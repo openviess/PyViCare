@@ -68,10 +68,9 @@ class PyViCare:
         """
         if os.path.isfile(token_file):
             print("reuse token")
-            oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
-            oauth._client=self.deserializeToken(token_file)       
+            oauth = OAuth2Session(client_id,token=self.deserializeToken(token_file))   
         else:
-            self.getNewToken(username, password,token_file)
+            oauth = self.getNewToken(username, password,token_file)
         return oauth
         
     def getNewToken(self, username, password,token_file=None):
@@ -90,7 +89,7 @@ class PyViCare:
             oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
         if token_file != None:
             print()
-            self.serializeToken(oauth._client,token_file)
+            self.serializeToken(oauth.token,token_file)
         return oauth
         
     def __get(self,url):
