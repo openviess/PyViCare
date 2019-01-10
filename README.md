@@ -12,7 +12,6 @@ A few nice feature removed from the app are available though the API (Comfort an
 Simple example:
 ```
 import sys
-sys.path.insert(0, 'PyViCare')
 from PyViCare import ViCareSession
 
 t=ViCareSession("email@domain","password","token.save")
