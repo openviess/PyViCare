@@ -34,3 +34,6 @@ print(t.setDomesticHotWaterTemperature(59))
 print(t.activateProgram("comfort"))
 print(t.deactivateComfort())
 ```
+
+Use Postman with this URL if you want fo investigate the Viessmann API:
+https://api.viessmann-platform.io/operational-data/v1/installations/16011/gateways/7571381681420106/devices/0/features
