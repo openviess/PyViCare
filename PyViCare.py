@@ -10,6 +10,8 @@ token_url = 'https://iam.viessmann.com/idp/v1/token';
 apiURLBase = 'https://api.viessmann-platform.io';
 redirect_uri = "vicare://oauth-callback/everest";
 viessmann_scope=["openid"]
+# TODO Holiday program can still be used (parameters are there)
+# TODO set eco program (still there as well)
 
 class PyViCare:
     
@@ -74,10 +76,42 @@ class PyViCare:
         r=self.oauth.get(url)
         j=json.loads(r.content)
         return j
+    
+    def setProperty(self,property_name,action,data):
+        h = {"Content-Type":"application/json"}
+        url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action
+        r=self.oauth.post(url,data,headers=h)
+        print(r.content)
+    
+    def getMonthSinceLastService(self):
+        return self.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
+    
+    def getLastServiceDate(self):
+        return self.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
         
     def getOutsideTemperature(self):
         r=self.getProperty("heating.sensors.temperature.outside")
         return r["properties"]["value"]["value"]
+        
+    def getSupplyTemperature(self):
+        return self.getProperty("heating.circuits.0.sensors.temperature.supply")["properties"]["value"]["value"]
+    
+    # Implement error
+    # TODO
+    def getRoomTemperature(self):
+        return self.getProperty("heating.circuits.0.sensors.temperature.room")["properties"]["value"]["value"]
+        
+    def getModes(self):
+        return self.getProperty("heating.circuits.0.operating.modes.active")["actions"][0]["fields"][0]["enum"]
+        
+    def getActiveMode(self):
+        return self.getProperty("heating.circuits.0.operating.modes.active")["properties"]["value"]["value"]
+        
+    def getHeatingCurveShift(self):
+        return self.getProperty("heating.circuits.0.heating.curve")["properties"]["shift"]["value"]
+    
+    def getHeatingCurveSlope(self):
+        return self.getProperty("heating.circuits.0.heating.curve")["properties"]["slope"]["value"]
         
     def getBoilerTemperature(self):
         r=self.getProperty("heating.boiler.sensors.temperature.main")
@@ -86,6 +120,17 @@ class PyViCare:
     def getActiveProgram(self):
         r=self.getProperty("heating.circuits.0.operating.programs.active")
         return r["properties"]["value"]["value"]
+    
+    def getPrograms(self):
+        r=self.getProperty("heating.circuits.0.operating.programs")
+        return r["entities"][9]["properties"]["components"]
+        
+    def getDesiredTemperatureForProgram(self , program):
+        r=self.getProperty("heating.circuits.0.operating.programs."+program)
+        return r["properties"]["temperature"]["value"]
+        
+    def setDesiredTemperatureForProgram(self,program,temperature):
+        print("o")
         
     def getCurrentDesiredTemperature(self):
         r=self.getProperty("heating.circuits.0.operating.programs."+self.getActiveProgram())
@@ -94,10 +139,12 @@ class PyViCare:
     def getDomesticHotWaterConfiguredTemperature(self):
         r=self.getProperty("heating.dhw.temperature")
         return r["properties"]["value"]["value"]
-    
-    def getDomesticHotWaterCurrentState(self):
-        return self.getProperty("heating.circuits.0.operating.modes.dhw")["properties"]["active"]["value"]
         
     def getDomesticHotWaterStorageTemperature(self):
         return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]  
+        
+    def getDomesticHotWaterMaxTemperature(self):
+        return self.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
     
+    def getDomesticHotWaterMinTemperature(self):
+        return self.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
