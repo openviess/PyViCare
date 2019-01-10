@@ -1,7 +1,10 @@
 from requests_oauthlib import OAuth2Session
+from oauthlib.oauth2 import TokenExpiredError
 import requests
 import re
 import json
+import pickle
+import os
 
 client_id = '79742319e39245de5f91d15ff4cac2a8';
 client_secret = '8ad97aceb92c5892e102b093c7c083fa';
@@ -17,37 +20,119 @@ viessmann_scope=["openid"]
 # TODO heating.circuits.0.heating.curve/setCurve
 # TODO error handling
 # TODO documentation
-# TODO re-use token (not generate a new one each time)
+# TODO Detect expired token (coming soon)
+#{
+#    "error": "EXPIRED TOKEN"
+#}
+
+""""Viessmann ViCare API Python tools"""
 
 class PyViCare:
-    
-    return_values = {
-      "heating.sensors.temperature.outside": "Ford",
-      "model": "Mustang"
-    }
-    def __init__(self, username, password):
-        self.oauth=self.getAccessToken(username, password)
+    """This class connects to the Viesmann ViCare API.
+    The authentication is done through OAuth2. 
+    Note that currently, a new token is generate for each run.
+    """
+
+    def __init__(self, username, password,token_file=None):
+        """Init function. Create the necessary oAuth2 sessions
+        Parameters
+        ----------
+        username : str
+            e-mail address
+        password : str
+            password
+
+        Returns
+        -------
+        """
+        self.username=username
+        self.password=password
+        self.token_file=token_file
+        self.oauth=self.__restoreToken(username, password,token_file)
         self.getInstallations()
         
-    def getAccessToken(self, username, password):
+    def __restoreToken(self, username, password,token_file=None):
+        """Create the necessary oAuth2 sessions
+        Viessmann tokens expire after 3600s (60min)
+        Parameters
+        ----------
+        username : str
+            e-mail address
+        password : str
+            password
+
+        Returns
+        -------
+        oauth: 
+            oauth sessions object
+        """
+        if os.path.isfile(token_file):
+            print("reuse token")
+            oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
+            oauth._client=self.deserializeToken(token_file)       
+        else:
+            self.getNewToken(username, password,token_file)
+        return oauth
+        
+    def getNewToken(self, username, password,token_file=None):
         oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
         authorization_url, state = oauth.authorization_url(authorizeURL)
         codestring=""
         try:
             header = {'Content-Type': 'application/x-www-form-urlencoded'}
             response = requests.post(authorization_url, headers=header,auth=(username, password))
-        except Exception as e:
+        except requests.exceptions.InvalidSchema as e:
             #capture the error, which contains the code the authorization code and put this in to codestring
             codestring = "{0}".format(str(e.args[0])).encode("utf-8");
             codestring = str(codestring)
             match = re.search("code\=(.*)\&",codestring)
             codestring=match.group(1)
-        oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
+            oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
+        if token_file != None:
+            print()
+            self.serializeToken(oauth._client,token_file)
         return oauth
         
+    def __get(self,url):
+        try:
+            r=self.oauth.get(url).json()
+            return r
+        except TokenExpiredError as e:
+            self.oauth=self.getNewToken(self.username,self.password,self.token_file)
+            print("token renewed")
+            return self.__get(url)
+        
+        
+    def __post(self,url,data):
+        h = {"Content-Type":"application/json","Accept":"application/vnd.siren+json"}
+        try:
+            j=self.oauth.post(url,data,headers=h)
+            try:
+                r=j.json()
+                return r
+            except json.decoder.JSONDecodeError:
+                if j.status_code == 204:
+                    return json.loads("{\"statusCode\": 204, \"error\": \"None\", \"message\": \"SUCCESS\"}")
+                else:
+                    return json.loads("{\"statusCode\":"+j.status_code+", \"error\": \"Unknown\", \"message\": \"UNKNOWN\"}")
+        except TokenExpiredError as e:
+            self.oauth=self.getNewToken(self.username,self.password,self.token_file)
+            print("token renewed")
+            return self._post(url,data)    
+    
+    def serializeToken(self,oauth,token_file):
+        binary_file = open(token_file,mode='wb')
+        s_token = pickle.dump(oauth,binary_file)
+        binary_file.close()
+        print(s_token)
+        
+    def deserializeToken(self,token_file):
+        binary_file = open(token_file,mode='rb')
+        s_token = pickle.load(binary_file)
+        return s_token
+    
     def getInstallations(self):
-        r = self.oauth.get(apiURLBase+"/general-management/installations?expanded=true&")
-        self.installations=json.loads(r.content)
+        self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
         self.href=self.installations["entities"][0]["links"][0]["href"]
         self.id=self.installations["entities"][0]["properties"]["id"]
         self.serial=self.installations["entities"][0]["entities"][0]["properties"]["serial"]
@@ -55,38 +140,36 @@ class PyViCare:
     
     def getProperty(self,property_name):
         url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name
-        r=self.oauth.get(url)
-        j=json.loads(r.content)
+        j=self.__get(url)
         return j
     
     def setProperty(self,property_name,action,data):
-        h = {"Content-Type":"application/json","Accept":"application/vnd.siren+json"}
         url = apiURLBase + '/operational-data/v1/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action
-        r=self.oauth.post(url,data,headers=h)
-        print(r.content)
+        return self.__post(url,data)
         
     def setMode(self,mode):
-        self.setProperty("heating.circuits.0.operating.modes.active","setMode","{\"mode\":\""+mode+"\"}")
+        r=self.setProperty("heating.circuits.0.operating.modes.active","setMode","{\"mode\":\""+mode+"\"}")
+        return r
     
     # Works for normal, reduced, comfort
     # active has no action
     # exetenral , standby no action
-    # holiday, sheculde and unscheduled
+    # holiday, sheculde and unscheduled 
     # activate, decativate comfort,eco
     
-    def setProgramTemperature(self,program,temperature):
-        self.setProperty("heating.circuits.0.operating.programs."+program,"setTemperature","{\"targetTemperature\":"+str(temperature)+"}")
+    def setProgramTemperature(self,program: str,temperature :int):
+        return self.setProperty("heating.circuits.0.operating.programs."+program,"setTemperature","{\"targetTemperature\":"+str(temperature)+"}")
     
     # comfort, eco
     # optional temperature parameter could be passed (but not done)
     def activateProgram(self,program):
-        self.setProperty("heating.circuits.0.operating.programs."+program,"activate","{}")
+        return self.setProperty("heating.circuits.0.operating.programs."+program,"activate","{}")
         
     def deactivateProgram(self,program):
-        self.setProperty("heating.circuits.0.operating.programs."+program,"deactivate","{}")
+        return self.setProperty("heating.circuits.0.operating.programs."+program,"deactivate","{}")
     
     def setDomesticHotWaterTemperature(self,temperature):
-        self.setProperty("heating.dhw.temperature","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
+        return self.setProperty("heating.dhw.temperature","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
     
     def getMonthSinceLastService(self):
         return self.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
