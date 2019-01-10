@@ -29,7 +29,7 @@ logger = logging.getLogger('ViCare')
 
 """"Viessmann ViCare API Python tools"""
 
-class PyViCare:
+class ViCareSession:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2. 
     Note that currently, a new token is generate for each run.
