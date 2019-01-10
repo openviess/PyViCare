@@ -13,9 +13,9 @@ Simple example:
 ```
 import sys
 sys.path.insert(0, 'PyViCare')
-from PyViCare import PyViCare
+from PyViCare import ViCareSession
 
-t=PyViCare("email@domain","password","token.save")
+t=ViCareSession("email@domain","password","token.save")
 i=t.getInstallations()
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
