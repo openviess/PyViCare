@@ -17,15 +17,8 @@ viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
 
 # TODO Holiday program can still be used (parameters are there) heating.circuits.0.operating.programs.holiday
-# TODO set eco program (does not appear to work on my install)
-# TODO heating.dhw.schedule/setSchedule slope&shift numbers
-# TODO heating.circuits.0.heating.curve/setCurve
-# TODO error handling
-# TODO documentation
-# TODO Detect expired token (coming soon)
-#{
-#    "error": "EXPIRED TOKEN"
-#}
+# TODO heating.dhw.schedule/setSchedule 
+# TODO handle multi install / multi devices
 
 """"Viessmann ViCare API Python tools"""
 
