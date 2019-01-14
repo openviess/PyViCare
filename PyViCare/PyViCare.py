@@ -176,7 +176,8 @@ class ViCareSession:
     
     def _getInstallations(self):
         self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
-        self.href=self.installations["entities"][0]["links"][0]["href"]
+        logger.debug(self.installations)
+        #self.href=self.installations["entities"][0]["links"][0]["href"]
         self.id=self.installations["entities"][0]["properties"]["id"]
         self.serial=self.installations["entities"][0]["entities"][0]["properties"]["serial"]
         return self.installations
