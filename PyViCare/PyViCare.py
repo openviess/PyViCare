@@ -71,7 +71,7 @@ class ViCareSession:
             logger.warning("Reuse existing token")
             oauth = OAuth2Session(client_id,token=self._deserializeToken(token_file))   
         else:
-            logger.warning("Requting new token")
+            logger.warning("Requesting new token")
             oauth = self.getNewToken(username, password,token_file)
         return oauth
         
