@@ -47,7 +47,7 @@ class ViCareSession:
         self.username= urllib.parse.quote_plus(username)
         self.password= urllib.parse.quote_plus(password)
         self.token_file=token_file
-        self.oauth=self.__restoreToken(username, password,token_file)
+        self.oauth=self.__restoreToken(self.username, self.password,token_file)
         self._getInstallations()
         logger.info("init done")
         
@@ -97,6 +97,7 @@ class ViCareSession:
         oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
         authorization_url, state = oauth.authorization_url(authorizeURL)
         codestring=""
+        logger.debug(authorization_url)
         try:
             header = {'Content-Type': 'application/x-www-form-urlencoded'}
             response = requests.post(authorization_url, headers=header,auth=(username, password))
