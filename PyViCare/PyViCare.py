@@ -47,11 +47,11 @@ class ViCareSession:
         self.username= urllib.parse.quote_plus(username)
         self.password= urllib.parse.quote_plus(password)
         self.token_file=token_file
-        self.oauth=self.__restoreToken(self.username, self.password,token_file)
+        self.oauth=self.__restoreToken(token_file)
         self._getInstallations()
         logger.info("init done")
         
-    def __restoreToken(self, username, password,token_file=None):
+    def __restoreToken(self,token_file=None):
         """Create the necessary oAuth2 sessions
         Restore it from token_file if existing (token dict)
         Viessmann tokens expire after 3600s (60min)
@@ -74,7 +74,7 @@ class ViCareSession:
             oauth = OAuth2Session(client_id,token=self._deserializeToken(token_file))   
         else:
             logger.warning("Requesting new token")
-            oauth = self.getNewToken(username, password,token_file)
+            oauth = self.getNewToken(self.username, self.password,token_file)
         return oauth
         
     def getNewToken(self, username, password,token_file=None):
