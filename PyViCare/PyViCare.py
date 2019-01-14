@@ -6,6 +6,7 @@ import json
 import pickle
 import os
 import logging
+import urllib
 
 client_id = '79742319e39245de5f91d15ff4cac2a8';
 client_secret = '8ad97aceb92c5892e102b093c7c083fa';
@@ -43,8 +44,8 @@ class ViCareSession:
         -------
         """
         
-        self.username=username
-        self.password=password
+        self.username= urllib.parse.quote_plus(username)
+        self.password= urllib.parse.quote_plus(password)
         self.token_file=token_file
         self.oauth=self.__restoreToken(username, password,token_file)
         self._getInstallations()
