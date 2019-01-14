@@ -15,6 +15,7 @@ apiURLBase = 'https://api.viessmann-platform.io';
 redirect_uri = "vicare://oauth-callback/everest";
 viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
+logger.addHandler(logging.NullHandler())
 
 # TODO Holiday program can still be used (parameters are there) heating.circuits.0.operating.programs.holiday
 # TODO heating.dhw.schedule/setSchedule 
