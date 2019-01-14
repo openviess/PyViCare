@@ -44,7 +44,7 @@ class ViCareSession:
         -------
         """
         
-        self.username= urllib.parse.quote_plus(username)
+        self.username= username
         self.password= urllib.parse.quote_plus(password)
         self.token_file=token_file
         self.oauth=self.__restoreToken(token_file)
@@ -70,7 +70,8 @@ class ViCareSession:
             oauth sessions object
         """
         if os.path.isfile(token_file):
-            logger.warning("Reuse existing token")
+            # TODO better handle incorrect token file
+            logger.warning("Token file argument present ")
             oauth = OAuth2Session(client_id,token=self._deserializeToken(token_file))   
         else:
             logger.warning("Requesting new token")
@@ -101,13 +102,17 @@ class ViCareSession:
         try:
             header = {'Content-Type': 'application/x-www-form-urlencoded'}
             response = requests.post(authorization_url, headers=header,auth=(username, password))
+            logger.debug(response.content)
         except requests.exceptions.InvalidSchema as e:
             #capture the error, which contains the code the authorization code and put this in to codestring
             codestring = "{0}".format(str(e.args[0])).encode("utf-8");
             codestring = str(codestring)
             match = re.search("code\=(.*)\&",codestring)
             codestring=match.group(1)
+            logger.debug("Codestring : "+codestring)
             oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
+            logger.debug(oauth)
+        logger.debug("Start serial")
         if token_file != None:
             print()
             self._serializeToken(oauth.token,token_file)
