@@ -141,6 +141,11 @@ class ViCareSession:
     def __get(self,url):
         try:
             r=self.oauth.get(url).json()
+            logger.debug("Response to get request: "+str(r))
+            if(r=={'error': 'EXPIRED TOKEN'}):
+                logger.warning("Abnormal token, renewing") # apparently forged tokens TODO investigate
+                self.oauth=self.getNewToken(self.username,self.password,self.token_file)
+                r = self.oauth.get(url).json()
             return r
         except TokenExpiredError as e:
             logger.warning("Token expired, renewing")
@@ -183,7 +188,6 @@ class ViCareSession:
         binary_file = open(token_file,mode='wb')
         s_token = pickle.dump(oauth,binary_file)
         binary_file.close()
-        logger.debug(s_token)
 
     def _deserializeToken(self,token_file):
         binary_file = open(token_file,mode='rb')
@@ -192,7 +196,7 @@ class ViCareSession:
 
     def _getInstallations(self):
         self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
-        logger.debug(self.installations)
+        logger.debug("Installations: "+str(self.installations))
         #self.href=self.installations["entities"][0]["links"][0]["href"]
         self.id=self.installations["entities"][0]["properties"]["id"]
         self.serial=self.installations["entities"][0]["entities"][0]["properties"]["serial"]
