@@ -72,8 +72,9 @@ class ViCareSession:
         """
         if (token_file!=None) and os.path.isfile(token_file):
             try:
-                logger.debug("Token file exists")
+                logger.info("Token file exists")
                 oauth = OAuth2Session(client_id,token=self._deserializeToken(token_file))
+                logger.info("Token restored from file")
             except UnpicklingError:
                 logger.warning("Could not restore token")
                 oauth = self.getNewToken(self.username, self.password,token_file)
@@ -148,9 +149,9 @@ class ViCareSession:
                 r = self.oauth.get(url).json()
             return r
         except TokenExpiredError as e:
-            logger.warning("Token expired, renewing")
+            logger.info("Token expired, renewing")
             self.oauth=self.getNewToken(self.username,self.password,self.token_file)
-            logger.info("token renewed")
+            logger.info("Token renewed successfully")
             return self.__get(url)
 
     """POST URL using OAuth session. Automatically renew the token if needed
@@ -196,7 +197,7 @@ class ViCareSession:
 
     def _getInstallations(self):
         self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
-        logger.debug("Installations: "+str(self.installations))
+        #logger.debug("Installations: "+str(self.installations))
         #self.href=self.installations["entities"][0]["links"][0]["href"]
         self.id=self.installations["entities"][0]["properties"]["id"]
         self.serial=self.installations["entities"][0]["entities"][0]["properties"]["serial"]
