@@ -145,7 +145,7 @@ class ViCareSession:
         except TokenExpiredError as e:
             logger.warning("Token expired, renewing")
             self.oauth=self.getNewToken(self.username,self.password,self.token_file)
-            print("token renewed")
+            logger.info("token renewed")
             return self.__get(url)
 
     """POST URL using OAuth session. Automatically renew the token if needed
@@ -176,14 +176,14 @@ class ViCareSession:
         except TokenExpiredError as e:
             logger.warning("Token expired, renewing")
             self.oauth=self.getNewToken(self.username,self.password,self.token_file)
-            print("token renewed")
+            logger.info("token renewed")
             return self._post(url,data)
 
     def _serializeToken(self,oauth,token_file):
         binary_file = open(token_file,mode='wb')
         s_token = pickle.dump(oauth,binary_file)
         binary_file.close()
-        print(s_token)
+        logger.debug(s_token)
 
     def _deserializeToken(self,token_file):
         binary_file = open(token_file,mode='rb')
