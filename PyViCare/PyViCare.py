@@ -415,3 +415,100 @@ class ViCareSession:
             return self.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
         except KeyError:
             return "error"
+
+    def getGasConsumptionHeatingDays(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['day']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingToday(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['day']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingWeeks(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['week']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingThisWeek(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['week']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingMonths(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['month']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingThisMonth(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['month']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingYears(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['year']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionHeatingThisYear(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['year']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterDays(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['day']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterToday(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['day']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterWeeks(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['week']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterThisWeek(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['week']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterMonths(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['month']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterThisMonth(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['month']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterYears(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['year']['value']
+        except KeyError:
+            return "error"
+
+    def getGasConsumptionDomesticHotWaterThisYear(self):
+        try:
+            return self.getProperty('heating.gas.consumption.heating')['properties']['year']['value'][0]
+        except KeyError:
+            return "error"
+
