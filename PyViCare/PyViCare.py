@@ -415,3 +415,10 @@ class ViCareSession:
             return self.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
         except KeyError:
             return "error"
+
+    def getCurrentPower(self):
+        try:
+            return self.getProperty('heating.burner.current.power')['properties']['value']['value']
+        except KeyError:
+            return "error"
+
