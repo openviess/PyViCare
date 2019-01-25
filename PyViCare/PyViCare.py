@@ -518,3 +518,9 @@ class ViCareSession:
         except KeyError:
             return "error"
 
+    def getBurnerActive(self):
+        try:
+            return self.getProperty("heating.burner")["properties"]["active"]["value"]
+        except KeyError:
+            return "error"
+
