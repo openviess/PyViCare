@@ -19,7 +19,7 @@ viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-# TODO Holiday program can still be used (parameters are there) heating.circuits.0.operating.programs.holiday
+# TODO Holiday program can still be used (parameters are there) heating.circuits." + str(self.circuit) + ".operating.programs.holiday
 # TODO heating.dhw.schedule/setSchedule
 # TODO handle multi install / multi devices
 
@@ -32,7 +32,7 @@ class ViCareSession:
     """
 
 
-    def __init__(self, username, password,token_file=None):
+    def __init__(self, username, password,token_file=None,circuit=0):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -48,6 +48,7 @@ class ViCareSession:
         self.username= username
         self.password= password
         self.token_file=token_file
+        self.circuit=circuit
         self.oauth=self.__restoreToken(token_file)
         self._getInstallations()
         logger.info("Initialisation successful !")
@@ -226,7 +227,7 @@ class ViCareSession:
         json representation of the answer
     """
     def setMode(self,mode):
-        r=self.setProperty("heating.circuits.0.operating.modes.active","setMode","{\"mode\":\""+mode+"\"}")
+        r=self.setProperty("heating.circuits." + str(self.circuit) + ".operating.modes.active","setMode","{\"mode\":\""+mode+"\"}")
         return r
 
     # Works for normal, reduced, comfort
@@ -248,7 +249,7 @@ class ViCareSession:
         json representation of the answer
     """
     def setProgramTemperature(self,program: str,temperature :int):
-        return self.setProperty("heating.circuits.0.operating.programs."+program,"setTemperature","{\"targetTemperature\":"+str(temperature)+"}")
+        return self.setProperty("heating.circuits." + str(self.circuit) + ".operating.programs."+program,"setTemperature","{\"targetTemperature\":"+str(temperature)+"}")
 
     def setReducedTemperature(self,temperature):
         return self.setProgramTemperature("reduced",temperature)
@@ -274,7 +275,7 @@ class ViCareSession:
     """
     # optional temperature parameter could be passed (but not done)
     def activateProgram(self,program):
-        return self.setProperty("heating.circuits.0.operating.programs."+program,"activate","{}")
+        return self.setProperty("heating.circuits." + str(self.circuit) + ".operating.programs."+program,"activate","{}")
 
     def activateComfort(self):
         return self.activateProgram("comfort")
@@ -290,7 +291,7 @@ class ViCareSession:
         json representation of the answer
     """
     def deactivateProgram(self,program):
-        return self.setProperty("heating.circuits.0.operating.programs."+program,"deactivate","{}")
+        return self.setProperty("heating.circuits." + str(self.circuit) + ".operating.programs."+program,"deactivate","{}")
     def deactivateComfort(self):
         return self.deactivateProgram("comfort")
 
@@ -328,37 +329,37 @@ class ViCareSession:
 
     def getSupplyTemperature(self):
         try:
-            return self.getProperty("heating.circuits.0.sensors.temperature.supply")["properties"]["value"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
         except KeyError:
             return "error"
 
     def getRoomTemperature(self):
         try:
-            return self.getProperty("heating.circuits.0.sensors.temperature.room")["properties"]["value"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
         except KeyError:
             return "error"
 
     def getModes(self):
         try:
-            return self.getProperty("heating.circuits.0.operating.modes.active")["actions"][0]["fields"][0]["enum"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
         except KeyError:
             return "error"
 
     def getActiveMode(self):
         try:
-            return self.getProperty("heating.circuits.0.operating.modes.active")["properties"]["value"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
         except KeyError:
             return "error"
 
     def getHeatingCurveShift(self):
         try:
-            return self.getProperty("heating.circuits.0.heating.curve")["properties"]["shift"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".heating.curve")["properties"]["shift"]["value"]
         except KeyError:
             return "error"
 
     def getHeatingCurveSlope(self):
         try:
-            return self.getProperty("heating.circuits.0.heating.curve")["properties"]["slope"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".heating.curve")["properties"]["slope"]["value"]
         except KeyError:
             return "error"
 
@@ -370,25 +371,25 @@ class ViCareSession:
 
     def getActiveProgram(self):
         try:
-            return self.getProperty("heating.circuits.0.operating.programs.active")["properties"]["value"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
         except KeyError:
             return "error"
 
     def getPrograms(self):
         try:
-            return self.getProperty("heating.circuits.0.operating.programs")["entities"][9]["properties"]["components"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
         except KeyError:
             return "error"
 
     def getDesiredTemperatureForProgram(self , program):
         try:
-            return self.getProperty("heating.circuits.0.operating.programs."+program)["properties"]["temperature"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
         except KeyError:
             return "error"
 
     def getCurrentDesiredTemperature(self):
         try:
-            return self.getProperty("heating.circuits.0.operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
+            return self.getProperty("heating.circuits." + str(self.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
         except KeyError:
             return "error"
 
