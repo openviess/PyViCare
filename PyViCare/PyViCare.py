@@ -78,13 +78,13 @@ class ViCareSession:
                 logger.info("Token restored from file")
             except UnpicklingError:
                 logger.warning("Could not restore token")
-                oauth = self.getNewToken(self.username, self.password,token_file)
+                oauth = self.__getNewToken(self.username, self.password,token_file)
         else:
             logger.debug("Token file argument not provided or file does not exist")
-            oauth = self.getNewToken(self.username, self.password,token_file)
+            oauth = self.__getNewToken(self.username, self.password,token_file)
         return oauth
 
-    def getNewToken(self, username, password,token_file=None):
+    def __getNewToken(self, username, password,token_file=None):
         """Create a new oAuth2 sessions
         Viessmann tokens expire after 3600s (60min)
         Parameters
@@ -129,6 +129,13 @@ class ViCareSession:
             return oauth
 
         # TODO tranform to exception
+        
+    def renewToken(self):
+        logger.warning("Token expired, renewing")
+        self.oauth=self.__getNewToken(self.username,self.password,self.token_file)
+        logger.info("Token renewed successfully")
+            
+        
     """Get URL using OAuth session. Automatically renew the token if needed
     Parameters
     ----------
@@ -142,18 +149,19 @@ class ViCareSession:
     """
     def __get(self,url):
         try:
+            if(self.oauth==None):
+                self.renewToken()
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
             if(r=={'error': 'EXPIRED TOKEN'}):
                 logger.warning("Abnormal token, renewing") # apparently forged tokens TODO investigate
-                self.oauth=self.getNewToken(self.username,self.password,self.token_file)
+                self.renewToken()
                 r = self.oauth.get(url).json()
             return r
         except TokenExpiredError as e:
-            logger.info("Token expired, renewing")
-            self.oauth=self.getNewToken(self.username,self.password,self.token_file)
-            logger.info("Token renewed successfully")
+            self.renewToken()
             return self.__get(url)
+
 
     """POST URL using OAuth session. Automatically renew the token if needed
     Parameters
@@ -171,6 +179,8 @@ class ViCareSession:
     def __post(self,url,data):
         h = {"Content-Type":"application/json","Accept":"application/vnd.siren+json"}
         try:
+            if(self.oauth==None):
+                self.renewToken()
             j=self.oauth.post(url,data,headers=h)
             try:
                 r=j.json()
@@ -181,9 +191,7 @@ class ViCareSession:
                 else:
                     return json.loads("{\"statusCode\":"+j.status_code+", \"error\": \"Unknown\", \"message\": \"UNKNOWN\"}")
         except TokenExpiredError as e:
-            logger.warning("Token expired, renewing")
-            self.oauth=self.getNewToken(self.username,self.password,self.token_file)
-            logger.info("token renewed")
+            self.renewToken()
             return self._post(url,data)
 
     def _serializeToken(self,oauth,token_file):
