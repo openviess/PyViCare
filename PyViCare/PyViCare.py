@@ -126,6 +126,7 @@ class ViCareSession:
                 self._serializeToken(oauth.token,token_file)
                 logger.info("Token serialized to "+token_file)
             logger.info("New token created")
+            #TODO throw an exception if oauth is null and implement the auth required method
             return oauth
 
         # TODO tranform to exception
@@ -149,8 +150,8 @@ class ViCareSession:
     """
     def __get(self,url):
         try:
-            if(self.oauth==None):
-                self.renewToken()
+            #if(self.oauth==None):
+            #    self.renewToken()
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
             if(r=={'error': 'EXPIRED TOKEN'}):
@@ -179,8 +180,8 @@ class ViCareSession:
     def __post(self,url,data):
         h = {"Content-Type":"application/json","Accept":"application/vnd.siren+json"}
         try:
-            if(self.oauth==None):
-                self.renewToken()
+            #if(self.oauth==None):
+            #    self.renewToken()
             j=self.oauth.post(url,data,headers=h)
             try:
                 r=j.json()
