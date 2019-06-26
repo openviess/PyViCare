@@ -51,3 +51,9 @@ https://api.viessmann-platform.io/operational-data/v1/installations/16011/gatewa
 - Auth url: https://iam.viessmann.com/idp/v1/authorize
 - Access token url: https://iam.viessmann.com/idp/v1/token
 - Scope: openid
+
+
+
+## Types of heatings
+- Use ViCareSession for gas heatings
+- Use ViCareHeatPumpSession for heat pumps
