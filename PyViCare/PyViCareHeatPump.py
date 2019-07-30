@@ -4,7 +4,7 @@ import os
 import logging
 from PyViCareDevice import ViCareDevice
 
-class ViCareHeatPumpSession(ViCareDevice):
+class ViCareHeatPump(ViCareDevice):
 
     def getHeatingSchedule(self):
         try:
