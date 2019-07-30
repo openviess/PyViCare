@@ -12,10 +12,14 @@ A few nice feature removed from the app are available though the API (Comfort an
 Simple example:
 ```
 import sys
-from PyViCare import ViCareSession
+import logging
+sys.path.insert(0, 'PyViCare')
+from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareService import ViCareService
+from PyViCare.PyViCare import ViCareSession
 
-t=ViCareSession("email@domain","password","token.save")
-i=t.getInstallations()
+t=GazBoiler("email@domain","password","token.save")
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
