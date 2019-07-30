@@ -12,7 +12,7 @@ logger.addHandler(logging.NullHandler())
 
 """"Viessmann ViCare API Python tools"""
 
-class ViCareSession:
+class ViCareHeatPumpSession:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
     Note that currently, a new token is generate for each run.
@@ -114,32 +114,6 @@ class ViCareSession:
     def deactivateComfort(self):
         return self.deactivateProgram("comfort")
 
-    """ Set the target temperature for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    def setDomesticHotWaterTemperature(self,temperature):
-        return self.service.setProperty("heating.dhw.temperature","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
-
-    def getMonthSinceLastService(self):
-        try:
-            return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
-        except KeyError:
-            return "error"
-
-    def getLastServiceDate(self):
-        try:
-            return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
-        except KeyError:
-            return "error"
-
     def getOutsideTemperature(self):
         try:
             return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
@@ -149,12 +123,6 @@ class ViCareSession:
     def getSupplyTemperature(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
-
-    def getRoomTemperature(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
         except KeyError:
             return "error"
 
@@ -182,12 +150,6 @@ class ViCareSession:
         except KeyError:
             return "error"
 
-    def getBoilerTemperature(self):
-        try:
-            return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
-
     def getActiveProgram(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
@@ -208,7 +170,11 @@ class ViCareSession:
 
     def getCurrentDesiredTemperature(self):
         try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
+            activeProgram = self.getActiveProgram()
+            if activeProgram == 'standby':
+                return self.getDesiredTemperatureForProgram('normal')
+            else:
+                return self.getDesiredTemperatureForProgram(activeProgram)
         except KeyError:
             return "error"
 
@@ -224,122 +190,65 @@ class ViCareSession:
         except KeyError:
             return "error"
 
-    def getDomesticHotWaterMaxTemperature(self):
+    def getHeatingSchedule(self):
         try:
-            return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
+            properties = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
+            return {
+                "active": properties["active"]["value"],
+                "mon": properties["entries"]["value"]["mon"],
+                "tue": properties["entries"]["value"]["tue"],
+                "wed": properties["entries"]["value"]["wed"],
+                "thu": properties["entries"]["value"]["thu"],
+                "fri": properties["entries"]["value"]["fri"],
+                "sat": properties["entries"]["value"]["sat"],
+                "sun": properties["entries"]["value"]["sun"]
+            }
         except KeyError:
             return "error"
 
-    def getDomesticHotWaterMinTemperature(self):
+    def getDomesticHotWaterSchedule(self):
         try:
-            return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
+            properties = self.service.getProperty("heating.dhw.schedule")["properties"]
+            return {
+                "active": properties["active"]["value"],
+                "mon": properties["entries"]["value"]["mon"],
+                "tue": properties["entries"]["value"]["tue"],
+                "wed": properties["entries"]["value"]["wed"],
+                "thu": properties["entries"]["value"]["thu"],
+                "fri": properties["entries"]["value"]["fri"],
+                "sat": properties["entries"]["value"]["sat"],
+                "sun": properties["entries"]["value"]["sun"]
+            }
         except KeyError:
             return "error"
 
-    def getGasConsumptionHeatingDays(self):
+    def getErrorHistory(self):
         try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['day']['value']
+            return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
         except KeyError:
             return "error"
 
-    def getGasConsumptionHeatingToday(self):
+    def getActiveError(self):
         try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['day']['value'][0]
+            return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
         except KeyError:
             return "error"
 
-    def getGasConsumptionHeatingWeeks(self):
+    def getReturnTemperature(self):
         try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['week']['value']
+            return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
         except KeyError:
             return "error"
 
-    def getGasConsumptionHeatingThisWeek(self):
+    def getCirculationPumpActive(self):
         try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['week']['value'][0]
+            status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
+            return status == 'on'
         except KeyError:
             return "error"
 
-    def getGasConsumptionHeatingMonths(self):
+    def getCompressorActive(self):
         try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['month']['value']
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionHeatingThisMonth(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionHeatingYears(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['year']['value']
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionHeatingThisYear(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.heating')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterDays(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['day']['value']
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterToday(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterWeeks(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['week']['value']
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterThisWeek(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterMonths(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['month']['value']
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterThisMonth(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterYears(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['year']['value']
-        except KeyError:
-            return "error"
-
-    def getGasConsumptionDomesticHotWaterThisYear(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.dhw')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getCurrentPower(self):
-        try:
-            return self.service.getProperty('heating.burner.current.power')['properties']['value']['value']
-        except KeyError:
-            return "error"
-
-    def getBurnerActive(self):
-        try:
-            return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
+            return self.service.getProperty("heating.compressor")["properties"]["active"]["value"]
         except KeyError:
             return "error"
