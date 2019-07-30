@@ -1,5 +1,1 @@
-import logging
-from .PyViCareDevice import ViCareHeatDevice
-from .PyViCareGaz import ViCareHeatGaz
-from .PyViCareHeatPump import ViCareHeatPump
-from .PyViCare  import ViCareSession
+__all__ = ['PyViCareService''PyViCareDevice','PyViCareGaz','PyViCareHeatPump']

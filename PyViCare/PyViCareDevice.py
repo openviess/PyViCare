@@ -2,7 +2,7 @@ import re
 import json
 import os
 import logging
-from PyViCareService import ViCareService
+from PyViCare.PyViCareService import ViCareService
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -17,7 +17,7 @@ logger.addHandler(logging.NullHandler())
 
 """"Viessmann ViCare API Python tools"""
 
-class ViCareDevice:
+class Device:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
     Note that currently, a new token is generate for each run.

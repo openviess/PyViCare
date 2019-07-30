@@ -2,9 +2,9 @@ import re
 import json
 import os
 import logging
-from PyViCareDevice import ViCareDevice
+from PyViCare.PyViCareDevice import Device
 
-class ViCareHeatPump(ViCareDevice):
+class HeatPump(Device):
 
     def getHeatingSchedule(self):
         try:

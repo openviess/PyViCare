@@ -1,6 +1,6 @@
-from PyViCareGaz import ViCareGaz
+from PyViCare.PyViCareGazBoiler import GazBoiler
 
 # DEPRECATED
-class ViCareSession(ViCareGaz):
+class ViCareSession(GazBoiler):
     def dummy(self):
         print("done")

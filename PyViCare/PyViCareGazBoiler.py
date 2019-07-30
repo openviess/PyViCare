@@ -1,6 +1,6 @@
-from PyViCareDevice import ViCareDevice
+from PyViCare.PyViCareDevice import Device
 
-class ViCareGaz(ViCareDevice):
+class GazBoiler(Device):
 
     def getBurnerActive(self):
         try:
