@@ -18,6 +18,11 @@ viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
+# https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
+# entities / "deviceType": "heating"
+# entities are connected devices
+# https://api.viessmann-platform.io/general-management/v1/installations/16011/gateways PUT and POST only
+
 # TODO handle multi install / multi devices
 
 """"Viessmann ViCare API Python tools"""
@@ -213,6 +218,7 @@ class ViCareService:
     def getInstallations(self):
         return self.installations
 
+   #TODO should move to device after refactoring 
     def getProperty(self,property_name):
         url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name
         j=self.__get(url)
