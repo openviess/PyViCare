@@ -2,11 +2,18 @@ from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import TokenExpiredError
 import requests
 import re
-import json
 import pickle
 import os
 import logging
 from pickle import UnpicklingError
+# This is required because "requests" uses simplejson if installed on the system 
+try:
+    import simplejson as json
+    from simplejson import JSONDecodeError
+except ImportError:
+    import json
+    from json import JSONDecodeError
+
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
@@ -188,7 +195,7 @@ class ViCareService:
             try:
                 r=j.json()
                 return r
-            except json.decoder.JSONDecodeError:
+            except JSONDecodeError:
                 if j.status_code == 204:
                     return json.loads("{\"statusCode\": 204, \"error\": \"None\", \"message\": \"SUCCESS\"}")
                 else:

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="PyViCare",
-    version="0.1.0",
+    version="0.1.1",
     author="Simon Gillet",
     author_email="mail+pyvicare@gillet.ninja",
     description="Library to communicate with the Viessmann ViCare API",
