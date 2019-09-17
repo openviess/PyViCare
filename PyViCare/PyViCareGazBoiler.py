@@ -104,6 +104,13 @@ class GazBoiler(Device):
         except KeyError:
             return "error"
             
+    def getBurnerModulation(self):
+        try:
+            return self.service.getProperty('heating.burner.modulation')["properties"]["value"]["value"]
+        except KeyError:
+            return "error"
+        
+            
     def getBoilerTemperature(self):
         try:
             return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]

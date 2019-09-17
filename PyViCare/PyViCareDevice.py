@@ -253,3 +253,35 @@ class Device:
             return status == 'on'
         except KeyError:
             return "error"
+    
+    def getHeatingSchedule(self):
+        try:
+            properties = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
+            return {
+                "active": properties["active"]["value"],
+                "mon": properties["entries"]["value"]["mon"],
+                "tue": properties["entries"]["value"]["tue"],
+                "wed": properties["entries"]["value"]["wed"],
+                "thu": properties["entries"]["value"]["thu"],
+                "fri": properties["entries"]["value"]["fri"],
+                "sat": properties["entries"]["value"]["sat"],
+                "sun": properties["entries"]["value"]["sun"]
+            }
+        except KeyError:
+            return "error"
+
+    def getDomesticHotWaterSchedule(self):
+        try:
+            properties = self.service.getProperty("heating.dhw.schedule")["properties"]
+            return {
+                "active": properties["active"]["value"],
+                "mon": properties["entries"]["value"]["mon"],
+                "tue": properties["entries"]["value"]["tue"],
+                "wed": properties["entries"]["value"]["wed"],
+                "thu": properties["entries"]["value"]["thu"],
+                "fri": properties["entries"]["value"]["fri"],
+                "sat": properties["entries"]["value"]["sat"],
+                "sun": properties["entries"]["value"]["sun"]
+            }
+        except KeyError:
+            return "error"
