@@ -16,3 +16,15 @@ class HeatPump(Device):
             return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
         except KeyError:
             return "error"
+
+    def getCompressorStarts(self):
+        try:
+            return self.service.getProperty("heating.compressor.statistics")["properties"]["starts"]["value"]
+        except KeyError:
+            return "error"   
+
+    def getCompressorHours(self):
+        try:
+            return self.service.getProperty("heating.compressor.statistics")["properties"]["hours"]["value"]
+        except KeyError:
+            return "error"
