@@ -221,6 +221,13 @@ class Device:
         except KeyError:
             return "error"
 
+    def getDomesticHotWaterPumpActive(self):
+        try:
+            status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
+            return status == 'on'
+        except KeyError:
+            return "error"
+
     def getDomesticHotWaterMaxTemperature(self):
         try:
             return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
