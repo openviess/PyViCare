@@ -55,16 +55,31 @@ print(t.activateProgram("comfort"))
 print(t.deactivateComfort())
 ```
 
-Use Postman with this URL if you want fo investigate the Viessmann API:
-https://api.viessmann-platform.io/operational-data/v1/installations/16011/gateways/7571381681420106/devices/0/features
-- Client id: 79742319e39245de5f91d15ff4cac2a8
-- Secret id: 8ad97aceb92c5892e102b093c7c083fa
-- Callback url: vicare://oauth-callback/everest
-- Auth url: https://iam.viessmann.com/idp/v1/authorize
-- Access token url: https://iam.viessmann.com/idp/v1/token
-- Scope: openid
+## Postman example
 
+Follow these steps to access the API in Postman:
 
+1. Create an access token in the `Authorization` tab with type `OAuth 2.0` and following inputs:
+
+    - Client id: 79742319e39245de5f91d15ff4cac2a8
+    - Secret id: 8ad97aceb92c5892e102b093c7c083fa
+    - Callback url: vicare://oauth-callback/everest
+    - Auth url: https://iam.viessmann.com/idp/v1/authorize
+    - Access token url: https://iam.viessmann.com/idp/v1/token
+    - Scope: openid
+
+    A login popup will open. Enter your ViCare username and password.
+
+2. Use this URL to access your `installationId` and `gatewaySerial`: 
+
+    `https://api.viessmann-platform.io/general-management/installations`
+
+    - `installationId` is `entities[0].properties.id`
+    - `gatewaySerial` is `entities[0].entities[0].properties.serial`
+
+3. Use above data to replace `{installationId}` and `{gatewaySerial}` in this URL to investigate the Viessmann API:
+
+    `https://api.viessmann-platform.io/operational-data/v1/installations/{installationId}/gateways/{gatewaySerial}/devices/0/features`
 
 ## Types of heatings
 - Use ViCareSession for gas heatings
