@@ -7,13 +7,9 @@ import os
 import logging
 from pickle import UnpicklingError
 # This is required because "requests" uses simplejson if installed on the system 
-try:
-    import simplejson as json
-    from simplejson import JSONDecodeError
-except ImportError:
-    import json
-    from json import JSONDecodeError
 
+import simplejson as json
+from simplejson import JSONDecodeError
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
@@ -118,7 +114,7 @@ class ViCareService:
         try:
             header = {'Content-Type': 'application/x-www-form-urlencoded'}
             response = requests.post(authorization_url, headers=header,auth=(username,password))
-            logger.warning("Reeived an HTML answer from the server during auth, this is not normal:")
+            logger.warning("Received an HTML answer from the server during auth, this is not normal:")
             logger.debug(response.content)
         except requests.exceptions.InvalidSchema as e:
             #capture the error, which contains the code the authorization code and put this in to codestring
@@ -161,6 +157,7 @@ class ViCareService:
         try:
             #if(self.oauth==None):
             #    self.renewToken()
+            logger.debug(self.oauth)
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
             if(r=={'error': 'EXPIRED TOKEN'}):
