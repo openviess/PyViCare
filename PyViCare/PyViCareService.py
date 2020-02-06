@@ -132,6 +132,7 @@ class ViCareService:
                 logger.info("Token serialized to "+token_file)
             logger.info("New token created")
             #TODO throw an exception if oauth is null and implement the auth required method
+            # RELLY TODO AttributeError
             return oauth
 
         # TODO tranform to exception
