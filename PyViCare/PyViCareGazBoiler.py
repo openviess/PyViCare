@@ -122,3 +122,15 @@ class GazBoiler(Device):
             return self.service.getProperty('heating.burner.current.power')['properties']['value']['value']
         except KeyError:
             return "error"
+    
+    def getBurnerHours(self):
+        try:
+            return self.service.getProperty('heating.burner.statistics')['properties']['hours']['value']
+        except KeyError:
+            return "error"
+
+    def getBurnerStarts(self):
+        try:
+            return self.service.getProperty('heating.burner.statistics')['properties']['starts']['value']
+        except KeyError:
+            return "error"
