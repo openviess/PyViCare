@@ -119,6 +119,9 @@ class Device:
     def deactivateComfort(self):
         return self.deactivateProgram("comfort")
 
+    def fetchAndCacheFeatures(self):
+        self.service.fetchAndCacheFeatures()
+
     def getMonthSinceLastService(self):
         try:
             return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
@@ -172,7 +175,6 @@ class Device:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
         except KeyError:
             return "error"
-
 
     def getActiveProgram(self):
         try:
