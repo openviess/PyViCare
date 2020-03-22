@@ -223,15 +223,14 @@ class ViCareService:
     def getInstallations(self):
         return self.installations
 
-    def fetchAndCacheFeatures(self):
-        url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
-        self.j = self.__get(url)
+    def get(self, url):
+        return self.__get(url)
 
    #TODO should move to device after refactoring 
     def getProperty(self,property_name):
-        entities = self.j["entities"]
-        feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
-        return feature
+        url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name
+        j=self.__get(url)
+        return j
 
     def setProperty(self,property_name,action,data):
         url = apiURLBase + '/operational-data/v1/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action

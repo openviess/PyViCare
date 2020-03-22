@@ -24,7 +24,7 @@ class Device:
     """
 
     # TODO cirtcuit management should move at method level
-    def __init__(self, username, password,token_file=None,circuit=0):
+    def __init__(self, username, password,token_file=None,circuit=0,service=None):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -37,7 +37,10 @@ class Device:
         -------
         """
 
-        self.service = ViCareService(username, password, token_file, circuit)
+        if service is None:
+            self.service = ViCareService(username, password, token_file, circuit)
+        else:
+            self.service = service
 
     """ Set the active mode
     Parameters
@@ -118,9 +121,6 @@ class Device:
         return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program,"deactivate","{}")
     def deactivateComfort(self):
         return self.deactivateProgram("comfort")
-
-    def fetchAndCacheFeatures(self):
-        self.service.fetchAndCacheFeatures()
 
     def getMonthSinceLastService(self):
         try:
