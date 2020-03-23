@@ -3,6 +3,7 @@ import json
 import os
 import logging
 from PyViCare.PyViCareService import ViCareService
+from PyViCare.PyViCareCachedService import ViCareCachedService
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -24,7 +25,7 @@ class Device:
     """
 
     # TODO cirtcuit management should move at method level
-    def __init__(self, username, password,token_file=None,circuit=0):
+    def __init__(self, username, password,token_file=None,circuit=0,cacheDuration=0):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -37,7 +38,10 @@ class Device:
         -------
         """
 
-        self.service = ViCareService(username, password, token_file, circuit)
+        if cacheDuration == 0:
+            self.service = ViCareService(username, password, token_file, circuit)
+        else:
+            self.service = ViCareCachedService(username, password, cacheDuration, token_file, circuit)
 
     """ Set the active mode
     Parameters
@@ -172,7 +176,6 @@ class Device:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
         except KeyError:
             return "error"
-
 
     def getActiveProgram(self):
         try:
