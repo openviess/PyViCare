@@ -1,1 +1,1 @@
-__all__ = ['PyViCareService''PyViCareDevice','PyViCareGazBoiler','PyViCareHeatPump','PyViCareCachedService']
+__all__ = ['PyViCareService''PyViCareDevice','PyViCareGazBoiler','PyViCareHeatPump','PyViCareCachedService','PyViCareOilBoiler']
