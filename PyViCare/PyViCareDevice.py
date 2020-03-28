@@ -2,11 +2,15 @@ import re
 import json
 import os
 import logging
+from datetime import datetime, time
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareCachedService import ViCareCachedService
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
+
+VICARE_DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+VICARE_DHW_TEMP2 = "temp-2"
 
 # TODO Holiday program can still be used (parameters are there) heating.circuits." + str(self.service.circuit) + ".operating.programs.holiday
 # TODO heating.dhw.schedule/setSchedule
@@ -212,11 +216,53 @@ class Device:
             return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
         except KeyError:
             return "error"
+
     def getDomesticHotWaterConfiguredTemperature(self):
         try:
             return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
         except KeyError:
             return "error"
+
+    def getDomesticHotWaterConfiguredTemperature2(self):
+        try:
+            return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
+        except KeyError:
+            return "error"
+
+    def getDomesticHotWaterActiveMode(self):
+        schedule = self.getDomesticHotWaterSchedule()
+        if schedule == "error" or schedule["active"] != True:
+            return None
+
+        currentDateTime = datetime.now()
+        currentTime = currentDateTime.time()
+
+        try:
+            daySchedule = schedule[VICARE_DAYS[currentDateTime.weekday()]]
+        except KeyError: # no schedule for day configured 
+            return None
+
+        tempMode = None
+        for s in daySchedule:
+            startTime = time.fromisoformat(s["start"])
+            endTime = time.fromisoformat(s["end"])
+            if startTime <= currentTime and currentTime <= endTime:
+                if s["mode"] == VICARE_DHW_TEMP2: # temp-2 overrides all other modes
+                    return s["mode"]
+                else:
+                    mode = s["mode"]
+        return mode
+
+    def getDomesticHotWaterDesiredTemperature(self): 
+        mode = self.getDomesticHotWaterActiveMode()
+
+        if mode != None:
+            if mode == VICARE_DHW_TEMP2:
+                return self.getDomesticHotWaterConfiguredTemperature2()
+            else:
+                return self.getDomesticHotWaterConfiguredTemperature()
+        
+        return None   
 
     def getDomesticHotWaterStorageTemperature(self):
         try:
