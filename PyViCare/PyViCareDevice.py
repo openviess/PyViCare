@@ -302,6 +302,19 @@ class Device:
     def setDomesticHotWaterTemperature(self,temperature):
         return self.service.setProperty("heating.dhw.temperature","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
         
+    """ Set the target temperature 2 for domestic host water
+    Parameters
+    ----------
+    temperature : int
+        Target temperature
+
+    Returns
+    -------
+    result: json
+        json representation of the answer
+    """
+    def setDomesticHotWaterTemperature2(self,temperature):
+        return self.service.setProperty("heating.dhw.temperature.temp2","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
 
     def getCirculationPumpActive(self):
         try:
