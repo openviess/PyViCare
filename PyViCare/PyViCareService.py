@@ -223,6 +223,9 @@ class ViCareService:
     def getInstallations(self):
         return self.installations
 
+    def get(self, url):
+        return self.__get(url)
+
    #TODO should move to device after refactoring 
     def getProperty(self,property_name):
         url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name
