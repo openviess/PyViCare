@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import threading
 from PyViCare.PyViCareService import apiURLBase, ViCareService
 
 class ViCareCachedService(ViCareService):
@@ -9,6 +9,7 @@ class ViCareCachedService(ViCareService):
         self.cacheDuration = cacheDuration
         self.cache = None
         self.cacheTime = None
+        self.lock = threading.Lock()
 
     def __setCache(self):
         url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
@@ -16,9 +17,13 @@ class ViCareCachedService(ViCareService):
         self.cacheTime = datetime.now()
 
     def getProperty(self,property_name):
-        if self.cache is None or self.cacheTime is None or (datetime.now() - self.cacheTime).seconds > self.cacheDuration:
-            self.__setCache()
-        
+        self.lock.acquire()
+        try:
+            if self.cache is None or self.cacheTime is None or (datetime.now() - self.cacheTime).seconds > self.cacheDuration:
+                self.__setCache()
+        finally:
+            self.lock.release()
+            
         entities = self.cache["entities"]
         feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
         return feature
