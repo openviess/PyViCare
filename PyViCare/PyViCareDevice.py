@@ -272,8 +272,7 @@ class Device:
 
     def getDomesticHotWaterPumpActive(self):
         try:
-            status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
-            return status == 'on'
+            return self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
         except KeyError:
             return "error"
 
@@ -318,8 +317,7 @@ class Device:
 
     def getCirculationPumpActive(self):
         try:
-            status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
-            return status == 'on'
+            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
         except KeyError:
             return "error"
     
