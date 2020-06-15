@@ -242,7 +242,7 @@ class Device:
         except KeyError: # no schedule for day configured 
             return None
 
-        tempMode = None
+        mode = None
         for s in daySchedule:
             startTime = time.fromisoformat(s["start"])
             endTime = time.fromisoformat(s["end"])
