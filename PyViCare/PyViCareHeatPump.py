@@ -40,3 +40,27 @@ class HeatPump(Device):
             return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
         except KeyError:
             return "error"
+
+    def getHeatingRodStatusOverall(self):
+        try:
+            return self.service.getProperty("heating.heatingRod.status")["properties"]["overall"]["value"]
+        except KeyError:
+            return "error"
+
+    def getHeatingRodStatusLevel1(self):
+        try:
+            return self.service.getProperty("heating.heatingRod.status")["properties"]["level1"]["value"]
+        except KeyError:
+            return "error"
+
+    def getHeatingRodStatusLevel2(self):
+        try:
+            return self.service.getProperty("heating.heatingRod.status")["properties"]["level2"]["value"]
+        except KeyError:
+            return "error"
+
+    def getHeatingRodStatusLevel3(self):
+        try:
+            return self.service.getProperty("heating.heatingRod.status")["properties"]["level3"]["value"]
+        except KeyError:
+            return "error"
