@@ -117,9 +117,51 @@ class GazBoiler(Device):
         except KeyError:
             return "error"
 
-    def getCurrentPower(self):
+    def getPowerConsumptionDays(self):
         try:
-            return self.service.getProperty('heating.burner.current.power')['properties']['value']['value']
+            return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value']
+        except KeyError:
+            return "error"
+        
+    def getPowerConsumptionToday(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getPowerConsumptionWeeks(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['week']['value']
+        except KeyError:
+            return "error"
+        
+    def getPowerConsumptionThisWeek(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['week']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getPowerConsumptionMonths(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['month']['value']
+        except KeyError:
+            return "error"
+        
+    def getPowerConsumptionThisMonth(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['month']['value'][0]
+        except KeyError:
+            return "error"
+
+    def getPowerConsumptionYears(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value']
+        except KeyError:
+            return "error"
+        
+    def getPowerConsumptionThisYear(self):
+        try:
+            return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value'][0]
         except KeyError:
             return "error"
     
