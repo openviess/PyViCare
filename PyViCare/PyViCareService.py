@@ -200,7 +200,7 @@ class ViCareService:
                     return json.loads("{\"statusCode\":"+j.status_code+", \"error\": \"Unknown\", \"message\": \"UNKNOWN\"}")
         except TokenExpiredError as e:
             self.renewToken()
-            return self._post(url,data)
+            return self.__post(url,data)
 
     def _serializeToken(self,oauth,token_file):
         binary_file = open(token_file,mode='wb')
