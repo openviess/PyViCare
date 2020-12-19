@@ -5,6 +5,7 @@ import logging
 from datetime import datetime, time
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareCachedService import ViCareCachedService
+import traceback
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -130,104 +131,104 @@ class Device:
     def getMonthSinceLastService(self):
         try:
             return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getLastServiceDate(self):
         try:
             return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getOutsideTemperature(self):
         try:
             return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getSupplyTemperature(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getRoomTemperature(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getModes(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getActiveMode(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getHeatingCurveShift(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getHeatingCurveSlope(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getActiveProgram(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getPrograms(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDesiredTemperatureForProgram(self , program):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getCurrentDesiredTemperature(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getErrorHistory(self):
         try:
             return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getActiveError(self):
         try:
             return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterConfiguredTemperature(self):
         try:
             return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterConfiguredTemperature2(self):
         try:
             return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterActiveMode(self):
         schedule = self.getDomesticHotWaterSchedule()
@@ -239,7 +240,7 @@ class Device:
 
         try:
             daySchedule = schedule[VICARE_DAYS[currentDateTime.weekday()]]
-        except KeyError: # no schedule for day configured 
+        except KeyError as err: # no schedule for day configured 
             return None
 
         mode = None
@@ -267,27 +268,27 @@ class Device:
     def getDomesticHotWaterStorageTemperature(self):
         try:
             return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterPumpActive(self):
         try:
             status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
             return status == 'on'
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterMaxTemperature(self):
         try:
             return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterMinTemperature(self):
         try:
             return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
     """ Set the target temperature for domestic host water
     Parameters
     ----------
@@ -320,8 +321,8 @@ class Device:
         try:
             status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
             return status == 'on'
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
     
     def getHeatingSchedule(self):
         try:
@@ -336,8 +337,8 @@ class Device:
                 "sat": properties["entries"]["value"]["sat"],
                 "sun": properties["entries"]["value"]["sun"]
             }
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
 
     def getDomesticHotWaterSchedule(self):
         try:
@@ -352,5 +353,5 @@ class Device:
                 "sat": properties["entries"]["value"]["sat"],
                 "sun": properties["entries"]["value"]["sun"]
             }
-        except KeyError:
-            return "error"
+        except KeyError as err:
+        	return "KeyError: "+str(err)
