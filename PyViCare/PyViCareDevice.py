@@ -43,7 +43,7 @@ class Device:
         -------
         """
 
-        if customService != None:
+        if customService is not None:
             self.service = customService
         elif cacheDuration == 0:
             self.service = ViCareService(username, password, token_file, circuit)
