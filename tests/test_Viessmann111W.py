@@ -17,6 +17,9 @@ class Viessmann111W(unittest.TestCase):
     def test_getPowerConsumptionDays_fails(self):
         self.assertEqual(self.gaz.getPowerConsumptionDays(), 'error')
 
+    def test_getMonthSinceLastService_fails(self):
+        self.assertEqual(self.gaz.getMonthSinceLastService(), "KeyError: 'properties'")
+
     def test_activateComfort(self):
         self.gaz.activateComfort()
         self.assertEqual(self.service.setPropertyData[0]['action'], 'activate')
