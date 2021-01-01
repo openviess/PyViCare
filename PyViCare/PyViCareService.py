@@ -138,7 +138,7 @@ class ViCareService:
         # TODO tranform to exception
         
     def renewToken(self):
-        logger.warning("Token expired, renewing")
+        logger.info("Token expired, renewing")
         self.oauth=self.__getNewToken(self.username,self.password,self.token_file)
         logger.info("Token renewed successfully")
             
