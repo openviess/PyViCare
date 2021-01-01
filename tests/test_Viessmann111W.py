@@ -26,6 +26,13 @@ class Viessmann111W(unittest.TestCase):
         self.gaz.deactivateComfort()
         self.assertEqual(self.service.setPropertyData[0]['action'], 'deactivate')
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.circuits.0.operating.programs.comfort')
+
+    def test_setDomesticHotWaterTemperature(self):
+        self.gaz.setDomesticHotWaterTemperature(50)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'setTargetTemperature')
+        self.assertEqual(self.service.setPropertyData[0]['data'], '{"temperature":50}')
+
         
 if __name__ == '__main__':
     unittest.main()
