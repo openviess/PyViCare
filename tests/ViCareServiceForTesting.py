@@ -1,8 +1,16 @@
+import simplejson as json
+import os
 from PyViCare.PyViCareService import ViCareService
 
 class ViCareServiceForTesting(ViCareService):
     
-    def __init__(self, testData, circuit):
+    def __init__(self, filename, circuit):
+        test_filename = os.path.join(os.path.dirname(__file__), filename)
+        try:
+            json_file = open(test_filename, mode='rb')
+            testData = json.load(json_file)
+        finally:
+            json_file.close()
         self.testData = testData
         self.circuit = circuit
         self.setPropertyData = []

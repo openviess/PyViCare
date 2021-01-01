@@ -1,18 +1,11 @@
 import unittest
-import simplejson as json
-import os
 from tests.ViCareServiceForTesting import ViCareServiceForTesting
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareGazBoiler import GazBoiler
 
-TESTDATA_FILENAME = os.path.join(os.path.dirname(__file__), 'response_Viessman_111W.json')
-
 class Viessmann111W(unittest.TestCase):
     def setUp(self):
-        json_file = open(TESTDATA_FILENAME, mode='rb')
-        data = json.load(json_file)
-        json_file.close()
-        self.service = ViCareServiceForTesting(data, 0)
+        self.service = ViCareServiceForTesting('response_Viessman_111W.json', 0)
         self.gaz = GazBoiler(None, None, None, 0, 0, self.service)
 
     def test_getBurnerActive(self):
