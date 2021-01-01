@@ -204,13 +204,18 @@ class ViCareService:
 
     def _serializeToken(self,oauth,token_file):
         binary_file = open(token_file,mode='wb')
-        pickle.dump(oauth,binary_file)
-        binary_file.close()
+        try:
+            pickle.dump(oauth,binary_file)
+        finally:
+            binary_file.close()
 
     def _deserializeToken(self,token_file):
         binary_file = open(token_file,mode='rb')
-        s_token = pickle.load(binary_file)
-        return s_token
+        try:  
+            s_token = pickle.load(binary_file)
+            return s_token
+        finally:
+            binary_file.close()
 
     def _getInstallations(self):
         self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
