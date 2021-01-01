@@ -6,6 +6,8 @@ def handleKeyError(func):
             return func()
         except KeyError as err:
         	return "KeyError: " + str(err)
+        except IndexError as err:
+            return "IndexError: " + str(err)
     return wrapper
 
 # DEPRECATED
