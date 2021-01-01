@@ -1,7 +1,6 @@
 import simplejson as json
 import os
-from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCare import readFeature
+from PyViCare.PyViCareService import ViCareService, readFeature
 
 class ViCareServiceForTesting(ViCareService):
     

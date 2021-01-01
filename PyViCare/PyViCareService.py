@@ -21,6 +21,11 @@ viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
+
+def readFeature(entities, property_name):
+    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
+    return feature
+
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
 # entities / "deviceType": "heating"
 # entities are connected devices
@@ -236,6 +241,4 @@ class ViCareService:
         url = apiURLBase + '/operational-data/v1/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action
         return self.__post(url,data)
 
-    def readFeature(self, entities, property_name):
-        feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
-        return feature
+    

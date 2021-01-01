@@ -1,7 +1,6 @@
 from datetime import datetime
 import threading
-from PyViCare.PyViCareService import apiURLBase, ViCareService
-from PyViCare.PyViCare import readFeature
+from PyViCare.PyViCareService import apiURLBase, ViCareService, readFeature
 
 class ViCareCachedService(ViCareService):
     
