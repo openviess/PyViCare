@@ -1,6 +1,7 @@
 import simplejson as json
 import os
 from PyViCare.PyViCareService import ViCareService
+from PyViCare.PyViCare import readFeature
 
 class ViCareServiceForTesting(ViCareService):
     
@@ -17,8 +18,7 @@ class ViCareServiceForTesting(ViCareService):
 
     def getProperty(self, property_name):
         entities = self.testData["entities"]
-        feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
-        return feature
+        return readFeature(entities, property_name)
 
     def setProperty(self, property_name, action, data):
         self.setPropertyData.append({

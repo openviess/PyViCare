@@ -235,3 +235,7 @@ class ViCareService:
     def setProperty(self,property_name,action,data):
         url = apiURLBase + '/operational-data/v1/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action
         return self.__post(url,data)
+
+    def readFeature(self, entities, property_name):
+        feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
+        return feature
