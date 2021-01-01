@@ -1,9 +1,9 @@
 from PyViCare.PyViCareGazBoiler import GazBoiler
 
 def handleKeyError(func):
-    def wrapper():
+    def wrapper(self):
         try:
-            return func()
+            return func(self)
         except KeyError as err:
         	return "KeyError: " + str(err)
         except IndexError as err:
