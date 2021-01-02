@@ -21,3 +21,14 @@ class Vitodens222F(unittest.TestCase):
 
     def test_getSupplyTemperature(self):
         self.assertAlmostEqual(self.gaz.getSupplyTemperature(), 41.9)
+
+    def test_getPrograms(self):
+        expected_programs = ['active',
+                            'comfort',
+                            'forcedLastFromSchedule',
+                            'holiday',
+                            'holidayAtHome',
+                            'normal',
+                            'reduced',
+                            'standby']
+        self.assertListEqual(self.gaz.getPrograms(), expected_programs)

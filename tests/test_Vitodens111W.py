@@ -18,3 +18,6 @@ class Vitodens111W(unittest.TestCase):
 
     def test_getMonthSinceLastService_fails(self):
         self.assertEqual(self.gaz.getMonthSinceLastService(), "KeyError: 'properties'")
+
+    def test_getPrograms_fails(self):
+        self.assertRaises(IndexError, self.gaz.getPrograms)
