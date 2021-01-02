@@ -1,3 +1,5 @@
+from PyViCare.PyViCareGazBoiler import GazBoiler
+
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not 
 # exists (IndexError), the requested feature is not supported by 
@@ -11,4 +13,9 @@ def handleNotSupported(func):
         except IndexError as err:
             return "IndexError: " + str(err)
     return wrapper
+
+# DEPRECATED
+class ViCareSession(GazBoiler):
+    def dummy(self):
+        print("done")
         
