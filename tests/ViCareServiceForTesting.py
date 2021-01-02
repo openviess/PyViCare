@@ -4,14 +4,18 @@ from PyViCare.PyViCareService import ViCareService, readFeature
 
 class ViCareServiceForTesting(ViCareService):
     
-    def __init__(self, filename, circuit):
-        test_filename = os.path.join(os.path.dirname(__file__), filename)
-        try:
-            json_file = open(test_filename, mode='rb')
-            testData = json.load(json_file)
-        finally:
-            json_file.close()
-        self.testData = testData
+    def __init__(self, filename, circuit, rawInput = None):
+        if rawInput is None:
+            test_filename = os.path.join(os.path.dirname(__file__), filename)
+            try:
+                json_file = open(test_filename, mode='rb')
+                testData = json.load(json_file)
+            finally:
+                json_file.close()
+            self.testData = testData
+        else:
+            self.testData = rawInput
+
         self.circuit = circuit
         self.setPropertyData = []
 

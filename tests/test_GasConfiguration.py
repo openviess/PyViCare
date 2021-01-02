@@ -1,25 +1,12 @@
 import unittest
 from tests.ViCareServiceForTesting import ViCareServiceForTesting
-from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareGazBoiler import GazBoiler
 
-class Viessmann111W(unittest.TestCase):
+class GasConfiguration(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceForTesting('response_Viessman_111W.json', 0)
+        self.service = ViCareServiceForTesting(None, 0, {})
         self.gaz = GazBoiler(None, None, None, 0, 0, self.service)
-
-    def test_getBurnerActive(self):
-        self.assertEqual(self.gaz.getBurnerActive(), False)
-
-    def test_getBurnerStarts(self):
-        self.assertEqual(self.gaz.getBurnerStarts(), 12648)
-
-    def test_getPowerConsumptionDays_fails(self):
-        self.assertEqual(self.gaz.getPowerConsumptionDays(), 'error')
-
-    def test_getMonthSinceLastService_fails(self):
-        self.assertEqual(self.gaz.getMonthSinceLastService(), "KeyError: 'properties'")
-
+        
     def test_activateComfort(self):
         self.gaz.activateComfort()
         self.assertEqual(len(self.service.setPropertyData), 1)
@@ -39,6 +26,4 @@ class Viessmann111W(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['action'], 'setTargetTemperature')
         self.assertEqual(self.service.setPropertyData[0]['data'], '{"temperature":50}')
 
-        
-if __name__ == '__main__':
-    unittest.main()
+    
