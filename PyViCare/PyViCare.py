@@ -6,7 +6,7 @@ def handleNotSupported(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except (IndexError):
+        except (KeyError, IndexError):
         	raise PyViCareNotSupportedFeatureError(func.__name__)
     return wrapper
 
