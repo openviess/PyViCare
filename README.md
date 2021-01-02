@@ -8,7 +8,7 @@ A few nice feature removed from the app are available though the API (Comfort an
 
 ## Version 0.1.0
 Note that the version 0.1.0 DOES BREAK a few things.
-ViCareSession is deprecated (but you can still import it using `from PyViCare.PyViCare import ViCareSession`).
+`ViCareSession` is now removed.
 You can now use the following objects:
 ```python
 from PyViCare.PyViCareDevice import Device # generic device

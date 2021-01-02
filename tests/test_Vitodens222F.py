@@ -1,6 +1,7 @@
 import unittest
 from tests.ViCareServiceForTesting import ViCareServiceForTesting
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCare import PyViCareNotSupportedFeatureError
 
 class Vitodens222F(unittest.TestCase):
     def setUp(self):
@@ -17,7 +18,7 @@ class Vitodens222F(unittest.TestCase):
         self.assertEqual(self.gaz.getPowerConsumptionToday(), 1)
 
     def test_getMonthSinceLastService_fails(self):
-        self.assertEqual(self.gaz.getMonthSinceLastService(), "KeyError: 'properties'")
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.gaz.getMonthSinceLastService)
 
     def test_getSupplyTemperature(self):
         self.assertAlmostEqual(self.gaz.getSupplyTemperature(), 41.9)
