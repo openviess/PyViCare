@@ -16,15 +16,17 @@ from PyViCare.PyViCareGazBoiler import GazBoiler # gaz boiler
 from PyViCare.PyViCareHeatPump import HeatPump # heat pump
 ```
 
+## Device Features / Errors
+
+Depending on the device, some features are not available/supported. This results in a response of `error` if the dedicated method is called. This is (mostly) not a bug, but a limitation of the device itself.
+
 ## Basic usage
 Simple example:
 ```
 import sys
 import logging
 sys.path.insert(0, 'PyViCare')
-from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareService import ViCareService
 
 t=GazBoiler("email@domain","password","token.save")
 print(t.getDomesticHotWaterConfiguredTemperature()) 
