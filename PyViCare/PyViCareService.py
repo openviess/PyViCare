@@ -10,6 +10,7 @@ from pickle import UnpicklingError
 
 import simplejson as json
 from simplejson import JSONDecodeError
+from PyViCare.PyViCare import PyViCareNotSupportedFeatureError
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
@@ -23,7 +24,11 @@ logger.addHandler(logging.NullHandler())
 
 
 def readFeature(entities, property_name):
-    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
+    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), None)
+
+    if(feature is None):
+        raise PyViCareNotSupportedFeatureError(property_name)
+
     return feature
 
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
@@ -239,8 +244,10 @@ class ViCareService:
    #TODO should move to device after refactoring 
     def getProperty(self,property_name):
         url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name
-        j=self.__get(url)
-        return j
+        response = self.__get(url)
+        if "statusCode" in response and response["statusCode"] == 404:
+            raise PyViCareNotSupportedFeatureError(property_name)
+        return response
 
     def setProperty(self,property_name,action,data):
         url = apiURLBase + '/operational-data/v1/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action
