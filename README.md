@@ -10,7 +10,7 @@ A few nice feature removed from the app are available though the API (Comfort an
 Note that the version 0.1.0 DOES BREAK a few things.
 ViCareSession is deprecated (but you can still import it using `from PyViCare.PyViCare import ViCareSession`).
 You can now use the following objects:
-```
+```python
 from PyViCare.PyViCareDevice import Device # generic device
 from PyViCare.PyViCareGazBoiler import GazBoiler # gaz boiler
 from PyViCare.PyViCareHeatPump import HeatPump # heat pump
@@ -22,7 +22,7 @@ Depending on the device, some features are not available/supported. This results
 
 ## Basic usage
 Simple example:
-```
+```python
 import sys
 import logging
 sys.path.insert(0, 'PyViCare')
