@@ -1,0 +1,3973 @@
+{
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+        },
+        {
+            "rel": [
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+            ],
+            "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+        }
+    ],
+    "properties": {},
+    "entities": [
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature"
+                }
+            ],
+            "class": [
+                "heating.sensors.temperature",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.sensors.temperature",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#outside",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-outside",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature.outside"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "outside"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw"
+                }
+            ],
+            "class": [
+                "heating.dhw",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": true,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw",
+                        "timestamp": "2020-12-18T06:58:12.528Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#schedule",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.schedule"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#sensors",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#temperature",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "schedule",
+                            "sensors",
+                            "temperature"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhw"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhw"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.modes.dhw",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhw",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.modes.dhw",
+                        "timestamp": "2020-12-18T06:58:12.639Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.modes",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.modes",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#active",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.active"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#dhw",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhw"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#dhwAndHeating",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhwAndHeating",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#standby",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.standby"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "active",
+                            "dhw",
+                            "dhwAndHeating",
+                            "standby"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.standby"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.standby"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs.standby",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.standby",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs.standby",
+                        "timestamp": "2020-12-18T06:58:12.634Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.sensors.temperature",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.sensors.temperature",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#room",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-room",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature.room"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "room"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration.multiFamilyHouse"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration.multiFamilyHouse"
+                }
+            ],
+            "class": [
+                "heating.configuration.multiFamilyHouse",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration.multiFamilyHouse",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.configuration.multiFamilyHouse",
+                        "timestamp": "2020-12-18T06:58:12.596Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits"
+                }
+            ],
+            "class": [
+                "heating.circuits",
+                "feature"
+            ],
+            "properties": {
+                "enabled": {
+                    "value": [
+                        "0"
+                    ],
+                    "type": "array"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits",
+                        "timestamp": "2020-12-18T06:58:12.592Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#0",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-0",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "0"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner.statistics"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner.statistics"
+                }
+            ],
+            "class": [
+                "heating.burner.statistics",
+                "feature"
+            ],
+            "properties": {
+                "hours": {
+                    "value": 3781,
+                    "type": "number"
+                },
+                "starts": {
+                    "value": 12648,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner.statistics",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.burner.statistics",
+                        "timestamp": "2020-12-18T07:29:00.110Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.reduced"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.reduced"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs.reduced",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                },
+                "demand": {
+                    "value": "unknown",
+                    "type": "string"
+                },
+                "temperature": {
+                    "value": 21,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.reduced",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs.reduced",
+                        "timestamp": "2020-12-18T06:58:12.630Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.reduced/setTemperature",
+                    "name": "setTemperature",
+                    "title": "setTemperature",
+                    "fields": [
+                        {
+                            "name": "targetTemperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 8,
+                            "max": 30,
+                            "stepping": 0.5
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.active"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.active"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs.active",
+                "feature"
+            ],
+            "properties": {
+                "value": {
+                    "value": "normal",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.active",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs.active",
+                        "timestamp": "2020-12-18T06:58:12.650Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#active",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.active"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#comfort",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-comfort",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#manual",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-manual",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#normal",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-normal",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.normal"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#reduced",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-reduced",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.reduced"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#standby",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.standby"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "active",
+                            "comfort",
+                            "manual",
+                            "normal",
+                            "reduced",
+                            "standby"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating"
+                }
+            ],
+            "class": [
+                "heating",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#boiler",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-boiler",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#burner",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-burner",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#circuits",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-circuits",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#configuration",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-configuration",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#device",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-device",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#dhw",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#errors",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-errors",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#sensors",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "boiler",
+                            "burner",
+                            "circuits",
+                            "configuration",
+                            "device",
+                            "dhw",
+                            "errors",
+                            "sensors"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time"
+                }
+            ],
+            "class": [
+                "heating.device.time",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.device.time",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#offset",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-offset",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time.offset"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "offset"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature.outside"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature.outside"
+                }
+            ],
+            "class": [
+                "heating.sensors.temperature.outside",
+                "feature"
+            ],
+            "properties": {
+                "status": {
+                    "value": "notConnected",
+                    "type": "string"
+                },
+                "unit": {
+                    "value": "celsius",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature.outside",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.sensors.temperature.outside",
+                        "timestamp": "2020-12-18T06:58:12.563Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
+                }
+            ],
+            "class": [
+                "heating.dhw.sensors.temperature.hotWaterStorage",
+                "feature"
+            ],
+            "properties": {
+                "status": {
+                    "value": "connected",
+                    "type": "string"
+                },
+                "value": {
+                    "value": 45.59765625,
+                    "type": "number"
+                },
+                "unit": {
+                    "value": "celsius",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw.sensors.temperature.hotWaterStorage",
+                        "timestamp": "2020-12-18T07:51:59.086Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0"
+                }
+            ],
+            "class": [
+                "heating.circuits.0",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": true,
+                    "type": "boolean"
+                },
+                "name": {
+                    "value": "",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0",
+                        "timestamp": "2020-12-18T06:58:12.588Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#heating",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-heating",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#operating",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-operating",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#sensors",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#temperature",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "heating",
+                            "operating",
+                            "sensors",
+                            "temperature"
+                        ]
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": false,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0/setName",
+                    "name": "setName",
+                    "title": "setName",
+                    "fields": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "required": true,
+                            "minLength": 1,
+                            "maxLength": 20
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.active"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.active"
+                }
+            ],
+            "class": [
+                "heating.errors.active",
+                "feature"
+            ],
+            "properties": {
+                "entries": {
+                    "type": "ErrorListChanges",
+                    "constraints": {},
+                    "value": {
+                        "new": [],
+                        "current": [],
+                        "gone": []
+                    }
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.active",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.errors.active",
+                        "timestamp": "2020-12-12T08:33:13.815Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.sensors",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.sensors",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#temperature",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "temperature"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.history"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.history"
+                }
+            ],
+            "class": [
+                "heating.errors.history",
+                "feature"
+            ],
+            "properties": {
+                "entries": {
+                    "type": "ErrorListChanges",
+                    "constraints": {},
+                    "value": {
+                        "new": [],
+                        "current": [],
+                        "gone": []
+                    }
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.history",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.errors.history",
+                        "timestamp": "2020-12-18T06:58:12.605Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs.manual",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs.manual",
+                        "timestamp": "2020-12-18T06:58:12.625Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual/setTemperature",
+                    "name": "setTemperature",
+                    "title": "setTemperature",
+                    "fields": [
+                        {
+                            "name": "targetTemperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 8,
+                            "max": 30,
+                            "stepping": 0.5
+                        }
+                    ],
+                    "type": "application/json"
+                },
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual/activate",
+                    "name": "activate",
+                    "title": "activate",
+                    "fields": [
+                        {
+                            "name": "temperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 8,
+                            "max": 30,
+                            "stepping": 0.5
+                        }
+                    ],
+                    "type": "application/json"
+                },
+                {
+                    "method": "POST",
+                    "isExecutable": false,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.manual/deactivate",
+                    "name": "deactivate",
+                    "title": "deactivate",
+                    "fields": [],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.schedule"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.schedule"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.heating.schedule",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": true,
+                    "type": "boolean"
+                },
+                "entries": {
+                    "value": {
+                        "fri": [
+                            {
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "mon": [
+                            {
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "sat": [
+                            {
+                                "end": "22:40",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "sun": [
+                            {
+                                "end": "22:40",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "thu": [
+                            {
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "tue": [
+                            {
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "wed": [
+                            {
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ]
+                    },
+                    "type": "Schedule"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.schedule",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.heating.schedule",
+                        "timestamp": "2020-12-18T06:58:12.618Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.schedule/setSchedule",
+                    "name": "setSchedule",
+                    "title": "setSchedule",
+                    "fields": [
+                        {
+                            "name": "newSchedule",
+                            "type": "Schedule",
+                            "required": true,
+                            "modes": [
+                                "comfort",
+                                "normal"
+                            ],
+                            "maxEntries": 20,
+                            "resolution": 5,
+                            "defaultMode": "reduced",
+                            "overlapAllowed": true
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.heating",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.heating",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#curve",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-curve",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.curve"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#schedule",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.schedule"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "curve",
+                            "schedule"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time.offset"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time.offset"
+                }
+            ],
+            "class": [
+                "heating.device.time.offset",
+                "feature"
+            ],
+            "properties": {
+                "value": {
+                    "value": 60,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time.offset",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.device.time.offset",
+                        "timestamp": "2020-12-18T06:58:12.602Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature.main"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature.main"
+                }
+            ],
+            "class": [
+                "heating.dhw.temperature.main",
+                "feature"
+            ],
+            "properties": {
+                "value": {
+                    "value": 45,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature.main",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw.temperature.main",
+                        "timestamp": "2020-12-18T06:58:12.614Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature.main/setTargetTemperature",
+                    "name": "setTargetTemperature",
+                    "title": "setTargetTemperature",
+                    "fields": [
+                        {
+                            "name": "temperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 30,
+                            "efficientLowerBorder": 30,
+                            "efficientUpperBorder": 60,
+                            "max": 60,
+                            "stepping": 1
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs.comfort",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                },
+                "demand": {
+                    "value": "unknown",
+                    "type": "string"
+                },
+                "temperature": {
+                    "value": 22.5,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs.comfort",
+                        "timestamp": "2020-12-18T06:58:12.621Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature",
+                    "name": "setTemperature",
+                    "title": "setTemperature",
+                    "fields": [
+                        {
+                            "name": "targetTemperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 8,
+                            "max": 30,
+                            "stepping": 0.5
+                        }
+                    ],
+                    "type": "application/json"
+                },
+                {
+                    "method": "POST",
+                    "isExecutable": false,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort/activate",
+                    "name": "activate",
+                    "title": "activate",
+                    "fields": [
+                        {
+                            "name": "temperature",
+                            "type": "number",
+                            "required": false,
+                            "min": 8,
+                            "max": 30,
+                            "stepping": 0.5
+                        }
+                    ],
+                    "type": "application/json"
+                },
+                {
+                    "method": "POST",
+                    "isExecutable": false,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate",
+                    "name": "deactivate",
+                    "title": "deactivate",
+                    "fields": [],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature"
+                }
+            ],
+            "class": [
+                "heating.boiler.sensors.temperature",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.boiler.sensors.temperature",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#commonSupply",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-commonSupply",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature.commonSupply"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "commonSupply"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature.commonSupply"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature.commonSupply"
+                }
+            ],
+            "class": [
+                "heating.boiler.sensors.temperature.commonSupply",
+                "feature"
+            ],
+            "properties": {
+                "status": {
+                    "value": "connected",
+                    "type": "string"
+                },
+                "value": {
+                    "value": 42.69921875,
+                    "type": "number"
+                },
+                "unit": {
+                    "value": "celsius",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature.commonSupply",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.boiler.sensors.temperature.commonSupply",
+                        "timestamp": "2020-12-18T07:57:00.177Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.temperature",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.temperature",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#levels",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-levels",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature.levels"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "levels"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors"
+                }
+            ],
+            "class": [
+                "heating.sensors",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.sensors",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#temperature",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "temperature"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature.levels"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature.levels"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.temperature.levels",
+                "feature"
+            ],
+            "properties": {
+                "min": {
+                    "value": 20,
+                    "type": "number"
+                },
+                "max": {
+                    "value": 45,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature.levels",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.temperature.levels",
+                        "timestamp": "2020-12-18T06:58:12.655Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.temperature.levels/setMax",
+                    "name": "setMax",
+                    "title": "setMax",
+                    "fields": [
+                        {
+                            "name": "temperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 21,
+                            "max": 80,
+                            "stepping": 1
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler"
+                }
+            ],
+            "class": [
+                "heating.boiler",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.boiler",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#sensors",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "sensors"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device"
+                }
+            ],
+            "class": [
+                "heating.device",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.device",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#time",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-time",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.device.time"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "time"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature.room"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature.room"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.sensors.temperature.room",
+                "feature"
+            ],
+            "properties": {
+                "status": {
+                    "value": "connected",
+                    "type": "string"
+                },
+                "value": {
+                    "value": 21.42,
+                    "type": "number"
+                },
+                "unit": {
+                    "value": "celsius",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.sensors.temperature.room",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.sensors.temperature.room",
+                        "timestamp": "2020-12-18T07:56:42.972Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.active"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.active"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.modes.active",
+                "feature"
+            ],
+            "properties": {
+                "value": {
+                    "value": "dhwAndHeating",
+                    "type": "string"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.active",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.modes.active",
+                        "timestamp": "2020-12-18T06:58:12.568Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.active/setMode",
+                    "name": "setMode",
+                    "title": "setMode",
+                    "fields": [
+                        {
+                            "name": "mode",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "standby",
+                                "dhw",
+                                "dhwAndHeating"
+                            ]
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner"
+                }
+            ],
+            "class": [
+                "heating.burner",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.burner",
+                        "timestamp": "2020-12-18T07:42:02.080Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#statistics",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-statistics",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.burner.statistics"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "statistics"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#modes",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-modes",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#programs",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-programs",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "modes",
+                            "programs"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.normal"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.normal"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.programs.normal",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": true,
+                    "type": "boolean"
+                },
+                "demand": {
+                    "value": "unknown",
+                    "type": "string"
+                },
+                "temperature": {
+                    "value": 21.5,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.normal",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.programs.normal",
+                        "timestamp": "2020-12-18T06:58:12.628Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.normal/setTemperature",
+                    "name": "setTemperature",
+                    "title": "setTemperature",
+                    "fields": [
+                        {
+                            "name": "targetTemperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 8,
+                            "max": 30,
+                            "stepping": 0.5
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.curve"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.curve"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.heating.curve",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.heating.curve",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.heating.curve",
+                        "timestamp": "2020-12-18T06:58:12.566Z",
+                        "isEnabled": false,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.modes.dhwAndHeating",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": true,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.modes.dhwAndHeating",
+                        "timestamp": "2020-12-18T06:58:12.641Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature"
+                }
+            ],
+            "class": [
+                "heating.dhw.sensors.temperature",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw.sensors.temperature",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#hotWaterStorage",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-hotWaterStorage",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "hotWaterStorage"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.schedule"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.schedule"
+                }
+            ],
+            "class": [
+                "heating.dhw.schedule",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": true,
+                    "type": "boolean"
+                },
+                "entries": {
+                    "value": {
+                        "fri": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "mon": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "sat": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "sun": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "thu": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "tue": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ],
+                        "wed": [
+                            {
+                                "end": "23:00",
+                                "mode": "on",
+                                "position": 0,
+                                "start": "06:00"
+                            }
+                        ]
+                    },
+                    "type": "Schedule"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.schedule",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw.schedule",
+                        "timestamp": "2020-12-18T06:58:12.600Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.schedule/setSchedule",
+                    "name": "setSchedule",
+                    "title": "setSchedule",
+                    "fields": [
+                        {
+                            "name": "newSchedule",
+                            "type": "Schedule",
+                            "required": true,
+                            "modes": [
+                                "on"
+                            ],
+                            "maxEntries": 20,
+                            "resolution": 5,
+                            "defaultMode": "off",
+                            "overlapAllowed": true
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors"
+                }
+            ],
+            "class": [
+                "heating.boiler.sensors",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.boiler.sensors",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#temperature",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.boiler.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "temperature"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.standby"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.standby"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.operating.modes.standby",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "value": false,
+                    "type": "boolean"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.modes.standby",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.operating.modes.standby",
+                        "timestamp": "2020-12-18T06:58:12.646Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors"
+                }
+            ],
+            "class": [
+                "heating.errors",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.errors",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#active",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.active"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#history",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-history",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.errors.history"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "active",
+                            "history"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors"
+                }
+            ],
+            "class": [
+                "heating.dhw.sensors",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw.sensors",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#temperature",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.sensors.temperature"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "temperature"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature"
+                }
+            ],
+            "class": [
+                "heating.dhw.temperature",
+                "feature"
+            ],
+            "properties": {
+                "value": {
+                    "value": 45,
+                    "type": "number"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.dhw.temperature",
+                        "timestamp": "2020-12-18T06:58:12.610Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#main",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-main",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature.main"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "main"
+                        ]
+                    }
+                }
+            ],
+            "actions": [
+                {
+                    "method": "POST",
+                    "isExecutable": true,
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.dhw.temperature/setTargetTemperature",
+                    "name": "setTargetTemperature",
+                    "title": "setTargetTemperature",
+                    "fields": [
+                        {
+                            "name": "temperature",
+                            "type": "number",
+                            "required": true,
+                            "min": 30,
+                            "max": 60,
+                            "stepping": 1
+                        }
+                    ],
+                    "type": "application/json"
+                }
+            ]
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration"
+                }
+            ],
+            "class": [
+                "heating.configuration",
+                "feature"
+            ],
+            "properties": {},
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration",
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.configuration",
+                        "timestamp": "2020-12-18T06:58:12.403Z",
+                        "isEnabled": true,
+                        "isReady": true,
+                        "deviceId": "0"
+                    }
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#multiFamilyHouse",
+                        "http://schema.viessmann.com/link-relations#feature-component",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-multiFamilyHouse",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.configuration.multiFamilyHouse"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-components",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "components": [
+                            "multiFamilyHouse"
+                        ]
+                    }
+                }
+            ],
+            "actions": []
+        },
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.geofencing"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+                },
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#live-updates",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+                    ],
+                    "href": "/operational-data/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.geofencing"
+                }
+            ],
+            "class": [
+                "heating.circuits.0.geofencing",
+                "feature"
+            ],
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "status": {
+                    "type": "string",
+                    "value": "home"
+                }
+            },
+            "entities": [
+                {
+                    "rel": [
+                        "http://schema.viessmann.com/link-relations#feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "properties": {
+                        "apiVersion": 1,
+                        "isEnabled": true,
+                        "isReady": true,
+                        "gatewayId": "XXXXXXXXXXXXXXXX",
+                        "feature": "heating.circuits.0.geofencing",
+                        "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/XXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.geofencing",
+                        "deviceId": "0",
+                        "timestamp": "2020-12-18T07:57:00.867Z"
+                    }
+                }
+            ],
+            "actions": []
+        }
+    ],
+    "actions": []
+}

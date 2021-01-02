@@ -1,6 +1,6 @@
 from datetime import datetime
 import threading
-from PyViCare.PyViCareService import apiURLBase, ViCareService
+from PyViCare.PyViCareService import apiURLBase, ViCareService, readFeature
 
 class ViCareCachedService(ViCareService):
     
@@ -25,5 +25,4 @@ class ViCareCachedService(ViCareService):
             self.lock.release()
             
         entities = self.cache["entities"]
-        feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
-        return feature
+        return readFeature(entities, property_name)

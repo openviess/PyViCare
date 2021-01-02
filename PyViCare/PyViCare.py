@@ -18,4 +18,3 @@ def handleNotSupported(func):
 class ViCareSession(GazBoiler):
     def dummy(self):
         print("done")
-        
