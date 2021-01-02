@@ -5,7 +5,7 @@ import logging
 from datetime import datetime, time
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareCachedService import ViCareCachedService
-from PyViCare.PyViCare import handleKeyError
+from PyViCare.PyViCare import handleNotSupported
 
 import traceback
 
@@ -130,71 +130,71 @@ class Device:
     def deactivateComfort(self):
         return self.deactivateProgram("comfort")
 
-    @handleKeyError
+    @handleNotSupported
     def getMonthSinceLastService(self):
         return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getLastServiceDate(self):
         return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getOutsideTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getSupplyTemperature(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getRoomTemperature(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getModes(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
 
-    @handleKeyError
+    @handleNotSupported
     def getActiveMode(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getHeatingCurveShift(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getHeatingCurveSlope(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getActiveProgram(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getPrograms(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
 
-    @handleKeyError
+    @handleNotSupported
     def getDesiredTemperatureForProgram(self , program):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getCurrentDesiredTemperature(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getErrorHistory(self):
         return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getActiveError(self):
         return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
         return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
         return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
 
@@ -233,20 +233,20 @@ class Device:
         
         return None   
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
         return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterPumpActive(self):
         status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
         return status == 'on'
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterMaxTemperature(self):
         return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterMinTemperature(self):
         return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
     
@@ -278,12 +278,12 @@ class Device:
     def setDomesticHotWaterTemperature2(self,temperature):
         return self.service.setProperty("heating.dhw.temperature.temp2","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
 
-    @handleKeyError
+    @handleNotSupported
     def getCirculationPumpActive(self):
         status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
         return status == 'on'
 
-    @handleKeyError
+    @handleNotSupported
     def getHeatingSchedule(self):
         properties = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
         return {
@@ -297,7 +297,7 @@ class Device:
             "sun": properties["entries"]["value"]["sun"]
         }
 
-    @handleKeyError
+    @handleNotSupported
     def getDomesticHotWaterSchedule(self):
         properties = self.service.getProperty("heating.dhw.schedule")["properties"]
         return {

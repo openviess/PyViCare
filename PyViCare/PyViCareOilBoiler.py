@@ -1,24 +1,24 @@
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCare import handleKeyError
+from PyViCare.PyViCare import handleNotSupported
 
 class OilBoiler(Device):
 
-    @handleKeyError
+    @handleNotSupported
     def getBurnerActive(self):
         return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
 
-    @handleKeyError         
+    @handleNotSupported         
     def getBurnerModulation(self):
         return self.service.getProperty('heating.burner.modulation')["properties"]["value"]["value"]
 
-    @handleKeyError      
+    @handleNotSupported      
     def getBoilerTemperature(self):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
-    @handleKeyError
+    @handleNotSupported
     def getBurnerHours(self):
         return self.service.getProperty('heating.burner.statistics')['properties']['hours']['value']
 
-    @handleKeyError
+    @handleNotSupported
     def getBurnerStarts(self):
         return self.service.getProperty('heating.burner.statistics')['properties']['starts']['value']
