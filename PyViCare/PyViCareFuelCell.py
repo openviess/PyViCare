@@ -1,641 +1,391 @@
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCare import handleNotSupported
 
 class FuelCell(GazBoiler):
 
+    @handleNotSupported
     def getOperatingPhase(self):
-        try:
-            # generation, startup, standby
-            return self.service.getProperty("heating.fuelCell.operating.phase")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        # generation, startup, standby
+        return self.service.getProperty("heating.fuelCell.operating.phase")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getOperatingModesActive(self):
-        try:
-            # standby, maintenance, heatControlled, economical, ecological
-            return self.service.getProperty("heating.fuelCell.operating.modes.active")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        # standby, maintenance, heatControlled, economical, ecological
+        return self.service.getProperty("heating.fuelCell.operating.modes.active")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getOperatingModesHeatControlled(self):
-        try:
-            # True or False
-            return self.service.getProperty("heating.fuelCell.operating.modes.heatControlled")["properties"]["active"]["value"]
-        except KeyError:
-            return "error"
+        # True or False
+        return self.service.getProperty("heating.fuelCell.operating.modes.heatControlled")["properties"]["active"]["value"]    
 
+    @handleNotSupported
     def getOperatingModesEcological(self):
-        try:
-            # True or False
-            return self.service.getProperty("heating.fuelCell.operating.modes.ecological")["properties"]["active"]["value"]
-        except KeyError:
-            return "error"
+        # True or False
+        return self.service.getProperty("heating.fuelCell.operating.modes.ecological")["properties"]["active"]["value"]
 
+    @handleNotSupported
     def getOperatingModesEconomical(self):
-        try:
-            # True or False
-            return self.service.getProperty("heating.fuelCell.operating.modes.economical")["properties"]["active"]["value"]
-        except KeyError:
-            return "error"
+        # True or False
+        return self.service.getProperty("heating.fuelCell.operating.modes.economical")["properties"]["active"]["value"]
 
+    @handleNotSupported
     def getOperatingModesMaintenance(self):
-        try:
-            # True or False
-            return self.service.getProperty("heating.fuelCell.operating.modes.maintenance")["properties"]["active"]["value"]
-        except KeyError:
-            return "error"
+        # True or False
+        return self.service.getProperty("heating.fuelCell.operating.modes.maintenance")["properties"]["active"]["value"]
 
+    @handleNotSupported
     def getOperatingModesStandby(self):
-        try:
-            # True or False
-            return self.service.getProperty("heating.fuelCell.operating.modes.standby")["properties"]["active"]["value"]
-        except KeyError:
-            return "error"
+        # True or False
+        return self.service.getProperty("heating.fuelCell.operating.modes.standby")["properties"]["active"]["value"]
 
+    @handleNotSupported
     def getFuelCellOperationHours(self):
-        try:
-            return self.service.getProperty("heating.fuelCell.statistics")["properties"]["operationHours"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["operationHours"]["value"]
 
+    @handleNotSupported
     def getFuelCellInsertions(self):
-        try:
-            return self.service.getProperty("heating.fuelCell.statistics")["properties"]["insertions"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["insertions"]["value"]
 
+    @handleNotSupported
     def getFuelCellProductionHours(self):
-        try:
-            return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionHours"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionHours"]["value"]
 
+    @handleNotSupported
     def getFuelCellProductionStarts(self):
-        try:
-            return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionStarts"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionStarts"]["value"]
 
+    @handleNotSupported
     def getFuelCellAvailabilityRate(self):
-        try:
-            return self.service.getProperty("heating.fuelCell.statistics")["properties"]["availabilityRate"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["availabilityRate"]["value"]
 
+    @handleNotSupported
     def getCumulativePowerProduced(self):
-        try:
-            return self.service.getProperty("heating.power.cumulativeProduced")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.cumulativeProduced")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getCumulativePowerSold(self):
-        try:
-            return self.service.getProperty("heating.power.cumulativeSold")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.cumulativeSold")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getCumulativePowerPurchased(self):
-        try:
-            return self.service.getProperty("heating.power.cumulativePurchased")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.cumulativePurchased")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getFuelCellReturnTemperature(self):
-        try:
-            return self.service.getProperty("heating.fuelCell.sensors.temperature.return")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.fuelCell.sensors.temperature.return")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getReturnTemperature(self):
-        try:
-            return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPowerProductionCurrent(self):
-        try:
-            return self.service.getProperty("heating.power.production.current")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.production.current")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPowerPurchaseCurrent(self):
-        try:
-            return self.service.getProperty("heating.power.purchase.current")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.purchase.current")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPowerOutput(self):
-        try:
-            return self.service.getProperty("heating.sensors.power.output")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.sensors.power.output")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPowerProductionDemandCoverageCurrent(self):
-        try:
-            return self.service.getProperty("heating.power.production.demandCoverage.current")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.production.demandCoverage.current")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPowerProductionProductionCoverageCurrent(self):
-        try:
-            return self.service.getProperty("heating.power.production.productionCoverage.current")["properties"]["value"]["value"]
-        except KeyError:
-            return "error"
+        return self.service.getProperty("heating.power.production.productionCoverage.current")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPowerSoldCurrent(self):
-        try:
-            return self.service.getProperty('heating.power.sold.current')['properties']['value']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.sold.current')['properties']['value']['value']
 
+    @handleNotSupported
     def getPowerSoldDays(self):
-        try:
-            return self.service.getProperty('heating.power.sold')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.sold')['properties']['day']['value']
 
+    @handleNotSupported
     def getPowerSoldToday(self):
-        try:
-            return self.service.getProperty('heating.power.sold')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.sold')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getPowerSoldWeeks(self):
-        try:
-            return self.service.getProperty('heating.power.sold')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.sold')['properties']['week']['value']
 
+    @handleNotSupported
     def getPowerSoldThisWeek(self):
-        try:
-            return self.service.getProperty('heating.power.sold')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.sold')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getPowerSoldMonths(self):
-        try:
-            return self.service.getProperty('heating.power.sold')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.sold')['properties']['month']['value']
 
+    @handleNotSupported
     def getPowerSoldThisMonth(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getPowerSoldYears(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value']
 
+    @handleNotSupported
     def getPowerSoldThisYear(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionDays(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['day']['value']
 
+    @handleNotSupported
     def getPowerProductionToday(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionWeeks(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['week']['value']
 
+    @handleNotSupported
     def getPowerProductionThisWeek(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionMonths(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value']
 
+    @handleNotSupported
     def getPowerProductionThisMonth(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionYears(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value']
 
+    @handleNotSupported
     def getPowerProductionThisYear(self):
-        try:
-            return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionDays(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['day']['value']
 
+    @handleNotSupported
     def getPowerConsumptionToday(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionWeeks(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['week']['value']
 
+    @handleNotSupported
     def getPowerConsumptionThisWeek(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionMonths(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['month']['value']
 
+    @handleNotSupported
     def getPowerConsumptionThisMonth(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionYears(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['year']['value']
 
+    @handleNotSupported
     def getPowerConsumptionThisYear(self):
-        try:
-            return self.service.getProperty('heating.power.consumption')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionHeatingDays(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['day']['value']
 
+    @handleNotSupported
     def getPowerConsumptionHeatingToday(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionHeatingWeeks(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['week']['value']
 
+    @handleNotSupported
     def getPowerConsumptionHeatingThisWeek(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionHeatingMonths(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['month']['value']
 
+    @handleNotSupported
     def getPowerConsumptionHeatingThisMonth(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionHeatingYears(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value']
 
+    @handleNotSupported
     def getPowerConsumptionHeatingThisYear(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterDays(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['day']['value']
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterToday(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterWeeks(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value']
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterThisWeek(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterMonths(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value']
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterThisMonth(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterYears(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value']
 
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterThisYear(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value'][0]
 
-    def getPowerConsumptionDomesticHotWaterThisWeek(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionDomesticHotWaterMonths(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value']
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionDomesticHotWaterThisMonth(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionDomesticHotWaterYears(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value']
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionDomesticHotWaterThisYear(self):
-        try:
-            return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
-
-
-    def getPowerConsumptionHeatingThisWeek(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionHeatingMonths(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['month']['value']
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionHeatingThisMonth(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionHeatingYears(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value']
-        except KeyError:
-            return "error"
-
-    def getPowerConsumptionHeatingThisYear(self):
-        try:
-            return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
-
+    @handleNotSupported
     def getGasConsumptionFuelCellDays(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value']
 
+    @handleNotSupported
     def getGasConsumptionFuelCellToday(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionFuelCellWeeks(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['week']['value']
 
+    @handleNotSupported
     def getGasConsumptionFuelCellThisWeek(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionFuelCellMonths(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['month']['value']
 
+    @handleNotSupported
     def getGasConsumptionFuelCellThisMonth(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionFuelCellYears(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['year']['value']
 
+    @handleNotSupported
     def getGasConsumptionFuelCellThisYear(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionTotalDays(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['day']['value']
 
+    @handleNotSupported
     def getGasConsumptionTotalToday(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionTotalWeeks(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['week']['value']
 
+    @handleNotSupported
     def getGasConsumptionTotalThisWeek(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionTotalMonths(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['month']['value']
 
+    @handleNotSupported
     def getGasConsumptionTotalThisMonth(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getGasConsumptionTotalYears(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['year']['value']
 
+    @handleNotSupported
     def getGasConsumptionTotalThisYear(self):
-        try:
-            return self.service.getProperty('heating.gas.consumption.total')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.gas.consumption.total')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalDays(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['day']['value']
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalToday(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalWeeks(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['week']['value']
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalThisWeek(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalMonths(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['month']['value']
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalThisMonth(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalYears(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['year']['value']
 
+    @handleNotSupported
     def getPowerProductionCoverageTotalThisYear(self):
-        try:
-            return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['year']['value'][0]
 
+    @handleNotSupported
     def getHeatProductionDays(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['day']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['day']['value']
 
+    @handleNotSupported
     def getHeatProductionToday(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['day']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['day']['value'][0]
 
+    @handleNotSupported
     def getHeatProductionWeeks(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['week']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['week']['value']
 
+    @handleNotSupported
     def getHeatProductionThisWeek(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['week']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['week']['value'][0]
 
+    @handleNotSupported
     def getHeatProductionMonths(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['month']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['month']['value']
 
+    @handleNotSupported
     def getHeatProductionThisMonth(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['month']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['month']['value'][0]
 
+    @handleNotSupported
     def getHeatProductionYears(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['year']['value']
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['year']['value']
 
+    @handleNotSupported
     def getHeatProductionThisYear(self):
-        try:
-            return self.service.getProperty('heating.heat.production')['properties']['year']['value'][0]
-        except KeyError:
-            return "error"
+        return self.service.getProperty('heating.heat.production')['properties']['year']['value'][0]

@@ -5,6 +5,8 @@ import logging
 from datetime import datetime, time
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareCachedService import ViCareCachedService
+from PyViCare.PyViCare import handleNotSupported
+
 import traceback
 
 logger = logging.getLogger('ViCare')
@@ -65,9 +67,9 @@ class Device:
 
     # Works for normal, reduced, comfort
     # active has no action
-    # exetenral , standby no action
+    # external, standby no action
     # holiday, sheculde and unscheduled
-    # activate, decativate comfort,eco
+    # activate, decativate comfort, eco
     """ Set the target temperature for the target program
     Parameters
     ----------
@@ -128,107 +130,73 @@ class Device:
     def deactivateComfort(self):
         return self.deactivateProgram("comfort")
 
+    @handleNotSupported
     def getMonthSinceLastService(self):
-        try:
-            return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
 
+    @handleNotSupported
     def getLastServiceDate(self):
-        try:
-            return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
 
+    @handleNotSupported
     def getOutsideTemperature(self):
-        try:
-            return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getSupplyTemperature(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getRoomTemperature(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getModes(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
 
+    @handleNotSupported
     def getActiveMode(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getHeatingCurveShift(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
 
+    @handleNotSupported
     def getHeatingCurveSlope(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
 
+    @handleNotSupported
     def getActiveProgram(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getPrograms(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
 
+    @handleNotSupported
     def getDesiredTemperatureForProgram(self , program):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
 
+    @handleNotSupported
     def getCurrentDesiredTemperature(self):
-        try:
-            return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
 
+    @handleNotSupported
     def getErrorHistory(self):
-        try:
-            return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
 
+    @handleNotSupported
     def getActiveError(self):
-        try:
-            return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
 
+    @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
-        try:
-            return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
-        try:
-            return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
 
     def getDomesticHotWaterActiveMode(self):
         schedule = self.getDomesticHotWaterSchedule()
@@ -240,7 +208,7 @@ class Device:
 
         try:
             daySchedule = schedule[VICARE_DAYS[currentDateTime.weekday()]]
-        except KeyError as err: # no schedule for day configured 
+        except KeyError: # no schedule for day configured 
             return None
 
         mode = None
@@ -265,30 +233,23 @@ class Device:
         
         return None   
 
+    @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
-        try:
-            return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getDomesticHotWaterPumpActive(self):
-        try:
-            status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
-            return status == 'on'
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
+        return status == 'on'
 
+    @handleNotSupported
     def getDomesticHotWaterMaxTemperature(self):
-        try:
-            return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
 
+    @handleNotSupported
     def getDomesticHotWaterMinTemperature(self):
-        try:
-            return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
+    
     """ Set the target temperature for domestic host water
     Parameters
     ----------
@@ -317,41 +278,35 @@ class Device:
     def setDomesticHotWaterTemperature2(self,temperature):
         return self.service.setProperty("heating.dhw.temperature.temp2","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
 
+    @handleNotSupported
     def getCirculationPumpActive(self):
-        try:
-            status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
-            return status == 'on'
-        except KeyError as err:
-        	return "KeyError: "+str(err)
-    
-    def getHeatingSchedule(self):
-        try:
-            properties = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
-            return {
-                "active": properties["active"]["value"],
-                "mon": properties["entries"]["value"]["mon"],
-                "tue": properties["entries"]["value"]["tue"],
-                "wed": properties["entries"]["value"]["wed"],
-                "thu": properties["entries"]["value"]["thu"],
-                "fri": properties["entries"]["value"]["fri"],
-                "sat": properties["entries"]["value"]["sat"],
-                "sun": properties["entries"]["value"]["sun"]
-            }
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
+        return status == 'on'
 
+    @handleNotSupported
+    def getHeatingSchedule(self):
+        properties = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
+        return {
+            "active": properties["active"]["value"],
+            "mon": properties["entries"]["value"]["mon"],
+            "tue": properties["entries"]["value"]["tue"],
+            "wed": properties["entries"]["value"]["wed"],
+            "thu": properties["entries"]["value"]["thu"],
+            "fri": properties["entries"]["value"]["fri"],
+            "sat": properties["entries"]["value"]["sat"],
+            "sun": properties["entries"]["value"]["sun"]
+        }
+
+    @handleNotSupported
     def getDomesticHotWaterSchedule(self):
-        try:
-            properties = self.service.getProperty("heating.dhw.schedule")["properties"]
-            return {
-                "active": properties["active"]["value"],
-                "mon": properties["entries"]["value"]["mon"],
-                "tue": properties["entries"]["value"]["tue"],
-                "wed": properties["entries"]["value"]["wed"],
-                "thu": properties["entries"]["value"]["thu"],
-                "fri": properties["entries"]["value"]["fri"],
-                "sat": properties["entries"]["value"]["sat"],
-                "sun": properties["entries"]["value"]["sun"]
-            }
-        except KeyError as err:
-        	return "KeyError: "+str(err)
+        properties = self.service.getProperty("heating.dhw.schedule")["properties"]
+        return {
+            "active": properties["active"]["value"],
+            "mon": properties["entries"]["value"]["mon"],
+            "tue": properties["entries"]["value"]["tue"],
+            "wed": properties["entries"]["value"]["wed"],
+            "thu": properties["entries"]["value"]["thu"],
+            "fri": properties["entries"]["value"]["fri"],
+            "sat": properties["entries"]["value"]["sat"],
+            "sun": properties["entries"]["value"]["sun"]
+        }

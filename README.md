@@ -8,24 +8,25 @@ A few nice feature removed from the app are available though the API (Comfort an
 
 ## Version 0.1.0
 Note that the version 0.1.0 DOES BREAK a few things.
-ViCareSession is deprecated (but you can still import it using f"rom PyViCare.PyViCare import ViCareSession").
+ViCareSession is deprecated (but you can still import it using `from PyViCare.PyViCare import ViCareSession`).
 You can now use the following objects:
-```
+```python
 from PyViCare.PyViCareDevice import Device # generic device
 from PyViCare.PyViCareGazBoiler import GazBoiler # gaz boiler
 from PyViCare.PyViCareHeatPump import HeatPump # heat pump
 ```
 
+## Device Features / Errors
+
+Depending on the device, some features are not available/supported. This results in a response of `error` if the dedicated method is called. This is (mostly) not a bug, but a limitation of the device itself.
+
 ## Basic usage
 Simple example:
-```
+```python
 import sys
 import logging
 sys.path.insert(0, 'PyViCare')
-from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCare import ViCareSession
 
 t=GazBoiler("email@domain","password","token.save")
 print(t.getDomesticHotWaterConfiguredTemperature()) 
@@ -61,12 +62,12 @@ Follow these steps to access the API in Postman:
 
 1. Create an access token in the `Authorization` tab with type `OAuth 2.0` and following inputs:
 
-    - Client id: 79742319e39245de5f91d15ff4cac2a8
-    - Secret id: 8ad97aceb92c5892e102b093c7c083fa
-    - Callback url: vicare://oauth-callback/everest
-    - Auth url: https://iam.viessmann.com/idp/v1/authorize
-    - Access token url: https://iam.viessmann.com/idp/v1/token
-    - Scope: openid
+    - Client id: `79742319e39245de5f91d15ff4cac2a8`
+    - Secret id: `8ad97aceb92c5892e102b093c7c083fa`
+    - Callback url: `vicare://oauth-callback/everest`
+    - Auth url: `https://iam.viessmann.com/idp/v1/authorize`
+    - Access token url: `https://iam.viessmann.com/idp/v1/token`
+    - Scope: `openid`
 
     A login popup will open. Enter your ViCare username and password.
 
@@ -82,5 +83,6 @@ Follow these steps to access the API in Postman:
     `https://api.viessmann-platform.io/operational-data/v1/installations/{installationId}/gateways/{gatewaySerial}/devices/0/features`
 
 ## Types of heatings
-- Use ViCareSession for gas heatings
-- Use ViCareHeatPumpSession for heat pumps
+- Use `GazBoiler` for gas heatings
+- Use `HeatPump` for heat pumps
+- Use `FuelCell` for fuel cells
