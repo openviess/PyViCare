@@ -7,16 +7,20 @@ import PyViCare.Feature
 def handleNotSupported(func):
     def wrapper(*args, **kwargs):
         try:
-            try:
-                return func(*args, **kwargs)
-            except (KeyError, IndexError):
-                raise PyViCareNotSupportedFeatureError(func.__name__)
+            return func(*args, **kwargs)
+        except (KeyError, IndexError):
+            raise PyViCareNotSupportedFeatureError(func.__name__)
+
+    #You can remove that wrapper after the feature flag gets removed entirely.
+    def feature_flag_wrapper(*args, **kwargs):
+        try:
+            return wrapper(*args, **kwargs)
         except PyViCareNotSupportedFeatureError:
             if PyViCare.Feature.raise_exception_instead_of_returning_error:
                 raise
             else:
                 return "error"
-    return wrapper
+    return feature_flag_wrapper
 
 class PyViCareNotSupportedFeatureError(Exception):
     pass
