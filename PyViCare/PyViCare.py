@@ -16,7 +16,7 @@ def handleNotSupported(func):
         try:
             return wrapper(*args, **kwargs)
         except PyViCareNotSupportedFeatureError:
-            if PyViCare.Feature.raise_exception_instead_of_returning_error:
+            if PyViCare.Feature.raise_exception_on_not_supported_device_feature:
                 raise
             else:
                 return "error"

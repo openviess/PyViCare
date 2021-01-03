@@ -8,7 +8,7 @@ class Vitodens111W(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceForTesting('response_Vitodens111W.json', 0)
         self.gaz = GazBoiler(None, None, None, 0, 0, self.service)
-        PyViCare.Feature.raise_exception_instead_of_returning_error = True
+        PyViCare.Feature.raise_exception_on_not_supported_device_feature = True
         
     def test_getBurnerActive(self):
         self.assertEqual(self.gaz.getBurnerActive(), False)
@@ -26,5 +26,5 @@ class Vitodens111W(unittest.TestCase):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.gaz.getPrograms)
 
     def test_ensure_old_behavior_non_supported_feature_returns_error(self):
-        PyViCare.Feature.raise_exception_instead_of_returning_error = False
+        PyViCare.Feature.raise_exception_on_not_supported_device_feature = False
         self.assertEqual(self.gaz.getPowerConsumptionDays(), "error")
