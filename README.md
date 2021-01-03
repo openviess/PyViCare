@@ -18,7 +18,7 @@ from PyViCare.PyViCareHeatPump import HeatPump # heat pump
 
 ## Device Features / Errors
 
-Depending on the device, some features are not available/supported. This results in a raising of a `PyViCareNotSupportedFeatureError` if the dedicated method is called. This is (mostly) likely not a bug, but a limitation of the device itself.
+Depending on the device, some features are not available/supported. This results in a raising of a `PyViCareNotSupportedFeatureError` if the dedicated method is called. This is most likely not a bug, but a limitation of the device itself.
 
 ## Basic usage
 Simple example:
