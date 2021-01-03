@@ -21,3 +21,7 @@ class Vitodens111W(unittest.TestCase):
 
     def test_getPrograms_fails(self):
         self.assertRaises(IndexError, self.gaz.getPrograms)
+    
+    def test_getModes(self):
+        expected_modes = ['standby', 'dhw', 'dhwAndHeating']
+        self.assertListEqual(self.gaz.getModes(), expected_modes)
