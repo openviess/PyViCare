@@ -10,6 +10,7 @@ from pickle import UnpicklingError
 
 import simplejson as json
 from simplejson import JSONDecodeError
+from PyViCare.PyViCare import PyViCareNotSupportedFeatureError
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
@@ -23,7 +24,11 @@ logger.addHandler(logging.NullHandler())
 
 
 def readFeature(entities, property_name):
-    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
+    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), None)
+
+    if(feature is None):
+        raise PyViCareNotSupportedFeatureError(property_name)
+
     return feature
 
 def buildSetPropertyUrl(id, serial, property_name, action):
