@@ -21,6 +21,11 @@ viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
+
+def readFeature(entities, property_name):
+    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), {})
+    return feature
+
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
 # entities / "deviceType": "heating"
 # entities are connected devices
@@ -107,7 +112,7 @@ class ViCareService:
             oauth sessions object
         """
         oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
-        authorization_url, state = oauth.authorization_url(authorizeURL)
+        authorization_url, _ = oauth.authorization_url(authorizeURL)
 
         logger.debug("Auth URL is: "+authorization_url)
 
@@ -120,7 +125,7 @@ class ViCareService:
             #capture the error, which contains the code the authorization code and put this in to codestring
             codestring = "{0}".format(str(e.args[0])).encode("utf-8")
             codestring = str(codestring)
-            match = re.search("code\=(.*)\&",codestring)
+            match = re.search("code=(.*)&",codestring)
             codestring=match.group(1)
             logger.debug("Codestring : "+codestring)
             oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
@@ -138,7 +143,7 @@ class ViCareService:
         # TODO tranform to exception
         
     def renewToken(self):
-        logger.warning("Token expired, renewing")
+        logger.info("Token expired, renewing")
         self.oauth=self.__getNewToken(self.username,self.password,self.token_file)
         logger.info("Token renewed successfully")
             
@@ -166,7 +171,7 @@ class ViCareService:
                 self.renewToken()
                 r = self.oauth.get(url).json()
             return r
-        except TokenExpiredError as e:
+        except TokenExpiredError:
             self.renewToken()
             return self.__get(url)
 
@@ -195,22 +200,27 @@ class ViCareService:
                 return r
             except JSONDecodeError:
                 if j.status_code == 204:
-                    return json.loads("{\"statusCode\": 204, \"error\": \"None\", \"message\": \"SUCCESS\"}")
+                    return {"statusCode": 204, "error": "None", "message": "SUCCESS"}
                 else:
-                    return json.loads("{\"statusCode\":"+j.status_code+", \"error\": \"Unknown\", \"message\": \"UNKNOWN\"}")
-        except TokenExpiredError as e:
+                    return {"statusCode": j.status_code, "error": "Unknown", "message": "UNKNOWN"}
+        except TokenExpiredError:
             self.renewToken()
-            return self._post(url,data)
+            return self.__post(url,data)
 
     def _serializeToken(self,oauth,token_file):
         binary_file = open(token_file,mode='wb')
-        s_token = pickle.dump(oauth,binary_file)
-        binary_file.close()
+        try:
+            pickle.dump(oauth,binary_file)
+        finally:
+            binary_file.close()
 
     def _deserializeToken(self,token_file):
         binary_file = open(token_file,mode='rb')
-        s_token = pickle.load(binary_file)
-        return s_token
+        try:  
+            s_token = pickle.load(binary_file)
+            return s_token
+        finally:
+            binary_file.close()
 
     def _getInstallations(self):
         self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
@@ -235,3 +245,5 @@ class ViCareService:
     def setProperty(self,property_name,action,data):
         url = apiURLBase + '/operational-data/v1/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/' + property_name +"/"+action
         return self.__post(url,data)
+
+    
