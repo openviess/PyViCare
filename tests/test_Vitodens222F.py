@@ -32,3 +32,21 @@ class Vitodens222F(unittest.TestCase):
                             'reduced',
                             'standby']
         self.assertListEqual(self.gaz.getPrograms(), expected_programs)
+
+    def test_getOneTimeCharge(self):
+        self.assertEqual(self.gaz.getOneTimeCharge(), False)
+
+    def test_activateComfort(self):
+        self.gaz.activateOneTimeCharge()
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'activate')
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.oneTimeCharge')
+        self.assertEqual(self.service.setPropertyData[0]['url'],'https://api.viessmann-platform.io/operational-data/v1/installations/[id]/gateways/[serial]/devices/0/features/heating.dhw.oneTimeCharge/activate')
+
+    def test_deactivateComfort(self):
+        self.gaz.deactivateOneTimeCharge()
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'deactivate')
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.oneTimeCharge')
+        self.assertEqual(self.service.setPropertyData[0]['url'],'https://api.viessmann-platform.io/operational-data/v1/installations/[id]/gateways/[serial]/devices/0/features/heating.dhw.oneTimeCharge/deactivate')
+
