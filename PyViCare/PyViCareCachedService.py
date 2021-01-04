@@ -11,18 +11,35 @@ class ViCareCachedService(ViCareService):
         self.cacheTime = None
         self.lock = threading.Lock()
 
-    def __setCache(self):
-        url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
-        self.cache = self.get(url)
-        self.cacheTime = datetime.now()
 
     def getProperty(self,property_name):
+        data = self.getOrUpdateCache()   
+        entities = data["entities"]
+        return readFeature(entities, property_name)
+
+    def setProperty(self,property_name,action,data):
+        response = super().setProperty(property_name, action, data)
+        self.clearCache()
+        return response
+
+    def getOrUpdateCache(self):
         self.lock.acquire()
         try:
-            if self.cache is None or self.cacheTime is None or (datetime.now() - self.cacheTime).seconds > self.cacheDuration:
-                self.__setCache()
+            if self.isCacheInvalid():
+                url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
+                self.cache = self.get(url)
+                self.cacheTime = datetime.now()
+            return self.cache
         finally:
             self.lock.release()
-            
-        entities = self.cache["entities"]
-        return readFeature(entities, property_name)
+
+    def isCacheInvalid(self):
+        return self.cache is None or self.cacheTime is None or (datetime.now() - self.cacheTime).seconds > self.cacheDuration
+
+    def clearCache(self):
+        self.lock.acquire()
+        try:
+            self.cache = None
+            self.cacheTime = None
+        finally:
+            self.lock.release()
