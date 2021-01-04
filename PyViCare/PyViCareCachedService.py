@@ -17,12 +17,27 @@ class ViCareCachedService(ViCareService):
         self.cacheTime = datetime.now()
 
     def getProperty(self,property_name):
+        self.ensureCacheData()   
+        entities = self.cache["entities"]
+        return readFeature(entities, property_name)
+
+    def setProperty(self,property_name,action,data):
+        response = super().setProperty(property_name, action, data)
+        self.clearCache()
+        return response
+
+    def ensureCacheData(self):
         self.lock.acquire()
         try:
             if self.cache is None or self.cacheTime is None or (datetime.now() - self.cacheTime).seconds > self.cacheDuration:
                 self.__setCache()
         finally:
             self.lock.release()
-            
-        entities = self.cache["entities"]
-        return readFeature(entities, property_name)
+
+    def clearCache(self):
+        self.lock.acquire()
+        try:
+            self.cache = None
+            self.cacheTime = None
+        finally:
+            self.lock.release()
