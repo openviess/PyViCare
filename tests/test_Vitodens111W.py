@@ -23,7 +23,7 @@ class Vitodens111W(unittest.TestCase):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.gaz.getMonthSinceLastService)
 
     def test_getPrograms_fails(self):
-        self.assertRaises(IndexError, self.gaz.getPrograms)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.gaz.getPrograms)
     
     def test_getModes(self):
         expected_modes = ['standby', 'dhw', 'dhwAndHeating']
