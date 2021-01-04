@@ -35,3 +35,7 @@ class Vitodens222F(unittest.TestCase):
                             'reduced',
                             'standby']
         self.assertListEqual(self.gaz.getPrograms(), expected_programs)
+
+    def test_getModes(self):
+        expected_modes = ['standby', 'heating', 'dhw', 'dhwAndHeating']
+        self.assertListEqual(self.gaz.getModes(), expected_modes)
