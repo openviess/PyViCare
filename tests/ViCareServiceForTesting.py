@@ -1,6 +1,6 @@
 import simplejson as json
 import os
-from PyViCare.PyViCareService import ViCareService, readFeature
+from PyViCare.PyViCareService import ViCareService, readFeature, buildSetPropertyUrl
 
 class ViCareServiceForTesting(ViCareService):
     
@@ -25,6 +25,7 @@ class ViCareServiceForTesting(ViCareService):
 
     def setProperty(self, property_name, action, data):
         self.setPropertyData.append({
+            "url" : buildSetPropertyUrl('[id]', '[serial]', property_name, action),
             "property_name": property_name,
             "action" : action,
             "data" : data
