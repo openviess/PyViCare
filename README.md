@@ -8,7 +8,7 @@ A few nice feature removed from the app are available though the API (Comfort an
 
 ## Version 0.1.0
 Note that the version 0.1.0 DOES BREAK a few things.
-ViCareSession is deprecated (but you can still import it using `from PyViCare.PyViCare import ViCareSession`).
+`ViCareSession` is now removed.
 You can now use the following objects:
 ```python
 from PyViCare.PyViCareDevice import Device # generic device
@@ -18,7 +18,7 @@ from PyViCare.PyViCareHeatPump import HeatPump # heat pump
 
 ## Device Features / Errors
 
-Depending on the device, some features are not available/supported. This results in a response of `error` if the dedicated method is called. This is (mostly) not a bug, but a limitation of the device itself.
+Depending on the device, some features are not available/supported. This results in a raising of a `PyViCareNotSupportedFeatureError` if the dedicated method is called. This is most likely not a bug, but a limitation of the device itself.
 
 ## Basic usage
 Simple example:

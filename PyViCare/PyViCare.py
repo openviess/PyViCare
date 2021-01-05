@@ -1,4 +1,4 @@
-from PyViCare.PyViCareGazBoiler import GazBoiler
+import PyViCare.Feature
 
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not 
@@ -8,13 +8,19 @@ def handleNotSupported(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except KeyError as err:
-        	return "KeyError: " + str(err)
-        except IndexError as err:
-            return "IndexError: " + str(err)
-    return wrapper
+        except (KeyError, IndexError):
+            raise PyViCareNotSupportedFeatureError(func.__name__)
 
-# DEPRECATED
-class ViCareSession(GazBoiler):
-    def dummy(self):
-        print("done")
+    #You can remove that wrapper after the feature flag gets removed entirely.
+    def feature_flag_wrapper(*args, **kwargs):
+        try:
+            return wrapper(*args, **kwargs)
+        except PyViCareNotSupportedFeatureError:
+            if PyViCare.Feature.raise_exception_on_not_supported_device_feature:
+                raise
+            else:
+                return "error"
+    return feature_flag_wrapper
+
+class PyViCareNotSupportedFeatureError(Exception):
+    pass
