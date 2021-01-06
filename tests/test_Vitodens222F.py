@@ -56,3 +56,7 @@ class Vitodens222F(unittest.TestCase):
     def test_getModes(self):
         expected_modes = ['standby', 'heating', 'dhw', 'dhwAndHeating']
         self.assertListEqual(self.gaz.getModes(), expected_modes)
+
+    def test_getTargetSupplyTemperature(self):
+        self.assertAlmostEqual(self.gaz.getTargetSupplyTemperature(), 45.1)
+        

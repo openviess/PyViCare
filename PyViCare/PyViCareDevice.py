@@ -312,3 +312,12 @@ class Device:
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
+
+    def getTargetSupplyTemperature(self):
+        inside = self.getCurrentDesiredTemperature()
+        outside = self.getOutsideTemperature()
+        delta_outside_inside = (outside - inside)
+        shift = self.getHeatingCurveShift()
+        slope = self.getHeatingCurveSlope()
+        targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * 0.000001 * pow(delta_outside_inside, 2))
+        return round(targetSupply, 1)
