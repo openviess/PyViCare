@@ -12,6 +12,7 @@ from pickle import UnpicklingError
 import simplejson as json
 from simplejson import JSONDecodeError
 from PyViCare.PyViCare import PyViCareNotSupportedFeatureError, PyViCareRateLimitError
+import PyViCare.Feature
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
@@ -177,10 +178,9 @@ class ViCareService:
             #    self.renewToken()
             logger.debug(self.oauth)
             r=self.oauth.get(url).json()
-
+            logger.debug("Response to get request: "+str(r))
             self.handleRateLimit(r)
 
-            logger.debug("Response to get request: "+str(r))
             if(r=={'error': 'EXPIRED TOKEN'}):
                 logger.warning("Abnormal token, renewing") # apparently forged tokens TODO investigate
                 self.renewToken()
@@ -191,6 +191,9 @@ class ViCareService:
             return self.__get(url)
 
     def handleRateLimit(self, response):
+        if not PyViCare.Feature.raise_exception_on_rate_limit:
+            return
+
         if("statusCode" in response and response["statusCode"] == 429):
             raise PyViCareRateLimitError(response)
             

@@ -2,3 +2,6 @@
 # The flag should be fully removed in a later release.
 # It allows dependend libraries to gracefully migrate to the new behaviour
 raise_exception_on_not_supported_device_feature = False
+
+# Feature flag to raise exception if rate limit of the API is hit
+raise_exception_on_rate_limit = False
