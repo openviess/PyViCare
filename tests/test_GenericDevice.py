@@ -1,10 +1,10 @@
 import unittest
-from tests.ViCareServiceForTesting import ViCareServiceForTesting
+from tests.ViCareServiceMock import ViCareServiceMock
 from PyViCare.PyViCareDevice import Device
 
 class GenericDevice(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceForTesting(None, 0, {})
+        self.service = ViCareServiceMock(None, 0, {})
         self.device = Device(None, None, None, 0, 0, self.service)
         
     def test_activateComfort(self):
