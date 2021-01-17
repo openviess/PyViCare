@@ -1,4 +1,5 @@
 import PyViCare.Feature
+import datetime
 
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not 
@@ -24,3 +25,18 @@ def handleNotSupported(func):
 
 class PyViCareNotSupportedFeatureError(Exception):
     pass
+
+class PyViCareRateLimitError(Exception):
+
+    def __init__(self, response):
+        extended_payload = response["extendedPayload"]
+        name = extended_payload["name"]
+        requestCountLimit = extended_payload["requestCountLimit"]
+        limitReset = extended_payload["limitReset"]
+        limitResetDate = datetime.datetime.utcfromtimestamp(limitReset/1000)
+
+        msg = f'API rate limit {name} exceeded. Max {requestCountLimit} calls in timewindow. Limit reset at {limitResetDate.isoformat()}.'
+
+        super().__init__(self, msg)
+        self.message = msg
+        self.limitResetDate = limitResetDate

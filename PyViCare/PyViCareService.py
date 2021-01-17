@@ -5,12 +5,14 @@ import re
 import pickle
 import os
 import logging
+import datetime
 from pickle import UnpicklingError
 # This is required because "requests" uses simplejson if installed on the system 
 
 import simplejson as json
 from simplejson import JSONDecodeError
-from PyViCare.PyViCare import PyViCareNotSupportedFeatureError
+from PyViCare.PyViCare import PyViCareNotSupportedFeatureError, PyViCareRateLimitError
+import PyViCare.Feature
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
@@ -177,6 +179,8 @@ class ViCareService:
             logger.debug(self.oauth)
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
+            self.handleRateLimit(r)
+
             if(r=={'error': 'EXPIRED TOKEN'}):
                 logger.warning("Abnormal token, renewing") # apparently forged tokens TODO investigate
                 self.renewToken()
@@ -186,7 +190,13 @@ class ViCareService:
             self.renewToken()
             return self.__get(url)
 
+    def handleRateLimit(self, response):
+        if not PyViCare.Feature.raise_exception_on_rate_limit:
+            return
 
+        if("statusCode" in response and response["statusCode"] == 429):
+            raise PyViCareRateLimitError(response)
+            
     """POST URL using OAuth session. Automatically renew the token if needed
     Parameters
     ----------
@@ -208,6 +218,7 @@ class ViCareService:
             j=self.oauth.post(url,data,headers=h)
             try:
                 r=j.json()
+                self.handleRateLimit(r)
                 return r
             except JSONDecodeError:
                 if j.status_code == 204:
