@@ -86,3 +86,7 @@ Follow these steps to access the API in Postman:
 - Use `GazBoiler` for gas heatings
 - Use `HeatPump` for heat pumps
 - Use `FuelCell` for fuel cells
+
+## Rate Limits
+
+[Due to latest changes in the Viessmann API](https://www.viessmann-community.com/t5/Konnektivitaet/Q-amp-A-Viessmann-API/td-p/127660) rate limits can be hit. In that case a `PyViCareRateLimitError` is raised. You can read from the error (`limitResetDate`) when the rate limit is reset.

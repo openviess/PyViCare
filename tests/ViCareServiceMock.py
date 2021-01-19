@@ -1,17 +1,11 @@
-import simplejson as json
-import os
 from PyViCare.PyViCareService import ViCareService, readFeature, buildSetPropertyUrl
+from tests.helper import readJson
 
-class ViCareServiceForTesting(ViCareService):
+class ViCareServiceMock(ViCareService):
     
     def __init__(self, filename, circuit, rawInput = None):
         if rawInput is None:
-            test_filename = os.path.join(os.path.dirname(__file__), filename)
-            try:
-                json_file = open(test_filename, mode='rb')
-                testData = json.load(json_file)
-            finally:
-                json_file.close()
+            testData = readJson(filename)
             self.testData = testData
         else:
             self.testData = rawInput

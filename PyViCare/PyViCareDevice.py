@@ -312,3 +312,14 @@ class Device:
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
+
+    # Calculates target supply temperature based on data from Viessmann
+    # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
+    def getTargetSupplyTemperature(self):
+        inside = self.getCurrentDesiredTemperature()
+        outside = self.getOutsideTemperature()
+        delta_outside_inside = (outside - inside)
+        shift = self.getHeatingCurveShift()
+        slope = self.getHeatingCurveSlope()
+        targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
+        return round(targetSupply, 1)
