@@ -251,6 +251,10 @@ class Device:
     @handleNotSupported
     def getDomesticHotWaterMinTemperature(self):
         return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
+
+    @handleNotSupported
+    def getDomesticHotWaterChargingActive(self):
+        return self.service.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
     
     """ Set the target temperature for domestic host water
     Parameters
