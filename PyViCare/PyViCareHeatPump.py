@@ -66,24 +66,3 @@ class HeatPump(Device):
     @handleNotSupported
     def getHeatingRodStatusLevel3(self):
         return self.service.getProperty("heating.heatingRod.status")["properties"]["level3"]["value"]
-        
-    @handleNotSupported
-    def getCompressorPower(self):
-        """Get compressor power percentage"""
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".sensors.power")["properties"]["value"]["value"]
-        
-    @handleNotSupported
-    def getExpansionValve(self):
-        """Get expansion valve percentage"""
-        return self.service.getProperty("heating.sensors.valve.expansion")["properties"]["value"]["value"]
-        
-    @handleNotSupported
-    def getSuctionGasPressure(self):
-        """Get suction gas pressure in bar"""
-        return self.service.getProperty("heating.sensors.pressure.suctionGas")["properties"]["value"]["value"]
-        
-    @handleNotSupported
-    def getHotGasPressure(self):
-        """Get hot gas pressure in bar"""
-        return self.service.getProperty("heating.sensors.pressure.hotGas")["properties"]["value"]["value"]
-        

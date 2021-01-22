@@ -22,20 +22,8 @@ class Vitodens111W(unittest.TestCase):
     def test_getHeatingRodStatusLevel1(self):
         self.assertEqual(self.heat.getHeatingRodStatusLevel1(), False)
 
-    def test_getSuctionGasPressure(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getSuctionGasPressure)
-        
-    def test_getHotGasPressure(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getHotGasPressure)
-
     def test_getReturnTemperature(self):
         self.assertAlmostEqual(self.heat.getReturnTemperature(), 25.8)
-
-    def test_getExpansionValve(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getExpansionValve)
-        
-    def test_getCompressorPower_fails(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getCompressorPower)
 
     def test_getMonthSinceLastService_fails(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getMonthSinceLastService)
