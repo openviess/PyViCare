@@ -231,38 +231,6 @@ class FuelCell(GazBoiler):
         return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
 
     @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterDays(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['day']['value']
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterToday(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['day']['value'][0]
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterWeeks(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value']
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterThisWeek(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['week']['value'][0]
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterMonths(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value']
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterThisMonth(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['month']['value'][0]
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterYears(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value']
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterThisYear(self):
-        return self.service.getProperty('dhw.power.consumption.dhw')['properties']['year']['value'][0]
-
-    @handleNotSupported
     def getGasConsumptionFuelCellDays(self):
         return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value']
 
