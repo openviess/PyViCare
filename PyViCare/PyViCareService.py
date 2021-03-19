@@ -33,11 +33,11 @@ def readFeature(entities, property_name):
 
     return feature
 
-def buildSetPropertyUrl(id, serial, property_name, action):
-    return f'{apiURLBase}/operational-data/v1/installations/{id}/gateways/{serial}/devices/0/features/{property_name}/{action}'
+def buildSetPropertyUrl(id, serial, circuit, property_name, action):
+    return apiURLBase +'/operational-data/v1/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
 
-def buildGetPropertyUrl(id, serial, property_name):
-    return f'{apiURLBase}/operational-data/installations/{id}/gateways/{serial}/devices/0/features/{property_name}'   
+def buildGetPropertyUrl(id, serial, circuit, property_name):
+    return apiURLBase + '/operational-data/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
 
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
 # entities / "deviceType": "heating"
@@ -260,12 +260,12 @@ class ViCareService:
 
    #TODO should move to device after refactoring 
     def getProperty(self,property_name):
-        url = buildGetPropertyUrl(self.id, self.serial, property_name)
+        url = buildGetPropertyUrl(self.id, self.serial, self.circuit, property_name)
         j=self.__get(url)
         return j
 
     def setProperty(self,property_name,action,data):
-        url = buildSetPropertyUrl(self.id, self.serial, property_name, action)
+        url = buildSetPropertyUrl(self.id, self.serial, self.circuit, property_name, action)
         return self.__post(url,data)
 
     

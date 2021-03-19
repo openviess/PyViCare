@@ -19,7 +19,7 @@ class ViCareServiceMock(ViCareService):
 
     def setProperty(self, property_name, action, data):
         self.setPropertyData.append({
-            "url" : buildSetPropertyUrl('[id]', '[serial]', property_name, action),
+            "url" : buildSetPropertyUrl('[id]', '[serial]', 0, property_name, action),
             "property_name": property_name,
             "action" : action,
             "data" : data
