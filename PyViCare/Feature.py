@@ -4,4 +4,4 @@
 raise_exception_on_not_supported_device_feature = False
 
 # Feature flag to raise exception if rate limit of the API is hit
-raise_exception_on_rate_limit = False
+raise_exception_on_rate_limit = True

@@ -16,13 +16,19 @@ import PyViCare.Feature
 
 client_id = '79742319e39245de5f91d15ff4cac2a8'
 client_secret = '8ad97aceb92c5892e102b093c7c083fa'
-authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize'
-token_url = 'https://iam.viessmann.com/idp/v1/token'
+# old v1 auth
+# authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize'
+# token_url = 'https://iam.viessmann.com/idp/v1/token'
+# new v2 auth point
+authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize'
+token_url = 'https://iam.viessmann.com/idp/v2/token'
 apiURLBase = 'https://api.viessmann-platform.io'
 redirect_uri = "vicare://oauth-callback/everest"
 viessmann_scope=["openid"]
 logger = logging.getLogger('ViCare')
-logger.addHandler(logging.NullHandler())
+logger.setLevel(logging.DEBUG)
+#logger.addHandler(logging.NullHandler())
+logger.addHandler(logging.FileHandler('pyvicare.log', mode='a'))
 
 
 def readFeature(entities, property_name):
@@ -195,7 +201,8 @@ class ViCareService:
             return
 
         if("statusCode" in response and response["statusCode"] == 429):
-            raise PyViCareRateLimitError(response)
+            #raise PyViCareRateLimitError(response)
+            PyViCareRateLimitError(response)
             
     """POST URL using OAuth session. Automatically renew the token if needed
     Parameters

@@ -141,6 +141,10 @@ class Device:
         return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
 
     @handleNotSupported
+    def getPressure(self):
+        return self.service.getProperty('heating.sensors.pressure.supply')['properties']['value']['value']
+
+    @handleNotSupported
     def getOutsideTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
@@ -253,6 +257,10 @@ class Device:
         return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
 
     @handleNotSupported
+    def getDomesticHotWaterHeatingMode(self):
+        return self.service.getProperty("heating.valves.diverter.heatDhw")["properties"]["position"]["value"]
+
+    @handleNotSupported
     def getDomesticHotWaterChargingActive(self):
         return self.service.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
     
@@ -321,9 +329,15 @@ class Device:
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self):
         inside = self.getCurrentDesiredTemperature()
+        # fallback to frost protection temperature
+        if not type(inside) == "str" :
+            inside = 3
         outside = self.getOutsideTemperature()
         delta_outside_inside = (outside - inside)
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
         targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
+        # fallback to minimal 20 supply temp
+        if targetSupply < 20 :
+            targetSupply = 20
         return round(targetSupply, 1)
