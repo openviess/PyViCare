@@ -329,7 +329,7 @@ class Device:
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self):
         inside = self.getCurrentDesiredTemperature()
-        # fallback to frost protection temperature
+        # in standby mode no inside temp, fallback to frost protection temperature
         if not type(inside) == "str" :
             inside = 3
         outside = self.getOutsideTemperature()
@@ -337,7 +337,7 @@ class Device:
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
         targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
-        # fallback to minimal 20 supply temp
+        # less than 20 makes no sense, fallback to minimal 20 supply temp
         if targetSupply < 20 :
             targetSupply = 20
         return round(targetSupply, 1)
