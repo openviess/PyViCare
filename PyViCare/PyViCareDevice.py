@@ -341,3 +341,8 @@ class Device:
         if targetSupply < 20 :
             targetSupply = 20
         return round(targetSupply, 1)
+
+    @handleNotSupported
+    def getAllEntries(self):
+         return self.service.getProperty("")
+
