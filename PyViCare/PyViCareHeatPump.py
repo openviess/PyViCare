@@ -9,7 +9,7 @@ class HeatPump(Device):
     
     @handleNotSupported
     def getCompressorActive(self):
-        return self.service.getProperty("heating.compressor")["properties"]["active"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.service.circuit))["properties"]["active"]["value"]
 
     @handleNotSupported
     def getReturnTemperature(self):
@@ -17,11 +17,11 @@ class HeatPump(Device):
 
     @handleNotSupported
     def getCompressorStarts(self):
-        return self.service.getProperty("heating.compressor.statistics")["properties"]["starts"]["value"] 
+        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["starts"]["value"] 
 
     @handleNotSupported
     def getCompressorHours(self):
-        return self.service.getProperty("heating.compressor.statistics")["properties"]["hours"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
     def getCompressorHoursLoadClass1(self):
