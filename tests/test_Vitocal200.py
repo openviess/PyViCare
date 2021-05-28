@@ -29,7 +29,7 @@ class Vitodens111W(unittest.TestCase):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getMonthSinceLastService)
 
     def test_getPrograms_fails(self):
-        expected_programs = ['active', 'comfort', 'eco', 'fixed', 'normal', 'reduced', 'screedDrying', 'standby', ]
+        expected_programs = ['active', 'comfort', 'eco', 'fixed', 'normal', 'reduced', 'screedDrying', 'standby']
         self.assertListEqual(self.heat.getPrograms(), expected_programs)
     
     def test_getModes(self):
