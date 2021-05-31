@@ -60,15 +60,15 @@ class FuelCell(GazBoiler):
 
     @handleNotSupported
     def getCumulativePowerProduced(self):
-        return self.service.getProperty("heating.power.cumulativeProduced")["properties"]["value"]["value"]
+        return self.service.getProperty("heating.power.production.cumulative")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getCumulativePowerSold(self):
-        return self.service.getProperty("heating.power.cumulativeSold")["properties"]["value"]["value"]
+        return self.service.getProperty("heating.power.sold.cumulative")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getCumulativePowerPurchased(self):
-        return self.service.getProperty("heating.power.cumulativePurchased")["properties"]["value"]["value"]
+        return self.service.getProperty("heating.power.purchase.cumulative")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getFuelCellReturnTemperature(self):
