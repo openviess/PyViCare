@@ -25,305 +25,348 @@ VICARE_DHW_TEMP2 = "temp-2"
 
 """"Viessmann ViCare API Python tools"""
 
+
 class Device:
-    """This class connects to the Viesmann ViCare API.
-    The authentication is done through OAuth2.
-    Note that currently, a new token is generate for each run.
-    """
+	"""This class connects to the Viesmann ViCare API.
+	The authentication is done through OAuth2.
+	Note that currently, a new token is generate for each run.
+	"""
 
-    # TODO cirtcuit management should move at method level
-    def __init__(self, username, password,token_file=None,circuit=0,cacheDuration=0,customService=None):
-        """Init function. Create the necessary oAuth2 sessions
-        Parameters
-        ----------
-        username : str
-            e-mail address
-        password : str
-            password
+	# TODO cirtcuit management should move at method level
+	def __init__(self, username, password, token_file=None, circuit=0, cacheDuration=0, customService=None):
+		"""Init function. Create the necessary oAuth2 sessions
+		Parameters
+		----------
+		username : str
+			e-mail address
+		password : str
+			password
 
-        Returns
-        -------
-        """
+		Returns
+		-------
+		"""
 
-        if customService is not None:
-            self.service = customService
-        elif cacheDuration == 0:
-            self.service = ViCareService(username, password, token_file, circuit)
-        else:
-            self.service = ViCareCachedService(username, password, cacheDuration, token_file, circuit)
+		if customService is not None:
+			self.service = customService
+		elif cacheDuration == 0:
+			self.service = ViCareService(
+				username, password, token_file, circuit)
+		else:
+			self.service = ViCareCachedService(
+				username, password, cacheDuration, token_file, circuit)
 
-    """ Set the active mode
-    Parameters
-    ----------
-    mode : str
-        Valid mode can be obtained using getModes()
+	""" Set the active mode
+	Parameters
+	----------
+	mode : str
+		Valid mode can be obtained using getModes()
 
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    def setMode(self,mode):
-        r=self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active","setMode","{\"mode\":\""+mode+"\"}")
-        return r
+	Returns
+	-------
+	result: json
+		json representation of the answer
+	"""
 
-    # Works for normal, reduced, comfort
-    # active has no action
-    # external, standby no action
-    # holiday, sheculde and unscheduled
-    # activate, decativate comfort, eco
-    """ Set the target temperature for the target program
-    Parameters
-    ----------
-    program : str
-        Can be normal, reduced or comfort
-    temperature: int
-        target temperature
+	def setMode(self, mode):
+		r = self.service.setProperty("heating.circuits." + str(self.service.circuit) +
+									 ".operating.modes.active", "setMode", "{\"mode\":\""+mode+"\"}")
+		return r
 
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    def setProgramTemperature(self,program: str,temperature :int):
-        return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program,"setTemperature","{\"targetTemperature\":"+str(temperature)+"}")
+	# Works for normal, reduced, comfort
+	# active has no action
+	# external, standby no action
+	# holiday, sheculde and unscheduled
+	# activate, decativate comfort, eco
+	""" Set the target temperature for the target program
+	Parameters
+	----------
+	program : str
+		Can be normal, reduced or comfort
+	temperature: int
+		target temperature
 
-    def setReducedTemperature(self,temperature):
-        return self.setProgramTemperature("reduced",temperature)
+	Returns
+	-------
+	result: json
+		json representation of the answer
+	"""
 
-    def setComfortTemperature(self,temperature):
-        return self.setProgramTemperature("comfort",temperature)
+	def setProgramTemperature(self, program: str, temperature: int):
+		return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program, "setTemperature", "{\"targetTemperature\":"+str(temperature)+"}")
 
-    def setNormalTemperature(self,temperature):
-        return self.setProgramTemperature("normal",temperature)
+	def setReducedTemperature(self, temperature):
+		return self.setProgramTemperature("reduced", temperature)
 
-    """ Activate a program
-        NOTE
-        DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-    Parameters
-    ----------
-    program : str
-        Appears to work only for comfort
+	def setComfortTemperature(self, temperature):
+		return self.setProgramTemperature("comfort", temperature)
 
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    # optional temperature parameter could be passed (but not done)
-    def activateProgram(self,program):
-        return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program,"activate","{}")
+	def setNormalTemperature(self, temperature):
+		return self.setProgramTemperature("normal", temperature)
 
-    def activateComfort(self):
-        return self.activateProgram("comfort")
-    """ Deactivate a program
-    Parameters
-    ----------
-    program : str
-        Appears to work only for comfort and eco (coming from normal, can be reached only by deactivating another state)
+	""" Activate a program
+		NOTE
+		DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
+	Parameters
+	----------
+	program : str
+		Appears to work only for comfort
 
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    def deactivateProgram(self,program):
-        return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program,"deactivate","{}")
-    def deactivateComfort(self):
-        return self.deactivateProgram("comfort")
+	Returns
+	-------
+	result: json
+		json representation of the answer
+	"""
+	# optional temperature parameter could be passed (but not done)
 
-    @handleNotSupported
-    def getMonthSinceLastService(self):
-        return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
+	def activateProgram(self, program):
+		return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program, "activate", "{}")
 
-    @handleNotSupported
-    def getLastServiceDate(self):
-        return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
+	def activateComfort(self):
+		return self.activateProgram("comfort")
+	""" Deactivate a program
+	Parameters
+	----------
+	program : str
+		Appears to work only for comfort and eco (coming from normal, can be reached only by deactivating another state)
 
-    @handleNotSupported
-    def getOutsideTemperature(self):
-        return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
+	Returns
+	-------
+	result: json
+		json representation of the answer
+	"""
 
-    @handleNotSupported
-    def getSupplyTemperature(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
+	def deactivateProgram(self, program):
+		return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program, "deactivate", "{}")
 
-    @handleNotSupported
-    def getRoomTemperature(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
+	def deactivateComfort(self):
+		return self.deactivateProgram("comfort")
 
-    @handleNotSupported
-    def getModes(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
+	@handleNotSupported
+	def getMonthSinceLastService(self):
+		return self.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
 
-    @handleNotSupported
-    def getActiveMode(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
+	@handleNotSupported
+	def getLastServiceDate(self):
+		return self.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
 
-    @handleNotSupported
-    def getHeatingCurveShift(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
+	@handleNotSupported
+	def getOutsideTemperature(self):
+		return self.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
-    @handleNotSupported
-    def getHeatingCurveSlope(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
+	@handleNotSupported
+	def getSupplyTemperature(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.supply")["properties"]["value"]["value"]
 
-    @handleNotSupported
-    def getActiveProgram(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
+	@handleNotSupported
+	def getRoomTemperature(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".sensors.temperature.room")["properties"]["value"]["value"]
 
-    @handleNotSupported
-    def getPrograms(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
+	@handleNotSupported
+	def getModes(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
 
-    @handleNotSupported
-    def getDesiredTemperatureForProgram(self , program):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
+	@handleNotSupported
+	def getActiveMode(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["properties"]["value"]["value"]
 
-    @handleNotSupported
-    def getCurrentDesiredTemperature(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
+	@handleNotSupported
+	def getHeatingCurveShift(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
 
-    @handleNotSupported
-    def getErrorHistory(self):
-        return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
+	@handleNotSupported
+	def getHeatingCurveSlope(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
 
-    @handleNotSupported
-    def getActiveError(self):
-        return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
+	@handleNotSupported
+	def getActiveProgram(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs.active")["properties"]["value"]["value"]
 
-    @handleNotSupported
-    def getDomesticHotWaterConfiguredTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
+	@handleNotSupported
+	def getPrograms(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
 
-    @handleNotSupported
-    def getDomesticHotWaterConfiguredTemperature2(self):
-        return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
+	@handleNotSupported
+	def getDesiredTemperatureForProgram(self, program):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+program)["properties"]["temperature"]["value"]
 
-    def getDomesticHotWaterActiveMode(self):
-        schedule = self.getDomesticHotWaterSchedule()
-        if schedule == "error" or schedule["active"] != True:
-            return None
+	@handleNotSupported
+	def getCurrentDesiredTemperature(self):
+		return self.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
 
-        currentDateTime = datetime.now()
-        currentTime = currentDateTime.time()
+	@handleNotSupported
+	def getErrorHistory(self):
+		return self.getProperty("heating.errors.history")["properties"]["entries"]["value"]
 
-        try:
-            daySchedule = schedule[VICARE_DAYS[currentDateTime.weekday()]]
-        except KeyError: # no schedule for day configured 
-            return None
+	@handleNotSupported
+	def getActiveError(self):
+		return self.getProperty("heating.errors.active")["properties"]["entries"]["value"]
 
-        mode = None
-        for s in daySchedule:
-            startTime = time.fromisoformat(s["start"])
-            endTime = time.fromisoformat(s["end"])
-            if startTime <= currentTime and currentTime <= endTime:
-                if s["mode"] == VICARE_DHW_TEMP2: # temp-2 overrides all other modes
-                    return s["mode"]
-                else:
-                    mode = s["mode"]
-        return mode
+	@handleNotSupported
+	def getDomesticHotWaterConfiguredTemperature(self):
+		return self.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
 
-    def getDomesticHotWaterDesiredTemperature(self): 
-        mode = self.getDomesticHotWaterActiveMode()
+	@handleNotSupported
+	def getDomesticHotWaterConfiguredTemperature2(self):
+		return self.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
 
-        if mode != None:
-            if mode == VICARE_DHW_TEMP2:
-                return self.getDomesticHotWaterConfiguredTemperature2()
-            else:
-                return self.getDomesticHotWaterConfiguredTemperature()
-        
-        return None   
+	def getDomesticHotWaterActiveMode(self):
+		schedule = self.getDomesticHotWaterSchedule()
+		if schedule == "error" or schedule["active"] != True:
+			return None
 
-    @handleNotSupported
-    def getDomesticHotWaterStorageTemperature(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
+		currentDateTime = datetime.now()
+		currentTime = currentDateTime.time()
 
-    @handleNotSupported
-    def getDomesticHotWaterPumpActive(self):
-        status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
-        return status == 'on'
+		try:
+			daySchedule = schedule[VICARE_DAYS[currentDateTime.weekday()]]
+		except KeyError:  # no schedule for day configured
+			return None
 
-    @handleNotSupported
-    def getDomesticHotWaterMaxTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
+		mode = None
+		for s in daySchedule:
+			startTime = time.fromisoformat(s["start"])
+			endTime = time.fromisoformat(s["end"])
+			if startTime <= currentTime and currentTime <= endTime:
+				if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
+					return s["mode"]
+				else:
+					mode = s["mode"]
+		return mode
 
-    @handleNotSupported
-    def getDomesticHotWaterMinTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
+	def getDomesticHotWaterDesiredTemperature(self):
+		mode = self.getDomesticHotWaterActiveMode()
 
-    @handleNotSupported
-    def getDomesticHotWaterChargingActive(self):
-        return self.service.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
-    
-    """ Set the target temperature for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
+		if mode != None:
+			if mode == VICARE_DHW_TEMP2:
+				return self.getDomesticHotWaterConfiguredTemperature2()
+			else:
+				return self.getDomesticHotWaterConfiguredTemperature()
 
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    def setDomesticHotWaterTemperature(self,temperature):
-        return self.service.setProperty("heating.dhw.temperature","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
-        
-    """ Set the target temperature 2 for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
+		return None
 
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-    def setDomesticHotWaterTemperature2(self,temperature):
-        return self.service.setProperty("heating.dhw.temperature.temp2","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
+	@handleNotSupported
+	def getDomesticHotWaterStorageTemperature(self):
+		return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
 
-    @handleNotSupported
-    def getCirculationPumpActive(self):
-        status =  self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
-        return status == 'on'
+	@handleNotSupported
+	def getDomesticHotWaterPumpActive(self):
+		return self.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
 
-    @handleNotSupported
-    def getHeatingSchedule(self):
-        properties = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
-        return {
-            "active": properties["active"]["value"],
-            "mon": properties["entries"]["value"]["mon"],
-            "tue": properties["entries"]["value"]["tue"],
-            "wed": properties["entries"]["value"]["wed"],
-            "thu": properties["entries"]["value"]["thu"],
-            "fri": properties["entries"]["value"]["fri"],
-            "sat": properties["entries"]["value"]["sat"],
-            "sun": properties["entries"]["value"]["sun"]
-        }
+	@handleNotSupported
+	def getDomesticHotWaterMaxTemperature(self):
+		return self.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
 
-    @handleNotSupported
-    def getDomesticHotWaterSchedule(self):
-        properties = self.service.getProperty("heating.dhw.schedule")["properties"]
-        return {
-            "active": properties["active"]["value"],
-            "mon": properties["entries"]["value"]["mon"],
-            "tue": properties["entries"]["value"]["tue"],
-            "wed": properties["entries"]["value"]["wed"],
-            "thu": properties["entries"]["value"]["thu"],
-            "fri": properties["entries"]["value"]["fri"],
-            "sat": properties["entries"]["value"]["sat"],
-            "sun": properties["entries"]["value"]["sun"]
-        }
+	@handleNotSupported
+	def getDomesticHotWaterMinTemperature(self):
+		return self.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
 
-    # Calculates target supply temperature based on data from Viessmann
-    # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
-    def getTargetSupplyTemperature(self):
-        inside = self.getCurrentDesiredTemperature()
-        outside = self.getOutsideTemperature()
-        delta_outside_inside = (outside - inside)
-        shift = self.getHeatingCurveShift()
-        slope = self.getHeatingCurveSlope()
-        targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
-        return round(targetSupply, 1)
+	@handleNotSupported
+	def getDomesticHotWaterChargingActive(self):
+		return self.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
+
+	""" Set the target temperature for domestic host water
+	Parameters
+	----------
+	temperature : int
+		Target temperature
+
+	Returns
+	-------
+	result: json
+		json representation of the answer
+	"""
+
+	def setDomesticHotWaterTemperature(self, temperature):
+		return self.service.setProperty("heating.dhw.temperature", "setTargetTemperature", "{\"temperature\":"+str(temperature)+"}")
+
+	""" Set the target temperature 2 for domestic host water
+	Parameters
+	----------
+	temperature : int
+		Target temperature
+
+	Returns
+	-------
+	result: json
+		json representation of the answer
+	"""
+
+	def setDomesticHotWaterTemperature2(self, temperature):
+		return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", "{\"temperature\":"+str(temperature)+"}")
+
+	@handleNotSupported
+	def getCirculationPumpActive(self):
+		return self.getProperty("heating.circuits." + str(
+			self.service.circuit) + ".circulation.pump")["properties"]["status"]["value"]
+
+	@handleNotSupported
+	def getHeatingSchedule(self):
+		properties = self.getProperty(
+			"heating.circuits." + str(self.service.circuit) + ".heating.schedule")["properties"]
+		return {
+			"active": properties["active"]["value"],
+			"mon": properties["entries"]["value"]["mon"],
+			"tue": properties["entries"]["value"]["tue"],
+			"wed": properties["entries"]["value"]["wed"],
+			"thu": properties["entries"]["value"]["thu"],
+			"fri": properties["entries"]["value"]["fri"],
+			"sat": properties["entries"]["value"]["sat"],
+			"sun": properties["entries"]["value"]["sun"]
+		}
+
+	@handleNotSupported
+	def getDomesticHotWaterSchedule(self):
+		properties = self.getProperty("heating.dhw.schedule")["properties"]
+		return {
+			"active": properties["active"]["value"],
+			"mon": properties["entries"]["value"]["mon"],
+			"tue": properties["entries"]["value"]["tue"],
+			"wed": properties["entries"]["value"]["wed"],
+			"thu": properties["entries"]["value"]["thu"],
+			"fri": properties["entries"]["value"]["fri"],
+			"sat": properties["entries"]["value"]["sat"],
+			"sun": properties["entries"]["value"]["sun"]
+		}
+
+	# Calculates target supply temperature based on data from Viessmann
+	# See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
+	def getTargetSupplyTemperature(self):
+		inside = self.getCurrentDesiredTemperature()
+		outside = self.getOutsideTemperature()
+		delta_outside_inside = (outside - inside)
+		shift = self.getHeatingCurveShift()
+		slope = self.getHeatingCurveSlope()
+		targetSupply = inside + shift - slope * delta_outside_inside * \
+			(1.4347 + 0.021 * delta_outside_inside + 247.9 *
+			 pow(10, -6) * pow(delta_outside_inside, 2))
+		return round(targetSupply, 1)
+
+	# Solar properties
+
+	@handleNotSupported
+	def getSolarStorageTemperature(self):
+		return self.getProperty("heating.solar.sensors.temperature.dhw")["properties"]["value"]["value"]
+
+	@handleNotSupported
+	def getSolarCollectorTemperature(self):
+		return self.getProperty("heating.solar.sensors.temperature.collector")["properties"]["value"]["value"]
+
+	@handleNotSupported
+	def getSolarPowerCumulativeProduced(self):
+		return self.getProperty("heating.solar.power.cumulativeProduced")["properties"]["value"]["value"]
+
+	@handleNotSupported
+	def getSolarRechargeSuppression(self):
+		return self.getProperty("heating.solar.rechargeSuppression")["properties"]["status"]["value"]
+
+	@handleNotSupported
+	def getSolarPowerProduction(self):
+		return self.getProperty("heating.solar.power.production")["properties"]["day"]["value"]
+
+	@handleNotSupported
+	def getSolarPumpActive(self):
+		return self.getProperty("heating.solar.pumps.circuit")["properties"]["status"]["value"]
+
+	@handleNotSupported
+	def getSolarHours(self):
+		return self.getProperty("heating.solar.statistics")["properties"]["hours"]["value"]

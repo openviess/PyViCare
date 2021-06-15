@@ -4,7 +4,13 @@ Implements an object to interact with the Viessmann ViCare API.
 The OAuth2 authentication token can optionally be stored in a file to be reused.
 Tokens are automatically renewed.
 
+This is a version adopted from somm15/PyViCare that changes the retrieval process. It doesn't create an url for each property,
+which is bouncing up the connection counter to the Viessmann ViCare API ending up in an rate limit exception,
+but does a retrieval of the whole data structure within one request.
+For debugging purposes you can cache the data in a file and always read from this file as long as it exists
+
 A few nice feature removed from the app are available though the API (Comfort and Eco modes).
+The Solar properties are also available though the API.
 
 ## Version 0.1.0
 Note that the version 0.1.0 DOES BREAK a few things.
@@ -29,6 +35,7 @@ sys.path.insert(0, 'PyViCare')
 from PyViCare.PyViCareGazBoiler import GazBoiler
 
 t=GazBoiler("email@domain","password","token.save")
+t.getAllProperties(cache=True)  # for debugging use cache=True in order to save API calls
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
@@ -40,6 +47,14 @@ print(t.getHeatingCurveSlope())
 print(t.getBoilerTemperature())
 print(t.getActiveProgram())
 print(t.getPrograms())
+
+print(t.getSolarStorageTemperature())
+print(t.getSolarCollectorTemperature())
+print(t.getSolarPowerCumulativeProduced())
+print(t.getSolarRechargeSuppression())
+print(t.getSolarPowerProduction())
+print(t.getSolarPumpActive())
+print(t.getSolarHours())
 
 print(t.getCurrentDesiredTemperature())
 print(t.getMonthSinceLastService())
