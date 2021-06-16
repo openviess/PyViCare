@@ -25,6 +25,13 @@ VICARE_DHW_TEMP2 = "temp-2"
 
 """"Viessmann ViCare API Python tools"""
 
+def isSupported(method):
+    try:
+        result = method()
+        return result != 'error'
+    except:
+        return False
+
 class Device:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
@@ -320,6 +327,12 @@ class Device:
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self):
+        if(not isSupported(self.getCurrentDesiredTemperature) 
+            or not isSupported(self.getOutsideTemperature)
+            or not isSupported(self.getHeatingCurveShift)
+            or not isSupported(self.getHeatingCurveSlope)):
+            return None
+
         inside = self.getCurrentDesiredTemperature()
         outside = self.getOutsideTemperature()
         delta_outside_inside = (outside - inside)
@@ -327,3 +340,5 @@ class Device:
         slope = self.getHeatingCurveSlope()
         targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
         return round(targetSupply, 1)
+
+    
