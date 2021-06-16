@@ -14,7 +14,7 @@ class Vitodens111W(unittest.TestCase):
         self.assertEqual(self.heat.getCompressorActive(), False)
 
     def test_getCompressorHours(self):
-        self.assertAlmostEqual(self.heat.getCompressorHours(), 6801.2)
+        self.assertAlmostEqual(self.heat.getCompressorHours(), 8541)
 
     def test_getHeatingRodStatusOverall(self):
         self.assertEqual(self.heat.getHeatingRodStatusOverall(), False)
@@ -23,13 +23,13 @@ class Vitodens111W(unittest.TestCase):
         self.assertEqual(self.heat.getHeatingRodStatusLevel1(), False)
 
     def test_getReturnTemperature(self):
-        self.assertAlmostEqual(self.heat.getReturnTemperature(), 25.8)
+        self.assertAlmostEqual(self.heat.getReturnTemperature(), 23.3)
 
     def test_getMonthSinceLastService_fails(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.heat.getMonthSinceLastService)
 
     def test_getPrograms_fails(self):
-        expected_programs = ['active', 'comfort', 'eco', 'fixed', 'holiday', 'normal', 'reduced', 'standby']
+        expected_programs = ['active', 'comfort', 'eco', 'fixed', 'normal', 'reduced', 'screedDrying', 'standby']
         self.assertListEqual(self.heat.getPrograms(), expected_programs)
     
     def test_getModes(self):
