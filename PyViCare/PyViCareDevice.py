@@ -254,7 +254,7 @@ class Device:
 
 	@handleNotSupported
 	def getDomesticHotWaterCirculationPumpActive(self):
-		return self.service.setProperty('heating.dhw.pumps.circulation')['properties']['status']['value']
+		return self.getProperty('heating.dhw.pumps.circulation')['properties']['status']['value']
 
 	@handleNotSupported
 	def getDomesticHotWaterMaxTemperature(self):
