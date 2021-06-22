@@ -17,7 +17,7 @@ from PyViCare.PyViCareHeatPump import HeatPump # heat pump
 ```
 ## Version with PKCE
 Note that the new API will break a lot! 
-Only simple thing fixed sofar.
+Only simple thingis fixed sofar.
 ## Device Features / Errors
 
 Depending on the device, some features are not available/supported. This results in a raising of a `PyViCareNotSupportedFeatureError` if the dedicated method is called. This is most likely not a bug, but a limitation of the device itself.
@@ -91,7 +91,7 @@ Follow these steps to access the new API with PKCE in Postman:
 
 4. Use above data to replace `{installationId}` and `{gatewaySerial}` in this URL to investigate the Viessmann API:
 
-    `https://api.viessmann.com/iot/v1/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'
+    'https://api.viessmann.com/iot/v1/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'
 
 ## Types of heatings
 - Use `GazBoiler` for gas heatings
