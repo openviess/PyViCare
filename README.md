@@ -91,7 +91,7 @@ Follow these steps to access the new API with PKCE in Postman:
 
 4. Use above data to replace `{installationId}` and `{gatewaySerial}` in this URL to investigate the Viessmann API:
 
-    'https://api.viessmann.com/iot/v1/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'
+    'https://api.viessmann.com/iot/v1/equipment/installations/{installationID/gateways/{gatewaySerial}/devices/0/features/'
 
 ## Types of heatings
 - Use `GazBoiler` for gas heatings
