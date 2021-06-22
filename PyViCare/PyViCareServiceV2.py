@@ -34,10 +34,10 @@ def readFeature(entities, property_name):
     return feature
 
 def buildSetPropertyUrl(id, serial, circuit, property_name, action):
-    return apiURLBase +'/operational-data/v1/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
+    return apiURLBase +'/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
 
 def buildGetPropertyUrl(id, serial, circuit, property_name):
-    return apiURLBase + '/operational-data/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
+    return apiURLBase + '/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
 
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
 # entities / "deviceType": "heating"
