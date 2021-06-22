@@ -32,7 +32,7 @@ class Device:
     """
 
     # TODO cirtcuit management should move at method level
-    def __init__(self, username, password,token_file=None,circuit=0,cacheDuration=0,customService=None):
+    def __init__(self, username, password, client_id, token_file=None,circuit=0,cacheDuration=0,customService=None):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -48,9 +48,9 @@ class Device:
         if customService is not None:
             self.service = customService
         elif cacheDuration == 0:
-            self.service = ViCareService(username, password, token_file, circuit)
+            self.service = ViCareService(username, password, client_id, token_file, circuit)
         else:
-            self.service = ViCareCachedService(username, password, cacheDuration, token_file, circuit)
+            self.service = ViCareCachedService(username, password, client_id, cacheDuration, token_file, circuit)
 
     """ Set the active mode
     Parameters

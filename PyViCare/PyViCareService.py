@@ -1,5 +1,11 @@
-from requests_oauthlib import OAuth2Session
-from oauthlib.oauth2 import TokenExpiredError
+#from requests_oauthlib import OAuth2Session
+#from oauthlib.oauth2 import TokenExpiredError
+
+from authlib.oauth2.rfc7636 import create_s256_code_challenge
+from authlib.integrations.requests_client import OAuth2Session
+from authlib.integrations.base_client import TokenExpiredError, InvalidTokenError
+from secrets import token_urlsafe
+
 import requests
 import re
 import pickle
@@ -14,18 +20,19 @@ from simplejson import JSONDecodeError
 from PyViCare.PyViCare import PyViCareNotSupportedFeatureError, PyViCareRateLimitError
 import PyViCare.Feature
 
-client_id = '79742319e39245de5f91d15ff4cac2a8'
-client_secret = '8ad97aceb92c5892e102b093c7c083fa'
+code_verifier = token_urlsafe(48)
+code_challenge = create_s256_code_challenge(code_verifier)
+code_challenge_method = 'S256'
 authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize'
 token_url = 'https://iam.viessmann.com/idp/v2/token'
-apiURLBase = 'https://api.viessmann-platform.io'
+apiURLBase = 'https://api.viessmann.com'
 redirect_uri = "vicare://oauth-callback/everest"
-viessmann_scope=["openid"]
+viessmann_scope=["IoT User"]
 logger = logging.getLogger('ViCare')
-#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
-#logger.addHandler(logging.FileHandler('pyvicare.log', mode='a'))
-
+logger.addHandler(logging.FileHandler('pyvicare.log', mode='a'))
+#logger.addHandler(logging.StreamHandler())
 
 def readFeature(entities, property_name):
     feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), None)
@@ -36,10 +43,12 @@ def readFeature(entities, property_name):
     return feature
 
 def buildSetPropertyUrl(id, serial, circuit, property_name, action):
-    return apiURLBase +'/operational-data/v1/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
+    return apiURLBase +'/iot/v1/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
 
 def buildGetPropertyUrl(id, serial, circuit, property_name):
-    return apiURLBase + '/operational-data/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
+    return apiURLBase + '/iot/v1/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
+    #return apiURLBase + '/iot/v1/equipment/installations/'+str(id)+'/gateways/'+str(serial)/features/'+property_name   
+    #return apiURLBase + '/iot/v1/equipment/installations/'+str(id)+'/features/'+property_name   
 
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
 # entities / "deviceType": "heating"
@@ -57,7 +66,7 @@ class ViCareService:
     """
 
 
-    def __init__(self, username, password,token_file=None,circuit=0):
+    def __init__(self, username, password, client_id, token_file=None,circuit=0):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -72,8 +81,9 @@ class ViCareService:
 
         self.username= username
         self.password= password
-        self.token_file=token_file
-        self.circuit=circuit
+        self.client_id= client_id
+        self.token_file= token_file
+        self.circuit= circuit
         self.oauth=self.__restoreToken(token_file)
         self._getInstallations()
         logger.info("Initialisation successful !")
@@ -99,17 +109,17 @@ class ViCareService:
         if (token_file!=None) and os.path.isfile(token_file):
             try:
                 logger.info("Token file exists")
-                oauth = OAuth2Session(client_id,token=self._deserializeToken(token_file))
-                logger.info("Token restored from file")
+                oauth = OAuth2Session(self.client_id,token=self._deserializeToken(token_file))
+                logger.info("Token restored from file"+str(self._deserializeToken(token_file)))
             except UnpicklingError:
                 logger.warning("Could not restore token")
-                oauth = self.__getNewToken(self.username, self.password,token_file)
+                oauth = self.__getNewToken(self.username, self.password, self.client_id, token_file)
         else:
             logger.debug("Token file argument not provided or file does not exist")
-            oauth = self.__getNewToken(self.username, self.password,token_file)
+            oauth = self.__getNewToken(self.username, self.password, self.client_id, token_file)
         return oauth
 
-    def __getNewToken(self, username, password,token_file=None):
+    def __getNewToken(self, username, password, client_id, token_file=None):
         """Create a new oAuth2 sessions
         Viessmann tokens expire after 3600s (60min)
         Parameters
@@ -126,8 +136,8 @@ class ViCareService:
         oauth:
             oauth sessions object
         """
-        oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
-        authorization_url, _ = oauth.authorization_url(authorizeURL)
+        oauth = OAuth2Session(client_id, redirect_uri=redirect_uri, scope=viessmann_scope)
+        authorization_url, _ = oauth.create_authorization_url(authorizeURL, code_challenge=code_challenge, code_challenge_method='S256')
 
         logger.debug("Auth URL is: "+authorization_url)
 
@@ -138,14 +148,16 @@ class ViCareService:
             logger.debug(response.content)
         except requests.exceptions.InvalidSchema as e:
             #capture the error, which contains the code the authorization code and put this in to codestring
+            logger.debug("Response is: "+str(e))
             codestring = "{0}".format(str(e.args[0])).encode("utf-8")
             codestring = str(codestring)
             match = re.search("code=(.*)&",codestring)
             codestring=match.group(1)
             logger.debug("Codestring : "+codestring)
-            oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
+            kwargs = {'client_id': client_id, 'redirect_uri': redirect_uri, 'code_verifier': code_verifier,'code': codestring}
+            token = oauth.fetch_token(token_url, headers = header, method='POST', auth='', grant_type='authorization_code', **kwargs)
             logger.debug("Token received: ")
-            logger.debug(oauth)
+            logger.debug(token)
             logger.debug("Start serial")
             if token_file != None:
                 self._serializeToken(oauth.token,token_file)
@@ -159,7 +171,7 @@ class ViCareService:
         
     def renewToken(self):
         logger.info("Token expired, renewing")
-        self.oauth=self.__getNewToken(self.username,self.password,self.token_file)
+        self.oauth=self.__getNewToken(self.username,self.password,self.client_id, self.token_file)
         logger.info("Token renewed successfully")
             
         
@@ -179,6 +191,7 @@ class ViCareService:
             #if(self.oauth==None):
             #    self.renewToken()
             logger.debug(self.oauth)
+            logger.debug(url)
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
             self.handleRateLimit(r)
@@ -188,7 +201,7 @@ class ViCareService:
                 self.renewToken()
                 r = self.oauth.get(url).json()
             return r
-        except TokenExpiredError:
+        except InvalidTokenError:
             self.renewToken()
             return self.__get(url)
 
@@ -227,7 +240,7 @@ class ViCareService:
                     return {"statusCode": 204, "error": "None", "message": "SUCCESS"}
                 else:
                     return {"statusCode": j.status_code, "error": "Unknown", "message": "UNKNOWN"}
-        except TokenExpiredError:
+        except InvalidTokenError:
             self.renewToken()
             return self.__post(url,data)
 
@@ -247,11 +260,10 @@ class ViCareService:
             binary_file.close()
 
     def _getInstallations(self):
-        self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
-        #logger.debug("Installations: "+str(self.installations))
-        #self.href=self.installations["entities"][0]["links"][0]["href"]
-        self.id=self.installations["entities"][0]["properties"]["id"]
-        self.serial=self.installations["entities"][0]["entities"][0]["properties"]["serial"]
+        self.installations = self.__get(apiURLBase+"/iot/v1/equipment/installations")
+        self.id=self.installations["data"][0]["id"]
+        self.gatewaySerial = self.__get(apiURLBase+"/iot/v1/equipment/gateways")
+        self.serial=self.gatewaySerial["data"][0]["serial"]
         return self.installations
 
     def getInstallations(self):
