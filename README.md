@@ -115,7 +115,7 @@ from PyViCare.PyViCareGazBoiler import GazBoiler
 
 client_id = "INSERT CLIENT ID"
 
-t=GazBoiler("email@domain","password","token.save", client_id=client_id, useV2=True)
+t=GazBoiler("email@domain","password","token.save", client_id=client_id, useV2=True, cacheDuration=60)
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
