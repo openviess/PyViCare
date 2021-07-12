@@ -114,8 +114,7 @@ sys.path.insert(0, 'PyViCare')
 from PyViCare.PyViCareGazBoiler import GazBoiler
 
 client_id = "INSERT CLIENT ID"
-
-t=GazBoiler("email@domain","password","token.save", client_id=client_id, useV2=True, cacheDuration=60)
+t=GazBoiler("email@domain","password","token.save", 0, 60, client_id=client_id, useV2=True)
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
@@ -165,17 +164,12 @@ Follow these steps to access the V2 API in Postman:
 
     A login popup will open. Enter your ViCare username and password.
 
-2. Use this URL to access your `installationId`: 
+2. Use this URL to access your `installationId` and `gatewaySerial`: 
 
-    `https://api.viessmann.com/iot/v1/equipment/installations`
+    `https://api.viessmann.com/iot/v1/equipment/installations?includeGateways=true`
 
     - `installationId` is `data[0].id`
-
-2. Use this URL to access your `gatewaySerial`. Replace `{installationId}` with the installation id above.
-
-    `https://api.viessmann.com/iot/v1/equipment/installations/{installationId}/gateways`
-
-    - `gatewaySerial` is `data[0].serial`
+    - `gatewaySerial` is `data[0].gateways[0].serial`
 
 3. Use above data to replace `{installationId}` and `{gatewaySerial}` in this URL to investigate the Viessmann API:
 

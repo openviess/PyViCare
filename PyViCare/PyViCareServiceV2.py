@@ -6,7 +6,6 @@ import re
 import pickle
 import os
 import logging
-import datetime
 import pkce
 from pickle import UnpicklingError
 # This is required because "requests" uses simplejson if installed on the system 
@@ -200,16 +199,16 @@ class ViCareServiceV2:
             logger.debug(self.oauth)
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
+            self.handleExpiredToken(r)
             self.handleRateLimit(r)
-
-            if(r=={'error': 'EXPIRED TOKEN'}):
-                logger.warning("Abnormal token, renewing") # apparently forged tokens TODO investigate
-                self.renewToken()
-                r = self.oauth.get(url).json()
             return r
         except TokenExpiredError:
             self.renewToken()
             return self.__get(url)
+
+    def handleExpiredToken(self, response):
+        if("error" in response and response["error"] == "EXPIRED TOKEN"):
+            raise TokenExpiredError(response)
 
     def handleRateLimit(self, response):
         if not PyViCare.Feature.raise_exception_on_rate_limit:
@@ -266,11 +265,11 @@ class ViCareServiceV2:
             binary_file.close()
 
     def _getInstallations(self):
-        self.installations = self.__get(apiURLBase+"/equipment/installations")
-        self.id = self.installations["data"][0]["id"]
-
-        self.gateways = self.__get(apiURLBase+"/equipment/installations/" + str(self.id) + "/gateways")
-        self.serial = self.gateways["data"][0]["serial"]
+        self.installations = self.__get(apiURLBase+"/equipment/installations?includeGateways=true")
+        installation = self.installations["data"][0]
+        self.id = installation["id"]
+        self.serial = installation["gateways"][0]["serial"]
+        
         return self.installations
 
     def getInstallations(self):
@@ -283,7 +282,7 @@ class ViCareServiceV2:
     def getProperty(self,property_name):
         url = buildGetPropertyUrl(self.id, self.serial, self.circuit, property_name)
         j=self.__get(url)
-        return j
+        return j["data"]
 
     def setProperty(self,property_name,action,data):
         url = buildSetPropertyUrl(self.id, self.serial, self.circuit, property_name, action)
