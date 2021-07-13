@@ -358,5 +358,5 @@ class Device:
 
     @handleNotSupported
     def getSolarPumpActive(self):
-        status =  self.service.getProperty("heating.solar.pumps.circuit")["properties"]["status"]["value"]
+        status = self.service.getProperty("heating.solar.pumps.circuit")["properties"]["status"]["value"]
         return status == 'on'
