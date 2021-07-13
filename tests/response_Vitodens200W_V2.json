@@ -2022,7 +2022,12 @@
             "deviceId": "0"
         },
         {
-            "properties": {},
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "off"
+                }
+            },
             "commands": {},
             "components": [],
             "apiVersion": 1,
@@ -2105,7 +2110,21 @@
             "deviceId": "0"
         },
         {
-            "properties": {},
+            "properties": {
+                "unit": {
+                    "value": "celsius",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number",
+                    "value": 55.3,
+                    "unit": "celsius"
+                },
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                }
+            },
             "commands": {},
             "components": [],
             "apiVersion": 1,
