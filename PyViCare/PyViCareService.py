@@ -200,16 +200,16 @@ class ViCareService:
             logger.debug(self.oauth)
             r=self.oauth.get(url).json()
             logger.debug("Response to get request: "+str(r))
+            self.handleExpiredToken(r)
             self.handleRateLimit(r)
-
-            if(r=={'error': 'EXPIRED TOKEN'}):
-                logger.warning("Abnormal token, renewing") # apparently forged tokens TODO investigate
-                self.renewToken()
-                r = self.oauth.get(url).json()
             return r
         except TokenExpiredError:
             self.renewToken()
             return self.__get(url)
+
+    def handleExpiredToken(self, response):
+        if("error" in response and response["error"] == "EXPIRED TOKEN"):
+            raise TokenExpiredError(response)
 
     def handleRateLimit(self, response):
         if not PyViCare.Feature.raise_exception_on_rate_limit:
@@ -266,11 +266,11 @@ class ViCareService:
             binary_file.close()
 
     def _getInstallations(self):
-        self.installations = self.__get(apiURLBase+"/equipment/installations")
-        self.id = self.installations["data"][0]["id"]
-
-        self.gateways = self.__get(apiURLBase+"/equipment/installations/" + str(self.id) + "/gateways")
-        self.serial = self.gateways["data"][0]["serial"]
+        self.installations = self.__get(apiURLBase+"/equipment/installations?includeGateways=true")
+        installation = self.installations["data"][0]
+        self.id = installation["id"]
+        self.serial = installation["gateways"][0]["serial"]
+        
         return self.installations
 
     def getInstallations(self):

@@ -342,4 +342,13 @@ class Device:
         targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
         return round(targetSupply, 1)
 
-    
+        return round(targetSupply, 1)
+
+    @handleNotSupported
+    def getSolarCollectorTemperature(self):
+        return self.service.getProperty("heating.solar.sensors.temperature.collector")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSolarPumpActive(self):
+        status = self.service.getProperty("heating.solar.pumps.circuit")["properties"]["status"]["value"]
+        return status == 'on'

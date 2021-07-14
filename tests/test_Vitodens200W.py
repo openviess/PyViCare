@@ -9,7 +9,7 @@ class Vitodens200W(unittest.TestCase):
         self.service = ViCareServiceMock('response_Vitodens200W.json', 0)
         self.device = GazBoiler(None, None, None, 0, 0, self.service)
         PyViCare.Feature.raise_exception_on_not_supported_device_feature = True
-        
+
     def test_getBurnerActive(self):
         self.assertEqual(self.device.getBurnerActive(), False)
 
