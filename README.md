@@ -5,6 +5,8 @@ This library implements access to Viessmann devices by using the official API fr
 ## Breaking changes in version 1.x
 
 * The versions prior to 1.x used an inofficial API which stopped working on July, 15th 2021. All users need to migrate to version 1.0.0 to continue using the API.
+* Exception is raised if the library runs into a API rate limit.  (See feature flag `raise_exception_on_rate_limit`)
+* Exception is raised if an unsupported device feature is used. (See feature flag `raise_exception_on_not_supported_device_feature`)
 * Python 3.4 is no longer supported.
 * Python 3.9 is now supported.
 
