@@ -4,17 +4,16 @@ from PyViCare.PyViCareService import apiURLBase, ViCareService, readFeature
 
 class ViCareCachedService(ViCareService):
     
-    def __init__(self, username, password, cacheDuration, token_file=None,circuit=0):
-        ViCareService.__init__(self, username, password, token_file, circuit)
+    def __init__(self, username, password, cacheDuration, client_id, token_file=None,circuit=0):
+        ViCareService.__init__(self, username, password, client_id, token_file, circuit)
         self.cacheDuration = cacheDuration
         self.cache = None
         self.cacheTime = None
         self.lock = threading.Lock()
 
-
     def getProperty(self,property_name):
         data = self.getOrUpdateCache()   
-        entities = data["entities"]
+        entities = data["data"]
         return readFeature(entities, property_name)
 
     def setProperty(self,property_name,action,data):
@@ -26,7 +25,7 @@ class ViCareCachedService(ViCareService):
         self.lock.acquire()
         try:
             if self.isCacheInvalid():
-                url = apiURLBase + '/operational-data/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
+                url = apiURLBase + '/equipment/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
                 self.cache = self.get(url)
                 self.cacheTime = datetime.now()
             return self.cache

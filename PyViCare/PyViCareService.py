@@ -1,11 +1,13 @@
 from requests_oauthlib import OAuth2Session
-from oauthlib.oauth2 import TokenExpiredError
+from oauthlib.oauth2 import TokenExpiredError 
+
 import requests
 import re
 import pickle
 import os
 import logging
 import datetime
+import pkce
 from pickle import UnpicklingError
 # This is required because "requests" uses simplejson if installed on the system 
 
@@ -14,19 +16,17 @@ from simplejson import JSONDecodeError
 from PyViCare.PyViCare import PyViCareNotSupportedFeatureError, PyViCareRateLimitError
 import PyViCare.Feature
 
-client_id = '79742319e39245de5f91d15ff4cac2a8'
-client_secret = '8ad97aceb92c5892e102b093c7c083fa'
-authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize'
-token_url = 'https://iam.viessmann.com/idp/v1/token'
-apiURLBase = 'https://api.viessmann-platform.io'
+authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize'
+token_url = 'https://iam.viessmann.com/idp/v2/token'
+apiURLBase = 'https://api.viessmann.com/iot/v1'
 redirect_uri = "vicare://oauth-callback/everest"
-viessmann_scope=["openid"]
+viessmann_scope=["IoT User"]
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
 
 def readFeature(entities, property_name):
-    feature = next((f for f in entities if f["class"][0] == property_name and f["class"][1] == "feature"), None)
+    feature = next((f for f in entities if f["feature"] == property_name), None)
 
     if(feature is None):
         raise PyViCareNotSupportedFeatureError(property_name)
@@ -34,10 +34,10 @@ def readFeature(entities, property_name):
     return feature
 
 def buildSetPropertyUrl(id, serial, circuit, property_name, action):
-    return apiURLBase +'/operational-data/v1/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
+    return apiURLBase +'/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
 
 def buildGetPropertyUrl(id, serial, circuit, property_name):
-    return apiURLBase + '/operational-data/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
+    return apiURLBase + '/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name   
 
 # https://api.viessmann-platform.io/general-management/v1/installations/DDDDD gives the type like VitoconnectOptolink
 # entities / "deviceType": "heating"
@@ -55,7 +55,7 @@ class ViCareService:
     """
 
 
-    def __init__(self, username, password,token_file=None,circuit=0):
+    def __init__(self, username, password, client_id, token_file=None,circuit=0):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -72,6 +72,7 @@ class ViCareService:
         self.password= password
         self.token_file=token_file
         self.circuit=circuit
+        self.client_id = client_id
         self.oauth=self.__restoreToken(token_file)
         self._getInstallations()
         logger.info("Initialisation successful !")
@@ -97,7 +98,7 @@ class ViCareService:
         if (token_file!=None) and os.path.isfile(token_file):
             try:
                 logger.info("Token file exists")
-                oauth = OAuth2Session(client_id,token=self._deserializeToken(token_file))
+                oauth = OAuth2Session(self.client_id,token=self._deserializeToken(token_file))
                 logger.info("Token restored from file")
             except UnpicklingError:
                 logger.warning("Could not restore token")
@@ -124,9 +125,12 @@ class ViCareService:
         oauth:
             oauth sessions object
         """
-        oauth = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
+        oauth = OAuth2Session(self.client_id, redirect_uri=redirect_uri,scope=viessmann_scope)
         authorization_url, _ = oauth.authorization_url(authorizeURL)
-
+           
+        # workaround until requests-oauthlib supports PKCE flow
+        code_verifier, code_challenge = pkce.generate_pkce_pair()
+        authorization_url += '&code_challenge=' + code_challenge + '&code_challenge_method=S256'
         logger.debug("Auth URL is: "+authorization_url)
 
         try:
@@ -141,7 +145,24 @@ class ViCareService:
             match = re.search("code=(.*)&",codestring)
             codestring=match.group(1)
             logger.debug("Codestring : "+codestring)
-            oauth.fetch_token(token_url, client_secret=client_secret,authorization_response=authorization_url,code=codestring)
+
+            # workaround until requests-oauthlib supports PKCE flow
+            resp = requests.post(url=token_url,
+                    data={
+                        'grant_type': 'authorization_code',
+                        'client_id': self.client_id,
+                        'redirect_uri': redirect_uri,
+                        'code': codestring,
+                        'code_verifier': code_verifier
+                    }
+                )
+            result = resp.json()
+            token_dict = {
+                'access_token': result['access_token'],
+                'token_type': 'bearer'
+            }
+            oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
+            # oauth.fetch_token(token_url, authorization_response=authorization_url,code=codestring)
             logger.debug("Token received: ")
             logger.debug(oauth)
             logger.debug("Start serial")
@@ -245,11 +266,11 @@ class ViCareService:
             binary_file.close()
 
     def _getInstallations(self):
-        self.installations = self.__get(apiURLBase+"/general-management/installations?expanded=true&")
-        #logger.debug("Installations: "+str(self.installations))
-        #self.href=self.installations["entities"][0]["links"][0]["href"]
-        self.id=self.installations["entities"][0]["properties"]["id"]
-        self.serial=self.installations["entities"][0]["entities"][0]["properties"]["serial"]
+        self.installations = self.__get(apiURLBase+"/equipment/installations")
+        self.id = self.installations["data"][0]["id"]
+
+        self.gateways = self.__get(apiURLBase+"/equipment/installations/" + str(self.id) + "/gateways")
+        self.serial = self.gateways["data"][0]["serial"]
         return self.installations
 
     def getInstallations(self):
