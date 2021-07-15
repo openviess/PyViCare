@@ -141,14 +141,6 @@ class Device:
         return self.deactivateProgram("comfort")
 
     @handleNotSupported
-    def getMonthSinceLastService(self):
-        return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
-
-    @handleNotSupported
-    def getLastServiceDate(self):
-        return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
-
-    @handleNotSupported
     def getOutsideTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
@@ -191,14 +183,6 @@ class Device:
     @handleNotSupported
     def getCurrentDesiredTemperature(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
-
-    @handleNotSupported
-    def getErrorHistory(self):
-        return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
-
-    @handleNotSupported
-    def getActiveError(self):
-        return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):

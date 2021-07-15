@@ -9,120 +9,119 @@ class GazBoiler(Device):
 
     @handleNotSupported
     def getGasConsumptionHeatingDays(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['day']['value']
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["day"]["value"]
 
     @handleNotSupported
     def getGasConsumptionHeatingToday(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['day']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["day"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionHeatingWeeks(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['week']['value']
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["week"]["value"]
 
     @handleNotSupported
     def getGasConsumptionHeatingThisWeek(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['week']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["week"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionHeatingMonths(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['month']['value']
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["month"]["value"]
 
     @handleNotSupported
     def getGasConsumptionHeatingThisMonth(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['month']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["month"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionHeatingYears(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['year']['value']
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["year"]["value"]
 
     @handleNotSupported
     def getGasConsumptionHeatingThisYear(self):
-        return self.service.getProperty('heating.gas.consumption.heating')['properties']['year']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["year"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterDays(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['day']['value']
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["day"]["value"]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterToday(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['day']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["day"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterWeeks(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['week']['value']
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["week"]["value"]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterThisWeek(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['week']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["week"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterMonths(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['month']['value']
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["month"]["value"]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterThisMonth(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['month']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["month"]["value"][0]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterYears(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['year']['value']
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["year"]["value"]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterThisYear(self):
-        return self.service.getProperty('heating.gas.consumption.dhw')['properties']['year']['value'][0]
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["year"]["value"][0]
 
-            
-    @handleNotSupported
-    def getBurnerModulation(self):
-        return self.service.getProperty('heating.burner.modulation')["properties"]["value"]["value"]
-            
     @handleNotSupported
     def getBoilerTemperature(self):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value']
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionToday(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value'][0]
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"][0]
 
     @handleNotSupported
     def getPowerConsumptionWeeks(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['week']['value']
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["week"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionThisWeek(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['week']['value'][0]
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["week"]["value"][0]
 
     @handleNotSupported
     def getPowerConsumptionMonths(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['month']['value']
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["month"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionThisMonth(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['month']['value'][0]
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["month"]["value"][0]
 
     @handleNotSupported
     def getPowerConsumptionYears(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value']
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["year"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionThisYear(self):
-        return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value'][0]
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["year"]["value"][0]
 
     @handleNotSupported
     def getBurnerHours(self):
-        return self.service.getProperty('heating.burner.statistics')['properties']['hours']['value']
+        return self.service.getProperty("heating.burners." + str(self.service.circuit) + ".statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
     def getBurnerStarts(self):
-        return self.service.getProperty('heating.burner.statistics')['properties']['starts']['value']
+        return self.service.getProperty("heating.burners." + str(self.service.circuit) + ".statistics")["properties"]["starts"]["value"]
+
+    @handleNotSupported
+    def getBurnerModulation(self):
+        return self.service.getProperty("heating.burners." + str(self.service.circuit) + ".modulation")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getOneTimeCharge(self):
-        return self.service.getProperty('heating.dhw.oneTimeCharge')["properties"]["active"]["value"]
+        return self.service.getProperty("heating.dhw.oneTimeCharge")["properties"]["active"]["value"]
 
     def deactivateOneTimeCharge(self):
         return self.service.setProperty("heating.dhw.oneTimeCharge","deactivate","{}")
