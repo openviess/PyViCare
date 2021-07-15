@@ -4,9 +4,7 @@ import os
 import logging
 from datetime import datetime, time
 from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCareServiceV2 import ViCareServiceV2
 from PyViCare.PyViCareCachedService import ViCareCachedService
-from PyViCare.PyViCareCachedServiceV2 import ViCareCachedServiceV2
 from PyViCare.PyViCare import handleNotSupported
 
 import traceback
@@ -41,7 +39,7 @@ class Device:
     """
 
     # TODO cirtcuit management should move at method level
-    def __init__(self, username, password,token_file=None,circuit=0,cacheDuration=0,customService=None,useV2=False,client_id=None):
+    def __init__(self, username, password,token_file=None,circuit=0,cacheDuration=0,customService=None,client_id=None):
         """Init function. Create the necessary oAuth2 sessions
         Parameters
         ----------
@@ -57,15 +55,9 @@ class Device:
         if customService is not None:
             self.service = customService
         elif cacheDuration == 0:
-            if useV2:
-                self.service = ViCareServiceV2(username, password, client_id, token_file, circuit)
-            else:
-                self.service = ViCareService(username, password, token_file, circuit)
+            self.service = ViCareService(username, password, client_id, token_file, circuit)
         else:
-            if useV2:
-                self.service = ViCareCachedServiceV2(username, password, cacheDuration, client_id, token_file, circuit)
-            else:
-                self.service = ViCareCachedService(username, password, cacheDuration, token_file, circuit)
+            self.service = ViCareCachedService(username, password, cacheDuration, client_id, token_file, circuit)
 
 
     """ Set the active mode
@@ -170,7 +162,7 @@ class Device:
 
     @handleNotSupported
     def getModes(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["actions"][0]["fields"][0]["enum"]
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
 
     @handleNotSupported
     def getActiveMode(self):
@@ -190,7 +182,7 @@ class Device:
 
     @handleNotSupported
     def getPrograms(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["entities"][9]["properties"]["components"]
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs")["components"]
 
     @handleNotSupported
     def getDesiredTemperatureForProgram(self , program):

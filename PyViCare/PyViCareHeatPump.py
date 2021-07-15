@@ -50,19 +50,3 @@ class HeatPump(Device):
     @handleNotSupported
     def getReturnTemperaturePrimaryCircuit(self):
         return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getHeatingRodStatusOverall(self):
-        return self.service.getProperty("heating.heatingRod.status")["properties"]["overall"]["value"]
-
-    @handleNotSupported
-    def getHeatingRodStatusLevel1(self):
-        return self.service.getProperty("heating.heatingRod.status")["properties"]["level1"]["value"]
-        
-    @handleNotSupported
-    def getHeatingRodStatusLevel2(self):
-        return self.service.getProperty("heating.heatingRod.status")["properties"]["level2"]["value"]
-        
-    @handleNotSupported
-    def getHeatingRodStatusLevel3(self):
-        return self.service.getProperty("heating.heatingRod.status")["properties"]["level3"]["value"]
