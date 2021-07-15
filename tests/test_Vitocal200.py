@@ -49,9 +49,6 @@ class Vitocal200(unittest.TestCase):
     def test_getSupplyTemperaturePrimaryCircuit(self):
         self.assertAlmostEqual(self.device.getSupplyTemperaturePrimaryCircuit(), 18.9)
 
-    def test_getMonthSinceLastService_fails(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getMonthSinceLastService)
-
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco', 'fixed', 'normal', 'reduced', 'standby']
         self.assertListEqual(self.device.getPrograms(), expected_programs)

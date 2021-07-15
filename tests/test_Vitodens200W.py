@@ -25,9 +25,6 @@ class Vitodens200W(unittest.TestCase):
     def test_getPowerConsumptionDays_fails(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDays)
 
-    def test_getMonthSinceLastService_fails(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getMonthSinceLastService)
-
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco', 'external', 'holiday', 'normal', 'reduced', 'standby']
         self.assertListEqual(self.device.getPrograms(), expected_programs)
