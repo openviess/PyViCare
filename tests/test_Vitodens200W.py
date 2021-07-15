@@ -13,25 +13,29 @@ class Vitodens200W(unittest.TestCase):
     def test_getBurnerActive(self):
         self.assertEqual(self.device.getBurnerActive(), False)
 
-    @unittest.skip("Not available in V2 yet")
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.getBurnerStarts(), 12648)
+        self.assertEqual(self.device.getBurnerStarts(), 17169)
+
+    def test_getBurnerHours(self):
+        self.assertEqual(self.device.getBurnerHours(), 1589.3)
+
+    def test_getBurnerModulation(self):
+        self.assertEqual(self.device.getBurnerModulation(), 0)
 
     def test_getPowerConsumptionDays_fails(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDays)
-
-    def test_getMonthSinceLastService_fails(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getMonthSinceLastService)
 
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco', 'external', 'holiday', 'normal', 'reduced', 'standby']
         self.assertListEqual(self.device.getPrograms(), expected_programs)
 
-    @unittest.skip("Not available in V2 yet")
     def test_getModes(self):
-        expected_modes = ['standby', 'dhw', 'dhwAndHeating']
+        expected_modes = ['standby', 'dhw', 'dhwAndHeating', 'forcedReduced', 'forcedNormal']
         self.assertListEqual(self.device.getModes(), expected_modes)
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPrograms)
+
+    def test_getPrograms(self):
+        expected_modes = ['active', 'comfort', 'eco', 'external', 'holiday', 'normal', 'reduced', 'standby']
+        self.assertListEqual(self.device.getPrograms(), expected_modes)
 
     def test_ensure_old_behavior_non_supported_feature_returns_error(self):
         PyViCare.Feature.raise_exception_on_not_supported_device_feature = False
