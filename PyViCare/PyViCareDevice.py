@@ -141,14 +141,6 @@ class Device:
         return self.deactivateProgram("comfort")
 
     @handleNotSupported
-    def getMonthSinceLastService(self):
-        return self.service.getProperty("heating.service.timeBased")["properties"]["activeMonthSinceLastService"]["value"]
-
-    @handleNotSupported
-    def getLastServiceDate(self):
-        return self.service.getProperty("heating.service.timeBased")["properties"]["lastService"]["value"]
-
-    @handleNotSupported
     def getOutsideTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
@@ -191,14 +183,6 @@ class Device:
     @handleNotSupported
     def getCurrentDesiredTemperature(self):
         return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
-
-    @handleNotSupported
-    def getErrorHistory(self):
-        return self.service.getProperty("heating.errors.history")["properties"]["entries"]["value"]
-
-    @handleNotSupported
-    def getActiveError(self):
-        return self.service.getProperty("heating.errors.active")["properties"]["entries"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
@@ -340,8 +324,6 @@ class Device:
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
         targetSupply = inside + shift - slope * delta_outside_inside * (1.4347 + 0.021 * delta_outside_inside + 247.9 * pow(10, -6) * pow(delta_outside_inside, 2))
-        return round(targetSupply, 1)
-
         return round(targetSupply, 1)
 
     @handleNotSupported

@@ -1,7 +1,3 @@
-import re
-import json
-import os
-import logging
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCare import handleNotSupported
 
