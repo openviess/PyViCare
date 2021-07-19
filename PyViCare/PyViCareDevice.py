@@ -334,3 +334,7 @@ class Device:
     def getSolarPumpActive(self):
         status = self.service.getProperty("heating.solar.pumps.circuit")["properties"]["status"]["value"]
         return status == 'on'
+
+    @handleNotSupported
+    def getFrostProtectionActive(self):
+        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".frostprotection")["properties"]["status"]["value"]
