@@ -337,4 +337,5 @@ class Device:
 
     @handleNotSupported
     def getFrostProtectionActive(self):
-        return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".frostprotection")["properties"]["status"]["value"]
+        status = self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".frostprotection")["properties"]["status"]["value"]
+        return status == 'on'
