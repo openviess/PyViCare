@@ -40,3 +40,6 @@ class Vitodens200W(unittest.TestCase):
     def test_ensure_old_behavior_non_supported_feature_returns_error(self):
         PyViCare.Feature.raise_exception_on_not_supported_device_feature = False
         self.assertEqual(self.device.getPowerConsumptionDays(), "error")
+
+    def test_getFrostProtectionActive(self):
+        self.assertEqual(self.device.getFrostProtectionActive(), False)
