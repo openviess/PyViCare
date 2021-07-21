@@ -43,3 +43,6 @@ class Vitodens200W(unittest.TestCase):
 
     def test_getFrostProtectionActive(self):
         self.assertEqual(self.device.getFrostProtectionActive(), False)
+
+    def test_getDomesticHotWaterCirculationPumpActive(self):
+        self.assertEqual(self.device.getDomesticHotWaterCirculationPumpActive(), True)
