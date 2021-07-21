@@ -56,3 +56,6 @@ class Vitocal200(unittest.TestCase):
     def test_getModes(self):
         expected_modes = ['standby', 'dhw', 'dhwAndHeatingCooling']
         self.assertListEqual(self.device.getModes(), expected_modes)
+
+    def test_getDomesticHotWaterCirculationPumpActive(self):
+        self.assertEqual(self.device.getDomesticHotWaterCirculationPumpActive(), False)
