@@ -237,6 +237,11 @@ class Device:
         return status == 'on'
 
     @handleNotSupported
+    def getDomesticHotWaterCirculationPumpActive(self):
+        status =  self.service.getProperty("heating.dhw.pumps.circulation")["properties"]["status"]["value"]
+        return status == 'on'
+
+    @handleNotSupported
     def getDomesticHotWaterMaxTemperature(self):
         return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
 
