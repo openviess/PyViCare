@@ -12,7 +12,7 @@ This library implements access to Viessmann devices by using the official API fr
 
 ## Help
 
-We need help testing and improving PyViCare, since the maintainers only have specific types of heating systems. For bugs, questions or feature requests join the [PyViCare channel on Discord](https://discord.gg/GMjBT7K5) or create an issue in this repository.
+We need help testing and improving PyViCare, since the maintainers only have specific types of heating systems. For bugs, questions or feature requests join the [PyViCare channel on Discord](https://discord.gg/aM3SqCD88f) or create an issue in this repository.
 
 ## Device Features / Errors
 
