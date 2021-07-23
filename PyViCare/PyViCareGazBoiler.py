@@ -77,35 +77,35 @@ class GazBoiler(Device):
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"]
+        return self.service.getProperty("heating.power.consumption")["properties"]["day"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionToday(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"][0]
+        return self.service.getProperty("heating.power.consumption")["properties"]["day"]["value"][0]
 
     @handleNotSupported
     def getPowerConsumptionWeeks(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["week"]["value"]
+        return self.service.getProperty("heating.power.consumption")["properties"]["week"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionThisWeek(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["week"]["value"][0]
+        return self.service.getProperty("heating.power.consumption")["properties"]["week"]["value"][0]
 
     @handleNotSupported
     def getPowerConsumptionMonths(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["month"]["value"]
+        return self.service.getProperty("heating.power.consumption")["properties"]["month"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionThisMonth(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["month"]["value"][0]
+        return self.service.getProperty("heating.power.consumption")["properties"]["month"]["value"][0]
 
     @handleNotSupported
     def getPowerConsumptionYears(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["year"]["value"]
+        return self.service.getProperty("heating.power.consumption")["properties"]["year"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionThisYear(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["year"]["value"][0]
+        return self.service.getProperty("heating.power.consumption")["properties"]["year"]["value"][0]
 
     @handleNotSupported
     def getBurnerHours(self):
