@@ -7,7 +7,7 @@ import PyViCare.Feature
 class Vitocal200(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock('response_Vitocal200.json', 0)
-        self.device = HeatPump(None, None, None, 0, 0, self.service)
+        self.device = HeatPump(self.service)
         PyViCare.Feature.raise_exception_on_not_supported_device_feature = True
         
     def test_getCompressorActive(self):

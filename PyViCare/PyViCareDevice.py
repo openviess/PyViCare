@@ -1,13 +1,6 @@
-import re
-import json
-import os
 import logging
 from datetime import datetime, time
-from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCare import handleNotSupported
-
-import traceback
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -39,27 +32,9 @@ class Device:
     """
 
     # TODO cirtcuit management should move at method level
-    def __init__(self, username, password,token_file=None,circuit=0,cacheDuration=0,customService=None,client_id=None):
-        """Init function. Create the necessary oAuth2 sessions
-        Parameters
-        ----------
-        username : str
-            e-mail address
-        password : str
-            password
-
-        Returns
-        -------
-        """
-
-        if customService is not None:
-            self.service = customService
-        elif cacheDuration == 0:
-            self.service = ViCareService(username, password, client_id, token_file, circuit)
-        else:
-            self.service = ViCareCachedService(username, password, cacheDuration, client_id, token_file, circuit)
-
-
+    def __init__(self, service):
+        self.service = service
+        
     """ Set the active mode
     Parameters
     ----------

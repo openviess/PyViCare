@@ -4,8 +4,8 @@ from PyViCare.PyViCareService import apiURLBase, ViCareService, readFeature
 
 class ViCareCachedService(ViCareService):
     
-    def __init__(self, username, password, cacheDuration, client_id, token_file=None,circuit=0):
-        ViCareService.__init__(self, username, password, client_id, token_file, circuit)
+    def __init__(self, oauth_manager, cacheDuration, circuit=0):
+        ViCareService.__init__(self, oauth_manager, circuit)
         self.cacheDuration = cacheDuration
         self.cache = None
         self.cacheTime = None

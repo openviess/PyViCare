@@ -28,7 +28,7 @@ class AbstractViCareOAuthManager:
         self.oauth.get(*args, **kwargs)
 
 
-class ViCareExternalOAuthManager(AbstractViCareOAuthManager):
+class ViCareHomeAssistantOAuthManager(AbstractViCareOAuthManager):
     def __init__(self, oauth):
         self.oauth = oauth
 
