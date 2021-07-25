@@ -38,7 +38,7 @@ password = "password"
 
 service = ViCareServiceBuilder()
         .withCacheDuration(60)
-        .withCurcuit(0)
+        .withCircuit(0)
         .buildFromArgs(email, password, client_id, "token.save")
 t=GazBoiler(service)
 print(t.getDomesticHotWaterConfiguredTemperature()) 
