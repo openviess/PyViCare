@@ -30,13 +30,16 @@ import sys
 import logging
 sys.path.insert(0, 'PyViCare')
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareServiceFactory import ViCareServiceFactory
+from PyViCare.PyViCareServiceBuilder import ViCareServiceBuilder
 
 client_id = "INSERT CLIENT ID"
 email = "email@domain"
 password = "password"
 
-service = ViCareServiceFactory.buildFromArgs(email, password,"token.save", client_id, 0, 60)
+service = ViCareServiceBuilder()
+        .withCacheDuration(60)
+        .withCurcuit(0)
+        .buildFromArgs(email, password, client_id, "token.save")
 t=GazBoiler(service)
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())

@@ -37,7 +37,7 @@ class ViCareService:
     Note that currently, a new token is generate for each run.
     """
 
-    def __init__(self, oauth_manager, circuit=0):
+    def __init__(self, oauth_manager, circuit):
         self.oauth_manager = oauth_manager
         self.circuit = circuit
         self._getInstallations()
