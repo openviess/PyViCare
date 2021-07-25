@@ -1,4 +1,7 @@
+from PyViCare.PyViCareUtils import PyViCareRateLimitError
+from PyViCare.PyViCare import PyViCare
 from abc import abstractclassmethod
+from oauthlib.oauth2.rfc6749.errors import TokenExpiredError
 import requests
 import re
 import pickle
@@ -14,6 +17,8 @@ authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize'
 token_url = 'https://iam.viessmann.com/idp/v2/token'
 redirect_uri = "vicare://oauth-callback/everest"
 viessmann_scope = ["IoT User"]
+apiURLBase = 'https://api.viessmann.com/iot/v1'
+
 
 
 class AbstractViCareOAuthManager:
@@ -21,11 +26,55 @@ class AbstractViCareOAuthManager:
     def renewToken(self):
         return
 
-    def post(self, *args, **kwargs):
-        self.oauth.post(*args, **kwargs)
+    def get(self, url):
+        try:
+            logger.debug(self.oauth)
+            response = self.oauth_manager.get(apiURLBase + url).json()
+            logger.debug("Response to get request: "+str(response))
+            self.handleExpiredToken(response)
+            self.handleRateLimit(response)
+            return response
+        except TokenExpiredError:
+            self.renewToken()
+            return self.get(url)
 
-    def get(self, *args, **kwargs):
-        self.oauth.get(*args, **kwargs)
+    def handleExpiredToken(self, response):
+        if("error" in response and response["error"] == "EXPIRED TOKEN"):
+            raise TokenExpiredError(response)
+
+    def handleRateLimit(self, response):
+        if not PyViCare.Feature.raise_exception_on_rate_limit:
+            return
+
+        if("statusCode" in response and response["statusCode"] == 429):
+            raise PyViCareRateLimitError(response)
+
+    """POST URL using OAuth session. Automatically renew the token if needed
+    Parameters
+    ----------
+    url : str
+        URL to get
+    data : str
+        Data to post
+
+    Returns
+    -------
+    result: json
+        json representation of the answer
+    """
+
+    def post(self, url, data):
+        headers = {"Content-Type": "application/json",
+                   "Accept": "application/vnd.siren+json"}
+        try:
+            response = self.oauth_manager.post(
+                apiURLBase + url, data, headers=headers).json()
+            self.handleExpiredToken(response)
+            self.handleRateLimit(response)
+            return response
+        except TokenExpiredError:
+            self.oauth_manager.renewToken()
+            return self.post(url, data)
 
 
 class ViCareHomeAssistantOAuthManager(AbstractViCareOAuthManager):
