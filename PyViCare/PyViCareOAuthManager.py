@@ -38,7 +38,7 @@ class ViCareHomeAssistantOAuthManager(AbstractViCareOAuthManager):
 
 
 class ViCareOAuthManager(AbstractViCareOAuthManager):
-    def __init__(self, username, password, client_id, token_file=None):
+    def __init__(self, username, password, client_id, token_file):
         self.username = username
         self.password = password
         self.token_file = token_file
