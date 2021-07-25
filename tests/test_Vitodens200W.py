@@ -1,7 +1,6 @@
 import unittest
 from tests.ViCareServiceMock import ViCareServiceMock
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCare import PyViCareNotSupportedFeatureError
 import PyViCare.Feature
 
 class Vitodens200W(unittest.TestCase):

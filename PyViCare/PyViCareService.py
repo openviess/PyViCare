@@ -4,7 +4,7 @@ import logging
 # This is required because "requests" uses simplejson if installed on the system
 
 import simplejson as json
-from PyViCare.PyViCare import PyViCareNotSupportedFeatureError, PyViCareRateLimitError
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, PyViCareRateLimitError
 import PyViCare.Feature
 
 logger = logging.getLogger('ViCare')
