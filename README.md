@@ -33,7 +33,9 @@ from PyViCare.PyViCareGazBoiler import GazBoiler
 
 client_id = "INSERT CLIENT ID"
 
-t=GazBoiler("email@domain","password","token.save", 0, 60, client_id=client_id)
+oauth = ViCareOAuthManager("email@domain","password","token.save", client_id)
+
+t=GazBoiler(0, 60)
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
