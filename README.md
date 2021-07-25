@@ -36,11 +36,10 @@ client_id = "INSERT CLIENT ID"
 email = "email@domain"
 password = "password"
 
-service = ViCareServiceBuilder()
-        .withCacheDuration(60)
-        .withCircuit(0)
-        .buildFromArgs(email, password, client_id, "token.save")
-t=GazBoiler(service)
+vicare = PyViCare()
+vicare.init(email, password, client_id, "token.save")
+t = vicare.device().asGazBoiler()
+
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())

@@ -40,3 +40,5 @@ class PyViCareRateLimitError(Exception):
         super().__init__(self, msg)
         self.message = msg
         self.limitResetDate = limitResetDate
+
+
