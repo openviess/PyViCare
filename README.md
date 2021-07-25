@@ -38,7 +38,7 @@ password = "password"
 
 vicare = PyViCare()
 vicare.init(email, password, client_id, "token.save")
-t = vicare.device().asGazBoiler()
+t = vicare.device(0).asGazBoiler()
 
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())

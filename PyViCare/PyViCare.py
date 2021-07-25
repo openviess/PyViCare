@@ -60,7 +60,7 @@ class PyViCare:
         serial = installation["gateways"][0]["serial"]
         self.devices[0] = ViCareDeviceAccessor(id, serial, 0)
 
-    def device(self, index=0):
+    def device(self, index):
         return PyViCareDeviceConfig(self.__buildService(self.devices[index]))
 
 
