@@ -28,4 +28,3 @@ class ViCareServiceBuilder:
             return ViCareService(oauth_manager, self.circuitNumber)
         else:
             return ViCareCachedService(oauth_manager, self.circuitNumber)
-

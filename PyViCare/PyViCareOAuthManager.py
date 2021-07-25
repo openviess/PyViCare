@@ -164,4 +164,3 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             return s_token
         finally:
             binary_file.close()
-

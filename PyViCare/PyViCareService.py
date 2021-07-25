@@ -12,6 +12,7 @@ logger.addHandler(logging.NullHandler())
 
 apiURLBase = 'https://api.viessmann.com/iot/v1'
 
+
 def readFeature(entities, property_name):
     feature = next(
         (f for f in entities if f["feature"] == property_name), None)
@@ -31,6 +32,8 @@ def buildGetPropertyUrl(id, serial, circuit, property_name):
 
 
 """"Viessmann ViCare API Python tools"""
+
+
 class ViCareService:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
@@ -96,7 +99,8 @@ class ViCareService:
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
-            response = self.oauth_manager.post(url, data, headers=headers).json()
+            response = self.oauth_manager.post(
+                url, data, headers=headers).json()
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
             return response

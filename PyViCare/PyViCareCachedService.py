@@ -2,8 +2,9 @@ from datetime import datetime
 import threading
 from PyViCare.PyViCareService import apiURLBase, ViCareService, readFeature
 
+
 class ViCareCachedService(ViCareService):
-    
+
     def __init__(self, oauth_manager, cacheDuration, circuit):
         ViCareService.__init__(self, oauth_manager, circuit)
         self.cacheDuration = cacheDuration
@@ -11,12 +12,12 @@ class ViCareCachedService(ViCareService):
         self.cacheTime = None
         self.lock = threading.Lock()
 
-    def getProperty(self,property_name):
-        data = self.getOrUpdateCache()   
+    def getProperty(self, property_name):
+        data = self.getOrUpdateCache()
         entities = data["data"]
         return readFeature(entities, property_name)
 
-    def setProperty(self,property_name,action,data):
+    def setProperty(self, property_name, action, data):
         response = super().setProperty(property_name, action, data)
         self.clearCache()
         return response
@@ -25,7 +26,9 @@ class ViCareCachedService(ViCareService):
         self.lock.acquire()
         try:
             if self.isCacheInvalid():
-                url = apiURLBase + '/equipment/installations/' + str(self.id) + '/gateways/' + str(self.serial) + '/devices/0/features/'
+                url = apiURLBase + '/equipment/installations/' + \
+                    str(self.id) + '/gateways/' + \
+                    str(self.serial) + '/devices/0/features/'
                 self.cache = self.get(url)
                 self.cacheTime = datetime.now()
             return self.cache
