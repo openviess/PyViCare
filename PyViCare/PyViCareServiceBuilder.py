@@ -24,7 +24,7 @@ class ViCareServiceBuilder:
         return self.buildFromOAuthManager(manager)
 
     def buildFromOAuthManager(self, oauth_manager):
-        if self.cacheDuration == 0:
-            return ViCareService(oauth_manager, self.circuitNumber)
-        else:
+        if self.cacheDuration > 0:
             return ViCareCachedService(oauth_manager, self.circuitNumber)
+        else:
+            return ViCareService(oauth_manager, self.circuitNumber)
