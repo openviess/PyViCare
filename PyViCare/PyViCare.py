@@ -55,13 +55,13 @@ class PyViCare:
 
     def __loadInstallations(self):
         installations = self.oauth_manager.get("/equipment/installations?includeGateways=true")
-        installation = installations["data"][0]
-        id = installation["id"]
-        serial = installation["gateways"][0]["serial"]
-        self.devices[0] = ViCareDeviceAccessor(id, serial, 0)
+        self.devices = []
+        for installation in installations["data"]:
+            id = installation["id"]
+            for gateway in installation["gateways"]:
+                serial = gateway["serial"]
 
-    def device(self, index):
-        return PyViCareDeviceConfig(self.__buildService(self.devices[index]))
+                accessor = ViCareDeviceAccessor(id, serial, 0)
+                service = self.__buildService(accessor)
 
-
-    
+                self.devices.append(PyViCareDeviceConfig(service))
