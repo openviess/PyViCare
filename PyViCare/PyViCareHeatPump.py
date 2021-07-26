@@ -5,7 +5,7 @@ class HeatPump(Device):
     
     @handleNotSupported
     def getCompressorActive(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit))["properties"]["active"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit))["properties"]["active"]["value"]
 
     @handleNotSupported
     def getReturnTemperature(self):
@@ -13,31 +13,31 @@ class HeatPump(Device):
 
     @handleNotSupported
     def getCompressorStarts(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["starts"]["value"] 
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["starts"]["value"] 
 
     @handleNotSupported
     def getCompressorHours(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hours"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
     def getCompressorHoursLoadClass1(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hoursLoadClassOne"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["hoursLoadClassOne"]["value"]
 
     @handleNotSupported
     def getCompressorHoursLoadClass2(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hoursLoadClassTwo"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["hoursLoadClassTwo"]["value"]
 
     @handleNotSupported
     def getCompressorHoursLoadClass3(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hoursLoadClassThree"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["hoursLoadClassThree"]["value"]
 
     @handleNotSupported
     def getCompressorHoursLoadClass4(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hoursLoadClassFour"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["hoursLoadClassFour"]["value"]
 
     @handleNotSupported
     def getCompressorHoursLoadClass5(self):
-        return self.service.getProperty("heating.compressors." + str(self.service.circuit) + ".statistics")["properties"]["hoursLoadClassFive"]["value"]
+        return self.service.getProperty("heating.compressors." + str(self.circuit) + ".statistics")["properties"]["hoursLoadClassFive"]["value"]
 
     @handleNotSupported
     def getSupplyTemperaturePrimaryCircuit(self):

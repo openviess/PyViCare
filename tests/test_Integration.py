@@ -25,3 +25,4 @@ class Integration(unittest.TestCase):
 
             device = deviceConfig.asGeneric()
             print("Outside temperature: %5.1f" % device.getOutsideTemperature())
+            print("Modes: %s" % device.getModes())

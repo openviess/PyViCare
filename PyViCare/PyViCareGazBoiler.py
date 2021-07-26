@@ -109,15 +109,15 @@ class GazBoiler(Device):
 
     @handleNotSupported
     def getBurnerHours(self):
-        return self.service.getProperty("heating.burners." + str(self.service.circuit) + ".statistics")["properties"]["hours"]["value"]
+        return self.service.getProperty("heating.burners." + str(self.circuit) + ".statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
     def getBurnerStarts(self):
-        return self.service.getProperty("heating.burners." + str(self.service.circuit) + ".statistics")["properties"]["starts"]["value"]
+        return self.service.getProperty("heating.burners." + str(self.circuit) + ".statistics")["properties"]["starts"]["value"]
 
     @handleNotSupported
     def getBurnerModulation(self):
-        return self.service.getProperty("heating.burners." + str(self.service.circuit) + ".modulation")["properties"]["value"]["value"]
+        return self.service.getProperty("heating.burners." + str(self.circuit) + ".modulation")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getOneTimeCharge(self):

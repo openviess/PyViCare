@@ -26,6 +26,8 @@ def handleNotSupported(func):
 class PyViCareNotSupportedFeatureError(Exception):
     pass
 
+class PyViCareInvalidCredentialsError(Exception):
+    pass
 class PyViCareRateLimitError(Exception):
 
     def __init__(self, response):

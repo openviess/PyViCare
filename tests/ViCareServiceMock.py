@@ -1,4 +1,4 @@
-from PyViCare.PyViCareService import readFeature, buildSetPropertyUrl
+from PyViCare.PyViCareService import ViCareDeviceAccessor, readFeature, buildSetPropertyUrl
 from tests.helper import readJson
 
 class ViCareServiceMock:
@@ -10,7 +10,8 @@ class ViCareServiceMock:
         else:
             self.testData = rawInput
 
-        self.circuit = circuit
+        self.accessor = ViCareDeviceAccessor(
+                        '[id]', '[serial]', circuit)
         self.setPropertyData = []
 
     def getProperty(self, property_name):
@@ -19,7 +20,7 @@ class ViCareServiceMock:
 
     def setProperty(self, property_name, action, data):
         self.setPropertyData.append({
-            "url" : buildSetPropertyUrl('[id]', '[serial]', self.circuit, property_name, action),
+            "url" : buildSetPropertyUrl(self.accessor.id, self.accessor.serial, self.accessor.circuit, property_name, action),
             "property_name": property_name,
             "action" : action,
             "data" : data

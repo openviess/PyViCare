@@ -1,5 +1,5 @@
 from PyViCare import Feature
-from PyViCare.PyViCareUtils import PyViCareRateLimitError
+from PyViCare.PyViCareUtils import PyViCareInvalidCredentialsError, PyViCareRateLimitError
 from abc import abstractclassmethod
 from oauthlib.oauth2 import TokenExpiredError
 import requests
@@ -23,7 +23,7 @@ apiURLBase = 'https://api.viessmann.com/iot/v1'
 
 class AbstractViCareOAuthManager:
     def __init__(self):
-        self.oauth = None
+        return
 
     @abstractclassmethod
     def renewToken(self):
@@ -195,6 +195,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
                 logger.info("Token serialized to "+token_file)
             logger.info("New token created")
             return oauth
+        raise PyViCareInvalidCredentialsError()
 
     def renewToken(self):
         logger.info("Token expired, renewing")
