@@ -32,6 +32,10 @@ class PyViCareDeviceConfig:
     def asPelletsBoilder(self):
         return PelletsBoiler(self.service)
 
+    @property
+    def config(self):
+        return self.service.accessor
+
 class PyViCare:
     def __init__(self):
         self.cacheDuration = 60
