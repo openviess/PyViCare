@@ -30,7 +30,7 @@ class ViCareCachedService(ViCareService):
                     str(self.accessor.id) + '/gateways/' + \
                     str(self.accessor.serial) + '/devices/' + \
                     str(self.accessor.circuit) + '/features/'
-                self.cache = self.get(url)
+                self.cache = self.oauth_manager.get(url)
                 self.cacheTime = datetime.now()
             return self.cache
         finally:

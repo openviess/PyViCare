@@ -18,8 +18,10 @@ class Integration(unittest.TestCase):
 
         vicare = PyViCare()
         vicare.initWithCredentials(email, password, client_id, "token.save")
-        device = vicare.devices[0]
-
+        deviceConfig = vicare.devices[0]
         with self.capsys.disabled(): #allow print to showup in console
             print()
-            print(device.getModel())
+            print(deviceConfig.getModel())
+
+            device = deviceConfig.asGeneric()
+            print("Outside temperature: %5.1f" % device.getOutsideTemperature())
