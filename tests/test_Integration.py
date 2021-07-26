@@ -37,6 +37,7 @@ class Integration(unittest.TestCase):
                 try:
                     print("%s: %s" % (name, m()))
                 except TypeError: #skip methods which have more than one argument
+                    print("%s: Skipped" % name)
                     pass
                 except PyViCareNotSupportedFeatureError:
                     print("%s: Not Supported" % name)
