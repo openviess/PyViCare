@@ -2,8 +2,16 @@ import unittest
 import os
 import pytest
 from PyViCare.PyViCare import PyViCare
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
+
+def allGetterMethods(object):
+    for method_name in dir(object):
+        if method_name.startswith("get"):
+            method = getattr(object, method_name)
+            if callable(method):
+                yield (method_name, method)
 
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
@@ -21,9 +29,16 @@ class Integration(unittest.TestCase):
         deviceConfig = vicare.devices[0]
         with self.capsys.disabled(): #allow print to showup in console
             print()
-            print(deviceConfig.getModel())
-            print("Is online: %r" % deviceConfig.isOnline())
+            print("model: %s" % deviceConfig.getModel())
+            print("isOnline: %s" % deviceConfig.isOnline())
 
             device = deviceConfig.asGeneric()
-            print("Outside temperature: %r" % device.getOutsideTemperature())
-            print("Modes: %r" % device.getModes())
+            for (name, m) in allGetterMethods(device):
+                try:
+                    print("%s: %s" % (name, m()))
+                except TypeError: #skip methods which have more than one argument
+                    pass
+                except PyViCareNotSupportedFeatureError:
+                    print("%s: Not Supported" % name)
+
+    
