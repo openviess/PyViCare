@@ -44,7 +44,7 @@ class PyViCareDeviceConfig:
         return self.status == "Online"
 
 
-class PyViCare:
+class ViCare:
     def __init__(self):
         self.cacheDuration = 60
 
