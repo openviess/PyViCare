@@ -36,6 +36,7 @@ class PyViCareDeviceConfig:
     def config(self):
         return self.service.accessor
 
+
 class PyViCare:
     def __init__(self):
         self.cacheDuration = 60
@@ -44,7 +45,8 @@ class PyViCare:
         self.cacheDuration = cache_duration
 
     def init(self, username, password, client_id, token_file):
-        self.oauth_manager = ViCareOAuthManager(username, password, client_id, token_file)
+        self.oauth_manager = ViCareOAuthManager(
+            username, password, client_id, token_file)
         self.__loadInstallations()
 
     def init(self, oauth_manager):
@@ -58,7 +60,8 @@ class PyViCare:
             return ViCareService(self.oauth_manager, accessor)
 
     def __loadInstallations(self):
-        installations = self.oauth_manager.get("/equipment/installations?includeGateways=true")
+        installations = self.oauth_manager.get(
+            "/equipment/installations?includeGateways=true")
         self.devices = []
         for installation in installations["data"]:
             installation_id = installation["id"]
@@ -68,11 +71,12 @@ class PyViCare:
 
                 for device in gateway["devices"]:
                     if device["deviceType"] != "heating":
-                        continue #we are not interested in non heating devices
+                        continue  # we are not interested in non heating devices
 
                     device_id = device["id"]
 
-                    accessor = ViCareDeviceAccessor(installation_id, gateway_serial, device_id)
+                    accessor = ViCareDeviceAccessor(
+                        installation_id, gateway_serial, device_id)
                     service = self.__buildService(accessor)
 
                     self.devices.append(PyViCareDeviceConfig(service))
