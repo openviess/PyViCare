@@ -1,4 +1,4 @@
-import PyViCare.Feature
+from PyViCare import Feature
 import datetime
 
 # This decorator handles access to underlying JSON properties.
@@ -17,7 +17,7 @@ def handleNotSupported(func):
         try:
             return wrapper(*args, **kwargs)
         except PyViCareNotSupportedFeatureError:
-            if PyViCare.Feature.raise_exception_on_not_supported_device_feature:
+            if Feature.raise_exception_on_not_supported_device_feature:
                 raise
             else:
                 return "error"

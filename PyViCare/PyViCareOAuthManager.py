@@ -1,5 +1,5 @@
+from PyViCare import Feature
 from PyViCare.PyViCareUtils import PyViCareRateLimitError
-from PyViCare.PyViCare import PyViCare
 from abc import abstractclassmethod
 from oauthlib.oauth2.rfc6749.errors import TokenExpiredError
 import requests
@@ -22,6 +22,9 @@ apiURLBase = 'https://api.viessmann.com/iot/v1'
 
 
 class AbstractViCareOAuthManager:
+    def __init__(self):
+        self.oauth = None
+
     @abstractclassmethod
     def renewToken(self):
         return
@@ -29,7 +32,7 @@ class AbstractViCareOAuthManager:
     def get(self, url):
         try:
             logger.debug(self.oauth)
-            response = self.oauth_manager.get(apiURLBase + url).json()
+            response = self.oauth.get(apiURLBase + url).json()
             logger.debug("Response to get request: "+str(response))
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
@@ -43,7 +46,7 @@ class AbstractViCareOAuthManager:
             raise TokenExpiredError(response)
 
     def handleRateLimit(self, response):
-        if not PyViCare.Feature.raise_exception_on_rate_limit:
+        if not Feature.raise_exception_on_rate_limit:
             return
 
         if("statusCode" in response and response["statusCode"] == 429):
@@ -67,7 +70,7 @@ class AbstractViCareOAuthManager:
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
-            response = self.oauth_manager.post(
+            response = self.oauth.post(
                 apiURLBase + url, data, headers=headers).json()
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
