@@ -22,7 +22,8 @@ class Integration(unittest.TestCase):
         with self.capsys.disabled(): #allow print to showup in console
             print()
             print(deviceConfig.getModel())
+            print("Is online: %r" % deviceConfig.isOnline())
 
             device = deviceConfig.asGeneric()
-            print("Outside temperature: %5.1f" % device.getOutsideTemperature())
-            print("Modes: %s" % device.getModes())
+            print("Outside temperature: %r" % device.getOutsideTemperature())
+            print("Modes: %r" % device.getModes())
