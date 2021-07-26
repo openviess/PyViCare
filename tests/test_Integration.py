@@ -5,7 +5,7 @@ from PyViCare.PyViCare import PyViCare
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
 
-class Implementation(unittest.TestCase):
+class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
         self.capsys = capsys
@@ -19,6 +19,6 @@ class Implementation(unittest.TestCase):
         vicare.initWithCredentials(email, password, client_id, "token.save")
         device = vicare.devices[0]
 
-        with self.capsys.disabled():
+        with self.capsys.disabled(): 
             print()
             print(device.getModel())
