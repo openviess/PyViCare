@@ -11,8 +11,10 @@ from PyViCare.PyViCareService import ViCareService
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service):
+    def __init__(self, service, device_model, status):
         self.service = service
+        self.device_model = device_model
+        self.status = status
 
     def asGeneric(self):
         return Device(self.service)
@@ -32,9 +34,14 @@ class PyViCareDeviceConfig:
     def asPelletsBoilder(self):
         return PelletsBoiler(self.service)
 
-    @property
-    def config(self):
+    def getConfig(self):
         return self.service.accessor
+
+    def getModel(self):
+        return self.device_model
+
+    def isOnline(self):
+        return self.status == "Online"
 
 
 class PyViCare:
@@ -44,12 +51,12 @@ class PyViCare:
     def setCacheDuration(self, cache_duration):
         self.cacheDuration = cache_duration
 
-    def init(self, username, password, client_id, token_file):
+    def initWithCredentials(self, username, password, client_id, token_file):
         self.oauth_manager = ViCareOAuthManager(
             username, password, client_id, token_file)
         self.__loadInstallations()
 
-    def init(self, oauth_manager):
+    def initWithExternalOAuth(self, oauth_manager):
         self.oauth_manager = oauth_manager
         self.__loadInstallations()
 
@@ -74,9 +81,12 @@ class PyViCare:
                         continue  # we are not interested in non heating devices
 
                     device_id = device["id"]
+                    device_model = device["modelId"]
+                    status = device["status"]
 
                     accessor = ViCareDeviceAccessor(
                         installation_id, gateway_serial, device_id)
                     service = self.__buildService(accessor)
 
-                    self.devices.append(PyViCareDeviceConfig(service))
+                    self.devices.append(PyViCareDeviceConfig(
+                        service, device_model, status))

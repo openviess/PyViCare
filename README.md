@@ -37,9 +37,12 @@ email = "email@domain"
 password = "password"
 
 vicare = PyViCare()
-vicare.init(email, password, client_id, "token.save")
-t = vicare.devices[0].asGazBoiler()
+vicare.initWithCredentials(email, password, client_id, "token.save")
+device = vicare.devices[0]
+print(device.getModel())
+print("Online" if device.isOnline() else "Offline")
 
+t = device.asGazBoiler()
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
