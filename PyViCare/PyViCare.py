@@ -57,11 +57,18 @@ class PyViCare:
         installations = self.oauth_manager.get("/equipment/installations?includeGateways=true")
         self.devices = []
         for installation in installations["data"]:
-            id = installation["id"]
+            installation_id = installation["id"]
+
             for gateway in installation["gateways"]:
-                serial = gateway["serial"]
+                gateway_serial = gateway["serial"]
 
-                accessor = ViCareDeviceAccessor(id, serial, 0)
-                service = self.__buildService(accessor)
+                for device in gateway["devices"]:
+                    if device["deviceType"] != "heating":
+                        continue #we are not interested in non heating devices
 
-                self.devices.append(PyViCareDeviceConfig(service))
+                    device_id = device["id"]
+
+                    accessor = ViCareDeviceAccessor(installation_id, gateway_serial, device_id)
+                    service = self.__buildService(accessor)
+
+                    self.devices.append(PyViCareDeviceConfig(service))
