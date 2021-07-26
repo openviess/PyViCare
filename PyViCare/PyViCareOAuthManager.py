@@ -1,7 +1,7 @@
 from PyViCare import Feature
 from PyViCare.PyViCareUtils import PyViCareRateLimitError
 from abc import abstractclassmethod
-from oauthlib.oauth2.rfc6749.errors import TokenExpiredError
+from oauthlib.oauth2 import TokenExpiredError
 import requests
 import re
 import pickle
