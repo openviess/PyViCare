@@ -11,14 +11,15 @@ class Integration(unittest.TestCase):
         self.capsys = capsys
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
-    def test_impl(self):
-        vicare = PyViCare()
+    def test_PyViCare(self):
         email = os.getenv('PYVICARE_EMAIL', '')
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+
+        vicare = PyViCare()
         vicare.initWithCredentials(email, password, client_id, "token.save")
         device = vicare.devices[0]
 
-        with self.capsys.disabled(): 
+        with self.capsys.disabled(): #allow print to showup in console
             print()
             print(device.getModel())
