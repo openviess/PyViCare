@@ -23,7 +23,7 @@ apiURLBase = 'https://api.viessmann.com/iot/v1'
 
 class AbstractViCareOAuthManager:
     def __init__(self):
-        return
+        self.oauth = None
 
     @abstractclassmethod
     def renewToken(self):

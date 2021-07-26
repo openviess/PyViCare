@@ -29,13 +29,13 @@ Depending on the device, some features are not available/supported. This results
 import sys
 import logging
 sys.path.insert(0, 'PyViCare')
-from PyViCare.PyViCare import ViCare
+from PyViCare.PyViCare import PyViCare
 
 client_id = "INSERT CLIENT ID"
 email = "email@domain"
 password = "password"
 
-vicare = ViCare()
+vicare = PyViCare()
 vicare.initWithCredentials(email, password, client_id, "token.save")
 device = vicare.devices[0]
 print(device.getModel())
