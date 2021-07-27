@@ -24,22 +24,28 @@ class Integration(unittest.TestCase):
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
 
-        vicare = PyViCare()
-        vicare.initWithCredentials(email, password, client_id, "token.save")
-        deviceConfig = vicare.devices[0]
         with self.capsys.disabled(): #allow print to showup in console
             print()
-            print("model: %s" % deviceConfig.getModel())
-            print("isOnline: %s" % deviceConfig.isOnline())
 
-            device = deviceConfig.asGeneric()
-            for (name, m) in allGetterMethods(device):
-                try:
-                    print("%s: %s" % (name, m()))
-                except TypeError: #skip methods which have more than one argument
-                    print("%s: Skipped" % name)
-                    pass
-                except PyViCareNotSupportedFeatureError:
-                    print("%s: Not Supported" % name)
+            vicare = PyViCare()
+            vicare.initWithCredentials(email, password, client_id, "token.save")
+            
+            print("Found %s devices" % len(vicare.devices))
+
+            for deviceConfig in vicare.devices:
+                print()
+                print (f"{'model':<45}{deviceConfig.getModel()}")
+                print (f"{'isOnline':<45}{deviceConfig.isOnline()}")
+
+                device = deviceConfig.asGeneric()
+                for (name, method) in allGetterMethods(device):
+                    result = None
+                    try:
+                        result = method()
+                    except TypeError: #skip methods which have more than one argument
+                        result = "Skipped"
+                    except PyViCareNotSupportedFeatureError:
+                        result = "Not Supported"
+                    print (f"{name:<45}{result}")
 
     
