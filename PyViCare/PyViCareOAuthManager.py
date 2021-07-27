@@ -10,6 +10,7 @@ import pkce
 from pickle import UnpicklingError
 from requests_oauthlib import OAuth2Session
 import logging
+
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
@@ -18,7 +19,6 @@ token_url = 'https://iam.viessmann.com/idp/v2/token'
 redirect_uri = "vicare://oauth-callback/everest"
 viessmann_scope = ["IoT User"]
 apiURLBase = 'https://api.viessmann.com/iot/v1'
-
 
 
 class AbstractViCareOAuthManager:
@@ -85,7 +85,7 @@ class ViCareHomeAssistantOAuthManager(AbstractViCareOAuthManager):
         self.oauth = oauth
 
     def renewToken(self):
-        # todo
+        # todo: move this class to Home Assistant and implement the oauth flow
         return super().renewToken()
 
 
@@ -126,10 +126,10 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
                 logger.warning("Could not restore token")
 
         logger.debug("Token file argument not provided or file does not exist")
-        oauth = self.__getNewToken(self.username, self.password, token_file)
+        oauth = self.__createNewToken(self.username, self.password, token_file)
         return oauth
 
-    def __getNewToken(self, username, password, token_file=None):
+    def __createNewToken(self, username, password, token_file=None):
         """Create a new oAuth2 sessions
         Viessmann tokens expire after 3600s (60min)
         Parameters
@@ -169,51 +169,48 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             codestring = str(codestring)
             match = re.search("code=(.*)&", codestring)
             codestring = match.group(1)
-            logger.debug("Codestring : "+codestring)
+            logger.debug("Codestring : %s" % codestring)
 
             # workaround until requests-oauthlib supports PKCE flow
-            resp = requests.post(url=token_url,
-                                 data={
-                                     'grant_type': 'authorization_code',
-                                     'client_id': self.client_id,
-                                     'redirect_uri': redirect_uri,
-                                     'code': codestring,
-                                     'code_verifier': code_verifier
-                                 }
-                                 )
+            resp = requests.post(url=token_url, data={
+                'grant_type': 'authorization_code',
+                'client_id': self.client_id,
+                'redirect_uri': redirect_uri,
+                'code': codestring,
+                'code_verifier': code_verifier
+            }
+            )
             result = resp.json()
             token_dict = {
                 'access_token': result['access_token'],
                 'token_type': 'bearer'
             }
             oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
-            logger.debug("Token received: ")
-            logger.debug(oauth)
-            logger.debug("Start serial")
-            if token_file != None:
-                self._serializeToken(oauth.token, token_file)
-                logger.info("Token serialized to "+token_file)
+            logger.debug("Token received: %s" % oauth)
+            self._serializeToken(oauth.token, token_file)    
             logger.info("New token created")
             return oauth
         raise PyViCareInvalidCredentialsError()
 
     def renewToken(self):
         logger.info("Token expired, renewing")
-        self.oauth = self.__getNewToken(
+        self.oauth = self.__createNewToken(
             self.username, self.password, self.token_file)
         logger.info("Token renewed successfully")
 
     def _serializeToken(self, oauth, token_file):
-        binary_file = open(token_file, mode='wb')
-        try:
+        logger.debug("Start serial")
+        if token_file is None:
+            logger.debug("Skip serial, no file provided.")
+            return
+
+        with open(token_file, mode='wb') as binary_file:
             pickle.dump(oauth, binary_file)
-        finally:
-            binary_file.close()
+
+        logger.info("Token serialized to %s" % token_file)
+            
 
     def _deserializeToken(self, token_file):
-        binary_file = open(token_file, mode='rb')
-        try:
+        with open(token_file, mode='rb') as binary_file:
             s_token = pickle.load(binary_file)
             return s_token
-        finally:
-            binary_file.close()

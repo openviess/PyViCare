@@ -1,11 +1,13 @@
 from PyViCare import Feature
 import datetime
+from functools import wraps
 
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not 
 # exists (IndexError), the requested feature is not supported by 
 # the device.
 def handleNotSupported(func):
+    @wraps(func)
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -28,6 +30,7 @@ class PyViCareNotSupportedFeatureError(Exception):
 
 class PyViCareInvalidCredentialsError(Exception):
     pass
+
 class PyViCareRateLimitError(Exception):
 
     def __init__(self, response):

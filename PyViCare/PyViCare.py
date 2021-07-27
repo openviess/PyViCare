@@ -2,7 +2,10 @@ from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareCachedService import ViCareCachedService
+import logging
 
+logger = logging.getLogger('ViCare')
+logger.addHandler(logging.NullHandler())
 class PyViCare:
     def __init__(self):
         self.cacheDuration = 60
@@ -46,6 +49,8 @@ class PyViCare:
                     accessor = ViCareDeviceAccessor(
                         installation_id, gateway_serial, device_id)
                     service = self.__buildService(accessor)
+
+                    logger.info("Device found: %s" % device_model)
 
                     self.devices.append(PyViCareDeviceConfig(
                         service, device_model, status))

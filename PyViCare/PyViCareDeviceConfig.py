@@ -27,7 +27,7 @@ class PyViCareDeviceConfig:
     def asOilBoiler(self):
         return OilBoiler(self.service)
 
-    def asPelletsBoilder(self):
+    def asPelletsBoiler(self):
         return PelletsBoiler(self.service)
 
     def getConfig(self):
