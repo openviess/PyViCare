@@ -98,38 +98,13 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         self.oauth = self.__restore_oauth_session_from_token(token_file)
 
     def __restore_oauth_session_from_token(self, token_file):
-        """Create the necessary oAuth2 sessions
-        Restore it from token_file if existing (token dict)
-        Viessmann tokens expire after 3600s (60min)
-        Parameters
-        ----------
-        username : str
-            e-mail address
-        password : str
-            password
-        token_file: str
-            path to serialize the token (will restore if already existing)
+        existing_token = self._deserializeToken(token_file)
+        if existing_token is not None:
+            return OAuth2Session(self.client_id, token = existing_token)
 
-        Returns
-        -------
-        oauth:
-            oauth sessions object
-        """
-        if (token_file != None) and os.path.isfile(token_file):
-            try:
-                logger.info("Token file exists")
-                oauth = OAuth2Session(
-                    self.client_id, token=self._deserializeToken(token_file))
-                logger.info("Token restored from file")
-                return oauth
-            except UnpicklingError:
-                logger.warning("Could not restore token")
+        return self.__createNewSession(self.username, self.password, token_file)
 
-        logger.debug("Token file argument not provided or file does not exist")
-        oauth = self.__createNewToken(self.username, self.password, token_file)
-        return oauth
-
-    def __createNewToken(self, username, password, token_file=None):
+    def __createNewSession(self, username, password, token_file=None):
         """Create a new oAuth2 sessions
         Viessmann tokens expire after 3600s (60min)
         Parameters
@@ -186,7 +161,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
                 'token_type': 'bearer'
             }
             oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
-            logger.debug("Token received: %s" % oauth)
+            logger.debug("Token received: %s" % oauth.token)
             self._serializeToken(oauth.token, token_file)    
             logger.info("New token created")
             return oauth
@@ -194,7 +169,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
 
     def renewToken(self):
         logger.info("Token expired, renewing")
-        self.oauth = self.__createNewToken(
+        self.oauth = self.__createNewSession(
             self.username, self.password, self.token_file)
         logger.info("Token renewed successfully")
 
@@ -211,6 +186,17 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             
 
     def _deserializeToken(self, token_file):
-        with open(token_file, mode='rb') as binary_file:
-            s_token = pickle.load(binary_file)
-            return s_token
+        if (token_file == None) or not os.path.isfile(token_file):
+            logger.debug("Token file argument not provided or file does not exist")
+            return None
+
+        logger.info("Token file exists")
+        try:
+            with open(token_file, mode='rb') as binary_file:
+                s_token = pickle.load(binary_file)
+                logger.info("Token restored from file")
+                return s_token
+        except UnpicklingError:
+            pass
+        logger.warning("Could not restore token")
+        return None
