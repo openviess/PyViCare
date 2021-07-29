@@ -36,6 +36,7 @@ class Integration(unittest.TestCase):
         email = os.getenv('PYVICARE_EMAIL', '')
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+        device_type = os.getenv('PYVICARE_DEVICE_TYPE', 'Generic')
 
         with self.capsys.disabled():  # allow print to showup in console
             print()
@@ -46,12 +47,14 @@ class Integration(unittest.TestCase):
 
             print("Found %s devices" % len(vicare.devices))
 
+            print("Read as %s device" % device_type)
+
             for deviceConfig in vicare.devices:
                 print()
                 print(f"{'model':<45}{deviceConfig.getModel()}")
                 print(f"{'isOnline':<45}{deviceConfig.isOnline()}")
 
-                device = deviceConfig.asGeneric()
+                device = getattr(deviceConfig, "as%s" % device_type)()
                 for (name, method) in allGetterMethods(device):
                     result = None
                     try:
