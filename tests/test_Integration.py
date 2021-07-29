@@ -1,10 +1,12 @@
 import unittest
 import os
 import pytest
+import json
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
+
 
 def allGetterMethods(object):
     for method_name in dir(object):
@@ -12,6 +14,17 @@ def allGetterMethods(object):
             method = getattr(object, method_name)
             if callable(method):
                 yield (method_name, method)
+
+
+def prettyPrintResults(result):
+    # format dictionary and lists nicely
+    if isinstance(result, dict) or isinstance(result, list):
+        formatted = json.dumps(result, sort_keys=True, indent=2)
+        indented = formatted.replace('\n', '\n' + ' ' * 45)
+        return indented
+    else:
+        return result
+
 
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
@@ -24,28 +37,27 @@ class Integration(unittest.TestCase):
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
 
-        with self.capsys.disabled(): #allow print to showup in console
+        with self.capsys.disabled():  # allow print to showup in console
             print()
 
             vicare = PyViCare()
-            vicare.initWithCredentials(email, password, client_id, "token.save")
-            
+            vicare.initWithCredentials(
+                email, password, client_id, "token.save")
+
             print("Found %s devices" % len(vicare.devices))
 
             for deviceConfig in vicare.devices:
                 print()
-                print (f"{'model':<45}{deviceConfig.getModel()}")
-                print (f"{'isOnline':<45}{deviceConfig.isOnline()}")
+                print(f"{'model':<45}{deviceConfig.getModel()}")
+                print(f"{'isOnline':<45}{deviceConfig.isOnline()}")
 
                 device = deviceConfig.asGeneric()
                 for (name, method) in allGetterMethods(device):
                     result = None
                     try:
-                        result = method()
-                    except TypeError: #skip methods which have more than one argument
+                        result = prettyPrintResults(method())
+                    except TypeError:  # skip methods which have more than one argument
                         result = "Skipped"
                     except PyViCareNotSupportedFeatureError:
                         result = "Not Supported"
-                    print (f"{name:<45}{result}")
-
-    
+                    print(f"{name:<45}{result}")
