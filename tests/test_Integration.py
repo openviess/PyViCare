@@ -25,17 +25,6 @@ def prettyPrintResults(result):
     else:
         return result
 
-
-def useDeviceTypeFromString(device_config, device_type):
-    device_method = getattr(device_config, "as%s" % device_type)
-    if device_method == None:
-        print(
-            "Could not find device type method for: %s. Fallback to 'Generic'" % device_type)
-        return device_config.asGeneric()
-    else:
-        print("Read as %s device" % device_type)
-        return device_method()
-
 def enablePrintStatementsForTest(test_case):
     return test_case.capsys.disabled()
 
