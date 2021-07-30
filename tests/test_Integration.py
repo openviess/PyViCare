@@ -23,7 +23,18 @@ def prettyPrintResults(result):
         indented = formatted.replace('\n', '\n' + ' ' * 45)
         return indented
     else:
-        return result
+        return
+
+
+def useDeviceTypeFromString(device_config, device_type):
+    device_method = getattr(device_config, "as%s" % device_type)
+    if device_method == None:
+        print(
+            "Could not find device type method for: %s. Fallback to 'Generic'" % device_type)
+        return device_config.asGeneric()
+    else:
+        print("Read as %s device" % device_type)
+        return device_method()
 
 
 class Integration(unittest.TestCase):
@@ -36,6 +47,7 @@ class Integration(unittest.TestCase):
         email = os.getenv('PYVICARE_EMAIL', '')
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+        # method part defined on the PyViCareDeviceConfig type. e.g. as[value]() > asGeneric()
         device_type = os.getenv('PYVICARE_DEVICE_TYPE', 'Generic')
 
         with self.capsys.disabled():  # allow print to showup in console
@@ -47,14 +59,12 @@ class Integration(unittest.TestCase):
 
             print("Found %s devices" % len(vicare.devices))
 
-            print("Read as %s device" % device_type)
-
             for deviceConfig in vicare.devices:
                 print()
                 print(f"{'model':<45}{deviceConfig.getModel()}")
                 print(f"{'isOnline':<45}{deviceConfig.isOnline()}")
 
-                device = getattr(deviceConfig, "as%s" % device_type)()
+                device = useDeviceTypeFromString(deviceConfig, device_type)
                 for (name, method) in allGetterMethods(device):
                     result = None
                     try:
