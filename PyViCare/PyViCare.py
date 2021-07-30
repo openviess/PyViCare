@@ -31,8 +31,10 @@ class PyViCare:
     def __loadInstallations(self):
         installations = self.oauth_manager.get(
             "/equipment/installations?includeGateways=true")
-        self.devices = []
-        for installation in installations["data"]:
+        self.devices = list(self.__readInstallations(installations["data"]))
+
+    def __readInstallations(self, data):
+        for installation in data:
             installation_id = installation["id"]
 
             for gateway in installation["gateways"]:
@@ -52,5 +54,4 @@ class PyViCare:
 
                     logger.info("Device found: %s" % device_model)
 
-                    self.devices.append(PyViCareDeviceConfig(
-                        service, device_model, status))
+                    yield PyViCareDeviceConfig(service, device_model, status)
