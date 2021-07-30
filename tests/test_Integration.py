@@ -36,6 +36,8 @@ def useDeviceTypeFromString(device_config, device_type):
         print("Read as %s device" % device_type)
         return device_method()
 
+def enablePrintStatementsForTest(test_case):
+    return test_case.capsys.disabled()
 
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
@@ -50,7 +52,7 @@ class Integration(unittest.TestCase):
         # method part defined on the PyViCareDeviceConfig type. e.g. as[value]() > asGeneric()
         device_type = os.getenv('PYVICARE_DEVICE_TYPE', 'Generic')
 
-        with self.capsys.disabled():  # allow print to showup in console
+        with enablePrintStatementsForTest(self):  
             print()
 
             vicare = PyViCare()
@@ -74,3 +76,4 @@ class Integration(unittest.TestCase):
                     except PyViCareNotSupportedFeatureError:
                         result = "Not Supported"
                     print(f"{name:<45}{result}")
+            print()
