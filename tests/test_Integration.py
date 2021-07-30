@@ -50,7 +50,7 @@ class Integration(unittest.TestCase):
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
         # method part defined on the PyViCareDeviceConfig type. e.g. as[value]() > asGeneric()
-        device_type = os.getenv('PYVICARE_DEVICE_TYPE', 'Generic')
+        expected_device_type = os.getenv('PYVICARE_DEVICE_TYPE', '')
 
         with enablePrintStatementsForTest(self):  
             print()
@@ -65,8 +65,14 @@ class Integration(unittest.TestCase):
                 print()
                 print(f"{'model':<45}{deviceConfig.getModel()}")
                 print(f"{'isOnline':<45}{deviceConfig.isOnline()}")
+                
+                device = deviceConfig.asAutoDetectDevice()
+                auto_type_name = type(device).__name__
+                print(f"{'detected type':<45}{auto_type_name}")
 
-                device = useDeviceTypeFromString(deviceConfig, device_type)
+                if expected_device_type != '':
+                    self.assertEqual(auto_type_name, expected_device_type)
+                
                 for (name, method) in allGetterMethods(device):
                     result = None
                     try:
