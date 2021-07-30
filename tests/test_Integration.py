@@ -23,7 +23,7 @@ def prettyPrintResults(result):
         indented = formatted.replace('\n', '\n' + ' ' * 45)
         return indented
     else:
-        return
+        return result
 
 
 def useDeviceTypeFromString(device_config, device_type):
