@@ -41,7 +41,7 @@ device = vicare.devices[0]
 print(device.getModel())
 print("Online" if device.isOnline() else "Offline")
 
-t = device.asGazBoiler()
+t = device.asAutoDetectDevice()
 print(t.getDomesticHotWaterConfiguredTemperature()) 
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())

@@ -44,24 +44,20 @@ class PyViCareDeviceConfig:
         return self.status == "Online"
 
     def asAutoDetectDevice(self):
-        if re.search(r"Vitodens", self.device_model):
-            logger.info("detected %s as GazBoiler" % self.device_model)
-            return self.asGazBoiler()
-        if re.search(r"Vitovalor|Vitocharge|Vitobloc", self.device_model):
-            logger.info("detected %s as FuelCell" % self.device_model)
-            return self.asFuelCell()
-        if re.search(r"Vitocal", self.device_model):
-            logger.info("detected %s as HeatPump" % self.device_model)
-            return self.asHeatPump()
-        if re.search(r"Vitoladens|Vitoradial|Vitorondens", self.device_model):
-            logger.info("detected %s as OilBoiler" % self.device_model)
-            return self.asOilBoiler()
-        if re.search(r"Vitoligno", self.device_model):
-            logger.info("detected %s as PelletsBoiler" % self.device_model)
-            return self.asPelletsBoiler()
+        device_types = [
+            (self.asGazBoiler, r"Vitodens"),
+            (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo"),
+            (self.asHeatPump, r"Vitocal"),
+            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens"),
+            (self.asPelletsBoiler, r"Vitoligno")
+        ]
 
-        print("Could not auto detect %s. Use generic device." % self.device_model)
+        for (creator_method, type_name) in device_types:
+            if re.search(type_name, self.device_model):
+                logger.info("detected %s %s" %
+                            (self.device_model, creator_method.__name__))
+                return creator_method()
+
+        logger.info("Could not auto detect %s. Use generic device." %
+                    self.device_model)
         return self.asGeneric()
-
-
-
