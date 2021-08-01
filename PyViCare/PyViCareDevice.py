@@ -323,3 +323,14 @@ class Device:
     def getFrostProtectionActive(self):
         status = self.service.getProperty("heating.circuits." + str(self.circuit) + ".frostprotection")["properties"]["status"]["value"]
         return status == 'on'
+
+    @handleNotSupported
+    def getOneTimeCharge(self):
+        return self.service.getProperty("heating.dhw.oneTimeCharge")["properties"]["active"]["value"]
+
+    def deactivateOneTimeCharge(self):
+        return self.service.setProperty("heating.dhw.oneTimeCharge","deactivate","{}")
+
+    def activateOneTimeCharge(self):
+        return self.service.setProperty("heating.dhw.oneTimeCharge","activate","{}")
+
