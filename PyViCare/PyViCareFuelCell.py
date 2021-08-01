@@ -1,5 +1,5 @@
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCare import handleNotSupported
+from PyViCare.PyViCareUtils import handleNotSupported
 
 class FuelCell(GazBoiler):
 

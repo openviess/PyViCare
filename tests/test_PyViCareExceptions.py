@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from PyViCare.PyViCare import PyViCareRateLimitError, PyViCareRateLimitError
+from PyViCare.PyViCareUtils import PyViCareRateLimitError, PyViCareRateLimitError
 from tests.helper import readJson
 
 

@@ -1,42 +1,57 @@
-import PyViCare.Feature
-import datetime
+from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
+from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
+from PyViCare.PyViCareCachedService import ViCareCachedService
+import logging
 
-# This decorator handles access to underlying JSON properties.
-# If the property is not found (KeyError) or the index does not 
-# exists (IndexError), the requested feature is not supported by 
-# the device.
-def handleNotSupported(func):
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except (KeyError, IndexError):
-            raise PyViCareNotSupportedFeatureError(func.__name__)
+logger = logging.getLogger('ViCare')
+logger.addHandler(logging.NullHandler())
+class PyViCare:
+    def __init__(self):
+        self.cacheDuration = 60
 
-    #You can remove that wrapper after the feature flag gets removed entirely.
-    def feature_flag_wrapper(*args, **kwargs):
-        try:
-            return wrapper(*args, **kwargs)
-        except PyViCareNotSupportedFeatureError:
-            if PyViCare.Feature.raise_exception_on_not_supported_device_feature:
-                raise
-            else:
-                return "error"
-    return feature_flag_wrapper
+    def setCacheDuration(self, cache_duration):
+        self.cacheDuration = cache_duration
 
-class PyViCareNotSupportedFeatureError(Exception):
-    pass
+    def initWithCredentials(self, username, password, client_id, token_file):
+        self.oauth_manager = ViCareOAuthManager(
+            username, password, client_id, token_file)
+        self.__loadInstallations()
 
-class PyViCareRateLimitError(Exception):
+    def initWithExternalOAuth(self, oauth_manager):
+        self.oauth_manager = oauth_manager
+        self.__loadInstallations()
 
-    def __init__(self, response):
-        extended_payload = response["extendedPayload"]
-        name = extended_payload["name"]
-        requestCountLimit = extended_payload["requestCountLimit"]
-        limitReset = extended_payload["limitReset"]
-        limitResetDate = datetime.datetime.utcfromtimestamp(limitReset/1000)
+    def __buildService(self, accessor):
+        if self.cacheDuration > 0:
+            return ViCareCachedService(self.oauth_manager, accessor, self.cacheDuration)
+        else:
+            return ViCareService(self.oauth_manager, accessor)
 
-        msg = 'API rate limit '+name+' exceeded. Max '+str(requestCountLimit)+' calls in timewindow. Limit reset at '+limitResetDate.isoformat()+'.'
+    def __loadInstallations(self):
+        installations = self.oauth_manager.get(
+            "/equipment/installations?includeGateways=true")
+        self.devices = list(self.__readInstallations(installations["data"]))
 
-        super().__init__(self, msg)
-        self.message = msg
-        self.limitResetDate = limitResetDate
+    def __readInstallations(self, data):
+        for installation in data:
+            installation_id = installation["id"]
+
+            for gateway in installation["gateways"]:
+                gateway_serial = gateway["serial"]
+
+                for device in gateway["devices"]:
+                    if device["deviceType"] != "heating":
+                        continue  # we are not interested in non heating devices
+
+                    device_id = device["id"]
+                    device_model = device["modelId"]
+                    status = device["status"]
+
+                    accessor = ViCareDeviceAccessor(
+                        installation_id, gateway_serial, device_id)
+                    service = self.__buildService(accessor)
+
+                    logger.info("Device found: %s" % device_model)
+
+                    yield PyViCareDeviceConfig(service, device_model, status)

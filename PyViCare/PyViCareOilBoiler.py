@@ -1,5 +1,5 @@
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCare import handleNotSupported
+from PyViCare.PyViCareUtils import handleNotSupported
 
 class OilBoiler(Device):
 

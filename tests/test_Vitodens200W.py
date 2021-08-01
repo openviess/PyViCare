@@ -1,13 +1,12 @@
 import unittest
 from tests.ViCareServiceMock import ViCareServiceMock
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCare import PyViCareNotSupportedFeatureError
 import PyViCare.Feature
 
 class Vitodens200W(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock('response_Vitodens200W.json', 0)
-        self.device = GazBoiler(None, None, None, 0, 0, self.service)
+        self.device = GazBoiler(self.service)
         PyViCare.Feature.raise_exception_on_not_supported_device_feature = True
 
     def test_getBurnerActive(self):

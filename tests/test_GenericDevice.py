@@ -5,7 +5,7 @@ from PyViCare.PyViCareDevice import Device
 class GenericDevice(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock(None, 0, {})
-        self.device = Device(None, None, None, 0, 0, self.service)
+        self.device = Device(self.service)
         
     def test_activateComfort(self):
         self.device.activateComfort()
