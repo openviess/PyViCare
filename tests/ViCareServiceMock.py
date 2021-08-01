@@ -3,7 +3,7 @@ from tests.helper import readJson
 
 class ViCareServiceMock:
     
-    def __init__(self, filename, circuit, rawInput = None):
+    def __init__(self, filename, rawInput = None):
         if rawInput is None:
             testData = readJson(filename)
             self.testData = testData
@@ -11,7 +11,7 @@ class ViCareServiceMock:
             self.testData = rawInput
 
         self.accessor = ViCareDeviceAccessor(
-                        '[id]', '[serial]', circuit)
+                        '[id]', '[serial]', '[deviceid]')
         self.setPropertyData = []
 
     def getProperty(self, property_name):
@@ -20,7 +20,7 @@ class ViCareServiceMock:
 
     def setProperty(self, property_name, action, data):
         self.setPropertyData.append({
-            "url" : buildSetPropertyUrl(self.accessor.id, self.accessor.serial, self.accessor.circuit, property_name, action),
+            "url" : buildSetPropertyUrl(self.accessor, property_name, action),
             "property_name": property_name,
             "action" : action,
             "data" : data

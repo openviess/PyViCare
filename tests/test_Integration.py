@@ -61,14 +61,20 @@ class Integration(unittest.TestCase):
 
                 if expected_device_type != '':
                     self.assertEqual(auto_type_name, expected_device_type)
+
+
+                for circuit in device.getAvailableCircuits():
+                    device.setCircuit(circuit)
+                    print(f"{'Use circuit':<45}{circuit}")
+                    print()
                 
-                for (name, method) in allGetterMethods(device):
-                    result = None
-                    try:
-                        result = prettyPrintResults(method())
-                    except TypeError:  # skip methods which have more than one argument
-                        result = "Skipped"
-                    except PyViCareNotSupportedFeatureError:
-                        result = "Not Supported"
-                    print(f"{name:<45}{result}")
+                    for (name, method) in allGetterMethods(device):
+                        result = None
+                        try:
+                            result = prettyPrintResults(method())
+                        except TypeError:  # skip methods which have more than one argument
+                            result = "Skipped"
+                        except PyViCareNotSupportedFeatureError:
+                            result = "Not Supported"
+                        print(f"{name:<45}{result}")
             print()

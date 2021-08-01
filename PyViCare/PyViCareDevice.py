@@ -34,10 +34,11 @@ class Device:
     # TODO cirtcuit management should move at method level
     def __init__(self, service):
         self.service = service
+        self.circuit = 0
 
-    @property
-    def circuit(self):
-        return self.service.accessor.circuit
+    
+    def setCircuit(self, circuit):
+        self.circuit = circuit
         
     """ Set the active mode
     Parameters
@@ -337,4 +338,8 @@ class Device:
 
     def activateOneTimeCharge(self):
         return self.service.setProperty("heating.dhw.oneTimeCharge","activate","{}")
+
+    @handleNotSupported
+    def getAvailableCircuits(self):
+        return self.service.getProperty("heating.circuits")["properties"]["enabled"]["value"]
 
