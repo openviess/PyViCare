@@ -338,3 +338,10 @@ class Device:
     def activateOneTimeCharge(self):
         return self.service.setProperty("heating.dhw.oneTimeCharge","activate","{}")
 
+    def setDomesticHotWaterCirculationSchedule(self,schedule):
+        return self.service.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule","{\"newSchedule\":"+str(schedule)+"}")
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationSchedule(self):
+        return self.service.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"]["modes"]
+
