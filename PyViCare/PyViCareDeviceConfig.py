@@ -43,13 +43,14 @@ class PyViCareDeviceConfig:
     def isOnline(self):
         return self.status == "Online"
 
+    #see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
-            (self.asGazBoiler, r"Vitodens|VScot"),
+            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH"),
             (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo"),
-            (self.asHeatPump, r"Vitocal"),
-            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens"),
-            (self.asPelletsBoiler, r"Vitoligno")
+            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B"),
+            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH"),
+            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P")
         ]
 
         for (creator_method, type_name) in device_types:
