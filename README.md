@@ -2,6 +2,10 @@
 
 This library implements access to Viessmann devices by using the official API from the [Viessmann Developer Portal](https://developer.viessmann.com/).
 
+
+## Breaking changes in version 2.x
+
+* The API to access your device changed to a general `PyViCare` class. Use this class to load all available devices. See the example below for how you can use that.
 ## Breaking changes in version 1.x
 
 * The versions prior to 1.x used an inofficial API which stopped working on July, 15th 2021. All users need to migrate to version 1.0.0 to continue using the API.
@@ -18,17 +22,20 @@ We need help testing and improving PyViCare, since the maintainers only have spe
 
 Depending on the device, some features are not available/supported. This results in a raising of a `PyViCareNotSupportedFeatureError` if the dedicated method is called. This is most likely not a bug, but a limitation of the device itself.
 
+Tip: You can use Pythons [contextlib.suppress](https://docs.python.org/3/library/contextlib.html#contextlib.suppress) to handle it gracefully.
+
 ## Types of heatings
-- Use `GazBoiler` for gas heatings
-- Use `HeatPump` for heat pumps
-- Use `FuelCell` for fuel cells
+- Use `asGazBoiler` for gas heatings
+- Use `asHeatPump` for heat pumps
+- Use `asFuelCell` for fuel cells
+- Use `asPelletsBoiler` for pellets heatings
+- Use `asOilBoiler` for oil heatings
 
 ## Basic Usage:
 
 ```python
 import sys
 import logging
-sys.path.insert(0, 'PyViCare')
 from PyViCare.PyViCare import PyViCare
 
 client_id = "INSERT CLIENT ID"
@@ -103,7 +110,7 @@ Follow these steps to access the API in Postman:
     `https://api.viessmann.com/iot/v1/equipment/installations/{installationId}/gateways/{gatewaySerial}/devices/0/features`
 
 
-## Migrate to PyViCare 1.x
+## Migrate to PyViCare 1.x and above
 
 To use PyViCare 1.x, every user has to register and create their private API key. Follow these steps to create your API key:
 
