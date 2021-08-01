@@ -45,7 +45,7 @@ class PyViCareDeviceConfig:
 
     def asAutoDetectDevice(self):
         device_types = [
-            (self.asGazBoiler, r"Vitodens"),
+            (self.asGazBoiler, r"Vitodens|VScot"),
             (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo"),
             (self.asHeatPump, r"Vitocal"),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens"),
