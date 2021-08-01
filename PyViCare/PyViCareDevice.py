@@ -211,6 +211,10 @@ class Device:
         return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getDomesticHotWaterOutletTemperature(self):
+        return self.service.getProperty("heating.dhw.sensors.temperature.outlet")["properties"]["value"]["value"]
+
+    @handleNotSupported
     def getDomesticHotWaterPumpActive(self):
         status =  self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
         return status == 'on'
