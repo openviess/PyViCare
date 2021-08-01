@@ -16,18 +16,18 @@ def readFeature(entities, property_name):
     return feature
 
 
-def buildSetPropertyUrl(id, serial, circuit, property_name, action):
-    return '/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name+'/'+action
+def buildSetPropertyUrl(accessor, property_name, action):
+    return '/equipment/installations/'+str(accessor.id)+'/gateways/'+str(accessor.serial)+'/devices/'+str(accessor.device_id)+'/features/'+property_name+'/'+action
 
 
-def buildGetPropertyUrl(id, serial, circuit, property_name):
-    return '/equipment/installations/'+str(id)+'/gateways/'+str(serial)+'/devices/'+str(circuit)+'/features/'+property_name
+def buildGetPropertyUrl(accessor, property_name):
+    return '/equipment/installations/'+str(accessor.id)+'/gateways/'+str(accessor.serial)+'/devices/'+str(accessor.device_id)+'/features/'+property_name
 
 class ViCareDeviceAccessor:
-    def __init__(self, id, serial, circuit):
+    def __init__(self, id, serial, device_id):
         self.id = id
         self.serial = serial
-        self.circuit = circuit
+        self.device_id = device_id
 
 
 class ViCareService:
@@ -37,11 +37,11 @@ class ViCareService:
 
     def getProperty(self, property_name):
         url = buildGetPropertyUrl(
-            self.accessor.id, self.accessor.serial, self.accessor.circuit, property_name)
+            self.accessor, property_name)
         j = self.oauth_manager.get(url)
         return j
 
     def setProperty(self, property_name, action, data):
         url = buildSetPropertyUrl(
-            self.accessor.id, self.accessor.serial, self.accessor.circuit, property_name, action)
+            self.accessor, property_name, action)
         return self.oauth_manager.post(url, data)
