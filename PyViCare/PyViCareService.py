@@ -1,5 +1,5 @@
 import logging
-
+import json
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 logger = logging.getLogger('ViCare')
@@ -44,4 +44,6 @@ class ViCareService:
     def setProperty(self, property_name, action, data):
         url = buildSetPropertyUrl(
             self.accessor, property_name, action)
-        return self.oauth_manager.post(url, data)
+
+        post_data = data if isinstance(data, str) else json.dump(data)
+        return self.oauth_manager.post(url, post_data)

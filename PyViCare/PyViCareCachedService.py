@@ -1,8 +1,6 @@
 from datetime import datetime
 import threading
 from PyViCare.PyViCareService import ViCareService, readFeature
-import json
-
 
 class ViCareCachedService(ViCareService):
 
@@ -19,8 +17,7 @@ class ViCareCachedService(ViCareService):
         return readFeature(entities, property_name)
 
     def setProperty(self, property_name, action, data):
-        strData = data if isinstance(data, str) else json.dump(data)
-        response = super().setProperty(property_name, action, strData)
+        response = super().setProperty(property_name, action, data)
         self.clearCache()
         return response
 
