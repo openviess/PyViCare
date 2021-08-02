@@ -1,5 +1,5 @@
 import logging
-
+import json
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 logger = logging.getLogger('ViCare')
@@ -17,11 +17,11 @@ def readFeature(entities, property_name):
 
 
 def buildSetPropertyUrl(accessor, property_name, action):
-    return '/equipment/installations/'+str(accessor.id)+'/gateways/'+str(accessor.serial)+'/devices/'+str(accessor.device_id)+'/features/'+property_name+'/'+action
+    return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/{action}'
 
 
 def buildGetPropertyUrl(accessor, property_name):
-    return '/equipment/installations/'+str(accessor.id)+'/gateways/'+str(accessor.serial)+'/devices/'+str(accessor.device_id)+'/features/'+property_name
+    return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}'
 
 class ViCareDeviceAccessor:
     def __init__(self, id, serial, device_id):
@@ -44,4 +44,6 @@ class ViCareService:
     def setProperty(self, property_name, action, data):
         url = buildSetPropertyUrl(
             self.accessor, property_name, action)
-        return self.oauth_manager.post(url, data)
+
+        post_data = data if isinstance(data, str) else json.dump(data)
+        return self.oauth_manager.post(url, post_data)

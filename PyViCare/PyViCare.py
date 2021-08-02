@@ -6,6 +6,8 @@ import logging
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
+
+""""Viessmann ViCare API Python tools"""
 class PyViCare:
     def __init__(self):
         self.cacheDuration = 60
@@ -52,6 +54,6 @@ class PyViCare:
                         installation_id, gateway_serial, device_id)
                     service = self.__buildService(accessor)
 
-                    logger.info("Device found: %s" % device_model)
+                    logger.info(f"Device found: {device_model}")
 
                     yield PyViCareDeviceConfig(service, device_model, status)
