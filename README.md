@@ -5,7 +5,10 @@ This library implements access to Viessmann devices by using the official API fr
 
 ## Breaking changes in version 2.x
 
-* The API to access your device changed to a general `PyViCare` class. Use this class to load all available devices. See the example below for how you can use that.
+* The API to access your device changed to a general `PyViCare` class. Use this class to load all available devices. 
+* The API to access the heating circuit of the device has moved to the `Device` class. You can now access and iterate over all available circuits via `device.curcuits`. This allows to easily see which properties are depending on the circuit.
+
+See the example below for how you can use that.
 ## Breaking changes in version 1.x
 
 * The versions prior to 1.x used an inofficial API which stopped working on July, 15th 2021. All users need to migrate to version 1.0.0 to continue using the API.
@@ -53,27 +56,26 @@ print(t.getDomesticHotWaterConfiguredTemperature())
 print(t.getDomesticHotWaterStorageTemperature())
 print(t.getOutsideTemperature())
 print(t.getRoomTemperature())
-print(t.getSupplyTemperature())
-print(t.getOutsideTemperature()) 
-print(t.getHeatingCurveShift()) 
-print(t.getHeatingCurveSlope()) 
 print(t.getBoilerTemperature())
-print(t.getActiveProgram())
-print(t.getPrograms())
+print(t.setDomesticHotWaterTemperature(59)) 
 
-print(t.getCurrentDesiredTemperature())
-print(t.getMonthSinceLastService())
-print(t.getLastServiceDate())
+circuit = t.circuits[0] #select heating circuit
 
-print(t.getDesiredTemperatureForProgram("comfort"))
-print(t.getActiveMode())
+print(circuit.getSupplyTemperature())
+print(circuit.getHeatingCurveShift()) 
+print(circuit.getHeatingCurveSlope()) 
 
-print(t.getDesiredTemperatureForProgram("comfort"))
-print(t.setProgramTemperature("comfort",21))
-print(t.activateProgram("comfort"))
-print(t.setDomesticHotWaterTemperature(59))
-print(t.activateProgram("comfort"))
-print(t.deactivateComfort())
+print(circuit.getActiveProgram())
+print(circuit.getPrograms())
+
+print(circuit.getCurrentDesiredTemperature())
+print(circuit.getDesiredTemperatureForProgram("comfort"))
+print(circuit.getActiveMode())
+
+print(circuit.getDesiredTemperatureForProgram("comfort"))
+print(circuit.setProgramTemperature("comfort",21))
+print(circuit.activateProgram("comfort"))
+print(circuit.deactivateComfort())
 ```
 
 ## API Usage in Postman
