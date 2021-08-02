@@ -31,7 +31,7 @@ class Device:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
 
     def getCircuit(self, circuit):
-        return DeviceWithCircuit(self.service, circuit)
+        return DeviceWithCircuit(self, circuit)
 
     @handleNotSupported
     def getOutsideTemperature(self):
@@ -186,9 +186,10 @@ class Device:
         return self.service.getProperty("heating.circuits")["properties"]["enabled"]["value"]
 
 class DeviceWithCircuit:
-    def __init__(self, service, circuit):
-        self.service = service
+    def __init__(self, device, circuit):
+        self.service = device.service
         self.circuit = circuit
+        self.device = device
 
     @property
     def id(self):
@@ -315,11 +316,12 @@ class DeviceWithCircuit:
 
     @handleNotSupported
     def getDesiredTemperatureForProgram(self, program):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs."+program)["properties"]["temperature"]["value"]
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"]["temperature"]["value"]
 
     @handleNotSupported
     def getCurrentDesiredTemperature(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs."+self.getActiveProgram())["properties"]["temperature"]["value"]
+        active_programm = self.getActiveProgram()
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_programm}")["properties"]["temperature"]["value"]
 
 
     @handleNotSupported
@@ -350,13 +352,13 @@ class DeviceWithCircuit:
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self):
         if(not isSupported(self.getCurrentDesiredTemperature)
-                or not isSupported(self.getOutsideTemperature)
+                or not isSupported(self.device.getOutsideTemperature)
                 or not isSupported(self.getHeatingCurveShift)
                 or not isSupported(self.getHeatingCurveSlope)):
             return None
 
         inside = self.getCurrentDesiredTemperature()
-        outside = self.getOutsideTemperature()
+        outside = self.device.getOutsideTemperature()
         delta_outside_inside = (outside - inside)
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()

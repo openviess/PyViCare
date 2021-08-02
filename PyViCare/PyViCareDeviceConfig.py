@@ -59,6 +59,5 @@ class PyViCareDeviceConfig:
                             (self.device_model, creator_method.__name__))
                 return creator_method()
 
-        logger.info("Could not auto detect %s. Use generic device." %
-                    self.device_model)
+        logger.info(f"Could not auto detect {self.device_model}. Use generic device.")
         return self.asGeneric()

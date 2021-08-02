@@ -4,7 +4,7 @@ from PyViCare.PyViCareUtils import handleNotSupported
 class GazBoiler(Device):
 
     def getCircuit(self, circuit):
-        return GazBoilerWithCircuit(self.service, circuit)
+        return GazBoilerWithCircuit(self, circuit)
 
     @handleNotSupported
     def getBurnerActive(self):

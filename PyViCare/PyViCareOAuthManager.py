@@ -123,13 +123,12 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         """
         oauth = OAuth2Session(
             self.client_id, redirect_uri=redirect_uri, scope=viessmann_scope)
-        authorization_url, _ = oauth.authorization_url(authorizeURL)
+        base_authorization_url, _ = oauth.authorization_url(authorizeURL)
 
         # workaround until requests-oauthlib supports PKCE flow
         code_verifier, code_challenge = pkce.generate_pkce_pair()
-        authorization_url += '&code_challenge=' + \
-            code_challenge + '&code_challenge_method=S256'
-        logger.debug("Auth URL is: "+authorization_url)
+        authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
+        logger.debug(f"Auth URL is: {authorization_url}")
 
         try:
             header = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -144,7 +143,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             codestring = str(codestring)
             match = re.search("code=(.*)&", codestring)
             codestring = match.group(1)
-            logger.debug("Codestring : %s" % codestring)
+            logger.debug(f"Codestring : {codestring}")
 
             # workaround until requests-oauthlib supports PKCE flow
             resp = requests.post(url=token_url, data={
@@ -161,7 +160,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
                 'token_type': 'bearer'
             }
             oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
-            logger.debug("Token received: %s" % oauth.token)
+            logger.debug(f"Token received: {oauth.token}")
             self._serializeToken(oauth.token, token_file)    
             logger.info("New token created")
             return oauth
