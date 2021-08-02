@@ -11,34 +11,34 @@ class Vitocal200(unittest.TestCase):
         PyViCare.Feature.raise_exception_on_not_supported_device_feature = True
         
     def test_getCompressorActive(self):
-        self.assertEqual(self.device.getCompressorActive(), False)
+        self.assertEqual(self.device.circuit(0).getCompressorActive(), False)
 
     def test_getCompressorHours(self):
-        self.assertAlmostEqual(self.device.getCompressorHours(), 8583.2)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorHours(), 8583.2)
 
     def test_getCompressorStarts(self):
-        self.assertAlmostEqual(self.device.getCompressorStarts(), 3180)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorStarts(), 3180)
 
     def test_getCompressorHoursLoadClass1(self):
-        self.assertAlmostEqual(self.device.getCompressorHoursLoadClass1(), 227)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorHoursLoadClass1(), 227)
 
     def test_getCompressorHoursLoadClass2(self):
-        self.assertAlmostEqual(self.device.getCompressorHoursLoadClass2(), 3294)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorHoursLoadClass2(), 3294)
 
     def test_getCompressorHoursLoadClass3(self):
-        self.assertAlmostEqual(self.device.getCompressorHoursLoadClass3(), 3903)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorHoursLoadClass3(), 3903)
 
     def test_getCompressorHoursLoadClass4(self):
-        self.assertAlmostEqual(self.device.getCompressorHoursLoadClass4(), 506)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorHoursLoadClass4(), 506)
 
     def test_getCompressorHoursLoadClass5(self):
-        self.assertAlmostEqual(self.device.getCompressorHoursLoadClass5(), 461)
+        self.assertAlmostEqual(self.device.circuit(0).getCompressorHoursLoadClass5(), 461)
 
     def test_getHeatingCurveSlope(self):
-        self.assertAlmostEqual(self.device.getHeatingCurveSlope(), 0.3)
+        self.assertAlmostEqual(self.device.circuit(0).getHeatingCurveSlope(), 0.3)
 
     def test_getHeatingCurveShift(self):
-        self.assertAlmostEqual(self.device.getHeatingCurveShift(), -5)
+        self.assertAlmostEqual(self.device.circuit(0).getHeatingCurveShift(), -5)
 
     def test_getReturnTemperature(self):
         self.assertAlmostEqual(self.device.getReturnTemperature(), 27.5)
@@ -51,11 +51,11 @@ class Vitocal200(unittest.TestCase):
 
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco', 'fixed', 'normal', 'reduced', 'standby']
-        self.assertListEqual(self.device.getPrograms(), expected_programs)
+        self.assertListEqual(self.device.circuit(0).getPrograms(), expected_programs)
 
     def test_getModes(self):
         expected_modes = ['standby', 'dhw', 'dhwAndHeatingCooling']
-        self.assertListEqual(self.device.getModes(), expected_modes)
+        self.assertListEqual(self.device.circuit(0).getModes(), expected_modes)
 
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(self.device.getDomesticHotWaterCirculationPumpActive(), False)

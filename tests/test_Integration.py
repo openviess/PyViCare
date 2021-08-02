@@ -28,6 +28,17 @@ def prettyPrintResults(result):
 def enablePrintStatementsForTest(test_case):
     return test_case.capsys.disabled()
 
+def dumpResults(vicare_device):
+    for (name, method) in allGetterMethods(vicare_device):
+        result = None
+        try:
+            result = prettyPrintResults(method())
+        except TypeError:  # skip methods which have more than one argument
+            result = "Skipped"
+        except PyViCareNotSupportedFeatureError:
+            result = "Not Supported"
+        print(f"{name:<45}{result}")
+
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
@@ -62,19 +73,15 @@ class Integration(unittest.TestCase):
                 if expected_device_type != '':
                     self.assertEqual(auto_type_name, expected_device_type)
 
+                dumpResults(device)
+                print()
 
                 for circuit in device.getAvailableCircuits():
-                    device.setCircuit(circuit)
+                    
                     print(f"{'Use circuit':<45}{circuit}")
+                    circuit_device = device.circuit(circuit)
+                    dumpResults(circuit_device)
                     print()
                 
-                    for (name, method) in allGetterMethods(device):
-                        result = None
-                        try:
-                            result = prettyPrintResults(method())
-                        except TypeError:  # skip methods which have more than one argument
-                            result = "Skipped"
-                        except PyViCareNotSupportedFeatureError:
-                            result = "Not Supported"
-                        print(f"{name:<45}{result}")
+                    
             print()

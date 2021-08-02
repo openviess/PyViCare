@@ -6,6 +6,8 @@ import logging
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
+
+""""Viessmann ViCare API Python tools"""
 class PyViCare:
     def __init__(self):
         self.cacheDuration = 60
