@@ -3,7 +3,7 @@ from PyViCare.PyViCareUtils import handleNotSupported
 
 class GazBoiler(Device):
 
-    def circuit(self, circuit):
+    def getCircuit(self, circuit):
         return GazBoilerWithCircuit(self.service, circuit)
 
     @handleNotSupported

@@ -76,11 +76,9 @@ class Integration(unittest.TestCase):
                 dumpResults(device)
                 print()
 
-                for circuit in device.getAvailableCircuits():
-                    
-                    print(f"{'Use circuit':<45}{circuit}")
-                    circuit_device = device.circuit(circuit)
-                    dumpResults(circuit_device)
+                for circuit in device.circuits:
+                    print(f"{'Use circuit':<45}{circuit.id}")
+                    dumpResults(circuit)
                     print()
                 
                     

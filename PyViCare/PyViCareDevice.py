@@ -26,7 +26,11 @@ class Device:
     def __init__(self, service):
         self.service = service
 
-    def circuit(self, circuit):
+    @property
+    def circuits(self):
+        return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
+
+    def getCircuit(self, circuit):
         return DeviceWithCircuit(self.service, circuit)
 
     @handleNotSupported
@@ -185,6 +189,10 @@ class DeviceWithCircuit:
     def __init__(self, service, circuit):
         self.service = service
         self.circuit = circuit
+
+    @property
+    def id(self):
+        return self.circuit
 
     """ Set the active mode
     Parameters

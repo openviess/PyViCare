@@ -3,7 +3,7 @@ from PyViCare.PyViCareUtils import handleNotSupported
 
 class HeatPump(Device):
 
-    def circuit(self, circuit):
+    def getCircuit(self, circuit):
         return HeatPumpWithCircuit(self.service, circuit)
 
     @handleNotSupported
