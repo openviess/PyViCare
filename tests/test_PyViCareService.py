@@ -3,10 +3,7 @@ from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
 from unittest.mock import Mock
 
-
-
-
-class GenericDevice(unittest.TestCase):
+class PyViCareServiceTest(unittest.TestCase):
 
     def setUp(self):
         self.oauth_mock = Mock()
