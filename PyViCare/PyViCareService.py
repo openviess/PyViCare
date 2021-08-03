@@ -45,5 +45,5 @@ class ViCareService:
         url = buildSetPropertyUrl(
             self.accessor, property_name, action)
 
-        post_data = data if isinstance(data, str) else json.dump(data)
+        post_data = data if isinstance(data, str) else json.dumps(data)
         return self.oauth_manager.post(url, post_data)
