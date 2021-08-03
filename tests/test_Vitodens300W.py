@@ -1,6 +1,7 @@
 import unittest
 from tests.ViCareServiceMock import ViCareServiceMock
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 import PyViCare.Feature
 
 class Vitodens300W(unittest.TestCase):
@@ -12,14 +13,18 @@ class Vitodens300W(unittest.TestCase):
     def test_getBurnerActive(self):
         self.assertEqual(self.device.getBurnerActive(), True)
 
-#    def test_getBurnerStarts(self):
+    def test_getBurnerStarts(self):
 #        self.assertEqual(self.device.circuits[0].getBurnerStarts(), 8028)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.circuits[0].getBurnerStarts)
 
-#    def test_getBurnerHours(self):
+
+    def test_getBurnerHours(self):
 #        self.assertEqual(self.device.circuits[0].getBurnerHours(), 5570)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.circuits[0].getBurnerHours)
 
-#    def test_getBurnerModulation(self):
+    def test_getBurnerModulation(self):
 #        self.assertEqual(self.device.circuits[0].getBurnerModulation(), 11.1)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.circuits[0].getBurnerModulation)
 
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco', 'external', 'holiday', 'normal', 'reduced', 'standby']
@@ -39,8 +44,9 @@ class Vitodens300W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(self.device.getDomesticHotWaterCirculationPumpActive(), False)
 
-#    def test_getDomesticHotWaterOutletTemperature(self):
+    def test_getDomesticHotWaterOutletTemperature(self):
 #        self.assertEqual(self.device.getDomesticHotWaterOutletTemperature(), 58)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDomesticHotWaterOutletTemperature)
 
     def test_getDomesticHotWaterCirculationSchedule(self):
         self.assertEqual(self.device.getDomesticHotWaterCirculationSchedule(), ['on'])
