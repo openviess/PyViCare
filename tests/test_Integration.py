@@ -6,7 +6,7 @@ from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
-
+TOKEN_FILE = "token.save"
 
 def allGetterMethods(object):
     for method_name in dir(object):
@@ -52,7 +52,7 @@ class Integration(unittest.TestCase):
         email = os.getenv('PYVICARE_EMAIL', '')
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
-        # method part defined on the PyViCareDeviceConfig type. e.g. as[value]() > asGeneric()
+        # name of the device class. e.g. GazBoiler, HeatPump
         expected_device_type = os.getenv('PYVICARE_DEVICE_TYPE', '')
 
         with enablePrintStatementsForTest(self):
@@ -60,7 +60,7 @@ class Integration(unittest.TestCase):
 
             vicare = PyViCare()
             vicare.initWithCredentials(
-                email, password, client_id, "token.save")
+                email, password, client_id, TOKEN_FILE)
 
             print("Found %s devices" % len(vicare.devices))
 
