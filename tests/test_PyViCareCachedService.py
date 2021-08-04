@@ -24,26 +24,32 @@ class PyViCareCachedServiceTest(unittest.TestCase):
         self.assertRaises(PyViCareNotSupportedFeatureError, func)
 
     def test_getProperty_existing_cached(self):
-        #time 0 seconds
+        #time+0 seconds
         with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
             self.service.getProperty("someprop")
+            self.service.getProperty("someprop") 
 
-        #time 30 seconds
+        #time+30 seconds
         with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 30)):
             self.service.getProperty("someprop")
 
+        self.assertEqual(self.oauth_mock.get.call_count, 1)
         self.oauth_mock.get.assert_called_once_with('/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/')
 
-        self.oauth_mock.reset_mock()
-        
-        #time 70 seconds (more than CACHE_DURATION)
+        #time+70 seconds (must be more than CACHE_DURATION)
         with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 1, 10)):
             self.service.getProperty("someprop")
 
-        self.oauth_mock.get.assert_called_once_with('/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/')
-
+        self.assertEqual(self.oauth_mock.get.call_count, 2)
+   
     def test_setProperty_invalidateCache(self):
-        self.service.cache = 'exists'
-        self.service.setProperty("someprop", "doaction", {'name': 'abc'})
-        self.oauth_mock.post.assert_called_once_with('/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/doaction', '{"name": "abc"}')
-        self.assertIsNone(self.service.cache)
+        #freeze time
+        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
+            self.service.getProperty("someprop")
+            self.assertEqual(self.oauth_mock.get.call_count, 1)
+
+            self.service.setProperty("someotherprop", "doaction", {'name': 'abc'})
+            self.oauth_mock.post.assert_called_once_with('/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/doaction', '{"name": "abc"}')
+
+            self.service.getProperty("someprop")
+            self.assertEqual(self.oauth_mock.get.call_count, 2)

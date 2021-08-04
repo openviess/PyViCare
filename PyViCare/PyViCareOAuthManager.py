@@ -14,12 +14,11 @@ import logging
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize'
-token_url = 'https://iam.viessmann.com/idp/v2/token'
-redirect_uri = "vicare://oauth-callback/everest"
-viessmann_scope = ["IoT User"]
-apiURLBase = 'https://api.viessmann.com/iot/v1'
-
+AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v2/authorize'
+TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
+REDIRECT_URI = "vicare://oauth-callback/everest"
+VIESSMANN_SCOPE = ["IoT User"]
+API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
 class AbstractViCareOAuthManager:
     def __init__(self):
@@ -32,7 +31,7 @@ class AbstractViCareOAuthManager:
     def get(self, url):
         try:
             logger.debug(self.oauth)
-            response = self.oauth.get(apiURLBase + url).json()
+            response = self.oauth.get(f"{API_BASE_URL}{url}").json()
             logger.debug("Response to get request: "+str(response))
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
@@ -71,7 +70,7 @@ class AbstractViCareOAuthManager:
                    "Accept": "application/vnd.siren+json"}
         try:
             response = self.oauth.post(
-                apiURLBase + url, data, headers=headers).json()
+                f"{API_BASE_URL}{url}", data, headers=headers).json()
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
             return response
@@ -122,8 +121,8 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             oauth sessions object
         """
         oauth = OAuth2Session(
-            self.client_id, redirect_uri=redirect_uri, scope=viessmann_scope)
-        base_authorization_url, _ = oauth.authorization_url(authorizeURL)
+            self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE)
+        base_authorization_url, _ = oauth.authorization_url(AUTHORIZE_URL)
 
         # workaround until requests-oauthlib supports PKCE flow
         code_verifier, code_challenge = pkce.generate_pkce_pair()
@@ -146,10 +145,10 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             logger.debug(f"Codestring : {codestring}")
 
             # workaround until requests-oauthlib supports PKCE flow
-            resp = requests.post(url=token_url, data={
+            resp = requests.post(url=TOKEN_URL, data={
                 'grant_type': 'authorization_code',
                 'client_id': self.client_id,
-                'redirect_uri': redirect_uri,
+                'redirect_uri': REDIRECT_URI,
                 'code': codestring,
                 'code_verifier': code_verifier
             }
