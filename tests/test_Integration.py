@@ -1,3 +1,4 @@
+from PyViCare.PyViCareOAuthManager import ViCareBrowserOAuthManager
 import unittest
 import os
 import pytest
@@ -47,6 +48,11 @@ class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
         self.capsys = capsys
+
+
+    def test_abc(self):
+        with enablePrintStatementsForTest(self):
+            ViCareBrowserOAuthManager("id", "some.save")
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_PyViCare(self):

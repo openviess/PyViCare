@@ -5,8 +5,10 @@ from oauthlib.oauth2 import TokenExpiredError
 import requests
 import re
 import pickle
+import threading
 import os
 import pkce
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pickle import UnpicklingError
 from requests_oauthlib import OAuth2Session
 import logging
@@ -84,6 +86,45 @@ class AbstractViCareOAuthManager:
 class ViCareHomeAssistantOAuthManager(AbstractViCareOAuthManager):
     def __init__(self, oauth):
         self.oauth = oauth
+
+    def renewToken(self):
+        # todo: move this class to Home Assistant and implement the oauth flow
+        return super().renewToken()
+
+class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
+    class Serv(BaseHTTPRequestHandler):
+        def __init__(self, callback, *args):
+            self.callback = callback
+            BaseHTTPRequestHandler.__init__(self, *args)
+
+        def do_GET(self):
+            self.callback(self.path)
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            self.wfile.write("Success. You can close this browser window now.".encode("utf-8"))
+            
+    def __init__(self, client_id, token_file):
+        self.token_file = token_file
+        self.client_id = client_id
+        self.abc = self.__createNewSession()
+
+    def __createNewSession(self):
+        server = None
+        code = None
+        def callback(path):
+            nonlocal code
+            nonlocal server
+            match = re.match(r"(?P<uri>.+?)\?code=(?P<code>[^&]+)", path)
+            code = match.group('code')
+            threading.Thread(target=server.shutdown, daemon=True).start()
+
+        def handlerWithCallbackWrapper(*args):
+            ViCareBrowserOAuthManager.Serv(callback, *args)
+
+        server = HTTPServer(('localhost',5125), handlerWithCallbackWrapper)
+        server.serve_forever()
+        print(f"Code: {code}")
 
     def renewToken(self):
         # todo: move this class to Home Assistant and implement the oauth flow
