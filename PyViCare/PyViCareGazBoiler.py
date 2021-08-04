@@ -1,6 +1,7 @@
 from PyViCare.PyViCareDevice import Device, DeviceWithCircuit
 from PyViCare.PyViCareUtils import handleNotSupported
 
+
 class GazBoiler(Device):
 
     def getCircuit(self, circuit):
@@ -110,6 +111,7 @@ class GazBoiler(Device):
     def getPowerConsumptionThisYear(self):
         return self.service.getProperty("heating.power.consumption")["properties"]["year"]["value"][0]
 
+
 class GazBoilerWithCircuit(DeviceWithCircuit):
 
     @handleNotSupported
@@ -123,6 +125,3 @@ class GazBoilerWithCircuit(DeviceWithCircuit):
     @handleNotSupported
     def getBurnerModulation(self):
         return self.service.getProperty(f"heating.burners.{self.circuit}.modulation")["properties"]["value"]["value"]
-
-
-

@@ -1,6 +1,7 @@
 from PyViCare.PyViCareDevice import Device, DeviceWithCircuit
 from PyViCare.PyViCareUtils import handleNotSupported
 
+
 class HeatPump(Device):
 
     def getCircuit(self, circuit):
@@ -18,11 +19,12 @@ class HeatPump(Device):
     def getReturnTemperaturePrimaryCircuit(self):
         return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
 
+
 class HeatPumpWithCircuit(DeviceWithCircuit):
 
     @handleNotSupported
     def getCompressorStarts(self):
-        return self.service.getProperty(f"heating.compressors.{self.circuit}.statistics")["properties"]["starts"]["value"] 
+        return self.service.getProperty(f"heating.compressors.{self.circuit}.statistics")["properties"]["starts"]["value"]
 
     @handleNotSupported
     def getCompressorHours(self):

@@ -6,6 +6,7 @@ from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
+TOKEN_FILE = "token.save"
 
 
 def allGetterMethods(object):
@@ -25,8 +26,10 @@ def prettyPrintResults(result):
     else:
         return result
 
+
 def enablePrintStatementsForTest(test_case):
     return test_case.capsys.disabled()
+
 
 def dumpResults(vicare_device):
     for (name, method) in allGetterMethods(vicare_device):
@@ -39,6 +42,7 @@ def dumpResults(vicare_device):
             result = "Not Supported"
         print(f"{name:<45}{result}")
 
+
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
@@ -49,15 +53,15 @@ class Integration(unittest.TestCase):
         email = os.getenv('PYVICARE_EMAIL', '')
         password = os.getenv('PYVICARE_PASSWORD', '')
         client_id = os.getenv('PYVICARE_CLIENT_ID', '')
-        # method part defined on the PyViCareDeviceConfig type. e.g. as[value]() > asGeneric()
+        # name of the device class. e.g. GazBoiler, HeatPump
         expected_device_type = os.getenv('PYVICARE_DEVICE_TYPE', '')
 
-        with enablePrintStatementsForTest(self):  
+        with enablePrintStatementsForTest(self):
             print()
 
             vicare = PyViCare()
             vicare.initWithCredentials(
-                email, password, client_id, "token.save")
+                email, password, client_id, TOKEN_FILE)
 
             print("Found %s devices" % len(vicare.devices))
 
@@ -65,7 +69,7 @@ class Integration(unittest.TestCase):
                 print()
                 print(f"{'model':<45}{deviceConfig.getModel()}")
                 print(f"{'isOnline':<45}{deviceConfig.isOnline()}")
-                
+
                 device = deviceConfig.asAutoDetectDevice()
                 auto_type_name = type(device).__name__
                 print(f"{'detected type':<45}{auto_type_name}")
@@ -80,6 +84,5 @@ class Integration(unittest.TestCase):
                     print(f"{'Use circuit':<45}{circuit.id}")
                     dumpResults(circuit)
                     print()
-                
-                    
+
             print()

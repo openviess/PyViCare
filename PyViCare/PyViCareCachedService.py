@@ -2,6 +2,14 @@ from datetime import datetime
 import threading
 from PyViCare.PyViCareService import ViCareService, readFeature
 
+# class is used to replace logic in unittest
+
+
+class ViCareTimer:
+    def now(self):
+        return datetime.now()
+
+
 class ViCareCachedService(ViCareService):
 
     def __init__(self, oauth_manager, accessor, cacheDuration):
@@ -22,23 +30,17 @@ class ViCareCachedService(ViCareService):
         return response
 
     def getOrUpdateCache(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             if self.isCacheInvalid():
                 url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
                 self.cache = self.oauth_manager.get(url)
-                self.cacheTime = datetime.now()
+                self.cacheTime = ViCareTimer().now()
             return self.cache
-        finally:
-            self.lock.release()
 
     def isCacheInvalid(self):
-        return self.cache is None or self.cacheTime is None or (datetime.now() - self.cacheTime).seconds > self.cacheDuration
+        return self.cache is None or self.cacheTime is None or (ViCareTimer().now() - self.cacheTime).seconds > self.cacheDuration
 
     def clearCache(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             self.cache = None
             self.cacheTime = None
-        finally:
-            self.lock.release()
