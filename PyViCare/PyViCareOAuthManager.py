@@ -125,46 +125,44 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE)
         base_authorization_url, _ = oauth.authorization_url(AUTHORIZE_URL)
 
-        # workaround until requests-oauthlib supports PKCE flow
         code_verifier, code_challenge = pkce.generate_pkce_pair()
         authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
         logger.debug(f"Auth URL is: {authorization_url}")
 
-        try:
-            header = {'Content-Type': 'application/x-www-form-urlencoded'}
-            response = requests.post(
-                authorization_url, headers=header, auth=(username, password))
-            logger.warning(
-                "Received an HTML answer from the server during auth, this is not normal:")
-            logger.debug(response.content)
-        except requests.exceptions.InvalidSchema as e:
-            # capture the error, which contains the code the authorization code and put this in to codestring
-            codestring = "{0}".format(str(e.args[0])).encode("utf-8")
-            codestring = str(codestring)
-            match = re.search("code=(.*)&", codestring)
-            codestring = match.group(1)
-            logger.debug(f"Codestring : {codestring}")
+        header = {'Content-Type': 'application/x-www-form-urlencoded'}
+        response = requests.post(
+            authorization_url, headers=header, auth=(username, password), allow_redirects=False)
 
-            # workaround until requests-oauthlib supports PKCE flow
-            resp = requests.post(url=TOKEN_URL, data={
-                'grant_type': 'authorization_code',
-                'client_id': self.client_id,
-                'redirect_uri': REDIRECT_URI,
-                'code': codestring,
-                'code_verifier': code_verifier
-            }
-            )
-            result = resp.json()
-            token_dict = {
-                'access_token': result['access_token'],
-                'token_type': 'bearer'
-            }
-            oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
-            logger.debug(f"Token received: {oauth.token}")
-            self._serializeToken(oauth.token, token_file)
-            logger.info("New token created")
-            return oauth
-        raise PyViCareInvalidCredentialsError()
+        if 'Location' not in response.headers:
+            logger.debug(f'Response: {response}')
+            raise PyViCareInvalidCredentialsError()
+
+        redirect_location = response.headers['Location']
+        logger.debug(f"Redirect location is: {redirect_location}")
+        match = re.match(
+            r"(?P<uri>.+?)\?code=(?P<code>.+?)&state=", redirect_location)
+        if match is None or match.group('uri') != REDIRECT_URI:
+            raise PyViCareInvalidCredentialsError()
+
+        code = match.group('code')
+        result = requests.post(url=TOKEN_URL, data={
+            'grant_type': 'authorization_code',
+            'client_id': self.client_id,
+            'redirect_uri': REDIRECT_URI,
+            'code': code,
+            'code_verifier': code_verifier
+        }
+        ).json()
+
+        token_dict = {
+            'access_token': result['access_token'],
+            'token_type': 'bearer'
+        }
+        oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
+        logger.debug(f"Token received: {oauth.token}")
+        self._serializeToken(oauth.token, token_file)
+        logger.info("New token created")
+        return oauth
 
     def renewToken(self):
         logger.info("Token expired, renewing")
