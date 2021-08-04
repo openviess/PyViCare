@@ -8,6 +8,7 @@ from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
 TOKEN_FILE = "token.save"
 
+
 def allGetterMethods(object):
     for method_name in dir(object):
         if method_name.startswith("get"):
