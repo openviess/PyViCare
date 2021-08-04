@@ -76,7 +76,7 @@ class AbstractViCareOAuthManager:
             self.handleRateLimit(response)
             return response
         except TokenExpiredError:
-            self.oauth_manager.renewToken()
+            self.renewToken()
             return self.post(url, data)
 
 
