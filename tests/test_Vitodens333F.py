@@ -51,9 +51,9 @@ class Vitodens333F(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterOutletTemperature(), 29.8)
 
-    def test_getDomesticHotWaterCirculationSchedule(self):
+    def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterCirculationSchedule(), ['on'])
+            self.device.getDomesticHotWaterCirculationScheduleModes(), ['on'])
 
     def test_getOutsideTemperature(self):
         self.assertEqual(

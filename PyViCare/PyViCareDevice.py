@@ -53,13 +53,12 @@ class Device:
         currentDateTime = datetime.now()
         currentTime = currentDateTime.time()
 
-        try:
-            daySchedule = schedule[VICARE_DAYS[currentDateTime.weekday()]]
-        except KeyError:  # no schedule for day configured
-            return None
+        current_day = VICARE_DAYS[currentDateTime.weekday()]
+        if current_day not in schedule:
+            return None 
 
         mode = None
-        for s in daySchedule:
+        for s in schedule[current_day]:
             startTime = time.fromisoformat(s["start"])
             endTime = time.fromisoformat(s["end"])
             if startTime <= currentTime and currentTime <= endTime:
@@ -181,8 +180,46 @@ class Device:
         return self.service.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule", {'newSchedule': schedule})
 
     @handleNotSupported
-    def getDomesticHotWaterCirculationSchedule(self):
+    def getDomesticHotWaterCirculationScheduleModes(self):
         return self.service.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"]["modes"]
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationSchedule(self):
+        schedule = self.service.getProperty("heating.dhw.pumps.circulation.schedule")
+        
+        properties = schedule["properties"]
+        command = schedule["commands"]
+        return {
+            "active": properties["active"]["value"],
+            "default_mode": command["setSchedule"]["params"]["newSchedule"]["constraints"]["defaultMode"],
+            "mon": properties["entries"]["value"]["mon"],
+            "tue": properties["entries"]["value"]["tue"],
+            "wed": properties["entries"]["value"]["wed"],
+            "thu": properties["entries"]["value"]["thu"],
+            "fri": properties["entries"]["value"]["fri"],
+            "sat": properties["entries"]["value"]["sat"],
+            "sun": properties["entries"]["value"]["sun"]
+        }
+
+    def getDomesticHotWaterCirculationMode(self):
+        schedule = self.getDomesticHotWaterCirculationSchedule()
+        if schedule == "error" or schedule["active"] != True:
+            return None
+
+        currentDateTime = datetime.now()
+        currentTime = currentDateTime.time()
+
+        current_day = VICARE_DAYS[currentDateTime.weekday()]
+        if current_day not in schedule:
+            return None # no schedule for day configured
+
+        for s in schedule[current_day]:
+            startTime = time.fromisoformat(s["start"])
+            endTime = time.fromisoformat(s["end"])
+            if startTime <= currentTime and currentTime <= endTime:
+                return s["mode"]
+        return schedule['default_mode']
+
 
     @handleNotSupported
     def getAvailableCircuits(self):
