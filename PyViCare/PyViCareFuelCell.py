@@ -1,6 +1,7 @@
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareUtils import handleNotSupported
 
+
 class FuelCell(GazBoiler):
 
     @handleNotSupported
@@ -16,7 +17,7 @@ class FuelCell(GazBoiler):
     @handleNotSupported
     def getOperatingModesHeatControlled(self):
         # True or False
-        return self.service.getProperty("heating.fuelCell.operating.modes.heatControlled")["properties"]["active"]["value"]    
+        return self.service.getProperty("heating.fuelCell.operating.modes.heatControlled")["properties"]["active"]["value"]
 
     @handleNotSupported
     def getOperatingModesEcological(self):

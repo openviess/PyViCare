@@ -25,8 +25,10 @@ def prettyPrintResults(result):
     else:
         return result
 
+
 def enablePrintStatementsForTest(test_case):
     return test_case.capsys.disabled()
+
 
 def dumpResults(vicare_device):
     for (name, method) in allGetterMethods(vicare_device):
@@ -38,6 +40,7 @@ def dumpResults(vicare_device):
         except PyViCareNotSupportedFeatureError:
             result = "Not Supported"
         print(f"{name:<45}{result}")
+
 
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
@@ -52,7 +55,7 @@ class Integration(unittest.TestCase):
         # method part defined on the PyViCareDeviceConfig type. e.g. as[value]() > asGeneric()
         expected_device_type = os.getenv('PYVICARE_DEVICE_TYPE', '')
 
-        with enablePrintStatementsForTest(self):  
+        with enablePrintStatementsForTest(self):
             print()
 
             vicare = PyViCare()
@@ -65,7 +68,7 @@ class Integration(unittest.TestCase):
                 print()
                 print(f"{'model':<45}{deviceConfig.getModel()}")
                 print(f"{'isOnline':<45}{deviceConfig.isOnline()}")
-                
+
                 device = deviceConfig.asAutoDetectDevice()
                 auto_type_name = type(device).__name__
                 print(f"{'detected type':<45}{auto_type_name}")
@@ -80,6 +83,5 @@ class Integration(unittest.TestCase):
                     print(f"{'Use circuit':<45}{circuit.id}")
                     dumpResults(circuit)
                     print()
-                
-                    
+
             print()

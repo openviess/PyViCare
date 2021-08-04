@@ -20,6 +20,7 @@ REDIRECT_URI = "vicare://oauth-callback/everest"
 VIESSMANN_SCOPE = ["IoT User"]
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
+
 class AbstractViCareOAuthManager:
     def __init__(self):
         self.oauth = None
@@ -99,7 +100,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
     def __restore_oauth_session_from_token(self, token_file):
         existing_token = self._deserializeToken(token_file)
         if existing_token is not None:
-            return OAuth2Session(self.client_id, token = existing_token)
+            return OAuth2Session(self.client_id, token=existing_token)
 
         return self.__createNewSession(self.username, self.password, token_file)
 
@@ -160,7 +161,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             }
             oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
             logger.debug(f"Token received: {oauth.token}")
-            self._serializeToken(oauth.token, token_file)    
+            self._serializeToken(oauth.token, token_file)
             logger.info("New token created")
             return oauth
         raise PyViCareInvalidCredentialsError()
@@ -181,11 +182,11 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             pickle.dump(oauth, binary_file)
 
         logger.info("Token serialized to %s" % token_file)
-            
 
     def _deserializeToken(self, token_file):
         if (token_file == None) or not os.path.isfile(token_file):
-            logger.debug("Token file argument not provided or file does not exist")
+            logger.debug(
+                "Token file argument not provided or file does not exist")
             return None
 
         logger.info("Token file exists")

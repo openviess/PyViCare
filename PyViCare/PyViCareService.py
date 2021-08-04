@@ -23,6 +23,7 @@ def buildSetPropertyUrl(accessor, property_name, action):
 def buildGetPropertyUrl(accessor, property_name):
     return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}'
 
+
 class ViCareDeviceAccessor:
     def __init__(self, id, serial, device_id):
         self.id = id
