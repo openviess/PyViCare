@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime, time
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -13,7 +13,7 @@ def isSupported(method):
     try:
         result = method()
         return result != 'error'
-    except:
+    except PyViCareNotSupportedFeatureError:
         return False
 
 
@@ -47,7 +47,7 @@ class Device:
 
     def getDomesticHotWaterActiveMode(self):
         schedule = self.getDomesticHotWaterSchedule()
-        if schedule == "error" or schedule["active"] != True:
+        if schedule == "error" or schedule["active"] is not True:
             return None
 
         currentDateTime = datetime.now()
@@ -71,7 +71,7 @@ class Device:
     def getDomesticHotWaterDesiredTemperature(self):
         mode = self.getDomesticHotWaterActiveMode()
 
-        if mode != None:
+        if mode is not None:
             if mode == VICARE_DHW_TEMP2:
                 return self.getDomesticHotWaterConfiguredTemperature2()
             else:
@@ -139,7 +139,7 @@ class Device:
     """
 
     def setDomesticHotWaterTemperature2(self, temperature):
-        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", "{\"temperature\":"+str(temperature)+"}")
+        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", {"temperature": temperature})
 
     @handleNotSupported
     def getDomesticHotWaterSchedule(self):
@@ -413,7 +413,7 @@ class DeviceWithCircuit:
         delta_outside_inside = (outside - inside)
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
-        targetSupply = inside + shift - slope * delta_outside_inside * \
-            (1.4347 + 0.021 * delta_outside_inside + 247.9 *
-             pow(10, -6) * pow(delta_outside_inside, 2))
+        targetSupply = (inside + shift - slope * delta_outside_inside
+                        * (1.4347 + 0.021 * delta_outside_inside + 247.9
+                            * pow(10, -6) * pow(delta_outside_inside, 2)))
         return round(targetSupply, 1)

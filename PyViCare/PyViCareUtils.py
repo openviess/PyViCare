@@ -47,7 +47,7 @@ class PyViCareRateLimitError(Exception):
         name = extended_payload["name"]
         requestCountLimit = extended_payload["requestCountLimit"]
         limitReset = extended_payload["limitReset"]
-        limitResetDate = datetime.datetime.utcfromtimestamp(limitReset/1000)
+        limitResetDate = datetime.datetime.utcfromtimestamp(limitReset / 1000)
 
         msg = f'API rate limit {name} exceeded. Max {requestCountLimit} calls in timewindow. Limit reset at {limitResetDate.isoformat()}.'
 
