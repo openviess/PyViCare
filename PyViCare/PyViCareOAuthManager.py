@@ -140,7 +140,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         redirect_location = response.headers['Location']
         logger.debug(f"Redirect location is: {redirect_location}")
         match = re.match(
-            r"(?P<uri>.+?)\?code=(?P<code>.+?)&state=", redirect_location)
+            r"(?P<uri>.+?)\?code=(?P<code>[^&]+)", redirect_location)
         if match is None or match.group('uri') != REDIRECT_URI:
             raise PyViCareInvalidCredentialsError()
 
@@ -153,6 +153,10 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             'code_verifier': code_verifier
         }
         ).json()
+
+        if 'access_token' not in result:
+            logger.debug(f"Invalid result after redirect {result}")
+            raise PyViCareInvalidCredentialsError()
 
         token_dict = {
             'access_token': result['access_token'],
