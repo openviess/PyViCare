@@ -1,17 +1,18 @@
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
 
+
 class PelletsBoiler(Device):
 
     @handleNotSupported
     def getBurnerActive(self):
         return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
 
-    @handleNotSupported         
+    @handleNotSupported
     def getBurnerModulation(self):
         return self.service.getProperty('heating.burner.modulation')["properties"]["value"]["value"]
 
-    @handleNotSupported      
+    @handleNotSupported
     def getBoilerTemperature(self):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
@@ -34,7 +35,6 @@ class PelletsBoiler(Device):
     @handleNotSupported
     def getAirFlapsSecondaryPosition(self):
         return self.service.getProperty('heating.boiler.airflaps.0.position.current')['properties']['value']['value']
-
 
     @handleNotSupported
     def getExhaustO2Level(self):
@@ -63,5 +63,3 @@ class PelletsBoiler(Device):
     @handleNotSupported
     def getBoilerCuircuitPumpStatus(self):
         return self.service.getProperty('heating.boiler.pumps.circuit')['properties']['status']['value']
-
-

@@ -2,10 +2,13 @@ from datetime import datetime
 import threading
 from PyViCare.PyViCareService import ViCareService, readFeature
 
-#class is used to replace logic in unittest
+# class is used to replace logic in unittest
+
+
 class ViCareTimer:
     def now(self):
         return datetime.now()
+
 
 class ViCareCachedService(ViCareService):
 

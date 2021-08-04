@@ -90,12 +90,14 @@ class Device:
 
     @handleNotSupported
     def getDomesticHotWaterPumpActive(self):
-        status = self.service.getProperty("heating.dhw.pumps.primary")["properties"]["status"]["value"]
+        status = self.service.getProperty("heating.dhw.pumps.primary")[
+            "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getDomesticHotWaterCirculationPumpActive(self):
-        status = self.service.getProperty("heating.dhw.pumps.circulation")["properties"]["status"]["value"]
+        status = self.service.getProperty("heating.dhw.pumps.circulation")[
+            "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
@@ -123,7 +125,7 @@ class Device:
     """
 
     def setDomesticHotWaterTemperature(self, temperature):
-        return self.service.setProperty("heating.dhw.temperature", "setTargetTemperature", {'temperature':temperature})
+        return self.service.setProperty("heating.dhw.temperature", "setTargetTemperature", {'temperature': temperature})
 
     """ Set the target temperature 2 for domestic host water
     Parameters
@@ -161,7 +163,8 @@ class Device:
 
     @handleNotSupported
     def getSolarPumpActive(self):
-        status = self.service.getProperty("heating.solar.pumps.circuit")["properties"]["status"]["value"]
+        status = self.service.getProperty("heating.solar.pumps.circuit")[
+            "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
@@ -184,6 +187,7 @@ class Device:
     @handleNotSupported
     def getAvailableCircuits(self):
         return self.service.getProperty("heating.circuits")["properties"]["enabled"]["value"]
+
 
 class DeviceWithCircuit:
     def __init__(self, device, circuit):
@@ -208,7 +212,8 @@ class DeviceWithCircuit:
     """
 
     def setMode(self, mode):
-        r = self.service.setProperty(f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
+        r = self.service.setProperty(
+            f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
         return r
 
     # Works for normal, reduced, comfort
@@ -262,7 +267,6 @@ class DeviceWithCircuit:
 
     def activateComfort(self):
         return self.activateProgram("comfort")
-
 
     """ Deactivate a program
     Parameters
@@ -323,20 +327,22 @@ class DeviceWithCircuit:
         active_programm = self.getActiveProgram()
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_programm}")["properties"]["temperature"]["value"]
 
-
     @handleNotSupported
     def getFrostProtectionActive(self):
-        status = self.service.getProperty(f"heating.circuits.{self.circuit}.frostprotection")["properties"]["status"]["value"]
+        status = self.service.getProperty(f"heating.circuits.{self.circuit}.frostprotection")[
+            "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getCirculationPumpActive(self):
-        status = self.service.getProperty(f"heating.circuits.{self.circuit}.circulation.pump")["properties"]["status"]["value"]
+        status = self.service.getProperty(f"heating.circuits.{self.circuit}.circulation.pump")[
+            "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getHeatingSchedule(self):
-        properties = self.service.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["properties"]
+        properties = self.service.getProperty(
+            f"heating.circuits.{self.circuit}.heating.schedule")["properties"]
         return {
             "active": properties["active"]["value"],
             "mon": properties["entries"]["value"]["mon"],

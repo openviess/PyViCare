@@ -1,17 +1,18 @@
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
 
+
 class OilBoiler(Device):
 
     @handleNotSupported
     def getBurnerActive(self):
         return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
 
-    @handleNotSupported         
+    @handleNotSupported
     def getBurnerModulation(self):
         return self.service.getProperty('heating.burner.modulation')["properties"]["value"]["value"]
 
-    @handleNotSupported      
+    @handleNotSupported
     def getBoilerTemperature(self):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 

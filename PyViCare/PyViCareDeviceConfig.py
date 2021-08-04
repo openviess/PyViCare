@@ -43,7 +43,7 @@ class PyViCareDeviceConfig:
     def isOnline(self):
         return self.status == "Online"
 
-    #see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
+    # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
             (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH"),
@@ -59,5 +59,6 @@ class PyViCareDeviceConfig:
                             (self.device_model, creator_method.__name__))
                 return creator_method()
 
-        logger.info(f"Could not auto detect {self.device_model}. Use generic device.")
+        logger.info(
+            f"Could not auto detect {self.device_model}. Use generic device.")
         return self.asGeneric()
