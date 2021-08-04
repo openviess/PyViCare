@@ -23,6 +23,10 @@ class PyViCareCachedServiceTest(unittest.TestCase):
         func = lambda: self.service.getProperty("some-non-prop")
         self.assertRaises(PyViCareNotSupportedFeatureError, func)
 
+    def test_setProperty_works(self):
+        self.service.setProperty("someotherprop", "doaction", {'name': 'abc'})
+        self.oauth_mock.post.assert_called_once_with('/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/doaction', '{"name": "abc"}')
+
     def test_getProperty_existing_cached(self):
         #time+0 seconds
         with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
@@ -45,11 +49,12 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def test_setProperty_invalidateCache(self):
         #freeze time
         with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
+            self.assertEqual(self.service.isCacheInvalid(), True)
             self.service.getProperty("someprop")
-            self.assertEqual(self.oauth_mock.get.call_count, 1)
+            self.assertEqual(self.service.isCacheInvalid(), False)
 
             self.service.setProperty("someotherprop", "doaction", {'name': 'abc'})
-            self.oauth_mock.post.assert_called_once_with('/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/doaction', '{"name": "abc"}')
-
+            self.assertEqual(self.service.isCacheInvalid(), True)
+            
             self.service.getProperty("someprop")
             self.assertEqual(self.oauth_mock.get.call_count, 2)

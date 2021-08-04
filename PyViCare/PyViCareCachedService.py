@@ -27,23 +27,17 @@ class ViCareCachedService(ViCareService):
         return response
 
     def getOrUpdateCache(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             if self.isCacheInvalid():
                 url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
                 self.cache = self.oauth_manager.get(url)
                 self.cacheTime = ViCareTimer().now()
             return self.cache
-        finally:
-            self.lock.release()
 
     def isCacheInvalid(self):
         return self.cache is None or self.cacheTime is None or (ViCareTimer().now() - self.cacheTime).seconds > self.cacheDuration
 
     def clearCache(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             self.cache = None
             self.cacheTime = None
-        finally:
-            self.lock.release()
