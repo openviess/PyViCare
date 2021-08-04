@@ -10,6 +10,7 @@ import pkce
 from pickle import UnpicklingError
 from requests_oauthlib import OAuth2Session
 import logging
+from contextlib import suppress
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -192,12 +193,10 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             return None
 
         logger.info("Token file exists")
-        try:
+        with suppress(UnpicklingError):
             with open(token_file, mode='rb') as binary_file:
                 s_token = pickle.load(binary_file)
                 logger.info("Token restored from file")
                 return s_token
-        except UnpicklingError:
-            pass
         logger.warning("Could not restore token")
         return None
