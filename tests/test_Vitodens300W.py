@@ -13,17 +13,16 @@ class Vitodens300W(unittest.TestCase):
     def test_getBurnerActive(self):
         self.assertEqual(self.device.getBurnerActive(), True)
 
+#  Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getBurnerStarts(self):
-#        self.assertEqual(self.device.circuits[0].getBurnerStarts(), 8028)
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.circuits[0].getBurnerStarts)
 
-
+#  Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getBurnerHours(self):
-#        self.assertEqual(self.device.circuits[0].getBurnerHours(), 5570)
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.circuits[0].getBurnerHours)
 
+#  Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getBurnerModulation(self):
-#        self.assertEqual(self.device.circuits[0].getBurnerModulation(), 11.1)
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.circuits[0].getBurnerModulation)
 
     def test_getPrograms(self):
@@ -44,11 +43,10 @@ class Vitodens300W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(self.device.getDomesticHotWaterCirculationPumpActive(), False)
 
+#  Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getDomesticHotWaterOutletTemperature(self):
-#        self.assertEqual(self.device.getDomesticHotWaterOutletTemperature(), 58)
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDomesticHotWaterOutletTemperature)
 
     def test_getDomesticHotWaterCirculationSchedule(self):
         self.assertEqual(self.device.getDomesticHotWaterCirculationSchedule(), ['on'])
 
-        
