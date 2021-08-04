@@ -188,6 +188,14 @@ class Device:
     def getAvailableCircuits(self):
         return self.service.getProperty("heating.circuits")["properties"]["enabled"]["value"]
 
+    @handleNotSupported
+    def getControllerSerial(self):
+        return self.service.getProperty("heating.controller.serial")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getBoilerSerial(self):
+        return self.service.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
+
 
 class DeviceWithCircuit:
     def __init__(self, device, circuit):

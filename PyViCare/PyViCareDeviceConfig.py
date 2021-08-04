@@ -62,3 +62,6 @@ class PyViCareDeviceConfig:
         logger.info(
             f"Could not auto detect {self.device_model}. Use generic device.")
         return self.asGeneric()
+
+    def getRawJSON(self):
+        return self.service.cache

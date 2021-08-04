@@ -129,3 +129,55 @@ Please not that not all previous properties are available in the new API. Missin
 ## Rate Limits
 
 [Due to latest changes in the Viessmann API](https://www.viessmann-community.com/t5/Konnektivitaet/Q-amp-A-Viessmann-API/td-p/127660) rate limits can be hit. In that case a `PyViCareRateLimitError` is raised. You can read from the error (`limitResetDate`) when the rate limit is reset.
+
+## More different devices for test cases needed
+In order to help ensuring making it easier to create more test cases you can run this code and make a pull request with the new test of your device type added. Your test shoudl be commited into [tests/response](tests/response) and named <family><model>.
+
+The code to run to make this happen is below. Notice how it removes "sensitive" information like installation id and serial numbers.
+You can either replace default values or use the `PYVICARE_*` environment variables.
+
+```python
+import sys
+import logging
+import json
+import os
+from PyViCare.PyViCare import PyViCare
+
+client_id = os.getenv("PYVICARE_CLIENT_ID", "INSERT CLIENT_ID")
+email = os.getenv("PYVICARE_EMAIL", "email@domain")
+password = os.getenv("PYVICARE_PASSWORD", "password")
+
+vicare = PyViCare()
+vicare.initWithCredentials(email, password, client_id, "token.save")
+device = vicare.devices[0]
+t = device.asAutoDetectDevice()
+
+# Extract install id and serial which we want to anonymize for test datasets
+config = device.getConfig()
+(installId, serial, deviceId)  = (config.id, config.serial, config.device_id) 
+
+# Extract heating.controller.serial
+controllerSerial = t.getControllerSerial()
+
+# Extract heating.boiler.serial
+boilerSerial = t.getBoilerSerial()
+# In case you want to see what will be replaced uncomment the next two lines
+#print(f"instalation (ID, serial, controllerSerial, boilerSerial) ({installId}, {serial}, {controllerSerial}, {boilerSerial})")
+#exit
+
+dumpJSON = json.dumps(device.getRawJSON(), indent=4)
+# Replace all values of installationId with xxxxxx
+dumpJSON = dumpJSON.replace(str(installId), "xxxxxx")
+
+# Replace all values of gatewayId with yyyyyyyyyyyyyyyy
+dumpJSON = dumpJSON.replace(serial, "yyyyyyyyyyyyyyyy")
+
+# Replace all values of boilers serial with zzzzzzzzzzzzzzzz
+dumpJSON = dumpJSON.replace(boilerSerial, "zzzzzzzzzzzzzzzz")
+
+# Replace all values of controller serial with wwwwwwwwwwwwwwww
+dumpJSON = dumpJSON.replace(controllerSerial, "wwwwwwwwwwwwwwww")
+
+print(dumpJSON)
+
+```
