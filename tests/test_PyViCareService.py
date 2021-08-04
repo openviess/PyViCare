@@ -1,6 +1,5 @@
 import unittest
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
-from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
 from unittest.mock import Mock
 
 
