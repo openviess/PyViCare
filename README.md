@@ -131,6 +131,7 @@ Please not that not all previous properties are available in the new API. Missin
 [Due to latest changes in the Viessmann API](https://www.viessmann-community.com/t5/Konnektivitaet/Q-amp-A-Viessmann-API/td-p/127660) rate limits can be hit. In that case a `PyViCareRateLimitError` is raised. You can read from the error (`limitResetDate`) when the rate limit is reset.
 
 ## More different devices for test cases needed
+
 In order to help ensuring making it easier to create more test cases you can run this code and make a pull request with the new test of your device type added. Your test shoudl be commited into [tests/response](tests/response) and named <family><model>.
 
 The code to run to make this happen is below. Notice how it removes "sensitive" information like installation id and serial numbers.
@@ -154,7 +155,7 @@ t = device.asAutoDetectDevice()
 
 # Extract install id and serial which we want to anonymize for test datasets
 config = device.getConfig()
-(installId, serial, deviceId)  = (config.id, config.serial, config.device_id) 
+(installId, serial, deviceId)  = (config.id, config.serial, config.device_id)
 
 # Extract heating.controller.serial
 controllerSerial = t.getControllerSerial()
