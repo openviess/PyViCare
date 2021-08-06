@@ -1,3 +1,4 @@
+from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
 import unittest
 import os
 import pytest
@@ -47,6 +48,17 @@ class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
         self.capsys = capsys
+
+    @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
+    def test_BrowserBasedLogin(self):
+        with enablePrintStatementsForTest(self):
+            client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+            token_file = "browser.save"
+
+            vicare = PyViCare()
+            vicare.initWithBrowserOAuth(client_id, token_file)
+
+            self.assertIsNotNone(vicare.oauth_manager.oauth)
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_PyViCare(self):

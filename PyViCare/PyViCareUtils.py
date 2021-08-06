@@ -36,6 +36,10 @@ class PyViCareInvalidCredentialsError(Exception):
     pass
 
 
+class PyViCareBrowserOAuthTimeoutReachedError(Exception):
+    pass
+
+
 class PyViCareRateLimitError(Exception):
 
     def __init__(self, response):

@@ -1,3 +1,4 @@
+from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
@@ -24,6 +25,10 @@ class PyViCare:
 
     def initWithExternalOAuth(self, oauth_manager):
         self.oauth_manager = oauth_manager
+        self.__loadInstallations()
+
+    def initWithBrowserOAuth(self, client_id, token_file):
+        self.oauth_manager = ViCareBrowserOAuthManager(client_id, token_file)
         self.__loadInstallations()
 
     def __buildService(self, accessor):
