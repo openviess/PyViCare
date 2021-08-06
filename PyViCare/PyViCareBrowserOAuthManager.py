@@ -7,6 +7,7 @@ import requests
 import re
 import pickle
 import threading
+import json
 import os
 import pkce
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -39,7 +40,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
     def __init__(self, client_id, token_file):
         self.token_file = token_file
         self.client_id = client_id
-        self.abc = self.__createNewSession()
+        self.__createNewSession()
 
     def __createNewSession(self):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
@@ -67,7 +68,50 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         server.serve_forever()
         print(f"Code: {code}")
 
-    def renewToken(self):
+        result = requests.post(url=TOKEN_URL, data={
+            'grant_type': 'authorization_code',
+            'client_id': self.client_id,
+            'redirect_uri': redirect_uri,
+            'code': code,
+            'code_verifier': code_verifier
+        }
+        ).json()
 
-        # todo: move this class to Home Assistant and implement the oauth flow
-        return super().renewToken()
+        self.__set_oauth(result)
+
+
+    def __storeToken(self, token):
+        with open(self.token_file, mode='w') as json_file:
+            token = json.dump(token, json_file)
+            logger.info("Token restored from file")
+            return token
+
+    def __restoreToken(self):
+        with open(self.token_file, mode='r') as json_file:
+            token = json.load(json_file)
+            logger.info("Token restored from file")
+            return token
+    
+    def __set_oauth(self, result):
+        if 'access_token' not in result and 'refresh_token' not in result:
+            logger.debug(f"Invalid result after redirect {result}")
+            raise PyViCareInvalidCredentialsError()
+
+        print(result)
+        self.token = result
+        token_dict = {
+            'access_token': result['access_token'],
+            'token_type': result['token_type']
+        }
+        self.oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
+        self.__storeToken(self.token)
+
+    def renewToken(self):
+        result = requests.post(url=TOKEN_URL, data={
+            'grant_type': 'refresh_token',
+            'client_id': self.client_id,
+            'refresh_token': self.token['refresh_token'],
+        }
+        ).json()
+
+        self.__set_oauth(result)
