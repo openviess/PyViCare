@@ -1,12 +1,7 @@
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare import Feature
-from PyViCare.PyViCareUtils import PyViCareInvalidCredentialsError, PyViCareRateLimitError
-from abc import abstractclassmethod
-from oauthlib.oauth2 import TokenExpiredError
+from PyViCare.PyViCareUtils import PyViCareBrowserOAuthTimeoutReachedError, PyViCareInvalidCredentialsError
 import requests
 import re
-import pickle
-import threading
 import json
 import os
 import pkce
@@ -70,14 +65,18 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             nonlocal server
             match = re.match(r"(?P<uri>.+?)\?code=(?P<code>[^&]+)", path)
             code = match.group('code')
-            threading.Thread(target=server.shutdown, daemon=True).start()
 
         def handlerWithCallbackWrapper(*args):
             ViCareBrowserOAuthManager.Serv(callback, *args)
 
         server = HTTPServer(('localhost', REDIRECT_PORT),
                             handlerWithCallbackWrapper)
-        server.serve_forever()
+        server.timeout = 60*3
+        server.handle_request()
+
+        if code is None:
+            logger.debug("Timeout reached")
+            raise PyViCareBrowserOAuthTimeoutReachedError()
 
         logger.debug(f"Code: {code}")
 
