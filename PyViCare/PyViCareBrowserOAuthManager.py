@@ -40,7 +40,12 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
     def __init__(self, client_id, token_file):
         self.token_file = token_file
         self.client_id = client_id
-        self.__createNewSession()
+        self.__loadOrCreateNewSession()
+
+    def __loadOrCreateNewSession(self):
+        self.__restoreToken()
+        if(self.token is None):
+            self.__createNewSession()
 
     def __createNewSession(self):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
@@ -87,10 +92,13 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             return token
 
     def __restoreToken(self):
+        if (self.token_file == None) or not os.path.isfile(self.token_file):
+            return None
+
         with open(self.token_file, mode='r') as json_file:
             token = json.load(json_file)
             logger.info("Token restored from file")
-            return token
+            self.token = token
     
     def __set_oauth(self, result):
         if 'access_token' not in result and 'refresh_token' not in result:
