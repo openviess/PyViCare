@@ -24,6 +24,7 @@ REDIRECT_PORT = 51125
 VIESSMANN_SCOPE = ["IoT User", "offline_access"]
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
+
 class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
     class Serv(BaseHTTPRequestHandler):
         def __init__(self, callback, *args):
@@ -35,11 +36,13 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             self.send_response(200)
             self.send_header("Content-type", "text/plain")
             self.end_headers()
-            self.wfile.write("Success. You can close this browser window now.".encode("utf-8"))
-            
+            self.wfile.write(
+                "Success. You can close this browser window now.".encode("utf-8"))
+
     def __init__(self, client_id, token_file):
         self.token_file = token_file
         self.client_id = client_id
+        self.token = None
         self.__loadOrCreateNewSession()
 
     def __loadOrCreateNewSession(self):
@@ -54,11 +57,12 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         base_authorization_url, _ = oauth.authorization_url(AUTHORIZE_URL)
         code_verifier, code_challenge = pkce.generate_pkce_pair()
         authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
-        
+
         webbrowser.open(authorization_url)
 
         server = None
         code = None
+
         def callback(path):
             nonlocal code
             nonlocal server
@@ -69,9 +73,11 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         def handlerWithCallbackWrapper(*args):
             ViCareBrowserOAuthManager.Serv(callback, *args)
 
-        server = HTTPServer(('localhost', REDIRECT_PORT), handlerWithCallbackWrapper)
+        server = HTTPServer(('localhost', REDIRECT_PORT),
+                            handlerWithCallbackWrapper)
         server.serve_forever()
-        print(f"Code: {code}")
+
+        logger.debug(f"Code: {code}")
 
         result = requests.post(url=TOKEN_URL, data={
             'grant_type': 'authorization_code',
@@ -83,7 +89,6 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         ).json()
 
         self.__set_oauth(result)
-
 
     def __storeToken(self, token):
         with open(self.token_file, mode='w') as json_file:
@@ -99,13 +104,13 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             token = json.load(json_file)
             logger.info("Token restored from file")
             self.token = token
-    
+
     def __set_oauth(self, result):
         if 'access_token' not in result and 'refresh_token' not in result:
             logger.debug(f"Invalid result after redirect {result}")
             raise PyViCareInvalidCredentialsError()
 
-        print(result)
+        logger.debug(f"configure oauth: {result}")
         self.token = result
         token_dict = {
             'access_token': result['access_token'],

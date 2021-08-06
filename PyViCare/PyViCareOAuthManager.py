@@ -18,6 +18,7 @@ TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
 REDIRECT_URI = "vicare://oauth-callback/everest"
 VIESSMANN_SCOPE = ["IoT User"]
 
+
 class ViCareOAuthManager(AbstractViCareOAuthManager):
     def __init__(self, username, password, client_id, token_file):
         self.username = username

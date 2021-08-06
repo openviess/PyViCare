@@ -9,6 +9,7 @@ logger.addHandler(logging.NullHandler())
 
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
+
 class AbstractViCareOAuthManager:
     def __init__(self):
         self.oauth = None
@@ -66,4 +67,3 @@ class AbstractViCareOAuthManager:
         except TokenExpiredError:
             self.renewToken()
             return self.post(url, data)
-
