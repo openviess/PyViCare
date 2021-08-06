@@ -40,9 +40,11 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
                 "Success. You can close this browser window now.".encode("utf-8"))
 
     def __init__(self, client_id, token_file):
+        super().__init__()
         self.token_file = token_file
         self.client_id = client_id
         self.token = None
+        self.oauth = None
         self.__loadOrCreateNewSession()
 
     def __loadOrCreateNewSession(self):
@@ -103,6 +105,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         with open(self.token_file, mode='r') as json_file:
             token = json.load(json_file)
             logger.info("Token restored from file")
+            self.__set_oauth(token)
             self.token = token
 
     def __set_oauth(self, result):

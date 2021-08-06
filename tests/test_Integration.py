@@ -53,7 +53,12 @@ class Integration(unittest.TestCase):
     def test_BrowserBasedLogin(self):
         with enablePrintStatementsForTest(self):
             client_id = os.getenv('PYVICARE_CLIENT_ID', '')
-            ViCareBrowserOAuthManager(client_id, "browser.save")
+            token_file = "browser.save"
+
+            vicare = PyViCare()
+            vicare.initWithBrowserOAuth(client_id, token_file)
+
+            self.assertIsNotNone(vicare.oauth_manager.token)
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_PyViCare(self):
