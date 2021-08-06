@@ -57,12 +57,10 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
 
         webbrowser.open(authorization_url)
 
-        server = None
         code = None
 
         def callback(path):
             nonlocal code
-            nonlocal server
             match = re.match(r"(?P<uri>.+?)\?code=(?P<code>[^&]+)", path)
             code = match.group('code')
 
