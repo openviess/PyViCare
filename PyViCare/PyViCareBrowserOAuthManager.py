@@ -19,7 +19,7 @@ logger.addHandler(logging.NullHandler())
 
 AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v2/authorize'
 TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
-REDIRECT_URI = "http://localhost:5125"
+REDIRECT_PORT = 51125
 VIESSMANN_SCOPE = ["IoT User", "offline_access"]
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
@@ -42,9 +42,9 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         self.abc = self.__createNewSession()
 
     def __createNewSession(self):
-
+        redirect_uri = f"http://localhost:{REDIRECT_PORT}"
         oauth = OAuth2Session(
-            self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE)
+            self.client_id, redirect_uri=redirect_uri, scope=VIESSMANN_SCOPE)
         base_authorization_url, _ = oauth.authorization_url(AUTHORIZE_URL)
         code_verifier, code_challenge = pkce.generate_pkce_pair()
         authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
@@ -63,13 +63,11 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         def handlerWithCallbackWrapper(*args):
             ViCareBrowserOAuthManager.Serv(callback, *args)
 
-        server = HTTPServer(('localhost',5125), handlerWithCallbackWrapper)
+        server = HTTPServer(('localhost', REDIRECT_PORT), handlerWithCallbackWrapper)
         server.serve_forever()
         print(f"Code: {code}")
 
     def renewToken(self):
-
-        offline_access
 
         # todo: move this class to Home Assistant and implement the oauth flow
         return super().renewToken()
