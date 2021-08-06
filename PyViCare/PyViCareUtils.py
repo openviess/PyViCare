@@ -35,6 +35,7 @@ class PyViCareNotSupportedFeatureError(Exception):
 class PyViCareInvalidCredentialsError(Exception):
     pass
 
+
 class PyViCareBrowserOAuthTimeoutReachedError(Exception):
     pass
 

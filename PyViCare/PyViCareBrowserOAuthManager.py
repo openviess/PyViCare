@@ -18,6 +18,7 @@ TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
 REDIRECT_PORT = 51125
 VIESSMANN_SCOPE = ["IoT User", "offline_access"]
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
+AUTH_TIMEOUT = 60 * 3
 
 
 class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
@@ -69,7 +70,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
 
         server = HTTPServer(('localhost', REDIRECT_PORT),
                             handlerWithCallbackWrapper)
-        server.timeout = 60*3
+        server.timeout = AUTH_TIMEOUT
         server.handle_request()
 
         if code is None:
