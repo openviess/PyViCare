@@ -1,4 +1,4 @@
-from PyViCare.PyViCareOAuthManager import ViCareBrowserOAuthManager
+from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
 import unittest
 import os
 import pytest
@@ -52,7 +52,8 @@ class Integration(unittest.TestCase):
 
     def test_abc(self):
         with enablePrintStatementsForTest(self):
-            ViCareBrowserOAuthManager("id", "some.save")
+            client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+            ViCareBrowserOAuthManager(client_id, "some.save")
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_PyViCare(self):
