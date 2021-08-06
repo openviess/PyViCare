@@ -39,16 +39,15 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         super().__init__()
         self.token_file = token_file
         self.client_id = client_id
-        self.token = None
-        self.oauth = None
-        self.__loadOrCreateNewSession()
+        self.oauth = self.__load_or_create_new_session()
 
-    def __loadOrCreateNewSession(self):
-        self.__restoreToken()
-        if(self.token is None):
-            self.__createNewSession()
+    def __load_or_create_new_session(self):
+        restore_oauth = self.__restoreToken()
+        if restore_oauth is not None:
+            return restore_oauth
+        return self.__execute_browser_authentication()            
 
-    def __createNewSession(self):
+    def __execute_browser_authentication(self):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
         oauth = OAuth2Session(
             self.client_id, redirect_uri=redirect_uri, scope=VIESSMANN_SCOPE)
@@ -88,13 +87,15 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         }
         ).json()
 
-        self.__set_oauth(result)
+        return self.__build_oauth_session(result)
 
     def __storeToken(self, token):
+        if (self.token_file == None):
+            return None
+
         with open(self.token_file, mode='w') as json_file:
-            token = json.dump(token, json_file)
-            logger.info("Token restored from file")
-            return token
+            json.dump(token, json_file)
+            logger.info("Token stored to file")
 
     def __restoreToken(self):
         if (self.token_file == None) or not os.path.isfile(self.token_file):
@@ -103,29 +104,25 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         with open(self.token_file, mode='r') as json_file:
             token = json.load(json_file)
             logger.info("Token restored from file")
-            self.__set_oauth(token)
-            self.token = token
+            return self.__build_oauth_session(token)
 
-    def __set_oauth(self, result):
+    def __build_oauth_session(self, result):
         if 'access_token' not in result and 'refresh_token' not in result:
             logger.debug(f"Invalid result after redirect {result}")
             raise PyViCareInvalidCredentialsError()
 
         logger.debug(f"configure oauth: {result}")
-        self.token = result
-        token_dict = {
-            'access_token': result['access_token'],
-            'token_type': result['token_type']
-        }
-        self.oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
-        self.__storeToken(self.token)
+        oauth = OAuth2Session(client_id=self.client_id, token=result)
+        self.__storeToken(result)
+        return oauth
 
     def renewToken(self):
+        token = self.oauth.token
         result = requests.post(url=TOKEN_URL, data={
             'grant_type': 'refresh_token',
             'client_id': self.client_id,
-            'refresh_token': self.token['refresh_token'],
+            'refresh_token': token['refresh_token'],
         }
         ).json()
 
-        self.__set_oauth(result)
+        self.__build_oauth_session(result)
