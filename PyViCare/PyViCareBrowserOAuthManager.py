@@ -45,7 +45,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         restore_oauth = self.__restoreToken()
         if restore_oauth is not None:
             return restore_oauth
-        return self.__execute_browser_authentication()            
+        return self.__execute_browser_authentication()
 
     def __execute_browser_authentication(self):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
@@ -90,15 +90,15 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         return self.__build_oauth_session(result, after_redirect=True)
 
     def __storeToken(self, token):
-        if (self.token_file == None):
-            return None
+        if self.token_file is None:
+            return
 
         with open(self.token_file, mode='w') as json_file:
             json.dump(token, json_file)
             logger.info("Token stored to file")
 
     def __restoreToken(self):
-        if (self.token_file == None) or not os.path.isfile(self.token_file):
+        if self.token_file is None or not os.path.isfile(self.token_file):
             return None
 
         with open(self.token_file, mode='r') as json_file:
@@ -112,7 +112,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             if after_redirect:
                 raise PyViCareInvalidCredentialsError()
             else:
-                logger.info(f"Invalid credentials, create new session")
+                logger.info("Invalid credentials, create new session")
                 return self.__execute_browser_authentication()
 
         logger.debug(f"configure oauth: {result}")

@@ -22,7 +22,7 @@ class AbstractViCareOAuthManager:
         try:
             logger.debug(self.oauth)
             response = self.oauth.get(f"{API_BASE_URL}{url}").json()
-            logger.debug("Response to get request: "+str(response))
+            logger.debug(f"Response to get request: {response}")
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
             return response
