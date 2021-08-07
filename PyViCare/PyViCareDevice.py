@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime, time
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -13,7 +13,7 @@ def isSupported(method):
     try:
         result = method()
         return result != 'error'
-    except:
+    except PyViCareNotSupportedFeatureError:
         return False
 
 
@@ -47,7 +47,7 @@ class Device:
 
     def getDomesticHotWaterActiveMode(self):
         schedule = self.getDomesticHotWaterSchedule()
-        if schedule == "error" or schedule["active"] != True:
+        if schedule == "error" or schedule["active"] is not True:
             return None
 
         currentDateTime = datetime.now()
@@ -55,7 +55,7 @@ class Device:
 
         current_day = VICARE_DAYS[currentDateTime.weekday()]
         if current_day not in schedule:
-            return None 
+            return None
 
         mode = None
         for s in schedule[current_day]:
@@ -71,7 +71,7 @@ class Device:
     def getDomesticHotWaterDesiredTemperature(self):
         mode = self.getDomesticHotWaterActiveMode()
 
-        if mode != None:
+        if mode is not None:
             if mode == VICARE_DHW_TEMP2:
                 return self.getDomesticHotWaterConfiguredTemperature2()
             else:
@@ -139,7 +139,7 @@ class Device:
     """
 
     def setDomesticHotWaterTemperature2(self, temperature):
-        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", "{\"temperature\":"+str(temperature)+"}")
+        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", {"temperature": temperature})
 
     @handleNotSupported
     def getDomesticHotWaterSchedule(self):
@@ -185,8 +185,9 @@ class Device:
 
     @handleNotSupported
     def getDomesticHotWaterCirculationSchedule(self):
-        schedule = self.service.getProperty("heating.dhw.pumps.circulation.schedule")
-        
+        schedule = self.service.getProperty(
+            "heating.dhw.pumps.circulation.schedule")
+
         properties = schedule["properties"]
         command = schedule["commands"]
         return {
@@ -203,7 +204,7 @@ class Device:
 
     def getDomesticHotWaterCirculationMode(self):
         schedule = self.getDomesticHotWaterCirculationSchedule()
-        if schedule == "error" or schedule["active"] != True:
+        if schedule == "error" or schedule["active"] is not True:
             return None
 
         currentDateTime = datetime.now()
@@ -211,7 +212,7 @@ class Device:
 
         current_day = VICARE_DAYS[currentDateTime.weekday()]
         if current_day not in schedule:
-            return None # no schedule for day configured
+            return None  # no schedule for day configured
 
         for s in schedule[current_day]:
             startTime = time.fromisoformat(s["start"])
@@ -219,7 +220,6 @@ class Device:
             if startTime <= currentTime and currentTime <= endTime:
                 return s["mode"]
         return schedule['default_mode']
-
 
     @handleNotSupported
     def getAvailableCircuits(self):
@@ -413,7 +413,7 @@ class DeviceWithCircuit:
         delta_outside_inside = (outside - inside)
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
-        targetSupply = inside + shift - slope * delta_outside_inside * \
-            (1.4347 + 0.021 * delta_outside_inside + 247.9 *
-             pow(10, -6) * pow(delta_outside_inside, 2))
+        targetSupply = (inside + shift - slope * delta_outside_inside
+                        * (1.4347 + 0.021 * delta_outside_inside + 247.9
+                            * pow(10, -6) * pow(delta_outside_inside, 2)))
         return round(targetSupply, 1)

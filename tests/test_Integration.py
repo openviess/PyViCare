@@ -1,4 +1,3 @@
-from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
 import unittest
 import os
 import pytest

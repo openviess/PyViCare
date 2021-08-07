@@ -23,7 +23,9 @@ class PyViCareCachedServiceTest(unittest.TestCase):
             '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/')
 
     def test_getProperty_nonexisting_raises_exception(self):
-        def func(): return self.service.getProperty("some-non-prop")
+
+        def func():
+            return self.service.getProperty("some-non-prop")
         self.assertRaises(PyViCareNotSupportedFeatureError, func)
 
     def test_setProperty_works(self):

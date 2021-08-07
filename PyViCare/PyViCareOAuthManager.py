@@ -116,7 +116,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         logger.info("Token serialized to %s" % token_file)
 
     def _deserializeToken(self, token_file):
-        if (token_file == None) or not os.path.isfile(token_file):
+        if token_file is None or not os.path.isfile(token_file):
             logger.debug(
                 "Token file argument not provided or file does not exist")
             return None
