@@ -56,13 +56,13 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def test_setProperty_invalidateCache(self):
         # freeze time
         with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
-            self.assertEqual(self.service.isCacheInvalid(), True)
+            self.assertEqual(self.service.is_cache_invalid(), True)
             self.service.getProperty("someprop")
-            self.assertEqual(self.service.isCacheInvalid(), False)
+            self.assertEqual(self.service.is_cache_invalid(), False)
 
             self.service.setProperty(
                 "someotherprop", "doaction", {'name': 'abc'})
-            self.assertEqual(self.service.isCacheInvalid(), True)
+            self.assertEqual(self.service.is_cache_invalid(), True)
 
             self.service.getProperty("someprop")
             self.assertEqual(self.oauth_mock.get.call_count, 2)
