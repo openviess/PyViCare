@@ -52,9 +52,8 @@ class AbstractViCareOAuthManager:
         if not Feature.raise_exception_on_command_failure:
             return
 
-        if("statusCode" in response and response["statusCode"] > 399):
+        if("statusCode" in response and response["statusCode"] >= 400):
             raise PyViCareCommandError(response)
-
 
     """POST URL using OAuth session. Automatically renew the token if needed
     Parameters

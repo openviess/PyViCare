@@ -7,4 +7,4 @@ raise_exception_on_not_supported_device_feature = True
 raise_exception_on_rate_limit = True
 
 # Feature flag to raise exception on command calls if the API does not return (2xx or 3xx) responses.
-raise_exception_on_command_failure =  True
+raise_exception_on_command_failure = True

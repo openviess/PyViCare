@@ -47,6 +47,7 @@ def handleAPICommandErrors(func):
                 return "error"
     return feature_flag_wrapper
 
+
 class PyViCareNotSupportedFeatureError(Exception):
     pass
 
@@ -73,6 +74,7 @@ class PyViCareRateLimitError(Exception):
         super().__init__(self, msg)
         self.message = msg
         self.limitResetDate = limitResetDate
+
 
 class PyViCareCommandError(Exception):
     def __init__(self, response):
