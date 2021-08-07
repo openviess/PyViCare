@@ -49,6 +49,17 @@ class Integration(unittest.TestCase):
         self.capsys = capsys
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
+    def test_BrowserBasedLogin(self):
+        with enablePrintStatementsForTest(self):
+            client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+            token_file = "browser.save"
+
+            vicare = PyViCare()
+            vicare.initWithBrowserOAuth(client_id, token_file)
+
+            self.assertGreaterEqual(len(vicare.devices), 1)
+
+    @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_PyViCare(self):
         email = os.getenv('PYVICARE_EMAIL', '')
         password = os.getenv('PYVICARE_PASSWORD', '')
