@@ -1,5 +1,5 @@
 from PyViCare import Feature
-from PyViCare.PyViCareUtils import PyViCareInvalidCredentialsError, PyViCareRateLimitError
+from PyViCare.PyViCareUtils import PyViCareInvalidCredentialsError, PyViCareRateLimitError, PyViCareCommandError
 from abc import abstractclassmethod
 from oauthlib.oauth2 import TokenExpiredError
 import requests
@@ -53,6 +53,13 @@ class AbstractViCareOAuthManager:
         if("statusCode" in response and response["statusCode"] == 429):
             raise PyViCareRateLimitError(response)
 
+    def handleCommandErrors(self, response):
+        if not Feature.raise_exception_on_command_failure:
+            return
+
+        if("statusCode" in response and response["statusCode"] > 399):
+            raise PyViCareCommandError(response)
+
     """POST URL using OAuth session. Automatically renew the token if needed
     Parameters
     ----------
@@ -75,6 +82,7 @@ class AbstractViCareOAuthManager:
                 f"{API_BASE_URL}{url}", data, headers=headers).json()
             self.handleExpiredToken(response)
             self.handleRateLimit(response)
+            self.handleCommandErrors(response)
             return response
         except TokenExpiredError:
             self.renewToken()
