@@ -25,16 +25,17 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         self.password = password
         self.token_file = token_file
         self.client_id = client_id
-        self.oauth = self.__restore_oauth_session_from_token(token_file)
+        oauth_session = self.__restore_oauth_session_from_token(token_file)
+        super().__init__(oauth_session)
 
     def __restore_oauth_session_from_token(self, token_file):
-        existing_token = self._deserializeToken(token_file)
+        existing_token = self.__deserialize_token(token_file)
         if existing_token is not None:
             return OAuth2Session(self.client_id, token=existing_token)
 
-        return self.__createNewSession(self.username, self.password, token_file)
+        return self.__create_new_session(self.username, self.password, token_file)
 
-    def __createNewSession(self, username, password, token_file=None):
+    def __create_new_session(self, username, password, token_file=None):
         """Create a new oAuth2 sessions
         Viessmann tokens expire after 3600s (60min)
         Parameters
@@ -51,9 +52,9 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         oauth:
             oauth sessions object
         """
-        oauth = OAuth2Session(
+        oauth_session = OAuth2Session(
             self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE)
-        base_authorization_url, _ = oauth.authorization_url(AUTHORIZE_URL)
+        base_authorization_url, _ = oauth_session.authorization_url(AUTHORIZE_URL)
 
         code_verifier, code_challenge = pkce.generate_pkce_pair()
         authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
@@ -92,19 +93,19 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             'access_token': result['access_token'],
             'token_type': 'bearer'
         }
-        oauth = OAuth2Session(client_id=self.client_id, token=token_dict)
-        logger.debug(f"Token received: {oauth.token}")
-        self._serializeToken(oauth.token, token_file)
+        new_session = OAuth2Session(client_id=self.client_id, token=token_dict)
+        logger.debug(f"Token received: {new_session.token}")
+        self.__serialize_token(new_session.token, token_file)
         logger.info("New token created")
-        return oauth
+        return new_session
 
     def renewToken(self):
         logger.info("Token expired, renewing")
-        self.oauth = self.__createNewSession(
-            self.username, self.password, self.token_file)
+        self.replace_session(self.__create_new_session(
+            self.username, self.password, self.token_file))
         logger.info("Token renewed successfully")
 
-    def _serializeToken(self, oauth, token_file):
+    def __serialize_token(self, oauth, token_file):
         logger.debug("Start serial")
         if token_file is None:
             logger.debug("Skip serial, no file provided.")
@@ -115,7 +116,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
 
         logger.info("Token serialized to %s" % token_file)
 
-    def _deserializeToken(self, token_file):
+    def __deserialize_token(self, token_file):
         if token_file is None or not os.path.isfile(token_file):
             logger.debug(
                 "Token file argument not provided or file does not exist")

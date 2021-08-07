@@ -36,10 +36,11 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
                 "Success. You can close this browser window now.".encode("utf-8"))
 
     def __init__(self, client_id, token_file):
-        super().__init__()
+
         self.token_file = token_file
         self.client_id = client_id
-        self.oauth = self.__load_or_create_new_session()
+        oauth_session = self.__load_or_create_new_session()
+        super().__init__(oauth_session)
 
     def __load_or_create_new_session(self):
         restore_oauth = self.__restoreToken()
@@ -116,12 +117,11 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
                 return self.__execute_browser_authentication()
 
         logger.debug(f"configure oauth: {result}")
-        oauth = OAuth2Session(client_id=self.client_id, token=result)
         self.__storeToken(result)
-        return oauth
+        return OAuth2Session(client_id=self.client_id, token=result)
 
     def renewToken(self):
-        token = self.oauth.token
+        token = self.oauth_session.token
         result = requests.post(url=TOKEN_URL, data={
             'grant_type': 'refresh_token',
             'client_id': self.client_id,
@@ -129,4 +129,4 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         }
         ).json()
 
-        self.oauth = self.__build_oauth_session(result, after_redirect=False)
+        self.replace_session(self.__build_oauth_session(result, after_redirect=False))

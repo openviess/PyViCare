@@ -7,11 +7,10 @@ from tests.helper import readJson
 
 class OAuthManagerWithMock(AbstractViCareOAuthManager):
     def __init__(self, mock):
-        super().__init__()
-        self.oauth = mock
+        super().__init__(mock)
 
     def renewToken(self):
-        self.oauth.renewToken()
+        self.oauth_session.renewToken()
 
 
 class FakeResponse:

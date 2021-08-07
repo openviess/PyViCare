@@ -57,7 +57,7 @@ class Integration(unittest.TestCase):
             vicare = PyViCare()
             vicare.initWithBrowserOAuth(client_id, token_file)
 
-            self.assertIsNotNone(vicare.oauth_manager.oauth)
+            self.assertGreaterEqual(len(vicare.devices), 1)
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_PyViCare(self):

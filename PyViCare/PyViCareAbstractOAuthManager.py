@@ -11,8 +11,15 @@ API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
 
 class AbstractViCareOAuthManager:
-    def __init__(self):
-        self.oauth = None
+    def __init__(self, oauth_session):
+        self.__oauth = oauth_session
+
+    @property
+    def oauth_session(self):
+        return self.__oauth
+
+    def replace_session(self, new_session):
+        self.__oauth = new_session
 
     @abstractclassmethod
     def renewToken(self):
@@ -20,21 +27,21 @@ class AbstractViCareOAuthManager:
 
     def get(self, url):
         try:
-            logger.debug(self.oauth)
-            response = self.oauth.get(f"{API_BASE_URL}{url}").json()
+            logger.debug(self.__oauth)
+            response = self.__oauth.get(f"{API_BASE_URL}{url}").json()
             logger.debug(f"Response to get request: {response}")
-            self.handleExpiredToken(response)
-            self.handleRateLimit(response)
+            self.__handle_expired_token(response)
+            self.__handle_rate_limit(response)
             return response
         except TokenExpiredError:
             self.renewToken()
             return self.get(url)
 
-    def handleExpiredToken(self, response):
+    def __handle_expired_token(self, response):
         if("error" in response and response["error"] == "EXPIRED TOKEN"):
             raise TokenExpiredError(response)
 
-    def handleRateLimit(self, response):
+    def __handle_rate_limit(self, response):
         if not Feature.raise_exception_on_rate_limit:
             return
 
@@ -59,10 +66,10 @@ class AbstractViCareOAuthManager:
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
-            response = self.oauth.post(
+            response = self.__oauth.post(
                 f"{API_BASE_URL}{url}", data, headers=headers).json()
-            self.handleExpiredToken(response)
-            self.handleRateLimit(response)
+            self.__handle_expired_token(response)
+            self.__handle_rate_limit(response)
             return response
         except TokenExpiredError:
             self.renewToken()
