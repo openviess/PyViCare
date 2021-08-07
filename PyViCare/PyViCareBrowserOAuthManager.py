@@ -36,7 +36,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
                 "Success. You can close this browser window now.".encode("utf-8"))
 
     def __init__(self, client_id, token_file):
-        
+
         self.token_file = token_file
         self.client_id = client_id
         oauth_session = self.__load_or_create_new_session()

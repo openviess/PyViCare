@@ -28,8 +28,6 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         oauth_session = self.__restore_oauth_session_from_token(token_file)
         super().__init__(oauth_session)
 
-        
-
     def __restore_oauth_session_from_token(self, token_file):
         existing_token = self.__deserialize_token(token_file)
         if existing_token is not None:
