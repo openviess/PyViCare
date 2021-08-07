@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime, time
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported, handleAPICommandErrors
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -123,6 +123,7 @@ class Device:
         json representation of the answer
     """
 
+    @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
         return self.service.setProperty("heating.dhw.temperature", "setTargetTemperature", {'temperature': temperature})
 
@@ -138,6 +139,7 @@ class Device:
         json representation of the answer
     """
 
+    @handleAPICommandErrors
     def setDomesticHotWaterTemperature2(self, temperature):
         return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", {"temperature": temperature})
 
@@ -170,12 +172,15 @@ class Device:
     def getOneTimeCharge(self):
         return self.service.getProperty("heating.dhw.oneTimeCharge")["properties"]["active"]["value"]
 
+    @handleAPICommandErrors
     def deactivateOneTimeCharge(self):
         return self.service.setProperty("heating.dhw.oneTimeCharge", "deactivate", {})
 
+    @handleAPICommandErrors
     def activateOneTimeCharge(self):
         return self.service.setProperty("heating.dhw.oneTimeCharge", "activate", {})
 
+    @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
         return self.service.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule", {'newSchedule': schedule})
 

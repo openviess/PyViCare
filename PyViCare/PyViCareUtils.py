@@ -28,6 +28,25 @@ def handleNotSupported(func):
     return feature_flag_wrapper
 
 
+def handleAPICommandErrors(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except (KeyError, IndexError):
+            raise PyViCareCommandError(func.__name__)
+
+    # You can remove that wrapper after the feature flag gets removed entirely.
+    def feature_flag_wrapper(*args, **kwargs):
+        try:
+            return wrapper(*args, **kwargs)
+        except PyViCareCommandError:
+            if Feature.raise_exception_on_command_failure:
+                raise
+            else:
+                return "error"
+    return feature_flag_wrapper
+
 class PyViCareNotSupportedFeatureError(Exception):
     pass
 
@@ -54,3 +73,15 @@ class PyViCareRateLimitError(Exception):
         super().__init__(self, msg)
         self.message = msg
         self.limitResetDate = limitResetDate
+
+class PyViCareCommandError(Exception):
+    def __init__(self, response):
+        statusCode = response["statusCode"]
+
+        extended_payload = response["extendedPayload"]
+        reason = extended_payload["reason"]
+
+        msg = f'Command failed with status code {statusCode}. Reason given was: {reason}'
+
+        super().__init__(self, msg)
+        self.message = msg
