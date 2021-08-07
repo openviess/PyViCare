@@ -20,7 +20,7 @@ class ViCareCachedService(ViCareService):
         self.lock = threading.Lock()
 
     def getProperty(self, property_name):
-        data = self.getOrUpdateCache()
+        data = self.__get_or_update_cache()
         entities = data["data"]
         return readFeature(entities, property_name)
 
@@ -29,7 +29,7 @@ class ViCareCachedService(ViCareService):
         self.clearCache()
         return response
 
-    def getOrUpdateCache(self):
+    def __get_or_update_cache(self):
         with self.lock:
             if self.isCacheInvalid():
                 url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
