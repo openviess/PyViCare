@@ -1,4 +1,4 @@
-from PyViCare.PyViCareUtils import PyViCareRateLimitError
+from PyViCare.PyViCareUtils import PyViCareRateLimitError, PyViCareCommandError
 import unittest
 from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
 from unittest.mock import Mock
@@ -34,6 +34,14 @@ class PyViCareServiceTest(unittest.TestCase):
         def func():
             return self.manager.get("/")
         self.assertRaises(PyViCareRateLimitError, func)
+
+    def test_post_raisecommanderror_ifthatreponse(self):
+        self.oauth_mock.post.return_value = FakeResponse(
+            'response/error_502.json')
+
+        def func():
+            return self.manager.post("/", {})
+        self.assertRaises(PyViCareCommandError, func)
 
     def test_get_renewtoken_ifexpired(self):
         self.oauth_mock.get.side_effect = [
