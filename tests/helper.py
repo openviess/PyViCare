@@ -1,5 +1,5 @@
 import os
-import simplejson as json
+import json
 
 
 def readJson(fileName):

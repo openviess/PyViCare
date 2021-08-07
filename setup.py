@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/somm15/PyViCare",
     packages=setuptools.find_packages(exclude=["tests"]),
-    install_requires=['requests-oauthlib>=1.1.0', 'simplejson'],
+    install_requires=['requests-oauthlib>=1.1.0', 'pkce'],
     setup_requires=['setuptools-git-versioning'],
     classifiers=[
         "Programming Language :: Python :: 3",
