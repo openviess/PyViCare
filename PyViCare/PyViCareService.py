@@ -39,8 +39,7 @@ class ViCareService:
     def getProperty(self, property_name):
         url = buildGetPropertyUrl(
             self.accessor, property_name)
-        j = self.oauth_manager.get(url)
-        return j
+        return self.oauth_manager.get(url)
 
     def setProperty(self, property_name, action, data):
         url = buildSetPropertyUrl(
