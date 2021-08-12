@@ -28,12 +28,11 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             BaseHTTPRequestHandler.__init__(self, *args)
 
         def do_GET(self):
-            self.callback(self.path)
-            self.send_response(200)
+            (status_code, text) = self.callback(self.path)
+            self.send_response(status_code)
             self.send_header("Content-type", "text/plain")
             self.end_headers()
-            self.wfile.write(
-                "Success. You can close this browser window now.".encode("utf-8"))
+            self.wfile.write(text.encode("utf-8"))
 
     def __init__(self, client_id, token_file):
 
@@ -52,7 +51,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
         oauth = OAuth2Session(
             self.client_id, redirect_uri=redirect_uri, scope=VIESSMANN_SCOPE)
-        base_authorization_url, _ = oauth.authorization_url(AUTHORIZE_URL)
+        base_authorization_url, state = oauth.authorization_url(AUTHORIZE_URL)
         code_verifier, code_challenge = pkce.generate_pkce_pair()
         authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
 
@@ -62,8 +61,13 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
 
         def callback(path):
             nonlocal code
-            match = re.match(r"(?P<uri>.+?)\?code=(?P<code>[^&]+)", path)
+            nonlocal state
+            match = re.match(r"(?P<uri>.+?)\?code=(?P<code>.+)&state=(?P<state>.+)", path)
+            if match.group('state') != state:
+                logger.warn("Invalid OAuth state")
+                return (401, "Invalid Oauth state.")
             code = match.group('code')
+            return (200, "Success. You can close this browser window now.")
 
         def handlerWithCallbackWrapper(*args):
             ViCareBrowserOAuthManager.Serv(callback, *args)
