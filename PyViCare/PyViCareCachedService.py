@@ -31,8 +31,7 @@ class ViCareCachedService(ViCareService):
     def __get_or_update_cache(self):
         with self.__lock:
             if self.is_cache_invalid():
-                url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
-                self.__cache = self.oauth_manager.get(url)
+                self.__cache = self.fetch_all_features()
                 self.__cacheTime = ViCareTimer().now()
             return self.__cache
 

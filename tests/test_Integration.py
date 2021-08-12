@@ -4,6 +4,7 @@ import pytest
 import json
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+import re
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
 TOKEN_FILE = "token.save"
@@ -97,3 +98,17 @@ class Integration(unittest.TestCase):
                     print()
 
             print()
+
+    @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
+    def test_Dump(self):
+        email = os.getenv('PYVICARE_EMAIL', '')
+        password = os.getenv('PYVICARE_PASSWORD', '')
+        client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+
+        with enablePrintStatementsForTest(self):
+            vicare = PyViCare()
+            vicare.initWithCredentials(
+                email, password, client_id, TOKEN_FILE)
+
+            with open(f"dump.json", mode='w') as output:
+                output.write(vicare.devices[0].dump_secure())
