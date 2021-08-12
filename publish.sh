@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo -n "Which version do you want to publish? (Format: x.y) "
+LAST_TAG=$(git tag --sort=-version:refname | head -1)
+
+echo -n "Which version do you want to publish? (Last: $LAST_TAG) "
 read new_tag
 
 rm -rf ./dist
