@@ -6,6 +6,7 @@ from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 import re
 import logging
+import json
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
@@ -63,5 +64,13 @@ class PyViCareDeviceConfig:
             f"Could not auto detect {self.device_model}. Use generic device.")
         return self.asGeneric()
 
-    def getRawJSON(self):
-        return self.service.cache
+    def get_raw_json(self):
+        return self.service.fetch_all_features()
+
+    def dump_secure(self):
+        dumpJSON = json.dumps(self.get_raw_json(), indent=4)
+
+        def repl(m):
+            return '#' * len(m.group())
+
+        return re.sub(r'\d{6,}', repl, dumpJSON)
