@@ -71,6 +71,6 @@ class PyViCareDeviceConfig:
         dumpJSON = json.dumps(self.get_raw_json(), indent=4)
 
         def repl(m):
-            return '#' * len(m.group())
+            return m.group(1) + ('#' * len(m.group(2))) + m.group(3)
 
-        return re.sub(r'\d{6,}', repl, dumpJSON)
+        return re.sub(r'(["\/])(\d{6,})(["\/])', repl, dumpJSON)
