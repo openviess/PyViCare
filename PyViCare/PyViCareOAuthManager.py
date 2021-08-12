@@ -54,7 +54,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         """
         oauth_session = OAuth2Session(
             self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE)
-        base_authorization_url, _ = oauth_session.authorization_url(AUTHORIZE_URL)
+        base_authorization_url, state = oauth_session.authorization_url(AUTHORIZE_URL)
 
         code_verifier, code_challenge = pkce.generate_pkce_pair()
         authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
@@ -71,8 +71,13 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         redirect_location = response.headers['Location']
         logger.debug(f"Redirect location is: {redirect_location}")
         match = re.match(
-            r"(?P<uri>.+?)\?code=(?P<code>[^&]+)", redirect_location)
+            r"(?P<uri>.+?)\?code=(?P<code>.+)&state=(?P<state>.+)", redirect_location)
         if match is None or match.group('uri') != REDIRECT_URI:
+            logger.warn("Redirect did not return correct url. Expected %s, got %s" % (REDIRECT_URI, match.group('uri')))
+            raise PyViCareInvalidCredentialsError()
+
+        if match.group('state') != state:
+            logger.warn("Invalid OAuth state")
             raise PyViCareInvalidCredentialsError()
 
         code = match.group('code')
