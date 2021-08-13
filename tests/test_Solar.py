@@ -5,7 +5,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class SolarTest(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Viessman.data.json')
+        self.service = ViCareServiceMock('response/Solar.json')
         self.device = Device(self.service)
 
     def test_getSolarStorageTemperature(self):
