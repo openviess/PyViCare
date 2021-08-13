@@ -163,6 +163,14 @@ class Device:
         return self.service.getProperty("heating.solar.sensors.temperature.collector")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getSolarStorageTemperature(self):
+        return self.service.getProperty("heating.solar.sensors.temperature.dhw")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSolarPowerProduction(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["day"]["value"]
+
+    @handleNotSupported
     def getSolarPumpActive(self):
         status = self.service.getProperty("heating.solar.pumps.circuit")[
             "properties"]["status"]["value"]
