@@ -1,7 +1,9 @@
-import unittest
-import os
-import pytest
 import json
+import os
+import unittest
+
+import pytest
+
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 

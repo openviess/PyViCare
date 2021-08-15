@@ -1,6 +1,8 @@
 import logging
 from datetime import datetime, time
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported, handleAPICommandErrors
+
+from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
+                                    handleAPICommandErrors, handleNotSupported)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

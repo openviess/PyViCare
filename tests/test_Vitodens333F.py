@@ -1,6 +1,7 @@
 import unittest
-from tests.ViCareServiceMock import ViCareServiceMock
+
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitodens333F(unittest.TestCase):

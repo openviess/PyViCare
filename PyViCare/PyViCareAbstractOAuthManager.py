@@ -1,8 +1,10 @@
-from PyViCare import Feature
-from PyViCare.PyViCareUtils import PyViCareRateLimitError, PyViCareCommandError
-from abc import abstractclassmethod
-from oauthlib.oauth2 import TokenExpiredError
 import logging
+from abc import abstractclassmethod
+
+from oauthlib.oauth2 import TokenExpiredError
+
+from PyViCare import Feature
+from PyViCare.PyViCareUtils import PyViCareCommandError, PyViCareRateLimitError
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

@@ -1,6 +1,7 @@
 import unittest
-from tests.ViCareServiceMock import ViCareServiceMock
+
 from PyViCare.PyViCareHeatPump import HeatPump
+from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal300G(unittest.TestCase):

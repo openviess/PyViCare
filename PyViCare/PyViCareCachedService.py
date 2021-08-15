@@ -1,5 +1,6 @@
-from datetime import datetime
 import threading
+from datetime import datetime
+
 from PyViCare.PyViCareService import ViCareService, readFeature
 
 

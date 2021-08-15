@@ -1,6 +1,7 @@
-from PyViCare import Feature
 import datetime
 from functools import wraps
+
+from PyViCare import Feature
 
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not

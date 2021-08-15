@@ -1,14 +1,17 @@
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareUtils import PyViCareBrowserOAuthTimeoutReachedError, PyViCareInvalidCredentialsError
-import requests
-import re
 import json
-import os
-import pkce
-from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
-from requests_oauthlib import OAuth2Session
+import os
+import re
 import webbrowser
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+import pkce
+import requests
+from requests_oauthlib import OAuth2Session
+
+from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
+                                    PyViCareInvalidCredentialsError)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

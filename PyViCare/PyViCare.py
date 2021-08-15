@@ -1,9 +1,10 @@
+import logging
+
 from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
+from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
-from PyViCare.PyViCareCachedService import ViCareCachedService
-import logging
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

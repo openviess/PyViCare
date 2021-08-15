@@ -1,5 +1,6 @@
-import logging
 import json
+import logging
+
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 logger = logging.getLogger('ViCare')

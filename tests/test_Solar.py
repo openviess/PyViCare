@@ -1,5 +1,6 @@
-from PyViCare.PyViCareDevice import Device
 import unittest
+
+from PyViCare.PyViCareDevice import Device
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

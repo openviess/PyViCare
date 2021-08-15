@@ -1,14 +1,16 @@
+import logging
+import os
+import pickle
+import re
+from contextlib import suppress
+from pickle import UnpicklingError
+
+import pkce
+import requests
+from requests_oauthlib import OAuth2Session
+
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import PyViCareInvalidCredentialsError
-import requests
-import re
-import pickle
-import os
-import pkce
-from pickle import UnpicklingError
-from requests_oauthlib import OAuth2Session
-import logging
-from contextlib import suppress
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

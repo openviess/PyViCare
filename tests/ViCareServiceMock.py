@@ -1,4 +1,5 @@
-from PyViCare.PyViCareService import ViCareDeviceAccessor, readFeature, buildSetPropertyUrl
+from PyViCare.PyViCareService import (ViCareDeviceAccessor,
+                                      buildSetPropertyUrl, readFeature)
 from tests.helper import readJson
 
 
