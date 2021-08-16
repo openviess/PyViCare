@@ -1,6 +1,8 @@
 import logging
-from datetime import datetime, time
+from datetime import datetime
+from typing import Any, Callable, List, Optional
 
+from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
                                     handleAPICommandErrors, handleNotSupported)
 
@@ -11,10 +13,10 @@ VICARE_DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 VICARE_DHW_TEMP2 = "temp-2"
 
 
-def isSupported(method):
+def isSupported(method: Callable) -> bool:
     try:
         result = method()
-        return result != 'error'
+        return bool(result != 'error')
     except PyViCareNotSupportedFeatureError:
         return False
 
@@ -25,11 +27,11 @@ class Device:
     Note that currently, a new token is generate for each run.
     """
 
-    def __init__(self, service):
+    def __init__(self, service: ViCareService) -> None:
         self.service = service
 
     @property
-    def circuits(self):
+    def circuits(self) -> List[Any]:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
 
     def getCircuit(self, circuit):
@@ -61,8 +63,8 @@ class Device:
 
         mode = None
         for s in schedule[current_day]:
-            startTime = time.fromisoformat(s["start"])
-            endTime = time.fromisoformat(s["end"])
+            startTime = datetime.strptime(s["start"], '%H:%M').time()
+            endTime = datetime.strptime(s["end"], '%H:%M').time()
             if startTime <= currentTime and currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return s["mode"]
@@ -230,8 +232,8 @@ class Device:
             return None  # no schedule for day configured
 
         for s in schedule[current_day]:
-            startTime = time.fromisoformat(s["start"])
-            endTime = time.fromisoformat(s["end"])
+            startTime = datetime.strptime(s["start"], '%H:%M').time()
+            endTime = datetime.strptime(s["end"], '%H:%M').time()
             if startTime <= currentTime and currentTime <= endTime:
                 return s["mode"]
         return schedule['default_mode']
@@ -250,13 +252,13 @@ class Device:
 
 
 class DeviceWithCircuit:
-    def __init__(self, device, circuit):
+    def __init__(self, device: Device, circuit: str) -> None:
         self.service = device.service
         self.circuit = circuit
         self.device = device
 
     @property
-    def id(self):
+    def id(self) -> str:
         return self.circuit
 
     """ Set the active mode
@@ -416,7 +418,7 @@ class DeviceWithCircuit:
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
-    def getTargetSupplyTemperature(self):
+    def getTargetSupplyTemperature(self) -> Optional[float]:
         if(not isSupported(self.getCurrentDesiredTemperature)
                 or not isSupported(self.device.getOutsideTemperature)
                 or not isSupported(self.getHeatingCurveShift)
@@ -431,4 +433,4 @@ class DeviceWithCircuit:
         targetSupply = (inside + shift - slope * delta_outside_inside
                         * (1.4347 + 0.021 * delta_outside_inside + 247.9
                             * pow(10, -6) * pow(delta_outside_inside, 2)))
-        return round(targetSupply, 1)
+        return float(round(targetSupply, 1))

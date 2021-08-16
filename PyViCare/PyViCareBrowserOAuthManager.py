@@ -37,7 +37,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             self.end_headers()
             self.wfile.write(text.encode("utf-8"))
 
-    def __init__(self, client_id, token_file):
+    def __init__(self, client_id: str, token_file: str) -> None:
 
         self.token_file = token_file
         self.client_id = client_id
@@ -127,7 +127,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         self.__storeToken(result)
         return OAuth2Session(client_id=self.client_id, token=result)
 
-    def renewToken(self):
+    def renewToken(self) -> None:
         token = self.oauth_session.token
         result = requests.post(url=TOKEN_URL, data={
             'grant_type': 'refresh_token',

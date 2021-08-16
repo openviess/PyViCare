@@ -1,5 +1,6 @@
 import logging
 
+from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
 from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
@@ -13,24 +14,22 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCare:
-    def __init__(self):
+    def __init__(self) -> None:
         self.cacheDuration = 60
 
     def setCacheDuration(self, cache_duration):
         self.cacheDuration = cache_duration
 
-    def initWithCredentials(self, username, password, client_id, token_file):
-        self.oauth_manager = ViCareOAuthManager(
-            username, password, client_id, token_file)
-        self.__loadInstallations()
+    def initWithCredentials(self, username: str, password: str, client_id: str, token_file: str):
+        self.initWithExternalOAuth(ViCareOAuthManager(
+            username, password, client_id, token_file))
 
-    def initWithExternalOAuth(self, oauth_manager):
+    def initWithExternalOAuth(self, oauth_manager: AbstractViCareOAuthManager) -> None:
         self.oauth_manager = oauth_manager
         self.__loadInstallations()
 
-    def initWithBrowserOAuth(self, client_id, token_file):
-        self.oauth_manager = ViCareBrowserOAuthManager(client_id, token_file)
-        self.__loadInstallations()
+    def initWithBrowserOAuth(self, client_id: str, token_file: str) -> None:
+        self.initWithExternalOAuth(ViCareBrowserOAuthManager(client_id, token_file))
 
     def __buildService(self, accessor):
         if self.cacheDuration > 0:

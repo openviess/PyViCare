@@ -1,5 +1,6 @@
 import datetime
 from functools import wraps
+from typing import Callable
 
 from PyViCare import Feature
 
@@ -9,7 +10,7 @@ from PyViCare import Feature
 # the device.
 
 
-def handleNotSupported(func):
+def handleNotSupported(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -29,7 +30,7 @@ def handleNotSupported(func):
     return feature_flag_wrapper
 
 
-def handleAPICommandErrors(func):
+def handleAPICommandErrors(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:

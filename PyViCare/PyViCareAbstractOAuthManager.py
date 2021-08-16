@@ -1,7 +1,9 @@
 import logging
 from abc import abstractclassmethod
+from typing import Any
 
-from oauthlib.oauth2 import TokenExpiredError
+from oauthlib.oauth2 import TokenExpiredError  # type: ignore
+from requests_oauthlib.oauth2_session import OAuth2Session
 
 from PyViCare import Feature
 from PyViCare.PyViCareUtils import PyViCareCommandError, PyViCareRateLimitError
@@ -13,21 +15,21 @@ API_BASE_URL = 'https://api.viessmann.com/iot/v1'
 
 
 class AbstractViCareOAuthManager:
-    def __init__(self, oauth_session):
+    def __init__(self, oauth_session: OAuth2Session) -> None:
         self.__oauth = oauth_session
 
     @property
-    def oauth_session(self):
+    def oauth_session(self) -> OAuth2Session:
         return self.__oauth
 
-    def replace_session(self, new_session):
+    def replace_session(self, new_session: OAuth2Session) -> None:
         self.__oauth = new_session
 
     @abstractclassmethod
     def renewToken(self):
         return
 
-    def get(self, url):
+    def get(self, url: str) -> Any:
         try:
             logger.debug(self.__oauth)
             response = self.__oauth.get(f"{API_BASE_URL}{url}").json()
@@ -71,7 +73,7 @@ class AbstractViCareOAuthManager:
         json representation of the answer
     """
 
-    def post(self, url, data):
+    def post(self, url, data) -> Any:
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
