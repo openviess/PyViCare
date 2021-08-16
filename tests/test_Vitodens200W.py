@@ -1,6 +1,7 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -10,16 +11,16 @@ class Vitodens200W(unittest.TestCase):
         self.device = GazBoiler(self.service)
 
     def test_getBurnerActive(self):
-        self.assertEqual(self.device.getBurnerActive(), True)
+        self.assertEqual(self.device.getBurnerActive(), False)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.circuits[0].getBurnerStarts(), 8028)
+        self.assertEqual(self.device.circuits[0].getBurnerStarts(), 8125)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.circuits[0].getBurnerHours(), 5570)
+        self.assertEqual(self.device.circuits[0].getBurnerHours(), 5605)
 
     def test_getBurnerModulation(self):
-        self.assertEqual(self.device.circuits[0].getBurnerModulation(), 11.1)
+        self.assertEqual(self.device.circuits[0].getBurnerModulation(), 0)
 
     def test_getPrograms(self):
         expected_programs = [
@@ -32,10 +33,9 @@ class Vitodens200W(unittest.TestCase):
         self.assertListEqual(
             self.device.circuits[0].getModes(), expected_modes)
 
+    # Is currently (August, 2021) not supported by the Viessman API
     def test_getPowerConsumptionDays(self):
-        expected_consumption = [0, 0.1, 0.2, 0.1, 0.2, 0.2, 0.2, 0.2]
-        self.assertEqual(self.device.getPowerConsumptionDays(),
-                         expected_consumption)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDays)
 
     def test_getFrostProtectionActive(self):
         self.assertEqual(
@@ -43,15 +43,15 @@ class Vitodens200W(unittest.TestCase):
 
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterCirculationPumpActive(), True)
+            self.device.getDomesticHotWaterCirculationPumpActive(), False)
 
     def test_getDomesticHotWaterOutletTemperature(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterOutletTemperature(), 58)
+            self.device.getDomesticHotWaterOutletTemperature(), 41.9)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterConfiguredTemperature(), 55)      
+            self.device.getDomesticHotWaterConfiguredTemperature(), 55)
 
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertEqual(
