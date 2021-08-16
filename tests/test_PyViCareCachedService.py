@@ -1,9 +1,10 @@
-import unittest
-from PyViCare.PyViCareService import ViCareDeviceAccessor
-from PyViCare.PyViCareCachedService import ViCareCachedService, ViCareTimer
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
-from unittest.mock import Mock, patch
 import datetime
+import unittest
+from unittest.mock import Mock, patch
+
+from PyViCare.PyViCareCachedService import ViCareCachedService, ViCareTimer
+from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 
 class PyViCareCachedServiceTest(unittest.TestCase):

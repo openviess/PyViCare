@@ -1,6 +1,7 @@
 import unittest
-from tests.ViCareServiceMock import ViCareServiceMock, MockCircuitsData
+
 from PyViCare.PyViCareDevice import Device
+from tests.ViCareServiceMock import MockCircuitsData, ViCareServiceMock
 
 
 class GenericDevice(unittest.TestCase):

@@ -1,6 +1,7 @@
 import unittest
-from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from unittest.mock import Mock
+
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 
 
 class PyViCareServiceTest(unittest.TestCase):

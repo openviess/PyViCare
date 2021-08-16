@@ -1,4 +1,5 @@
 import unittest
+
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 
 

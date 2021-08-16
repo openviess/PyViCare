@@ -1,7 +1,8 @@
 import unittest
-from tests.ViCareServiceMock import ViCareServiceMock
+
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal200(unittest.TestCase):

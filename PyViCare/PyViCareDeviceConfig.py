@@ -1,12 +1,14 @@
+import json
+import logging
+import re
+
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareFuelCell import FuelCell
+from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
-import re
-import logging
-import json
+
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 

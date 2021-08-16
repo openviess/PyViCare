@@ -1,7 +1,8 @@
-from PyViCare.PyViCareUtils import PyViCareRateLimitError, PyViCareCommandError
 import unittest
-from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
 from unittest.mock import Mock
+
+from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
+from PyViCare.PyViCareUtils import PyViCareCommandError, PyViCareRateLimitError
 from tests.helper import readJson
 
 

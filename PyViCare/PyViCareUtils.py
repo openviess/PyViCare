@@ -1,6 +1,8 @@
-from PyViCare import Feature
 import datetime
 from functools import wraps
+from typing import Callable
+
+from PyViCare import Feature
 
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not
@@ -8,7 +10,7 @@ from functools import wraps
 # the device.
 
 
-def handleNotSupported(func):
+def handleNotSupported(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -28,7 +30,7 @@ def handleNotSupported(func):
     return feature_flag_wrapper
 
 
-def handleAPICommandErrors(func):
+def handleAPICommandErrors(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
