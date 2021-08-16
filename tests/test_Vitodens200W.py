@@ -49,6 +49,10 @@ class Vitodens200W(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterOutletTemperature(), 58)
 
+    def test_getDomesticHotWaterConfiguredTemperature(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterConfiguredTemperature(), 55)      
+
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationScheduleModes(), ['on'])
