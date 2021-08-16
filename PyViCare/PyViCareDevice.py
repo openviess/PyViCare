@@ -43,7 +43,7 @@ class Device:
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature")["properties"]["value"]["value"]
+        return self.service.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
