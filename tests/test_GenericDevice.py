@@ -29,7 +29,7 @@ class GenericDevice(unittest.TestCase):
         self.device.setDomesticHotWaterTemperature(50)
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(
-            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature')
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature.main')
         self.assertEqual(
             self.service.setPropertyData[0]['action'], 'setTargetTemperature')
         self.assertEqual(self.service.setPropertyData[0]['data'], {

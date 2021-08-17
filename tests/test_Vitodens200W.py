@@ -37,6 +37,12 @@ class Vitodens200W(unittest.TestCase):
     def test_getPowerConsumptionDays(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDays)
 
+    def test_getDomesticHotWaterMaxTemperature(self):
+        self.assertEqual(self.device.getDomesticHotWaterMaxTemperature(), 60)
+
+    def test_getDomesticHotWaterMinTemperature(self):
+        self.assertEqual(self.device.getDomesticHotWaterMinTemperature(), 10)
+
     def test_getFrostProtectionActive(self):
         self.assertEqual(
             self.device.circuits[0].getFrostProtectionActive(), False)
