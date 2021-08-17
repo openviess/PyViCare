@@ -105,11 +105,11 @@ class Device:
 
     @handleNotSupported
     def getDomesticHotWaterMaxTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["max"]
+        return self.service.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"]["temperature"]["constraints"]["max"]
 
     @handleNotSupported
     def getDomesticHotWaterMinTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature")["actions"][0]["fields"][0]["min"]
+        return self.service.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"]["temperature"]["constraints"]["min"]
 
     @handleNotSupported
     def getDomesticHotWaterChargingActive(self):
@@ -129,7 +129,7 @@ class Device:
 
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
-        return self.service.setProperty("heating.dhw.temperature", "setTargetTemperature", {'temperature': temperature})
+        return self.service.setProperty("heating.dhw.temperature.main", "setTargetTemperature", {'temperature': temperature})
 
     """ Set the target temperature 2 for domestic host water
     Parameters
