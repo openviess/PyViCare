@@ -1,8 +1,8 @@
-from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class FuelCell(GazBoiler):
+class FuelCell(Device):
 
     @handleNotSupported
     def getOperatingPhase(self):
