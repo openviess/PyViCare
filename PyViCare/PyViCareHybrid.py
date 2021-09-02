@@ -6,5 +6,6 @@ class Hybrid(GazBoiler, HeatPump):
     def getCircuit(self, circuit):
         return HybridWithCircuit(self, circuit)
 
+
 class HybridWithCircuit(GazBoilerWithCircuit, HeatPumpWithCircuit):
     pass
