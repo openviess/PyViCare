@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareHybrid import Hybrid
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
