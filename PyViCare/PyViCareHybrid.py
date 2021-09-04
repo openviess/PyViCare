@@ -1,11 +1,8 @@
-from PyViCare.PyViCareGazBoiler import GazBoiler, GazBoilerWithCircuit
-from PyViCare.PyViCareHeatPump import HeatPump, HeatPumpWithCircuit
+from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareHeatPump import HeatPump
 
 
 class Hybrid(GazBoiler, HeatPump):
-    def getCircuit(self, circuit):
-        return HybridWithCircuit(self, circuit)
-
-
-class HybridWithCircuit(GazBoilerWithCircuit, HeatPumpWithCircuit):
     pass
+
+

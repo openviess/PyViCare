@@ -35,7 +35,15 @@ class Device:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
 
     def getCircuit(self, circuit):
-        return DeviceWithCircuit(self, circuit)
+        return HeatingCircuit(self, circuit)
+
+    @property
+    def burners(self) -> List[Any]:
+        return []
+
+    @property
+    def compressors(self) -> List[Any]:
+        return []
 
     @handleNotSupported
     def getOutsideTemperature(self):
@@ -251,15 +259,21 @@ class Device:
         return self.service.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
 
 
-class DeviceWithCircuit:
-    def __init__(self, device: Device, circuit: str) -> None:
+class DeviceWithComponent:
+    def __init__(self, device: Device, component: str) -> None:
         self.service = device.service
-        self.circuit = circuit
+        self.component = component
         self.device = device
 
     @property
     def id(self) -> str:
-        return self.circuit
+        return self.component
+
+class HeatingCircuit(DeviceWithComponent):
+
+    @property
+    def circuit(self) -> str:
+        return self.component
 
     """ Set the active mode
     Parameters

@@ -98,6 +98,16 @@ class Integration(unittest.TestCase):
                     dumpResults(circuit)
                     print()
 
+                for burner in device.burners:
+                    print(f"{'Use burner':<45}{burner.id}")
+                    dumpResults(burner)
+                    print()
+
+                for compressor in device.compressors:
+                    print(f"{'Use compressor':<45}{compressor.id}")
+                    dumpResults(compressor)
+                    print()
+
             print()
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
