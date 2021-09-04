@@ -269,6 +269,7 @@ class DeviceWithComponent:
     def id(self) -> str:
         return self.component
 
+
 class HeatingCircuit(DeviceWithComponent):
 
     @property

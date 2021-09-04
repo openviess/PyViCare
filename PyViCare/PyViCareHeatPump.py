@@ -1,4 +1,5 @@
 from typing import Any, List
+
 from PyViCare.PyViCareDevice import Device, DeviceWithComponent
 from PyViCare.PyViCareUtils import handleNotSupported
 
@@ -11,11 +12,10 @@ class HeatPump(Device):
 
     def getCompressor(self, compressor):
         return Compressor(self, compressor)
-    
+
     @handleNotSupported
     def getAvailableCompressors(self):
         return self.service.getProperty("heating.compressors")["components"]
-
 
     @handleNotSupported
     def getReturnTemperature(self):

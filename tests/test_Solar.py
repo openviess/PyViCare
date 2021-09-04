@@ -18,10 +18,6 @@ class SolarTest(unittest.TestCase):
 
     def test_getSolarCollectorTemperature(self):
         self.assertEqual(self.device.getSolarCollectorTemperature(), 21.9)
-    
+
     def test_getSolarPumpActive(self):
         self.assertEqual(self.device.getSolarPumpActive(), False)
-
-        
-
-    

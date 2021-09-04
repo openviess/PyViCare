@@ -1,4 +1,5 @@
 from typing import Any, List
+
 from PyViCare.PyViCareDevice import Device, DeviceWithComponent
 from PyViCare.PyViCareUtils import handleNotSupported
 
