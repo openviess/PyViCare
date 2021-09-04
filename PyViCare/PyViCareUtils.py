@@ -62,6 +62,10 @@ class PyViCareBrowserOAuthTimeoutReachedError(Exception):
     pass
 
 
+class PyViCareInvalidDataError(Exception):
+    pass
+
+
 class PyViCareRateLimitError(Exception):
 
     def __init__(self, response):
