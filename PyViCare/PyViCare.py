@@ -41,7 +41,7 @@ class PyViCare:
     def __loadInstallations(self):
         installations = self.oauth_manager.get(
             "/equipment/installations?includeGateways=true")
-        if not "data" in installations:
+        if "data" not in installations:
             logger.error("Missing data property when fetching installations: %s" % json.dumps(installations))
         self.devices = list(self.__readInstallations(installations["data"]))
 
