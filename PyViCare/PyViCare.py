@@ -7,6 +7,7 @@ from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
+from PyViCare.PyViCareUtils import PyViCareInvalidDataError
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -43,6 +44,8 @@ class PyViCare:
             "/equipment/installations?includeGateways=true")
         if "data" not in installations:
             logger.error("Missing data property when fetching installations: %s" % json.dumps(installations))
+            raise PyViCareInvalidDataError()
+
         self.devices = list(self.__readInstallations(installations["data"]))
 
     def __readInstallations(self, data):
