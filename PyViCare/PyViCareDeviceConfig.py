@@ -6,6 +6,7 @@ from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareHybrid import Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 
@@ -36,6 +37,9 @@ class PyViCareDeviceConfig:
 
     def asPelletsBoiler(self):
         return PelletsBoiler(self.service)
+
+    def asHybridDevice(self):
+        return Hybrid(self.service)
 
     def getConfig(self):
         return self.service.accessor
