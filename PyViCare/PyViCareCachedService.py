@@ -31,7 +31,7 @@ class ViCareCachedService(ViCareService):
         data = self.__get_or_update_cache()
 
         if "data" not in data:
-            logger.error("Missing data property when fetching data: %s")
+            logger.error("Missing 'data' property when fetching data.")
             raise PyViCareInvalidDataError(data)
 
         entities = data["data"]

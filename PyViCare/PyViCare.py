@@ -1,4 +1,3 @@
-import json
 import logging
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
@@ -43,7 +42,7 @@ class PyViCare:
         installations = self.oauth_manager.get(
             "/equipment/installations?includeGateways=true")
         if "data" not in installations:
-            logger.error("Missing data property when fetching installations: %s" % json.dumps(installations))
+            logger.error("Missing 'data' property when fetching installations")
             raise PyViCareInvalidDataError(installations)
 
         self.devices = list(self.__readInstallations(installations["data"]))
