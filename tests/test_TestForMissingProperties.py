@@ -9,7 +9,7 @@ import pytest
 from tests.helper import readJson
 
 
-class TestData(unittest.TestCase):
+class TestForMissingProperties(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
         self.capsys = capsys
@@ -18,7 +18,17 @@ class TestData(unittest.TestCase):
 
         ignore = [
             'heating.operating.programs.holidayAtHome',
-            'heating.boiler.temperature'  # ignore as value is to low to be plausible in response data
+            'heating.operating.programs.holiday',
+            'heating.device.time.offset',
+            'heating.configuration.multiFamilyHouse',
+            'heating.boiler.temperature',  # ignore as value is to low to be plausible in response data
+
+            'heating.circuits.0.dhw.pumps.circulation.schedule',
+            'heating.circuits.0.dhw.schedule',
+            'heating.power.consumption.dhw',
+
+            'heating.circuits.0.temperature.levels',  # hint: command
+            'heating.dhw.temperature.hysteresis',  # hint: command
         ]
 
         all_features = self.read_all_features()
@@ -32,12 +42,12 @@ class TestData(unittest.TestCase):
             if not found and len(foundInFiles) > 0 and feature not in ignore:
                 missing_features[feature] = foundInFiles
 
-        has_missing_features = len(missing_features) >= 0
+        has_missing_features = len(missing_features) > 0
         self.assertFalse(has_missing_features, json.dumps(missing_features, sort_keys=True, indent=2))
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")
-        search_string = re.sub(r"\d", r"{.*?}", search_string)
+        search_string = re.sub(r"\b\d\b", r"{.*?}", search_string)
         search_string = re.sub(r'\\.modes\\.\w+', r'\\.modes\\.\\w+', search_string)
         search_string = re.sub(r'\\.programs\\.\w+', r'\\.programs\\.\\w+', search_string)
 
@@ -68,7 +78,7 @@ class TestData(unittest.TestCase):
             data = readJson(join(response_path, response))
             if "data" in data:
                 for feature in data["data"]:
-                    name = re.sub(r"\d", "0", feature["feature"])
+                    name = re.sub(r"\b\d\b", "0", feature["feature"])
                     if name not in all_features:
                         all_features[name] = {'files': []}
 

@@ -1,3 +1,4 @@
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
@@ -33,11 +34,9 @@ class Vitodens333F(unittest.TestCase):
         self.assertListEqual(
             self.device.circuits[0].getModes(), expected_modes)
 
+    # the api has changed, and the current response file is missing the new property, so for now we expect a not supported error
     def test_getPowerConsumptionDays(self):
-        expected_consumption = [0.097, 0.162, 0.166,
-                                0.162, 0.159, 0.173, 0.182, 0.159]
-        self.assertEqual(self.device.getPowerConsumptionDays(),
-                         expected_consumption)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDays)
 
     def test_getFrostProtectionActive(self):
         self.assertEqual(

@@ -54,6 +54,14 @@ class Device:
         return self.service.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getHotWaterStorageTemperatureTop(self):
+        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.top")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHotWaterStorageTemperatureBottom(self):
+        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"]["value"]
+
+    @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
         return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
 

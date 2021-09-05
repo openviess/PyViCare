@@ -21,6 +21,14 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getBurnerActive(self):
         self.assertEqual(self.device.getBurnerActive(), False)
 
+    def test_getBufferTopTemperature(self):
+        self.assertEqual(
+            self.device.getBufferTopTemperature(), 36)
+
+    def test_getBufferMainTemperature(self):
+        self.assertEqual(
+            self.device.getBufferMainTemperature(), 36)
+
     def test_getBurnerStarts(self):
         self.assertEqual(self.device.getBurner(0).getStarts(), 1306)
 
@@ -63,3 +71,7 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getOutsideTemperature(self):
         self.assertEqual(
             self.device.getOutsideTemperature(), 15.3)
+
+    def test_getHotWaterStorageTemperatureTop(self):
+        self.assertEqual(
+            self.device.getHotWaterStorageTemperatureTop(), 50.9)

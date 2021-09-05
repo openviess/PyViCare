@@ -17,6 +17,14 @@ class HeatPump(Device):
     def getAvailableCompressors(self):
         return self.service.getProperty("heating.compressors")["components"]
 
+    @handleNotSupported
+    def getBufferMainTemperature(self):
+        return self.service.getProperty("heating.buffer.sensors.temperature.main")["properties"]['value']['value']
+
+    @handleNotSupported
+    def getBufferTopTemperature(self):
+        return self.service.getProperty("heating.buffer.sensors.temperature.top")["properties"]['value']['value']
+
 
 class Compressor(DeviceWithComponent):
 
