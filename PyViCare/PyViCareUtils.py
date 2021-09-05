@@ -82,6 +82,19 @@ class PyViCareRateLimitError(Exception):
         self.limitResetDate = limitResetDate
 
 
+class PyViCareInternalServerError(Exception):
+    def __init__(self, response):
+        statusCode = response["statusCode"]
+
+        message = response["message"]
+        viErrorId = response["viErrorId"]
+
+        msg = f'Request failed with status code {statusCode} and message "{message}". ViCare ErrorId: {viErrorId}'
+
+        super().__init__(self, msg)
+        self.message = msg
+
+
 class PyViCareCommandError(Exception):
     def __init__(self, response):
         statusCode = response["statusCode"]

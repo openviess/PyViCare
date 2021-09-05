@@ -35,7 +35,15 @@ class Device:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
 
     def getCircuit(self, circuit):
-        return DeviceWithCircuit(self, circuit)
+        return HeatingCircuit(self, circuit)
+
+    @property
+    def burners(self) -> List[Any]:
+        return []
+
+    @property
+    def compressors(self) -> List[Any]:
+        return []
 
     @handleNotSupported
     def getOutsideTemperature(self):
@@ -44,6 +52,14 @@ class Device:
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
         return self.service.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHotWaterStorageTemperatureTop(self):
+        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.top")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHotWaterStorageTemperatureBottom(self):
+        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
@@ -101,6 +117,11 @@ class Device:
     def getDomesticHotWaterCirculationPumpActive(self):
         status = self.service.getProperty("heating.dhw.pumps.circulation")[
             "properties"]["status"]["value"]
+        return status == 'on'
+
+    @handleNotSupported
+    def getDomesticHotWaterActive(self):
+        status = self.service.getProperty("heating.dhw")["properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
@@ -250,16 +271,47 @@ class Device:
     def getBoilerSerial(self):
         return self.service.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getSerial(self):
+        return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
-class DeviceWithCircuit:
-    def __init__(self, device: Device, circuit: str) -> None:
+    @handleNotSupported
+    def getReturnTemperature(self):
+        return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSupplyTemperaturePrimaryCircuit(self):
+        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.supply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getReturnTemperaturePrimaryCircuit(self):
+        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSupplyTemperatureSecondaryCircuit(self):
+        return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getReturnTemperatureSecondaryCircuit(self):
+        return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
+
+
+class DeviceWithComponent:
+    def __init__(self, device: Device, component: str) -> None:
         self.service = device.service
-        self.circuit = circuit
+        self.component = component
         self.device = device
 
     @property
     def id(self) -> str:
-        return self.circuit
+        return self.component
+
+
+class HeatingCircuit(DeviceWithComponent):
+
+    @property
+    def circuit(self) -> str:
+        return self.component
 
     """ Set the active mode
     Parameters

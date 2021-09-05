@@ -34,6 +34,7 @@ Tip: You can use Pythons [contextlib.suppress](https://docs.python.org/3/library
 - Use `asFuelCell` for fuel cells
 - Use `asPelletsBoiler` for pellets heatings
 - Use `asOilBoiler` for oil heatings
+- Use `asHybridDevice` for gas/heat pump hybrid heatings
 
 ## Basic Usage:
 

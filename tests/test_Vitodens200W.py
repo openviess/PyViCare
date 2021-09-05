@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -10,17 +9,26 @@ class Vitodens200W(unittest.TestCase):
         self.service = ViCareServiceMock('response/Vitodens200W.json')
         self.device = GazBoiler(self.service)
 
+    def test_getSerial(self):
+        self.assertEqual(self.device.getSerial(), '################')
+
+    def test_getBoilerCommonSupplyTemperature(self):
+        self.assertEqual(self.device.getBoilerCommonSupplyTemperature(), 44.4)
+
     def test_getBurnerActive(self):
         self.assertEqual(self.device.getBurnerActive(), False)
 
+    def test_getDomesticHotWaterActive(self):
+        self.assertEqual(self.device.getDomesticHotWaterActive(), True)
+
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.circuits[0].getBurnerStarts(), 8125)
+        self.assertEqual(self.device.burners[0].getStarts(), 8237)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.circuits[0].getBurnerHours(), 5605)
+        self.assertEqual(self.device.burners[0].getHours(), 5644)
 
     def test_getBurnerModulation(self):
-        self.assertEqual(self.device.circuits[0].getBurnerModulation(), 0)
+        self.assertEqual(self.device.burners[0].getModulation(), 0)
 
     def test_getPrograms(self):
         expected_programs = [
@@ -33,9 +41,9 @@ class Vitodens200W(unittest.TestCase):
         self.assertListEqual(
             self.device.circuits[0].getModes(), expected_modes)
 
-    # Is currently (August, 2021) not supported by the Viessman API
     def test_getPowerConsumptionDays(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDays)
+        expected_days = [0.1, 0.2, 0.2, 0.2, 0.2, 0.4, 0.4, 0.1]
+        self.assertEqual(self.device.getPowerConsumptionDays(), expected_days)
 
     def test_getDomesticHotWaterMaxTemperature(self):
         self.assertEqual(self.device.getDomesticHotWaterMaxTemperature(), 60)
@@ -53,7 +61,7 @@ class Vitodens200W(unittest.TestCase):
 
     def test_getDomesticHotWaterOutletTemperature(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterOutletTemperature(), 41.9)
+            self.device.getDomesticHotWaterOutletTemperature(), 39.1)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(

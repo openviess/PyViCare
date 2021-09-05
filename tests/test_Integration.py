@@ -6,6 +6,7 @@ import pytest
 
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.helper import enablePrintStatementsForTest
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
 TOKEN_FILE = "token.save"
@@ -27,10 +28,6 @@ def prettyPrintResults(result):
         return indented
     else:
         return result
-
-
-def enablePrintStatementsForTest(test_case):
-    return test_case.capsys.disabled()
 
 
 def dumpResults(vicare_device):
@@ -96,6 +93,16 @@ class Integration(unittest.TestCase):
                 for circuit in device.circuits:
                     print(f"{'Use circuit':<45}{circuit.id}")
                     dumpResults(circuit)
+                    print()
+
+                for burner in device.burners:
+                    print(f"{'Use burner':<45}{burner.id}")
+                    dumpResults(burner)
+                    print()
+
+                for compressor in device.compressors:
+                    print(f"{'Use compressor':<45}{compressor.id}")
+                    dumpResults(compressor)
                     print()
 
             print()
