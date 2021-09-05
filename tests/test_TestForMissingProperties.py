@@ -4,17 +4,13 @@ import unittest
 from os import listdir
 from os.path import dirname, isfile, join
 
-import pytest
-
 from tests.helper import readJson
 
 
 class TestForMissingProperties(unittest.TestCase):
-    @pytest.fixture(autouse=True)
-    def capsys(self, capsys):
-        self.capsys = capsys
-
     def test_missingProperties(self):
+        # with this test we want to check if new properties
+        # are added to the response files
 
         ignore = [
             'heating.operating.programs.holidayAtHome',
@@ -45,6 +41,25 @@ class TestForMissingProperties(unittest.TestCase):
         has_missing_features = len(missing_features) > 0
         self.assertFalse(has_missing_features, json.dumps(missing_features, sort_keys=True, indent=2))
 
+    def test_unverifiedProperties(self):
+        # with this test we want to verify if we access
+        # properties which are not in any test response data
+
+        all_features = self.read_all_features()
+        all_python_files = self.read_all_python_code()
+
+        used_features = []
+        for python in all_python_files:
+            if python in ['PyViCareFuelCell.py']:  # skip, where we miss test data
+                continue
+
+            for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
+                feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
+                feature_name = re.sub(r'\.{(program|active_programm)}', '', feature_name)
+                used_features.append(feature_name)
+
+        self.assertSetEqual(set([]), set(used_features) - set(all_features))
+
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")
         search_string = re.sub(r"\b\d\b", r"{.*?}", search_string)
@@ -65,6 +80,9 @@ class TestForMissingProperties(unittest.TestCase):
         all_python_files = {}
 
         for python in python_files:
+            if not python.endswith(".py"):
+                continue
+
             with open(join(python_path, python)) as f:
                 all_python_files[python] = f.read()
         return all_python_files
