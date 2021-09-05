@@ -1,7 +1,7 @@
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
