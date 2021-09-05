@@ -56,9 +56,6 @@ class AbstractViCareOAuthManager:
             raise PyViCareRateLimitError(response)
 
     def __handle_server_error(self, response):
-        if not Feature.raise_exception_on_command_failure:
-            return
-
         if("statusCode" in response and response["statusCode"] >= 500):
             raise PyViCareInternalServerError(response)
 
