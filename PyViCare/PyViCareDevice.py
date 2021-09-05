@@ -258,6 +258,26 @@ class Device:
     def getBoilerSerial(self):
         return self.service.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getReturnTemperature(self):
+        return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSupplyTemperaturePrimaryCircuit(self):
+        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.supply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getReturnTemperaturePrimaryCircuit(self):
+        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSupplyTemperatureSecondaryCircuit(self):
+        return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getReturnTemperatureSecondaryCircuit(self):
+        return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
+
 
 class DeviceWithComponent:
     def __init__(self, device: Device, component: str) -> None:

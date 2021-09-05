@@ -17,18 +17,6 @@ class HeatPump(Device):
     def getAvailableCompressors(self):
         return self.service.getProperty("heating.compressors")["components"]
 
-    @handleNotSupported
-    def getReturnTemperature(self):
-        return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getSupplyTemperaturePrimaryCircuit(self):
-        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.supply")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getReturnTemperaturePrimaryCircuit(self):
-        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"]["value"]
-
 
 class Compressor(DeviceWithComponent):
 
