@@ -129,13 +129,13 @@ class GazBurner(DeviceWithComponent):
         return self.component
 
     @handleNotSupported
-    def getBurnerHours(self):
+    def getHours(self):
         return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
-    def getBurnerStarts(self):
+    def getStarts(self):
         return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["starts"]["value"]
 
     @handleNotSupported
-    def getBurnerModulation(self):
+    def getModulation(self):
         return self.service.getProperty(f"heating.burners.{self.burner}.modulation")["properties"]["value"]["value"]

@@ -25,33 +25,33 @@ class Compressor(DeviceWithComponent):
         return self.component
 
     @handleNotSupported
-    def getCompressorStarts(self):
+    def getStarts(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["starts"]["value"]
 
     @handleNotSupported
-    def getCompressorHours(self):
+    def getHours(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
-    def getCompressorHoursLoadClass1(self):
+    def getHoursLoadClass1(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassOne"]["value"]
 
     @handleNotSupported
-    def getCompressorHoursLoadClass2(self):
+    def getHoursLoadClass2(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassTwo"]["value"]
 
     @handleNotSupported
-    def getCompressorHoursLoadClass3(self):
+    def getHoursLoadClass3(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassThree"]["value"]
 
     @handleNotSupported
-    def getCompressorHoursLoadClass4(self):
+    def getHoursLoadClass4(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassFour"]["value"]
 
     @handleNotSupported
-    def getCompressorHoursLoadClass5(self):
+    def getHoursLoadClass5(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassFive"]["value"]
 
     @handleNotSupported
-    def getCompressorActive(self):
+    def getActive(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]

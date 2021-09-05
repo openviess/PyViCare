@@ -11,35 +11,35 @@ class Vitocal200(unittest.TestCase):
         self.device = HeatPump(self.service)
 
     def test_getCompressorActive(self):
-        self.assertEqual(self.device.compressors[0].getCompressorActive(), False)
+        self.assertEqual(self.device.compressors[0].getActive(), False)
 
     def test_getCompressorHours(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorHours(), 8583.2)
+            self.device.compressors[0].getHours(), 8583.2)
 
     def test_getCompressorStarts(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorStarts(), 3180)
+            self.device.compressors[0].getStarts(), 3180)
 
     def test_getCompressorHoursLoadClass1(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorHoursLoadClass1(), 227)
+            self.device.compressors[0].getHoursLoadClass1(), 227)
 
     def test_getCompressorHoursLoadClass2(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorHoursLoadClass2(), 3294)
+            self.device.compressors[0].getHoursLoadClass2(), 3294)
 
     def test_getCompressorHoursLoadClass3(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorHoursLoadClass3(), 3903)
+            self.device.compressors[0].getHoursLoadClass3(), 3903)
 
     def test_getCompressorHoursLoadClass4(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorHoursLoadClass4(), 506)
+            self.device.compressors[0].getHoursLoadClass4(), 506)
 
     def test_getCompressorHoursLoadClass5(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getCompressorHoursLoadClass5(), 461)
+            self.device.compressors[0].getHoursLoadClass5(), 461)
 
     def test_getHeatingCurveSlope(self):
         self.assertAlmostEqual(

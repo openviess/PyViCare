@@ -22,16 +22,16 @@ class Vitocaldens222F(unittest.TestCase):
         self.assertEqual(self.device.getBurnerActive(), False)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.getBurner(0).getBurnerStarts(), 1306)
+        self.assertEqual(self.device.getBurner(0).getStarts(), 1306)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.getBurner(0).getBurnerHours(), 1639)
+        self.assertEqual(self.device.getBurner(0).getHours(), 1639)
 
     def test_getBurnerModulation(self):
-        self.assertEqual(self.device.getBurner(0).getBurnerModulation(), 0)
+        self.assertEqual(self.device.getBurner(0).getModulation(), 0)
 
     def test_getCompressorHours(self):
-        self.assertEqual(self.device.getCompressor(0).getCompressorHours(), 1.4)
+        self.assertEqual(self.device.getCompressor(0).getHours(), 1.4)
 
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco', 'fixed',

@@ -14,13 +14,13 @@ class Vitodens200W(unittest.TestCase):
         self.assertEqual(self.device.getBurnerActive(), False)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.burners[0].getBurnerStarts(), 8125)
+        self.assertEqual(self.device.burners[0].getStarts(), 8125)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.burners[0].getBurnerHours(), 5605)
+        self.assertEqual(self.device.burners[0].getHours(), 5605)
 
     def test_getBurnerModulation(self):
-        self.assertEqual(self.device.burners[0].getBurnerModulation(), 0)
+        self.assertEqual(self.device.burners[0].getModulation(), 0)
 
     def test_getPrograms(self):
         expected_programs = [

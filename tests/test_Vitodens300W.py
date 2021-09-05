@@ -16,17 +16,17 @@ class Vitodens300W(unittest.TestCase):
     # Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getBurnerStarts(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
-                          lambda: self.device.burners[0].getBurnerStarts())
+                          lambda: self.device.burners[0].getStarts())
 
     # Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getBurnerHours(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
-                          lambda: self.device.burners[0].getBurnerHours())
+                          lambda: self.device.burners[0].getHours())
 
     # Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getBurnerModulation(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
-                          lambda: self.device.burners[0].getBurnerModulation())
+                          lambda: self.device.burners[0].getModulation())
 
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco',
