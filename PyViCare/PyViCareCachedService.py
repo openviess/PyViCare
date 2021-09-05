@@ -1,3 +1,4 @@
+import logging
 import threading
 from datetime import datetime
 from typing import Any
@@ -5,6 +6,10 @@ from typing import Any
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
                                       readFeature)
+from PyViCare.PyViCareUtils import PyViCareInvalidDataError
+
+logger = logging.getLogger('ViCare')
+logger.addHandler(logging.NullHandler())
 
 
 class ViCareTimer:
@@ -24,6 +29,11 @@ class ViCareCachedService(ViCareService):
 
     def getProperty(self, property_name: str) -> Any:
         data = self.__get_or_update_cache()
+
+        if "data" not in data:
+            logger.error("Missing data property when fetching data: %s")
+            raise PyViCareInvalidDataError(data)
+
         entities = data["data"]
         return readFeature(entities, property_name)
 

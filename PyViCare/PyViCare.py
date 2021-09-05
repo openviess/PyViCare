@@ -44,7 +44,7 @@ class PyViCare:
             "/equipment/installations?includeGateways=true")
         if "data" not in installations:
             logger.error("Missing data property when fetching installations: %s" % json.dumps(installations))
-            raise PyViCareInvalidDataError()
+            raise PyViCareInvalidDataError(installations)
 
         self.devices = list(self.__readInstallations(installations["data"]))
 

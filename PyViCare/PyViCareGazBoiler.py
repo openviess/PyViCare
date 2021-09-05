@@ -90,6 +90,10 @@ class GazBoiler(Device):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getBoilerCommonSupplyTemperature(self):
+        return self.service.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
+
+    @handleNotSupported
     def getPowerConsumptionDays(self):
         return self.service.getProperty("heating.power.consumption")["properties"]["day"]["value"]
 

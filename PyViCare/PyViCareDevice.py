@@ -112,6 +112,11 @@ class Device:
         return status == 'on'
 
     @handleNotSupported
+    def getDomesticHotWaterActive(self):
+        status = self.service.getProperty("heating.dhw")["properties"]["status"]["value"]
+        return status == 'on'
+
+    @handleNotSupported
     def getDomesticHotWaterMaxTemperature(self):
         return self.service.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"]["temperature"]["constraints"]["max"]
 
@@ -257,6 +262,10 @@ class Device:
     @handleNotSupported
     def getBoilerSerial(self):
         return self.service.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getSerial(self):
+        return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getReturnTemperature(self):

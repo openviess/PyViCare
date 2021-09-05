@@ -6,6 +6,7 @@ import pytest
 
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.helper import enablePrintStatementsForTest
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
 TOKEN_FILE = "token.save"
@@ -27,10 +28,6 @@ def prettyPrintResults(result):
         return indented
     else:
         return result
-
-
-def enablePrintStatementsForTest(test_case):
-    return test_case.capsys.disabled()
 
 
 def dumpResults(vicare_device):

@@ -17,7 +17,7 @@ then
     echo "PYVICARE_DEVICE_TYPE=[device type: Generic, GazBoiler, etc.]"
     EXEC_INTEGRATION_TEST=0
 else
-    EXEC_INTEGRATION_TEST=1
+    EXEC_INTEGRATION_TEST=0
 fi
 
 PYVICARE_EMAIL=$PYVICARE_EMAIL \

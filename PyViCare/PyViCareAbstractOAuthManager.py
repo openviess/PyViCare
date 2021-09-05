@@ -6,7 +6,9 @@ from oauthlib.oauth2 import TokenExpiredError  # type: ignore
 from requests_oauthlib.oauth2_session import OAuth2Session
 
 from PyViCare import Feature
-from PyViCare.PyViCareUtils import PyViCareCommandError, PyViCareRateLimitError
+from PyViCare.PyViCareUtils import (PyViCareCommandError,
+                                    PyViCareInternalServerError,
+                                    PyViCareRateLimitError)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -36,6 +38,7 @@ class AbstractViCareOAuthManager:
             logger.debug(f"Response to get request: {response}")
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
+            self.__handle_server_error(response)
             return response
         except TokenExpiredError:
             self.renewToken()
@@ -51,6 +54,13 @@ class AbstractViCareOAuthManager:
 
         if("statusCode" in response and response["statusCode"] == 429):
             raise PyViCareRateLimitError(response)
+
+    def __handle_server_error(self, response):
+        if not Feature.raise_exception_on_command_failure:
+            return
+
+        if("statusCode" in response and response["statusCode"] >= 500):
+            raise PyViCareInternalServerError(response)
 
     def __handle_command_error(self, response):
         if not Feature.raise_exception_on_command_failure:
