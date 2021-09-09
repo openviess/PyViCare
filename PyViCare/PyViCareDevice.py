@@ -4,7 +4,8 @@ from typing import Any, Callable, List, Optional
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
-                                    handleNotSupported)
+                                    handleNotSupported, parse_time_as_delta,
+                                    time_as_delta)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -71,7 +72,7 @@ class Device:
             return None
 
         currentDateTime = ViCareTimer().now()
-        currentTime = ViCareTimer.time_as_delta(currentDateTime)
+        currentTime = time_as_delta(currentDateTime)
 
         current_day = VICARE_DAYS[currentDateTime.weekday()]
         if current_day not in schedule:
@@ -79,8 +80,8 @@ class Device:
 
         mode = None
         for s in schedule[current_day]:
-            startTime = ViCareTimer.parse_time_as_delta(s["start"])
-            endTime = ViCareTimer.parse_time_as_delta(s["end"])
+            startTime = parse_time_as_delta(s["start"])
+            endTime = parse_time_as_delta(s["end"])
             if startTime <= currentTime and currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return s["mode"]
@@ -246,15 +247,15 @@ class Device:
             return None
 
         currentDateTime = ViCareTimer().now()
-        currentTime = ViCareTimer.time_as_delta(currentDateTime)
+        currentTime = time_as_delta(currentDateTime)
 
         current_day = VICARE_DAYS[currentDateTime.weekday()]
         if current_day not in schedule:
             return None  # no schedule for day configured
 
         for s in schedule[current_day]:
-            startTime = ViCareTimer.parse_time_as_delta(s["start"])
-            endTime = ViCareTimer.parse_time_as_delta(s["end"])
+            startTime = parse_time_as_delta(s["start"])
+            endTime = parse_time_as_delta(s["end"])
             if startTime <= currentTime and currentTime <= endTime:
                 return s["mode"]
         return schedule['default_mode']
