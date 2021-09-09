@@ -1,10 +1,10 @@
 import logging
-from datetime import datetime
 from typing import Any, Callable, List, Optional
 
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
-                                    handleAPICommandErrors, handleNotSupported)
+                                    ViCareTimer, handleAPICommandErrors,
+                                    handleNotSupported)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -70,8 +70,8 @@ class Device:
         if schedule == "error" or schedule["active"] is not True:
             return None
 
-        currentDateTime = datetime.now()
-        currentTime = currentDateTime.time()
+        currentDateTime = ViCareTimer().now()
+        currentTime = ViCareTimer.time_as_delta(currentDateTime)
 
         current_day = VICARE_DAYS[currentDateTime.weekday()]
         if current_day not in schedule:
@@ -79,8 +79,8 @@ class Device:
 
         mode = None
         for s in schedule[current_day]:
-            startTime = datetime.strptime(s["start"], '%H:%M').time()
-            endTime = datetime.strptime(s["end"], '%H:%M').time()
+            startTime = ViCareTimer.parse_time_as_delta(s["start"])
+            endTime = ViCareTimer.parse_time_as_delta(s["end"])
             if startTime <= currentTime and currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return s["mode"]
@@ -245,16 +245,16 @@ class Device:
         if schedule == "error" or schedule["active"] is not True:
             return None
 
-        currentDateTime = datetime.now()
-        currentTime = currentDateTime.time()
+        currentDateTime = ViCareTimer().now()
+        currentTime = ViCareTimer.time_as_delta(currentDateTime)
 
         current_day = VICARE_DAYS[currentDateTime.weekday()]
         if current_day not in schedule:
             return None  # no schedule for day configured
 
         for s in schedule[current_day]:
-            startTime = datetime.strptime(s["start"], '%H:%M').time()
-            endTime = datetime.strptime(s["end"], '%H:%M').time()
+            startTime = ViCareTimer.parse_time_as_delta(s["start"])
+            endTime = ViCareTimer.parse_time_as_delta(s["end"])
             if startTime <= currentTime and currentTime <= endTime:
                 return s["mode"]
         return schedule['default_mode']

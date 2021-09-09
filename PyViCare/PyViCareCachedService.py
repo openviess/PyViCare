@@ -1,21 +1,14 @@
 import logging
 import threading
-from datetime import datetime
 from typing import Any
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
                                       readFeature)
-from PyViCare.PyViCareUtils import PyViCareInvalidDataError
+from PyViCare.PyViCareUtils import PyViCareInvalidDataError, ViCareTimer
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
-
-
-class ViCareTimer:
-    # class is used to replace logic in unittest
-    def now(self) -> datetime:
-        return datetime.now()
 
 
 class ViCareCachedService(ViCareService):
