@@ -25,6 +25,23 @@ class TestForMissingProperties(unittest.TestCase):
 
             'heating.circuits.0.temperature.levels',  # hint: command
             'heating.dhw.temperature.hysteresis',  # hint: command
+
+            #todo: implement ventilation
+            'ventilation.schedule',
+            'ventilation.operating.programs',
+            'ventilation.operating.programs.eco',
+            'ventilation.operating.programs.comfort',
+            'ventilation.operating.programs.basic',
+            'ventilation.operating.programs.active',
+            'ventilation.operating.programs.holiday',
+            'ventilation.operating.programs.intensive',
+            'ventilation.operating.programs.standby',
+            'ventilation.operating.programs.standard',
+            'ventilation.operating.programs.reduced',
+            'ventilation.operating.modes.standby',
+            'ventilation.operating.modes.active',
+            'ventilation.operating.modes.standard',
+            'ventilation.operating.modes.ventilation'
         ]
 
         all_features = self.read_all_features()
