@@ -9,6 +9,7 @@ from PyViCare import Feature
 # exists (IndexError), the requested feature is not supported by
 # the device.
 
+
 class ViCareTimer:
     # class is used to replace logic in unittest
     def now(self) -> datetime:
@@ -24,6 +25,7 @@ class ViCareTimer:
             hours=int(time_string[0:2]),
             minutes=int(time_string[3:5])
         )
+
 
 def handleNotSupported(func: Callable) -> Callable:
     @wraps(func)

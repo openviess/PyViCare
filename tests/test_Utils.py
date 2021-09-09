@@ -2,6 +2,8 @@ import unittest
 from datetime import timedelta
 
 from PyViCare.PyViCareUtils import ViCareTimer
+
+
 class UtilTests(unittest.TestCase):
 
     def test_parse_timespan(self):

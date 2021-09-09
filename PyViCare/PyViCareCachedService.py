@@ -1,6 +1,5 @@
 import logging
 import threading
-from datetime import datetime
 from typing import Any
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager

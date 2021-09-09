@@ -1,10 +1,10 @@
 import datetime
-from PyViCare.PyViCareUtils import ViCareTimer
 import unittest
+from unittest.mock import patch
 
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareUtils import ViCareTimer
 from tests.ViCareServiceMock import ViCareServiceMock
-from unittest.mock import patch
 
 
 class Vitocal222S(unittest.TestCase):

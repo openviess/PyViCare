@@ -1,11 +1,10 @@
 import logging
-from datetime import date, datetime
 from typing import Any, Callable, List, Optional
 
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
-                                    handleAPICommandErrors, handleNotSupported, ViCareTimer)
-
+                                    ViCareTimer, handleAPICommandErrors,
+                                    handleNotSupported)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -20,8 +19,6 @@ def isSupported(method: Callable) -> bool:
         return bool(result != 'error')
     except PyViCareNotSupportedFeatureError:
         return False
-
-
 
 
 class Device:
