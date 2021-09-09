@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 from functools import wraps
 from typing import Callable
 
@@ -9,6 +9,21 @@ from PyViCare import Feature
 # exists (IndexError), the requested feature is not supported by
 # the device.
 
+class ViCareTimer:
+    # class is used to replace logic in unittest
+    def now(self) -> datetime:
+        return datetime.now()
+
+    @staticmethod
+    def time_as_delta(date_time: datetime) -> timedelta:
+        return date_time - datetime(year=date_time.year, month=date_time.month, day=date_time.day)
+
+    @staticmethod
+    def parse_time_as_delta(time_string: str) -> timedelta:
+        return timedelta(
+            hours=int(time_string[0:2]),
+            minutes=int(time_string[3:5])
+        )
 
 def handleNotSupported(func: Callable) -> Callable:
     @wraps(func)
@@ -73,7 +88,7 @@ class PyViCareRateLimitError(Exception):
         name = extended_payload["name"]
         requestCountLimit = extended_payload["requestCountLimit"]
         limitReset = extended_payload["limitReset"]
-        limitResetDate = datetime.datetime.utcfromtimestamp(limitReset / 1000)
+        limitResetDate = datetime.utcfromtimestamp(limitReset / 1000)
 
         msg = f'API rate limit {name} exceeded. Max {requestCountLimit} calls in timewindow. Limit reset at {limitResetDate.isoformat()}.'
 
