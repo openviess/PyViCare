@@ -10,21 +10,25 @@ from PyViCare import Feature
 # the device.
 
 
+def time_as_delta(date_time: datetime) -> timedelta:
+    return timedelta(
+        hours=date_time.hour,
+        minutes=date_time.minute,
+        seconds=date_time.second
+    )
+
+
+def parse_time_as_delta(time_string: str) -> timedelta:
+    return timedelta(
+        hours=int(time_string[0:2]),
+        minutes=int(time_string[3:5])
+    )
+
+
 class ViCareTimer:
     # class is used to replace logic in unittest
     def now(self) -> datetime:
         return datetime.now()
-
-    @staticmethod
-    def time_as_delta(date_time: datetime) -> timedelta:
-        return date_time - datetime(year=date_time.year, month=date_time.month, day=date_time.day)
-
-    @staticmethod
-    def parse_time_as_delta(time_string: str) -> timedelta:
-        return timedelta(
-            hours=int(time_string[0:2]),
-            minutes=int(time_string[3:5])
-        )
 
 
 def handleNotSupported(func: Callable) -> Callable:
