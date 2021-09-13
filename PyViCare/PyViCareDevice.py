@@ -84,7 +84,7 @@ class Device:
             endTime = parse_time_as_delta(s["end"])
             if startTime <= currentTime and currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
-                    return s["mode"]
+                    return VICARE_DHW_TEMP2
                 else:
                     mode = s["mode"]
         return mode
