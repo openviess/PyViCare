@@ -17,4 +17,4 @@ def enablePrintStatementsForTest(test_case):
 
 
 def now_is(date_time):
-    return patch.object(ViCareTimer, 'now', return_value=datetime.fromisoformat(date_time))
+    return patch.object(ViCareTimer, 'now', return_value=datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S'))
