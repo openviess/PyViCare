@@ -1,9 +1,7 @@
-import datetime
 import unittest
-from unittest.mock import patch
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareUtils import ViCareTimer
+from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -75,11 +73,11 @@ class Vitodens200W(unittest.TestCase):
             self.device.getDomesticHotWaterCirculationScheduleModes(), ['on'])
 
     def test_getDomesticHotWaterCirculationMode_wed_07_30_time(self):
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2021, 9, 8, 7, 30, 0)):
+        with now_is('2021-09-08 07:30:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterCirculationMode(), 'on')
 
     def test_getDomesticHotWaterCirculationMode_wed_10_10_time(self):
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2021, 9, 8, 10, 10, 0)):
+        with now_is('2021-09-08 10:10:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterCirculationMode(), 'off')
