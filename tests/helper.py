@@ -1,5 +1,9 @@
 import json
 import os
+from datetime import datetime
+from unittest.mock import patch
+
+from PyViCare.PyViCareUtils import ViCareTimer
 
 
 def readJson(fileName):
@@ -10,3 +14,7 @@ def readJson(fileName):
 
 def enablePrintStatementsForTest(test_case):
     return test_case.capsys.disabled()
+
+
+def now_is(date_time):
+    return patch.object(ViCareTimer, 'now', return_value=datetime.fromisoformat(date_time))

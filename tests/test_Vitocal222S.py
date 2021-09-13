@@ -1,9 +1,7 @@
-import datetime
 import unittest
-from unittest.mock import patch
 
 from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareUtils import ViCareTimer
+from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -13,6 +11,6 @@ class Vitocal222S(unittest.TestCase):
         self.device = HeatPump(self.service)
 
     def test_getDomesticHotWaterActiveMode_10_10_time(self):
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 10, 10, 0)):
+        with now_is('2000-01-01 10:10:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterActiveMode(), 'normal')

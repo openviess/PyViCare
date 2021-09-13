@@ -1,10 +1,8 @@
-import datetime
 import unittest
-from unittest.mock import patch
 
 from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
-                                    ViCareTimer)
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -79,16 +77,16 @@ class Vitocal200(unittest.TestCase):
             self.device.getDomesticHotWaterCirculationPumpActive(), False)
 
     def test_getDomesticHotWaterActiveMode_fri_10_10_time(self):
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2021, 9, 10, 10, 10, 0)):
+        with now_is('2021-09-10 10:10:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterActiveMode(), 'temp-2')
 
     def test_getDomesticHotWaterDesiredTemperature_fri_10_10_time(self):
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2021, 9, 10, 10, 10, 0)):
+        with now_is('2021-09-10 10:10:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterDesiredTemperature(), 60)
 
     def test_getDomesticHotWaterDesiredTemperature_fri_20_00_time(self):
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2021, 9, 10, 20, 0, 0)):
+        with now_is('2021-09-10 20:00:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterDesiredTemperature(), 50)

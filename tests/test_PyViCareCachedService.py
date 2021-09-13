@@ -1,10 +1,10 @@
-import datetime
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
-from PyViCare.PyViCareCachedService import ViCareCachedService, ViCareTimer
+from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.helper import now_is
 
 
 class PyViCareCachedServiceTest(unittest.TestCase):
@@ -36,12 +36,12 @@ class PyViCareCachedServiceTest(unittest.TestCase):
 
     def test_getProperty_existing_cached(self):
         # time+0 seconds
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
+        with now_is('2000-01-01 00:00:00'):
             self.service.getProperty("someprop")
             self.service.getProperty("someprop")
 
         # time+30 seconds
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 30)):
+        with now_is('2000-01-01 00:00:30'):
             self.service.getProperty("someprop")
 
         self.assertEqual(self.oauth_mock.get.call_count, 1)
@@ -49,14 +49,14 @@ class PyViCareCachedServiceTest(unittest.TestCase):
             '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/')
 
         # time+70 seconds (must be more than CACHE_DURATION)
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 1, 10)):
+        with now_is('2000-01-01 00:01:10'):
             self.service.getProperty("someprop")
 
         self.assertEqual(self.oauth_mock.get.call_count, 2)
 
     def test_setProperty_invalidateCache(self):
         # freeze time
-        with patch.object(ViCareTimer, 'now', return_value=datetime.datetime(2000, 1, 1, 0, 0, 0)):
+        with now_is('2000-01-01 00:00:00'):
             self.assertEqual(self.service.is_cache_invalid(), True)
             self.service.getProperty("someprop")
             self.assertEqual(self.service.is_cache_invalid(), False)
