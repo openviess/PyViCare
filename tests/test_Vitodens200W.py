@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -17,9 +16,8 @@ class Vitodens200W(unittest.TestCase):
     def test_getBoilerCommonSupplyTemperature(self):
         self.assertEqual(self.device.getBoilerCommonSupplyTemperature(), 44.4)
 
-    # currently missing an up-to-date test response
     def test_getIsActive(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurner(0).getIsActive)
+        self.assertEqual(self.device.burners[0].getIsActive(), False)
 
     def test_getDomesticHotWaterActive(self):
         self.assertEqual(self.device.getDomesticHotWaterActive(), True)
