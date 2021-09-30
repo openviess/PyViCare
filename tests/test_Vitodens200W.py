@@ -16,8 +16,8 @@ class Vitodens200W(unittest.TestCase):
     def test_getBoilerCommonSupplyTemperature(self):
         self.assertEqual(self.device.getBoilerCommonSupplyTemperature(), 44.4)
 
-    def test_getIsActive(self):
-        self.assertEqual(self.device.burners[0].getIsActive(), False)
+    def test_getActive(self):
+        self.assertEqual(self.device.burners[0].getActive(), False)
 
     def test_getDomesticHotWaterActive(self):
         self.assertEqual(self.device.getDomesticHotWaterActive(), True)

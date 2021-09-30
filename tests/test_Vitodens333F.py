@@ -11,8 +11,8 @@ class Vitodens333F(unittest.TestCase):
         self.device = GazBoiler(self.service)
 
     # currently missing an up-to-date test response
-    def test_getIsActive(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.burners[0].getIsActive)
+    def test_getActive(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.burners[0].getActive)
 
     def test_getBurnerStarts(self):
         self.assertEqual(self.device.burners[0].getStarts(), 13987)

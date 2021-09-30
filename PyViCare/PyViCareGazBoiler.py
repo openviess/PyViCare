@@ -133,7 +133,7 @@ class GazBurner(DeviceWithComponent):
         return self.component
 
     @handleNotSupported
-    def getIsActive(self):
+    def getActive(self):
         return self.service.getProperty(f"heating.burners.{self.burner}")["properties"]["active"]["value"]
 
     @handleNotSupported
