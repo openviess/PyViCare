@@ -14,3 +14,7 @@ class Vitocal222S(unittest.TestCase):
         with now_is('2000-01-01 10:10:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterActiveMode(), 'normal')
+
+    def test_getCurrentDesiredTemperature(self):
+        self.assertEqual(
+            self.device.circuits[0].getCurrentDesiredTemperature(), 23)

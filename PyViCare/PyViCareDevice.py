@@ -440,6 +440,8 @@ class HeatingCircuit(DeviceWithComponent):
     @handleNotSupported
     def getCurrentDesiredTemperature(self):
         active_programm = self.getActiveProgram()
+        if active_programm in ['standby']:
+            return None
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_programm}")["properties"]["temperature"]["value"]
 
     @handleNotSupported
