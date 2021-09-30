@@ -11,32 +11,30 @@ class Vitodens222W(unittest.TestCase):
         self.device = GazBoiler(self.service)
 
     def test_getIsActive(self):
-        self.assertEqual(self.device.getBurner(0).getIsActive(), False)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurner(0).getIsActive)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.burners[0].getStarts(), 79167)
+        self.assertEqual(self.device.burners[0].getStarts(), 8299)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.burners[0].getHours(), 25123.2)
+        self.assertEqual(self.device.burners[0].getHours(), 5674)
 
     def test_getBurnerModulation(self):
-        self.assertEqual(self.device.burners[0].getModulation(), 0)
+        self.assertEqual(self.device.burners[0].getModulation(), 15.8)
 
     def test_getPrograms(self):
-        expected_programs = ['active', 'comfort', 'eco',
-                             'external', 'holiday', 'normal', 'reduced', 'standby']
+        expected_programs = ['active', 'comfort', 'forcedLastFromSchedule', 'normal', 'reduced', 'standby']
         self.assertListEqual(
             self.device.circuits[0].getPrograms(), expected_programs)
 
     def test_getModes(self):
-        expected_modes = ['standby', 'dhw', 'dhwAndHeating',
-                          'forcedReduced', 'forcedNormal']
+        expected_modes = ['standby', 'heating', 'dhw', 'dhwAndHeating']
         self.assertListEqual(
             self.device.circuits[0].getModes(), expected_modes)
 
     def test_getPowerConsumptionDays(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError,
-                          self.device.getPowerConsumptionDays)
+        expected_consumption = [0.4, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        self.assertListEqual(self.device.getPowerConsumptionDays(), expected_consumption)
 
     def test_getFrostProtectionActive(self):
         self.assertEqual(
@@ -48,7 +46,7 @@ class Vitodens222W(unittest.TestCase):
 
     def test_getDomesticHotWaterOutletTemperature(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterOutletTemperature(), 44.8)
+            self.device.getDomesticHotWaterOutletTemperature(), 39.8)
 
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertEqual(
@@ -56,8 +54,7 @@ class Vitodens222W(unittest.TestCase):
 
     def test_getOutsideTemperature(self):
         self.assertEqual(
-            self.device.getOutsideTemperature(), 16.3)
+            self.device.getOutsideTemperature(), 11.9)
 
     def test_getBoilerTemperature(self):
-        self.assertEqual(
-            self.device.getBoilerTemperature(), 73)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBoilerTemperature)

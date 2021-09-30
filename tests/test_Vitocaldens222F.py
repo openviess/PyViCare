@@ -1,6 +1,7 @@
 import unittest
 
 from PyViCare.PyViCareHybrid import Hybrid
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -18,8 +19,9 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getAvailableCompressors(self):
         self.assertEqual(self.device.getAvailableCompressors(), ['0', '1'])
 
+    # currently missing an up-to-date test response
     def test_getIsActive(self):
-        self.assertEqual(self.device.getBurner(0).getIsActive(), False)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurner(0).getIsActive)
 
     def test_getBufferTopTemperature(self):
         self.assertEqual(

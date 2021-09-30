@@ -11,7 +11,7 @@ class Vitodens300W(unittest.TestCase):
         self.device = GazBoiler(self.service)
 
     def test_getIsActive(self):
-        self.assertEqual(self.device.getBurner(0).getIsActive(), False)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurner(0).getIsActive)
 
     def test_getDomesticHotWaterChargingLevel(self):
         self.assertEqual(self.device.getDomesticHotWaterChargingLevel(), 0)
