@@ -18,10 +18,6 @@ class GazBoiler(Device):
         return self.service.getProperty("heating.burners")["components"]
 
     @handleNotSupported
-    def getBurnerActive(self):
-        return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
-
-    @handleNotSupported
     def getGasConsumptionHeatingDays(self):
         return self.service.getProperty("heating.gas.consumption.heating")["properties"]["day"]["value"]
 
@@ -135,6 +131,10 @@ class GazBurner(DeviceWithComponent):
     @property
     def burner(self) -> str:
         return self.component
+
+    @handleNotSupported
+    def getIsActive(self):
+        return self.service.getProperty("heating.burners.{self.burner}")["properties"]["active"]["value"]
 
     @handleNotSupported
     def getHours(self):

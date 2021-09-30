@@ -10,8 +10,8 @@ class Vitodens222W(unittest.TestCase):
         self.service = ViCareServiceMock('response/Vitodens222W.json')
         self.device = GazBoiler(self.service)
 
-    def test_getBurnerActive(self):
-        self.assertEqual(self.device.getBurnerActive(), False)
+    def test_getIsActive(self):
+        self.assertEqual(self.device.getBurner(0).getIsActive(), False)
 
     def test_getBurnerStarts(self):
         self.assertEqual(self.device.burners[0].getStarts(), 79167)

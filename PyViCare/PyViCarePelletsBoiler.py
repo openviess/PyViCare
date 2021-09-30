@@ -5,7 +5,7 @@ from PyViCare.PyViCareUtils import handleNotSupported
 class PelletsBoiler(Device):
 
     @handleNotSupported
-    def getBurnerActive(self):
+    def getIsActive(self):
         return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
 
     @handleNotSupported
