@@ -2,6 +2,10 @@
 
 This library implements access to Viessmann devices by using the official API from the [Viessmann Developer Portal](https://developer.viessmann.com/).
 
+## Breaking changes in version 2.8.x
+
+- The circuit, burner (Gaz) and compressor (Heat Pump) is now separted. Accessing the properties of the burner/compressor is moved from `device.curcuits` to `device.burners` and `device.compressor`.
+
 ## Breaking changes in version 2.x
 
 - The API to access your device changed to a general `PyViCare` class. Use this class to load all available devices.
@@ -78,6 +82,13 @@ print(circuit.getDesiredTemperatureForProgram("comfort"))
 print(circuit.setProgramTemperature("comfort",21))
 print(circuit.activateProgram("comfort"))
 print(circuit.deactivateComfort())
+
+burner = t.burners[0] #select burner
+print(burner.getActive())
+
+compressor = t.compressors[0] #select compressor
+print(compressor.getActive())
+
 ```
 
 ## API Usage in Postman
