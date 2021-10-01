@@ -22,11 +22,6 @@ class ViCareCachedService(ViCareService):
 
     def getProperty(self, property_name: str) -> Any:
         data = self.__get_or_update_cache()
-
-        if "data" not in data:
-            logger.error("Missing 'data' property when fetching data.")
-            raise PyViCareInvalidDataError(data)
-
         entities = data["data"]
         return readFeature(entities, property_name)
 
@@ -38,7 +33,11 @@ class ViCareCachedService(ViCareService):
     def __get_or_update_cache(self):
         with self.__lock:
             if self.is_cache_invalid():
-                self.__cache = self.fetch_all_features()
+                data = self.fetch_all_features()
+                if "data" not in data:
+                    logger.error("Missing 'data' property when fetching data.")
+                    raise PyViCareInvalidDataError(data)
+                self.__cache = data
                 self.__cacheTime = ViCareTimer().now()
             return self.__cache
 
