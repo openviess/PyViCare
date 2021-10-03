@@ -1,63 +1,21 @@
-from PyViCare.PyViCareDevice import Device
+from typing import Any, List
+
+from PyViCare.PyViCareDevice import Device, DeviceWithComponent
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
 class FuelCell(Device):
 
-    @handleNotSupported
-    def getOperatingPhase(self):
-        # generation, startup, standby
-        return self.service.getProperty("heating.fuelCell.operating.phase")["properties"]["value"]["value"]
+    @property
+    def burners(self) -> List[Any]:
+        return list([self.getBurner(x) for x in self.getAvailableBurners()])
+
+    def getBurner(self, burner):
+        return FuelCellBurner(self, burner)
 
     @handleNotSupported
-    def getOperatingModesActive(self):
-        # standby, maintenance, heatControlled, economical, ecological
-        return self.service.getProperty("heating.fuelCell.operating.modes.active")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getOperatingModesHeatControlled(self):
-        # True or False
-        return self.service.getProperty("heating.fuelCell.operating.modes.heatControlled")["properties"]["active"]["value"]
-
-    @handleNotSupported
-    def getOperatingModesEcological(self):
-        # True or False
-        return self.service.getProperty("heating.fuelCell.operating.modes.ecological")["properties"]["active"]["value"]
-
-    @handleNotSupported
-    def getOperatingModesEconomical(self):
-        # True or False
-        return self.service.getProperty("heating.fuelCell.operating.modes.economical")["properties"]["active"]["value"]
-
-    @handleNotSupported
-    def getOperatingModesMaintenance(self):
-        # True or False
-        return self.service.getProperty("heating.fuelCell.operating.modes.maintenance")["properties"]["active"]["value"]
-
-    @handleNotSupported
-    def getOperatingModesStandby(self):
-        # True or False
-        return self.service.getProperty("heating.fuelCell.operating.modes.standby")["properties"]["active"]["value"]
-
-    @handleNotSupported
-    def getFuelCellOperationHours(self):
-        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["operationHours"]["value"]
-
-    @handleNotSupported
-    def getFuelCellInsertions(self):
-        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["insertions"]["value"]
-
-    @handleNotSupported
-    def getFuelCellProductionHours(self):
-        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionHours"]["value"]
-
-    @handleNotSupported
-    def getFuelCellProductionStarts(self):
-        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionStarts"]["value"]
-
-    @handleNotSupported
-    def getFuelCellAvailabilityRate(self):
-        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["availabilityRate"]["value"]
+    def getAvailableBurners(self):
+        return self.service.getProperty("heating.burners")["components"]
 
     @handleNotSupported
     def getCumulativePowerProduced(self):
@@ -92,112 +50,36 @@ class FuelCell(Device):
         return self.service.getProperty("heating.sensors.power.output")["properties"]["value"]["value"]
 
     @handleNotSupported
-    def getPowerProductionDemandCoverageCurrent(self):
-        return self.service.getProperty("heating.power.production.demandCoverage.current")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getPowerProductionProductionCoverageCurrent(self):
-        return self.service.getProperty("heating.power.production.productionCoverage.current")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getPowerSoldCurrent(self):
-        return self.service.getProperty('heating.power.sold.current')['properties']['value']['value']
-
-    @handleNotSupported
-    def getPowerSoldDays(self):
-        return self.service.getProperty('heating.power.sold')['properties']['day']['value']
-
-    @handleNotSupported
-    def getPowerSoldToday(self):
-        return self.service.getProperty('heating.power.sold')['properties']['day']['value'][0]
-
-    @handleNotSupported
-    def getPowerSoldWeeks(self):
-        return self.service.getProperty('heating.power.sold')['properties']['week']['value']
-
-    @handleNotSupported
-    def getPowerSoldThisWeek(self):
-        return self.service.getProperty('heating.power.sold')['properties']['week']['value'][0]
-
-    @handleNotSupported
-    def getPowerSoldMonths(self):
-        return self.service.getProperty('heating.power.sold')['properties']['month']['value']
-
-    @handleNotSupported
-    def getPowerSoldThisMonth(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value'][0]
-
-    @handleNotSupported
-    def getPowerSoldYears(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value']
-
-    @handleNotSupported
-    def getPowerSoldThisYear(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value'][0]
-
-    @handleNotSupported
-    def getPowerProductionDays(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['day']['value']
-
-    @handleNotSupported
-    def getPowerProductionToday(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['day']['value'][0]
-
-    @handleNotSupported
-    def getPowerProductionWeeks(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['week']['value']
-
-    @handleNotSupported
-    def getPowerProductionThisWeek(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['week']['value'][0]
-
-    @handleNotSupported
-    def getPowerProductionMonths(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value']
-
-    @handleNotSupported
-    def getPowerProductionThisMonth(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['month']['value'][0]
-
-    @handleNotSupported
-    def getPowerProductionYears(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value']
-
-    @handleNotSupported
-    def getPowerProductionThisYear(self):
-        return self.service.getProperty('heating.fuelCell.power.production')['properties']['year']['value'][0]
-
-    @handleNotSupported
     def getPowerConsumptionDays(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['day']['value']
+        return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value']
 
     @handleNotSupported
     def getPowerConsumptionToday(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['day']['value'][0]
+        return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value'][0]
 
     @handleNotSupported
     def getPowerConsumptionWeeks(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['week']['value']
+        return self.service.getProperty('heating.power.consumption.total')['properties']['week']['value']
 
     @handleNotSupported
     def getPowerConsumptionThisWeek(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['week']['value'][0]
+        return self.service.getProperty('heating.power.consumption.total')['properties']['week']['value'][0]
 
     @handleNotSupported
     def getPowerConsumptionMonths(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['month']['value']
+        return self.service.getProperty('heating.power.consumption.total')['properties']['month']['value']
 
     @handleNotSupported
     def getPowerConsumptionThisMonth(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['month']['value'][0]
+        return self.service.getProperty('heating.power.consumption.total')['properties']['month']['value'][0]
 
     @handleNotSupported
     def getPowerConsumptionYears(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['year']['value']
+        return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value']
 
     @handleNotSupported
     def getPowerConsumptionThisYear(self):
-        return self.service.getProperty('heating.power.consumption')['properties']['year']['value'][0]
+        return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value'][0]
 
     @handleNotSupported
     def getPowerConsumptionHeatingDays(self):
@@ -232,38 +114,6 @@ class FuelCell(Device):
         return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
 
     @handleNotSupported
-    def getGasConsumptionFuelCellDays(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value']
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellToday(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['day']['value'][0]
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellWeeks(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['week']['value']
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellThisWeek(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['week']['value'][0]
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellMonths(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['month']['value']
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellThisMonth(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['month']['value'][0]
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellYears(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['year']['value']
-
-    @handleNotSupported
-    def getGasConsumptionFuelCellThisYear(self):
-        return self.service.getProperty('heating.gas.consumption.fuelCell')['properties']['year']['value'][0]
-
-    @handleNotSupported
     def getGasConsumptionTotalDays(self):
         return self.service.getProperty('heating.gas.consumption.total')['properties']['day']['value']
 
@@ -296,65 +146,40 @@ class FuelCell(Device):
         return self.service.getProperty('heating.gas.consumption.total')['properties']['year']['value'][0]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalDays(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['day']['value']
+    def getVolumetricFlowReturn(self):
+        return self.service.getProperty("heating.sensors.volumetricFlow.return")["properties"]["value"]["value"]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalToday(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['day']['value'][0]
+    def getDomesticHotWaterMaxTemperatureLevel(self):
+        return self.service.getProperty("heating.dhw.temperature.levels")["properties"]["max"]["value"]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalWeeks(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['week']['value']
+    def getDomesticHotWaterMinTemperatureLevel(self):
+        return self.service.getProperty("heating.dhw.temperature.levels")["properties"]["min"]["value"]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalThisWeek(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['week']['value'][0]
+    def getHydraulicSeparatorTemperature(self):
+        return self.service.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
+
+
+class FuelCellBurner(DeviceWithComponent):
+
+    @property
+    def burner(self) -> str:
+        return self.component
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalMonths(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['month']['value']
+    def getActive(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}")["properties"]["active"]["value"]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalThisMonth(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['month']['value'][0]
+    def getHours(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalYears(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['year']['value']
+    def getStarts(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["starts"]["value"]
 
     @handleNotSupported
-    def getPowerProductionCoverageTotalThisYear(self):
-        return self.service.getProperty('heating.power.production.productionCoverage.total')['properties']['year']['value'][0]
-
-    @handleNotSupported
-    def getHeatProductionDays(self):
-        return self.service.getProperty('heating.heat.production')['properties']['day']['value']
-
-    @handleNotSupported
-    def getHeatProductionToday(self):
-        return self.service.getProperty('heating.heat.production')['properties']['day']['value'][0]
-
-    @handleNotSupported
-    def getHeatProductionWeeks(self):
-        return self.service.getProperty('heating.heat.production')['properties']['week']['value']
-
-    @handleNotSupported
-    def getHeatProductionThisWeek(self):
-        return self.service.getProperty('heating.heat.production')['properties']['week']['value'][0]
-
-    @handleNotSupported
-    def getHeatProductionMonths(self):
-        return self.service.getProperty('heating.heat.production')['properties']['month']['value']
-
-    @handleNotSupported
-    def getHeatProductionThisMonth(self):
-        return self.service.getProperty('heating.heat.production')['properties']['month']['value'][0]
-
-    @handleNotSupported
-    def getHeatProductionYears(self):
-        return self.service.getProperty('heating.heat.production')['properties']['year']['value']
-
-    @handleNotSupported
-    def getHeatProductionThisYear(self):
-        return self.service.getProperty('heating.heat.production')['properties']['year']['value'][0]
+    def getModulation(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}.modulation")["properties"]["value"]["value"]
