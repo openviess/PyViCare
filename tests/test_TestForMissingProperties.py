@@ -22,6 +22,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.dhw.pumps.circulation.schedule',
             'heating.circuits.0.dhw.schedule',
             'heating.power.consumption.dhw',
+            'heating.power.consumption',
 
             'heating.circuits.0.temperature.levels',  # hint: command
             'heating.dhw.temperature.hysteresis',  # hint: command
