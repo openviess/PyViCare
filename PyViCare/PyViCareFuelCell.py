@@ -18,36 +18,8 @@ class FuelCell(Device):
         return self.service.getProperty("heating.burners")["components"]
 
     @handleNotSupported
-    def getCumulativePowerProduced(self):
-        return self.service.getProperty("heating.power.production.cumulative")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getCumulativePowerSold(self):
-        return self.service.getProperty("heating.power.sold.cumulative")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getCumulativePowerPurchased(self):
-        return self.service.getProperty("heating.power.purchase.cumulative")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getFuelCellReturnTemperature(self):
-        return self.service.getProperty("heating.fuelCell.sensors.temperature.return")["properties"]["value"]["value"]
-
-    @handleNotSupported
     def getReturnTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getPowerProductionCurrent(self):
-        return self.service.getProperty("heating.power.production.current")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getPowerPurchaseCurrent(self):
-        return self.service.getProperty("heating.power.purchase.current")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getPowerOutput(self):
-        return self.service.getProperty("heating.sensors.power.output")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
