@@ -80,6 +80,8 @@ class PyViCareDeviceConfig:
             return m.group(1) + ('#' * len(m.group(2))) + m.group(3)
 
         dumpJSON = re.sub(r'(["\/])(\d{6,})(["\/])', repl, dumpJSON)
-        if not flat:
-            return dumpJSON
-        return re.sub(r'{"apiVersion', '\n{"apiVersion', dumpJSON)
+        if flat:
+            m = re.search('\[({\".*?\":)', dumpJSON)
+            if m and m.lastindex > 0:
+                return dumpJSON.replace(m.group(1), "\n"+m.group(1))
+        return dumpJSON
