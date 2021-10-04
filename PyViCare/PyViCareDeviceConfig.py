@@ -73,10 +73,15 @@ class PyViCareDeviceConfig:
     def get_raw_json(self):
         return self.service.fetch_all_features()
 
-    def dump_secure(self):
-        dumpJSON = json.dumps(self.get_raw_json(), indent=4)
+    def dump_secure(self, flat=False):
+        dumpJSON = json.dumps(self.get_raw_json(), indent=None if flat else 4)
 
         def repl(m):
             return m.group(1) + ('#' * len(m.group(2))) + m.group(3)
 
-        return re.sub(r'(["\/])(\d{6,})(["\/])', repl, dumpJSON)
+        dumpJSON = re.sub(r'(["\/])(\d{6,})(["\/])', repl, dumpJSON)
+        if flat:
+            m = re.search('\[({\".*?\":)', dumpJSON)
+            if m and m.lastindex > 0:
+                return dumpJSON.replace(m.group(1), "\n"+m.group(1))
+        return dumpJSON
