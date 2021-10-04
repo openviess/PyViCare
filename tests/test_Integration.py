@@ -120,3 +120,6 @@ class Integration(unittest.TestCase):
 
             with open("dump.json", mode='w') as output:
                 output.write(vicare.devices[0].dump_secure())
+
+            with open("dump.flat.json", mode='w') as output:
+                output.write(vicare.devices[0].dump_secure(flat=True))
