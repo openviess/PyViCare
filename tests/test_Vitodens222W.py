@@ -56,5 +56,9 @@ class Vitodens222W(unittest.TestCase):
         self.assertEqual(
             self.device.getOutsideTemperature(), 11.9)
 
+    def test_getOneTimeCharge(self):
+        self.assertEqual(
+            self.device.getOneTimeCharge(), False)
+
     def test_getBoilerTemperature(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBoilerTemperature)
