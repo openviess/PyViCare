@@ -75,8 +75,9 @@ class PyViCare:
 
 class DictWrap(object):
     def __init__(self, d):
-        for k,v in d.items():
+        for k, v in d.items():
             setattr(self, k, Wrap(v))
+
 
 def Wrap(v):
     if isinstance(v, list):
@@ -85,5 +86,3 @@ def Wrap(v):
         return DictWrap(v)
     else:
         return v
-
-            
