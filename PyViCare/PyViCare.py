@@ -45,7 +45,9 @@ class PyViCare:
             logger.error("Missing 'data' property when fetching installations")
             raise PyViCareInvalidDataError(installations)
 
-        self.devices = list(self.__readInstallations(installations["data"]))
+        data = installations['data']
+        self.installations = Wrap(data)
+        self.devices = list(self.__readInstallations(data))
 
     def __readInstallations(self, data):
         for installation in data:
@@ -69,3 +71,19 @@ class PyViCare:
                     logger.info(f"Device found: {device_model}")
 
                     yield PyViCareDeviceConfig(service, device_model, status)
+
+
+class DictWrap(object):
+    def __init__(self, d):
+        for k,v in d.items():
+            setattr(self, k, Wrap(v))
+
+def Wrap(v):
+    if isinstance(v, list):
+        return [Wrap(x) for x in v]
+    if isinstance(v, dict):
+        return DictWrap(v)
+    else:
+        return v
+
+            
