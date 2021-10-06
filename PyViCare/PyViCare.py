@@ -19,7 +19,7 @@ class PyViCare:
         self.cacheDuration = 60
 
     def setCacheDuration(self, cache_duration):
-        self.cacheDuration = cache_duration
+        self.cacheDuration = int(cache_duration)
 
     def initWithCredentials(self, username: str, password: str, client_id: str, token_file: str):
         self.initWithExternalOAuth(ViCareOAuthManager(

@@ -151,7 +151,7 @@ class Device:
 
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
-        return self.service.setProperty("heating.dhw.temperature.main", "setTargetTemperature", {'temperature': temperature})
+        return self.service.setProperty("heating.dhw.temperature.main", "setTargetTemperature", {'temperature': int(temperature)})
 
     """ Set the target temperature 2 for domestic host water
     Parameters
@@ -167,7 +167,7 @@ class Device:
 
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature2(self, temperature):
-        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", {"temperature": temperature})
+        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature", {"temperature": int(temperature)})
 
     @handleNotSupported
     def getDomesticHotWaterSchedule(self):
@@ -351,7 +351,7 @@ class HeatingCircuit(DeviceWithComponent):
     """
 
     def setProgramTemperature(self, program: str, temperature: int):
-        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "setTemperature", {'targetTemperature': temperature})
+        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "setTemperature", {'targetTemperature': int(temperature)})
 
     def setReducedTemperature(self, temperature):
         return self.setProgramTemperature("reduced", temperature)
