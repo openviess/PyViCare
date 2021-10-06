@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
@@ -47,30 +48,22 @@ class PyViCare:
 
         data = installations['data']
         self.installations = Wrap(data)
-        self.devices = list(self.__readInstallations(data))
+        self.devices = list(self.__extract_devices())
 
-    def __readInstallations(self, data):
-        for installation in data:
-            installation_id = installation["id"]
-
-            for gateway in installation["gateways"]:
-                gateway_serial = gateway["serial"]
-
-                for device in gateway["devices"]:
-                    if device["deviceType"] != "heating":
+    def __extract_devices(self):
+        for installation in self.installations:
+            for gateway in installation.gateways:
+                for device in gateway.devices:
+                    if device.deviceType != "heating":
                         continue  # we are not interested in non heating devices
 
-                    device_id = device["id"]
-                    device_model = device["modelId"]
-                    status = device["status"]
-
                     accessor = ViCareDeviceAccessor(
-                        installation_id, gateway_serial, device_id)
+                        installation.id, gateway.serial, device.id)
                     service = self.__buildService(accessor)
 
-                    logger.info(f"Device found: {device_model}")
+                    logger.info(f"Device found: {device.modelId}")
 
-                    yield PyViCareDeviceConfig(service, device_model, status)
+                    yield PyViCareDeviceConfig(service, device.modelId, device.status)
 
 
 class DictWrap(object):
@@ -84,5 +77,7 @@ def Wrap(v):
         return [Wrap(x) for x in v]
     if isinstance(v, dict):
         return DictWrap(v)
+    if isinstance(v, str) and len(v) == 24 and v[23] == 'Z' and v[10] == 'T':
+        return datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f%z')
     else:
         return v
