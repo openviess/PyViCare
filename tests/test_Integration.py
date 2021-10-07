@@ -107,6 +107,21 @@ class Integration(unittest.TestCase):
 
             print()
 
+            for i in vicare.installations:
+                print(i.id)
+                print(i.description)
+                print(i.address.street)
+                print()
+                for g in i.gateways:
+                    print(g.producedAt)
+                    print(g.autoUpdate)
+                    print(g.aggregatedStatus)
+                    print(g.registeredAt)
+                    print()
+                    for d in g.devices:
+                        print(d.modelId)
+                        print(d.createdAt)
+
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_Dump(self):
         email = os.getenv('PYVICARE_EMAIL', '')
