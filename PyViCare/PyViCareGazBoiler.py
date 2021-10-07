@@ -18,6 +18,10 @@ class GazBoiler(Device):
         return self.service.getProperty("heating.burners")["components"]
 
     @handleNotSupported
+    def getGasConsumptionHeatingUnit(self):
+        return self.service.getProperty("heating.gas.consumption.heating")["properties"]["unit"]["value"]
+
+    @handleNotSupported
     def getGasConsumptionHeatingDays(self):
         return self.service.getProperty("heating.gas.consumption.heating")["properties"]["day"]["value"]
 
@@ -48,6 +52,10 @@ class GazBoiler(Device):
     @handleNotSupported
     def getGasConsumptionHeatingThisYear(self):
         return self.service.getProperty("heating.gas.consumption.heating")["properties"]["year"]["value"][0]
+
+    @handleNotSupported
+    def getGasConsumptionDomesticHotWaterUnit(self):
+        return self.service.getProperty("heating.gas.consumption.dhw")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getGasConsumptionDomesticHotWaterDays(self):
@@ -92,6 +100,10 @@ class GazBoiler(Device):
     @handleNotSupported
     def getBoilerCommonSupplyTemperature(self):
         return self.service.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getPowerConsumptionUnit(self):
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
