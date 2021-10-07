@@ -16,7 +16,7 @@ class Vitocaldens222F(unittest.TestCase):
         self.assertEqual(self.device.getAvailableBurners(), ['0'])
 
     def test_getAvailableCompressors(self):
-        self.assertEqual(self.device.getAvailableCompressors(), ['0', '1'])
+        self.assertEqual(self.device.getAvailableCompressors(), ['0'])
 
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), False)

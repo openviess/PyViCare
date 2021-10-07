@@ -17,6 +17,9 @@ class Vitocal200(unittest.TestCase):
     def test_getCompressorHours(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHours(), 8583.2)
+            
+    def test_getAvailableCompressors(self):
+        self.assertEqual(self.device.getAvailableCompressors(), ['0'])
 
     def test_getCompressorStarts(self):
         self.assertAlmostEqual(
