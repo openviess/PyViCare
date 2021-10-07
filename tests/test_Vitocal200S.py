@@ -13,6 +13,9 @@ class Vitocal200S(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterConfiguredTemperature(), 40)
 
+    def test_getAvailableCompressors(self):
+        self.assertEqual(self.device.getAvailableCompressors(), ['0'])
+
     def test_getDomesticHotWaterConfiguredTemperature2(self):
         self.assertEqual(
             self.device.getDomesticHotWaterConfiguredTemperature2(), 60)
