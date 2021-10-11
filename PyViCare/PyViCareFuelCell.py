@@ -22,6 +22,10 @@ class FuelCell(Device):
         return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getPowerConsumptionUnit(self):
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["unit"]["value"]
+
+    @handleNotSupported
     def getPowerConsumptionDays(self):
         return self.service.getProperty('heating.power.consumption.total')['properties']['day']['value']
 
@@ -54,6 +58,10 @@ class FuelCell(Device):
         return self.service.getProperty('heating.power.consumption.total')['properties']['year']['value'][0]
 
     @handleNotSupported
+    def getPowerConsumptionHeatingUnit(self):
+        return self.service.getProperty("heating.power.consumption.heating")["properties"]["unit"]["value"]
+
+    @handleNotSupported
     def getPowerConsumptionHeatingDays(self):
         return self.service.getProperty('heating.power.consumption.heating')['properties']['day']['value']
 
@@ -84,6 +92,10 @@ class FuelCell(Device):
     @handleNotSupported
     def getPowerConsumptionHeatingThisYear(self):
         return self.service.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
+
+    @handleNotSupported
+    def getGasConsumptionUnit(self):
+        return self.service.getProperty("heating.gas.consumption.total")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getGasConsumptionTotalDays(self):
