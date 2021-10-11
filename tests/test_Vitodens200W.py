@@ -86,7 +86,7 @@ class Vitodens200W(unittest.TestCase):
         self.assertEqual(
             self.device.getGasConsumptionHeatingUnit(), "cubicMeter")
 
-    def test_ggetGasConsumptionHeatingToday(self):
+    def test_getGasConsumptionHeatingToday(self):
         self.assertEqual(
             self.device.getGasConsumptionHeatingToday(), 0)
 
