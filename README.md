@@ -128,7 +128,7 @@ Follow these steps to access the API in Postman:
 
 To use PyViCare 1.x, every user has to register and create their private API key. Follow these steps to create your API key:
 
-1. Register and login in the [Viessmann Developer Portal](https://developer.viessmann.com/).
+1. Login to the [Viessmann Developer Portal](https://developer.viessmann.com/) with your existing ViCare username from the ViCare app.
 2. In the menu navigate to `API Keys`.
 3. Create a new OAuth client using following data:
    - Name: PyViCare
