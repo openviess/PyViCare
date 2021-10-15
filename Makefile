@@ -1,6 +1,3 @@
-publish:
-	sh publish.sh
-
 lint:
 	flake8
 	mypy .
@@ -16,3 +13,6 @@ ifdef PYVICARE_CLIENT_ID
 else
 	pytest
 endif
+
+publish:
+	sh publish.sh
