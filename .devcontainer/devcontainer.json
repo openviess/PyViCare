@@ -22,6 +22,7 @@
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": ["--disable=C0111"],
     "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
     "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
     "python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
