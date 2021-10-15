@@ -48,30 +48,15 @@ class Integration(unittest.TestCase):
         self.capsys = capsys
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
-    def test_BrowserBasedLogin(self):
+    def test_PyViCare(self):
         with enablePrintStatementsForTest(self):
+            print()
+
             client_id = os.getenv('PYVICARE_CLIENT_ID', '')
             token_file = "browser.save"
 
             vicare = PyViCare()
             vicare.initWithBrowserOAuth(client_id, token_file)
-
-            self.assertGreaterEqual(len(vicare.devices), 1)
-
-    @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
-    def test_PyViCare(self):
-        email = os.getenv('PYVICARE_EMAIL', '')
-        password = os.getenv('PYVICARE_PASSWORD', '')
-        client_id = os.getenv('PYVICARE_CLIENT_ID', '')
-        # name of the device class. e.g. GazBoiler, HeatPump
-        expected_device_type = os.getenv('PYVICARE_DEVICE_TYPE', '')
-
-        with enablePrintStatementsForTest(self):
-            print()
-
-            vicare = PyViCare()
-            vicare.initWithCredentials(
-                email, password, client_id, TOKEN_FILE)
 
             print("Found %s devices" % len(vicare.devices))
 
@@ -83,9 +68,6 @@ class Integration(unittest.TestCase):
                 device = deviceConfig.asAutoDetectDevice()
                 auto_type_name = type(device).__name__
                 print(f"{'detected type':<45}{auto_type_name}")
-
-                if expected_device_type != '':
-                    self.assertEqual(auto_type_name, expected_device_type)
 
                 dumpResults(device)
                 print()
