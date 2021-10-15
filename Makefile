@@ -1,3 +1,5 @@
+default: format lint test
+
 lint:
 	flake8
 	mypy .
