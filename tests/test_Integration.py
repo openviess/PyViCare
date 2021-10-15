@@ -9,7 +9,7 @@ from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import enablePrintStatementsForTest
 
 EXEC_INTEGRATION_TEST = int(os.getenv('EXEC_INTEGRATION_TEST', '0'))
-TOKEN_FILE = "token.save"
+TOKEN_FILE = "browser.save"
 
 
 def allGetterMethods(object):
@@ -42,6 +42,14 @@ def dumpResults(vicare_device):
         print(f"{name:<45}{result}")
 
 
+def create_client():
+    client_id = os.getenv('PYVICARE_CLIENT_ID', '')
+
+    vicare = PyViCare()
+    vicare.initWithBrowserOAuth(client_id, TOKEN_FILE)
+    return vicare
+
+
 class Integration(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def capsys(self, capsys):
@@ -52,11 +60,7 @@ class Integration(unittest.TestCase):
         with enablePrintStatementsForTest(self):
             print()
 
-            client_id = os.getenv('PYVICARE_CLIENT_ID', '')
-            token_file = "browser.save"
-
-            vicare = PyViCare()
-            vicare.initWithBrowserOAuth(client_id, token_file)
+            vicare = create_client()
 
             print("Found %s devices" % len(vicare.devices))
 
@@ -106,14 +110,8 @@ class Integration(unittest.TestCase):
 
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_Dump(self):
-        email = os.getenv('PYVICARE_EMAIL', '')
-        password = os.getenv('PYVICARE_PASSWORD', '')
-        client_id = os.getenv('PYVICARE_CLIENT_ID', '')
-
         with enablePrintStatementsForTest(self):
-            vicare = PyViCare()
-            vicare.initWithCredentials(
-                email, password, client_id, TOKEN_FILE)
+            vicare = vicare = create_client()
 
             with open("dump.json", mode='w') as output:
                 output.write(vicare.devices[0].dump_secure())
