@@ -42,7 +42,9 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.modes.standby',
             'ventilation.operating.modes.active',
             'ventilation.operating.modes.standard',
-            'ventilation.operating.modes.ventilation'
+            'ventilation.operating.modes.ventilation',
+
+            'heating.circuits.0.heating.roomInfluenceFactor'
         ]
 
         all_features = self.read_all_features()
