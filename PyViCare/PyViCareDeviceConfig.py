@@ -56,7 +56,7 @@ class PyViCareDeviceConfig:
             (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System"),
             (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo"),
             (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B"),
-            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH"),
+            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6"),
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P")
         ]
 
