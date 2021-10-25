@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 LAST_TAG=$(git tag --sort=-version:refname | head -1)
 
 echo -n "Which version do you want to publish? (Last: $LAST_TAG) "
