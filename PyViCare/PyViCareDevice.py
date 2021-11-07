@@ -194,7 +194,43 @@ class Device:
 
     @handleNotSupported
     def getSolarPowerProduction(self):
+        return self.getSolarPowerProductionDays()
+
+    @handleNotSupported
+    def getSolarPowerProductionUnit(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getSolarPowerProductionDays(self):
         return self.service.getProperty("heating.solar.power.production")["properties"]["day"]["value"]
+
+    @handleNotSupported
+    def getSolarPowerProductionToday(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getSolarPowerProductionWeeks(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["week"]["value"]
+
+    @handleNotSupported
+    def getSolarPowerProductionThisWeek(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["week"]["value"][0]
+
+    @handleNotSupported
+    def getSolarPowerProductionMonths(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["month"]["value"]
+
+    @handleNotSupported
+    def getSolarPowerProductionThisMonth(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getSolarPowerProductionYears(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["year"]["value"]
+
+    @handleNotSupported
+    def getSolarPowerProductionThisYear(self):
+        return self.service.getProperty("heating.solar.power.production")["properties"]["year"]["value"][0]
 
     @handleNotSupported
     def getSolarPumpActive(self):
