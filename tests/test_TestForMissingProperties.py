@@ -44,7 +44,10 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.modes.standard',
             'ventilation.operating.modes.ventilation',
 
-            'heating.circuits.0.heating.roomInfluenceFactor'
+            'heating.circuits.0.heating.roomInfluenceFactor',
+            'heating.circuits.0.temperature', # TODO: to analyse, from Vitodens 100W 
+            'heating.circuits.0.operating.programs.noDemand.hmiState', # TODO: to analyse, from Vitodens 100W
+            'heating.circuits.0.name' # TODO: to analyse, from Vitodens 100W
         ]
 
         all_features = self.read_all_features()
