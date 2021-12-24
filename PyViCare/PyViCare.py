@@ -47,6 +47,7 @@ class PyViCare:
             raise PyViCareInvalidDataError(installations)
 
         data = installations['data']
+
         self.installations = Wrap(data)
         self.devices = list(self.__extract_devices())
 
@@ -63,7 +64,7 @@ class PyViCare:
 
                     logger.info(f"Device found: {device.modelId}")
 
-                    yield PyViCareDeviceConfig(service, device.modelId, device.status)
+                    yield PyViCareDeviceConfig(service, device.modelId, device.status, device.roles)
 
 
 class DictWrap(object):

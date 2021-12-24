@@ -15,10 +15,11 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_model, status):
+    def __init__(self, service, device_model, status, roles):
         self.service = service
         self.device_model = device_model
         self.status = status
+        self.roles = roles
 
     def asGeneric(self):
         return Device(self.service)
