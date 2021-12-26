@@ -1,6 +1,6 @@
 import logging
 from typing import Any, Callable, List, Optional
-from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_version1
+from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_variant1
 
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
@@ -525,4 +525,4 @@ class HeatingCircuit(DeviceWithComponent):
         return float(round(targetSupply, 1))
 
     def logic_for_heat_curve_calculation(self):
-        return heat_curve_formular_version1
+        return heat_curve_formular_variant1

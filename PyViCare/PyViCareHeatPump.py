@@ -1,7 +1,7 @@
 from typing import Any, List
 
 from PyViCare.PyViCareDevice import Device, DeviceWithComponent
-from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_version2
+from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_variant2
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
@@ -68,4 +68,4 @@ class Compressor(DeviceWithComponent):
     def logic_for_heat_curve_calculation(self):
         # add logic here, based on roles and circuit count
 
-        return heat_curve_formular_version2
+        return heat_curve_formular_variant2
