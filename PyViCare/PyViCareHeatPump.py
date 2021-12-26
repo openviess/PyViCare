@@ -66,4 +66,6 @@ class Compressor(DeviceWithComponent):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]
 
     def logic_for_heat_curve_calculation(self):
+        # add logic here, based on roles and circuit count
+
         return heat_curve_formular_version2
