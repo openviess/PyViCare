@@ -1,5 +1,6 @@
 import logging
 from typing import Any, Callable, List, Optional
+from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_boiler
 
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
@@ -518,10 +519,10 @@ class HeatingCircuit(DeviceWithComponent):
 
         inside = self.getCurrentDesiredTemperature()
         outside = self.device.getOutsideTemperature()
-        delta_outside_inside = (outside - inside)
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
-        targetSupply = (inside + shift - slope * delta_outside_inside
-                        * (1.4347 + 0.021 * delta_outside_inside + 247.9
-                            * pow(10, -6) * pow(delta_outside_inside, 2)))
+        targetSupply = self.logic_for_heat_curve_calculation()(outside, inside, shift, slope)
         return float(round(targetSupply, 1))
+
+    def logic_for_heat_curve_calculation(self):
+        return heat_curve_formular_boiler
