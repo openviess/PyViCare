@@ -19,6 +19,10 @@
   },
   // Set *default* container specific settings.json values on container create.
   "settings": {
+    "files.insertFinalNewline": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
     "python.pythonPath": "/usr/local/bin/python",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
