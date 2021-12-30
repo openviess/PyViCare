@@ -1,7 +1,6 @@
 from typing import Any, List
 
 from PyViCare.PyViCareDevice import Device, DeviceWithComponent
-from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_variant2
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
@@ -64,8 +63,3 @@ class Compressor(DeviceWithComponent):
     @handleNotSupported
     def getActive(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]
-
-    def logic_for_heat_curve_calculation(self):
-        # add logic here, based on roles and circuit count
-
-        return heat_curve_formular_variant2

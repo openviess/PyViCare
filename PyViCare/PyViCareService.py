@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Any
+from typing import Any, List, Set
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
@@ -35,14 +35,21 @@ class ViCareDeviceAccessor:
 
 
 class ViCareService:
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor) -> None:
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, roles: List[str]) -> None:
         self.oauth_manager = oauth_manager
         self.accessor = accessor
+        self.roles = roles
 
     def getProperty(self, property_name: str) -> Any:
         url = buildGetPropertyUrl(
             self.accessor, property_name)
         return self.oauth_manager.get(url)
+
+    def getRoles(self) -> Set[str]:
+        return set(self.roles)
+
+    def hasRoles(self, requested_roles) -> bool:
+        return set(requested_roles).issubset(self.getRoles())
 
     def setProperty(self, property_name: str, action: str, data: Any) -> Any:
         url = buildSetPropertyUrl(

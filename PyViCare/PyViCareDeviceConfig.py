@@ -15,11 +15,10 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_model, status, roles):
+    def __init__(self, service, device_model, status):
         self.service = service
         self.device_model = device_model
         self.status = status
-        self.roles = roles
 
     def asGeneric(self):
         return Device(self.service)
@@ -66,7 +65,7 @@ class PyViCareDeviceConfig:
                 logger.info("detected %s %s" %
                             (self.device_model, creator_method.__name__))
                 return creator_method()
-            if len(roles) > 0 and set(roles).issubset(set(self.roles)):
+            if len(roles) > 0 and self.service.hasRoles(roles):
                 return creator_method()
 
         logger.info(

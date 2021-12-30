@@ -1,12 +1,14 @@
 import logging
 from typing import Any, Callable, List, Optional
-from PyViCare.PyViCareHeatCurveCalculation import heat_curve_formular_variant1
 
+from PyViCare.PyViCareHeatCurveCalculation import (
+    heat_curve_formular_variant1, heat_curve_formular_variant2)
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
                                     handleNotSupported, parse_time_as_delta,
                                     time_as_delta)
+from contextlib import suppress
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -38,6 +40,13 @@ class Device:
 
     def getCircuit(self, circuit):
         return HeatingCircuit(self, circuit)
+
+    def get_heat_curve_formular(self):
+        if self.service.hasRoles(["type:heatpump", "type:E3"]):
+            return heat_curve_formular_variant1
+        if self.service.hasRoles(["type:heatpump"]) and len(self.getAvailableCircuits()) == 1:
+            return heat_curve_formular_variant2
+        return heat_curve_formular_variant1
 
     @property
     def burners(self) -> List[Any]:
@@ -494,6 +503,14 @@ class HeatingCircuit(DeviceWithComponent):
         return status == 'on'
 
     @handleNotSupported
+    def getTemperatureLevelsMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["min"]["value"]
+
+    @handleNotSupported
+    def getTemperatureLevelsMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["max"]["value"]
+
+    @handleNotSupported
     def getHeatingSchedule(self):
         properties = self.service.getProperty(
             f"heating.circuits.{self.circuit}.heating.schedule")["properties"]
@@ -517,12 +534,18 @@ class HeatingCircuit(DeviceWithComponent):
                 or not isSupported(self.getHeatingCurveSlope)):
             return None
 
+        max_value = 1000
+        with suppress(PyViCareNotSupportedFeatureError):
+            max_value = self.getTemperatureLevelsMax()
+
+        min_value = 0
+        with suppress(PyViCareNotSupportedFeatureError):
+            min_value = self.getTemperatureLevelsMin()
+
         inside = self.getCurrentDesiredTemperature()
         outside = self.device.getOutsideTemperature()
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
-        targetSupply = self.logic_for_heat_curve_calculation()(outside, inside, shift, slope)
-        return float(round(targetSupply, 1))
-
-    def logic_for_heat_curve_calculation(self):
-        return heat_curve_formular_variant1
+        target_supply = self.device.get_heat_curve_formular()(outside, inside, shift, slope)
+        clamped_target_value = max(min_value, min(target_supply, max_value))
+        return float(round(clamped_target_value, 1))
