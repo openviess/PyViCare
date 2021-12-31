@@ -548,7 +548,6 @@ class HeatingCircuit(DeviceWithComponent):
         target_supply = self.device.get_heat_curve_formular()(delta_outside_inside, inside, shift, slope)
 
         if min_value is not None and max_value is not None:
-            clamped_target_value = max(min_value, min(target_supply, max_value))
-        else:
-            clamped_target_value = target_supply
-        return float(round(clamped_target_value, 1))
+            target_supply = max(min_value, min(target_supply, max_value))
+
+        return float(round(target_supply, 1))
