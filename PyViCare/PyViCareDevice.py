@@ -1,4 +1,5 @@
 import logging
+from contextlib import suppress
 from typing import Any, Callable, List, Optional
 
 from PyViCare.PyViCareHeatCurveCalculation import (
@@ -8,7 +9,6 @@ from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
                                     handleNotSupported, parse_time_as_delta,
                                     time_as_delta)
-from contextlib import suppress
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

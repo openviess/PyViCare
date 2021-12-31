@@ -19,6 +19,10 @@ def readFeature(entities, property_name):
     return feature
 
 
+def hasRoles(requested_roles, existing_roles):
+    return len(requested_roles) > 0 and set(requested_roles).issubset(set(existing_roles))
+
+
 def buildSetPropertyUrl(accessor, property_name, action):
     return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/{action}'
 
@@ -45,11 +49,8 @@ class ViCareService:
             self.accessor, property_name)
         return self.oauth_manager.get(url)
 
-    def getRoles(self) -> Set[str]:
-        return set(self.roles)
-
     def hasRoles(self, requested_roles) -> bool:
-        return set(requested_roles).issubset(self.getRoles())
+        return hasRoles(requested_roles, self.roles)
 
     def setProperty(self, property_name: str, action: str, data: Any) -> Any:
         url = buildSetPropertyUrl(

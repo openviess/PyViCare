@@ -2,10 +2,11 @@ import unittest
 from unittest.mock import Mock
 
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
+from PyViCare.PyViCareService import hasRoles
 
 
 def has_roles(roles):
-    return lambda requested_roles: set(requested_roles).issubset(roles)
+    return lambda requested_roles: hasRoles(requested_roles, roles)
 
 
 class PyViCareDeviceConfigTest(unittest.TestCase):
