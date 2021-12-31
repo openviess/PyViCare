@@ -33,7 +33,12 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
 
     def test_autoDetect_RoleBoiler_asGazBoiler(self):
         self.service.hasRoles = has_roles(["type:boiler"])
-
         c = PyViCareDeviceConfig(self.service, "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("GazBoiler", type(device_type).__name__)
+
+    def test_autoDetect_RoleHeatpump_asHeatpump(self):
+        self.service.hasRoles = has_roles(["type:heatpump"])
+        c = PyViCareDeviceConfig(self.service, "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("HeatPump", type(device_type).__name__)
