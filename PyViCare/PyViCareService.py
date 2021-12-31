@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Any, List, Set
+from typing import Any, List
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
@@ -19,7 +19,7 @@ def readFeature(entities, property_name):
     return feature
 
 
-def hasRoles(requested_roles, existing_roles):
+def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
     return len(requested_roles) > 0 and set(requested_roles).issubset(set(existing_roles))
 
 
