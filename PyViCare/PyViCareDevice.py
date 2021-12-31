@@ -534,18 +534,21 @@ class HeatingCircuit(DeviceWithComponent):
                 or not isSupported(self.getHeatingCurveSlope)):
             return None
 
-        max_value = 1000
+        max_value = None
+        min_value = None
         with suppress(PyViCareNotSupportedFeatureError):
             max_value = self.getTemperatureLevelsMax()
-
-        min_value = 0
-        with suppress(PyViCareNotSupportedFeatureError):
             min_value = self.getTemperatureLevelsMin()
 
         inside = self.getCurrentDesiredTemperature()
         outside = self.device.getOutsideTemperature()
+        delta_outside_inside = (outside - inside)
         shift = self.getHeatingCurveShift()
         slope = self.getHeatingCurveSlope()
-        target_supply = self.device.get_heat_curve_formular()(outside, inside, shift, slope)
-        clamped_target_value = max(min_value, min(target_supply, max_value))
+        target_supply = self.device.get_heat_curve_formular()(delta_outside_inside, inside, shift, slope)
+
+        if min_value is not None and max_value is not None:
+            clamped_target_value = max(min_value, min(target_supply, max_value))
+        else:
+            clamped_target_value = target_supply
         return float(round(clamped_target_value, 1))
