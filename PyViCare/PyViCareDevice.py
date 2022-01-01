@@ -25,6 +25,10 @@ def isSupported(method: Callable) -> bool:
         return False
 
 
+def all_set(list: List[Any]) -> bool:
+    return all(v is not None for v in list)
+
+
 class Device:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
@@ -528,10 +532,17 @@ class HeatingCircuit(DeviceWithComponent):
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self) -> Optional[float]:
-        if(not isSupported(self.getCurrentDesiredTemperature)
-                or not isSupported(self.device.getOutsideTemperature)
-                or not isSupported(self.getHeatingCurveShift)
-                or not isSupported(self.getHeatingCurveSlope)):
+        inside = None
+        outside = None
+        shift = None
+        slope = None
+        with suppress(PyViCareNotSupportedFeatureError):
+            inside = self.getCurrentDesiredTemperature()
+            outside = self.device.getOutsideTemperature()
+            shift = self.getHeatingCurveShift()
+            slope = self.getHeatingCurveSlope()
+
+        if(not all_set([inside, outside, shift, slope])):
             return None
 
         max_value = None
@@ -540,14 +551,10 @@ class HeatingCircuit(DeviceWithComponent):
             max_value = self.getTemperatureLevelsMax()
             min_value = self.getTemperatureLevelsMin()
 
-        inside = self.getCurrentDesiredTemperature()
-        outside = self.device.getOutsideTemperature()
         delta_outside_inside = (outside - inside)
-        shift = self.getHeatingCurveShift()
-        slope = self.getHeatingCurveSlope()
         target_supply = self.device.get_heat_curve_formular()(delta_outside_inside, inside, shift, slope)
 
-        if min_value is not None and max_value is not None:
+        if all_set([min_value, max_value]):
             target_supply = max(min_value, min(target_supply, max_value))
 
         return float(round(target_supply, 1))
