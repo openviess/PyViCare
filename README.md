@@ -21,6 +21,20 @@ See the example below for how you can use that.
 - Python 3.4 is no longer supported.
 - Python 3.9 is now supported.
 
+## Prerequisite
+
+To use PyViCare, every user has to register and create their private API key. Follow these steps to create your API key:
+
+1. Login to the [Viessmann Developer Portal](https://developer.viessmann.com/) with your existing ViCare username from the ViCare app.
+2. In the menu navigate to `API Keys`.
+3. Create a new OAuth client using following data:
+   - Name: PyViCare
+   - Google reCAPTCHA: Disabled
+   - Redirect URIs: `vicare://oauth-callback/everest`
+4. Copy the `Client ID` to use in your code. Pass it as constructor parameter to the device.
+
+Please note that not all properties from older versions and the ViCare mobile app are available in the new API. Missing properties were removed and might be added later if they are available again.
+
 ## Help
 
 We need help testing and improving PyViCare, since the maintainers only have specific types of heating systems. For bugs, questions or feature requests join the [PyViCare channel on Discord](https://discord.gg/aM3SqCD88f) or create an issue in this repository.
@@ -123,20 +137,6 @@ Follow these steps to access the API in Postman:
 3. Use above data to replace `{installationId}` and `{gatewaySerial}` in this URL to investigate the Viessmann API:
 
    `https://api.viessmann.com/iot/v1/equipment/installations/{installationId}/gateways/{gatewaySerial}/devices/0/features`
-
-## Migrate to PyViCare 1.x and above
-
-To use PyViCare 1.x, every user has to register and create their private API key. Follow these steps to create your API key:
-
-1. Login to the [Viessmann Developer Portal](https://developer.viessmann.com/) with your existing ViCare username from the ViCare app.
-2. In the menu navigate to `API Keys`.
-3. Create a new OAuth client using following data:
-   - Name: PyViCare
-   - Google reCAPTCHA: Disabled
-   - Redirect URIs: `vicare://oauth-callback/everest`
-4. Copy the `Client ID` to use in your code. Pass it as constructor parameter to the device.
-
-Please not that not all previous properties are available in the new API. Missing properties were removed and might be added later if they are available again.
 
 ## Rate Limits
 
