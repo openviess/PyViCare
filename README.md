@@ -21,7 +21,7 @@ See the example below for how you can use that.
 - Python 3.4 is no longer supported.
 - Python 3.9 is now supported.
 
-## Prerequisite
+## Prerequisites
 
 To use PyViCare, every user has to register and create their private API key. Follow these steps to create your API key:
 
