@@ -1,6 +1,9 @@
 import logging
+from contextlib import suppress
 from typing import Any, Callable, List, Optional
 
+from PyViCare.PyViCareHeatCurveCalculation import (
+    heat_curve_formular_variant1, heat_curve_formular_variant2)
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
@@ -22,6 +25,10 @@ def isSupported(method: Callable) -> bool:
         return False
 
 
+def all_set(list: List[Any]) -> bool:
+    return all(v is not None for v in list)
+
+
 class Device:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
@@ -37,6 +44,13 @@ class Device:
 
     def getCircuit(self, circuit):
         return HeatingCircuit(self, circuit)
+
+    def get_heat_curve_formular(self):
+        if self.service.hasRoles(["type:heatpump", "type:E3"]):
+            return heat_curve_formular_variant1
+        if self.service.hasRoles(["type:heatpump"]) and len(self.getAvailableCircuits()) == 1:
+            return heat_curve_formular_variant2
+        return heat_curve_formular_variant1
 
     @property
     def burners(self) -> List[Any]:
@@ -493,6 +507,14 @@ class HeatingCircuit(DeviceWithComponent):
         return status == 'on'
 
     @handleNotSupported
+    def getTemperatureLevelsMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["min"]["value"]
+
+    @handleNotSupported
+    def getTemperatureLevelsMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["max"]["value"]
+
+    @handleNotSupported
     def getHeatingSchedule(self):
         properties = self.service.getProperty(
             f"heating.circuits.{self.circuit}.heating.schedule")["properties"]
@@ -510,18 +532,29 @@ class HeatingCircuit(DeviceWithComponent):
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self) -> Optional[float]:
-        if(not isSupported(self.getCurrentDesiredTemperature)
-                or not isSupported(self.device.getOutsideTemperature)
-                or not isSupported(self.getHeatingCurveShift)
-                or not isSupported(self.getHeatingCurveSlope)):
+        inside = None
+        outside = None
+        shift = None
+        slope = None
+        with suppress(PyViCareNotSupportedFeatureError):
+            inside = self.getCurrentDesiredTemperature()
+            outside = self.device.getOutsideTemperature()
+            shift = self.getHeatingCurveShift()
+            slope = self.getHeatingCurveSlope()
+
+        if(not all_set([inside, outside, shift, slope])):
             return None
 
-        inside = self.getCurrentDesiredTemperature()
-        outside = self.device.getOutsideTemperature()
+        max_value = None
+        min_value = None
+        with suppress(PyViCareNotSupportedFeatureError):
+            max_value = self.getTemperatureLevelsMax()
+            min_value = self.getTemperatureLevelsMin()
+
         delta_outside_inside = (outside - inside)
-        shift = self.getHeatingCurveShift()
-        slope = self.getHeatingCurveSlope()
-        targetSupply = (inside + shift - slope * delta_outside_inside
-                        * (1.4347 + 0.021 * delta_outside_inside + 247.9
-                            * pow(10, -6) * pow(delta_outside_inside, 2)))
-        return float(round(targetSupply, 1))
+        target_supply = self.device.get_heat_curve_formular()(delta_outside_inside, inside, shift, slope)
+
+        if all_set([min_value, max_value]):
+            target_supply = max(min_value, min(target_supply, max_value))
+
+        return float(round(target_supply, 1))

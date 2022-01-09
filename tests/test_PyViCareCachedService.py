@@ -16,7 +16,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
         self.oauth_mock.get.return_value = {'data': [{"feature": "someprop"}]}
         accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareCachedService(
-            self.oauth_mock, accessor, self.CACHE_DURATION)
+            self.oauth_mock, accessor, [], self.CACHE_DURATION)
 
     def test_getProperty_existing(self):
         self.service.getProperty("someprop")

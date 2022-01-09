@@ -53,15 +53,15 @@ class PyViCareDeviceConfig:
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
-            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System"),
-            (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo"),
-            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B"),
-            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6"),
-            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P")
+            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
+            (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo", []),
+            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
+            (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
+            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", [])
         ]
 
-        for (creator_method, type_name) in device_types:
-            if re.search(type_name, self.device_model):
+        for (creator_method, type_name, roles) in device_types:
+            if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
                 logger.info("detected %s %s" %
                             (self.device_model, creator_method.__name__))
                 return creator_method()
