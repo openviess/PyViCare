@@ -42,6 +42,18 @@ Tip: You can use Pythons [contextlib.suppress](https://docs.python.org/3/library
 
 ## Basic Usage:
 
+### Prerequsites
+- login to [Viessmann Developer Portal](https://developer.viessmann.com/
+- Go to tab "API Keys"
+- Create an Oauth Client
+   - Disable Capture
+   - set Redirect URL to: `vicare://oauth-callback/everest` 
+      - If you miss this setting, you will get error messages like:
+         - `{"error":"Invalid redirection URI."}`
+         - `PyViCare.PyViCareUtils.PyViCareInvalidCredentialsError`
+   - Copy the generate CLient ID and place it in the code below. (And email and password of course)
+
+### Code sample
 ```python
 import sys
 import logging
