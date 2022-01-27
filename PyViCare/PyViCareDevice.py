@@ -29,6 +29,21 @@ def all_set(list: List[Any]) -> bool:
     return all(v is not None for v in list)
 
 
+def get_available_burners(service):
+    # legacy clean implementation which directly acccess the components
+    with suppress(PyViCareNotSupportedFeatureError):
+        return service.getProperty("heating.burners")["components"]
+
+    # workaround starting form 25.01.2022
+    available_burners = []
+    for burner in ['0', '1', '2', '3', '4', '5']:
+        with suppress(PyViCareNotSupportedFeatureError):
+            if service.getProperty(f"heating.burners.{burner}") is not None:
+                available_burners.append(burner)
+
+    return available_burners
+
+
 class Device:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.

@@ -1,6 +1,6 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import Device, DeviceWithComponent
+from PyViCare.PyViCareDevice import Device, DeviceWithComponent, get_available_burners
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
@@ -15,7 +15,7 @@ class GazBoiler(Device):
 
     @handleNotSupported
     def getAvailableBurners(self):
-        return self.service.getProperty("heating.burners")["components"]
+        return get_available_burners(self.service)
 
     @handleNotSupported
     def getGasConsumptionHeatingUnit(self):
