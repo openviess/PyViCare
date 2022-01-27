@@ -35,6 +35,7 @@ def get_available_burners(service):
         return service.getProperty("heating.burners")["components"]
 
     # workaround starting form 25.01.2022
+    # see: https://github.com/somm15/PyViCare/issues/243
     available_burners = []
     for burner in ['0', '1', '2', '3', '4', '5']:
         with suppress(PyViCareNotSupportedFeatureError):
