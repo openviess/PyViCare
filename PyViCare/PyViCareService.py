@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Any
+from typing import Any, List
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
@@ -19,6 +19,10 @@ def readFeature(entities, property_name):
     return feature
 
 
+def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
+    return len(requested_roles) > 0 and set(requested_roles).issubset(set(existing_roles))
+
+
 def buildSetPropertyUrl(accessor, property_name, action):
     return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/{action}'
 
@@ -35,14 +39,18 @@ class ViCareDeviceAccessor:
 
 
 class ViCareService:
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor) -> None:
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, roles: List[str]) -> None:
         self.oauth_manager = oauth_manager
         self.accessor = accessor
+        self.roles = roles
 
     def getProperty(self, property_name: str) -> Any:
         url = buildGetPropertyUrl(
             self.accessor, property_name)
         return self.oauth_manager.get(url)
+
+    def hasRoles(self, requested_roles) -> bool:
+        return hasRoles(requested_roles, self.roles)
 
     def setProperty(self, property_name: str, action: str, data: Any) -> Any:
         url = buildSetPropertyUrl(

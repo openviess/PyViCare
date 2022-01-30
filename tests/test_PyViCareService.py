@@ -9,7 +9,7 @@ class PyViCareServiceTest(unittest.TestCase):
     def setUp(self):
         self.oauth_mock = Mock()
         accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
-        self.service = ViCareService(self.oauth_mock, accessor)
+        self.service = ViCareService(self.oauth_mock, accessor, [])
 
     def test_getProperty(self):
         self.service.getProperty("someprop")

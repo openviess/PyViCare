@@ -44,7 +44,10 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.modes.standard',
             'ventilation.operating.modes.ventilation',
 
-            'heating.circuits.0.heating.roomInfluenceFactor'
+            'heating.circuits.0.heating.roomInfluenceFactor',
+            'heating.circuits.0.temperature',  # TODO: to analyse, from Vitodens 100W
+            'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
+            'heating.circuits.0.name'  # TODO: to analyse, from Vitodens 100W
         ]
 
         all_features = self.read_all_features()
@@ -75,6 +78,7 @@ class TestForMissingProperties(unittest.TestCase):
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
+                feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'\.{(program|active_programm)}', '', feature_name)
                 used_features.append(feature_name)
 
