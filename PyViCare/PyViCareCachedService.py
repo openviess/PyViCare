@@ -1,6 +1,6 @@
 import logging
 import threading
-from typing import Any
+from typing import Any, List
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
@@ -13,8 +13,8 @@ logger.addHandler(logging.NullHandler())
 
 class ViCareCachedService(ViCareService):
 
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, cacheDuration: int) -> None:
-        ViCareService.__init__(self, oauth_manager, accessor)
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, roles: List[str], cacheDuration: int) -> None:
+        ViCareService.__init__(self, oauth_manager, accessor, roles)
         self.__cacheDuration = cacheDuration
         self.__cache = None
         self.__cacheTime = None

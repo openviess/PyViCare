@@ -1,6 +1,6 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import Device, DeviceWithComponent
+from PyViCare.PyViCareDevice import Device, DeviceWithComponent, get_available_burners
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
@@ -15,7 +15,7 @@ class GazBoiler(Device):
 
     @handleNotSupported
     def getAvailableBurners(self):
-        return self.service.getProperty("heating.burners")["components"]
+        return get_available_burners(self.service)
 
     @handleNotSupported
     def getGasConsumptionHeatingUnit(self):
@@ -136,6 +136,123 @@ class GazBoiler(Device):
     @handleNotSupported
     def getPowerConsumptionThisYear(self):
         return self.service.getProperty("heating.power.consumption.total")["properties"]["year"]["value"][0]
+
+    # For Vitodens-100W new "summary" api methods
+    # Gas consumption for Heating data:
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingUnit(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingCurrentDay(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingCurrentMonth(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingCurrentYear(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingLastMonth(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["lastMonth"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingLastSevenDays(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["lastSevenDays"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionHeatingLastYear(self):
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["lastYear"]["value"]
+
+    # Gas consumption for Domestic Hot Water data:
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterUnit(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterCurrentDay(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterCurrentMonth(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterCurrentYear(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterLastMonth(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["lastMonth"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterLastSevenDays(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["lastSevenDays"]["value"]
+
+    @handleNotSupported
+    def getGasSummaryConsumptionDomesticHotWaterLastYear(self):
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["lastYear"]["value"]
+
+    # Power consumption for Heating:
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingUnit(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingCurrentDay(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingCurrentMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingCurrentYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingLastMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["lastMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingLastSevenDays(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["lastSevenDays"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingLastYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["lastYear"]["value"]
+
+    # Power consumption for Domestic Hot Water:
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterUnit(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterCurrentDay(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterCurrentYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterLastMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastSevenDays"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
 
 
 class GazBurner(DeviceWithComponent):
