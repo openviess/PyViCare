@@ -51,5 +51,5 @@ class GenericDevice(unittest.TestCase):
             self.service.setPropertyData[0]['property_name'], 'heating.circuits.0.heating.curve')
         self.assertEqual(
             self.service.setPropertyData[0]['action'], 'setCurve')
-        self.assertEqual(self.service.setPropertyData[0]['data'], {
-                         'shift': -2, 'slope': 0.9})
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'shift': -2, 'slope': 0.9})
+ 
