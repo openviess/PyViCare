@@ -491,6 +491,10 @@ class HeatingCircuit(DeviceWithComponent):
     def getHeatingCurveSlope(self):
         return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["slope"]["value"]
 
+    @handleAPICommandErrors
+    def setHeatingCurve(self, shift, slope):
+        return self.service.setProperty(f"heating.circuits.{self.circuit}.heating.curve", "setCurve", {'shift': int(shift), 'slope': round(float(slope), 1)})
+
     @handleNotSupported
     def getActiveProgram(self):
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.active")["properties"]["value"]["value"]

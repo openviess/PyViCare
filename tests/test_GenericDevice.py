@@ -43,3 +43,12 @@ class GenericDevice(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['action'], 'setMode')
         self.assertEqual(
             self.service.setPropertyData[0]['data'], {'mode': 'dhw'})
+
+    def test_setHeatingCurve(self):
+        self.device.circuits[0].setHeatingCurve(-2, 0.9)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.circuits.0.heating.curve')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setCurve')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'shift': -2, 'slope': 0.9})
