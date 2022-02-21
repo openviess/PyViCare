@@ -144,7 +144,7 @@ Follow these steps to access the API in Postman:
 
 ## More different devices for test cases needed
 
-In order to help ensuring making it easier to create more test cases you can run this code and make a pull request with the new test of your device type added. Your test shoudl be commited into [tests/response](tests/response) and named <family><model>.
+In order to help ensuring making it easier to create more test cases you can run this code and make a pull request with the new test of your device type added. Your test should be commited into [tests/response](tests/response) and named `<family><model>`.
 
 The code to run to make this happen is below. This automatically removes "sensitive" information like installation id and serial numbers.
 You can either replace default values or use the `PYVICARE_*` environment variables.
