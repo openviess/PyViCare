@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/somm15/PyViCare",
     packages=setuptools.find_packages(exclude=["tests"]),
     install_requires=['requests-oauthlib>=1.1.0', 'pkce'],
-    setup_requires=['setuptools-git-versioning'],
+    setup_requires=['setuptools-git-versioning<1.8.0'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
