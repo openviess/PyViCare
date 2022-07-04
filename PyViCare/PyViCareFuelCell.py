@@ -1,6 +1,7 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import Device, DeviceWithComponent, get_available_burners
+from PyViCare.PyViCareDevice import (Device, DeviceWithComponent,
+                                     get_available_burners)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
