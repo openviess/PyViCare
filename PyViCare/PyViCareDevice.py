@@ -30,12 +30,6 @@ def all_set(list: List[Any]) -> bool:
 
 
 def get_available_burners(service):
-    # legacy clean implementation which directly acccess the components
-    with suppress(PyViCareNotSupportedFeatureError):
-        burner = service.getProperty("heating.burners")
-        if "components" in burner:
-            return burner["components"]
-
     # workaround starting from 25.01.2022
     # see: https://github.com/somm15/PyViCare/issues/243
     available_burners = []
