@@ -121,7 +121,11 @@ class PyViCareCommandError(Exception):
         statusCode = response["statusCode"]
 
         extended_payload = response["extendedPayload"]
-        reason = extended_payload["reason"]
+
+        if "reason" in extended_payload:
+            reason = extended_payload["reason"]
+        else:
+            reason = "Unknown"
 
         msg = f'Command failed with status code {statusCode}. Reason given was: {reason}'
 
