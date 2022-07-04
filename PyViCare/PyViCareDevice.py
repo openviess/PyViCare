@@ -497,7 +497,13 @@ class HeatingCircuit(DeviceWithComponent):
 
     @handleNotSupported
     def getPrograms(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs")["components"]
+        available_programs = []
+        for program in ['active', 'comfort', 'forcedLastFromSchedule', 'eco', 'external', 'fixed', 'holiday', 'normal', 'reduced', 'standby']:
+            with suppress(PyViCareNotSupportedFeatureError):
+                if self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
+                    available_programs.append(program)
+
+        return available_programs
 
     @handleNotSupported
     def getDesiredTemperatureForProgram(self, program):
