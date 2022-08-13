@@ -224,7 +224,7 @@ class Device:
 
     @handleNotSupported
     def getSolarPowerProductionUnit(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["unit"]["value"]
+        return self.service.getProperty("heating.solar.power.production")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getSolarPowerProductionDays(self):
