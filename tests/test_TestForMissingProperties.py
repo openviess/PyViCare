@@ -26,8 +26,13 @@ class TestForMissingProperties(unittest.TestCase):
 
             'heating.circuits.0.temperature.levels',  # hint: command
             'heating.dhw.temperature.hysteresis',  # hint: command
+            'heating.dhw.hygiene',
+            'heating.dhw.temperature',
+            'heating.burners',
+            'heating.solar',
 
             # todo: implement ventilation
+            'ventilation',
             'ventilation.schedule',
             'ventilation.operating.programs',
             'ventilation.operating.programs.eco',
