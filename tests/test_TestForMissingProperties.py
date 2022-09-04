@@ -124,6 +124,6 @@ class TestForMissingProperties(unittest.TestCase):
                     if name not in all_features:
                         all_features[name] = {'files': []}
 
-                    if feature['isEnabled'] and feature['properties'] != {} and feature['components'] == []:
+                    if feature['isEnabled'] and feature['properties'] != {}:
                         all_features[name]['files'].append(response)
         return all_features
