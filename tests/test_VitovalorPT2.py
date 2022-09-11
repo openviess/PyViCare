@@ -45,19 +45,19 @@ class VitovalorPT2(unittest.TestCase):
         expected_consumption = [0.6, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3]
         self.assertListEqual(self.device.getPowerConsumptionDays(), expected_consumption)
 
-    def test_getPowerConsumptionUnit(self):
-        self.assertEqual(self.device.getPowerConsumptionUnit(), "kilowattHour")
+    # def test_getPowerConsumptionUnit(self):
+    #     self.assertEqual(self.device.getPowerConsumptionUnit(), "kilowattHour")
 
     def test_getPowerConsumptionHeatingDays(self):
         expected_consumption = [0.6, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3]
         self.assertListEqual(self.device.getPowerConsumptionHeatingDays(), expected_consumption)
 
-    def test_getPowerConsumptionHeatingUnit(self):
-        self.assertEqual(self.device.getPowerConsumptionHeatingUnit(), "kilowattHour")
+    # def test_getPowerConsumptionHeatingUnit(self):
+    #     self.assertEqual(self.device.getPowerConsumptionHeatingUnit(), "kilowattHour")
 
     def test_getGasConsumptionTotalDays(self):
         expected_consumption = [2, 4.1, 4.1, 4.1, 4.1, 4.199999999999999, 4.1, 4.199999999999999]
         self.assertListEqual(self.device.getGasConsumptionTotalDays(), expected_consumption)
 
-    def test_getGasConsumptionUnit(self):
-        self.assertEqual(self.device.getGasConsumptionUnit(), "cubicMeter")
+    # def test_getGasConsumptionUnit(self):
+    #     self.assertEqual(self.device.getGasConsumptionUnit(), "cubicMeter")

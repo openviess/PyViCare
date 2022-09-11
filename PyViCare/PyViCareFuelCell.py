@@ -24,7 +24,7 @@ class FuelCell(Device):
 
     @handleNotSupported
     def getPowerConsumptionUnit(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["unit"]["value"]
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
@@ -60,7 +60,7 @@ class FuelCell(Device):
 
     @handleNotSupported
     def getPowerConsumptionHeatingUnit(self):
-        return self.service.getProperty("heating.power.consumption.heating")["properties"]["unit"]["value"]
+        return self.service.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
 
     @handleNotSupported
     def getPowerConsumptionHeatingDays(self):
@@ -96,7 +96,7 @@ class FuelCell(Device):
 
     @handleNotSupported
     def getGasConsumptionUnit(self):
-        return self.service.getProperty("heating.gas.consumption.total")["properties"]["unit"]["value"]
+        return self.service.getProperty("heating.gas.consumption.total")["properties"]["day"]["unit"]
 
     @handleNotSupported
     def getGasConsumptionTotalDays(self):
