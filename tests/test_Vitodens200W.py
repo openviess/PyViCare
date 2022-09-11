@@ -82,25 +82,13 @@ class Vitodens200W(unittest.TestCase):
             self.assertEqual(
                 self.device.getDomesticHotWaterCirculationMode(), 'off')
 
-    # def test_getGasConsumptionHeatingUnit(self):
-    #     self.assertEqual(
-    #         self.device.getGasConsumptionHeatingUnit(), "cubicMeter")
-
     def test_getGasConsumptionHeatingToday(self):
         self.assertEqual(
             self.device.getGasConsumptionHeatingToday(), 0)
 
-    # def test_getGasConsumptionDomesticHotWaterUnit(self):
-    #     self.assertEqual(
-    #         self.device.getGasConsumptionDomesticHotWaterUnit(), "cubicMeter")
-
     def test_getGasConsumptionDomesticHotWaterToday(self):
         self.assertEqual(
             self.device.getGasConsumptionDomesticHotWaterToday(), 1.3)
-
-    # def test_getPowerConsumptionUnit(self):
-    #     self.assertEqual(
-    #         self.device.getPowerConsumptionUnit(), "kilowattHour")
 
     def test_getPowerConsumptionToday(self):
         self.assertEqual(
