@@ -16,34 +16,34 @@ class Vitocal200(unittest.TestCase):
 
     def test_getCompressorHours(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHours(), 8583.2)
+            self.device.compressors[0].getHours(), 11362.7)
 
     def test_getAvailableCompressors(self):
         self.assertEqual(self.device.getAvailableCompressors(), ['0'])
 
     def test_getCompressorStarts(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getStarts(), 3180)
+            self.device.compressors[0].getStarts(), 5101)
 
     def test_getCompressorHoursLoadClass1(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass1(), 227)
+            self.device.compressors[0].getHoursLoadClass1(), 283)
 
     def test_getCompressorHoursLoadClass2(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass2(), 3294)
+            self.device.compressors[0].getHoursLoadClass2(), 4336)
 
     def test_getCompressorHoursLoadClass3(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass3(), 3903)
+            self.device.compressors[0].getHoursLoadClass3(), 5275)
 
     def test_getCompressorHoursLoadClass4(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass4(), 506)
+            self.device.compressors[0].getHoursLoadClass4(), 611)
 
     def test_getCompressorHoursLoadClass5(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass5(), 461)
+            self.device.compressors[0].getHoursLoadClass5(), 606)
 
     def test_getHeatingCurveSlope(self):
         self.assertAlmostEqual(
@@ -54,7 +54,7 @@ class Vitocal200(unittest.TestCase):
             self.device.circuits[0].getHeatingCurveShift(), -5)
 
     def test_getReturnTemperature(self):
-        self.assertAlmostEqual(self.device.getReturnTemperature(), 27.5)
+        self.assertAlmostEqual(self.device.getReturnTemperature(), 25.6)
 
     def test_getReturnTemperaturePrimaryCircuit(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
@@ -62,7 +62,7 @@ class Vitocal200(unittest.TestCase):
 
     def test_getSupplyTemperaturePrimaryCircuit(self):
         self.assertAlmostEqual(
-            self.device.getSupplyTemperaturePrimaryCircuit(), 18.9)
+            self.device.getSupplyTemperaturePrimaryCircuit(), 13.4)
 
     def test_getPrograms(self):
         expected_programs = ['active', 'comfort', 'eco',
