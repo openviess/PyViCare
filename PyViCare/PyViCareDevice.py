@@ -265,6 +265,12 @@ class Device:
         return status == 'on'
 
     @handleNotSupported
+    def getSolarRechargeSuppressionActive(self):
+        status = self.service.getProperty("heating.solar.rechargeSuppression")[
+            "properties"]["status"]["value"]
+        return status == 'on'
+
+    @handleNotSupported
     def getOneTimeCharge(self):
         return self.service.getProperty("heating.dhw.oneTimeCharge")["properties"]["active"]["value"]
 
