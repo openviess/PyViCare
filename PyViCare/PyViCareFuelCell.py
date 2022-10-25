@@ -146,6 +146,10 @@ class FuelCell(Device):
     def getHydraulicSeparatorTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getFuelCellOperatingPhase(self):
+        return self.service.getProperty("heating.fuelCell.operating.phase")["properties"]["value"]["value"]
+
 
 class FuelCellBurner(DeviceWithComponent):
 
