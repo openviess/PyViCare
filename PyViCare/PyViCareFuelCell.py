@@ -150,6 +150,9 @@ class FuelCell(Device):
     def getFuelCellOperatingPhase(self):
         return self.service.getProperty("heating.fuelCell.operating.phase")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getFuelCellPowerProductionCurrent(self):
+        return self.service.getProperty("heating.power.production.current")["properties"]["value"]["value"]
 
 class FuelCellBurner(DeviceWithComponent):
 
