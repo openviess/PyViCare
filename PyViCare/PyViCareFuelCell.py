@@ -146,13 +146,139 @@ class FuelCell(Device):
     def getHydraulicSeparatorTemperature(self):
         return self.service.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
 
+    # ---- Actual FuelCell-relevant methods (they require paid "Advanced" API plan):
+
+    # TODO: Implement setFuelCellOperatingMode<...>() methods
+
+    @handleNotSupported
+    def getFuelCellOperatingModeActive(self):
+        # Returns currently active operating mode as string, e.g. "economical"
+        return self.service.getProperty("heating.fuelCell.operating.modes.active")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionUnit(self):
+        # Returns the unit for the fuel cell's power production statistics, e.g. kilowattHour
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["day"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionDays(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["day"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionToday(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionWeeks(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["week"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionThisWeek(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["week"]["value"][0]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionMonths(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["month"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionThisMonth(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionYears(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["year"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionThisYear(self):
+        return self.service.getProperty("heating.fuelCell.power.production")["properties"]["year"]["value"][0]
+
     @handleNotSupported
     def getFuelCellOperatingPhase(self):
+        # Returns current operating phase as string, e.g. "standby" or "generation"
         return self.service.getProperty("heating.fuelCell.operating.phase")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getFuelCellPowerProductionCurrentUnit(self):
+        # Returns current power production unit, e.g. "watt"
+        return self.service.getProperty("heating.power.production.current")["properties"]["value"]["unit"]
+
+    @handleNotSupported
     def getFuelCellPowerProductionCurrent(self):
+        # Returns current power production as integer
         return self.service.getProperty("heating.power.production.current")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellFlowReturnTemperatureUnit(self):
+        # Returns flow return temperature unit, e.g. "celsius"
+        return self.service.getProperty("heating.fuelCell.sensors.temperature.return")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellFlowReturnTemperature(self):
+        # Returns flow return temperature at the fuel cell as float
+        return self.service.getProperty("heating.fuelCell.sensors.temperature.return")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellFlowSupplyTemperatureUnit(self):
+        # Returns flow supply temperature unit, e.g. "celsius"
+        return self.service.getProperty("heating.fuelCell.sensors.temperature.supply")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellFlowSupplyTemperature(self):
+        # Returns flow supply temperature at the fuel cell as float
+        return self.service.getProperty("heating.fuelCell.sensors.temperature.supply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellOperationHours(self):
+        # Returns the operation hours of the fuel cell as integer
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["operationHours"]["value"]
+
+    @handleNotSupported
+    def getFuelCellProductionHours(self):
+        # Returns the production hours of the fuel cell as integer
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionHours"]["value"]
+
+    @handleNotSupported
+    def getFuelCellProductionStarts(self):
+        # Returns the number of production starts of the fuel cell as integer
+        return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionStarts"]["value"]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionUnit(self):
+        # Returns the unit for the fuel cell's gas consumption statistics, e.g. "cubicMeter"
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["day"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionDays(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["day"]["value"]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionToday(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionWeeks(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["week"]["value"]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionThisWeek(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["week"]["value"][0]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionMonths(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["month"]["value"]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionThisMonth(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionYears(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["year"]["value"]
+
+    @handleNotSupported
+    def getFuelCellGasConsumptionThisYear(self):
+        return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["year"]["value"][0]
+
 
 class FuelCellBurner(DeviceWithComponent):
 
