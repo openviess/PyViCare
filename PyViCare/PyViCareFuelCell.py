@@ -148,8 +148,6 @@ class FuelCell(Device):
 
     # ---- Actual FuelCell-relevant methods (they require paid "Advanced" API plan):
 
-    # TODO: Implement setFuelCellOperatingMode<...>() methods
-
     @handleNotSupported
     def getFuelCellOperatingModeActive(self):
         # Returns currently active operating mode as string, e.g. "economical"
