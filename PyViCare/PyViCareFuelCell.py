@@ -132,7 +132,7 @@ class FuelCell(Device):
 
     @handleNotSupported
     def getVolumetricFlowReturn(self):
-        return self.service.getProperty("heating.sensors.volumetricFlow.return")["properties"]["value"]["value"]
+        return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterMaxTemperatureLevel(self):
