@@ -11,26 +11,26 @@ class VitovalorPT2(unittest.TestCase):
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterConfiguredTemperature(), 47)
+            self.device.getDomesticHotWaterConfiguredTemperature(), 45)
 
     def test_getReturnTemperature(self):
         self.assertEqual(
-            self.device.getReturnTemperature(), 46.1)
+            self.device.getReturnTemperature(), 22.2)
 
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), False)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.burners[0].getStarts(), 6218)
+        self.assertEqual(self.device.burners[0].getStarts(), 3862)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.burners[0].getHours(), 1688)
+        self.assertEqual(self.device.burners[0].getHours(), 282)
 
     def test_getBurnerModulation(self):
         self.assertEqual(self.device.burners[0].getModulation(), 0)
 
     def test_getVolumetricFlowReturn(self):
-        self.assertEqual(self.device.getVolumetricFlowReturn(), 412)
+        self.assertEqual(self.device.getVolumetricFlowReturn(), 513)
 
     def test_getDomesticHotWaterMaxTemperatureLevel(self):
         self.assertEqual(self.device.getDomesticHotWaterMaxTemperatureLevel(), 10)
@@ -39,16 +39,16 @@ class VitovalorPT2(unittest.TestCase):
         self.assertEqual(self.device.getDomesticHotWaterMinTemperatureLevel(), 10)
 
     def test_getHydraulicSeparatorTemperature(self):
-        self.assertEqual(self.device.getHydraulicSeparatorTemperature(), 46.8)
+        self.assertEqual(self.device.getHydraulicSeparatorTemperature(), 22.3)
 
     def test_getPowerConsumptionDays(self):
-        expected_consumption = [0.6, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3]
+        expected_consumption = [0.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
         self.assertListEqual(self.device.getPowerConsumptionDays(), expected_consumption)
 
     def test_getPowerConsumptionHeatingDays(self):
-        expected_consumption = [0.6, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3]
+        expected_consumption = [0.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
         self.assertListEqual(self.device.getPowerConsumptionHeatingDays(), expected_consumption)
 
     def test_getGasConsumptionTotalDays(self):
-        expected_consumption = [2, 4.1, 4.1, 4.1, 4.1, 4.199999999999999, 4.1, 4.199999999999999]
+        expected_consumption = [1.5, 0.2, 0.30000000000000004, 0.2, 0.4, 0.6000000000000001, 1.7, 0.2]
         self.assertListEqual(self.device.getGasConsumptionTotalDays(), expected_consumption)
