@@ -31,6 +31,17 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.burners',
             'heating.solar',
 
+            'heating.dhw.hygiene.trigger',
+            'heating.dhw.operating.modes.off',
+            'heating.dhw.temperature.hygiene',
+            'heating.power.production.cumulative',
+            'heating.power.purchase.cumulative',
+            'heating.power.purchase.current',
+            'heating.power.sold.cumulative',
+            'heating.power.sold.current',
+            'heating.sensors.pressure.supply',
+            'heating.sensors.temperature.allengra',
+
             # todo: implement ventilation
             'ventilation',
             'ventilation.schedule',
