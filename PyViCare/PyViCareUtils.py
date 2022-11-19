@@ -118,16 +118,18 @@ class PyViCareInternalServerError(Exception):
 
 class PyViCareCommandError(Exception):
     def __init__(self, response):
-        statusCode = response["statusCode"]
-
-        extended_payload = response["extendedPayload"]
-
-        if "reason" in extended_payload:
-            reason = extended_payload["reason"]
+        if isinstance(response, str):
+            msg = f'Command failed with message "{response}"'
         else:
-            reason = "Unknown"
+            statusCode = response["statusCode"]
+            extended_payload = response["extendedPayload"]
 
-        msg = f'Command failed with status code {statusCode}. Reason given was: {reason}'
+            if "reason" in extended_payload:
+                reason = extended_payload["reason"]
+            else:
+                reason = "Unknown"
+
+            msg = f'Command failed with status code {statusCode}. Reason given was: {reason}'
 
         super().__init__(self, msg)
         self.message = msg
