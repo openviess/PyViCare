@@ -33,12 +33,17 @@ class ViCareCachedService(ViCareService):
     def __get_or_update_cache(self):
         with self.__lock:
             if self.is_cache_invalid():
+                # we always sett the cache time before we fetch the data
+                # to avoid consuming all the api calls if the api is down
+                # see https://github.com/home-assistant/core/issues/67052
+                # we simply return the old cache in this case
+                self.__cacheTime = ViCareTimer().now()
+
                 data = self.fetch_all_features()
                 if "data" not in data:
                     logger.error("Missing 'data' property when fetching data.")
                     raise PyViCareInvalidDataError(data)
                 self.__cache = data
-                self.__cacheTime = ViCareTimer().now()
             return self.__cache
 
     def is_cache_invalid(self) -> bool:
