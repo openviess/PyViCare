@@ -63,3 +63,11 @@ class Compressor(DeviceWithComponent):
     @handleNotSupported
     def getActive(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]
+
+    @handleNotSupported
+    def getPowerConsumptionToday(self):
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterToday(self):
+        return self.service.getProperty("heating.power.consumption.dhw")["properties"]["day"]["value"][0]
