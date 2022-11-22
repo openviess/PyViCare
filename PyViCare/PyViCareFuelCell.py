@@ -202,8 +202,58 @@ class FuelCell(Device):
 
     @handleNotSupported
     def getFuelCellPowerProductionCurrent(self):
-        # Returns current power production as integer
+        # Returns current power production
         return self.service.getProperty("heating.power.production.current")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerPurchaseCurrentUnit(self):
+        # Returns current purchased power unit, e.g. "watt"
+        return self.service.getProperty("heating.power.purchase.current")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellPowerPurchaseCurrent(self):
+        # Returns current purchased power
+        return self.service.getProperty("heating.power.purchase.current")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerSoldCurrentUnit(self):
+        # Returns current sold power unit, e.g. "watt"
+        return self.service.getProperty("heating.power.sold.current")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellPowerSoldCurrent(self):
+        # Returns current sold power
+        return self.service.getProperty("heating.power.sold.current")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionCumulativeUnit(self):
+        # Returns cumulated value of produced power unit, e.g. "kilowattHour"
+        return self.service.getProperty("heating.power.production.cumulative")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellPowerProductionCumulative(self):
+        # Returns cumulated value of produced power
+        return self.service.getProperty("heating.power.production.cumulative")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerPurchaseCumulativeUnit(self):
+        # Returns cumulated value of purchased power unit, e.g. "kilowattHour"
+        return self.service.getProperty("heating.power.purchase.cumulative")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellPowerPurchaseCumulative(self):
+        # Returns cumulated value of purchased power
+        return self.service.getProperty("heating.power.purchase.cumulative")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getFuelCellPowerSoldCumulativeUnit(self):
+        # Returns cumulated value of sold power unit, e.g. "kilowattHour"
+        return self.service.getProperty("heating.power.sold.cumulative")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getFuelCellPowerSoldCumulative(self):
+        # Returns cumulated value of sold power
+        return self.service.getProperty("heating.power.sold.cumulative")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getFuelCellFlowReturnTemperatureUnit(self):
@@ -227,17 +277,17 @@ class FuelCell(Device):
 
     @handleNotSupported
     def getFuelCellOperationHours(self):
-        # Returns the operation hours of the fuel cell as integer
+        # Returns the operation hours of the fuel cell
         return self.service.getProperty("heating.fuelCell.statistics")["properties"]["operationHours"]["value"]
 
     @handleNotSupported
     def getFuelCellProductionHours(self):
-        # Returns the production hours of the fuel cell as integer
+        # Returns the production hours of the fuel cell
         return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionHours"]["value"]
 
     @handleNotSupported
     def getFuelCellProductionStarts(self):
-        # Returns the number of production starts of the fuel cell as integer
+        # Returns the number of production starts of the fuel cell
         return self.service.getProperty("heating.fuelCell.statistics")["properties"]["productionStarts"]["value"]
 
     @handleNotSupported
