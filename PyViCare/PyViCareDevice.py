@@ -45,7 +45,7 @@ class Device:
     """This class connects to the Viesmann ViCare API.
     The authentication is done through OAuth2.
     Note that currently, a new token is generate for each run.
-    """
+    """ 
 
     def __init__(self, service: ViCareService) -> None:
         self.service = service
@@ -412,8 +412,8 @@ class HeatingCircuit(DeviceWithComponent):
         json representation of the answer
     """
 
-    def setProgramTemperature(self, program: str, temperature: int):
-        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "setTemperature", {'targetTemperature': int(temperature)})
+    def setProgramTemperature(self, program: str, temperature: float):
+        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "setTemperature", {'targetTemperature': float(temperature)})
 
     def setReducedTemperature(self, temperature):
         return self.setProgramTemperature("reduced", temperature)
