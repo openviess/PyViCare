@@ -93,6 +93,36 @@ class VitovalorPT2(unittest.TestCase):
     def test_getFuelCellPowerProductionCurrent(self):
         self.assertEqual(self.device.getFuelCellPowerProductionCurrent(), 0)
 
+    def test_getFuelCellPowerPurchaseCurrentUnit(self):
+        self.assertEqual(self.device.getFuelCellPowerPurchaseCurrentUnit(), "watt")
+
+    def test_getFuelCellPowerPurchaseCurrent(self):
+        self.assertEqual(self.device.getFuelCellPowerPurchaseCurrent(), 594)
+
+    def test_getFuelCellPowerSoldCurrentUnit(self):
+        self.assertEqual(self.device.getFuelCellPowerSoldCurrentUnit(), "watt")
+
+    def test_getFuelCellPowerSoldCurrent(self):
+        self.assertEqual(self.device.getFuelCellPowerSoldCurrent(), 0)
+
+    def test_getFuelCellPowerProductionCumulativeUnit(self):
+        self.assertEqual(self.device.getFuelCellPowerProductionCumulativeUnit(), "kilowattHour")
+
+    def test_getFuelCellPowerProductionCumulative(self):
+        self.assertEqual(self.device.getFuelCellPowerProductionCumulative(), 4537)
+
+    def test_getFuelCellPowerPurchaseCumulativeUnit(self):
+        self.assertEqual(self.device.getFuelCellPowerPurchaseCumulativeUnit(), "kilowattHour")
+
+    def test_getFuelCellPowerPurchaseCumulative(self):
+        self.assertEqual(self.device.getFuelCellPowerPurchaseCumulative(), 3767.1)
+
+    def test_getFuelCellPowerSoldCumulativeUnit(self):
+        self.assertEqual(self.device.getFuelCellPowerSoldCumulativeUnit(), "kilowattHour")
+
+    def test_getFuelCellPowerSoldCumulative(self):
+        self.assertEqual(self.device.getFuelCellPowerSoldCumulative(), 1822.1)
+
     def test_getFuelCellFlowReturnTemperatureUnit(self):
         self.assertEqual(self.device.getFuelCellFlowReturnTemperatureUnit(), "celsius")
 
