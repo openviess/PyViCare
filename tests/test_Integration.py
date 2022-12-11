@@ -73,6 +73,8 @@ class Integration(unittest.TestCase):
                 auto_type_name = type(device).__name__
                 print(f"{'detected type':<45}{auto_type_name}")
 
+                print(f"{'Roles':<45}{', '.join(device.service.roles)})")
+
                 dump_results(device)
                 print()
 
