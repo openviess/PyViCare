@@ -97,7 +97,7 @@ class GazBoiler(Device):
     @handleNotSupported
     def getBoilerTargetTemperature(self):
         return self.service.getProperty("heating.boiler.temperature")["properties"]["value"]["value"]
- 
+
     @handleNotSupported
     def getDomesticHotWaterChargingLevel(self):
         return self.service.getProperty("heating.dhw.charging.level")["properties"]["value"]["value"]
