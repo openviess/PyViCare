@@ -9,6 +9,8 @@ from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareHybrid import Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
+from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
+from PyViCare.PyViCareRoomSensor import RoomSensor
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -42,6 +44,12 @@ class PyViCareDeviceConfig:
     def asHybridDevice(self):
         return Hybrid(self.service)
 
+    def asRadiatorActuator(self):
+        return RadiatorActuator(self.service)
+
+    def asRoomSensor(self):
+        return RoomSensor(self.service)
+
     def getConfig(self):
         return self.service.accessor
 
@@ -61,7 +69,9 @@ class PyViCareDeviceConfig:
             (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo", []),
             (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
-            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", [])
+            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
+            (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
+            (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"])
         ]
 
         for (creator_method, type_name, roles) in device_types:

@@ -42,3 +42,15 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("HeatPump", type(device_type).__name__)
+
+    def test_autoDetect_RoleRadiator_asRadiatorActuator(self):
+        self.service.hasRoles = has_roles(["type:radiator"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RadiatorActuator", type(device_type).__name__)
+
+    def test_autoDetect_RoleClimateSensor_asRoomSensor(self):
+        self.service.hasRoles = has_roles(["type:climateSensor"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomSensor", type(device_type).__name__)
