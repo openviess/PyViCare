@@ -15,8 +15,9 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_model, status):
+    def __init__(self, service, device_id, device_model, status):
         self.service = service
+        self.device_id = device_id
         self.device_model = device_model
         self.status = status
 
@@ -43,6 +44,9 @@ class PyViCareDeviceConfig:
 
     def getConfig(self):
         return self.service.accessor
+
+    def getId(self):
+        return self.device_id
 
     def getModel(self):
         return self.device_model

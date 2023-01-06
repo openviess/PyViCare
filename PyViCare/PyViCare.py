@@ -63,7 +63,7 @@ class PyViCare:
 
                     logger.info(f"Device found: {device.modelId}")
 
-                    yield PyViCareDeviceConfig(service, device.modelId, device.status)
+                    yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status)
 
 
 class DictWrap(object):
