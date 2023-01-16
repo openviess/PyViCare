@@ -142,6 +142,10 @@ class GazBoiler(Device):
     def getPowerConsumptionThisYear(self):
         return self.service.getProperty("heating.power.consumption.total")["properties"]["year"]["value"][0]
 
+    @handleNotSupported
+    def getVolumetricFlowReturn(self):
+        return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]["value"]["value"]
+
     # For Vitodens-100W new "summary" api methods
     # Gas consumption for Heating data:
     @handleNotSupported
