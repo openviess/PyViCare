@@ -92,3 +92,32 @@ class Vitocal250A(unittest.TestCase):
     def test_getFrostProtectionActive(self):
         self.assertEqual(
             self.device.circuits[0].getFrostProtectionActive(), False)
+
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterUnit(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterUnit(), "kilowattHour")
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterCurrentDay(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentDay(), 1.0)
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(), 18.0)
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterCurrentYear(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentYear(), 18.0)
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterLastMonth(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterLastMonth(), 74.8)
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(), 14.0)
+
+    def test_getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
+        self.assertEqual(
+            self.device.getPowerSummaryConsumptionDomesticHotWaterLastYear(), 177.7)
