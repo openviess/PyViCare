@@ -122,9 +122,7 @@
               "constraints": {
                 "defaultMode": "off",
                 "maxEntries": 4,
-                "modes": [
-                  "on"
-                ],
+                "modes": ["on"],
                 "overlapAllowed": false,
                 "resolution": 10
               },
@@ -504,16 +502,7 @@
         "day": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            1,
-            2.4,
-            2,
-            1.8,
-            1.8,
-            2.3,
-            2.7,
-            0.8
-          ]
+          "value": [1, 2.4, 2, 1.8, 1.8, 2.3, 2.7, 0.8]
         },
         "dayValueReadAt": {
           "type": "string",
@@ -522,21 +511,7 @@
         "month": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            18,
-            74.8,
-            48.7,
-            48,
-            10,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "value": [18, 74.8, 48.7, 48, 10, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "monthValueReadAt": {
           "type": "string",
@@ -545,14 +520,7 @@
         "week": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            1,
-            13.8,
-            15.100000000000001,
-            16.099999999999998,
-            17.4,
-            18.2
-          ]
+          "value": [1, 13.8, 15.100000000000001, 16.099999999999998, 17.4, 18.2]
         },
         "weekValueReadAt": {
           "type": "string",
@@ -561,10 +529,7 @@
         "year": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            18,
-            181.5
-          ]
+          "value": [18, 181.5]
         },
         "yearValueReadAt": {
           "type": "string",
@@ -1360,14 +1325,7 @@
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            6.9,
-            7.699999999999999,
-            7.1,
-            8.1,
-            7.5,
-            6.8,
-            10.600000000000001,
-            5.1
+            6.9, 7.699999999999999, 7.1, 8.1, 7.5, 6.8, 10.600000000000001, 5.1
           ]
         },
         "dayValueReadAt": {
@@ -1378,19 +1336,8 @@
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            66,
-            538.6999999999999,
-            337.00000000000006,
-            149.8,
-            38.1,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+            66, 538.6999999999999, 337.00000000000006, 149.8, 38.1, 0, 0, 0, 0,
+            0, 0, 0, 0
           ]
         },
         "monthValueReadAt": {
@@ -1400,14 +1347,7 @@
         "week": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            6.9,
-            52.9,
-            54.7,
-            76.8,
-            206.8,
-            133.20000000000002
-          ]
+          "value": [6.9, 52.9, 54.7, 76.8, 206.8, 133.20000000000002]
         },
         "weekValueReadAt": {
           "type": "string",
@@ -1416,10 +1356,7 @@
         "year": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            66,
-            1080.3
-          ]
+          "value": [66, 1080.3]
         },
         "yearValueReadAt": {
           "type": "string",
@@ -1611,16 +1548,7 @@
         "day": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            5.9,
-            5.3,
-            5.1,
-            6.3,
-            5.7,
-            4.5,
-            7.9,
-            4.3
-          ]
+          "value": [5.9, 5.3, 5.1, 6.3, 5.7, 4.5, 7.9, 4.3]
         },
         "dayValueReadAt": {
           "type": "string",
@@ -1629,21 +1557,7 @@
         "month": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            48,
-            463.9,
-            288.3,
-            101.8,
-            28.1,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "value": [48, 463.9, 288.3, 101.8, 28.1, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "monthValueReadAt": {
           "type": "string",
@@ -1653,12 +1567,7 @@
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            5.9,
-            39.099999999999994,
-            39.6,
-            60.7,
-            189.39999999999998,
-            115
+            5.9, 39.099999999999994, 39.6, 60.7, 189.39999999999998, 115
           ]
         },
         "weekValueReadAt": {
@@ -1668,10 +1577,7 @@
         "year": {
           "type": "array",
           "unit": "kilowattHour",
-          "value": [
-            48,
-            898.8000000000001
-          ]
+          "value": [48, 898.8000000000001]
         },
         "yearValueReadAt": {
           "type": "string",
@@ -1704,9 +1610,7 @@
       "properties": {
         "enabled": {
           "type": "array",
-          "value": [
-            "0"
-          ]
+          "value": ["0"]
         }
       },
       "timestamp": "2023-01-09T13:42:24.624Z",
@@ -1721,12 +1625,7 @@
           "params": {
             "mode": {
               "constraints": {
-                "enum": [
-                  "standby",
-                  "heating",
-                  "dhw",
-                  "dhwAndHeating"
-                ]
+                "enum": ["standby", "heating", "dhw", "dhwAndHeating"]
               },
               "required": true,
               "type": "string"
@@ -1989,9 +1888,7 @@
               "constraints": {
                 "defaultMode": "off",
                 "maxEntries": 4,
-                "modes": [
-                  "on"
-                ],
+                "modes": ["on"],
                 "overlapAllowed": false,
                 "resolution": 10
               },
@@ -2786,9 +2683,7 @@
       "properties": {
         "enabled": {
           "type": "array",
-          "value": [
-            "0"
-          ]
+          "value": ["0"]
         }
       },
       "timestamp": "2023-01-09T13:42:20.774Z",
@@ -2875,10 +2770,7 @@
               "constraints": {
                 "defaultMode": "reduced",
                 "maxEntries": 4,
-                "modes": [
-                  "normal",
-                  "comfort"
-                ],
+                "modes": ["normal", "comfort"],
                 "overlapAllowed": false,
                 "resolution": 10
               },

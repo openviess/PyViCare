@@ -97,7 +97,6 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(
             self.device.circuits[0].getFrostProtectionActive(), False)
 
-
     def test_getPowerSummaryConsumptionDomesticHotWaterUnit(self):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionDomesticHotWaterUnit(), "kilowattHour")

@@ -1,61 +1,61 @@
 {
-    "data": [
-        {
-            "apiVersion": 1,
-            "commands": {
-                "setTargetTemperature": {
-                    "isExecutable": false,
-                    "name": "setTargetTemperature",
-                    "params": {
-                        "temperature": {
-                            "constraints": {
-                                "max": 30,
-                                "min": 8,
-                                "stepping": 0.5
-                            },
-                            "required": true,
-                            "type": "number"
-                        }
-                    },
-                    "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-84fd27fffed5a072/features/trv.temperature/commands/setTargetTemperature"
-                }
-            },
-            "deviceId": "zigbee-84fd27fffed5a072",
-            "feature": "trv.temperature",
-            "gatewayId": "################",
-            "isEnabled": true,
-            "isReady": true,
-            "properties": {
-                "value": {
-                    "type": "number",
-                    "unit": "celsius",
-                    "value": 18
-                }
-            },
-            "timestamp": "2023-01-05T03:59:37.716Z",
-            "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-84fd27fffed5a072/features/trv.temperature"
-        },
-        {
-            "apiVersion": 1,
-            "commands": {},
-            "deviceId": "zigbee-84fd27fffed5a072",
-            "feature": "device.sensors.temperature",
-            "gatewayId": "################",
-            "isEnabled": true,
-            "isReady": true,
-            "properties": {
-                "status": {
-                    "type": "string",
-                    "value": "connected"
-                },
-                "value": {
-                    "type": "number",
-                    "unit": "celsius",
-                    "value": 18.5
-                }
-            },
-            "timestamp": "2023-01-05T21:57:01.580Z",
-            "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-84fd27fffed5a072/features/device.sensors.temperature"
+  "data": [
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setTargetTemperature": {
+          "isExecutable": false,
+          "name": "setTargetTemperature",
+          "params": {
+            "temperature": {
+              "constraints": {
+                "max": 30,
+                "min": 8,
+                "stepping": 0.5
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-84fd27fffed5a072/features/trv.temperature/commands/setTargetTemperature"
         }
-    ]
+      },
+      "deviceId": "zigbee-84fd27fffed5a072",
+      "feature": "trv.temperature",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 18
+        }
+      },
+      "timestamp": "2023-01-05T03:59:37.716Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-84fd27fffed5a072/features/trv.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "zigbee-84fd27fffed5a072",
+      "feature": "device.sensors.temperature",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 18.5
+        }
+      },
+      "timestamp": "2023-01-05T21:57:01.580Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-84fd27fffed5a072/features/device.sensors.temperature"
+    }
+  ]
 }

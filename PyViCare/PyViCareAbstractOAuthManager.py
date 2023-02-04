@@ -28,7 +28,7 @@ class AbstractViCareOAuthManager:
         self.__oauth = new_session
 
     @abstractclassmethod
-    def renewToken(self):
+    def renewToken(self) -> None:
         return
 
     def get(self, url: str) -> Any:
@@ -45,25 +45,25 @@ class AbstractViCareOAuthManager:
             return self.get(url)
 
     def __handle_expired_token(self, response):
-        if("error" in response and response["error"] == "EXPIRED TOKEN"):
+        if ("error" in response and response["error"] == "EXPIRED TOKEN"):
             raise TokenExpiredError(response)
 
     def __handle_rate_limit(self, response):
         if not Feature.raise_exception_on_rate_limit:
             return
 
-        if("statusCode" in response and response["statusCode"] == 429):
+        if ("statusCode" in response and response["statusCode"] == 429):
             raise PyViCareRateLimitError(response)
 
     def __handle_server_error(self, response):
-        if("statusCode" in response and response["statusCode"] >= 500):
+        if ("statusCode" in response and response["statusCode"] >= 500):
             raise PyViCareInternalServerError(response)
 
     def __handle_command_error(self, response):
         if not Feature.raise_exception_on_command_failure:
             return
 
-        if("statusCode" in response and response["statusCode"] >= 400):
+        if ("statusCode" in response and response["statusCode"] >= 400):
             raise PyViCareCommandError(response)
 
     """POST URL using OAuth session. Automatically renew the token if needed

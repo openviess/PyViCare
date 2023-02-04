@@ -13,7 +13,7 @@ def readFeature(entities, property_name):
     feature = next(
         (f for f in entities if f["feature"] == property_name), None)
 
-    if(feature is None):
+    if (feature is None):
         raise PyViCareNotSupportedFeatureError(property_name)
 
     return feature
