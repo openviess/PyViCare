@@ -45,6 +45,10 @@ class Vitocal250A(unittest.TestCase):
         self.assertListEqual(
             self.device.circuits[0].getModes(), expected_modes)
 
+    def test_getPowerConsumptionUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionUnit(), "kilowattHour")
+
     def test_getPowerConsumptionToday(self):
         self.assertEqual(
             self.device.getPowerConsumptionToday(), 6.9)
