@@ -115,8 +115,8 @@ Follow these steps to access the API in Postman:
    - Grant Type: `Authorization Code (With PKCE)`
    - Callback URL: `vicare://oauth-callback/everest`
    - Authorize using browser: Disabled
-   - Auth URL: `https://iam.viessmann.com/idp/v2/authorize`
-   - Access Token URL: `https://iam.viessmann.com/idp/v2/token`
+   - Auth URL: `https://iam.viessmann.com/idp/v3/authorize`
+   - Access Token URL: `https://iam.viessmann.com/idp/v3/token`
    - Client ID: Your personal Client ID created in the developer portal.
    - Client Secret: Blank
    - Code Challenge Method: `SHA-256`
