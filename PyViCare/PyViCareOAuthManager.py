@@ -73,6 +73,9 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
 
         oauth_session.fetch_token(TOKEN_URL, authorization_response=response.headers['Location'], code_verifier=code_verifier)
 
+        if oauth_session.token is None:
+            raise PyViCareInvalidCredentialsError()
+
         logger.debug(f"Token received: {oauth_session.token}")
         self.__serialize_token(oauth_session.token, token_file)
         logger.info("New token created")
