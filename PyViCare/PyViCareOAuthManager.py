@@ -64,8 +64,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             authorization_url, headers=header, auth=(username, password), allow_redirects=False)
     
         if response.status_code == 401:
-            exception = PyViCareInvalidConfigurationError(response.json())
-            raise exception
+            raise PyViCareInvalidConfigurationError(response.json())
 
         if 'Location' not in response.headers:
             logger.debug(f'Response: {response}')
