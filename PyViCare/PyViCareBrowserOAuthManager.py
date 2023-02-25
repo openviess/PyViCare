@@ -7,7 +7,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import pkce
 import requests
-from requests_oauthlib import OAuth2Session
+
+from authlib.integrations.requests_client import OAuth2Session
+from authlib.common.security import generate_token
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
@@ -16,8 +18,8 @@ from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v2/authorize'
-TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
+AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v3/authorize'
+TOKEN_URL = 'https://iam.viessmann.com/idp/v3/token'
 REDIRECT_PORT = 51125
 VIESSMANN_SCOPE = ["IoT User", "offline_access"]
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
@@ -52,24 +54,25 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
 
     def __execute_browser_authentication(self):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
-        oauth = OAuth2Session(
-            self.client_id, redirect_uri=redirect_uri, scope=VIESSMANN_SCOPE)
-        base_authorization_url, state = oauth.authorization_url(AUTHORIZE_URL)
-        code_verifier, code_challenge = pkce.generate_pkce_pair()
-        authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
+        oauth_session = OAuth2Session(
+            self.client_id, redirect_uri=redirect_uri, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
+        code_verifier = generate_token(48)
+        authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
 
         webbrowser.open(authorization_url)
 
-        code = None
+        location = None
 
         def callback(path):
-            nonlocal code
-            nonlocal state
-            match = re.match(r"(?P<uri>.+?)\?code=(?P<code>.+)&state=(?P<state>.+)", path)
-            if match.group('state') != state:
-                logger.warn("Invalid OAuth state")
-                return (401, "Invalid Oauth state.")
-            code = match.group('code')
+            nonlocal location
+            location = path
+            # nonlocal code
+            # # nonlocal state
+            # match = re.match(r"(?P<uri>.+?)\?code=(?P<code>.+)&state=(?P<state>.+)", path)
+            # if match.group('state') != state:
+            #     logger.warn("Invalid OAuth state")
+            #     return (401, "Invalid Oauth state.")
+            # code = match.group('code')
             return (200, "Success. You can close this browser window now.")
 
         def handlerWithCallbackWrapper(*args):
@@ -80,22 +83,29 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         server.timeout = AUTH_TIMEOUT
         server.handle_request()
 
-        if code is None:
+        if location is None:
             logger.debug("Timeout reached")
             raise PyViCareBrowserOAuthTimeoutReachedError()
 
-        logger.debug(f"Code: {code}")
+        logger.debug(f"Location: {location}")
 
-        result = requests.post(url=TOKEN_URL, data={
-            'grant_type': 'authorization_code',
-            'client_id': self.client_id,
-            'redirect_uri': redirect_uri,
-            'code': code,
-            'code_verifier': code_verifier
-        }
-        ).json()
+        oauth_session.fetch_token(TOKEN_URL, authorization_response=location, code_verifier=code_verifier)
 
-        return self.__build_oauth_session(result, after_redirect=True)
+
+        # result = requests.post(url=TOKEN_URL, data={
+        #     'grant_type': 'authorization_code',
+        #     'client_id': self.client_id,
+        #     'redirect_uri': redirect_uri,
+        #     'code': code,
+        #     'code_verifier': code_verifier
+        # }
+        # ).json()
+        logger.debug(f"Token received: {oauth_session.token}")
+        self.__serialize_token(oauth_session.token, self.token_file)
+        logger.info("New token created")
+        return oauth_session
+
+        # return self.__build_oauth_session(result, after_redirect=True)
 
     def __storeToken(self, token):
         if self.token_file is None:
