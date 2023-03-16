@@ -25,6 +25,76 @@ class HeatPump(Device):
     def getBufferTopTemperature(self):
         return self.service.getProperty("heating.buffer.sensors.temperature.top")["properties"]['value']['value']
 
+    # Power consumption for Heating:
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingUnit(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentDay"]["unit"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingCurrentDay(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingCurrentMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingCurrentYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingLastMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["lastMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingLastSevenDays(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["lastSevenDays"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionHeatingLastYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["lastYear"]["value"]
+
+    @handleNotSupported
+    def getPowerConsumptionUnit(self):
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
+
+    @handleNotSupported
+    def getPowerConsumptionToday(self):
+        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterToday(self):
+        return self.service.getProperty("heating.power.consumption.dhw")["properties"]["day"]["value"][0]
+
+    # Power consumption for Domestic Hot Water:
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterUnit(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterCurrentDay(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterCurrentYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterLastMonth(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastMonth"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastSevenDays"]["value"]
+
+    @handleNotSupported
+    def getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
+
 
 class Compressor(DeviceWithComponent):
 
@@ -63,11 +133,3 @@ class Compressor(DeviceWithComponent):
     @handleNotSupported
     def getActive(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]
-
-    @handleNotSupported
-    def getPowerConsumptionToday(self):
-        return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["value"][0]
-
-    @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterToday(self):
-        return self.service.getProperty("heating.power.consumption.dhw")["properties"]["day"]["value"][0]

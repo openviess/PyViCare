@@ -65,8 +65,8 @@ class PyViCareDeviceConfig:
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
-            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
             (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo", []),
+            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
             (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),

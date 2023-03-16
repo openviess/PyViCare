@@ -564,7 +564,7 @@ class HeatingCircuit(DeviceWithComponent):
             shift = self.getHeatingCurveShift()
             slope = self.getHeatingCurveSlope()
 
-        if(not all_set([inside, outside, shift, slope])):
+        if (not all_set([inside, outside, shift, slope])):
             return None
 
         max_value = None
@@ -572,6 +572,9 @@ class HeatingCircuit(DeviceWithComponent):
         with suppress(PyViCareNotSupportedFeatureError):
             max_value = self.getTemperatureLevelsMax()
             min_value = self.getTemperatureLevelsMin()
+
+        if outside is None or inside is None:
+            return None
 
         delta_outside_inside = (outside - inside)
         target_supply = self.device.get_heat_curve_formular()(delta_outside_inside, inside, shift, slope)
