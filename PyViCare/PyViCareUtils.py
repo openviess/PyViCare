@@ -4,10 +4,20 @@ from typing import Callable
 
 from PyViCare import Feature
 
+VICARE_DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not
 # exists (IndexError), the requested feature is not supported by
 # the device.
+
+
+def isSupported(method: Callable) -> bool:
+    try:
+        result = method()
+        return bool(result != 'error')
+    except PyViCareNotSupportedFeatureError:
+        return False
 
 
 def time_as_delta(date_time: datetime) -> timedelta:

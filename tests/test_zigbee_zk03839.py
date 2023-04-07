@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.sensor.PyViCareRoomSensor import RoomSensor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

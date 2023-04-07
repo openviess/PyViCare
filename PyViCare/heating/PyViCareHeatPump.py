@@ -1,10 +1,10 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import Device, DeviceWithComponent
+from PyViCare.heating.PyViCareHeatingDevice import (HeatingDevice, HeatingDeviceWithComponent)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class HeatPump(Device):
+class HeatPump(HeatingDevice):
 
     @property
     def compressors(self) -> List[Any]:
@@ -96,7 +96,7 @@ class HeatPump(Device):
         return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
 
 
-class Compressor(DeviceWithComponent):
+class Compressor(HeatingDeviceWithComponent):
 
     @property
     def compressor(self) -> str:

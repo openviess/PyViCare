@@ -2,15 +2,15 @@ import json
 import logging
 import re
 
-from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareFuelCell import FuelCell
-from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareHybrid import Hybrid
-from PyViCare.PyViCareOilBoiler import OilBoiler
-from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
-from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
-from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.generic.PyViCareGenericDevice import GenericDevice
+from PyViCare.heating.PyViCareFuelCell import FuelCell
+from PyViCare.heating.PyViCareGazBoiler import GazBoiler
+from PyViCare.heating.PyViCareHeatPump import HeatPump
+from PyViCare.heating.PyViCareHybrid import Hybrid
+from PyViCare.heating.PyViCareOilBoiler import OilBoiler
+from PyViCare.heating.PyViCarePelletsBoiler import PelletsBoiler
+from PyViCare.radiator.PyViCareRadiatorActuator import RadiatorActuator
+from PyViCare.sensor.PyViCareRoomSensor import RoomSensor
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -24,7 +24,7 @@ class PyViCareDeviceConfig:
         self.status = status
 
     def asGeneric(self):
-        return Device(self.service)
+        return GenericDevice(self.service)
 
     def asGazBoiler(self):
         return GazBoiler(self.service)

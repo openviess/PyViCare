@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
+from PyViCare.radiator.PyViCareRadiatorActuator import RadiatorActuator
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
