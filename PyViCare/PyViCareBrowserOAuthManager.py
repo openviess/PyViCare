@@ -16,8 +16,8 @@ from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v3/authorize'
-TOKEN_URL = 'https://iam.viessmann.com/idp/v3/token'
+AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v2/authorize'
+TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
 REDIRECT_PORT = 51125
 VIESSMANN_SCOPE = ["IoT User", "offline_access"]
 API_BASE_URL = 'https://api.viessmann.com/iot/v1'
