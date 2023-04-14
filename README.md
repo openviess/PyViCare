@@ -135,7 +135,7 @@ Follow these steps to access the API in Postman:
    - `gatewaySerial` is `data[0].gateways[0].serial`
    - `deviceId` is `data[0].gateways[0].devices[0].id`
 
-3. Use above data to replace `{installationId}`, `{gatewaySerial}` and `deviceId` in this URL to investigate the Viessmann API:
+3. Use above data to replace `{installationId}`, `{gatewaySerial}` and `{deviceId}` in this URL to investigate the Viessmann API:
 
    `https://api.viessmann.com/iot/v1/features/installations/{installationId}/gateways/{gatewaySerial}/devices/{deviceId}/features`
 
