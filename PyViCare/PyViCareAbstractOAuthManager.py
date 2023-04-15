@@ -2,8 +2,8 @@ import logging
 from abc import abstractclassmethod
 from typing import Any
 
-from oauthlib.oauth2 import TokenExpiredError  # type: ignore
-from requests_oauthlib.oauth2_session import OAuth2Session
+from authlib.integrations.base_client import TokenExpiredError
+from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare import Feature
 from PyViCare.PyViCareUtils import (PyViCareCommandError,

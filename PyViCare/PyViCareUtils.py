@@ -74,18 +74,23 @@ def handleAPICommandErrors(func: Callable) -> Callable:
 class PyViCareNotSupportedFeatureError(Exception):
     pass
 
+class PyViCareInvalidConfigurationError(Exception):
+    def __init__(self, response):
+        error = response['error']
+        error_description = response['error_description']
+
+        msg = f'Invalid credentials. Error: {error}. Description: {error_description}. Please check your configuration: clientid and redirect uri.'
+        super().__init__(self, msg)
+        self.message = msg
 
 class PyViCareInvalidCredentialsError(Exception):
     pass
 
-
 class PyViCareBrowserOAuthTimeoutReachedError(Exception):
     pass
 
-
 class PyViCareInvalidDataError(Exception):
     pass
-
 
 class PyViCareRateLimitError(Exception):
 
