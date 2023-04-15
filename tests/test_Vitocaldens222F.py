@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.heating.PyViCareHybrid import Hybrid
+from PyViCare.PyViCareHybrid import Hybrid
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

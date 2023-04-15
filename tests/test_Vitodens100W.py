@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.heating.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareGazBoiler import GazBoiler
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

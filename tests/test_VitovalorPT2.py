@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.heating.PyViCareFuelCell import FuelCell
+from PyViCare.PyViCareFuelCell import FuelCell
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

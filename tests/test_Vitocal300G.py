@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.heating.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

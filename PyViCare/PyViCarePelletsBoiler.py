@@ -1,4 +1,4 @@
-from PyViCare.heating.PyViCareHeatingDevice import HeatingDevice
+from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareUtils import handleNotSupported
 
 

@@ -1,13 +1,13 @@
 from contextlib import suppress
 from typing import Any, List, Optional
 
-from PyViCare.heating.PyViCareHeatCurveCalculation import (
+from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
                                     handleNotSupported, parse_time_as_delta,
                                     time_as_delta, VICARE_DAYS)
-from PyViCare.PyViCareDevice import (Device, DeviceWithComponent)
+from PyViCare.PyViCareService import ViCareService
 
 VICARE_DHW_TEMP2 = "temp-2"
 
@@ -28,7 +28,19 @@ def get_available_burners(service):
     return available_burners
 
 
-class HeatingDevice(Device):
+class HeatingDevice:
+    """This is the base class for all heating devices.
+    This class connects to the Viessmann ViCare API.
+    The authentication is done through OAuth2.
+    Note that currently, a new token is generated for each run.
+    """
+
+    def __init__(self, service: ViCareService) -> None:
+        self.service = service
+
+    @handleNotSupported
+    def getSerial(self):
+        return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
     @property
     def circuits(self) -> List[Any]:
@@ -349,9 +361,12 @@ class HeatingDevice(Device):
             "value"]
 
 
-class HeatingDeviceWithComponent(DeviceWithComponent):
+class HeatingDeviceWithComponent:
+    """This is the base class for all heating components"""
+
     def __init__(self, device: HeatingDevice, component: str) -> None:
-        super().__init__(device, component)
+        self.service = device.service
+        self.component = component
         self.device = device
 
     @property
