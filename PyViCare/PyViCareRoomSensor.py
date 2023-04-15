@@ -1,8 +1,8 @@
-from PyViCare.PyViCareHeatingDevice import HeatingDevice
+from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class RoomSensor(HeatingDevice):
+class RoomSensor(Device):
 
     @handleNotSupported
     def getTemperature(self):
