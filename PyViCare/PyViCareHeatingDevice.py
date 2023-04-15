@@ -3,11 +3,12 @@ from typing import Any, List, Optional
 
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
+from PyViCare.PyViCareService import ViCareService
+from PyViCare.PyViCareUtils import (VICARE_DAYS,
+                                    PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
                                     handleNotSupported, parse_time_as_delta,
-                                    time_as_delta, VICARE_DAYS)
-from PyViCare.PyViCareService import ViCareService
+                                    time_as_delta)
 
 VICARE_DHW_TEMP2 = "temp-2"
 

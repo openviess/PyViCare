@@ -4,8 +4,8 @@ import os
 import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from authlib.integrations.requests_client import OAuth2Session
 from authlib.common.security import generate_token
+from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
