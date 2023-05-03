@@ -2,6 +2,10 @@
 
 This library implements access to Viessmann devices by using the official API from the [Viessmann Developer Portal](https://developer.viessmann.com/).
 
+## Breaking changes in version 2.27.x
+
+- Some base classes have been renamed to provide a better support for non heating devices. See [PR #307](https://https://github.com/somm15/PyViCare/pull/307)
+
 ## Breaking changes in version 2.8.x
 
 - The circuit, burner (Gaz) and compressor (Heat Pump) is now separted. Accessing the properties of the burner/compressor is moved from `device.curcuits` to `device.burners` and `device.compressor`.
