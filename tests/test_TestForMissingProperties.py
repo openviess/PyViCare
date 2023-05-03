@@ -42,6 +42,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.pressure.supply',
             'heating.sensors.temperature.allengra',
 
+            'heating.dhw.operating.modes.active',
+            'heating.dhw.operating.modes.comfort',
+            'heating.dhw.operating.modes.eco',
+
             # todo: implement ventilation
             'ventilation',
             'ventilation.schedule',
