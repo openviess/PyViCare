@@ -54,7 +54,7 @@ class PyViCare:
         for installation in self.installations:
             for gateway in installation.gateways:
                 for device in gateway.devices:
-                    if device.deviceType != "heating" and device.deviceType != "zigbee":
+                    if device.deviceType != "heating" and device.deviceType != "zigbee" and device.deviceType != "vitoconnect":
                         continue  # we are not interested in non heating devices
 
                     accessor = ViCareDeviceAccessor(
