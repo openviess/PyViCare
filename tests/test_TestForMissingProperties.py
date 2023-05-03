@@ -2,7 +2,7 @@ import json
 import re
 import unittest
 from os import listdir
-from os.path import dirname, isfile, isdir, join
+from os.path import dirname, isdir, isfile, join
 
 from tests.helper import readJson
 

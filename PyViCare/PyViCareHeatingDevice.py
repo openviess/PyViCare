@@ -81,8 +81,8 @@ class HeatingDevice:
     @handleNotSupported
     def getHotWaterStorageTemperatureBottom(self):
         return \
-        self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"][
-            "value"]
+            self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"][
+                "value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
@@ -474,8 +474,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getSupplyTemperature(self):
         return \
-        self.service.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
-            "value"]["value"]
+            self.service.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
+                "value"]["value"]
 
     @handleNotSupported
     def getRoomTemperature(self):
@@ -485,14 +485,14 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getModes(self):
         return \
-        self.service.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["commands"]["setMode"][
-            "params"]["mode"]["constraints"]["enum"]
+            self.service.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["commands"]["setMode"][
+                "params"]["mode"]["constraints"]["enum"]
 
     @handleNotSupported
     def getActiveMode(self):
         return \
-        self.service.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["properties"]["value"][
-            "value"]
+            self.service.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["properties"]["value"][
+                "value"]
 
     @handleNotSupported
     def getHeatingCurveShift(self):
@@ -529,8 +529,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getDesiredTemperatureForProgram(self, program):
         return \
-        self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"][
-            "temperature"]["value"]
+            self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"][
+                "temperature"]["value"]
 
     @handleNotSupported
     def getCurrentDesiredTemperature(self):
