@@ -24,11 +24,11 @@ def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
 
 
 def buildSetPropertyUrl(accessor, property_name, action):
-    return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/{action}'
+    return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/{action}'
 
 
 def buildGetPropertyUrl(accessor, property_name):
-    return f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}'
+    return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}'
 
 
 class ViCareDeviceAccessor:
@@ -60,5 +60,5 @@ class ViCareService:
         return self.oauth_manager.post(url, post_data)
 
     def fetch_all_features(self) -> Any:
-        url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
+        url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
         return self.oauth_manager.get(url)

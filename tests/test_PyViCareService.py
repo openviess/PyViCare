@@ -14,14 +14,14 @@ class PyViCareServiceTest(unittest.TestCase):
     def test_getProperty(self):
         self.service.getProperty("someprop")
         self.oauth_mock.get.assert_called_once_with(
-            '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someprop')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someprop')
 
     def test_setProperty_object(self):
         self.service.setProperty("someprop", "doaction", {'name': 'abc'})
         self.oauth_mock.post.assert_called_once_with(
-            '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/doaction', '{"name": "abc"}')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/doaction', '{"name": "abc"}')
 
     def test_setProperty_string(self):
         self.service.setProperty("someprop", "doaction", '{}')
         self.oauth_mock.post.assert_called_once_with(
-            '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/doaction', '{}')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/doaction', '{}')
