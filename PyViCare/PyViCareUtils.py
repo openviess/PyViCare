@@ -74,6 +74,7 @@ def handleAPICommandErrors(func: Callable) -> Callable:
 class PyViCareNotSupportedFeatureError(Exception):
     pass
 
+
 class PyViCareInvalidConfigurationError(Exception):
     def __init__(self, response):
         error = response['error']
@@ -83,14 +84,18 @@ class PyViCareInvalidConfigurationError(Exception):
         super().__init__(self, msg)
         self.message = msg
 
+
 class PyViCareInvalidCredentialsError(Exception):
     pass
+
 
 class PyViCareBrowserOAuthTimeoutReachedError(Exception):
     pass
 
+
 class PyViCareInvalidDataError(Exception):
     pass
+
 
 class PyViCareRateLimitError(Exception):
 

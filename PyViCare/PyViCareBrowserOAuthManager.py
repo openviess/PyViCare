@@ -4,8 +4,8 @@ import os
 import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from authlib.integrations.requests_client import OAuth2Session
 from authlib.common.security import generate_token
+from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
@@ -104,6 +104,6 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             logger.info("Token restored from file")
             return OAuth2Session(self.client_id, token=token)
 
-    def renewToken(self) -> None:
+    def renewToken(self) -> None:  # type: ignore
         refresh_token = self.oauth_session.refresh_token
         self.oauth_session.refresh_token(TOKEN_URL, refresh_token=refresh_token)

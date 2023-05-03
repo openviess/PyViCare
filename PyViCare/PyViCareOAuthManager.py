@@ -5,11 +5,12 @@ from contextlib import suppress
 from pickle import UnpicklingError
 
 import requests
-from authlib.integrations.requests_client import OAuth2Session
 from authlib.common.security import generate_token
+from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareUtils import PyViCareInvalidConfigurationError, PyViCareInvalidCredentialsError
+from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
+                                    PyViCareInvalidCredentialsError)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -62,7 +63,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         header = {'Content-Type': 'application/x-www-form-urlencoded'}
         response = requests.post(
             authorization_url, headers=header, auth=(username, password), allow_redirects=False)
-    
+
         if response.status_code == 401:
             raise PyViCareInvalidConfigurationError(response.json())
 
