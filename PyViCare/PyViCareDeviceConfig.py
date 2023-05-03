@@ -2,9 +2,9 @@ import json
 import logging
 import re
 
-from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareHybrid import Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
@@ -24,7 +24,7 @@ class PyViCareDeviceConfig:
         self.status = status
 
     def asGeneric(self):
-        return Device(self.service)
+        return HeatingDevice(self.service)
 
     def asGazBoiler(self):
         return GazBoiler(self.service)

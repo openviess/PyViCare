@@ -1,11 +1,12 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import (Device, DeviceWithComponent,
-                                     get_available_burners)
+from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
+                                            HeatingDeviceWithComponent,
+                                            get_available_burners)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class FuelCell(Device):
+class FuelCell(HeatingDevice):
 
     @property
     def burners(self) -> List[Any]:
@@ -328,7 +329,7 @@ class FuelCell(Device):
         return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["year"]["value"][0]
 
 
-class FuelCellBurner(DeviceWithComponent):
+class FuelCellBurner(HeatingDeviceWithComponent):
 
     @property
     def burner(self) -> str:

@@ -2,9 +2,15 @@ import json
 import re
 import unittest
 from os import listdir
-from os.path import dirname, isfile, join
+from os.path import dirname, isfile, isdir, join
 
 from tests.helper import readJson
+
+
+class PythonFile:
+    def __init__(self, filename, path):
+        self.filename = filename
+        self.path = path
 
 
 class TestForMissingProperties(unittest.TestCase):
@@ -120,17 +126,30 @@ class TestForMissingProperties(unittest.TestCase):
 
     def read_all_python_code(self):
         python_path = join(dirname(__file__), '../PyViCare')
-        python_files = [f for f in listdir(python_path) if isfile(join(python_path, f))]
+        # searches in all subdirectories
+        python_files = self.get_all_files(python_path)
 
         all_python_files = {}
 
         for python in python_files:
-            if not python.endswith(".py"):
+            if not python.filename.endswith(".py"):
                 continue
 
-            with open(join(python_path, python)) as f:
-                all_python_files[python] = f.read()
+            with open(join(python.path, python.filename)) as f:
+                all_python_files[python.filename] = f.read()
+
         return all_python_files
+
+    def get_all_files(self, path):
+        files = []
+        for f in listdir(path):
+            new_path = join(path, f)
+            if isdir(new_path):
+                files.extend(self.get_all_files(new_path))
+            elif isfile(new_path):
+                files.append(PythonFile(f, path))
+
+        return files
 
     def read_all_features(self):
         response_path = join(dirname(__file__), './response')

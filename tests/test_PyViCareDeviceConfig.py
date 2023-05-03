@@ -24,7 +24,7 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
     def test_autoDetect_Unknown_asGeneric(self):
         c = PyViCareDeviceConfig(self.service, "0", "myRobot", "Online")
         device_type = c.asAutoDetectDevice()
-        self.assertEqual("Device", type(device_type).__name__)
+        self.assertEqual("HeatingDevice", type(device_type).__name__)
 
     def test_autoDetect_VScot_asGazBoiler(self):
         c = PyViCareDeviceConfig(self.service, "0", "VScotHO1_200", "Online")

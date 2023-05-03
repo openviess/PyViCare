@@ -1,10 +1,11 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import Device, DeviceWithComponent
+from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
+                                            HeatingDeviceWithComponent)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class HeatPump(Device):
+class HeatPump(HeatingDevice):
 
     @property
     def compressors(self) -> List[Any]:
@@ -100,7 +101,7 @@ class HeatPump(Device):
         return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
 
 
-class Compressor(DeviceWithComponent):
+class Compressor(HeatingDeviceWithComponent):
 
     @property
     def compressor(self) -> str:
