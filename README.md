@@ -4,7 +4,7 @@ This library implements access to Viessmann devices by using the official API fr
 
 ## Breaking changes in version 2.27.x
 
-- Some base classes have been renamed to provide a better support for non heating devices. See [PR #307](https://https://github.com/somm15/PyViCare/pull/307)
+- Some base classes have been renamed to provide a better support for non heating devices. See [PR #307](https://github.com/somm15/PyViCare/pull/307)
 
 ## Breaking changes in version 2.8.x
 
