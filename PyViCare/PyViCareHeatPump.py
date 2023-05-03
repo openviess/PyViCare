@@ -95,6 +95,10 @@ class HeatPump(Device):
     def getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
 
+    @handleNotSupported
+    def getVolumetricFlowReturn(self):
+        return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
+
 
 class Compressor(DeviceWithComponent):
 
