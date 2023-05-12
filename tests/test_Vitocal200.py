@@ -93,3 +93,11 @@ class Vitocal200(unittest.TestCase):
         with now_is('2021-09-10 20:00:00'):
             self.assertEqual(
                 self.device.getDomesticHotWaterDesiredTemperature(), 50)
+
+    def test_getActiveProgramMinTemperature(self):
+        self.assertEqual(
+            self.device.getActiveProgramMinTemperature(), 10)
+
+    def test_getActiveProgramMaxTemperature(self):
+        self.assertEqual(
+            self.device.getActiveProgramMaxTemperature(), 30)
