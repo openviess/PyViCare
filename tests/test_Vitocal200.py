@@ -94,8 +94,10 @@ class Vitocal200(unittest.TestCase):
                 self.device.getDomesticHotWaterDesiredTemperature(), 50)
 
     def test_getActiveProgramMinTemperature(self):
-        self.assertEqual(
-            self.device.getCircuit(0).getActiveProgramMinTemperature(), 10)
+        self.assertEqual(self.device.getCircuit(0).getActiveProgramMinTemperature(), 10)
 
     def test_getActiveProgramMaxTemperature(self):
         self.assertEqual(self.device.getCircuit(0).getActiveProgramMaxTemperature(), 30)
+
+    def test_getActiveProgramMaxTemperature(self):
+        self.assertEqual(self.device.getCircuit(0).getActiveProgramStepping(), 1)
