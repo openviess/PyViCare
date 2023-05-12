@@ -47,11 +47,11 @@ class Vitocal200(unittest.TestCase):
 
     def test_getHeatingCurveSlope(self):
         self.assertAlmostEqual(
-            self.device.circuits[0].getHeatingCurveSlope(), 0.3)
+            self.device.getCircuit(0).getHeatingCurveSlope(), 0.3)
 
     def test_getHeatingCurveShift(self):
         self.assertAlmostEqual(
-            self.device.circuits[0].getHeatingCurveShift(), -5)
+            self.device.getCircuit(0).getHeatingCurveShift(), -5)
 
     def test_getReturnTemperature(self):
         self.assertAlmostEqual(self.device.getReturnTemperature(), 25.6)
@@ -68,12 +68,12 @@ class Vitocal200(unittest.TestCase):
         expected_programs = ['active', 'comfort', 'eco',
                              'fixed', 'normal', 'reduced', 'standby']
         self.assertListEqual(
-            self.device.circuits[0].getPrograms(), expected_programs)
+            self.device.getCircuit(0).getPrograms(), expected_programs)
 
     def test_getModes(self):
         expected_modes = ['standby', 'dhw', 'dhwAndHeatingCooling']
         self.assertListEqual(
-            self.device.circuits[0].getModes(), expected_modes)
+            self.device.getCircuit(0).getModes(), expected_modes)
 
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(
@@ -96,8 +96,7 @@ class Vitocal200(unittest.TestCase):
 
     def test_getActiveProgramMinTemperature(self):
         self.assertEqual(
-            self.device.getActiveProgramMinTemperature(), 10)
+            self.device.getCircuit(0).getActiveProgramMaxTemperature(), 10)
 
     def test_getActiveProgramMaxTemperature(self):
-        self.assertEqual(
-            self.device.getActiveProgramMaxTemperature(), 30)
+        self.assertEqual(self.device.getCircuit(0).getActiveProgramMaxTemperature(), 30)
