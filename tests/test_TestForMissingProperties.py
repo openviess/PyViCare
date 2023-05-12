@@ -106,7 +106,7 @@ class TestForMissingProperties(unittest.TestCase):
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
-                feature_name = re.sub(r'\.{(program|active_programm)}', '', feature_name)
+                feature_name = re.sub(r'\.{(program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
         self.assertSetEqual(set([]), set(used_features) - set(all_features))
