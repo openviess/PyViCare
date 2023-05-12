@@ -432,29 +432,42 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getActiveProgramMinTemperature(self):
         active_program = self.getActiveProgram()
-        if active_program in ['standby']:
-            return None
-        
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
-            "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["min"]
+        return self.getProgramMinTemperature(active_program)
 
     @handleNotSupported
     def getActiveProgramMaxTemperature(self):
         active_program = self.getActiveProgram()
-        if active_program in ['standby']:
-            return None
-       
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
-            "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["max"]
+        return self.getProgramMaxTemperature(active_program)
 
     @handleNotSupported
     def getActiveProgramStepping(self):
         active_program = self.getActiveProgram()
-        if active_program in ['standby']:
+        return self.getProgramStepping(active_program)
+
+    @handleNotSupported
+    def getProgramMinTemperature(self, program: str):        
+        if program in ['standby']:
             return None
-       
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
+        
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
+            "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getProgramMaxTemperature(self, program: str):        
+        if program in ['standby']:
+            return None
+        
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
+            "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getProgramStepping(self, program: str):        
+        if program in ['standby']:
+            return None
+        
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["stepping"]
+
 
 
     """ Activate a program

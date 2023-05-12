@@ -101,3 +101,12 @@ class Vitocal200(unittest.TestCase):
 
     def test_getActiveProgramMaxTemperature(self):
         self.assertEqual(self.device.getCircuit(0).getActiveProgramStepping(), 1)
+
+    def test_getNormalProgramMinTemperature(self):
+        self.assertEqual(self.device.getCircuit(0).getProgramMinTemperature("normal"), 10)
+
+    def test_getNormalProgramMaxTemperature(self):
+        self.assertEqual(self.device.getCircuit(0).getProgramMaxTemperature("normal"), 30)
+        
+    def test_getNormalProgramStepping(self):
+        self.assertEqual(self.device.getCircuit(0).getProgramStepping("normal"), 1)
