@@ -12,38 +12,42 @@ class Vitocal200(unittest.TestCase):
         self.device = HeatPump(self.service)
 
     def test_getCompressorActive(self):
-        self.assertEqual(self.device.compressors[0].getActive(), False)
+        self.assertEqual(self.device.getCompressor(0).getActive(), False)
 
     def test_getCompressorHours(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHours(), 13651.9)
+            self.device.getCompressor(0).getHours(), 13651.9)
 
     def test_getAvailableCompressors(self):
         self.assertEqual(self.device.getAvailableCompressors(), ['0'])
 
     def test_getCompressorStarts(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getStarts(), 6973)
+            self.device.getCompressor(0).getStarts(), 6973)
 
     def test_getCompressorHoursLoadClass1(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass1(), 366)
+            self.device.getCompressor(0).getHoursLoadClass1(), 366)
 
     def test_getCompressorHoursLoadClass2(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass2(), 5579)
+            self.device.getCompressor(0).getHoursLoadClass2(), 5579)
 
     def test_getCompressorHoursLoadClass3(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass3(), 6024)
+            self.device.getCompressor(0).getHoursLoadClass3(), 6024)
 
     def test_getCompressorHoursLoadClass4(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass4(), 659)
+            self.device.getCompressor(0).getHoursLoadClass4(), 659)
 
     def test_getCompressorHoursLoadClass5(self):
         self.assertAlmostEqual(
-            self.device.compressors[0].getHoursLoadClass5(), 715)
+            self.device.getCompressor(0).getHoursLoadClass5(), 715)
+
+    def test_getCompressorPhase(self):
+        self.assertEqual(
+            self.device.getCompressor(0).getPhase(), "off")
 
     def test_getHeatingCurveSlope(self):
         self.assertAlmostEqual(
