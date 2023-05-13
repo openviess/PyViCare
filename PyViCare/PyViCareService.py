@@ -24,7 +24,7 @@ def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
 
 
 def buildSetPropertyUrl(accessor, property_name, action):
-    return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/{action}'
+    return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
 
 
 def buildGetPropertyUrl(accessor, property_name):
