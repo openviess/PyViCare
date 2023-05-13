@@ -138,3 +138,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getActive(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]
+    
+    @handleNotSupported
+    def getPhase(self):
+        return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]
