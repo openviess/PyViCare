@@ -32,7 +32,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def test_setProperty_works(self):
         self.service.setProperty("someotherprop", "doaction", {'name': 'abc'})
         self.oauth_mock.post.assert_called_once_with(
-            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/doaction', '{"name": "abc"}')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/commands/doaction', '{"name": "abc"}')
 
     def test_getProperty_existing_cached(self):
         # time+0 seconds

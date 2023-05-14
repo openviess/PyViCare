@@ -2,7 +2,7 @@ import logging
 from abc import abstractclassmethod
 from typing import Any
 
-from authlib.integrations.base_client import TokenExpiredError
+from authlib.integrations.base_client import TokenExpiredError, InvalidTokenError
 from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare import Feature
@@ -43,6 +43,9 @@ class AbstractViCareOAuthManager:
         except TokenExpiredError:
             self.renewToken()
             return self.get(url)
+        except InvalidTokenError:
+            self.renewToken()
+            return self.get(url)          
 
     def __handle_expired_token(self, response):
         if ("error" in response and response["error"] == "EXPIRED TOKEN"):
@@ -93,3 +96,6 @@ class AbstractViCareOAuthManager:
         except TokenExpiredError:
             self.renewToken()
             return self.post(url, data)
+        except InvalidTokenError:
+            self.renewToken()
+            return self.get(url)          
