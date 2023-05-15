@@ -13,6 +13,6 @@ git checkout master
 git reset --hard origin/master
 git tag $new_tag
 
-python setup.py sdist bdist_wheel
+python -m build --sdist --wheel --outdir dist/
 twine upload dist/*
 git push --tags
