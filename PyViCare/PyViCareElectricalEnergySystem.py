@@ -1,9 +1,14 @@
 from typing import Any, List
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareService import ViCareService
 
 
 class ElectricalEnergySystem(Device):
+
+    def __init__(self, service: ViCareService) -> None:
+        self.service = service
+
     @handleNotSupported
     def getPointOfCommonCouplingTransferPowerExchange(self):
         return self.service.getProperty("pcc.transfer.power.exchange")["properties"][
@@ -142,7 +147,7 @@ class ElectricalEnergySystem(Device):
 
     @handleNotSupported
     def getElectricalEnergySystemPowerUnit(self):
-        return self.service.getProperty("ess.power")["properties"]["value"]["value"]
+        return self.service.getProperty("ess.power")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getElectricalEnergySystemOperationState(self):
