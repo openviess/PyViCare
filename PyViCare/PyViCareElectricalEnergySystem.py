@@ -1,14 +1,9 @@
 from typing import Any, List
-
-from PyViCare.PyViCareHeatingDevice import HeatingDevice, get_available_burners
+from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class ElectricalEnergySystem(HeatingDevice):
-    @handleNotSupported
-    def getSerial(self):
-        return self.service.getProperty("device.serial")["properties"]["value"]["value"]
-
+class ElectricalEnergySystem(Device):
     @handleNotSupported
     def getPointOfCommonCouplingTransferPowerExchange(self):
         return self.service.getProperty("pcc.transfer.power.exchange")["properties"][
