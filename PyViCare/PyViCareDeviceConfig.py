@@ -11,6 +11,7 @@ from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -49,6 +50,9 @@ class PyViCareDeviceConfig:
 
     def asRoomSensor(self):
         return RoomSensor(self.service)
+    
+    def asElectricalEnergySystem(self):
+        return ElectricalEnergySystem(self.service)
 
     def getConfig(self):
         return self.service.accessor
@@ -71,7 +75,11 @@ class PyViCareDeviceConfig:
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
-            (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"])
+            (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
+            (self.asElectricalEnergySystem, r"E3_HEMS", ["type:hems"]),
+            (self.asElectricalEnergySystem, r"E3_TCU10_x07", ["type:tcu"]),
+            (self.asElectricalEnergySystem, r"E3_EEBus", ["type:eebus"]),
+            (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:energy_storage"])
         ]
 
         for (creator_method, type_name, roles) in device_types:

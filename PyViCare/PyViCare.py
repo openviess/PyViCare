@@ -54,11 +54,20 @@ class PyViCare:
         for installation in self.installations:
             for gateway in installation.gateways:
                 for device in gateway.devices:
-                    if device.deviceType != "heating" and device.deviceType != "zigbee" and device.deviceType != "vitoconnect":
-                        continue  # we are not interested in non heating devices
+                    if device.deviceType != "heating" and device.deviceType != "zigbee" and device.deviceType != "vitoconnect" and device.deviceType != "electricityStorage" and device.deviceType != "EEBus" and device.deviceType != "hems" and device.deviceType != "tcu":
+                        continue  # we are only interested in heating, photovoltaic, electricityStorage and hems devices
 
                     if device.id == "gateway" and device.deviceType == "vitoconnect":
                         device.id = "0"  # vitoconnect has no device id, so we use 0
+                    
+                    if device.id == "gateway" and device.deviceType == "tcu":
+                        device.id = "0"  # tcu has no device id, so we use 0
+
+                    if device.id == "HEMS" and device.deviceType == "hems":
+                        device.id = "0"  # hems has no device id, so we use 0
+
+                    if device.id == "EEBUS" and device.deviceType == "EEBus":
+                        device.id = "0" # EEBus has no device id,
 
                     accessor = ViCareDeviceAccessor(
                         installation.id, gateway.serial, device.id)
