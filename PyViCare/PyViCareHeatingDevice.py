@@ -196,6 +196,11 @@ class HeatingDevice:
         return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
 
+    @handleAPICommandErrors
+    def setDhwOperatingMode(self, mode):
+        return self.service.setProperty("heating.dhw.operating.modes.active", "setMode",
+                                        {'mode': mode})
+
     @handleNotSupported
     def getDomesticHotWaterSchedule(self):
         properties = self.service.getProperty(
