@@ -197,7 +197,7 @@ class HeatingDevice:
                                         {"temperature": int(temperature)})
 
     @handleAPICommandErrors
-    def setDhwOperatingMode(self, mode):
+    def setDomesticHotWaterOperatingMode(self, mode):
         return self.service.setProperty("heating.dhw.operating.modes.active", "setMode",
                                         {'mode': mode})
 
