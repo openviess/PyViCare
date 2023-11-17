@@ -563,8 +563,11 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPrograms(self):
         available_programs = []
-        for program in ['active', 'comfort', 'forcedLastFromSchedule', 'eco', 'external', 'fixed', 'holiday',
-                        'normal', 'reduced', 'standby']:
+        for program in ['active', 'comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 
+                        'comfortHeating', 'dhwPrecedence', 'forcedLastFromSchedule', 'frostprotection', 'eco', 
+                        'external', 'fixed', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling', 
+                        'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
+                        'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(
                         f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
