@@ -546,9 +546,39 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "value"]
 
     @handleNotSupported
+    def getHeatingCurveShiftMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getHeatingCurveShiftMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getHeatingCurveShiftStepping(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["stepping"]
+
+    @handleNotSupported
     def getHeatingCurveSlope(self):
         return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["slope"][
             "value"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeStepping(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["stepping"]
 
     @handleAPICommandErrors
     def setHeatingCurve(self, shift, slope):
