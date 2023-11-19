@@ -563,7 +563,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPrograms(self):
         available_programs = []
-        for program in ['active', 'comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 
+        for program in ['comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 
                         'comfortHeating', 'dhwPrecedence', 'forcedLastFromSchedule', 'frostprotection', 'eco', 
                         'external', 'fixed', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling', 
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
