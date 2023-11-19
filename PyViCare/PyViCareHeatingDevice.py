@@ -564,8 +564,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     def getPrograms(self):
         available_programs = []
         for program in ['comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 
-                        'comfortHeating', 'dhwPrecedence', 'forcedLastFromSchedule', 'frostprotection', 'eco', 
-                        'external', 'fixed', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling', 
+                        'comfortHeating', 'dhwPrecedence', 'eco', 'external', 'fixed', 'forcedLastFromSchedule', 
+                        'frostprotection', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling', 
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
                         'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']:
             with suppress(PyViCareNotSupportedFeatureError):
