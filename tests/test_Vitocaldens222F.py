@@ -42,8 +42,7 @@ class Vitocaldens222F(unittest.TestCase):
         self.assertEqual(self.device.getCompressor(0).getHours(), 1.4)
 
     def test_getPrograms(self):
-        expected_programs = ['active', 'comfort', 'eco', 'fixed',
-                             'normal', 'reduced', 'standby']
+        expected_programs = ['comfort', 'eco', 'fixed', 'normal', 'reduced', 'standby']
         self.assertListEqual(
             self.device.getCircuit(1).getPrograms(), expected_programs)
 
