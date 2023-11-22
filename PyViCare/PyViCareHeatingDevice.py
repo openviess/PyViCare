@@ -435,6 +435,18 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return self.setProgramTemperature("normal", temperature)
 
     @handleNotSupported
+    def getActive(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["active"]["value"]
+
+    @handleNotSupported
+    def getName(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["name"]["value"]
+
+    @handleNotSupported
+    def getType(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
+
+    @handleNotSupported
     def getActiveProgramMinTemperature(self):
         active_program = self.getActiveProgram()
         return self.getProgramMinTemperature(active_program)
