@@ -69,8 +69,7 @@ class Vitocal200(unittest.TestCase):
             self.device.getSupplyTemperaturePrimaryCircuit(), 11.6)
 
     def test_getPrograms(self):
-        expected_programs = ['active', 'comfort', 'eco',
-                             'fixed', 'normal', 'reduced', 'standby']
+        expected_programs = ['comfort', 'eco', 'fixed', 'normal', 'reduced', 'standby']
         self.assertListEqual(
             self.device.getCircuit(0).getPrograms(), expected_programs)
 

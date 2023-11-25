@@ -32,8 +32,7 @@ class Vitodens200W(unittest.TestCase):
         self.assertEqual(self.device.burners[0].getModulation(), 0)
 
     def test_getPrograms(self):
-        expected_programs = [
-            'active', 'comfort', 'forcedLastFromSchedule', 'normal', 'reduced', 'standby']
+        expected_programs = ['comfort', 'forcedLastFromSchedule', 'normal', 'reduced', 'standby']
         self.assertListEqual(
             self.device.circuits[0].getPrograms(), expected_programs)
 
