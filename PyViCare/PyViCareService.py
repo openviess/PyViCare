@@ -52,6 +52,9 @@ class ViCareService:
     def hasRoles(self, requested_roles) -> bool:
         return hasRoles(requested_roles, self.roles)
 
+    def _isGateway(self) -> bool:
+        return self.hasRoles(["type:gateway;VitoconnectOpto1"])
+
     def setProperty(self, property_name: str, action: str, data: Any) -> Any:
         url = buildSetPropertyUrl(
             self.accessor, property_name, action)
@@ -61,4 +64,6 @@ class ViCareService:
 
     def fetch_all_features(self) -> Any:
         url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
+        if self._isGateway():
+            url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/'
         return self.oauth_manager.get(url)
