@@ -1,7 +1,7 @@
 from contextlib import suppress
 
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleNotSupported)
+from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported)
 
 
 class VentilationDevice(Device):
@@ -74,6 +74,10 @@ class VentilationDevice(Device):
     """
     def deactivateProgram(self, program):
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
+
+    @handleAPICommandErrors
+    def setPermanentLevel(self, level: str):
+        return self.service.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})
 
     @handleNotSupported
     def getSchedule(self):
