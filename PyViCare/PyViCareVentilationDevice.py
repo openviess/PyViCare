@@ -73,7 +73,7 @@ class VentilationDevice(Device):
         json representation of the answer
     """
     def deactivateProgram(self, program):
-        return self.service.setProperty("ventilation.operating.programs.{program}", "deactivate", {})
+        return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
     @handleNotSupported
     def getSchedule(self):
