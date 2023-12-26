@@ -59,7 +59,7 @@ class PyViCare:
 
                     if device.id == "gateway" and device.deviceType == "vitoconnect":
                         device.id = "0"  # vitoconnect has no device id, so we use 0
-                    
+
                     if device.id == "gateway" and device.deviceType == "tcu":
                         device.id = "0"  # tcu has no device id, so we use 0
 

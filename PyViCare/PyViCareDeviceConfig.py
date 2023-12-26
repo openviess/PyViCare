@@ -50,7 +50,7 @@ class PyViCareDeviceConfig:
 
     def asRoomSensor(self):
         return RoomSensor(self.service)
-    
+
     def asElectricalEnergySystem(self):
         return ElectricalEnergySystem(self.service)
 

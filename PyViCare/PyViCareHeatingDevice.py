@@ -450,26 +450,26 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return self.getProgramStepping(active_program)
 
     @handleNotSupported
-    def getProgramMinTemperature(self, program: str):        
+    def getProgramMinTemperature(self, program: str):
         if program in ['standby']:
             return None
-        
+
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["min"]
 
     @handleNotSupported
-    def getProgramMaxTemperature(self, program: str):        
+    def getProgramMaxTemperature(self, program: str):
         if program in ['standby']:
             return None
-        
+
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["max"]
 
     @handleNotSupported
-    def getProgramStepping(self, program: str):        
+    def getProgramStepping(self, program: str):
         if program in ['standby']:
             return None
-        
+
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["stepping"]
 

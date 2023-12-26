@@ -45,7 +45,7 @@ class AbstractViCareOAuthManager:
             return self.get(url)
         except InvalidTokenError:
             self.renewToken()
-            return self.get(url)          
+            return self.get(url)
 
     def __handle_expired_token(self, response):
         if ("error" in response and response["error"] == "EXPIRED TOKEN"):
@@ -98,4 +98,4 @@ class AbstractViCareOAuthManager:
             return self.post(url, data)
         except InvalidTokenError:
             self.renewToken()
-            return self.get(url)          
+            return self.get(url)

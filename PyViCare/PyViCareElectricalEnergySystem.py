@@ -62,7 +62,7 @@ class ElectricalEnergySystem(Device):
         return self.service.getProperty("photovoltaic.production.current")[
             "properties"
         ]["value"]["value"]
-    
+
     @handleNotSupported
     def getPhotovoltaicProductionCurrentUnit(self):
         return self.service.getProperty("photovoltaic.production.current")[
