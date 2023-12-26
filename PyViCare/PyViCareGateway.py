@@ -7,5 +7,5 @@ from PyViCare.PyViCareUtils import handleNotSupported
 class Gateway(Device):
 
     @handleNotSupported
-    def getWifi(self):
+    def getWifiSignalStrength(self):
         return self.service.getProperty("gateway.wifi")["properties"]["strength"]["value"]
