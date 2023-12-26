@@ -54,3 +54,15 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("RoomSensor", type(device_type).__name__)
+
+    def test_autoDetect_RoleVentilation_asVentilation(self):
+        self.service.hasRoles = has_roles(["type:ventilation"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("VentilationDevice", type(device_type).__name__)
+
+    def test_autoDetect_Vitoair_FS_300E_asVentilation(self):
+        # self.service.hasRoles = has_roles(["type:ventilation"])
+        c = PyViCareDeviceConfig(self.service, "0", "E3_ViAir_300F", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("VentilationDevice", type(device_type).__name__)

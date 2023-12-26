@@ -52,29 +52,15 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.operating.modes.comfort',
             'heating.dhw.operating.modes.eco',
 
-            # todo: implement ventilation
-            'ventilation',
-            'ventilation.schedule',
-            'ventilation.operating.programs',
-            'ventilation.operating.programs.eco',
-            'ventilation.operating.programs.comfort',
-            'ventilation.operating.programs.basic',
-            'ventilation.operating.programs.active',
-            'ventilation.operating.programs.holiday',
-            'ventilation.operating.programs.intensive',
-            'ventilation.operating.programs.standby',
-            'ventilation.operating.programs.standard',
-            'ventilation.operating.programs.reduced',
-            'ventilation.operating.modes.standby',
-            'ventilation.operating.modes.active',
-            'ventilation.operating.modes.standard',
-            'ventilation.operating.modes.ventilation',
-
             'heating.circuits.0.heating.roomInfluenceFactor',
             'heating.circuits.0.temperature',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
+
+            # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
+            'device.messages.errors.raw',
+            'device.productIdentification',
         ]
 
         all_features = self.read_all_features()

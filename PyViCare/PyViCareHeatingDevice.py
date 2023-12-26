@@ -435,6 +435,18 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return self.setProgramTemperature("normal", temperature)
 
     @handleNotSupported
+    def getActive(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["active"]["value"]
+
+    @handleNotSupported
+    def getName(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["name"]["value"]
+
+    @handleNotSupported
+    def getType(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
+
+    @handleNotSupported
     def getActiveProgramMinTemperature(self):
         active_program = self.getActiveProgram()
         return self.getProgramMinTemperature(active_program)
@@ -546,9 +558,39 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "value"]
 
     @handleNotSupported
+    def getHeatingCurveShiftMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getHeatingCurveShiftMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getHeatingCurveShiftStepping(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["stepping"]
+
+    @handleNotSupported
     def getHeatingCurveSlope(self):
         return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["slope"][
             "value"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeStepping(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["stepping"]
 
     @handleAPICommandErrors
     def setHeatingCurve(self, shift, slope):
@@ -563,8 +605,11 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPrograms(self):
         available_programs = []
-        for program in ['active', 'comfort', 'forcedLastFromSchedule', 'eco', 'external', 'fixed', 'holiday',
-                        'normal', 'reduced', 'standby']:
+        for program in ['comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 
+                        'comfortHeating', 'dhwPrecedence', 'eco', 'external', 'fixed', 'forcedLastFromSchedule', 
+                        'frostprotection', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling', 
+                        'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
+                        'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(
                         f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
