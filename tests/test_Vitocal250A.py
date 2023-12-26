@@ -124,7 +124,7 @@ class Vitocal250A(unittest.TestCase):
     def test_getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionDomesticHotWaterLastYear(), 177.7)
-        
+
     def test_getCompressorPhase(self):
         self.assertEqual(
             self.device.getCompressor(0).getPhase(), "ready")
