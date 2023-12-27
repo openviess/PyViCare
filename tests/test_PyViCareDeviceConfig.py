@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
-from PyViCare.PyViCareService import hasRoles
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
 
 
 def has_roles(roles):
@@ -77,3 +77,15 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
+
+    def test_fetchAllUrl_RoleGateway(self):
+        # init
+        oauth_mock = Mock()
+        accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        service = ViCareService(oauth_mock, accessor, ["type:gateway;VitoconnectOpto1"])
+        c = PyViCareDeviceConfig(service, "0", "Unknown", "Online")
+        # test
+        c.get_raw_json()
+        # assert
+        oauth_mock.get.assert_called_once_with(
+            '/features/installations/[id]/gateways/[serial]/features/')
