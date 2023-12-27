@@ -32,8 +32,8 @@ def buildGetPropertyUrl(accessor, property_name):
 
 
 class ViCareDeviceAccessor:
-    def __init__(self, id: int, serial: str, device_id: str) -> None:
-        self.id = id
+    def __init__(self, _id: int, serial: str, device_id: str) -> None:
+        self.id = _id
         self.serial = serial
         self.device_id = device_id
 

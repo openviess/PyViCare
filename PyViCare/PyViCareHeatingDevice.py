@@ -13,8 +13,8 @@ from PyViCare.PyViCareUtils import (VICARE_DAYS,
 VICARE_DHW_TEMP2 = "temp-2"
 
 
-def all_set(list: List[Any]) -> bool:
-    return all(v is not None for v in list)
+def all_set(_list: List[Any]) -> bool:
+    return all(v is not None for v in _list)
 
 
 def get_available_burners(service):
@@ -605,9 +605,9 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPrograms(self):
         available_programs = []
-        for program in ['comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 
-                        'comfortHeating', 'dhwPrecedence', 'eco', 'external', 'fixed', 'forcedLastFromSchedule', 
-                        'frostprotection', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling', 
+        for program in ['comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving',
+                        'comfortHeating', 'dhwPrecedence', 'eco', 'external', 'fixed', 'forcedLastFromSchedule',
+                        'frostprotection', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling',
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
                         'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']:
             with suppress(PyViCareNotSupportedFeatureError):
