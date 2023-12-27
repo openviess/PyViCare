@@ -31,3 +31,9 @@ class PyViCareServiceTest(unittest.TestCase):
         self.service.getProperty("someprop")
         self.oauth_mock.get.assert_called_once_with(
             '/features/installations/[id]/gateways/[serial]/features/someprop')
+
+    def test_fetch_all_features_gateway(self):
+        self.service = ViCareService(self.oauth_mock, self.accessor, ["type:gateway;VitoconnectOpto1"])
+        self.service.fetch_all_features()
+        self.oauth_mock.get.assert_called_once_with(
+            '/features/installations/[id]/gateways/[serial]/features/')
