@@ -89,8 +89,7 @@ class PyViCareDeviceConfig:
 
         for (creator_method, type_name, roles) in device_types:
             if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
-                logger.info("detected %s %s" %
-                            (self.device_model, creator_method.__name__))
+                logger.info(f"detected {self.device_model} {creator_method.__name__}")
                 return creator_method()
 
         logger.info(

@@ -96,7 +96,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         with open(token_file, mode='wb') as binary_file:
             pickle.dump(oauth, binary_file)
 
-        logger.info("Token serialized to %s" % token_file)
+        logger.info(f"Token serialized to {token_file}")
 
     def __deserialize_token(self, token_file):
         if token_file is None or not os.path.isfile(token_file):
