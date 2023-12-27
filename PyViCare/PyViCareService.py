@@ -27,10 +27,6 @@ def buildSetPropertyUrl(accessor, property_name, action):
     return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
 
 
-def buildGetPropertyUrl(accessor, property_name):
-    return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}'
-
-
 class ViCareDeviceAccessor:
     def __init__(self, id: int, serial: str, device_id: str) -> None:
         self.id = id
@@ -45,9 +41,14 @@ class ViCareService:
         self.roles = roles
 
     def getProperty(self, property_name: str) -> Any:
-        url = buildGetPropertyUrl(
-            self.accessor, property_name)
+        url = self.buildGetPropertyUrl(property_name)
         return self.oauth_manager.get(url)
+        
+    def buildGetPropertyUrl(self, property_name):
+        if self._isGateway():
+            return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/{property_name}'
+        return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/{property_name}'
+
 
     def hasRoles(self, requested_roles) -> bool:
         return hasRoles(requested_roles, self.roles)
