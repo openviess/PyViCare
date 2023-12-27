@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
+from .test_PyViCareDeviceConfig import has_roles
 
 
 class PyViCareServiceTest(unittest.TestCase):
@@ -25,3 +26,9 @@ class PyViCareServiceTest(unittest.TestCase):
         self.service.setProperty("someprop", "doaction", '{}')
         self.oauth_mock.post.assert_called_once_with(
             '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/commands/doaction', '{}')
+
+    def test_getProperty_gateway(self):
+        self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto1"])
+        self.service.getProperty("someprop")
+        self.oauth_mock.get.assert_called_once_with(
+            '/features/installations/[id]/gateways/[serial]/features/someprop')
