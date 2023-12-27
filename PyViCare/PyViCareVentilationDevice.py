@@ -60,7 +60,7 @@ class VentilationDevice(Device):
         json representation of the answer
     """
     def activateProgram(self, program):
-        return self.service.setProperty("ventilation.operating.programs.{program}", "activate", {})
+        return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
 
     """ Deactivate a program
     Parameters
