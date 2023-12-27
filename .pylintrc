@@ -1,0 +1,13 @@
+[MAIN]
+
+[MESSAGES CONTROL]
+disable=
+    invalid-name,
+    too-many-public-methods,
+    duplicate-code,
+    # handled by prettier
+    format,
+    # fix later
+    missing-function-docstring,
+    missing-module-docstring,
+    missing-class-docstring,
