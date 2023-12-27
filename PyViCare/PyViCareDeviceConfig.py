@@ -12,6 +12,7 @@ from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
+from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 logger = logging.getLogger('ViCare')
@@ -54,6 +55,9 @@ class PyViCareDeviceConfig:
 
     def asElectricalEnergySystem(self):
         return ElectricalEnergySystem(self.service)
+    
+    def asGateway(self):
+        return Gateway(self.service)
 
     def asVentilation(self):
         return VentilationDevice(self.service)
@@ -84,7 +88,8 @@ class PyViCareDeviceConfig:
             (self.asElectricalEnergySystem, r"E3_TCU10_x07", ["type:tcu"]),
             (self.asElectricalEnergySystem, r"E3_EEBus", ["type:eebus"]),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:energy_storage"]),
-            (self.asVentilation, r"E3_ViAir", ["type:ventilation"])
+            (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
+            (self.asGateway, r"Heatbox1", ["type:gateway;VitoconnectOpto1"])
         ]
 
         for (creator_method, type_name, roles) in device_types:

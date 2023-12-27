@@ -61,6 +61,9 @@ class TestForMissingProperties(unittest.TestCase):
             # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.productIdentification',
+
+            # gateway
+            'gateway.devices', # not used
         ]
 
         all_features = self.read_all_features()
