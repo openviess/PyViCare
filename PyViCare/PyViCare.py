@@ -35,8 +35,7 @@ class PyViCare:
     def __buildService(self, accessor, roles):
         if self.cacheDuration > 0:
             return ViCareCachedService(self.oauth_manager, accessor, roles, self.cacheDuration)
-        else:
-            return ViCareService(self.oauth_manager, accessor, roles)
+        return ViCareService(self.oauth_manager, accessor, roles)
 
     def __loadInstallations(self):
         installations = self.oauth_manager.get(
@@ -90,5 +89,4 @@ def Wrap(v):
         return DictWrap(v)
     if isinstance(v, str) and len(v) == 24 and v[23] == 'Z' and v[10] == 'T':
         return datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f%z')
-    else:
-        return v
+    return v

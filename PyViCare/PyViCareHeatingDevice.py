@@ -107,8 +107,7 @@ class HeatingDevice:
             if startTime <= currentTime and currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return VICARE_DHW_TEMP2
-                else:
-                    mode = s["mode"]
+                mode = s["mode"]
         return mode
 
     def getDomesticHotWaterDesiredTemperature(self):
@@ -117,8 +116,7 @@ class HeatingDevice:
         if mode is not None:
             if mode == VICARE_DHW_TEMP2:
                 return self.getDomesticHotWaterConfiguredTemperature2()
-            else:
-                return self.getDomesticHotWaterConfiguredTemperature()
+            return self.getDomesticHotWaterConfiguredTemperature()
 
         return None
 
