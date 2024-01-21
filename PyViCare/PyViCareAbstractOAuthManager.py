@@ -35,7 +35,7 @@ class AbstractViCareOAuthManager:
         try:
             logger.debug(self.__oauth)
             response = self.__oauth.get(f"{API_BASE_URL}{url}", timeout=31).json()
-            logger.debug(f"Response to get request: {response}")
+            logger.debug("Response to get request: %s", response)
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
             self.__handle_server_error(response)
