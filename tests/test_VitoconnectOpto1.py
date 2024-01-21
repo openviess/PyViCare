@@ -9,6 +9,10 @@ class VitoconnectOpto1(unittest.TestCase):
         self.service = ViCareServiceMock('response/VitoconnectOpto1.json')
         self.device = Gateway(self.service)
 
+    def test_getSerial(self):
+        self.assertEqual(
+            self.device.getSerial(), "#########")
+
     def test_getWifiSignalStrength(self):
         self.assertEqual(
             self.device.getWifiSignalStrength(), -69)
