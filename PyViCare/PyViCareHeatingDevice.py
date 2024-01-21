@@ -162,37 +162,35 @@ class HeatingDevice:
     def getDomesticHotWaterChargingActive(self):
         return self.service.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
 
-    """ Set the target temperature for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
+        """ Set the target temperature for domestic host water
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty("heating.dhw.temperature.main", "setTargetTemperature",
                                         {'temperature': int(temperature)})
 
-    """ Set the target temperature 2 for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature2(self, temperature):
+        """ Set the target temperature 2 for domestic host water
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
 
@@ -385,43 +383,41 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     def circuit(self) -> str:
         return self.component
 
-    """ Set the active mode
-    Parameters
-    ----------
-    mode : str
-        Valid mode can be obtained using getModes()
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def setMode(self, mode):
+        """ Set the active mode
+        Parameters
+        ----------
+        mode : str
+            Valid mode can be obtained using getModes()
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         r = self.service.setProperty(
             f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
         return r
 
-    # Works for normal, reduced, comfort
-    # active has no action
-    # external, standby no action
-    # holiday, scheduled and unscheduled
-    # activate, decativate comfort, eco
-    """ Set the target temperature for the target program
-    Parameters
-    ----------
-    program : str
-        Can be normal, reduced or comfort
-    temperature: int
-        target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def setProgramTemperature(self, program: str, temperature: float):
+        # Works for normal, reduced, comfort
+        # active has no action
+        # external, standby no action
+        # holiday, scheduled and unscheduled
+        # activate, decativate comfort, eco
+        """ Set the target temperature for the target program
+        Parameters
+        ----------
+        program : str
+            Can be normal, reduced or comfort
+        temperature: int
+            target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "setTemperature", {'targetTemperature': float(temperature)})
 
@@ -485,44 +481,40 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["stepping"]
 
-
-
-    """ Activate a program
-        NOTE
-        DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-    Parameters
-    ----------
-    program : str
-        Appears to work only for comfort
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
-    # optional temperature parameter could be passed (but not done)
-
     def activateProgram(self, program):
+        """ Activate a program
+            NOTE
+            DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
+        Parameters
+        ----------
+        program : str
+            Appears to work only for comfort
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+
+        # optional temperature parameter could be passed (but not done)
         return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "activate",
                                         {})
 
     def activateComfort(self):
         return self.activateProgram("comfort")
 
-    """ Deactivate a program
-    Parameters
-    ----------
-    program : str
-        Appears to work only for comfort and eco (coming from normal, can be reached only by deactivating another state)
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def deactivateProgram(self, program):
+        """ Deactivate a program
+        Parameters
+        ----------
+        program : str
+            Appears to work only for comfort and eco (coming from normal, can be reached only by deactivating another state)
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "deactivate", {})
 

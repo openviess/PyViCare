@@ -12,10 +12,9 @@ from PyViCare.PyViCareUtils import PyViCareInvalidDataError
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-""""Viessmann ViCare API Python tools"""
-
 
 class PyViCare:
+    """"Viessmann ViCare API Python tools"""
     def __init__(self) -> None:
         self.cacheDuration = 60
 

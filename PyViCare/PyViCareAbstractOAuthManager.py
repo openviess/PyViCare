@@ -69,21 +69,20 @@ class AbstractViCareOAuthManager:
         if ("statusCode" in response and response["statusCode"] >= 400):
             raise PyViCareCommandError(response)
 
-    """POST URL using OAuth session. Automatically renew the token if needed
-    Parameters
-    ----------
-    url : str
-        URL to get
-    data : str
-        Data to post
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def post(self, url, data) -> Any:
+        """POST URL using OAuth session. Automatically renew the token if needed
+        Parameters
+        ----------
+        url : str
+            URL to get
+        data : str
+            Data to post
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
