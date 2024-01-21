@@ -1,9 +1,9 @@
 from contextlib import suppress
 from typing import Any, List, Optional
 
+from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (VICARE_DAYS,
                                     PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
@@ -29,19 +29,12 @@ def get_available_burners(service):
     return available_burners
 
 
-class HeatingDevice:
+class HeatingDevice(Device):
     """This is the base class for all heating devices.
     This class connects to the Viessmann ViCare API.
     The authentication is done through OAuth2.
     Note that currently, a new token is generated for each run.
     """
-
-    def __init__(self, service: ViCareService) -> None:
-        self.service = service
-
-    @handleNotSupported
-    def getSerial(self):
-        return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
     @property
     def circuits(self) -> List[Any]:
