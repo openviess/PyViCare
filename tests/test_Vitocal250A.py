@@ -128,4 +128,3 @@ class Vitocal250A(unittest.TestCase):
     def test_getCompressorPhase(self):
         self.assertEqual(
             self.device.getCompressor(0).getPhase(), "ready")
-
