@@ -22,12 +22,12 @@ class Device:
 
     @handleNotSupported
     def isDomesticHotWaterDevice(self):
-        return self.service.getProperty("heating.dhw")["isEnabled"]
+        return self.service.getProperty("heating.dhw")["properties"]["active"]["value"]
 
     @handleNotSupported
     def isSolarThermalDevice(self):
-        return self.service.getProperty("heating.solar")["isEnabled"]
+        return self.service.getProperty("heating.solar")["properties"]["active"]["value"]
 
     @handleNotSupported
     def isVentilationDevice(self):
-        return self.service.getProperty("ventilation")["isEnabled"]
+        return self.service.getProperty("ventilation")["properties"]["active"]["value"]
