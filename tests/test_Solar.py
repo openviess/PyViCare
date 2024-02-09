@@ -40,7 +40,7 @@ class SolarTest(unittest.TestCase):
         self.assertEqual(self.device.getSolarPumpActive(), False)
 
     def test_isHeatingDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isHeatingDevice)
+        self.assertTrue(self.device.isHeatingDevice())
 
     def test_isDomesticHotWaterDevice(self):
         self.assertTrue(self.device.isDomesticHotWaterDevice())
