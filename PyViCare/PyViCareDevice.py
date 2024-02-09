@@ -17,17 +17,17 @@ class Device:
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
     @handleNotSupported
-    def supportsHeating(self):
+    def isHeatingDevice(self):
         return self.service.getProperty("heating")["isEnabled"]
 
     @handleNotSupported
-    def supportsDomesticHotWater(self):
+    def isDomesticHotWaterDevice(self):
         return self.service.getProperty("heating.dhw")["isEnabled"]
 
     @handleNotSupported
-    def supportsSolarThermal(self):
+    def isSolarThermalDevice(self):
         return self.service.getProperty("heating.solar")["isEnabled"]
 
     @handleNotSupported
-    def supportsVentilation(self):
+    def isVentilationDevice(self):
         return self.service.getProperty("ventilation")["isEnabled"]
