@@ -21,9 +21,7 @@ class Vitocal222S(unittest.TestCase):
             self.device.circuits[0].getCurrentDesiredTemperature(), 23)
 
     def test_isHeatingDevice(self):
-        # "feature": "heating" has "isEnabled: true" but has no property: active: value: true"
-        # self.assertTrue(self.device.isHeatingDevice())
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isHeatingDevice)
+        self.assertTrue(self.device.isHeatingDevice())
 
     def test_isDomesticHotWaterDevice(self):
         self.assertTrue(self.device.isDomesticHotWaterDevice())
