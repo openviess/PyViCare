@@ -35,7 +35,7 @@ class AbstractViCareOAuthManager:
         try:
             logger.debug(self.__oauth)
             response = self.__oauth.get(f"{API_BASE_URL}{url}", timeout=31).json()
-            logger.debug(f"Response to get request: {response}")
+            logger.debug("Response to get request: %s", response)
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
             self.__handle_server_error(response)
@@ -69,21 +69,20 @@ class AbstractViCareOAuthManager:
         if ("statusCode" in response and response["statusCode"] >= 400):
             raise PyViCareCommandError(response)
 
-    """POST URL using OAuth session. Automatically renew the token if needed
-    Parameters
-    ----------
-    url : str
-        URL to get
-    data : str
-        Data to post
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def post(self, url, data) -> Any:
+        """POST URL using OAuth session. Automatically renew the token if needed
+        Parameters
+        ----------
+        url : str
+            URL to get
+        data : str
+            Data to post
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:

@@ -19,18 +19,18 @@ class VentilationDevice(Device):
     def getActiveMode(self):
         return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
 
-    """ Set the active mode
-    Parameters
-    ----------
-    mode : str
-        Valid mode can be obtained using getModes()
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
     def setActiveMode(self, mode):
+        """ Set the active mode
+        Parameters
+        ----------
+        mode : str
+            Valid mode can be obtained using getModes()
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
 
     @handleNotSupported
@@ -47,32 +47,32 @@ class VentilationDevice(Device):
     def getActiveProgram(self):
         return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
 
-    """ Activate a program
-        NOTE
-        DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-    Parameters
-    ----------
-    program : str
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
     def activateProgram(self, program):
+        """ Activate a program
+            NOTE
+            DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
+        Parameters
+        ----------
+        program : str
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
 
-    """ Deactivate a program
-    Parameters
-    ----------
-    program : str
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
     def deactivateProgram(self, program):
+        """ Deactivate a program
+        Parameters
+        ----------
+        program : str
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
     @handleAPICommandErrors
