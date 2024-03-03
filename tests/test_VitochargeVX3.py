@@ -43,34 +43,34 @@ class VitochargeVX3(unittest.TestCase):
         self.assertEqual(self.device.getPhotovoltaicProductionCurrentUnit(), "kilowatt")
 
     def test_getPointOfCommonCouplingTransferConsumptionTotal(self):
-        self.assertEqual(self.device.getPointOfCommonCouplingTransferConsumptionTotal(),7700)
+        self.assertEqual(self.device.getPointOfCommonCouplingTransferConsumptionTotal(), 7700)
 
     def test_getPointOfCommonCouplingTransferConsumptionTotalUnit(self):
-        self.assertEqual(self.device.getPointOfCommonCouplingTransferConsumptionTotalUnit(),"wattHour")
+        self.assertEqual(self.device.getPointOfCommonCouplingTransferConsumptionTotalUnit(), "wattHour")
 
     def test_getPointOfCommonCouplingTransferFeedInTotal(self):
-        self.assertEqual(self.device.getPointOfCommonCouplingTransferFeedInTotal(),298900)
+        self.assertEqual(self.device.getPointOfCommonCouplingTransferFeedInTotal(), 298900)
 
     def test_getPointOfCommonCouplingTransferFeedInTotalUnit(self):
-        self.assertEqual(self.device.getPointOfCommonCouplingTransferFeedInTotalUnit(),"wattHour")
+        self.assertEqual(self.device.getPointOfCommonCouplingTransferFeedInTotalUnit(), "wattHour")
 
     def test_getElectricalEnergySystemTransferDischargeCumulatedUnit(self):
-        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedUnit(),"wattHour")
+        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedUnit(), "wattHour")
 
     def test_getElectricalEnergySystemTransferDischargeCumulatedCurrentDay(self):
-        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentDay(),4751)
+        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentDay(), 4751)
 
     def test_getElectricalEnergySystemTransferDischargeCumulatedCurrentWeek(self):
-        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentWeek(),29820)
+        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentWeek(), 29820)
 
     def test_getElectricalEnergySystemTransferDischargeCumulatedCurrentMonth(self):
-        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentMonth(),66926)
+        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentMonth(), 66926)
 
     def test_getElectricalEnergySystemTransferDischargeCumulatedCurrentYear(self):
-        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentYear(),66926)
+        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedCurrentYear(), 66926)
 
     def test_getElectricalEnergySystemTransferDischargeCumulatedLifeCycle(self):
-        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedLifeCycle(),66926)
+        self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedLifeCycle(), 66926)
 
     def test_getElectricalEnergySystemSOC(self):
         self.assertEqual(self.device.getElectricalEnergySystemSOC(),91)
