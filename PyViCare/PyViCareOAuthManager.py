@@ -58,7 +58,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
         code_verifier = generate_token(48)
         authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
-        logger.debug(f"Auth URL is: {authorization_url}")
+        logger.debug("Auth URL is: %s", authorization_url)
 
         header = {'Content-Type': 'application/x-www-form-urlencoded'}
         response = requests.post(
@@ -68,7 +68,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             raise PyViCareInvalidConfigurationError(response.json())
 
         if 'Location' not in response.headers:
-            logger.debug(f'Response: {response}')
+            logger.debug('Response: %s', response)
             raise PyViCareInvalidCredentialsError()
 
         oauth_session.fetch_token(TOKEN_URL, authorization_response=response.headers['Location'], code_verifier=code_verifier)
@@ -76,7 +76,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         if oauth_session.token is None:
             raise PyViCareInvalidCredentialsError()
 
-        logger.debug(f"Token received: {oauth_session.token}")
+        logger.debug("Token received: %s",oauth_session.token)
         self.__serialize_token(oauth_session.token, token_file)
         logger.info("New token created")
         return oauth_session
@@ -96,7 +96,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         with open(token_file, mode='wb') as binary_file:
             pickle.dump(oauth, binary_file)
 
-        logger.info(f"Token serialized to {token_file}")
+        logger.info("Token serialized to %s", token_file)
 
     def __deserialize_token(self, token_file):
         if token_file is None or not os.path.isfile(token_file):

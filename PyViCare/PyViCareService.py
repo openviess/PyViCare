@@ -13,7 +13,7 @@ def readFeature(entities, property_name):
     feature = next(
         (f for f in entities if f["feature"] == property_name), None)
 
-    if (feature is None):
+    if feature is None:
         raise PyViCareNotSupportedFeatureError(property_name)
 
     return feature
@@ -43,7 +43,7 @@ class ViCareService:
     def getProperty(self, property_name: str) -> Any:
         url = self.buildGetPropertyUrl(property_name)
         return self.oauth_manager.get(url)
-        
+
     def buildGetPropertyUrl(self, property_name):
         if self._isGateway():
             return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/{property_name}'

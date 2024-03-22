@@ -55,7 +55,7 @@ class PyViCareDeviceConfig:
 
     def asElectricalEnergySystem(self):
         return ElectricalEnergySystem(self.service)
-    
+
     def asGateway(self):
         return Gateway(self.service)
 
@@ -94,11 +94,10 @@ class PyViCareDeviceConfig:
 
         for (creator_method, type_name, roles) in device_types:
             if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
-                logger.info(f"detected {self.device_model} {creator_method.__name__}")
+                logger.info("detected %s %s", self.device_model, creator_method.__name__)
                 return creator_method()
 
-        logger.info(
-            f"Could not auto detect {self.device_model}. Use generic device.")
+        logger.info("Could not auto detect %s. Use generic device.", self.device_model)
         return self.asGeneric()
 
     def get_raw_json(self):
