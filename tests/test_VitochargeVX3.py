@@ -76,7 +76,7 @@ class VitochargeVX3(unittest.TestCase):
         self.assertEqual(self.device.getElectricalEnergySystemSOC(), 91)
 
     def test_getElectricalEnergySystemSOCUnit(self):
-       self.assertEqual(self.device.getElectricalEnergySystemSOCUnit(), "percent")
+        self.assertEqual(self.device.getElectricalEnergySystemSOCUnit(), "percent")
 
     def test_getElectricalEnergySystemPower(self):
         self.assertEqual(self.device.getElectricalEnergySystemPower(), 700)
@@ -85,4 +85,4 @@ class VitochargeVX3(unittest.TestCase):
         self.assertEqual(self.device.getElectricalEnergySystemPowerUnit(), "watt")
 
     def test_getElectricalEnergySystemOperationState(self):
-       self.assertEqual(self.device.getElectricalEnergySystemOperationState(), "discharge")
+        self.assertEqual(self.device.getElectricalEnergySystemOperationState(), "discharge")
