@@ -56,8 +56,6 @@ class ViCareService:
     def _isGateway(self) -> bool:
         return self.hasRoles(["type:gateway;VitoconnectOpto1"]) or self.hasRoles(["type:gateway;TCU300"])
 
-
-
     def setProperty(self, property_name: str, action: str, data: Any) -> Any:
         url = buildSetPropertyUrl(
             self.accessor, property_name, action)
