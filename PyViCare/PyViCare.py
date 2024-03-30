@@ -55,9 +55,6 @@ class PyViCare:
                     if device.deviceType not in ["heating", "zigbee", "vitoconnect", "electricityStorage", "tcu", "ventilation"]:
                         continue  # we are only interested in heating, photovoltaic, electricityStorage, hems and ventilation devices
 
-                    if device.id == "gateway" and device.deviceType == "vitoconnect":
-                        device.id = "0"  # vitoconnect has no device id, so we use 0
-
                     accessor = ViCareDeviceAccessor(
                         installation.id, gateway.serial, device.id)
                     service = self.__buildService(accessor, device.roles)
