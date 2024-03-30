@@ -77,3 +77,8 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
+
+        self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto2/OT2"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("Gateway", type(device_type).__name__)
