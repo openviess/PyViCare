@@ -85,7 +85,7 @@ class PyViCareDeviceConfig:
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asElectricalEnergySystem, r"E3_HEMS", ["type:hems"]),
-            (self.asElectricalEnergySystem, r"E3_TCU10_x07", ["type:tcu"]),
+            (self.asGateway, r"E3_TCU10_x07", ["type:tcu"]),
             (self.asElectricalEnergySystem, r"E3_EEBus", ["type:eebus"]),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:energy_storage"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
