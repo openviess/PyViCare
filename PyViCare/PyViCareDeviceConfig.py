@@ -84,10 +84,8 @@ class PyViCareDeviceConfig:
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
-            (self.asElectricalEnergySystem, r"E3_HEMS", ["type:hems"]),
-            (self.asElectricalEnergySystem, r"E3_TCU10_x07", ["type:tcu"]),
-            (self.asElectricalEnergySystem, r"E3_EEBus", ["type:eebus"]),
-            (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:energy_storage"]),
+            (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
+            (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
             (self.asGateway, r"Heatbox1", ["type:gateway;VitoconnectOpto1"]),
             (self.asGateway, r"Heatbox2", ["type:gateway;VitoconnectOpto2/OT2"])
