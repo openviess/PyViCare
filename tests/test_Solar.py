@@ -9,6 +9,18 @@ class SolarTest(unittest.TestCase):
         self.service = ViCareServiceMock('response/Solar.json')
         self.device = HeatingDevice(self.service)
 
+    def test_isHeatingDevice(self):
+        self.assertTrue(self.device.isHeatingDevice())
+
+    def test_isDomesticHotWaterDevice(self):
+        self.assertTrue(self.device.isDomesticHotWaterDevice())
+
+    def test_isSolarThermalDevice(self):
+        self.assertTrue(self.device.isSolarThermalDevice())
+
+    def test_isVentilationDevice(self):
+        self.assertFalse(self.device.isVentilationDevice())
+
     def test_getSolarStorageTemperature(self):
         self.assertEqual(self.device.getSolarStorageTemperature(), 41.5)
 
@@ -37,15 +49,3 @@ class SolarTest(unittest.TestCase):
 
     def test_getSolarPumpActive(self):
         self.assertEqual(self.device.getSolarPumpActive(), False)
-
-    def test_isHeatingDevice(self):
-        self.assertTrue(self.device.isHeatingDevice())
-
-    def test_isDomesticHotWaterDevice(self):
-        self.assertTrue(self.device.isDomesticHotWaterDevice())
-
-    def test_isSolarThermalDevice(self):
-        self.assertTrue(self.device.isSolarThermalDevice())
-
-    def test_isVentilationDevice(self):
-        self.assertFalse(self.device.isVentilationDevice())

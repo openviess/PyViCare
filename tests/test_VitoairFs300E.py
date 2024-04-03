@@ -9,6 +9,18 @@ class VitoairFs300(unittest.TestCase):
         self.service = ViCareServiceMock('response/VitoairFs300E.json')
         self.device = VentilationDevice(self.service)
 
+    def test_isHeatingDevice(self):
+        self.assertFalse(self.device.isHeatingDevice())
+
+    def test_isDomesticHotWaterDevice(self):
+        self.assertFalse(self.device.isDomesticHotWaterDevice())
+
+    def test_isSolarThermalDevice(self):
+        self.assertFalse(self.device.isSolarThermalDevice())
+
+    def test_isVentilationDevice(self):
+        self.assertTrue(self.device.isVentilationDevice())
+
     def test_getActiveMode(self):
         self.assertEqual(self.device.getActiveMode(), "permanent")
 
@@ -29,15 +41,3 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getSerial(self):
         self.assertEqual(self.device.getSerial(), "################")
-
-    def test_isHeatingDevice(self):
-        self.assertFalse(self.device.isHeatingDevice())
-
-    def test_isDomesticHotWaterDevice(self):
-        self.assertFalse(self.device.isDomesticHotWaterDevice())
-
-    def test_isSolarThermalDevice(self):
-        self.assertFalse(self.device.isSolarThermalDevice())
-
-    def test_isVentilationDevice(self):
-        self.assertTrue(self.device.isVentilationDevice())

@@ -9,6 +9,18 @@ class VitovalorPT2(unittest.TestCase):
         self.service = ViCareServiceMock('response/VitovalorPT2.json')
         self.device = FuelCell(self.service)
 
+    def test_isHeatingDevice(self):
+        self.assertFalse(self.device.isHeatingDevice())
+
+    def test_isDomesticHotWaterDevice(self):
+        self.assertTrue(self.device.isDomesticHotWaterDevice())
+
+    def test_isSolarThermalDevice(self):
+        self.assertFalse(self.device.isSolarThermalDevice())
+
+    def test_isVentilationDevice(self):
+        self.assertFalse(self.device.isVentilationDevice())
+
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(
             self.device.getDomesticHotWaterConfiguredTemperature(), 45)

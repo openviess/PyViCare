@@ -9,6 +9,18 @@ class ZK03839(unittest.TestCase):
         self.service = ViCareServiceMock('response/zigbee_zk03839.json')
         self.device = RoomSensor(self.service)
 
+    def test_isHeatingDevice(self):
+        self.assertFalse(self.device.isHeatingDevice())
+
+    def test_isDomesticHotWaterDevice(self):
+        self.assertFalse(self.device.isDomesticHotWaterDevice())
+
+    def test_isSolarThermalDevice(self):
+        self.assertFalse(self.device.isSolarThermalDevice())
+
+    def test_isVentilationDevice(self):
+        self.assertFalse(self.device.isVentilationDevice())
+
     def test_getTemperature(self):
         self.assertEqual(
             self.device.getTemperature(), 19.7)
