@@ -62,9 +62,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.errors.raw',
             'device.productIdentification',
 
-            # gateway
-            'gateway.devices', # not used
-
             # vitovent
             "heating.bufferCylinder.sensors.temperature.main",
             "heating.bufferCylinder.sensors.temperature.top",
