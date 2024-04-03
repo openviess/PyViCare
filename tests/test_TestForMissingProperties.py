@@ -35,7 +35,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
-            'heating.solar',
 
             'heating.dhw.hygiene.trigger',
             'heating.dhw.operating.modes.off',
