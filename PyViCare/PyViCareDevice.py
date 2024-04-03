@@ -1,5 +1,5 @@
 from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 
 class Device:
@@ -16,18 +16,25 @@ class Device:
     def getSerial(self):
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
-    @handleNotSupported
     def isHeatingDevice(self):
-        return self.service.getProperty("heating")["isEnabled"]
+        try:
+            return self.service.getProperty("heating")["isEnabled"]
+        except PyViCareNotSupportedFeatureError:
+            return False
 
-    @handleNotSupported
     def isDomesticHotWaterDevice(self):
-        return self.service.getProperty("heating.dhw")["properties"]["active"]["value"]
+        return self._isTypeDevice("heating.dhw")
 
-    @handleNotSupported
     def isSolarThermalDevice(self):
-        return self.service.getProperty("heating.solar")["properties"]["active"]["value"]
+        return self._isTypeDevice("heating.solar")
 
-    @handleNotSupported
     def isVentilationDevice(self):
-        return self.service.getProperty("ventilation")["properties"]["active"]["value"]
+        return self._isTypeDevice("ventilation")
+
+    def _isTypeDevice(self, deviceType: str):
+        try:
+            return self.service.getProperty(deviceType)["properties"]["active"]["value"]
+        except PyViCareNotSupportedFeatureError:
+            return False
+        except KeyError:
+            return False
