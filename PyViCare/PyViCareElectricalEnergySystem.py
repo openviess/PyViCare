@@ -1,12 +1,8 @@
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
-from PyViCare.PyViCareService import ViCareService
 
 
 class ElectricalEnergySystem(Device):
-
-    def __init__(self, service: ViCareService) -> None:
-        self.service = service
 
     @handleNotSupported
     def getPointOfCommonCouplingTransferPowerExchange(self):
