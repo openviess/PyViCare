@@ -33,8 +33,6 @@ class Device:
 
     def _isTypeDevice(self, deviceType: str):
         try:
-            return self.service.getProperty(deviceType)["properties"]["active"]["value"]
+            return self.service.getProperty(deviceType)["isEnabled"] and self.service.getProperty(deviceType)["properties"]["active"]["value"]
         except PyViCareNotSupportedFeatureError:
-            return False
-        except KeyError:
             return False
