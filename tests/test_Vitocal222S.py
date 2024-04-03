@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -27,7 +26,7 @@ class Vitocal222S(unittest.TestCase):
         self.assertTrue(self.device.isDomesticHotWaterDevice())
 
     def test_isSolarThermalDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isSolarThermalDevice)
+        self.assertFalse(self.device.isSolarThermalDevice())
 
     def test_isVentilationDevice(self):
         self.assertTrue(self.device.isVentilationDevice())

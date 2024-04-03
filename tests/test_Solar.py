@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -49,4 +48,4 @@ class SolarTest(unittest.TestCase):
         self.assertTrue(self.device.isSolarThermalDevice())
 
     def test_isVentilationDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isVentilationDevice)
+        self.assertFalse(self.device.isVentilationDevice())

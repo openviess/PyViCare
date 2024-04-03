@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -101,7 +100,7 @@ class Vitodens200W(unittest.TestCase):
         self.assertTrue(self.device.isDomesticHotWaterDevice())
 
     def test_isSolarThermalDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isSolarThermalDevice)
+        self.assertFalse(self.device.isSolarThermalDevice())
 
     def test_isVentilationDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isVentilationDevice)
+        self.assertFalse(self.device.isVentilationDevice())

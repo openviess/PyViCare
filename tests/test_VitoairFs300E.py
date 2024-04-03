@@ -1,5 +1,4 @@
 import unittest
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
@@ -32,13 +31,13 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getSerial(), "################")
 
     def test_isHeatingDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isHeatingDevice)
+        self.assertFalse(self.device.isHeatingDevice())
 
     def test_isDomesticHotWaterDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isDomesticHotWaterDevice)
+        self.assertFalse(self.device.isDomesticHotWaterDevice())
 
     def test_isSolarThermalDevice(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.isSolarThermalDevice)
+        self.assertFalse(self.device.isSolarThermalDevice())
 
     def test_isVentilationDevice(self):
         self.assertTrue(self.device.isVentilationDevice())
