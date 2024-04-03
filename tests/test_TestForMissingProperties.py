@@ -64,6 +64,14 @@ class TestForMissingProperties(unittest.TestCase):
 
             # gateway
             'gateway.devices', # not used
+
+            # vitovent
+            "heating.bufferCylinder.sensors.temperature.main",
+            "heating.bufferCylinder.sensors.temperature.top",
+            "heating.configuration.dhw.temperature.dhwCylinder.max",
+            "heating.dhw.sensors.temperature.dhwCylinder",
+            "heating.dhw.sensors.temperature.dhwCylinder.bottom",
+            "heating.dhw.sensors.temperature.dhwCylinder.top",
         ]
 
         all_features = self.read_all_features()
