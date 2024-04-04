@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareOilBoiler import OilBoiler
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -24,3 +23,4 @@ class Vitoladens300C(unittest.TestCase):
 
     def test_getBoilerTemperature(self):
         self.assertEqual(self.device.getBoilerTemperature(), 42)
+        
