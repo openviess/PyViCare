@@ -124,6 +124,11 @@ class HeatingDevice:
     def getDomesticHotWaterStorageTemperature(self):
         return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"][
             "value"]
+    
+    @handleNotSupported
+    def getDomesticHotWaterCylinderTemperature(self):
+        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
+            "value"]
 
     @handleNotSupported
     def getDomesticHotWaterOutletTemperature(self):
