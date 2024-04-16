@@ -276,6 +276,11 @@ class HeatingDevice(Device):
         return self.service.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
                                         {'newSchedule': schedule})
 
+    @handleAPICommandErrors
+    def setDomesticHotWaterSchedule(self, schedule):
+        return self.service.setProperty("heating.dhw.schedule", "setSchedule",
+                                        {'newSchedule': schedule})
+    
     @handleNotSupported
     def getDomesticHotWaterCirculationScheduleModes(self):
         return self.service.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
