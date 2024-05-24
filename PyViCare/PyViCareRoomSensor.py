@@ -3,7 +3,7 @@ from PyViCare.PyViCareUtils import handleNotSupported
 
 
 class RoomSensor(Device):
-    
+
     @handleNotSupported
     def getSerial(self):
         return self.service.getProperty("device.name")["deviceId"]
