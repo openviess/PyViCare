@@ -1,0 +1,96 @@
+{
+    "data": [
+        {
+            "apiVersion": 1,
+            "commands": {},
+            "feature": "gateway.devices",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "devices": {
+                    "type": "DeviceList",
+                    "value": [
+                        {
+                            "fingerprint": "gw:hb2,mj:2,mi:50,p:3",
+                            "id": "gateway",
+                            "modelId": "Heatbox2_SRC",
+                            "modelVersion": "0c599f0d19ea696b8f8d61c8583aa383da30361f",
+                            "name": "Heatbox 2 SRC, Vitoconnect",
+                            "roles": [
+                                "type:gateway;VitoconnectOpto2/OT2",
+                                "type:hb2",
+                                "type:legacy"
+                            ],
+                            "status": "online",
+                            "type": "vitoconnect"
+                        },
+                        {
+                            "fingerprint": "ext_hd_ctrl:hb2,mj:2,mi:50,p:3",
+                            "id": "HeatDemandControl",
+                            "modelId": "HeatDemandControl",
+                            "modelVersion": "849a43846dbfc44d4024d3709dddc041efc7c0e1",
+                            "name": "External Heat Demand Control",
+                            "roles": [
+                                "type:legacy",
+                                "type:virtual;heatDemandControl"
+                            ],
+                            "status": "online",
+                            "type": "virtual"
+                        },
+                        {
+                            "fingerprint": "gg:20,gk:4d,si:66,esi:65535",
+                            "id": "0",
+                            "modelId": "CU401B_S",
+                            "modelVersion": "712d6e32c9e295df60b8ab278580eb730f6b58ec",
+                            "name": "Vitocalxxx-S mit Vitotronic 200 (Typ WO1C)",
+                            "roles": [
+                                "capability:monetization;AdvancedReport",
+                                "type:heatpump",
+                                "type:legacy",
+                                "type:product;CU401B"
+                            ],
+                            "status": "online",
+                            "type": "heating"
+                        },
+                        {
+                            "fingerprint": "src:hb2:ext,mj:2,mi:50,p:3",
+                            "id": "RoomControl-1",
+                            "modelId": "Smart_RoomControl",
+                            "modelVersion": "8572c02269ca9007938b8cf0eff30310edb579ae",
+                            "name": "Smart_RoomControl_49",
+                            "roles": [
+                                "capability:monetization;FTDC",
+                                "capability:monetization;OWD",
+                                "capability:zigbeeCoordinator",
+                                "type:legacy",
+                                "type:virtual;smartRoomControl"
+                            ],
+                            "status": "online",
+                            "type": "roomControl"
+                        }
+                    ]
+                }
+            },
+            "timestamp": "2024-05-26T16:49:01.343Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/features/gateway.devices"
+        },
+        {
+            "apiVersion": 1,
+            "commands": {},
+            "feature": "gateway.wifi",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "strength": {
+                    "type": "number",
+                    "unit": "",
+                    "value": -58
+                }
+            },
+            "timestamp": "2024-05-26T17:17:32.779Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/features/gateway.wifi"
+        }
+    ]
+}
