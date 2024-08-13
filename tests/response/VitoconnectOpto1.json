@@ -1,0 +1,65 @@
+{
+    "data": [
+        {
+            "apiVersion": 1,
+            "commands": {},
+            "feature": "gateway.devices",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "devices": {
+                    "type": "DeviceList",
+                    "value": [
+                        {
+                            "fingerprint": "xxx",
+                            "id": "gateway",
+                            "modelId": "Heatbox1",
+                            "modelVersion": "xxx",
+                            "name": "Heatbox 1, Vitoconnect",
+                            "roles": [
+                                "type:gateway;VitoconnectOpto1",
+                                "type:legacy"
+                            ],
+                            "status": "online",
+                            "type": "vitoconnect"
+                        },
+                        {
+                            "fingerprint": "xxx",
+                            "id": "0",
+                            "modelId": "VScotHO1_40",
+                            "modelVersion": "xxx",
+                            "name": "VT 200 (HO1A / HO1B)",
+                            "roles": [
+                                "type:boiler",
+                                "type:legacy",
+                                "type:product;VScotHO1"
+                            ],
+                            "status": "online",
+                            "type": "heating"
+                        }
+                    ]
+                }
+            },
+            "timestamp": "2023-12-25T04:01:00.448Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/features/gateway.devices"
+        },
+        {
+            "apiVersion": 1,
+            "commands": {},
+            "feature": "gateway.wifi",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "strength": {
+                    "type": "number",
+                    "unit": "",
+                    "value": -69
+                }
+            },
+            "timestamp": "2023-12-26T20:44:41.417Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/features/gateway.wifi"
+        }
+    ]
+}

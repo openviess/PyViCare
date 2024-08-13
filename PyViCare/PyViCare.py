@@ -12,10 +12,9 @@ from PyViCare.PyViCareUtils import PyViCareInvalidDataError
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-""""Viessmann ViCare API Python tools"""
-
 
 class PyViCare:
+    """"Viessmann ViCare API Python tools"""
     def __init__(self) -> None:
         self.cacheDuration = 60
 
@@ -36,8 +35,7 @@ class PyViCare:
     def __buildService(self, accessor, roles):
         if self.cacheDuration > 0:
             return ViCareCachedService(self.oauth_manager, accessor, roles, self.cacheDuration)
-        else:
-            return ViCareService(self.oauth_manager, accessor, roles)
+        return ViCareService(self.oauth_manager, accessor, roles)
 
     def __loadInstallations(self):
         installations = self.oauth_manager.get(
@@ -54,26 +52,14 @@ class PyViCare:
         for installation in self.installations:
             for gateway in installation.gateways:
                 for device in gateway.devices:
-                    if device.deviceType != "heating" and device.deviceType != "zigbee" and device.deviceType != "vitoconnect" and device.deviceType != "electricityStorage" and device.deviceType != "EEBus" and device.deviceType != "hems" and device.deviceType != "tcu":
-                        continue  # we are only interested in heating, photovoltaic, electricityStorage and hems devices
-
-                    if device.id == "gateway" and device.deviceType == "vitoconnect":
-                        device.id = "0"  # vitoconnect has no device id, so we use 0
-                    
-                    if device.id == "gateway" and device.deviceType == "tcu":
-                        device.id = "0"  # tcu has no device id, so we use 0
-
-                    if device.id == "HEMS" and device.deviceType == "hems":
-                        device.id = "0"  # hems has no device id, so we use 0
-
-                    if device.id == "EEBUS" and device.deviceType == "EEBus":
-                        device.id = "0" # EEBus has no device id,
+                    if device.deviceType not in ["heating", "zigbee", "vitoconnect", "electricityStorage", "tcu", "ventilation"]:
+                        continue  # we are only interested in heating, photovoltaic, electricityStorage, and ventilation devices
 
                     accessor = ViCareDeviceAccessor(
                         installation.id, gateway.serial, device.id)
                     service = self.__buildService(accessor, device.roles)
 
-                    logger.info(f"Device found: {device.modelId}")
+                    logger.info("Device found: %s", device.modelId)
 
                     yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status)
 
@@ -91,5 +77,4 @@ def Wrap(v):
         return DictWrap(v)
     if isinstance(v, str) and len(v) == 24 and v[23] == 'Z' and v[10] == 'T':
         return datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f%z')
-    else:
-        return v
+    return v

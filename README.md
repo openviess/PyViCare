@@ -27,11 +27,11 @@ See the example below for how you can use that.
 
 ## Prerequisites
 
-To use PyViCare, every user has to register and create their private API key. Follow these steps to create your API key:
+To use PyViCare, every user has to register and create their personal API client. Follow these steps to create your client:
 
-1. Login to the [Viessmann Developer Portal](https://developer.viessmann.com/) with your existing ViCare username from the ViCare app.
-2. In the menu navigate to `API Keys`.
-3. Create a new OAuth client using following data:
+1. Login to the [Viessmann Developer Portal](https://app.developer.viessmann.com/) with **your existing ViCare app username/password**.
+2. On the developer dashboard click *add* in the *clients* section.
+3. Create a new client using following data:
    - Name: PyViCare
    - Google reCAPTCHA: Disabled
    - Redirect URIs: `vicare://oauth-callback/everest`

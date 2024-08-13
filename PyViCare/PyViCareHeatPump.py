@@ -1,8 +1,9 @@
+from contextlib import suppress
 from typing import Any, List
 
 from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
                                             HeatingDeviceWithComponent)
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 
 class HeatPump(HeatingDevice):
@@ -100,6 +101,56 @@ class HeatPump(HeatingDevice):
     def getVolumetricFlowReturn(self):
         return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
 
+    @handleNotSupported
+    def getAvailableVentilationModes(self):
+        return self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+
+    @handleNotSupported
+    def getActiveVentilationMode(self):
+        return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
+
+    """ Set the active mode
+    Parameters
+    ----------
+    mode : str
+        Valid mode can be obtained using getModes()
+
+    Returns
+    -------
+    result: json
+        json representation of the answer
+    """
+    def setActiveVentilationMode(self, mode):
+        return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
+
+    @handleNotSupported
+    def getAvailableVentilationPrograms(self):
+        available_programs = []
+        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'comfort', 'eco', 'forcedLevelFour',
+                        'holiday', 'holidayAtHome', 'levelFour', 'levelOne', 'levelThree', 'levelTwo', 'permanent', 'silent']:
+            with suppress(PyViCareNotSupportedFeatureError):
+                if self.service.getProperty(f"ventilation.operating.programs.{program}") is not None:
+                    available_programs.append(program)
+        return available_programs
+
+    @handleNotSupported
+    def getActiveVentilationProgram(self):
+        return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
+
+    """ Activate a ventilation program
+        NOTE
+        DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
+    Parameters
+    ----------
+    program : str
+
+    Returns
+    -------
+    result: json
+        json representation of the answer
+    """
+    def activateVentilationProgram(self, program):
+        return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
 
 class Compressor(HeatingDeviceWithComponent):
 
@@ -138,7 +189,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getActive(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["active"]["value"]
-    
+
     @handleNotSupported
     def getPhase(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]

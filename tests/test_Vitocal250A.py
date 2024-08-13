@@ -36,7 +36,7 @@ class Vitocal250A(unittest.TestCase):
             self.device.getSupplyTemperaturePrimaryCircuit(), 5.9)
 
     def test_getPrograms(self):
-        expected_programs = ['active', 'forcedLastFromSchedule', 'fixed', 'standby']
+        expected_programs = ['comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 'comfortHeating', 'fixed', 'forcedLastFromSchedule', 'frostprotection', 'normalCooling', 'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reducedCooling', 'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']
         self.assertListEqual(
             self.device.circuits[0].getPrograms(), expected_programs)
 
@@ -124,8 +124,7 @@ class Vitocal250A(unittest.TestCase):
     def test_getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionDomesticHotWaterLastYear(), 177.7)
-        
+
     def test_getCompressorPhase(self):
         self.assertEqual(
             self.device.getCompressor(0).getPhase(), "ready")
-
