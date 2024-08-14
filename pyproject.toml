@@ -51,6 +51,33 @@ pytest = "^8.3.2"
 pytest-cov = "^5.0.0"
 ruff = "^0.5.7"
 
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "duplicate-code",
+    "fixme",
+    "line-too-long",
+    "invalid-name",
+    "too-many-public-methods",
+    "too-few-public-methods",
+    # FIXME:
+    "arguments-differ",
+    "attribute-defined-outside-init",
+    "bad-classmethod-argument",
+    "chained-comparison",
+    "consider-merging-isinstance",
+    "consider-using-dict-items",
+    "consider-using-generator",
+    "deprecated-decorator",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "missing-timeout",
+    "raise-missing-from",
+    "unspecified-encoding",
+    "useless-object-inheritance",
+    "useless-parent-delegation",
+]
+
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
