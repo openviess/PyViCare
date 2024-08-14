@@ -2,7 +2,7 @@ from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class RadiatorActuator(HeatingDevice):
+class FloorHeating(HeatingDevice):
 
     @handleNotSupported
     def getSerial(self):
