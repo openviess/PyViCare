@@ -21,11 +21,11 @@ class HeatPump(HeatingDevice):
 
     @handleNotSupported
     def getBufferMainTemperature(self):
-        return self.service.getProperty("heating.buffer.sensors.temperature.main")["properties"]['value']['value']
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
 
     @handleNotSupported
     def getBufferTopTemperature(self):
-        return self.service.getProperty("heating.buffer.sensors.temperature.top")["properties"]['value']['value']
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]['value']['value']
 
     # Power consumption for Heating:
     @handleNotSupported
