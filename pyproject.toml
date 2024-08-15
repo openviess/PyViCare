@@ -37,11 +37,8 @@ Changelog = "https://github.com/CFenner/PyViCare/releases"
 [tool.poetry.dependencies]
 authlib = "^1.2.0"
 python = "^3.11"
+types-requests = "^2.32.0.20240712"
 requests = "^2.32.3"
-#types-requests
-#isort
-#twine
-#build
 
 [tool.poetry.group.dev.dependencies]
 codespell = "^2.3.0"
@@ -50,6 +47,35 @@ pylint = "^3.2.6"
 pytest = "^8.3.2"
 pytest-cov = "^5.0.0"
 ruff = "^0.5.7"
+
+[tool.mypy]
+platform = "linux"
+python_version = "3.11"
+# show error messages from unrelated files
+follow_imports = "normal"
+# suppress errors about unsatisfied imports
+#ignore_missing_imports = true
+disable_error_code = ["arg-type", "call-overload"]
+# be strict
+#   check_untyped_defs = true
+#   disallow_any_generics = true
+#   disallow_incomplete_defs = true
+disallow_subclassing_any = true
+#   disallow_untyped_calls = true
+disallow_untyped_decorators = true
+#   disallow_untyped_defs = true
+no_implicit_optional = true
+strict_optional = true
+warn_incomplete_stub = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "authlib.*"
+ignore_missing_imports = true
 
 [tool.pylint."MESSAGES CONTROL"]
 disable = [
