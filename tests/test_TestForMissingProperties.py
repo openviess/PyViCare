@@ -18,6 +18,8 @@ class TestForMissingProperties(unittest.TestCase):
         # are added to the response files
 
         ignore = [
+            'heating.device.variant', # not yet used
+
             'heating.operating.programs.holidayAtHome',
             'heating.operating.programs.holiday',
             'heating.device.time.offset',
@@ -63,9 +65,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage.top', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage.bottom', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
 
-            # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
+            # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.productIdentification',
+            'device.productMatrix',
 
             # gateway
             'gateway.devices', # not used
@@ -89,10 +92,7 @@ class TestForMissingProperties(unittest.TestCase):
         # properties which are not in any test response data
 
         ignore = [
-            'heating.dhw.sensors.temperature.dhwCylinder', #FIXME: remove once test data is updated
-            'heating.dhw.sensors.temperature.dhwCylinder.top', #FIXME: remove once test data is updated
             'heating.dhw.sensors.temperature.dhwCylinder.bottom', #FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.main', #FIXME: remove once test data is updated
             'heating.bufferCylinder.sensors.temperature.top', #FIXME: remove once test data is updated
         ]
 
