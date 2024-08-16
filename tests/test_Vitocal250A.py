@@ -128,3 +128,15 @@ class Vitocal250A(unittest.TestCase):
     def test_getFrostProtectionActive(self):
         self.assertEqual(
             self.device.circuits[0].getFrostProtectionActive(), False)
+
+    def test_getDomesticHotWaterHysteresis(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresis(), 5)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisUnit(), 'kelvin')
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisMin(), 1)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisMax(), 10)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisStepping(), 0.5)

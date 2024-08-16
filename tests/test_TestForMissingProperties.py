@@ -32,7 +32,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.power.consumption',
 
             'heating.circuits.0.temperature.levels',  # hint: command
-            'heating.dhw.temperature.hysteresis',  # hint: command
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
