@@ -35,10 +35,10 @@ packages = [
 Changelog = "https://github.com/CFenner/PyViCare/releases"
 
 [tool.poetry.dependencies]
-authlib = "^1.2.0"
 python = "^3.11"
-types-requests = "^2.32.0.20240712"
-requests = "^2.32.3"
+authlib = ">1.2.0"
+types-requests = ">=2.31"
+requests = ">=2.31.0"
 
 [tool.poetry.group.dev.dependencies]
 codespell = "^2.3.0"
