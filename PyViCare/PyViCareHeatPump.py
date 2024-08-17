@@ -3,7 +3,7 @@ from typing import Any, List
 
 from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
                                             HeatingDeviceWithComponent)
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
 
 
 class HeatPump(HeatingDevice):
@@ -21,11 +21,11 @@ class HeatPump(HeatingDevice):
 
     @handleNotSupported
     def getBufferMainTemperature(self):
-        return self.service.getProperty("heating.buffer.sensors.temperature.main")["properties"]['value']['value']
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
 
     @handleNotSupported
     def getBufferTopTemperature(self):
-        return self.service.getProperty("heating.buffer.sensors.temperature.top")["properties"]['value']['value']
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]['value']['value']
 
     # Power consumption for Heating:
     @handleNotSupported
@@ -109,18 +109,18 @@ class HeatPump(HeatingDevice):
     def getActiveVentilationMode(self):
         return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
 
-    """ Set the active mode
-    Parameters
-    ----------
-    mode : str
-        Valid mode can be obtained using getModes()
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
     def setActiveVentilationMode(self, mode):
+        """ Set the active mode
+        Parameters
+        ----------
+        mode : str
+            Valid mode can be obtained using getModes()
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
 
     @handleNotSupported
@@ -137,20 +137,64 @@ class HeatPump(HeatingDevice):
     def getActiveVentilationProgram(self):
         return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
 
-    """ Activate a ventilation program
-        NOTE
-        DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-    Parameters
-    ----------
-    program : str
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
     def activateVentilationProgram(self, program):
+        """ Activate a ventilation program
+            NOTE
+            DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
+        Parameters
+        ----------
+        program : str
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
+
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresis(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisMin(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresis"]["params"]["hysteresis"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisMax(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresis"]["params"]["hysteresis"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisStepping(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresis"]["params"]["hysteresis"]["constraints"]["stepping"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisUnit(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["value"]["unit"]
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHysteresis(self, temperature):
+        """ Set the hysteresis temperature for domestic host water
+        Parameters
+        ----------
+        temperature : float
+            hysteresis temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresis", {'hysteresis': int(temperature)})
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOn(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["switchOnValue"]["value"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOff(self):
+        return self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["switchOffValue"]["value"]
 
 class Compressor(HeatingDeviceWithComponent):
 
