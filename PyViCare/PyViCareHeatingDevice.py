@@ -115,7 +115,8 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
         return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"][
-            "value"]
+            "value"] # DEPRECATED replaced by heating.dhw.sensors.temperature.dhwCylinder removal date 2024-09-15
+
 
     @handleNotSupported
     def getDomesticHotWaterCylinderTemperature(self):
