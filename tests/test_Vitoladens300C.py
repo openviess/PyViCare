@@ -13,19 +13,19 @@ class Vitoladens300C(unittest.TestCase):
         self.assertEqual(self.device.burners[0].getActive(), False)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.burners[0].getStarts(), 29098)
+        self.assertEqual(self.device.burners[0].getStarts(), 29494)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.burners[0].getHours(), 4222.5)
+        self.assertEqual(self.device.burners[0].getHours(), 4272)
 
     def test_getBurnerModulation(self):
         self.assertEqual(self.device.burners[0].getModulation(), 0)
 
     def test_getBoilerTemperature(self):
-        self.assertEqual(self.device.getBoilerTemperature(), 42)
+        self.assertEqual(self.device.getBoilerTemperature(), 26)
 
     def test_getDomesticHotWaterCylinderTemperature(self):
-        self.assertEqual(self.device.getDomesticHotWaterCylinderTemperature(), 46.9)
+        self.assertEqual(self.device.getDomesticHotWaterCylinderTemperature(), 60.8)
 
     def test_getDomesticHotWaterStorageTemperature(self):
-        self.assertEqual(self.device.getDomesticHotWaterStorageTemperature(), 46.9)
+        self.assertEqual(self.device.getDomesticHotWaterStorageTemperature(), 60.8)
