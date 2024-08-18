@@ -87,7 +87,8 @@ class PyViCareDeviceConfig:
             (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
-            (self.asGateway, r"Heatbox1", ["type:gateway;VitoconnectOpto1"])
+            (self.asGateway, r"Heatbox1", ["type:gateway;VitoconnectOpto1"]),
+            (self.asGateway, r"Heatbox2", ["type:gateway;VitoconnectOpto2/OT2"])
         ]
 
         for (creator_method, type_name, roles) in device_types:

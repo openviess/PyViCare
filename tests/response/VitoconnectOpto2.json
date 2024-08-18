@@ -1,0 +1,97 @@
+{
+    "data": [
+        {
+            "feature": "gateway.devices",
+            "gatewayId": "##############",
+            "timestamp": "2024-03-28T05:06:02.633Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.devices",
+            "properties": {
+                "devices": {
+                    "type": "DeviceList",
+                    "value": [
+                        {
+                            "id": "gateway",
+                            "fingerprint": "###",
+                            "modelId": "Heatbox2_SRC",
+                            "modelVersion": "###",
+                            "name": "Heatbox 2 SRC, Vitoconnect",
+                            "type": "vitoconnect",
+                            "roles": [
+                                "type:gateway;VitoconnectOpto2/OT2",
+                                "type:hb2",
+                                "type:legacy"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "id": "0",
+                            "fingerprint": "###",
+                            "modelId": "VPlusHO1_40",
+                            "modelVersion": "###",
+                            "name": "VT 200 (HO1A / HO1B)",
+                            "type": "heating",
+                            "roles": [
+                                "type:boiler",
+                                "type:legacy",
+                                "type:product;VPlusHO1"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "id": "RoomControl-1",
+                            "fingerprint": "###",
+                            "modelId": "Smart_RoomControl",
+                            "modelVersion": "###",
+                            "name": "Smart_RoomControl_49",
+                            "type": "roomControl",
+                            "roles": [
+                                "capability:monetization;FTDC",
+                                "capability:monetization;OWD",
+                                "capability:zigbeeCoordinator",
+                                "type:legacy",
+                                "type:virtual;smartRoomControl"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "id": "zigbee-#####",
+                            "fingerprint": "###",
+                            "modelId": "Smart_Device_eTRV_generic_50",
+                            "modelVersion": "ac746d50a111d3eb8fa54146c05971aa2bc5b5cc",
+                            "name": "Smart_Device_eTRV_generic_50",
+                            "type": "zigbee",
+                            "roles": [
+                                "type:actuator",
+                                "type:legacy",
+                                "type:radiator",
+                                "type:smartRoomDevice"
+                            ],
+                            "status": "online"
+                        }
+                    ]
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "gateway.wifi",
+            "gatewayId": "##############",
+            "timestamp": "2024-03-30T17:31:57.758Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.wifi",
+            "properties": {
+                "strength": {
+                    "type": "number",
+                    "value": -41,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        }
+    ]
+}
