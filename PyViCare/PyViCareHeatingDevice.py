@@ -68,13 +68,13 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getHotWaterStorageTemperatureTop(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.top")["properties"]["value"][
+        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getHotWaterStorageTemperatureBottom(self):
         return \
-            self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"][
+            self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"][
                 "value"]
 
     @handleNotSupported
@@ -114,12 +114,6 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"][
-            "value"] # DEPRECATED replaced by heating.dhw.sensors.temperature.dhwCylinder removal date 2024-09-15
-
-
-    @handleNotSupported
-    def getDomesticHotWaterCylinderTemperature(self):
         return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
             "value"]
 
@@ -597,7 +591,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                         'comfortHeating', 'dhwPrecedence', 'eco', 'external', 'fixed', 'forcedLastFromSchedule',
                         'frostprotection', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling',
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
-                        'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']:
+                        'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(
                         f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
