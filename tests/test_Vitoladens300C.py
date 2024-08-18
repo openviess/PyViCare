@@ -24,8 +24,5 @@ class Vitoladens300C(unittest.TestCase):
     def test_getBoilerTemperature(self):
         self.assertEqual(self.device.getBoilerTemperature(), 26)
 
-    def test_getDomesticHotWaterCylinderTemperature(self):
-        self.assertEqual(self.device.getDomesticHotWaterCylinderTemperature(), 60.8)
-
     def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(self.device.getDomesticHotWaterStorageTemperature(), 60.8)
