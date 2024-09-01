@@ -64,6 +64,14 @@ class TestForMissingProperties(unittest.TestCase):
 
             # gateway
             'gateway.devices', # not used
+
+            # ventilation - not yet used
+            'ventilation.levels.levelOne',
+            'ventilation.levels.levelTwo',
+            'ventilation.levels.levelThree',
+            'ventilation.levels.levelFour',
+            'ventilation.quickmodes.forcedLevelFour',
+            'ventilation.quickmodes.silent',
         ]
 
         all_features = self.read_all_features()
