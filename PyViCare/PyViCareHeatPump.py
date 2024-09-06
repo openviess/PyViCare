@@ -115,7 +115,7 @@ class HeatPump(HeatingDevice):
         ----------
         mode : str
             Valid mode can be obtained using getModes()
-    
+
         Returns
         -------
         result: json
@@ -144,7 +144,7 @@ class HeatPump(HeatingDevice):
         Parameters
         ----------
         program : str
-    
+
         Returns
         -------
         result: json
@@ -227,7 +227,7 @@ class HeatPump(HeatingDevice):
         return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOffValue"]["params"]["hysteresis"]["constraints"]["min"])
 
     @handleNotSupported
-    def getDomesticHotWaterHysteresisSwitchOffMax(self):
+    def getDomesticHotWaterHysteresisSwitchOffMax(self) -> float:
         return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOffValue"]["params"]["hysteresis"]["constraints"]["max"])
 
     @handleNotSupported
@@ -248,6 +248,7 @@ class HeatPump(HeatingDevice):
             json representation of the answer
         """
         return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
+
 
 class Compressor(HeatingDeviceWithComponent):
 
