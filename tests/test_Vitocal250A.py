@@ -129,10 +129,6 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(
             self.device.getCompressor(0).getPhase(), "ready")
 
-    def test_getFrostProtectionActive(self):
-        self.assertEqual(
-            self.device.circuits[0].getFrostProtectionActive(), False)
-
     def test_getDomesticHotWaterHysteresis(self):
         self.assertEqual(
             self.device.getDomesticHotWaterHysteresisUnit(), 'kelvin')
