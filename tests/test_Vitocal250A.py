@@ -128,3 +128,65 @@ class Vitocal250A(unittest.TestCase):
     def test_getCompressorPhase(self):
         self.assertEqual(
             self.device.getCompressor(0).getPhase(), "ready")
+
+    def test_getDomesticHotWaterHysteresis(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisUnit(), 'kelvin')
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresis(), 5)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisMin(), 1)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisMax(), 10)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisStepping(), 0.5)
+
+    def test_getDomesticHotWaterHysteresisSwitchOn(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOn(), 5)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOnMin(), 1)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOnMax(), 10)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOnStepping(), 0.5)
+
+    def test_getDomesticHotWaterHysteresisSwitchOff(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOff(), 0)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOffMin(), 0)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOffMax(), 2.5)
+        self.assertEqual(
+            self.device.getDomesticHotWaterHysteresisSwitchOffStepping(), 0.5)
+
+    def test_setDomesticHotWaterHysteresis(self):
+        self.device.setDomesticHotWaterHysteresis(5)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature.hysteresis')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setHysteresis')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {
+                         'hysteresis': 5})
+
+    def test_setDomesticHotWaterHysteresisSwitchOn(self):
+        self.device.setDomesticHotWaterHysteresisSwitchOn(5)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature.hysteresis')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setHysteresisSwitchOnValue')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {
+                         'hysteresis': 5})
+
+    def test_setDomesticHotWaterHysteresisSwitchOff(self):
+        self.device.setDomesticHotWaterHysteresisSwitchOff(5)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature.hysteresis')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setHysteresisSwitchOffValue')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {
+                         'hysteresis': 5})
