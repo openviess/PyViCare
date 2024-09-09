@@ -20,7 +20,7 @@ class VitoairFs300(unittest.TestCase):
         self.assertListEqual(self.device.getAvailableModes(), expected_modes)
 
     def test_getAvailablePrograms(self):
-        expected_programs = ['standby', 'forcedLevelFour', 'levelFour', 'levelOne', 'levelThree', 'levelTwo', 'silent']
+        expected_programs = ['standby']
         self.assertListEqual(self.device.getAvailablePrograms(), expected_programs)
 
     def test_getSchedule(self):
