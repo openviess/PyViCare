@@ -57,18 +57,18 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
 
-            'heating.buffer.sensors.temperature.main', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.buffer.sensors.temperature.top', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.dhw.sensors.temperature.hotWaterStorage', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.dhw.sensors.temperature.hotWaterStorage.top', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.dhw.sensors.temperature.hotWaterStorage.bottom', # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
 
             # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.productIdentification',
 
             # gateway
-            'gateway.devices', # not used
+            'gateway.devices',  # not used
         ]
 
         all_features = self.read_all_features()
@@ -89,11 +89,11 @@ class TestForMissingProperties(unittest.TestCase):
         # properties which are not in any test response data
 
         ignore = [
-            'heating.dhw.sensors.temperature.dhwCylinder', #FIXME: remove once test data is updated
-            'heating.dhw.sensors.temperature.dhwCylinder.top', #FIXME: remove once test data is updated
-            'heating.dhw.sensors.temperature.dhwCylinder.bottom', #FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.main', #FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.top', #FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.top',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.bottom',  # FIXME: remove once test data is updated
+            'heating.bufferCylinder.sensors.temperature.main',  # FIXME: remove once test data is updated
+            'heating.bufferCylinder.sensors.temperature.top',  # FIXME: remove once test data is updated
         ]
 
         all_features = self.read_all_features()
