@@ -126,8 +126,7 @@ class HeatPump(HeatingDevice):
     @handleNotSupported
     def getAvailableVentilationPrograms(self):
         available_programs = []
-        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'comfort', 'eco', 'forcedLevelFour',
-                        'holiday', 'holidayAtHome', 'levelFour', 'levelOne', 'levelThree', 'levelTwo', 'permanent', 'silent']:
+        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby',  'holidayAtHome', 'permanent']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(f"ventilation.operating.programs.{program}") is not None:
                     available_programs.append(program)
