@@ -37,7 +37,7 @@ jobs:
       - name: 🏗 Install dependencies
         run: poetry install --no-interaction
       - name: 🚀 Run pytest
-        run: poetry run pytest --cov tests PyViCare
+        run: poetry run pytest --cov PyViCare
       - name: ⬆️ Upload coverage artifact
         uses: actions/upload-artifact@v4.4.0
         with:
