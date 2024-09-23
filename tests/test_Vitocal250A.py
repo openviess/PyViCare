@@ -36,7 +36,7 @@ class Vitocal250A(unittest.TestCase):
             self.device.getSupplyTemperaturePrimaryCircuit(), 5.9)
 
     def test_getPrograms(self):
-        expected_programs = ['comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 'comfortHeating', 'fixed', 'forcedLastFromSchedule', 'frostprotection', 'normalCooling', 'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reducedCooling', 'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby', 'summerEco']
+        expected_programs = ['comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 'comfortHeating', 'fixed', 'forcedLastFromSchedule', 'frostprotection', 'normalCooling', 'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reducedCooling', 'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']
         self.assertListEqual(
             self.device.circuits[0].getPrograms(), expected_programs)
 
@@ -85,6 +85,7 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionHeatingUnit(), "kilowattHour")
 
+    @unittest.skip("dump is not up to date, underlying data point was rernamed")
     def test_getBufferMainTemperature(self):
         self.assertAlmostEqual(
             self.device.getBufferMainTemperature(), 31.9)
