@@ -3,7 +3,7 @@ from typing import Any, List
 
 from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
                                             HeatingDeviceWithComponent)
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
 
 
 class HeatPump(HeatingDevice):
@@ -21,11 +21,11 @@ class HeatPump(HeatingDevice):
 
     @handleNotSupported
     def getBufferMainTemperature(self):
-        return self.service.getProperty("heating.buffer.sensors.temperature.main")["properties"]['value']['value']
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
 
     @handleNotSupported
     def getBufferTopTemperature(self):
-        return self.service.getProperty("heating.buffer.sensors.temperature.top")["properties"]['value']['value']
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]['value']['value']
 
     # Power consumption for Heating:
     @handleNotSupported
@@ -115,7 +115,7 @@ class HeatPump(HeatingDevice):
         ----------
         mode : str
             Valid mode can be obtained using getModes()
-    
+
         Returns
         -------
         result: json
@@ -126,8 +126,7 @@ class HeatPump(HeatingDevice):
     @handleNotSupported
     def getAvailableVentilationPrograms(self):
         available_programs = []
-        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'comfort', 'eco', 'forcedLevelFour',
-                        'holiday', 'holidayAtHome', 'levelFour', 'levelOne', 'levelThree', 'levelTwo', 'permanent', 'silent']:
+        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(f"ventilation.operating.programs.{program}") is not None:
                     available_programs.append(program)
@@ -144,13 +143,111 @@ class HeatPump(HeatingDevice):
         Parameters
         ----------
         program : str
-    
+
         Returns
         -------
         result: json
             json representation of the answer
         """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisUnit(self) -> str:
+        return str(self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresis(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisMin(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresis"]["params"]["hysteresis"]["constraints"]["min"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisMax(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresis"]["params"]["hysteresis"]["constraints"]["max"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisStepping(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresis"]["params"]["hysteresis"]["constraints"]["stepping"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHysteresis(self, temperature: float) -> Any:
+        """ Set the hysteresis temperature for domestic host water
+        Parameters
+        ----------
+        temperature : float
+            hysteresis temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresis", {'hysteresis': temperature})
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOn(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["switchOnValue"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOnMin(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOnValue"]["params"]["hysteresis"]["constraints"]["min"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOnMax(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOnValue"]["params"]["hysteresis"]["constraints"]["max"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOnStepping(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOnValue"]["params"]["hysteresis"]["constraints"]["stepping"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHysteresisSwitchOn(self, temperature: float) -> Any:
+        """ Set the hysteresis switch on temperature for domestic host water
+        Parameters
+        ----------
+        temperature : float
+            hysteresis switch on temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOnValue", {'hysteresis': temperature})
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOff(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["properties"]["switchOffValue"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOffMin(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOffValue"]["params"]["hysteresis"]["constraints"]["min"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOffMax(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOffValue"]["params"]["hysteresis"]["constraints"]["max"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHysteresisSwitchOffStepping(self) -> float:
+        return float(self.service.getProperty("heating.dhw.temperature.hysteresis")["commands"]["setHysteresisSwitchOffValue"]["params"]["hysteresis"]["constraints"]["stepping"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHysteresisSwitchOff(self, temperature: float) -> Any:
+        """ Set the hysteresis switch off temperature for domestic host water
+        Parameters
+        ----------
+        temperature : float
+            hysteresis switch off temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
+
 
 class Compressor(HeatingDeviceWithComponent):
 
