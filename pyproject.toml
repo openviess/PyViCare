@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "PyViCare"
+version = "0.1.0"
+description = "Library to communicate with the Viessmann ViCare API."
+authors = [
+  "Simon Gillet <mail+pyvicare@gillet.ninja>"
+]
+maintainers = [
+  "Christopher Fenner <fenner.christopher@gmail.com>",
+  "Martin",
+  "Lukas Wöhrl",
+]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/openviess/PyViCare"
+repository = "https://github.com/openviess/PyViCare"
+documentation = "https://github.com/openviess/PyViCare"
+keywords = [
+  "viessmann",
+  "vicare",
+  "api"
+]
+classifiers = [
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: Apache Software License",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Operating System :: OS Independent",
+]
+packages = [
+    { include = "PyViCare", from = "." },
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/openviess/PyViCare/issues"
+Changelog = "https://github.com/openviess/PyViCare/releases"
+
+[tool.poetry.dependencies]
+authlib = ">1.2.0"
+python = "^3.8"
+requests = ">=2.31.0"
+types-requests = ">=2.31"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+pytest-cov = "^5.0.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
