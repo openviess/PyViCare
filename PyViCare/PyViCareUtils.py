@@ -4,10 +4,20 @@ from typing import Callable
 
 from PyViCare import Feature
 
+VICARE_DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
 # This decorator handles access to underlying JSON properties.
 # If the property is not found (KeyError) or the index does not
 # exists (IndexError), the requested feature is not supported by
 # the device.
+
+
+def isSupported(method: Callable) -> bool:
+    try:
+        result = method()
+        return bool(result != 'error')
+    except PyViCareNotSupportedFeatureError:
+        return False
 
 
 def time_as_delta(date_time: datetime) -> timedelta:
@@ -46,8 +56,7 @@ def handleNotSupported(func: Callable) -> Callable:
         except PyViCareNotSupportedFeatureError:
             if Feature.raise_exception_on_not_supported_device_feature:
                 raise
-            else:
-                return "error"
+            return "error"
     return feature_flag_wrapper
 
 
@@ -66,13 +75,22 @@ def handleAPICommandErrors(func: Callable) -> Callable:
         except PyViCareCommandError:
             if Feature.raise_exception_on_command_failure:
                 raise
-            else:
-                return "error"
+            return "error"
     return feature_flag_wrapper
 
 
 class PyViCareNotSupportedFeatureError(Exception):
     pass
+
+
+class PyViCareInvalidConfigurationError(Exception):
+    def __init__(self, response):
+        error = response['error']
+        error_description = response['error_description']
+
+        msg = f'Invalid credentials. Error: {error}. Description: {error_description}. Please check your configuration: clientid and redirect uri.'
+        super().__init__(self, msg)
+        self.message = msg
 
 
 class PyViCareInvalidCredentialsError(Exception):

@@ -1,22 +1,22 @@
 import logging
 import os
 import pickle
-import re
 from contextlib import suppress
 from pickle import UnpicklingError
 
-import pkce
 import requests
-from requests_oauthlib import OAuth2Session
+from authlib.common.security import generate_token
+from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareUtils import PyViCareInvalidCredentialsError
+from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
+                                    PyViCareInvalidCredentialsError)
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v2/authorize'
-TOKEN_URL = 'https://iam.viessmann.com/idp/v2/token'
+AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v3/authorize'
+TOKEN_URL = 'https://iam.viessmann.com/idp/v3/token'
 REDIRECT_URI = "vicare://oauth-callback/everest"
 VIESSMANN_SCOPE = ["IoT User"]
 
@@ -55,56 +55,31 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             oauth sessions object
         """
         oauth_session = OAuth2Session(
-            self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE)
-        base_authorization_url, state = oauth_session.authorization_url(AUTHORIZE_URL)
-
-        code_verifier, code_challenge = pkce.generate_pkce_pair()
-        authorization_url = f'{base_authorization_url}&code_challenge={code_challenge}&code_challenge_method=S256'
-        logger.debug(f"Auth URL is: {authorization_url}")
+            self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
+        code_verifier = generate_token(48)
+        authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
+        logger.debug("Auth URL is: %s", authorization_url)
 
         header = {'Content-Type': 'application/x-www-form-urlencoded'}
         response = requests.post(
             authorization_url, headers=header, auth=(username, password), allow_redirects=False)
 
+        if response.status_code == 401:
+            raise PyViCareInvalidConfigurationError(response.json())
+
         if 'Location' not in response.headers:
-            logger.debug(f'Response: {response}')
+            logger.debug('Response: %s', response)
             raise PyViCareInvalidCredentialsError()
 
-        redirect_location = response.headers['Location']
-        logger.debug(f"Redirect location is: {redirect_location}")
-        match = re.match(
-            r"(?P<uri>.+?)\?code=(?P<code>.+)&state=(?P<state>.+)", redirect_location)
-        if match is None or match.group('uri') != REDIRECT_URI:
-            logger.warn("Redirect did not return correct url. Expected %s, got %s" % (REDIRECT_URI, match.group('uri')))
+        oauth_session.fetch_token(TOKEN_URL, authorization_response=response.headers['Location'], code_verifier=code_verifier)
+
+        if oauth_session.token is None:
             raise PyViCareInvalidCredentialsError()
 
-        if match.group('state') != state:
-            logger.warn("Invalid OAuth state")
-            raise PyViCareInvalidCredentialsError()
-
-        code = match.group('code')
-        result = requests.post(url=TOKEN_URL, data={
-            'grant_type': 'authorization_code',
-            'client_id': self.client_id,
-            'redirect_uri': REDIRECT_URI,
-            'code': code,
-            'code_verifier': code_verifier
-        }
-        ).json()
-
-        if 'access_token' not in result:
-            logger.debug(f"Invalid result after redirect {result}")
-            raise PyViCareInvalidCredentialsError()
-
-        token_dict = {
-            'access_token': result['access_token'],
-            'token_type': 'bearer'
-        }
-        new_session = OAuth2Session(client_id=self.client_id, token=token_dict)
-        logger.debug(f"Token received: {new_session.token}")
-        self.__serialize_token(new_session.token, token_file)
+        logger.debug("Token received: %s",oauth_session.token)
+        self.__serialize_token(oauth_session.token, token_file)
         logger.info("New token created")
-        return new_session
+        return oauth_session
 
     def renewToken(self):
         logger.info("Token expired, renewing")
@@ -121,7 +96,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         with open(token_file, mode='wb') as binary_file:
             pickle.dump(oauth, binary_file)
 
-        logger.info("Token serialized to %s" % token_file)
+        logger.info("Token serialized to %s", token_file)
 
     def __deserialize_token(self, token_file):
         if token_file is None or not os.path.isfile(token_file):

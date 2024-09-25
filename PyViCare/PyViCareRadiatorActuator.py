@@ -1,8 +1,8 @@
-from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
-class RadiatorActuator(Device):
+class RadiatorActuator(HeatingDevice):
 
     @handleNotSupported
     def getTemperature(self):

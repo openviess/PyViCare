@@ -1,11 +1,12 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import (Device, DeviceWithComponent,
-                                     get_available_burners)
+from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
+                                            HeatingDeviceWithComponent,
+                                            get_available_burners)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class OilBoiler(Device):
+class OilBoiler(HeatingDevice):
 
     @property
     def burners(self) -> List[Any]:
@@ -23,7 +24,7 @@ class OilBoiler(Device):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
 
-class OilBurner(DeviceWithComponent):
+class OilBurner(HeatingDeviceWithComponent):
 
     @property
     def burner(self) -> str:

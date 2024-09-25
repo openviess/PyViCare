@@ -1,13 +1,13 @@
 import unittest
 
-from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class SolarTest(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock('response/Solar.json')
-        self.device = Device(self.service)
+        self.device = HeatingDevice(self.service)
 
     def test_getSolarStorageTemperature(self):
         self.assertEqual(self.device.getSolarStorageTemperature(), 41.5)

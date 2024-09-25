@@ -1,11 +1,12 @@
 from typing import Any, List
 
-from PyViCare.PyViCareDevice import (Device, DeviceWithComponent,
-                                     get_available_burners)
+from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
+                                            HeatingDeviceWithComponent,
+                                            get_available_burners)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class GazBoiler(Device):
+class GazBoiler(HeatingDevice):
 
     @property
     def burners(self) -> List[Any]:
@@ -179,7 +180,7 @@ class GazBoiler(Device):
     # Gas consumption for Domestic Hot Water data:
     @handleNotSupported
     def getGasSummaryConsumptionDomesticHotWaterUnit(self):
-        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["day"]["unit"]
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getGasSummaryConsumptionDomesticHotWaterCurrentDay(self):
@@ -264,7 +265,7 @@ class GazBoiler(Device):
         return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
 
 
-class GazBurner(DeviceWithComponent):
+class GazBurner(HeatingDeviceWithComponent):
 
     @property
     def burner(self) -> str:

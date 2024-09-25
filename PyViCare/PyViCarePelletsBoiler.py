@@ -1,8 +1,8 @@
-from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class PelletsBoiler(Device):
+class PelletsBoiler(HeatingDevice):
 
     @handleNotSupported
     def getActive(self):

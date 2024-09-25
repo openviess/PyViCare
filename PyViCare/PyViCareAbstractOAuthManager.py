@@ -1,9 +1,9 @@
 import logging
-from abc import abstractclassmethod
+from abc import abstractmethod
 from typing import Any
 
-from oauthlib.oauth2 import TokenExpiredError  # type: ignore
-from requests_oauthlib.oauth2_session import OAuth2Session
+from authlib.integrations.base_client import TokenExpiredError, InvalidTokenError
+from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare import Feature
 from PyViCare.PyViCareUtils import (PyViCareCommandError,
@@ -27,7 +27,8 @@ class AbstractViCareOAuthManager:
     def replace_session(self, new_session: OAuth2Session) -> None:
         self.__oauth = new_session
 
-    @abstractclassmethod
+    @classmethod
+    @abstractmethod
     def renewToken(self) -> None:
         return
 
@@ -35,12 +36,15 @@ class AbstractViCareOAuthManager:
         try:
             logger.debug(self.__oauth)
             response = self.__oauth.get(f"{API_BASE_URL}{url}", timeout=31).json()
-            logger.debug(f"Response to get request: {response}")
+            logger.debug("Response to get request: %s", response)
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
             self.__handle_server_error(response)
             return response
         except TokenExpiredError:
+            self.renewToken()
+            return self.get(url)
+        except InvalidTokenError:
             self.renewToken()
             return self.get(url)
 
@@ -66,21 +70,20 @@ class AbstractViCareOAuthManager:
         if ("statusCode" in response and response["statusCode"] >= 400):
             raise PyViCareCommandError(response)
 
-    """POST URL using OAuth session. Automatically renew the token if needed
-    Parameters
-    ----------
-    url : str
-        URL to get
-    data : str
-        Data to post
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def post(self, url, data) -> Any:
+        """POST URL using OAuth session. Automatically renew the token if needed
+        Parameters
+        ----------
+        url : str
+            URL to get
+        data : str
+            Data to post
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
@@ -93,3 +96,6 @@ class AbstractViCareOAuthManager:
         except TokenExpiredError:
             self.renewToken()
             return self.post(url, data)
+        except InvalidTokenError:
+            self.renewToken()
+            return self.get(url)

@@ -1,10 +1,15 @@
-import json
 import re
 import unittest
 from os import listdir
-from os.path import dirname, isfile, join
+from os.path import dirname, isdir, isfile, join
 
 from tests.helper import readJson
+
+
+class PythonFile:
+    def __init__(self, filename, path):
+        self.filename = filename
+        self.path = path
 
 
 class TestForMissingProperties(unittest.TestCase):
@@ -25,7 +30,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.power.consumption',
 
             'heating.circuits.0.temperature.levels',  # hint: command
-            'heating.dhw.temperature.hysteresis',  # hint: command
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
@@ -42,29 +46,41 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.pressure.supply',
             'heating.sensors.temperature.allengra',
 
-            # todo: implement ventilation
-            'ventilation',
-            'ventilation.schedule',
-            'ventilation.operating.programs',
-            'ventilation.operating.programs.eco',
-            'ventilation.operating.programs.comfort',
-            'ventilation.operating.programs.basic',
-            'ventilation.operating.programs.active',
-            'ventilation.operating.programs.holiday',
-            'ventilation.operating.programs.intensive',
-            'ventilation.operating.programs.standby',
-            'ventilation.operating.programs.standard',
-            'ventilation.operating.programs.reduced',
-            'ventilation.operating.modes.standby',
-            'ventilation.operating.modes.active',
-            'ventilation.operating.modes.standard',
-            'ventilation.operating.modes.ventilation',
+            'heating.dhw.operating.modes.active',
+            'heating.dhw.operating.modes.comfort',
+            'heating.dhw.operating.modes.eco',
 
             'heating.circuits.0.heating.roomInfluenceFactor',
             'heating.circuits.0.temperature',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
+
+            'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
+
+            'heating.power.consumption.cooling',  # TODO: to analyse, from Vitocal 151A
+
+            'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+
+            # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
+            'device.messages.errors.raw',
+            'device.productIdentification',
+            'device.productMatrix',
+
+            # gateway
+            'gateway.devices',  # not used
+
+            # ventilation - not yet used
+            'ventilation.levels.levelOne',
+            'ventilation.levels.levelTwo',
+            'ventilation.levels.levelThree',
+            'ventilation.levels.levelFour',
+            'ventilation.quickmodes.forcedLevelFour',
+            'ventilation.quickmodes.silent',
         ]
 
         all_features = self.read_all_features()
@@ -78,12 +94,18 @@ class TestForMissingProperties(unittest.TestCase):
             if not found and len(foundInFiles) > 0 and feature not in ignore:
                 missing_features[feature] = foundInFiles
 
-        has_missing_features = len(missing_features) > 0
-        self.assertFalse(has_missing_features, json.dumps(missing_features, sort_keys=True, indent=2))
+        self.assertDictEqual({}, missing_features)
 
     def test_unverifiedProperties(self):
         # with this test we want to verify if we access
         # properties which are not in any test response data
+
+        ignore = [
+            'heating.dhw.sensors.temperature.dhwCylinder.top',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.bottom',  # FIXME: remove once test data is updated
+            'heating.bufferCylinder.sensors.temperature.main',  # FIXME: remove once test data is updated
+            'heating.bufferCylinder.sensors.temperature.top',  # FIXME: remove once test data is updated
+        ]
 
         all_features = self.read_all_features()
         all_python_files = self.read_all_python_code()
@@ -96,10 +118,10 @@ class TestForMissingProperties(unittest.TestCase):
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
-                feature_name = re.sub(r'\.{(program|active_programm)}', '', feature_name)
+                feature_name = re.sub(r'\.{(program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
-        self.assertSetEqual(set([]), set(used_features) - set(all_features))
+        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore))
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")
@@ -116,17 +138,30 @@ class TestForMissingProperties(unittest.TestCase):
 
     def read_all_python_code(self):
         python_path = join(dirname(__file__), '../PyViCare')
-        python_files = [f for f in listdir(python_path) if isfile(join(python_path, f))]
+        # searches in all subdirectories
+        python_files = self.get_all_files(python_path)
 
         all_python_files = {}
 
         for python in python_files:
-            if not python.endswith(".py"):
+            if not python.filename.endswith(".py"):
                 continue
 
-            with open(join(python_path, python)) as f:
-                all_python_files[python] = f.read()
+            with open(join(python.path, python.filename)) as f:
+                all_python_files[python.filename] = f.read()
+
         return all_python_files
+
+    def get_all_files(self, path):
+        files = []
+        for f in listdir(path):
+            new_path = join(path, f)
+            if isdir(new_path):
+                files.extend(self.get_all_files(new_path))
+            elif isfile(new_path):
+                files.append(PythonFile(f, path))
+
+        return files
 
     def read_all_features(self):
         response_path = join(dirname(__file__), './response')
