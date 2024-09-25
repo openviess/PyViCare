@@ -21,7 +21,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def test_getProperty_existing(self):
         self.service.getProperty("someprop")
         self.oauth_mock.get.assert_called_once_with(
-            '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/')
 
     def test_getProperty_nonexisting_raises_exception(self):
 
@@ -32,7 +32,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def test_setProperty_works(self):
         self.service.setProperty("someotherprop", "doaction", {'name': 'abc'})
         self.oauth_mock.post.assert_called_once_with(
-            '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/doaction', '{"name": "abc"}')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/commands/doaction', '{"name": "abc"}')
 
     def test_getProperty_existing_cached(self):
         # time+0 seconds
@@ -46,7 +46,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
 
         self.assertEqual(self.oauth_mock.get.call_count, 1)
         self.oauth_mock.get.assert_called_once_with(
-            '/equipment/installations/[id]/gateways/[serial]/devices/[device]/features/')
+            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/')
 
         # time+70 seconds (must be more than CACHE_DURATION)
         with now_is('2000-01-01 00:01:10'):

@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "zigbee-2c1165fffe977770",
+      "feature": "device.sensors.temperature",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 19.7
+        }
+      },
+      "timestamp": "2023-01-05T21:43:19.578Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-2c1165fffe977770/features/device.sensors.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "zigbee-2c1165fffe977770",
+      "feature": "device.sensors.humidity",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 56
+        }
+      },
+      "timestamp": "2023-01-05T20:20:44.130Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/#######/gateways/################/devices/zigbee-2c1165fffe977770/features/device.sensors.humidity"
+    }
+  ]
+}

@@ -2,26 +2,32 @@ import json
 import logging
 import re
 
-from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareHybrid import Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
+from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
+from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
+from PyViCare.PyViCareGateway import Gateway
+from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_model, status):
+    def __init__(self, service, device_id, device_model, status):
         self.service = service
+        self.device_id = device_id
         self.device_model = device_model
         self.status = status
 
     def asGeneric(self):
-        return Device(self.service)
+        return HeatingDevice(self.service)
 
     def asGazBoiler(self):
         return GazBoiler(self.service)
@@ -41,8 +47,26 @@ class PyViCareDeviceConfig:
     def asHybridDevice(self):
         return Hybrid(self.service)
 
+    def asRadiatorActuator(self):
+        return RadiatorActuator(self.service)
+
+    def asRoomSensor(self):
+        return RoomSensor(self.service)
+
+    def asElectricalEnergySystem(self):
+        return ElectricalEnergySystem(self.service)
+
+    def asGateway(self):
+        return Gateway(self.service)
+
+    def asVentilation(self):
+        return VentilationDevice(self.service)
+
     def getConfig(self):
         return self.service.accessor
+
+    def getId(self):
+        return self.device_id
 
     def getModel(self):
         return self.device_model
@@ -53,21 +77,25 @@ class PyViCareDeviceConfig:
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
-            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
             (self.asFuelCell, r"Vitovalor|Vitocharge|Vitoblo", []),
+            (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
             (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
-            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", [])
+            (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
+            (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
+            (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
+            (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
+            (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]),
+            (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
+            (self.asGateway, r"Heatbox1", ["type:gateway;VitoconnectOpto1"])
         ]
 
         for (creator_method, type_name, roles) in device_types:
             if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
-                logger.info("detected %s %s" %
-                            (self.device_model, creator_method.__name__))
+                logger.info("detected %s %s", self.device_model, creator_method.__name__)
                 return creator_method()
 
-        logger.info(
-            f"Could not auto detect {self.device_model}. Use generic device.")
+        logger.info("Could not auto detect %s. Use generic device.", self.device_model)
         return self.asGeneric()
 
     def get_raw_json(self):
