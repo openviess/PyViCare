@@ -13,7 +13,7 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getActiveMode(), "permanent")
 
     def test_getActiveProgram(self):
-        self.assertEqual(self.device.getActiveProgram(), "levelThree")
+        self.assertEqual(self.device.getActiveProgram(), "levelOne")
 
     def test_getAvailableModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
