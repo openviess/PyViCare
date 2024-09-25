@@ -75,14 +75,14 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             logger.debug("Timeout reached")
             raise PyViCareBrowserOAuthTimeoutReachedError()
 
-        logger.debug(f"Location: {location}")
+        logger.debug("Location: %s", location)
 
         oauth_session.fetch_token(TOKEN_URL, authorization_response=location, code_verifier=code_verifier)
 
         if oauth_session.token is None:
             raise PyViCareInvalidCredentialsError()
 
-        logger.debug(f"Token received: {oauth_session.token}")
+        logger.debug("Token received: %s", oauth_session.token)
         self.__storeToken(oauth_session.token)
         logger.info("New token created")
         return oauth_session

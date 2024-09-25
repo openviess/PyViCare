@@ -56,8 +56,7 @@ def handleNotSupported(func: Callable) -> Callable:
         except PyViCareNotSupportedFeatureError:
             if Feature.raise_exception_on_not_supported_device_feature:
                 raise
-            else:
-                return "error"
+            return "error"
     return feature_flag_wrapper
 
 
@@ -76,8 +75,7 @@ def handleAPICommandErrors(func: Callable) -> Callable:
         except PyViCareCommandError:
             if Feature.raise_exception_on_command_failure:
                 raise
-            else:
-                return "error"
+            return "error"
     return feature_flag_wrapper
 
 

@@ -8,18 +8,18 @@ This library implements access to Viessmann devices by using the official API fr
 
 ## Breaking changes in version 2.8.x
 
-- The circuit, burner (Gaz) and compressor (Heat Pump) is now separted. Accessing the properties of the burner/compressor is moved from `device.curcuits` to `device.burners` and `device.compressor`.
+- The circuit, burner (Gaz) and compressor (Heat Pump) is now separated. Accessing the properties of the burner/compressor is moved from `device.circuits` to `device.burners` and `device.compressor`.
 
 ## Breaking changes in version 2.x
 
 - The API to access your device changed to a general `PyViCare` class. Use this class to load all available devices.
-- The API to access the heating circuit of the device has moved to the `Device` class. You can now access and iterate over all available circuits via `device.curcuits`. This allows to easily see which properties are depending on the circuit.
+- The API to access the heating circuit of the device has moved to the `Device` class. You can now access and iterate over all available circuits via `device.circuits`. This allows to easily see which properties are depending on the circuit.
 
 See the example below for how you can use that.
 
 ## Breaking changes in version 1.x
 
-- The versions prior to 1.x used an inofficial API which stopped working on July, 15th 2021. All users need to migrate to version 1.0.0 to continue using the API.
+- The versions prior to 1.x used an unofficial API which stopped working on July, 15th 2021. All users need to migrate to version 1.0.0 to continue using the API.
 - Exception is raised if the library runs into a API rate limit. (See feature flag `raise_exception_on_rate_limit`)
 - Exception is raised if an unsupported device feature is used. (See feature flag `raise_exception_on_not_supported_device_feature`)
 - Python 3.4 is no longer supported.
@@ -27,11 +27,11 @@ See the example below for how you can use that.
 
 ## Prerequisites
 
-To use PyViCare, every user has to register and create their private API key. Follow these steps to create your API key:
+To use PyViCare, every user has to register and create their personal API client. Follow these steps to create your client:
 
-1. Login to the [Viessmann Developer Portal](https://developer.viessmann.com/) with your existing ViCare username from the ViCare app.
-2. In the menu navigate to `API Keys`.
-3. Create a new OAuth client using following data:
+1. Login to the [Viessmann Developer Portal](https://app.developer.viessmann.com/) with **your existing ViCare app username/password**.
+2. On the developer dashboard click *add* in the *clients* section.
+3. Create a new client using following data:
    - Name: PyViCare
    - Google reCAPTCHA: Disabled
    - Redirect URIs: `vicare://oauth-callback/everest`
@@ -149,7 +149,7 @@ Follow these steps to access the API in Postman:
 
 ## More different devices for test cases needed
 
-In order to help ensuring making it easier to create more test cases you can run this code and make a pull request with the new test of your device type added. Your test should be commited into [tests/response](tests/response) and named `<family><model>`.
+In order to help ensuring making it easier to create more test cases you can run this code and make a pull request with the new test of your device type added. Your test should be committed into [tests/response](tests/response) and named `<family><model>`.
 
 The code to run to make this happen is below. This automatically removes "sensitive" information like installation id and serial numbers.
 You can either replace default values or use the `PYVICARE_*` environment variables.

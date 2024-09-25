@@ -1,13 +1,8 @@
-from typing import Any, List
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import handleNotSupported
-from PyViCare.PyViCareService import ViCareService
 
 
 class ElectricalEnergySystem(Device):
-
-    def __init__(self, service: ViCareService) -> None:
-        self.service = service
 
     @handleNotSupported
     def getPointOfCommonCouplingTransferPowerExchange(self):
@@ -62,7 +57,7 @@ class ElectricalEnergySystem(Device):
         return self.service.getProperty("photovoltaic.production.current")[
             "properties"
         ]["value"]["value"]
-    
+
     @handleNotSupported
     def getPhotovoltaicProductionCurrentUnit(self):
         return self.service.getProperty("photovoltaic.production.current")[
