@@ -1,4 +1,3 @@
-import json
 import re
 import unittest
 from os import listdir
@@ -57,12 +56,26 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
 
+            'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+
             # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.productIdentification',
 
             # gateway
-            'gateway.devices', # not used
+            'gateway.devices',  # not used
+
+            # ventilation - not yet used
+            'ventilation.levels.levelOne',
+            'ventilation.levels.levelTwo',
+            'ventilation.levels.levelThree',
+            'ventilation.levels.levelFour',
+            'ventilation.quickmodes.forcedLevelFour',
+            'ventilation.quickmodes.silent',
         ]
 
         all_features = self.read_all_features()
@@ -76,12 +89,18 @@ class TestForMissingProperties(unittest.TestCase):
             if not found and len(foundInFiles) > 0 and feature not in ignore:
                 missing_features[feature] = foundInFiles
 
-        has_missing_features = len(missing_features) > 0
-        self.assertFalse(has_missing_features, json.dumps(missing_features, sort_keys=True, indent=2))
+        self.assertDictEqual({}, missing_features)
 
     def test_unverifiedProperties(self):
         # with this test we want to verify if we access
         # properties which are not in any test response data
+
+        ignore = [
+            'heating.dhw.sensors.temperature.dhwCylinder.top',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.bottom',  # FIXME: remove once test data is updated
+            'heating.bufferCylinder.sensors.temperature.main',  # FIXME: remove once test data is updated
+            'heating.bufferCylinder.sensors.temperature.top',  # FIXME: remove once test data is updated
+        ]
 
         all_features = self.read_all_features()
         all_python_files = self.read_all_python_code()
@@ -97,7 +116,7 @@ class TestForMissingProperties(unittest.TestCase):
                 feature_name = re.sub(r'\.{(program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
-        self.assertSetEqual(set([]), set(used_features) - set(all_features))
+        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore))
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")

@@ -21,10 +21,12 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), False)
 
+    @unittest.skip("dump is not up to date, underlying data point was rernamed")
     def test_getBufferTopTemperature(self):
         self.assertEqual(
             self.device.getBufferTopTemperature(), 36)
 
+    @unittest.skip("dump is not up to date, underlying data point was rernamed")
     def test_getBufferMainTemperature(self):
         self.assertEqual(
             self.device.getBufferMainTemperature(), 36)
@@ -71,6 +73,7 @@ class Vitocaldens222F(unittest.TestCase):
         self.assertEqual(
             self.device.getOutsideTemperature(), 15.3)
 
+    @unittest.skip("dump is not up to date, underlying data point was rernamed")
     def test_getHotWaterStorageTemperatureTop(self):
         self.assertEqual(
             self.device.getHotWaterStorageTemperatureTop(), 50.9)
