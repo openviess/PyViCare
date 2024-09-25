@@ -26,8 +26,7 @@ def pretty_print_results(result):
         formatted = json.dumps(result, sort_keys=True, indent=2)
         indented = formatted.replace('\n', '\n' + ' ' * 45)
         return indented
-    else:
-        return result
+    return result
 
 
 def dump_results(vicare_device):

@@ -1,12 +1,13 @@
 import unittest
 
 from PyViCare.PyViCareGateway import Gateway
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class VitoconnectOpto1(unittest.TestCase):
+class TCU300_ethernet(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/VitoconnectOpto1.json')
+        self.service = ViCareServiceMock('response/TCU300_ethernet.json')
         self.device = Gateway(self.service)
 
     def test_getSerial(self):
@@ -14,5 +15,5 @@ class VitoconnectOpto1(unittest.TestCase):
             self.device.getSerial(), "################")
 
     def test_getWifiSignalStrength(self):
-        self.assertEqual(
-            self.device.getWifiSignalStrength(), -69)
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getWifiSignalStrength()
