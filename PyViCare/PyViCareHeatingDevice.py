@@ -1,9 +1,9 @@
 from contextlib import suppress
 from typing import Any, List, Optional
 
+from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import (VICARE_DAYS,
                                     PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
@@ -13,8 +13,8 @@ from PyViCare.PyViCareUtils import (VICARE_DAYS,
 VICARE_DHW_TEMP2 = "temp-2"
 
 
-def all_set(list: List[Any]) -> bool:
-    return all(v is not None for v in list)
+def all_set(_list: List[Any]) -> bool:
+    return all(v is not None for v in _list)
 
 
 def get_available_burners(service):
@@ -29,19 +29,12 @@ def get_available_burners(service):
     return available_burners
 
 
-class HeatingDevice:
+class HeatingDevice(Device):
     """This is the base class for all heating devices.
     This class connects to the Viessmann ViCare API.
     The authentication is done through OAuth2.
     Note that currently, a new token is generated for each run.
     """
-
-    def __init__(self, service: ViCareService) -> None:
-        self.service = service
-
-    @handleNotSupported
-    def getSerial(self):
-        return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
     @property
     def circuits(self) -> List[Any]:
@@ -75,13 +68,13 @@ class HeatingDevice:
 
     @handleNotSupported
     def getHotWaterStorageTemperatureTop(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.top")["properties"]["value"][
+        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getHotWaterStorageTemperatureBottom(self):
         return \
-            self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"][
+            self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"][
                 "value"]
 
     @handleNotSupported
@@ -107,8 +100,7 @@ class HeatingDevice:
             if startTime <= currentTime and currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return VICARE_DHW_TEMP2
-                else:
-                    mode = s["mode"]
+                mode = s["mode"]
         return mode
 
     def getDomesticHotWaterDesiredTemperature(self):
@@ -117,14 +109,13 @@ class HeatingDevice:
         if mode is not None:
             if mode == VICARE_DHW_TEMP2:
                 return self.getDomesticHotWaterConfiguredTemperature2()
-            else:
-                return self.getDomesticHotWaterConfiguredTemperature()
+            return self.getDomesticHotWaterConfiguredTemperature()
 
         return None
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"][
+        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
             "value"]
 
     @handleNotSupported
@@ -162,37 +153,35 @@ class HeatingDevice:
     def getDomesticHotWaterChargingActive(self):
         return self.service.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
 
-    """ Set the target temperature for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
+        """ Set the target temperature for domestic host water
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty("heating.dhw.temperature.main", "setTargetTemperature",
                                         {'temperature': int(temperature)})
 
-    """ Set the target temperature 2 for domestic host water
-    Parameters
-    ----------
-    temperature : int
-        Target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature2(self, temperature):
+        """ Set the target temperature 2 for domestic host water
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
 
@@ -385,43 +374,41 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     def circuit(self) -> str:
         return self.component
 
-    """ Set the active mode
-    Parameters
-    ----------
-    mode : str
-        Valid mode can be obtained using getModes()
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def setMode(self, mode):
+        """ Set the active mode
+        Parameters
+        ----------
+        mode : str
+            Valid mode can be obtained using getModes()
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         r = self.service.setProperty(
             f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
         return r
 
-    # Works for normal, reduced, comfort
-    # active has no action
-    # external, standby no action
-    # holiday, scheduled and unscheduled
-    # activate, decativate comfort, eco
-    """ Set the target temperature for the target program
-    Parameters
-    ----------
-    program : str
-        Can be normal, reduced or comfort
-    temperature: int
-        target temperature
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def setProgramTemperature(self, program: str, temperature: float):
+        # Works for normal, reduced, comfort
+        # active has no action
+        # external, standby no action
+        # holiday, scheduled and unscheduled
+        # activate, decativate comfort, eco
+        """ Set the target temperature for the target program
+        Parameters
+        ----------
+        program : str
+            Can be normal, reduced or comfort
+        temperature: int
+            target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "setTemperature", {'targetTemperature': float(temperature)})
 
@@ -433,6 +420,18 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     def setNormalTemperature(self, temperature):
         return self.setProgramTemperature("normal", temperature)
+
+    @handleNotSupported
+    def getActive(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["active"]["value"]
+
+    @handleNotSupported
+    def getName(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["name"]["value"]
+
+    @handleNotSupported
+    def getType(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
 
     @handleNotSupported
     def getActiveProgramMinTemperature(self):
@@ -450,67 +449,63 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return self.getProgramStepping(active_program)
 
     @handleNotSupported
-    def getProgramMinTemperature(self, program: str):        
+    def getProgramMinTemperature(self, program: str):
         if program in ['standby']:
             return None
-        
+
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["min"]
 
     @handleNotSupported
-    def getProgramMaxTemperature(self, program: str):        
+    def getProgramMaxTemperature(self, program: str):
         if program in ['standby']:
             return None
-        
+
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["max"]
 
     @handleNotSupported
-    def getProgramStepping(self, program: str):        
+    def getProgramStepping(self, program: str):
         if program in ['standby']:
             return None
-        
+
         return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["stepping"]
 
-
-
-    """ Activate a program
-        NOTE
-        DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-    Parameters
-    ----------
-    program : str
-        Appears to work only for comfort
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
-    # optional temperature parameter could be passed (but not done)
-
     def activateProgram(self, program):
+        """ Activate a program
+            NOTE
+            DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
+        Parameters
+        ----------
+        program : str
+            Appears to work only for comfort
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+
+        # optional temperature parameter could be passed (but not done)
         return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "activate",
                                         {})
 
     def activateComfort(self):
         return self.activateProgram("comfort")
 
-    """ Deactivate a program
-    Parameters
-    ----------
-    program : str
-        Appears to work only for comfort and eco (coming from normal, can be reached only by deactivating another state)
-
-    Returns
-    -------
-    result: json
-        json representation of the answer
-    """
-
     def deactivateProgram(self, program):
+        """ Deactivate a program
+        Parameters
+        ----------
+        program : str
+            Appears to work only for comfort and eco (coming from normal, can be reached only by deactivating another state)
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
         return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "deactivate", {})
 
@@ -546,9 +541,39 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "value"]
 
     @handleNotSupported
+    def getHeatingCurveShiftMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getHeatingCurveShiftMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getHeatingCurveShiftStepping(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "shift"]["constraints"]["stepping"]
+
+    @handleNotSupported
     def getHeatingCurveSlope(self):
         return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["slope"][
             "value"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeMin(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeMax(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getHeatingCurveSlopeStepping(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+            "slope"]["constraints"]["stepping"]
 
     @handleAPICommandErrors
     def setHeatingCurve(self, shift, slope):
@@ -563,8 +588,11 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPrograms(self):
         available_programs = []
-        for program in ['active', 'comfort', 'forcedLastFromSchedule', 'eco', 'external', 'fixed', 'holiday',
-                        'normal', 'reduced', 'standby']:
+        for program in ['comfort', 'comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving',
+                        'comfortHeating', 'dhwPrecedence', 'eco', 'external', 'fixed', 'forcedLastFromSchedule',
+                        'frostprotection', 'holiday', 'holidayAtHome', 'manual', 'normal', 'normalCooling',
+                        'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
+                        'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(
                         f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
@@ -636,7 +664,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             shift = self.getHeatingCurveShift()
             slope = self.getHeatingCurveSlope()
 
-        if (not all_set([inside, outside, shift, slope])):
+        if not all_set([inside, outside, shift, slope]):
             return None
 
         max_value = None
@@ -648,7 +676,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         if outside is None or inside is None:
             return None
 
-        delta_outside_inside = (outside - inside)
+        delta_outside_inside = outside - inside
         target_supply = self.device.get_heat_curve_formular()(delta_outside_inside, inside, shift, slope)
 
         if all_set([min_value, max_value]):

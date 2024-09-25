@@ -8,8 +8,8 @@ class PyViCareServiceTest(unittest.TestCase):
 
     def setUp(self):
         self.oauth_mock = Mock()
-        accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
-        self.service = ViCareService(self.oauth_mock, accessor, [])
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.service = ViCareService(self.oauth_mock, self.accessor, [])
 
     def test_getProperty(self):
         self.service.getProperty("someprop")
@@ -25,3 +25,15 @@ class PyViCareServiceTest(unittest.TestCase):
         self.service.setProperty("someprop", "doaction", '{}')
         self.oauth_mock.post.assert_called_once_with(
             '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someprop/commands/doaction', '{}')
+
+    def test_getProperty_gateway(self):
+        self.service = ViCareService(self.oauth_mock, self.accessor, ["type:gateway;VitoconnectOpto1"])
+        self.service.getProperty("someprop")
+        self.oauth_mock.get.assert_called_once_with(
+            '/features/installations/[id]/gateways/[serial]/features/someprop')
+
+    def test_fetch_all_features_gateway(self):
+        self.service = ViCareService(self.oauth_mock, self.accessor, ["type:gateway;VitoconnectOpto1"])
+        self.service.fetch_all_features()
+        self.oauth_mock.get.assert_called_once_with(
+            '/features/installations/[id]/gateways/[serial]/features/')
