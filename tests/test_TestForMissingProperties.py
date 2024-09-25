@@ -56,7 +56,9 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
 
-            'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal333G
+            'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
+
+            'heating.power.consumption.cooling',  # TODO: to analyse, from Vitocal 151A
 
             'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
@@ -64,9 +66,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage.bottom',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
 
-            # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
+            # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.productIdentification',
+            'device.productMatrix',
 
             # gateway
             'gateway.devices',  # not used
