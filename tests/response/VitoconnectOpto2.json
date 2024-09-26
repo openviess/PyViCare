@@ -27,20 +27,6 @@
                             "status": "online"
                         },
                         {
-                            "id": "0",
-                            "fingerprint": "###",
-                            "modelId": "VPlusHO1_40",
-                            "modelVersion": "###",
-                            "name": "VT 200 (HO1A / HO1B)",
-                            "type": "heating",
-                            "roles": [
-                                "type:boiler",
-                                "type:legacy",
-                                "type:product;VPlusHO1"
-                            ],
-                            "status": "online"
-                        },
-                        {
                             "id": "RoomControl-1",
                             "fingerprint": "###",
                             "modelId": "Smart_RoomControl",
@@ -53,6 +39,48 @@
                                 "capability:zigbeeCoordinator",
                                 "type:legacy",
                                 "type:virtual;smartRoomControl"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "fingerprint": "ext_hd_ctrl:hb2,mj:2,mi:50,p:3",
+                            "id": "HeatDemandControl",
+                            "modelId": "HeatDemandControl",
+                            "modelVersion": "849a43846dbfc44d4024d3709dddc041efc7c0e1",
+                            "name": "External Heat Demand Control",
+                            "roles": [
+                                "type:legacy",
+                                "type:virtual;heatDemandControl"
+                            ],
+                            "status": "online",
+                            "type": "virtual"
+                        },
+                        {
+                            "fingerprint": "gg:20,gk:4d,si:66,esi:65535",
+                            "id": "0",
+                            "modelId": "CU401B_S",
+                            "modelVersion": "712d6e32c9e295df60b8ab278580eb730f6b58ec",
+                            "name": "Vitocalxxx-S mit Vitotronic 200 (Typ WO1C)",
+                            "roles": [
+                                "capability:monetization;AdvancedReport",
+                                "type:heatpump",
+                                "type:legacy",
+                                "type:product;CU401B"
+                            ],
+                            "status": "online",
+                            "type": "heating"
+                        },
+                        {
+                            "id": "1",
+                            "fingerprint": "###",
+                            "modelId": "VPlusHO1_40",
+                            "modelVersion": "###",
+                            "name": "VT 200 (HO1A / HO1B)",
+                            "type": "heating",
+                            "roles": [
+                                "type:boiler",
+                                "type:legacy",
+                                "type:product;VPlusHO1"
                             ],
                             "status": "online"
                         },
