@@ -1,29 +1,46 @@
 {
     "data": [
         {
-            "apiVersion": 1,
-            "commands": {},
             "feature": "gateway.devices",
-            "gatewayId": "################",
+            "gatewayId": "##############",
+            "timestamp": "2024-03-28T05:06:02.633Z",
             "isEnabled": true,
             "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.devices",
             "properties": {
                 "devices": {
                     "type": "DeviceList",
                     "value": [
                         {
-                            "fingerprint": "gw:hb2,mj:2,mi:50,p:3",
                             "id": "gateway",
+                            "fingerprint": "###",
                             "modelId": "Heatbox2_SRC",
-                            "modelVersion": "0c599f0d19ea696b8f8d61c8583aa383da30361f",
+                            "modelVersion": "###",
                             "name": "Heatbox 2 SRC, Vitoconnect",
+                            "type": "vitoconnect",
                             "roles": [
                                 "type:gateway;VitoconnectOpto2/OT2",
                                 "type:hb2",
                                 "type:legacy"
                             ],
-                            "status": "online",
-                            "type": "vitoconnect"
+                            "status": "online"
+                        },
+                        {
+                            "id": "RoomControl-1",
+                            "fingerprint": "###",
+                            "modelId": "Smart_RoomControl",
+                            "modelVersion": "###",
+                            "name": "Smart_RoomControl_49",
+                            "type": "roomControl",
+                            "roles": [
+                                "capability:monetization;FTDC",
+                                "capability:monetization;OWD",
+                                "capability:zigbeeCoordinator",
+                                "type:legacy",
+                                "type:virtual;smartRoomControl"
+                            ],
+                            "status": "online"
                         },
                         {
                             "fingerprint": "ext_hd_ctrl:hb2,mj:2,mi:50,p:3",
@@ -54,43 +71,55 @@
                             "type": "heating"
                         },
                         {
-                            "fingerprint": "src:hb2:ext,mj:2,mi:50,p:3",
-                            "id": "RoomControl-1",
-                            "modelId": "Smart_RoomControl",
-                            "modelVersion": "8572c02269ca9007938b8cf0eff30310edb579ae",
-                            "name": "Smart_RoomControl_49",
+                            "id": "1",
+                            "fingerprint": "###",
+                            "modelId": "VPlusHO1_40",
+                            "modelVersion": "###",
+                            "name": "VT 200 (HO1A / HO1B)",
+                            "type": "heating",
                             "roles": [
-                                "capability:monetization;FTDC",
-                                "capability:monetization;OWD",
-                                "capability:zigbeeCoordinator",
+                                "type:boiler",
                                 "type:legacy",
-                                "type:virtual;smartRoomControl"
+                                "type:product;VPlusHO1"
                             ],
-                            "status": "online",
-                            "type": "roomControl"
+                            "status": "online"
+                        },
+                        {
+                            "id": "zigbee-#####",
+                            "fingerprint": "###",
+                            "modelId": "Smart_Device_eTRV_generic_50",
+                            "modelVersion": "ac746d50a111d3eb8fa54146c05971aa2bc5b5cc",
+                            "name": "Smart_Device_eTRV_generic_50",
+                            "type": "zigbee",
+                            "roles": [
+                                "type:actuator",
+                                "type:legacy",
+                                "type:radiator",
+                                "type:smartRoomDevice"
+                            ],
+                            "status": "online"
                         }
                     ]
                 }
             },
-            "timestamp": "2024-05-26T16:49:01.343Z",
-            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/features/gateway.devices"
+            "commands": {}
         },
         {
-            "apiVersion": 1,
-            "commands": {},
             "feature": "gateway.wifi",
-            "gatewayId": "################",
+            "gatewayId": "##############",
+            "timestamp": "2024-03-30T17:31:57.758Z",
             "isEnabled": true,
             "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.wifi",
             "properties": {
                 "strength": {
                     "type": "number",
-                    "unit": "",
-                    "value": -58
+                    "value": -41,
+                    "unit": ""
                 }
             },
-            "timestamp": "2024-05-26T17:17:32.779Z",
-            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/features/gateway.wifi"
+            "commands": {}
         }
     ]
 }

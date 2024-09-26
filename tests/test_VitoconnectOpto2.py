@@ -11,8 +11,8 @@ class VitoconnectOpto2(unittest.TestCase):
 
     def test_getSerial(self):
         self.assertEqual(
-            self.device.getSerial(), "################")
+            self.device.getSerial(), "##############")
 
     def test_getWifiSignalStrength(self):
         self.assertEqual(
-            self.device.getWifiSignalStrength(), -58)
+            self.device.getWifiSignalStrength(), -41)

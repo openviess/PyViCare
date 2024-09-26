@@ -72,6 +72,11 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
+    def test_autoDetect_VitoconnectOpto2_asGateway(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Heatbox2_SRC", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("Gateway", type(device_type).__name__)
+
     def test_autoDetect_TCU300_asGateway(self):
         c = PyViCareDeviceConfig(self.service, "0", "E3_TCU10_x07", "Online")
         device_type = c.asAutoDetectDevice()
@@ -79,6 +84,12 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
 
     def test_autoDetect_RoleGateway_asGateway(self):
         self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto1"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("Gateway", type(device_type).__name__)
+
+    def test_autoDetect_RoleGateway_asGateway_vc_opto2(self):
+        self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto2/OT2"])
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
