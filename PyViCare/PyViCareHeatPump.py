@@ -62,15 +62,15 @@ class HeatPump(HeatingDevice):
         return self.service.getProperty("heating.power.consumption.cooling")["properties"]["day"]["unit"]
 
     @handleNotSupported
-    def getPowerConsumptionCoolingCurrentDay(self):
+    def getPowerConsumptionCoolingToday(self):
         return self.service.getProperty("heating.power.consumption.cooling")["properties"]["day"]["value"][0]
 
     @handleNotSupported
-    def getPowerConsumptionCoolingCurrentMonth(self):
+    def getPowerConsumptionCoolingThisMonth(self):
         return self.service.getProperty("heating.power.consumption.cooling")["properties"]["month"]["value"][0]
 
     @handleNotSupported
-    def getPowerConsumptionCoolingCurrentYear(self):
+    def getPowerConsumptionCoolingThisYear(self):
         return self.service.getProperty("heating.power.consumption.cooling")["properties"]["year"]["value"][0]
 
     @handleNotSupported
