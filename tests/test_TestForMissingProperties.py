@@ -68,6 +68,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.errors.raw',
             'device.productIdentification',
             'device.productMatrix',
+            'heating.device.variant',
 
             # gateway
             'gateway.devices',  # not used
