@@ -80,6 +80,7 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.levels.levelFour',
             'ventilation.quickmodes.forcedLevelFour',
             'ventilation.quickmodes.silent',
+            'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
         ]
 
         all_features = self.read_all_features()
