@@ -58,8 +58,6 @@ class TestForMissingProperties(unittest.TestCase):
 
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
 
-            'heating.power.consumption.cooling',  # TODO: to analyse, from Vitocal 151A
-
             'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
@@ -70,6 +68,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.errors.raw',
             'device.productIdentification',
             'device.productMatrix',
+            'heating.device.variant',
 
             # gateway
             'gateway.devices',  # not used
@@ -81,6 +80,7 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.levels.levelFour',
             'ventilation.quickmodes.forcedLevelFour',
             'ventilation.quickmodes.silent',
+            'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
         ]
 
         all_features = self.read_all_features()
