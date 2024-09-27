@@ -51,6 +51,6 @@ jobs:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v4.2.0
       - name: 🚀 Sort test response data
-        run: find ./tests/response/ -name "*.json" -exec jq '.data|=sort_by(.feature)' {} | sponge {} \;
+        run: find ./tests/response/ -name "*.json" -exec jq '.data|=sort_by(.feature)' {} > {}.tmp && mv {}.tmp {} \;
       - name: Verify
         run: git diff --name-only --exit-code
