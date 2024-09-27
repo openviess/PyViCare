@@ -43,3 +43,14 @@ jobs:
         with:
           name: coverage-${{ matrix.python }}
           path: .coverage
+
+  jq:
+    name: Sort Testdata
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v4.2.0
+      - name: 🚀 Sort test response data
+        run: find ./tests/response/ -name "*.json" -exec jq '.data|=sort_by(.feature)' {} | sponge {} \;
+      - name: Verify
+        run: git diff --name-only --exit-code
