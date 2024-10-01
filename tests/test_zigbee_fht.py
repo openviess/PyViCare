@@ -11,7 +11,7 @@ class ZK03840(unittest.TestCase):
 
     def test_getSerial(self):
         self.assertEqual(
-            self.device.getSerial(), "zigbee-1a1a1a1a1a1a1a1a")
+            self.device.getSerial(), "zigbee-5cc7c1fffea25f73")
 
     def test_getActiveMode(self):
         self.assertEqual(
