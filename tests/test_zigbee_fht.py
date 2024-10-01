@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.PyViCareFloorHeatingDevice import FloorHeating
+from PyViCare.PyViCareFloorHeating import FloorHeating
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
