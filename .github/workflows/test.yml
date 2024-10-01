@@ -56,6 +56,6 @@ jobs:
             -maxdepth '1' \
             -type 'f' \
             -name '*.json' \
-            -exec sh -c 'mv $1 $1.tmp; jq ".data|=sort_by(.feature)" $1.tmp > $1; rm $1.tmp' shell {} ";"
+            -exec sh -c 'mv $1 $1.tmp; jq ".data|=sort_by(.feature)" --sort-keys $1.tmp > $1; rm $1.tmp' shell {} ";"
       - name: Verify
         run: git diff --name-only --exit-code
