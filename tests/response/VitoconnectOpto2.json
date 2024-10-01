@@ -1,38 +1,36 @@
 {
   "data": [
     {
+      "apiVersion": 1,
+      "commands": {},
       "feature": "gateway.devices",
       "gatewayId": "##############",
-      "timestamp": "2024-03-28T05:06:02.633Z",
       "isEnabled": true,
       "isReady": true,
-      "apiVersion": 1,
-      "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.devices",
       "properties": {
         "devices": {
           "type": "DeviceList",
           "value": [
             {
-              "id": "gateway",
               "fingerprint": "###",
+              "id": "gateway",
               "modelId": "Heatbox2_SRC",
               "modelVersion": "###",
               "name": "Heatbox 2 SRC, Vitoconnect",
-              "type": "vitoconnect",
               "roles": [
                 "type:gateway;VitoconnectOpto2/OT2",
                 "type:hb2",
                 "type:legacy"
               ],
-              "status": "online"
+              "status": "online",
+              "type": "vitoconnect"
             },
             {
-              "id": "RoomControl-1",
               "fingerprint": "###",
+              "id": "RoomControl-1",
               "modelId": "Smart_RoomControl",
               "modelVersion": "###",
               "name": "Smart_RoomControl_49",
-              "type": "roomControl",
               "roles": [
                 "capability:monetization;FTDC",
                 "capability:monetization;OWD",
@@ -40,7 +38,8 @@
                 "type:legacy",
                 "type:virtual;smartRoomControl"
               ],
-              "status": "online"
+              "status": "online",
+              "type": "roomControl"
             },
             {
               "fingerprint": "ext_hd_ctrl:hb2,mj:2,mi:50,p:3",
@@ -71,55 +70,56 @@
               "type": "heating"
             },
             {
-              "id": "1",
               "fingerprint": "###",
+              "id": "1",
               "modelId": "VPlusHO1_40",
               "modelVersion": "###",
               "name": "VT 200 (HO1A / HO1B)",
-              "type": "heating",
               "roles": [
                 "type:boiler",
                 "type:legacy",
                 "type:product;VPlusHO1"
               ],
-              "status": "online"
+              "status": "online",
+              "type": "heating"
             },
             {
-              "id": "zigbee-#####",
               "fingerprint": "###",
+              "id": "zigbee-#####",
               "modelId": "Smart_Device_eTRV_generic_50",
               "modelVersion": "ac746d50a111d3eb8fa54146c05971aa2bc5b5cc",
               "name": "Smart_Device_eTRV_generic_50",
-              "type": "zigbee",
               "roles": [
                 "type:actuator",
                 "type:legacy",
                 "type:radiator",
                 "type:smartRoomDevice"
               ],
-              "status": "online"
+              "status": "online",
+              "type": "zigbee"
             }
           ]
         }
       },
-      "commands": {}
+      "timestamp": "2024-03-28T05:06:02.633Z",
+      "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.devices"
     },
     {
+      "apiVersion": 1,
+      "commands": {},
       "feature": "gateway.wifi",
       "gatewayId": "##############",
-      "timestamp": "2024-03-30T17:31:57.758Z",
       "isEnabled": true,
       "isReady": true,
-      "apiVersion": 1,
-      "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.wifi",
       "properties": {
         "strength": {
           "type": "number",
-          "value": -41,
-          "unit": ""
+          "unit": "",
+          "value": -41
         }
       },
-      "commands": {}
+      "timestamp": "2024-03-30T17:31:57.758Z",
+      "uri": "https://api.viessmann.com/iot/v1/features/installations/######/gateways/##############/features/gateway.wifi"
     }
   ]
 }
