@@ -52,9 +52,9 @@ jobs:
         uses: actions/checkout@v4.2.0
       - name: 🚀 Sort test response data
         run: |
-          find ./tests/response \
-            -depth 1 \
-            -type f \
+          find './tests/response' \
+            -depth '1' \
+            -type 'f' \
             -name '*.json' \
             -exec sh -c 'mv $1 $1.tmp; jq ".data|=sort_by(.feature)" $1.tmp > $1; rm $1.tmp' shell {} ";"
       - name: Verify
