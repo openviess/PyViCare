@@ -1,107 +1,107 @@
 {
-    "data": [
-        {
-            "feature": "gateway.devices",
-            "gatewayId": "################",
-            "timestamp": "2024-03-17T18:55:46.182Z",
-            "isEnabled": true,
-            "isReady": true,
-            "apiVersion": 1,
-            "uri": "https://api.viessmann.com/iot/v1/features/installations/252756/gateways/################/features/gateway.devices",
-            "properties": {
-                "devices": {
-                    "type": "DeviceList",
-                    "value": [
-                        {
-                            "id": "gateway",
-                            "fingerprint": "####",
-                            "modelId": "E3_TCU10_x07",
-                            "modelVersion": "####",
-                            "name": "TCU",
-                            "type": "tcu",
-                            "roles": [
-                                "capability:hems",
-                                "capability:zigbeeCoordinator",
-                                "type:E3",
-                                "type:gateway;TCU300"
-                            ],
-                            "status": "online"
-                        },
-                        {
-                            "id": "HEMS",
-                            "fingerprint": "###",
-                            "modelId": "E3_HEMS",
-                            "modelVersion": "###",
-                            "name": "Home Energy Management System",
-                            "type": "hems",
-                            "roles": [
-                                "type:E3",
-                                "type:virtual;hems"
-                            ],
-                            "status": "online"
-                        },
-                        {
-                            "id": "RoomControl-1",
-                            "fingerprint": "###",
-                            "modelId": "E3_RoomControl_One_525",
-                            "modelVersion": "####",
-                            "name": "E3_RoomControl_One_525",
-                            "type": "roomControl",
-                            "roles": [
-                                "capability:monetization;FTDC",
-                                "capability:monetization;OWD",
-                                "capability:zigbeeCoordinator",
-                                "type:E3",
-                                "type:virtual;smartRoomControl"
-                            ],
-                            "status": "online"
-                        },
-                        {
-                            "id": "EEBUS",
-                            "fingerprint": "#####",
-                            "modelId": "E3_EEBus",
-                            "modelVersion": "#####",
-                            "name": "accessories",
-                            "type": "EEBus",
-                            "roles": [
-                                "type:E3",
-                                "type:accessory;eeBus"
-                            ],
-                            "status": "online"
-                        },
-                        {
-                            "id": "0",
-                            "fingerprint": "ecu;#####",
-                            "modelId": "E3_VitoCharge_03",
-                            "modelVersion": "####",
-                            "name": "E3 device",
-                            "type": "electricityStorage",
-                            "roles": [
-                                "capability:hems",
-                                "type:E3",
-                                "type:ess",
-                                "type:photovoltaic;Internal",
-                                "type:product;Vitocharge"
-                            ],
-                            "status": "online"
-                        },
-                        {
-                            "id": "eebus-1",
-                            "fingerprint": "eebus:wallbox;########",
-                            "modelId": "E3_HEMS_VCS",
-                            "modelVersion": "####",
-                            "name": "Home Energy Management System",
-                            "type": "vehicleChargingStation",
-                            "roles": [
-                                "type:E3",
-                                "type:accessory;vehicleChargingStation"
-                            ],
-                            "status": "online"
-                        }
-                    ]
-                }
+  "data": [
+    {
+      "feature": "gateway.devices",
+      "gatewayId": "################",
+      "timestamp": "2024-03-17T18:55:46.182Z",
+      "isEnabled": true,
+      "isReady": true,
+      "apiVersion": 1,
+      "uri": "https://api.viessmann.com/iot/v1/features/installations/252756/gateways/################/features/gateway.devices",
+      "properties": {
+        "devices": {
+          "type": "DeviceList",
+          "value": [
+            {
+              "id": "gateway",
+              "fingerprint": "####",
+              "modelId": "E3_TCU10_x07",
+              "modelVersion": "####",
+              "name": "TCU",
+              "type": "tcu",
+              "roles": [
+                "capability:hems",
+                "capability:zigbeeCoordinator",
+                "type:E3",
+                "type:gateway;TCU300"
+              ],
+              "status": "online"
             },
-            "commands": {}
+            {
+              "id": "HEMS",
+              "fingerprint": "###",
+              "modelId": "E3_HEMS",
+              "modelVersion": "###",
+              "name": "Home Energy Management System",
+              "type": "hems",
+              "roles": [
+                "type:E3",
+                "type:virtual;hems"
+              ],
+              "status": "online"
+            },
+            {
+              "id": "RoomControl-1",
+              "fingerprint": "###",
+              "modelId": "E3_RoomControl_One_525",
+              "modelVersion": "####",
+              "name": "E3_RoomControl_One_525",
+              "type": "roomControl",
+              "roles": [
+                "capability:monetization;FTDC",
+                "capability:monetization;OWD",
+                "capability:zigbeeCoordinator",
+                "type:E3",
+                "type:virtual;smartRoomControl"
+              ],
+              "status": "online"
+            },
+            {
+              "id": "EEBUS",
+              "fingerprint": "#####",
+              "modelId": "E3_EEBus",
+              "modelVersion": "#####",
+              "name": "accessories",
+              "type": "EEBus",
+              "roles": [
+                "type:E3",
+                "type:accessory;eeBus"
+              ],
+              "status": "online"
+            },
+            {
+              "id": "0",
+              "fingerprint": "ecu;#####",
+              "modelId": "E3_VitoCharge_03",
+              "modelVersion": "####",
+              "name": "E3 device",
+              "type": "electricityStorage",
+              "roles": [
+                "capability:hems",
+                "type:E3",
+                "type:ess",
+                "type:photovoltaic;Internal",
+                "type:product;Vitocharge"
+              ],
+              "status": "online"
+            },
+            {
+              "id": "eebus-1",
+              "fingerprint": "eebus:wallbox;########",
+              "modelId": "E3_HEMS_VCS",
+              "modelVersion": "####",
+              "name": "Home Energy Management System",
+              "type": "vehicleChargingStation",
+              "roles": [
+                "type:E3",
+                "type:accessory;vehicleChargingStation"
+              ],
+              "status": "online"
+            }
+          ]
         }
-    ]
+      },
+      "commands": {}
+    }
+  ]
 }
