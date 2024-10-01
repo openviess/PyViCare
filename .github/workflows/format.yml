@@ -1,0 +1,30 @@
+name: Format
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+env:
+  DEFAULT_PYTHON: "3.11"
+
+jobs:
+  sort:
+    name: sort testdata
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v4.2.0
+      - name: 🚀 Sort test response data
+        run: |
+          find './tests/response' \
+            -maxdepth '1' \
+            -type 'f' \
+            -name '*.json' \
+            -exec sh -c 'mv $1 $1.tmp; jq ".data|=sort_by(.feature)" --sort-keys $1.tmp > $1; rm $1.tmp' shell {} ";"
+      - name: 🔍 Verify
+        run: git diff --name-only --exit-code
