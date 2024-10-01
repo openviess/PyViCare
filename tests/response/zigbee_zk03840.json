@@ -2,6 +2,23 @@
   "data": [
     {
       "apiVersion": 1,
+      "commands": {},
+      "deviceId": "zigbee-048727fffe196e03",
+      "feature": "device.messages.errors.raw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "entries": {
+          "type": "array",
+          "value": []
+        }
+      },
+      "timestamp": "2024-10-01T00:31:25.906Z",
+      "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-048727fffe196e03/features/device.messages.errors.raw"
+    },
+    {
+      "apiVersion": 1,
       "commands": {
         "setName": {
           "isExecutable": true,
@@ -33,23 +50,6 @@
       },
       "timestamp": "2024-10-01T00:31:25.906Z",
       "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-048727fffe196e03/features/device.name"
-    },
-    {
-      "apiVersion": 1,
-      "commands": {},
-      "deviceId": "zigbee-048727fffe196e03",
-      "feature": "device.messages.errors.raw",
-      "gatewayId": "################",
-      "isEnabled": true,
-      "isReady": true,
-      "properties": {
-        "entries": {
-          "type": "array",
-          "value": []
-        }
-      },
-      "timestamp": "2024-10-01T00:31:25.906Z",
-      "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-048727fffe196e03/features/device.messages.errors.raw"
     },
     {
       "apiVersion": 1,
