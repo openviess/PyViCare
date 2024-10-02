@@ -6,7 +6,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class ZK03840(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/zigbee_zk03840.json')
+        self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
 
     def test_getTemperature(self):
