@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "zigbee-142d41fffe8797bd",
+      "feature": "device.messages.errors.raw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "entries": {
+          "type": "array",
+          "value": []
+        }
+      },
+      "timestamp": "2024-10-01T00:31:25.951Z",
+      "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-142d41fffe8797bd/features/device.messages.errors.raw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setName": {
+          "isExecutable": true,
+          "name": "setName",
+          "params": {
+            "name": {
+              "constraints": {
+                "maxLength": 40,
+                "minLength": 1,
+                "regEx": "^[\\p{L}0-9]+( [\\p{L}0-9]+)*$"
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-142d41fffe8797bd/features/device.name/commands/setName"
+        }
+      },
+      "deviceId": "zigbee-142d41fffe8797bd",
+      "feature": "device.name",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "value": "Erdgeschoss"
+        }
+      },
+      "timestamp": "2024-10-01T00:31:25.951Z",
+      "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-142d41fffe8797bd/features/device.name"
+    }
+  ]
+}
