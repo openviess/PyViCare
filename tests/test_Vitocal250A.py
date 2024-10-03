@@ -10,37 +10,37 @@ class Vitocal250A(unittest.TestCase):
         self.device = HeatPump(self.service)
 
     def test_getCompressorActive(self):
-        self.assertEqual(self.device.compressors[0].getActive(), False)
+        self.assertEqual(self.device.compressors[0].getActive(), True)
 
     def test_getCompressorHours(self):
         self.assertEqual(
-            self.device.compressors[0].getHours(), 1090)
+            self.device.compressors[0].getHours(), 71)
 
     def test_getCompressorStarts(self):
         self.assertEqual(
-            self.device.compressors[0].getStarts(), 486)
+            self.device.compressors[0].getStarts(), 121)
 
     def test_getHeatingCurveSlope(self):
         self.assertEqual(
-            self.device.circuits[0].getHeatingCurveSlope(), 0.6)
+            self.device.circuits[0].getHeatingCurveSlope(), 1.1)
 
     def test_getHeatingCurveShift(self):
         self.assertEqual(
             self.device.circuits[0].getHeatingCurveShift(), 0)
 
     def test_getReturnTemperature(self):
-        self.assertEqual(self.device.getReturnTemperature(), 31.6)
+        self.assertEqual(self.device.getReturnTemperature(), 35.3)
 
     def test_getSupplyTemperaturePrimaryCircuit(self):
         self.assertEqual(
-            self.device.getSupplyTemperaturePrimaryCircuit(), 16.9)
+            self.device.getSupplyTemperaturePrimaryCircuit(), 12.8)
 
     def test_getPrograms(self):
         expected_programs = ['comfortCooling', 'comfortCoolingEnergySaving', 'comfortEnergySaving', 'comfortHeating', 'eco', 'fixed', 'forcedLastFromSchedule', 'frostprotection', 'normalCooling', 'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reducedCooling', 'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']
         self.assertListEqual(expected_programs, self.device.circuits[0].getPrograms())
 
     def test_getModes(self):
-        expected_modes = ['cooling', 'heating', 'heatingCooling', 'standby']
+        expected_modes = ['heating', 'standby']
         self.assertListEqual(expected_modes, self.device.circuits[0].getModes())
 
     def test_getPowerConsumptionUnit(self):
@@ -49,31 +49,31 @@ class Vitocal250A(unittest.TestCase):
 
     def test_getPowerConsumptionToday(self):
         self.assertEqual(
-            self.device.getPowerConsumptionToday(), 1.3)
+            self.device.getPowerConsumptionToday(), 24)
 
     def test_getPowerConsumptionDomesticHotWaterToday(self):
         self.assertEqual(
-            self.device.getPowerConsumptionDomesticHotWaterToday(), 1.3)
+            self.device.getPowerConsumptionDomesticHotWaterToday(), 7.6)
 
     def test_getPowerSummaryConsumptionHeatingCurrentDay(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionHeatingCurrentDay(), 0)
+            self.device.getPowerSummaryConsumptionHeatingCurrentDay(), 16.4)
 
     def test_getPowerSummaryConsumptionHeatingCurrentMonth(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionHeatingCurrentMonth(), 0)
+            self.device.getPowerSummaryConsumptionHeatingCurrentMonth(), 16.4)
 
     def test_getPowerSummaryConsumptionHeatingCurrentYear(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionHeatingCurrentYear(), 529.4)
+            self.device.getPowerSummaryConsumptionHeatingCurrentYear(), 55.2)
 
     def test_getPowerSummaryConsumptionHeatingLastMonth(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionHeatingLastMonth(), 0)
+            self.device.getPowerSummaryConsumptionHeatingLastMonth(), 36.7)
 
     def test_getPowerSummaryConsumptionHeatingLastSevenDays(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionHeatingLastSevenDays(), 0)
+            self.device.getPowerSummaryConsumptionHeatingLastSevenDays(), 47.6)
 
     def test_getPowerSummaryConsumptionHeatingLastYear(self):
         self.assertEqual(
@@ -90,7 +90,7 @@ class Vitocal250A(unittest.TestCase):
 
     def test_getOutsideTemperature(self):
         self.assertEqual(
-            self.device.getOutsideTemperature(), 16.8)
+            self.device.getOutsideTemperature(), 14.3)
 
     def test_getFrostProtectionActive(self):
         self.assertEqual(
@@ -102,23 +102,23 @@ class Vitocal250A(unittest.TestCase):
 
     def test_getPowerSummaryConsumptionDomesticHotWaterCurrentDay(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentDay(), 1.3)
+            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentDay(), 7.6)
 
     def test_getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(), 12.8)
+            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentMonth(), 7.6)
 
     def test_getPowerSummaryConsumptionDomesticHotWaterCurrentYear(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentYear(), 475)
+            self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentYear(), 143)
 
     def test_getPowerSummaryConsumptionDomesticHotWaterLastMonth(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionDomesticHotWaterLastMonth(), 44.7)
+            self.device.getPowerSummaryConsumptionDomesticHotWaterLastMonth(), 93.9)
 
     def test_getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(self):
         self.assertEqual(
-            self.device.getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(), 9.1)
+            self.device.getPowerSummaryConsumptionDomesticHotWaterLastSevenDays(), 28.3)
 
     def test_getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         self.assertEqual(
