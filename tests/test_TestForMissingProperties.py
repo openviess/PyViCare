@@ -57,6 +57,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
+            'heating.dhw.sensors.temperature.dhwCylinder',
 
             # Ignored for now as both are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
