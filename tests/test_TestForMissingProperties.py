@@ -55,6 +55,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
+            'heating.dhw.sensors.temperature.dhwCylinder',
 
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
 
