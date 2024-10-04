@@ -1,7 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
