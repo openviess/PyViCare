@@ -88,6 +88,7 @@ class PyViCareDeviceConfig:
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asGateway, r"E3_TCU19_x05", ["type:gateway;TCU200"]),
             (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
+            (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
             (self.asGateway, r"Heatbox1", ["type:gateway;VitoconnectOpto1"]),
             (self.asGateway, r"Heatbox2", ["type:gateway;VitoconnectOpto2/OT2"])
         ]
