@@ -192,4 +192,4 @@ class Vitocal250A(unittest.TestCase):
 
     def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(
-            self.device.getDomesticHotWaterStorageTemperature(), 50.4)
+            self.device.getDomesticHotWaterStorageTemperature(), 58.8)
