@@ -78,12 +78,12 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_TCU100_asGateway(self):
-        c = PyViCareDeviceConfig(self.service, "0", "TCU41_x04", "Online")
+        c = PyViCareDeviceConfig(self.service, "0", "E3_TCU41_x04", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_TCU200_asGateway(self):
-        c = PyViCareDeviceConfig(self.service, "0", "TCU19_x05", "Online")
+        c = PyViCareDeviceConfig(self.service, "0", "E3_TCU19_x05", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
