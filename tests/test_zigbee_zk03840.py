@@ -6,7 +6,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class ZK03840(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/zigbee_zk03840.json')
+        self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
 
     def test_isHeatingDevice(self):
@@ -23,11 +23,11 @@ class ZK03840(unittest.TestCase):
 
     def test_getTemperature(self):
         self.assertEqual(
-            self.device.getTemperature(), 18.5)
+            self.device.getTemperature(), 18.4)
 
     def test_getTargetTemperature(self):
         self.assertEqual(
-            self.device.getTargetTemperature(), 18)
+            self.device.getTargetTemperature(), 8)
 
     def test_setTargetTemperature(self):
         self.device.setTargetTemperature(22)

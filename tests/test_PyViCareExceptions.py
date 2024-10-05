@@ -8,7 +8,7 @@ from tests.helper import readJson
 class TestPyViCareRateLimitError(unittest.TestCase):
 
     def test_createFromResponse(self):
-        mockResponse = readJson('response/rate_limit.json')
+        mockResponse = readJson('response/errors/rate_limit.json')
 
         error = PyViCareRateLimitError(mockResponse)
 
@@ -21,7 +21,7 @@ class TestPyViCareRateLimitError(unittest.TestCase):
 class TestPyViCareCommandError(unittest.TestCase):
 
     def test_createFromResponse(self):
-        mockResponse = readJson('response/error_502.json')
+        mockResponse = readJson('response/errors/error_502.json')
 
         error = PyViCareCommandError(mockResponse)
 
