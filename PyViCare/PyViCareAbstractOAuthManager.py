@@ -1,5 +1,5 @@
 import logging
-from abc import abstractclassmethod
+from abc import abstractmethod
 from typing import Any
 
 from authlib.integrations.base_client import TokenExpiredError, InvalidTokenError
@@ -27,7 +27,8 @@ class AbstractViCareOAuthManager:
     def replace_session(self, new_session: OAuth2Session) -> None:
         self.__oauth = new_session
 
-    @abstractclassmethod
+    @classmethod
+    @abstractmethod
     def renewToken(self) -> None:
         return
 

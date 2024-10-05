@@ -1,0 +1,2965 @@
+{
+  "data": [
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "device.serial",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "################"
+        }
+      },
+      "timestamp": "2023-01-13T03:39:47.222Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/device.serial"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.boiler.sensors.temperature.commonSupply",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 39.8
+        }
+      },
+      "timestamp": "2023-01-13T17:36:50.651Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.boiler.sensors.temperature.commonSupply"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.boiler.serial",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "################"
+        }
+      },
+      "timestamp": "2023-01-13T03:40:06.136Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.boiler.serial"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.boiler.temperature",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20
+        }
+      },
+      "timestamp": "2023-01-13T03:39:47.549Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.boiler.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.buffer.sensors.temperature.main",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:47.586Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.buffer.sensors.temperature.main"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.burners",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "enabled": {
+          "type": "array",
+          "value": [
+            "0"
+          ]
+        }
+      },
+      "timestamp": "2023-01-13T03:39:47.916Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.burners"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.burners.0",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "timestamp": "2023-01-13T17:14:21.463Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.burners.0"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.burners.0.modulation",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 41.1
+        }
+      },
+      "timestamp": "2023-01-13T17:36:43.906Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.burners.0.modulation"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.burners.0.statistics",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "hours": {
+          "type": "number",
+          "unit": "hour",
+          "value": 4149
+        },
+        "starts": {
+          "type": "number",
+          "unit": "",
+          "value": 19520
+        }
+      },
+      "timestamp": "2023-01-13T17:32:12.050Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.burners.0.statistics"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "enabled": {
+          "type": "array",
+          "value": [
+            "0"
+          ]
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setName": {
+          "isExecutable": true,
+          "name": "setName",
+          "params": {
+            "name": {
+              "constraints": {
+                "maxLength": 20,
+                "minLength": 1
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0/commands/setName"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        },
+        "name": {
+          "type": "string",
+          "value": "Haus"
+        },
+        "type": {
+          "type": "string",
+          "value": "heatingCircuit"
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.circulation.pump",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "on"
+        }
+      },
+      "timestamp": "2023-01-13T14:01:53.329Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.circulation.pump"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.frostprotection",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "off"
+        }
+      },
+      "timestamp": "2023-01-13T03:39:51.658Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.frostprotection"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setCurve": {
+          "isExecutable": true,
+          "name": "setCurve",
+          "params": {
+            "shift": {
+              "constraints": {
+                "max": 40,
+                "min": -13,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            },
+            "slope": {
+              "constraints": {
+                "max": 3.5,
+                "min": 0.2,
+                "stepping": 0.1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.heating.curve/commands/setCurve"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.heating.curve",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "shift": {
+          "type": "number",
+          "unit": "",
+          "value": 10
+        },
+        "slope": {
+          "type": "number",
+          "unit": "",
+          "value": 0.2
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.heating.curve"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setSchedule": {
+          "isExecutable": true,
+          "name": "setSchedule",
+          "params": {
+            "newSchedule": {
+              "constraints": {
+                "defaultMode": "reduced",
+                "maxEntries": 4,
+                "modes": [
+                  "normal",
+                  "comfort"
+                ],
+                "overlapAllowed": false,
+                "resolution": 10
+              },
+              "required": true,
+              "type": "Schedule"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.heating.schedule/commands/setSchedule"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.heating.schedule",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        },
+        "entries": {
+          "type": "Schedule",
+          "value": {
+            "fri": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ],
+            "mon": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ],
+            "sat": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ],
+            "sun": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ],
+            "thu": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ],
+            "tue": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ],
+            "wed": [
+              {
+                "end": "10:30",
+                "mode": "comfort",
+                "position": 0,
+                "start": "05:30"
+              },
+              {
+                "end": "19:30",
+                "mode": "comfort",
+                "position": 1,
+                "start": "15:00"
+              }
+            ]
+          }
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.heating.schedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setName": {
+          "isExecutable": true,
+          "name": "setName",
+          "params": {
+            "name": {
+              "constraints": {
+                "maxLength": 20,
+                "minLength": 1
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.name/commands/setName"
+        }
+      },
+      "components": [],
+      "deviceId": "0",
+      "feature": "heating.circuits.0.name",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "value": "Haus"
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.name"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setMode": {
+          "isExecutable": true,
+          "name": "setMode",
+          "params": {
+            "mode": {
+              "constraints": {
+                "enum": [
+                  "standby",
+                  "heating"
+                ]
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.active/commands/setMode"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.modes.active",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "heating"
+        }
+      },
+      "timestamp": "2023-01-13T03:39:58.071Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.modes.heating",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "timestamp": "2023-01-12T22:58:15.138Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.modes.standby",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.programs.active",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "comfort"
+        }
+      },
+      "timestamp": "2023-01-13T14:01:53.414Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "activate": {
+          "isExecutable": false,
+          "name": "activate",
+          "params": {
+            "temperature": {
+              "constraints": {
+                "max": 37,
+                "min": 3,
+                "stepping": 1
+              },
+              "required": false,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfort/commands/activate"
+        },
+        "deactivate": {
+          "isExecutable": false,
+          "name": "deactivate",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfort/commands/deactivate"
+        },
+        "setTemperature": {
+          "isExecutable": true,
+          "name": "setTemperature",
+          "params": {
+            "targetTemperature": {
+              "constraints": {
+                "max": 37,
+                "min": 3,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfort/commands/setTemperature"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.programs.comfort",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        },
+        "demand": {
+          "type": "string",
+          "value": "unknown"
+        },
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 21
+        }
+      },
+      "timestamp": "2023-01-13T14:01:53.399Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfort"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "activate": {
+          "isExecutable": true,
+          "name": "activate",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.forcedLastFromSchedule/commands/activate"
+        },
+        "deactivate": {
+          "isExecutable": false,
+          "name": "deactivate",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.forcedLastFromSchedule/commands/deactivate"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.programs.forcedLastFromSchedule",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.forcedLastFromSchedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setTemperature": {
+          "isExecutable": true,
+          "name": "setTemperature",
+          "params": {
+            "targetTemperature": {
+              "constraints": {
+                "max": 37,
+                "min": 3,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.normal/commands/setTemperature"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.programs.normal",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "demand": {
+          "type": "string",
+          "value": "unknown"
+        },
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 19
+        }
+      },
+      "timestamp": "2023-01-13T03:40:07.401Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.normal"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setTemperature": {
+          "isExecutable": true,
+          "name": "setTemperature",
+          "params": {
+            "targetTemperature": {
+              "constraints": {
+                "max": 37,
+                "min": 3,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.reduced/commands/setTemperature"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.programs.reduced",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "demand": {
+          "type": "string",
+          "value": "unknown"
+        },
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 3
+        }
+      },
+      "timestamp": "2023-01-13T03:40:07.998Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.reduced"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.operating.programs.standby",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "timestamp": "2023-01-13T14:01:53.411Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.sensors.temperature.room",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.495Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.sensors.temperature.room"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.sensors.temperature.supply",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 39.8
+        }
+      },
+      "timestamp": "2023-01-13T17:36:50.703Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.sensors.temperature.supply"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.0.temperature",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T15:13:10.022Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.0.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.circulation.pump",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T14:01:53.355Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.circulation.pump"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.frostprotection",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:51.689Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.frostprotection"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setCurve": {
+          "isExecutable": true,
+          "name": "setCurve",
+          "params": {
+            "shift": {
+              "constraints": {
+                "max": 40,
+                "min": -13,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            },
+            "slope": {
+              "constraints": {
+                "max": 3.5,
+                "min": 0.2,
+                "stepping": 0.1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.heating.curve/commands/setCurve"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.1.heating.curve",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "shift": {
+          "type": "number",
+          "unit": "",
+          "value": 0
+        },
+        "slope": {
+          "type": "number",
+          "unit": "",
+          "value": 1.4
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.heating.curve"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.heating.schedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.heating.schedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "components": [],
+      "deviceId": "0",
+      "feature": "heating.circuits.1.name",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2021-11-30T14:09:59.965Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.name"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.modes.active",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:58.961Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.modes.heating",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.modes.standby",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.programs.active",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:10.950Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.programs.comfort",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:06.830Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.comfort"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.programs.forcedLastFromSchedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.forcedLastFromSchedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.programs.normal",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:07.404Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.normal"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.programs.reduced",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:07.998Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.reduced"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.operating.programs.standby",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.sensors.temperature.room",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.500Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.sensors.temperature.room"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.sensors.temperature.supply",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.529Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.sensors.temperature.supply"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.1.temperature",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.590Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.1.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.circulation.pump",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T14:01:53.378Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.circulation.pump"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.frostprotection",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:51.706Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.frostprotection"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setCurve": {
+          "isExecutable": true,
+          "name": "setCurve",
+          "params": {
+            "shift": {
+              "constraints": {
+                "max": 40,
+                "min": -13,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            },
+            "slope": {
+              "constraints": {
+                "max": 3.5,
+                "min": 0.2,
+                "stepping": 0.1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.heating.curve/commands/setCurve"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.2.heating.curve",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "shift": {
+          "type": "number",
+          "unit": "",
+          "value": 0
+        },
+        "slope": {
+          "type": "number",
+          "unit": "",
+          "value": 1.4
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.heating.curve"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.heating.schedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.heating.schedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "components": [],
+      "deviceId": "0",
+      "feature": "heating.circuits.2.name",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2021-11-30T14:10:00.065Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.name"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.modes.active",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:59.102Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.modes.heating",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.797Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.modes.standby",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.programs.active",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:11.148Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.programs.comfort",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:06.833Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.comfort"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.programs.forcedLastFromSchedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.forcedLastFromSchedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.programs.normal",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:07.407Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.normal"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.programs.reduced",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:07.998Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.reduced"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.operating.programs.standby",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.sensors.temperature.room",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.508Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.sensors.temperature.room"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.sensors.temperature.supply",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.532Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.sensors.temperature.supply"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.2.temperature",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.612Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.2.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.circulation.pump",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T14:01:53.384Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.circulation.pump"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.frostprotection",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:51.720Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.frostprotection"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setCurve": {
+          "isExecutable": true,
+          "name": "setCurve",
+          "params": {
+            "shift": {
+              "constraints": {
+                "max": 40,
+                "min": -13,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            },
+            "slope": {
+              "constraints": {
+                "max": 3.5,
+                "min": 0.2,
+                "stepping": 0.1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.heating.curve/commands/setCurve"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.circuits.3.heating.curve",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "shift": {
+          "type": "number",
+          "unit": "",
+          "value": 0
+        },
+        "slope": {
+          "type": "number",
+          "unit": "",
+          "value": 1.4
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.heating.curve"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.heating.schedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.heating.schedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "components": [],
+      "deviceId": "0",
+      "feature": "heating.circuits.3.name",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2021-11-30T14:10:00.360Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.name"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.modes.active",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:59.623Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.modes.heating",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.modes.standby",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.programs.active",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:11.326Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.active"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.programs.comfort",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:06.833Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.comfort"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.programs.forcedLastFromSchedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.forcedLastFromSchedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.programs.normal",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:07.407Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.normal"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.programs.reduced",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:40:07.998Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.reduced"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.operating.programs.standby",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.standby"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.sensors.temperature.room",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.520Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.sensors.temperature.room"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.sensors.temperature.supply",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.538Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.sensors.temperature.supply"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.circuits.3.temperature",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:56.649Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.circuits.3.temperature"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        },
+        "status": {
+          "type": "string",
+          "value": "on"
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "activate": {
+          "isExecutable": false,
+          "name": "activate",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.hygiene/commands/activate"
+        },
+        "disable": {
+          "isExecutable": false,
+          "name": "disable",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.hygiene/commands/disable"
+        },
+        "enable": {
+          "isExecutable": true,
+          "name": "enable",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.hygiene/commands/enable"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.dhw.hygiene",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.hygiene"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.hygiene.trigger",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.hygiene.trigger"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "activate": {
+          "isExecutable": true,
+          "name": "activate",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.oneTimeCharge/commands/activate"
+        },
+        "deactivate": {
+          "isExecutable": false,
+          "name": "deactivate",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.oneTimeCharge/commands/deactivate"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.dhw.oneTimeCharge",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.oneTimeCharge"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.pumps.circulation",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:59.958Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.pumps.circulation"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.pumps.circulation.schedule",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.pumps.circulation.schedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.pumps.primary",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T03:39:59.977Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.pumps.primary"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.pumps.secondary",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-13T14:47:37.922Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.pumps.secondary"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setSchedule": {
+          "isExecutable": true,
+          "name": "setSchedule",
+          "params": {
+            "newSchedule": {
+              "constraints": {
+                "defaultMode": "off",
+                "maxEntries": 4,
+                "modes": [
+                  "on"
+                ],
+                "overlapAllowed": false,
+                "resolution": 10
+              },
+              "required": true,
+              "type": "Schedule"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.schedule/commands/setSchedule"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.dhw.schedule",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        },
+        "entries": {
+          "type": "Schedule",
+          "value": {
+            "fri": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ],
+            "mon": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ],
+            "sat": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ],
+            "sun": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ],
+            "thu": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ],
+            "tue": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ],
+            "wed": [
+              {
+                "end": "16:00",
+                "mode": "on",
+                "position": 0,
+                "start": "15:30"
+              },
+              {
+                "end": "06:00",
+                "mode": "on",
+                "position": 1,
+                "start": "05:30"
+              }
+            ]
+          }
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.schedule"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.sensors.temperature.hotWaterStorage",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 48.9
+        }
+      },
+      "timestamp": "2023-01-13T17:36:42.722Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.sensors.temperature.outlet",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 37.3
+        }
+      },
+      "timestamp": "2023-01-13T17:36:50.754Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.outlet"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.dhw.temperature.hygiene",
+      "gatewayId": "################",
+      "isEnabled": false,
+      "isReady": true,
+      "properties": {},
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.temperature.hygiene"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "setTargetTemperature": {
+          "isExecutable": true,
+          "name": "setTargetTemperature",
+          "params": {
+            "temperature": {
+              "constraints": {
+                "efficientLowerBorder": 10,
+                "efficientUpperBorder": 60,
+                "max": 60,
+                "min": 10,
+                "stepping": 1
+              },
+              "required": true,
+              "type": "number"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.temperature.main/commands/setTargetTemperature"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.dhw.temperature.main",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 50
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.dhw.temperature.main"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.gas.consumption.dhw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            0.3,
+            0.4,
+            0.4,
+            1.3,
+            0.3,
+            0.4,
+            0.4,
+            0.6
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:39:28.561Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            6.2,
+            16.9,
+            10.8,
+            2.9,
+            2.1,
+            0.2,
+            1.1,
+            1,
+            2.4,
+            8.4,
+            6.1,
+            13.2,
+            20.1
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:39:28.561Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            2.7,
+            2.9,
+            4.5,
+            4.3,
+            2.5,
+            3.9999999999999996
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:39:28.479Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            6.2,
+            85.3
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:39:28.561Z"
+        }
+      },
+      "timestamp": "2023-01-13T14:39:29.961Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.gas.consumption.dhw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.gas.consumption.heating",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            2.1,
+            2.7,
+            2.8,
+            3,
+            3,
+            2.7,
+            2.7,
+            2.8
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.338Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            34.5,
+            112.8,
+            43.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            19.5,
+            25.2,
+            90.8,
+            121
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.338Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            13.600000000000001,
+            18.8,
+            17.5,
+            21.299999999999997,
+            36,
+            29.099999999999998
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.102Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            34.5,
+            413
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.338Z"
+        }
+      },
+      "timestamp": "2023-01-13T16:07:29.336Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.gas.consumption.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.gas.consumption.summary.dhw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 0.3
+        },
+        "currentMonth": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 6.2
+        },
+        "currentYear": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 6.2
+        },
+        "lastMonth": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 16.9
+        },
+        "lastSevenDays": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 3.5
+        },
+        "lastYear": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 85.3
+        }
+      },
+      "timestamp": "2023-01-13T14:39:29.973Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.gas.consumption.summary.dhw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.gas.consumption.summary.heating",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 2.1
+        },
+        "currentMonth": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 34.5
+        },
+        "currentYear": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 34.5
+        },
+        "lastMonth": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 112.8
+        },
+        "lastSevenDays": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 19
+        },
+        "lastYear": {
+          "type": "number",
+          "unit": "cubicMeter",
+          "value": 413
+        }
+      },
+      "timestamp": "2023-01-13T16:07:29.379Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.gas.consumption.summary.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.gas.consumption.total",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            2.4,
+            3.1,
+            3.1999999999999997,
+            4.3,
+            3.3,
+            3.1,
+            3.1,
+            3.4
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.338Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            40.7,
+            129.7,
+            54.3,
+            2.9,
+            2.1,
+            0.2,
+            1.1,
+            1,
+            2.4,
+            27.9,
+            31.299999999999997,
+            104,
+            141.1
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.338Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            16.3,
+            21.7,
+            22,
+            25.6,
+            38.5,
+            33.1
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.102Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "cubicMeter",
+          "value": [
+            40.7,
+            498.3
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:01:31.338Z"
+        }
+      },
+      "timestamp": "2023-01-13T16:07:29.433Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.gas.consumption.total"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "changeEndDate": {
+          "isExecutable": false,
+          "name": "changeEndDate",
+          "params": {
+            "end": {
+              "constraints": {
+                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$",
+                "sameDayAllowed": true
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holiday/commands/changeEndDate"
+        },
+        "schedule": {
+          "isExecutable": true,
+          "name": "schedule",
+          "params": {
+            "end": {
+              "constraints": {
+                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$",
+                "sameDayAllowed": true
+              },
+              "required": true,
+              "type": "string"
+            },
+            "start": {
+              "constraints": {
+                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$"
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holiday/commands/schedule"
+        },
+        "unschedule": {
+          "isExecutable": true,
+          "name": "unschedule",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holiday/commands/unschedule"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.operating.programs.holiday",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "end": {
+          "type": "string",
+          "value": ""
+        },
+        "start": {
+          "type": "string",
+          "value": ""
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holiday"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
+        "changeEndDate": {
+          "isExecutable": false,
+          "name": "changeEndDate",
+          "params": {
+            "end": {
+              "constraints": {
+                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$",
+                "sameDayAllowed": true
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holidayAtHome/commands/changeEndDate"
+        },
+        "schedule": {
+          "isExecutable": true,
+          "name": "schedule",
+          "params": {
+            "end": {
+              "constraints": {
+                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$",
+                "sameDayAllowed": true
+              },
+              "required": true,
+              "type": "string"
+            },
+            "start": {
+              "constraints": {
+                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$"
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holidayAtHome/commands/schedule"
+        },
+        "unschedule": {
+          "isExecutable": true,
+          "name": "unschedule",
+          "params": {},
+          "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holidayAtHome/commands/unschedule"
+        }
+      },
+      "deviceId": "0",
+      "feature": "heating.operating.programs.holidayAtHome",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "end": {
+          "type": "string",
+          "value": ""
+        },
+        "start": {
+          "type": "string",
+          "value": ""
+        }
+      },
+      "timestamp": "2023-01-12T22:58:13.798Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.operating.programs.holidayAtHome"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.power.consumption.dhw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            0,
+            0.1,
+            0.1,
+            0.3,
+            0,
+            0.1,
+            0.1,
+            0.1
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:35:28.193Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            1.6,
+            4.4,
+            2.8,
+            0.7,
+            0.5,
+            0,
+            0.2,
+            0.2,
+            0.6,
+            2.2,
+            1.6,
+            3.5,
+            5.2
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:35:28.193Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            0.5,
+            0.4,
+            0.7999999999999999,
+            0.8,
+            0.2,
+            0.6
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-12T22:58:51.685Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            1.6,
+            22.5
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T14:35:28.193Z"
+        }
+      },
+      "timestamp": "2023-01-13T14:39:40.075Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.power.consumption.dhw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.power.consumption.heating",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            0.7,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:55:32.935Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            10,
+            32.5,
+            14.2,
+            3.6,
+            3.5,
+            3.6,
+            3.6,
+            3.5,
+            3.6,
+            8.8,
+            13.2,
+            30.8,
+            37.9
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:55:32.935Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            3.8999999999999995,
+            4.9,
+            5,
+            5.6,
+            9.9,
+            8.1
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:49:32.604Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            10,
+            159.2
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:55:32.935Z"
+        }
+      },
+      "timestamp": "2023-01-13T17:03:31.035Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.power.consumption.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.power.consumption.summary.dhw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 0
+        },
+        "currentMonth": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 1.6
+        },
+        "currentYear": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 1.6
+        },
+        "lastMonth": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 4.4
+        },
+        "lastSevenDays": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 0.9
+        },
+        "lastYear": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 22.5
+        }
+      },
+      "timestamp": "2023-01-13T14:39:40.104Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.power.consumption.summary.dhw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.power.consumption.summary.heating",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 0.7
+        },
+        "currentMonth": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 10
+        },
+        "currentYear": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 10
+        },
+        "lastMonth": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 32.5
+        },
+        "lastSevenDays": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 5.5
+        },
+        "lastYear": {
+          "type": "number",
+          "unit": "kilowattHour",
+          "value": 159.2
+        }
+      },
+      "timestamp": "2023-01-13T17:04:47.014Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.power.consumption.summary.heating"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.power.consumption.total",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            0.7,
+            0.9,
+            0.9,
+            1.1,
+            0.8,
+            0.7999999999999999,
+            0.7999999999999999,
+            0.7999999999999999
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T17:03:33.528Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            11.6,
+            36.9,
+            17,
+            4.3,
+            4,
+            3.6,
+            3.8000000000000003,
+            3.7,
+            4.2,
+            11,
+            14.799999999999999,
+            34.3,
+            43.1
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T17:03:33.528Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            4.4,
+            5.3,
+            5.8,
+            6.3999999999999995,
+            10.1,
+            8.7
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T16:49:32.604Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            11.6,
+            181.7
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T17:03:33.528Z"
+        }
+      },
+      "timestamp": "2023-01-13T17:04:47.016Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.power.consumption.total"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.sensors.temperature.outside",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 7.3
+        }
+      },
+      "timestamp": "2023-01-13T17:23:31.938Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.sensors.temperature.outside"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.sensors.volumetricFlow.allengra",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "liter",
+          "value": 424
+        }
+      },
+      "timestamp": "2023-01-13T17:36:54.838Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.sensors.volumetricFlow.allengra"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.solar",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "timestamp": "2023-01-13T03:40:02.959Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.solar"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.solar.power.production",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "day": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            0.3,
+            0,
+            1.7,
+            0.7,
+            0.3,
+            5,
+            1.1,
+            3
+          ]
+        },
+        "dayValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T11:43:22.866Z"
+        },
+        "month": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            20.4,
+            73.6,
+            120.8,
+            217.1,
+            232.1,
+            352.4,
+            318.7,
+            273.3,
+            279.3,
+            225.6,
+            218.9,
+            143.6,
+            52.1
+          ]
+        },
+        "monthValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T11:43:22.866Z"
+        },
+        "week": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            3,
+            16.1,
+            8.8,
+            3.3,
+            58.10000000000001,
+            4.699999999999999
+          ]
+        },
+        "weekValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T11:43:22.772Z"
+        },
+        "year": {
+          "type": "array",
+          "unit": "kilowattHour",
+          "value": [
+            20.4,
+            2507.5
+          ]
+        },
+        "yearValueReadAt": {
+          "type": "string",
+          "value": "2023-01-13T11:43:22.866Z"
+        }
+      },
+      "timestamp": "2023-01-13T13:41:25.012Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.solar.power.production"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.solar.pumps.circuit",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "off"
+        }
+      },
+      "timestamp": "2023-01-13T12:12:22.630Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.solar.pumps.circuit"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.solar.sensors.temperature.collector",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 7.3
+        }
+      },
+      "timestamp": "2023-01-13T17:36:26.908Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.solar.sensors.temperature.collector"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.solar.sensors.temperature.dhw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 18.4
+        }
+      },
+      "timestamp": "2023-01-13T17:36:03.408Z",
+      "uri": "https://api.viessmann.com/iot/v1/equipment/installations/######/gateways/################/devices/0/features/heating.solar.sensors.temperature.dhw"
+    }
+  ]
+}
