@@ -9,9 +9,6 @@ class SolarTest(unittest.TestCase):
         self.service = ViCareServiceMock('response/Solar.json')
         self.device = HeatingDevice(self.service)
 
-    def test_isHeatingDevice(self):
-        self.assertTrue(self.device.isHeatingDevice())
-
     def test_isDomesticHotWaterDevice(self):
         self.assertTrue(self.device.isDomesticHotWaterDevice())
 

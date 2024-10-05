@@ -9,9 +9,6 @@ class VitochargeVX3(unittest.TestCase):
         self.service = ViCareServiceMock('response/VitochargeVX3.json')
         self.device = ElectricalEnergySystem(self.service)
 
-    def test_isHeatingDevice(self):
-        self.assertFalse(self.device.isHeatingDevice())
-
     def test_isDomesticHotWaterDevice(self):
         self.assertFalse(self.device.isDomesticHotWaterDevice())
 

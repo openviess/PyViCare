@@ -9,9 +9,6 @@ class VitoairFs300(unittest.TestCase):
         self.service = ViCareServiceMock('response/VitoairFs300E.json')
         self.device = VentilationDevice(self.service)
 
-    def test_isHeatingDevice(self):
-        self.assertFalse(self.device.isHeatingDevice())
-
     def test_isDomesticHotWaterDevice(self):
         self.assertFalse(self.device.isDomesticHotWaterDevice())
 

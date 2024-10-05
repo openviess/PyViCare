@@ -16,12 +16,6 @@ class Device:
     def getSerial(self):
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
-    def isHeatingDevice(self):
-        try:
-            return self.service.getProperty("heating")["isEnabled"]
-        except PyViCareNotSupportedFeatureError:
-            return False
-
     def isDomesticHotWaterDevice(self):
         return self._isTypeDevice("heating.dhw")
 

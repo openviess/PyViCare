@@ -9,9 +9,6 @@ class ZK03840(unittest.TestCase):
         self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
 
-    def test_isHeatingDevice(self):
-        self.assertFalse(self.device.isHeatingDevice())
-
     def test_isDomesticHotWaterDevice(self):
         self.assertFalse(self.device.isDomesticHotWaterDevice())
 

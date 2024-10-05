@@ -19,9 +19,6 @@ class Vitocal222S(unittest.TestCase):
         self.assertEqual(
             self.device.circuits[0].getCurrentDesiredTemperature(), 23)
 
-    def test_isHeatingDevice(self):
-        self.assertTrue(self.device.isHeatingDevice())
-
     def test_isDomesticHotWaterDevice(self):
         self.assertTrue(self.device.isDomesticHotWaterDevice())
 
