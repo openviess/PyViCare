@@ -87,8 +87,7 @@ class HeatingDevice(Device):
         if self.isE3Device():
             return self.service.getProperty("heating.dhw.operating.modes.active")["commands"]["setMode"][
                 "params"]["mode"]["constraints"]["enum"]
-        return []
-
+        raise PyViCareNotSupportedFeatureError("getDomesticHotWaterModes")
 
     def getDomesticHotWaterActiveMode(self):
         if self.isE3Device():
