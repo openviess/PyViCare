@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitodens100W(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitodens100W.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitodens100W.json')
         self.device = GazBoiler(self.service)
 
     def test_getActive(self):

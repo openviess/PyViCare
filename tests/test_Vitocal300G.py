@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitocal300G(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal300G.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitocal300G.json')
         self.device = HeatPump(self.service)
 
     def test_getCompressorActive(self):

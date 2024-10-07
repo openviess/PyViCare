@@ -3,10 +3,18 @@ import unittest
 from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = [
+    "type:E3",
+    "type:cooling;integrated",
+    "type:dhw;integrated",
+    "type:heating;integrated",
+    "type:heatpump",
+    "type:product;Vitocal_151A"
+]
 
 class Vitocal200(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal151A.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitocal151A.json')
         self.device = HeatPump(self.service)
 
     def test_getPowerConsumptionCooling(self):

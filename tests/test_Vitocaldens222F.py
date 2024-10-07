@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareHybrid import Hybrid
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitocaldens222F(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocaldens222F.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitocaldens222F.json')
         self.device = Hybrid(self.service)
 
     def test_getAvailableCircuits(self):
