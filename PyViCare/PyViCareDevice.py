@@ -16,6 +16,12 @@ class Device:
     def getSerial(self):
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
+    def isLegacyDevice(self) -> bool:
+        return self.service.hasRoles(["type:legacy"])
+
+    def isE3Device(self) -> bool:
+        return self.service.hasRoles(["type:E3"])
+
     def isDomesticHotWaterDevice(self):
         return self._isTypeDevice("heating.dhw")
 
