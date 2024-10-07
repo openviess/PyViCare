@@ -10,13 +10,13 @@ class VitoairFs300(unittest.TestCase):
         self.device = VentilationDevice(self.service)
 
     def test_isDomesticHotWaterDevice(self):
-        self.assertFalse(self.device.isDomesticHotWaterDevice())
+        self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
 
     def test_isSolarThermalDevice(self):
-        self.assertFalse(self.device.isSolarThermalDevice())
+        self.assertEqual(self.device.isSolarThermalDevice(), False)
 
     def test_isVentilationDevice(self):
-        self.assertTrue(self.device.isVentilationDevice())
+        self.assertEqual(self.device.isVentilationDevice(), True)
 
     def test_getActiveMode(self):
         self.assertEqual(self.device.getActiveMode(), "permanent")

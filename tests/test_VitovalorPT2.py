@@ -10,13 +10,13 @@ class VitovalorPT2(unittest.TestCase):
         self.device = FuelCell(self.service)
 
     def test_isDomesticHotWaterDevice(self):
-        self.assertTrue(self.device.isDomesticHotWaterDevice())
+        self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
 
     def test_isSolarThermalDevice(self):
-        self.assertFalse(self.device.isSolarThermalDevice())
+        self.assertEqual(self.device.isSolarThermalDevice(), False)
 
     def test_isVentilationDevice(self):
-        self.assertFalse(self.device.isVentilationDevice())
+        self.assertEqual(self.device.isVentilationDevice(), False)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(

@@ -10,13 +10,13 @@ class SolarTest(unittest.TestCase):
         self.device = HeatingDevice(self.service)
 
     def test_isDomesticHotWaterDevice(self):
-        self.assertTrue(self.device.isDomesticHotWaterDevice())
+        self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
 
     def test_isSolarThermalDevice(self):
-        self.assertTrue(self.device.isSolarThermalDevice())
+        self.assertEqual(self.device.isSolarThermalDevice(), True)
 
     def test_isVentilationDevice(self):
-        self.assertFalse(self.device.isVentilationDevice())
+        self.assertEqual(self.device.isVentilationDevice(), False)
 
     def test_getSolarStorageTemperature(self):
         self.assertEqual(self.device.getSolarStorageTemperature(), 41.5)
