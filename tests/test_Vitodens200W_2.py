@@ -4,10 +4,11 @@ from PyViCare.PyViCareGazBoiler import GazBoiler
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitodens200W_2(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitodens200W_2.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitodens200W_2.json')
         self.device = GazBoiler(self.service)
 
     def test_getSerial(self):
