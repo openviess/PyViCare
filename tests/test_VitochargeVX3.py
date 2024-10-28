@@ -3,10 +3,17 @@ import unittest
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = [
+    "capability:hems",
+    "type:E3",
+    "type:ess",
+    "type:photovoltaic;Internal",
+    "type:product;Vitocharge"
+]
 
 class VitochargeVX3(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/VitochargeVX3.json')
+        self.service = ViCareServiceMock(ROLES, 'response/VitochargeVX3.json')
         self.device = ElectricalEnergySystem(self.service)
 
     def test_getSerial(self):
