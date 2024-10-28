@@ -71,6 +71,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.productIdentification',
             'device.productMatrix',
             'heating.device.variant',
+            'device.time.daylightSaving',
 
             # gateway
             'gateway.devices',  # not used
@@ -82,6 +83,7 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.levels.levelFour',
             'ventilation.quickmodes.forcedLevelFour',
             'ventilation.quickmodes.silent',
+            'ventilation.quickmodes.standby',
             'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
             'heating.compressors.0.heat.production.current',
             'heating.compressors.0.power.consumption.current',
