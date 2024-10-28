@@ -84,6 +84,7 @@ class PyViCareDeviceConfig:
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
+            (self.asVentilation, r"E3_VitoPure", ["type:ventilation;purifier"]),
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
