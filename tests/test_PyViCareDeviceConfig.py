@@ -66,6 +66,17 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device_type = c.asAutoDetectDevice()
         self.assertEqual("VentilationDevice", type(device_type).__name__)
 
+    def test_autoDetect_RoleVentilationPurifier_asVentilation(self):
+        self.service.hasRoles = has_roles(["type:ventilation;purifier"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("VentilationDevice", type(device_type).__name__)
+
+    def test_autoDetect_Vitopure_350_asVentilation(self):
+        c = PyViCareDeviceConfig(self.service, "0", "E3_VitoPure", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("VentilationDevice", type(device_type).__name__)
+
     def test_autoDetect_VitoconnectOpto1_asGateway(self):
         c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online")
         device_type = c.asAutoDetectDevice()
