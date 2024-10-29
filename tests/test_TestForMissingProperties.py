@@ -126,10 +126,7 @@ class TestForMissingProperties(unittest.TestCase):
         # properties which are not in any test response data
 
         ignore = [
-            'heating.dhw.sensors.temperature.dhwCylinder.top',  # FIXME: remove once test data is updated
-            'heating.dhw.sensors.temperature.dhwCylinder.bottom',  # FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.main',  # FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.top',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.midBottom',  # FIXME: remove once test data is updated
         ]
 
         all_features = self.read_all_features()
