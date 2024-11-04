@@ -16,6 +16,10 @@ class Device:
     def getSerial(self):
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getDeviceErrors(self) -> list[Any]:
+        return self.service.getProperty("device.messages.errors.raw")["properties"]["entries"]["value"]
+
     def isLegacyDevice(self) -> bool:
         return self.service.hasRoles(["type:legacy"])
 
