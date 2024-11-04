@@ -1,3 +1,5 @@
+from typing import Any
+
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import handleNotSupported
 
