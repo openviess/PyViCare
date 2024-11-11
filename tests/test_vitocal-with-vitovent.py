@@ -4,9 +4,9 @@ from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class Vitovent(unittest.TestCase):
+class Vitocal_with_Vitovent(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitovent.json')
+        self.service = ViCareServiceMock('response/Vitocal-200S-with-Vitovent-300W.json')
         self.device = VentilationDevice(self.service)
 
     def test_isDomesticHotWaterDevice(self):
