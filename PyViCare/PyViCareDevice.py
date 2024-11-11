@@ -1,5 +1,5 @@
 from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 
 class Device:
@@ -21,3 +21,18 @@ class Device:
 
     def isE3Device(self) -> bool:
         return self.service.hasRoles(["type:E3"])
+
+    def isDomesticHotWaterDevice(self):
+        return self._isTypeDevice("heating.dhw")
+
+    def isSolarThermalDevice(self):
+        return self._isTypeDevice("heating.solar")
+
+    def isVentilationDevice(self):
+        return self._isTypeDevice("ventilation")
+
+    def _isTypeDevice(self, deviceType: str):
+        try:
+            return self.service.getProperty(deviceType)["isEnabled"] and self.service.getProperty(deviceType)["properties"]["active"]["value"]
+        except PyViCareNotSupportedFeatureError:
+            return False
