@@ -6,7 +6,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class DeviceErrorTest(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/device_error.json')
+        self.service = ViCareServiceMock('response/deviceerrors/F.1100.json')
         self.device = Device(self.service)
 
     def test_deviceErrors(self):
