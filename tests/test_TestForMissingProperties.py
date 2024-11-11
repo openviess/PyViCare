@@ -72,13 +72,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.device.variant',
             'device.time.daylightSaving',
 
-            # vitovent
-            "heating.bufferCylinder.sensors.temperature.main",
-            "heating.bufferCylinder.sensors.temperature.top",
-            "heating.configuration.dhw.temperature.dhwCylinder.max",
-            "heating.dhw.sensors.temperature.dhwCylinder",
-            "heating.dhw.sensors.temperature.dhwCylinder.bottom",
-            "heating.dhw.sensors.temperature.dhwCylinder.top",
             # gateway
             'gateway.devices',  # not used
 
@@ -90,6 +83,9 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.forcedLevelFour',
             'ventilation.quickmodes.silent',
             'ventilation.quickmodes.standby',
+            'ventilation.quickmodes.comfort',
+            'ventilation.quickmodes.eco',
+            'ventilation.quickmodes.holiday',
             'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
             'heating.compressors.0.heat.production.current',
             'heating.compressors.0.power.consumption.current',
