@@ -33,7 +33,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
-            'heating.solar',
 
             'heating.dhw.hygiene.trigger',
             'heating.dhw.operating.modes.off',
@@ -84,6 +83,9 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.forcedLevelFour',
             'ventilation.quickmodes.silent',
             'ventilation.quickmodes.standby',
+            'ventilation.quickmodes.comfort',
+            'ventilation.quickmodes.eco',
+            'ventilation.quickmodes.holiday',
             'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
             'heating.compressors.0.heat.production.current',
             'heating.compressors.0.power.consumption.current',
