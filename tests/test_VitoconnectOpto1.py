@@ -9,6 +9,15 @@ class VitoconnectOpto1(unittest.TestCase):
         self.service = ViCareServiceMock('response/VitoconnectOpto1.json')
         self.device = Gateway(self.service)
 
+    def test_isDomesticHotWaterDevice(self):
+        self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
+
+    def test_isSolarThermalDevice(self):
+        self.assertEqual(self.device.isSolarThermalDevice(), False)
+
+    def test_isVentilationDevice(self):
+        self.assertEqual(self.device.isVentilationDevice(), False)
+
     def test_getSerial(self):
         self.assertEqual(
             self.device.getSerial(), "################")

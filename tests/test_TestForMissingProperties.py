@@ -33,7 +33,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
-            'heating.solar',
 
             'heating.dhw.hygiene.trigger',
             'heating.dhw.operating.modes.off',
@@ -55,6 +54,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
+            'heating.dhw.sensors.temperature.dhwCylinder',
 
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
 
@@ -66,9 +66,11 @@ class TestForMissingProperties(unittest.TestCase):
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
+            'device.name',
             'device.productIdentification',
             'device.productMatrix',
             'heating.device.variant',
+            'device.time.daylightSaving',
 
             # gateway
             'gateway.devices',  # not used
@@ -80,7 +82,32 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.levels.levelFour',
             'ventilation.quickmodes.forcedLevelFour',
             'ventilation.quickmodes.silent',
+            'ventilation.quickmodes.standby',
+            'ventilation.quickmodes.comfort',
+            'ventilation.quickmodes.eco',
+            'ventilation.quickmodes.holiday',
             'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
+            'heating.compressors.0.heat.production.current',
+            'heating.compressors.0.power.consumption.current',
+            'heating.compressors.0.power.consumption.dhw',
+            'heating.compressors.0.power.consumption.heating',
+            'heating.compressors.0.power.consumption.total',
+            'heating.heatingRod.heat.production.current',
+            'heating.heatingRod.power.consumption.current',
+            'heating.heatingRod.power.consumption.dhw',
+            'heating.heatingRod.power.consumption.heating',
+            'heating.heatingRod.power.consumption.summary.dhw',
+            'heating.heatingRod.power.consumption.summary.heating',
+            'heating.heatingRod.power.consumption.total',
+            'heating.heatingRod.statistics',
+            'heating.heatingRod.status',
+            'heating.power.consumption.current',
+            'heating.scop.dhw', # deprecated
+            'heating.scop.heating', # deprecated
+            'heating.scop.total', # deprecated
+            'heating.spf.dhw',
+            'heating.spf.heating',
+            'heating.spf.total',
         ]
 
         all_features = self.read_all_features()
@@ -101,10 +128,7 @@ class TestForMissingProperties(unittest.TestCase):
         # properties which are not in any test response data
 
         ignore = [
-            'heating.dhw.sensors.temperature.dhwCylinder.top',  # FIXME: remove once test data is updated
-            'heating.dhw.sensors.temperature.dhwCylinder.bottom',  # FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.main',  # FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.top',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.midBottom',  # FIXME: remove once test data is updated
         ]
 
         all_features = self.read_all_features()
