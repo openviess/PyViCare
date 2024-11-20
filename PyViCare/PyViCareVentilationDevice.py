@@ -95,3 +95,15 @@ class VentilationDevice(Device):
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
+
+    @handleNotSupported
+    def getVentilationDemand(self) -> str:
+        return str(self.service.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
+
+    @handleNotSupported
+    def getVentilationLevel(self) -> str:
+        return str(self.service.getProperty("ventilation.operating.state")["properties"]["level"]["value"])
+
+    @handleNotSupported
+    def getVentilationReason(self) -> str:
+        return str(self.service.getProperty("ventilation.operating.state")["properties"]["reason"]["value"])

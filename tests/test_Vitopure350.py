@@ -35,3 +35,8 @@ class Vitopure350(unittest.TestCase):
     def test_getSerial(self):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getSerial()
+
+    def test_ventilationState(self):
+        self.assertEqual(self.device.getVentilationDemand(), "unknown")
+        self.assertEqual(self.device.getVentilationLevel(), "unknown")
+        self.assertEqual(self.device.getVentilationReason(), "sensorDriven")
