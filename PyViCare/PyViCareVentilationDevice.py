@@ -74,6 +74,10 @@ class VentilationDevice(Device):
         """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
+    @handleNotSupported
+    def getPermanentLevels(self) -> list[str]:
+        return list[str](self.service.getProperty("ventilation.operating.modes.permanent")["commands"]["setLevel"]["params"]["level"]["constraints"]["enum"])
+
     @handleAPICommandErrors
     def setPermanentLevel(self, level: str):
         return self.service.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})

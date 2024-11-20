@@ -24,6 +24,10 @@ class Vitopure350(unittest.TestCase):
         expected_programs = ['standby']
         self.assertListEqual(expected_programs, self.device.getAvailablePrograms())
 
+    def test_getPermanentLevels(self):
+        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
+        self.assertListEqual(expected_levels, self.device.getPermanentLevels())
+
     def test_getSchedule(self):
         keys = ['active', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
         self.assertListEqual(keys, list(self.device.getSchedule().keys()))

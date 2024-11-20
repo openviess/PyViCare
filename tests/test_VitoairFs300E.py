@@ -32,6 +32,10 @@ class VitoairFs300(unittest.TestCase):
         expected_programs = ['standby']
         self.assertListEqual(self.device.getAvailablePrograms(), expected_programs)
 
+    def test_getPermanentLevels(self):
+        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
+        self.assertListEqual(expected_levels, self.device.getPermanentLevels())
+
     def test_getSchedule(self):
         keys = ['active', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
         self.assertListEqual(list(self.device.getSchedule().keys()), keys)
