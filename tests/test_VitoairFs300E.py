@@ -38,3 +38,8 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getSerial(self):
         self.assertEqual(self.device.getSerial(), "################")
+
+    def test_ventilationState(self):
+        self.assertEqual(self.device.getVentilationDemand(), "unknown")
+        self.assertEqual(self.device.getVentilationLevel(), "levelFour")
+        self.assertEqual(self.device.getVentilationReason(), "sensorOverride")
