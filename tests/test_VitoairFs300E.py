@@ -40,6 +40,6 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getSerial(), "################")
 
     def test_ventilationState(self):
-        self.assertEqual(self.device.getVentilationDemand(), "ventilation")
+        self.assertEqual(self.device.getVentilationDemand(), "unknown")
         self.assertEqual(self.device.getVentilationLevel(), "unknown")
         self.assertEqual(self.device.getVentilationReason(), "unknown")
