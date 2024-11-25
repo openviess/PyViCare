@@ -111,7 +111,7 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getVentilationQuickmodes(self) -> list[str]:
         available_quickmodes = []
-        for quickmode in ['standby', 'silent', 'forcedLevelFour']:
+        for quickmode in ['comfort', 'eco', 'forcedLevelFour', 'holiday', 'standby', 'silent']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.service.getProperty(f"ventilation.quickmodes.{quickmode}") is not None:
                     available_quickmodes.append(quickmode)
