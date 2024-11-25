@@ -107,7 +107,16 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getVentilationReason(self) -> str:
         return str(self.service.getProperty("ventilation.operating.state")["properties"]["reason"]["value"])
-      
+
+    @handleNotSupported
+    def getVentilationQuickmodes(self) -> list[str]:
+        available_quickmodes = []
+        for quickmode in ['standby', 'silent', 'forcedLevelFour']:
+            with suppress(PyViCareNotSupportedFeatureError):
+                if self.service.getProperty(f"ventilation.quickmodes.{quickmode}") is not None:
+                    available_quickmodes.append(quickmode)
+        return available_quickmodes
+
     @handleNotSupported
     def getVentilationQuickmode(self, quickmode: str) -> bool:
         return bool(self.service.getProperty(f"ventilation.quickmodes.{quickmode}")["properties"]["active"]["value"])
