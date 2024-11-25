@@ -91,3 +91,12 @@ class VentilationDevice(Device):
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
+
+    def getVentilationQuickmode(self, quickmode) -> bool:
+        return bool(self.service.getProperty(f"ventilation.quickmodes.{quickmode}")["properties"]["active"]["value"])
+
+    def activateVentilationQuickmode(self, quickmode) -> None:
+        return self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "activate", {})
+
+    def deactivateVentilationQuickmode(self, quickmode) -> None:
+        return self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
