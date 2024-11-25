@@ -32,9 +32,18 @@ class VitoairFs300(unittest.TestCase):
         expected_programs = ['standby']
         self.assertListEqual(self.device.getAvailablePrograms(), expected_programs)
 
+    def test_getPermanentLevels(self):
+        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
+        self.assertListEqual(expected_levels, self.device.getPermanentLevels())
+
     def test_getSchedule(self):
         keys = ['active', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
         self.assertListEqual(list(self.device.getSchedule().keys()), keys)
 
     def test_getSerial(self):
         self.assertEqual(self.device.getSerial(), "################")
+
+    def test_ventilationState(self):
+        self.assertEqual(self.device.getVentilationDemand(), "unknown")
+        self.assertEqual(self.device.getVentilationLevel(), "levelFour")
+        self.assertEqual(self.device.getVentilationReason(), "sensorOverride")

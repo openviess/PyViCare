@@ -74,6 +74,10 @@ class VentilationDevice(Device):
         """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
+    @handleNotSupported
+    def getPermanentLevels(self) -> list[str]:
+        return list[str](self.service.getProperty("ventilation.operating.modes.permanent")["commands"]["setLevel"]["params"]["level"]["constraints"]["enum"])
+
     @handleAPICommandErrors
     def setPermanentLevel(self, level: str):
         return self.service.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})
@@ -92,11 +96,26 @@ class VentilationDevice(Device):
             "sun": properties["entries"]["value"]["sun"]
         }
 
-    def getVentilationQuickmode(self, quickmode) -> bool:
+    @handleNotSupported
+    def getVentilationDemand(self) -> str:
+        return str(self.service.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
+
+    @handleNotSupported
+    def getVentilationLevel(self) -> str:
+        return str(self.service.getProperty("ventilation.operating.state")["properties"]["level"]["value"])
+
+    @handleNotSupported
+    def getVentilationReason(self) -> str:
+        return str(self.service.getProperty("ventilation.operating.state")["properties"]["reason"]["value"])
+      
+    @handleNotSupported
+    def getVentilationQuickmode(self, quickmode: str) -> bool:
         return bool(self.service.getProperty(f"ventilation.quickmodes.{quickmode}")["properties"]["active"]["value"])
 
-    def activateVentilationQuickmode(self, quickmode) -> None:
-        return self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "activate", {})
+    @handleNotSupported
+    def activateVentilationQuickmode(self, quickmode: str) -> None:
+        self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "activate", {})
 
-    def deactivateVentilationQuickmode(self, quickmode) -> None:
-        return self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
+    @handleNotSupported
+    def deactivateVentilationQuickmode(self, quickmode: str) -> None:
+        self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
