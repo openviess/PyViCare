@@ -1,0 +1,104 @@
+{
+    "data": [
+        {
+            "apiVersion": 1,
+            "commands": {},
+            "deviceId": "zigbee-################-1",
+            "feature": "fht.valve.state",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "closed"
+                }
+            },
+            "timestamp": "2023-09-16T21:03:29.016Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve.state"
+        },
+        {
+            "apiVersion": 1,
+            "commands": {},
+            "deviceId": "zigbee-################-1",
+            "feature": "fht.valve.position",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "unit": "percent",
+                    "value": 0
+                }
+            },
+            "timestamp": "2023-09-16T15:15:36.292Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve.position"
+        },
+        {
+            "apiVersion": 1,
+            "commands": {
+                "setType": {
+                    "isExecutable": true,
+                    "name": "setType",
+                    "params": {
+                        "type": {
+                            "constraints": {
+                                "enum": [
+                                    "normallyClosed",
+                                    "normallyOpened"
+                                ]
+                            },
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve/commands/setType"
+                }
+            },
+            "deviceId": "zigbee-################-1",
+            "feature": "fht.valve",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "value": "normallyClosed"
+                }
+            },
+            "timestamp": "2023-09-16T15:15:35.807Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve"
+        },
+        {
+            "apiVersion": 1,
+            "commands": {
+                "activate": {
+                    "isExecutable": true,
+                    "name": "activate",
+                    "params": {},
+                    "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve.burnInMode/commands/activate"
+                },
+                "deactivate": {
+                    "isExecutable": true,
+                    "name": "deactivate",
+                    "params": {},
+                    "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve.burnInMode/commands/deactivate"
+                }
+            },
+            "deviceId": "zigbee-################-1",
+            "feature": "fht.valve.burnInMode",
+            "gatewayId": "################",
+            "isEnabled": true,
+            "isReady": true,
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "timestamp": "2023-09-16T15:15:35.807Z",
+            "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/zigbee-################-1/features/fht.valve.burnInMode"
+        }
+    ]
+}
