@@ -41,6 +41,9 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(self.device.getVentilationLevel(), "unknown")
         self.assertEqual(self.device.getVentilationReason(), "sensorDriven")
 
+    def test_ventilationQuickmode(self):
+        self.assertEqual(self.device.getVentilationQuickmode("standby"), False)
+
     def test_ventilationQuickmodes(self):
         self.assertEqual(self.device.getVentilationQuickmodes(), [
             "forcedLevelFour",
