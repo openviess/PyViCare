@@ -80,7 +80,7 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.levels.levelTwo',
             'ventilation.levels.levelThree',
             'ventilation.levels.levelFour',
-            'ventilation.quickmodes.forcedLevelFour',
+            'ventilation.quickmodes.forcedLevelFour', # quickmode accessible via getVentilationQuickmode
             'ventilation.quickmodes.silent',
             'ventilation.quickmodes.standby',
             'ventilation.quickmodes.comfort',
@@ -129,6 +129,7 @@ class TestForMissingProperties(unittest.TestCase):
 
         ignore = [
             'heating.dhw.sensors.temperature.dhwCylinder.midBottom',  # FIXME: remove once test data is updated
+            'ventilation.quickmodes',
         ]
 
         all_features = self.read_all_features()
@@ -142,7 +143,7 @@ class TestForMissingProperties(unittest.TestCase):
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
-                feature_name = re.sub(r'\.{(program|active_program)}', '', feature_name)
+                feature_name = re.sub(r'\.{(quickmode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
         self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore))
