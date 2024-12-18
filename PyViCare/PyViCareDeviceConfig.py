@@ -82,7 +82,8 @@ class PyViCareDeviceConfig:
             (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
-            (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]),
+            (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]), # ees, it this a typo?
+            (self.asElectricalEnergySystem, r"E3_VitoCharge_05", ["type:ess"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation;central"]),
             (self.asVentilation, r"E3_VitoPure", ["type:ventilation;purifier"]),
