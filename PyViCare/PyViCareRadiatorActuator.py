@@ -5,6 +5,10 @@ from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 class RadiatorActuator(Device):
 
     @handleNotSupported
+    def getSerial(self):
+        return self.service.getProperty("device.name")["deviceId"]
+
+    @handleNotSupported
     def getTemperature(self):
         return self.service.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
 
