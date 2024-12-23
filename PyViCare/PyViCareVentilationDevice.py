@@ -1,15 +1,12 @@
 
 from contextlib import suppress
 
-from PyViCare.Features.FeatureVentilationModePermanent import FeatureVentilationModePermanent
-from PyViCare.Features.FeatureVentilationModes import FeatureVentilationModes
-from PyViCare.Features.FeatureVentilationQuickmodes import FeatureVentilationQuickmodes
-from PyViCare.Features.FeatureVentilationState import FeatureVentilationState
+from PyViCare.Features.FeatureVentilation import FeatureVentilation
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported)
 
 
-class VentilationDevice(FeatureVentilationModePermanent, FeatureVentilationModes, FeatureVentilationQuickmodes, FeatureVentilationState, Device):
+class VentilationDevice(FeatureVentilation, Device):
     """This is the base class for all ventilation devices.
     This class connects to the Viessmann ViCare API.
     The authentication is done through OAuth2.

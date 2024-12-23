@@ -1,15 +1,12 @@
 from contextlib import suppress
 from typing import Any, List
 
-from PyViCare.Features.FeatureVentilationModePermanent import FeatureVentilationModePermanent
-from PyViCare.Features.FeatureVentilationModes import FeatureVentilationModes
-from PyViCare.Features.FeatureVentilationQuickmodes import FeatureVentilationQuickmodes
-from PyViCare.Features.FeatureVentilationState import FeatureVentilationState
+from PyViCare.Features.FeatureVentilation import FeatureVentilation
 from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
 
 
-class HeatPump(FeatureVentilationModePermanent, FeatureVentilationModes, FeatureVentilationQuickmodes, FeatureVentilationState, HeatingDevice):
+class HeatPump(FeatureVentilation, HeatingDevice):
 
     @property
     def compressors(self) -> List[Any]:
