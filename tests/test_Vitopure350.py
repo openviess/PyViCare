@@ -65,13 +65,13 @@ class Vitopure350(unittest.TestCase):
             "silent",
         ])
 
-    def test_activateComfort(self):
+    def test_activateVentilationQuickmodeStandby(self):
         self.device.activateVentilationQuickmode("standby")
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(self.service.setPropertyData[0]['action'], 'activate')
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'ventilation.quickmodes.standby')
 
-    def test_deactivateComfort(self):
+    def test_deactivateVentilationQuickmodeStandby(self):
         self.device.deactivateVentilationQuickmode("standby")
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(self.service.setPropertyData[0]['action'], 'deactivate')

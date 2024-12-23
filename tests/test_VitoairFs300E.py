@@ -52,6 +52,7 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getVentilationMode(self):
         self.assertEqual(False, self.device.getVentilationMode("filterChange"))
+
     def test_ventilationQuickmode(self):
         self.assertEqual(self.device.getVentilationQuickmode("forcedLevelFour"), False)
         self.assertEqual(self.device.getVentilationQuickmode("silent"), False)
