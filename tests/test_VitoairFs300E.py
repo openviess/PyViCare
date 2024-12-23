@@ -47,3 +47,13 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getVentilationDemand(), "unknown")
         self.assertEqual(self.device.getVentilationLevel(), "levelFour")
         self.assertEqual(self.device.getVentilationReason(), "sensorOverride")
+
+    def test_ventilationQuickmode(self):
+        self.assertEqual(self.device.getVentilationQuickmode("forcedLevelFour"), False)
+        self.assertEqual(self.device.getVentilationQuickmode("silent"), False)
+
+    def test_ventilationQuickmodes(self):
+        self.assertEqual(self.device.getVentilationQuickmodes(), [
+            "forcedLevelFour",
+            "silent",
+        ])

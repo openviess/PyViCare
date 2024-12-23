@@ -17,3 +17,15 @@ class Vitocal_with_Vitovent(unittest.TestCase):
 
     def test_isVentilationDevice(self):
         self.assertEqual(self.device.isVentilationDevice(), True)
+
+    def test_ventilationQuickmode(self):
+        self.assertEqual(self.device.getVentilationQuickmode("comfort"), False)
+        self.assertEqual(self.device.getVentilationQuickmode("eco"), False)
+        self.assertEqual(self.device.getVentilationQuickmode("holiday"), False)
+
+    def test_ventilationQuickmodes(self):
+        self.assertEqual(self.device.getVentilationQuickmodes(), [
+            "comfort",
+            "eco",
+            "holiday",
+        ])
