@@ -1,12 +1,15 @@
 from contextlib import suppress
 from typing import Any, List
 
-from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
-                                            HeatingDeviceWithComponent)
+from PyViCare.Features.FeatureVentilationModePermanent import FeatureVentilationModePermanent
+from PyViCare.Features.FeatureVentilationModes import FeatureVentilationModes
+from PyViCare.Features.FeatureVentilationQuickmodes import FeatureVentilationQuickmodes
+from PyViCare.Features.FeatureVentilationState import FeatureVentilationState
+from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
 
 
-class HeatPump(HeatingDevice):
+class HeatPump(FeatureVentilationModePermanent, FeatureVentilationModes, FeatureVentilationQuickmodes, FeatureVentilationState, HeatingDevice):
 
     @property
     def compressors(self) -> List[Any]:
@@ -118,14 +121,17 @@ class HeatPump(HeatingDevice):
     def getVolumetricFlowReturn(self):
         return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
 
+    #TODO: deprecate, use getVentilationModes
     @handleNotSupported
     def getAvailableVentilationModes(self):
         return self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
 
+    #TODO: deprecate, use getActiveVentilationMode
     @handleNotSupported
     def getActiveVentilationMode(self):
         return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
 
+    #TODO: deprecate, use activateVentilationMode
     def setActiveVentilationMode(self, mode):
         """ Set the active mode
         Parameters

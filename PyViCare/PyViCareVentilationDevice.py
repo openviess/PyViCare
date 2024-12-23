@@ -1,27 +1,32 @@
 
 from contextlib import suppress
 
+from PyViCare.Features.FeatureVentilationModePermanent import FeatureVentilationModePermanent
+from PyViCare.Features.FeatureVentilationModes import FeatureVentilationModes
 from PyViCare.Features.FeatureVentilationQuickmodes import FeatureVentilationQuickmodes
 from PyViCare.Features.FeatureVentilationState import FeatureVentilationState
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported)
 
 
-class VentilationDevice(FeatureVentilationQuickmodes, FeatureVentilationState, Device):
+class VentilationDevice(FeatureVentilationModePermanent, FeatureVentilationModes, FeatureVentilationQuickmodes, FeatureVentilationState, Device):
     """This is the base class for all ventilation devices.
     This class connects to the Viessmann ViCare API.
     The authentication is done through OAuth2.
     Note that currently, a new token is generated for each run.
     """
 
+    #TODO: deprecate, use getVentilationModes
     @handleNotSupported
     def getAvailableModes(self):
         return self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
 
+    #TODO: deprecate, use getActiveVentilationMode
     @handleNotSupported
     def getActiveMode(self):
         return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
 
+    #TODO: deprecate, use activateVentilationMode
     def setActiveMode(self, mode):
         """ Set the active mode
         Parameters
@@ -77,10 +82,12 @@ class VentilationDevice(FeatureVentilationQuickmodes, FeatureVentilationState, D
         """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
+    #TODO: deprecate, use getVentilationModePermanentLevels
     @handleNotSupported
     def getPermanentLevels(self) -> list[str]:
         return list[str](self.service.getProperty("ventilation.operating.modes.permanent")["commands"]["setLevel"]["params"]["level"]["constraints"]["enum"])
 
+    #TODO: deprecate, use setVentilationModePermanentLevel
     @handleAPICommandErrors
     def setPermanentLevel(self, level: str):
         return self.service.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})
