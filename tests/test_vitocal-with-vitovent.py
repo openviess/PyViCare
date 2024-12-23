@@ -1,13 +1,13 @@
 import unittest
 
-from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal_with_Vitovent(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock('response/Vitocal-200S-with-Vitovent-300W.json')
-        self.device = VentilationDevice(self.service)
+        self.device = HeatPump(self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
@@ -17,6 +17,11 @@ class Vitocal_with_Vitovent(unittest.TestCase):
 
     def test_isVentilationDevice(self):
         self.assertEqual(self.device.isVentilationDevice(), True)
+
+    def test_ventilation_state(self):
+        self.assertEqual(self.device.getVentilationDemand(), "ventilation")
+        self.assertEqual(self.device.getVentilationLevel(), "levelTwo")
+        self.assertEqual(self.device.getVentilationReason(), "schedule")
 
     def test_ventilationQuickmode(self):
         self.assertEqual(self.device.getVentilationQuickmode("comfort"), False)
