@@ -2,11 +2,12 @@
 from contextlib import suppress
 
 from PyViCare.Features.FeatureVentilationQuickmodes import FeatureVentilationQuickmodes
+from PyViCare.Features.FeatureVentilationState import FeatureVentilationState
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported)
 
 
-class VentilationDevice(FeatureVentilationQuickmodes, Device):
+class VentilationDevice(FeatureVentilationQuickmodes, FeatureVentilationState, Device):
     """This is the base class for all ventilation devices.
     This class connects to the Viessmann ViCare API.
     The authentication is done through OAuth2.
@@ -97,16 +98,3 @@ class VentilationDevice(FeatureVentilationQuickmodes, Device):
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
-
-    @handleNotSupported
-    def getVentilationDemand(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
-
-    @handleNotSupported
-    def getVentilationLevel(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.state")["properties"]["level"]["value"])
-
-    @handleNotSupported
-    def getVentilationReason(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.state")["properties"]["reason"]["value"])
-
