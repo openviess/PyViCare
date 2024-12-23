@@ -43,11 +43,15 @@ class VitoairFs300(unittest.TestCase):
     def test_getSerial(self):
         self.assertEqual(self.device.getSerial(), "################")
 
-    def test_ventilationState(self):
-        self.assertEqual(self.device.getVentilationDemand(), "unknown")
-        self.assertEqual(self.device.getVentilationLevel(), "levelFour")
-        self.assertEqual(self.device.getVentilationReason(), "sensorOverride")
+    def test_getActiveVentilationMode(self):
+        self.assertEqual("sensorOverride", self.device.getActiveVentilationMode())
 
+    def test_getVentilationModes(self):
+        expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
+        self.assertListEqual(expected_modes, self.device.getVentilationModes())
+
+    def test_getVentilationMode(self):
+        self.assertEqual(False, self.device.getVentilationMode("filterChange"))
     def test_ventilationQuickmode(self):
         self.assertEqual(self.device.getVentilationQuickmode("forcedLevelFour"), False)
         self.assertEqual(self.device.getVentilationQuickmode("silent"), False)
