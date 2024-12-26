@@ -44,7 +44,7 @@ class VentilationDevice(Device):
     @handleNotSupported
     @deprecated(reason="renamed, use getVentilationLevels")
     def getPermanentLevels(self) -> list[str]:
-        return self.getVentilationLevels()
+        return list[str](self.getVentilationLevels())
 
     @handleNotSupported
     def getVentilationLevel(self) -> str:
