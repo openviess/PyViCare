@@ -6,7 +6,7 @@ from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICo
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 
-class HeatPump(VentilationDevice, HeatingDevice):
+class HeatPump(HeatingDevice, VentilationDevice):
 
     @property
     def compressors(self) -> List[Any]:
