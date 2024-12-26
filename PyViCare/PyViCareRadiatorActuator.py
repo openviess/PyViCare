@@ -18,4 +18,4 @@ class RadiatorActuator(Device):
 
     @handleAPICommandErrors
     def setTargetTemperature(self, temperature):
-        return self.service.setProperty("trv.temperature", "setTargetTemperature", {'temperature': int(temperature)})
+        return self.service.setProperty("trv.temperature", "setTargetTemperature", {'temperature': float(temperature)})
