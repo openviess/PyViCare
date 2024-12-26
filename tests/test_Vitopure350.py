@@ -46,9 +46,9 @@ class Vitopure350(unittest.TestCase):
     def test_getVentilationMode(self):
         self.assertEqual(False, self.device.getVentilationMode("filterChange"))
 
-    def test_getVentilationModePermanentLevel(self):
+    def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
-        self.assertListEqual(expected_levels, self.device.getVentilationModePermanentLevels())
+        self.assertListEqual(expected_levels, self.device.getVentilationLevels())
 
     def test_ventilationState(self):
         self.assertEqual(self.device.getVentilationDemand(), "unknown")
