@@ -36,6 +36,20 @@ class Vitopure350(unittest.TestCase):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getSerial()
 
+    def test_getActiveVentilationMode(self):
+        self.assertEqual("sensorDriven", self.device.getActiveVentilationMode())
+
+    def test_getVentilationModes(self):
+        expected_modes = ['permanent', 'ventilation', 'sensorDriven']
+        self.assertListEqual(expected_modes, self.device.getVentilationModes())
+
+    def test_getVentilationMode(self):
+        self.assertEqual(False, self.device.getVentilationMode("filterChange"))
+
+    def test_getVentilationLevels(self):
+        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
+        self.assertListEqual(expected_levels, self.device.getVentilationLevels())
+
     def test_ventilationState(self):
         self.assertEqual(self.device.getVentilationDemand(), "unknown")
         self.assertEqual(self.device.getVentilationLevel(), "unknown")
@@ -51,13 +65,13 @@ class Vitopure350(unittest.TestCase):
             "silent",
         ])
 
-    def test_activateComfort(self):
+    def test_activateVentilationQuickmodeStandby(self):
         self.device.activateVentilationQuickmode("standby")
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(self.service.setPropertyData[0]['action'], 'activate')
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'ventilation.quickmodes.standby')
 
-    def test_deactivateComfort(self):
+    def test_deactivateVentilationQuickmodeStandby(self):
         self.device.deactivateVentilationQuickmode("standby")
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(self.service.setPropertyData[0]['action'], 'deactivate')
