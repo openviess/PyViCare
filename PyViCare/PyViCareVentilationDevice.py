@@ -25,7 +25,7 @@ class VentilationDevice(Device):
         return list[str](self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"])
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getVentilationModes")
+    @deprecated(reason="renamed, use getVentilationModes", version="2.40.0")
     def getAvailableModes(self):
         return self.getVentilationModes()
 
@@ -42,7 +42,7 @@ class VentilationDevice(Device):
         return list[str](self.service.getProperty("ventilation.operating.modes.permanent")["commands"]["setLevel"]["params"]["level"]["constraints"]["enum"])
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getVentilationLevels")
+    @deprecated(reason="renamed, use getVentilationLevels", version="2.40.0")
     def getPermanentLevels(self) -> list[str]:
         return list[str](self.getVentilationLevels())
 
@@ -55,12 +55,12 @@ class VentilationDevice(Device):
         return self.service.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})
 
     @handleAPICommandErrors
-    @deprecated(reason="renamed, use setVentilationLevel")
+    @deprecated(reason="renamed, use setVentilationLevel", version="2.40.0")
     def setPermanentLevel(self, level: str):
         return self.setVentilationLevel(level)
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getActiveVentilationMode")
+    @deprecated(reason="renamed, use getActiveVentilationMode", version="2.40.0")
     def getActiveMode(self):
         return self.getActiveVentilationMode()
 
@@ -78,7 +78,7 @@ class VentilationDevice(Device):
         """
         return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
 
-    @deprecated(reason="renamed, use activateVentilationMode")
+    @deprecated(reason="renamed, use activateVentilationMode", version="2.40.0")
     def setActiveMode(self, mode):
         """ Set the active mode
         Parameters
@@ -124,7 +124,7 @@ class VentilationDevice(Device):
         return available_programs
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getVentilationPrograms")
+    @deprecated(reason="renamed, use getVentilationPrograms", version="2.40.0")
     def getAvailablePrograms(self):
         return self.getVentilationPrograms()
 
@@ -133,7 +133,7 @@ class VentilationDevice(Device):
         return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getActiveVentilationProgram")
+    @deprecated(reason="renamed, use getActiveVentilationProgram", version="2.40.0")
     def getActiveProgram(self):
         return self.getActiveVentilationProgram()
 
@@ -152,7 +152,7 @@ class VentilationDevice(Device):
         """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
 
-    @deprecated(reason="renamed, use activateVentilationProgram")
+    @deprecated(reason="renamed, use activateVentilationProgram", version="2.40.0")
     def activateProgram(self, program):
         """ Activate a program
             NOTE
@@ -181,7 +181,7 @@ class VentilationDevice(Device):
         """
         return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
-    @deprecated(reason="renamed, use deactivateVentilationProgram")
+    @deprecated(reason="renamed, use deactivateVentilationProgram", version="2.40.0")
     def deactivateProgram(self, program):
         """ Deactivate a program
         Parameters
@@ -210,6 +210,6 @@ class VentilationDevice(Device):
         }
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getVentilationSchedule")
+    @deprecated(reason="renamed, use getVentilationSchedule", version="2.40.0")
     def getSchedule(self):
         return self.getVentilationSchedule()

@@ -119,11 +119,11 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getVentilationModes")
+    @deprecated(reason="renamed, use getVentilationModes", version="2.40.0")
     def getAvailableVentilationModes(self):
         return self.getVentilationModes()
 
-    @deprecated(reason="renamed, use activateVentilationMode")
+    @deprecated(reason="renamed, use activateVentilationMode", version="2.40.0")
     def setActiveVentilationMode(self, mode):
         """ Set the active mode
         Parameters
@@ -139,7 +139,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return self.activateVentilationMode(mode)
 
     @handleNotSupported
-    @deprecated(reason="renamed, use getVentilationPrograms")
+    @deprecated(reason="renamed, use getVentilationPrograms", version="2.40.0")
     def getAvailableVentilationPrograms(self):
         return self.getVentilationPrograms()
 
