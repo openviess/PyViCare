@@ -190,3 +190,7 @@ class Vitocal250A(unittest.TestCase):
             self.service.setPropertyData[0]['action'], 'setHysteresisSwitchOffValue')
         self.assertEqual(self.service.setPropertyData[0]['data'], {
                          'hysteresis': 5})
+
+    def test_getDomesticHotWaterStorageTemperature(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterStorageTemperature(), 58.8)

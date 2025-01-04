@@ -10,6 +10,18 @@ class ZK03840(unittest.TestCase):
         self.service = ViCareServiceMock(ROLES, 'response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
 
+    def test_getSerial(self):
+        self.assertEqual(self.device.getSerial(), "zigbee-048727fffe196e03")
+
+    def test_isDomesticHotWaterDevice(self):
+        self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
+
+    def test_isSolarThermalDevice(self):
+        self.assertEqual(self.device.isSolarThermalDevice(), False)
+
+    def test_isVentilationDevice(self):
+        self.assertEqual(self.device.isVentilationDevice(), False)
+
     def test_getTemperature(self):
         self.assertEqual(
             self.device.getTemperature(), 18.4)

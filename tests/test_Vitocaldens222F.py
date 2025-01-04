@@ -10,6 +10,15 @@ class Vitocaldens222F(unittest.TestCase):
         self.service = ViCareServiceMock(ROLES, 'response/Vitocaldens222F.json')
         self.device = Hybrid(self.service)
 
+    def test_isDomesticHotWaterDevice(self):
+        self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
+
+    def test_isSolarThermalDevice(self):
+        self.assertEqual(self.device.isSolarThermalDevice(), False)
+
+    def test_isVentilationDevice(self):
+        self.assertEqual(self.device.isVentilationDevice(), False)
+
     def test_getAvailableCircuits(self):
         self.assertEqual(self.device.getAvailableCircuits(), ['1'])
 
