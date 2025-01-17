@@ -2,32 +2,21 @@ import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
-from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class Vitocal222S(unittest.TestCase):
+class Vitocal300G(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal222S.json')
+        self.service = ViCareServiceMock('response/Vitocal333G.json')
         self.device = HeatPump(self.service)
 
-    def test_getDomesticHotWaterActiveMode_10_10_time(self):
-        with now_is('2000-01-01 10:10:00'):
-            self.assertEqual(
-                self.device.getDomesticHotWaterActiveMode(), 'normal')
-
-    def test_getCurrentDesiredTemperature(self):
+    def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(
-            self.device.circuits[0].getCurrentDesiredTemperature(), 23)
+            self.device.getDomesticHotWaterStorageTemperature(), 47.5)
 
-    def test_isDomesticHotWaterDevice(self):
-        self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
-
-    def test_isSolarThermalDevice(self):
-        self.assertEqual(self.device.isSolarThermalDevice(), False)
-
-    def test_isVentilationDevice(self):
-        self.assertEqual(self.device.isVentilationDevice(), True)
+    def test_getHotWaterStorageTemperatureTop(self):
+        self.assertEqual(
+            self.device.getHotWaterStorageTemperatureTop(), 47.5)
 
     def test_getActiveVentilationMode(self):
         self.assertEqual("ventilation", self.device.getActiveVentilationMode())

@@ -1,12 +1,12 @@
-from contextlib import suppress
 from typing import Any, List
+from deprecated import deprecated
 
-from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
-                                            HeatingDeviceWithComponent)
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
+from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 
-class HeatPump(HeatingDevice):
+class HeatPump(HeatingDevice, VentilationDevice):
 
     @property
     def compressors(self) -> List[Any]:
@@ -119,13 +119,11 @@ class HeatPump(HeatingDevice):
         return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
 
     @handleNotSupported
+    @deprecated(reason="renamed, use getVentilationModes", version="2.40.0")
     def getAvailableVentilationModes(self):
-        return self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+        return self.getVentilationModes()
 
-    @handleNotSupported
-    def getActiveVentilationMode(self):
-        return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
-
+    @deprecated(reason="renamed, use activateVentilationMode", version="2.40.0")
     def setActiveVentilationMode(self, mode):
         """ Set the active mode
         Parameters
@@ -138,35 +136,12 @@ class HeatPump(HeatingDevice):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
+        return self.activateVentilationMode(mode)
 
     @handleNotSupported
+    @deprecated(reason="renamed, use getVentilationPrograms", version="2.40.0")
     def getAvailableVentilationPrograms(self):
-        available_programs = []
-        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
-            with suppress(PyViCareNotSupportedFeatureError):
-                if self.service.getProperty(f"ventilation.operating.programs.{program}") is not None:
-                    available_programs.append(program)
-        return available_programs
-
-    @handleNotSupported
-    def getActiveVentilationProgram(self):
-        return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
-
-    def activateVentilationProgram(self, program):
-        """ Activate a ventilation program
-            NOTE
-            DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-        Parameters
-        ----------
-        program : str
-
-        Returns
-        -------
-        result: json
-            json representation of the answer
-        """
-        return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
+        return self.getVentilationPrograms()
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisUnit(self) -> str:

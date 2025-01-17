@@ -33,7 +33,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
-            'heating.solar',
 
             'heating.dhw.hygiene.trigger',
             'heating.dhw.operating.modes.off',
@@ -71,6 +70,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.productIdentification',
             'device.productMatrix',
             'heating.device.variant',
+            'device.time.daylightSaving',
 
             # gateway
             'gateway.devices',  # not used
@@ -80,8 +80,12 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.levels.levelTwo',
             'ventilation.levels.levelThree',
             'ventilation.levels.levelFour',
-            'ventilation.quickmodes.forcedLevelFour',
+            'ventilation.quickmodes.forcedLevelFour', # quickmode accessible via getVentilationQuickmode
             'ventilation.quickmodes.silent',
+            'ventilation.quickmodes.standby',
+            'ventilation.quickmodes.comfort',
+            'ventilation.quickmodes.eco',
+            'ventilation.quickmodes.holiday',
             'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
             'heating.compressors.0.heat.production.current',
             'heating.compressors.0.power.consumption.current',
@@ -124,10 +128,8 @@ class TestForMissingProperties(unittest.TestCase):
         # properties which are not in any test response data
 
         ignore = [
-            'heating.dhw.sensors.temperature.dhwCylinder.top',  # FIXME: remove once test data is updated
-            'heating.dhw.sensors.temperature.dhwCylinder.bottom',  # FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.main',  # FIXME: remove once test data is updated
-            'heating.bufferCylinder.sensors.temperature.top',  # FIXME: remove once test data is updated
+            'heating.dhw.sensors.temperature.dhwCylinder.midBottom',  # FIXME: remove once test data is updated
+            'ventilation.quickmodes',
         ]
 
         all_features = self.read_all_features()
@@ -141,7 +143,7 @@ class TestForMissingProperties(unittest.TestCase):
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
-                feature_name = re.sub(r'\.{(program|active_program)}', '', feature_name)
+                feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
         self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore))
