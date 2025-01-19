@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitocal200S(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal200S.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitocal200S.json')
         self.device = HeatPump(self.service)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
