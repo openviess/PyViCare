@@ -42,7 +42,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.power.purchase.current',
             'heating.power.sold.cumulative',
             'heating.power.sold.current',
-            'heating.sensors.pressure.supply',
             'heating.sensors.temperature.allengra',
 
             'heating.dhw.operating.modes.active',
