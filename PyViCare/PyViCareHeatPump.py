@@ -240,6 +240,42 @@ class HeatPump(HeatingDevice, VentilationDevice):
         """
         return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
 
+    @handleNotSupported
+    def getHeatingRodStarts(self) -> int:
+        return int(self.service.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHours(self):
+        return self.service.getProperty("heating.heatingRod.statistics")["properties"]["hours"]["value"]
+
+    @handleNotSupported
+    def getHeatingRodHeatProductionCurrent(self) -> float:
+        return self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHeatingRodHeatProductionCurrentUnit(self):
+        return self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionCurrent(self):
+        return self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionCurrentUnit(self):
+        return self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["unit"]
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionDHWThisYear(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.dhw")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionHeatingThisYear(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.heating")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionTotalThisYear(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.total")["properties"]["year"]["value"][0])
+
 
 class Compressor(HeatingDeviceWithComponent):
 
