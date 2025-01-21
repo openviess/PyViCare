@@ -193,3 +193,12 @@ class Vitocal250A(unittest.TestCase):
     def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(
             self.device.getDomesticHotWaterStorageTemperature(), 58.8)
+
+    def test_getHeatingRod(self):
+        self.assertEqual(self.device.getHeatingRodHeatProductionCurrent(), 0)
+        self.assertEqual(self.device.getHeatingRodPowerConsumptionCurrent(), 0)
+        self.assertEqual(self.device.getHeatingRodPowerConsumptionDHWThisYear(), 0)
+        self.assertEqual(self.device.getHeatingRodPowerConsumptionDHWThisYear(), 0)
+        self.assertEqual(self.device.getHeatingRodPowerConsumptionHeatingThisYear(), 0)
+        self.assertEqual(self.device.getHeatingRodStarts(), 0)
+        self.assertEqual(self.device.getHeatingRodHours(), 0)
