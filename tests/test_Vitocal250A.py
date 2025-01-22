@@ -1,6 +1,7 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -19,6 +20,21 @@ class Vitocal250A(unittest.TestCase):
     def test_getCompressorStarts(self):
         self.assertEqual(
             self.device.compressors[0].getStarts(), 121)
+
+    def test_getCompressorHeatProduction(self):
+        self.assertEqual(self.device.compressors[0].getHeatProductionCurrent(), 13.317)
+        self.assertEqual(self.device.compressors[0].getHeatProductionCurrentUnit(), "watt")
+
+    def test_getCompressorPowerConsumptionCurrent(self):
+        self.assertEqual(self.device.compressors[0].getPowerConsumptionCurrent(), 3.107)
+        self.assertEqual(self.device.compressors[0].getPowerConsumptionCurrentUnit(), "kilowatt")
+
+    def test_getCompressorPowerConsumptionThisYear(self):
+        self.assertEqual(self.device.compressors[0].getPowerConsumptionDHWThisYear(), 143.0)
+        self.assertEqual(self.device.compressors[0].getPowerConsumptionHeatingThisYear(), 55.2)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.compressors[0].getPowerConsumptionCoolingThisYear)
+        self.assertEqual(self.device.compressors[0].getPowerConsumptionTotalThisYear(), 198.2)
+        self.assertEqual(self.device.compressors[0].getPowerConsumptionTotalUnit(), "kilowattHour")
 
     def test_getHeatingCurveSlope(self):
         self.assertEqual(
