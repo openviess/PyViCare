@@ -250,6 +250,18 @@ class HeatPump(HeatingDevice, VentilationDevice):
         # Returns heating supply pressure
         return float(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["value"])
 
+    @handleNotSupported
+    def getSeasonalPerformanceFactorDHW(self) -> float:
+        return float(self.service.getProperty("heating.spf.dhw")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorHeating(self) -> float:
+        return float(self.service.getProperty("heating.spf.heating")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorTotal(self) -> float:
+        return float(self.service.getProperty("heating.spf.total")["properties"]["value"]["value"])
+
 
 class Compressor(HeatingDeviceWithComponent):
 
