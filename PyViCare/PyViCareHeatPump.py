@@ -240,6 +240,18 @@ class HeatPump(HeatingDevice, VentilationDevice):
         """
         return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
 
+    @handleNotSupported
+    def getSeasonalPerformanceFactorDHW(self) -> float:
+        return float(self.service.getProperty("heating.spf.dhw")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorHeating(self) -> float:
+        return float(self.service.getProperty("heating.spf.heating")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorTotal(self) -> float:
+        return float(self.service.getProperty("heating.spf.total")["properties"]["value"]["value"])
+
 
 class Compressor(HeatingDeviceWithComponent):
 

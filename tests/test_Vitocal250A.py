@@ -193,3 +193,8 @@ class Vitocal250A(unittest.TestCase):
     def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(
             self.device.getDomesticHotWaterStorageTemperature(), 58.8)
+
+    def test_getSeasonalPerformanceFactor(self):
+        self.assertEqual(self.device.getSeasonalPerformanceFactorDHW(), 4.1)
+        self.assertEqual(self.device.getSeasonalPerformanceFactorHeating(), 3.2)
+        self.assertEqual(self.device.getSeasonalPerformanceFactorTotal(), 3.9)
