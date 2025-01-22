@@ -108,6 +108,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.spf.dhw',
             'heating.spf.heating',
             'heating.spf.total',
+            'heating.dhw.comfort', # deprecated
         ]
 
         all_features = self.read_all_features()
