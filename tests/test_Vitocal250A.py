@@ -193,3 +193,7 @@ class Vitocal250A(unittest.TestCase):
     def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(
             self.device.getDomesticHotWaterStorageTemperature(), 58.8)
+
+    def test_getSupplyPressure(self):
+        self.assertEqual(self.device.getSupplyPressure(), 2.1)
+        self.assertEqual(self.device.getSupplyPressureUnit(), "bar")
