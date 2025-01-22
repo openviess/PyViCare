@@ -245,24 +245,24 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return int(self.service.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
 
     @handleNotSupported
-    def getHeatingRodHours(self):
-        return self.service.getProperty("heating.heatingRod.statistics")["properties"]["hours"]["value"]
+    def getHeatingRodHours(self) -> int:
+        return int(self.service.getProperty("heating.heatingRod.statistics")["properties"]["hours"]["value"])
 
     @handleNotSupported
     def getHeatingRodHeatProductionCurrent(self) -> float:
-        return self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["value"]
+        return float(self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getHeatingRodHeatProductionCurrentUnit(self):
-        return self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["unit"]
+    def getHeatingRodHeatProductionCurrentUnit(self) -> str:
+        return str(self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getHeatingRodPowerConsumptionCurrent(self):
-        return self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["value"]
+    def getHeatingRodPowerConsumptionCurrent(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getHeatingRodPowerConsumptionCurrentUnit(self):
-        return self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["unit"]
+    def getHeatingRodPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["unit"])
 
     @handleNotSupported
     def getHeatingRodPowerConsumptionDHWThisYear(self) -> float:
