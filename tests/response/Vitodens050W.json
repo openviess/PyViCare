@@ -724,10 +724,15 @@
       "deviceId": "0",
       "feature": "heating.dhw.operating.modes.balanced",
       "gatewayId": "################",
-      "isEnabled": false,
+      "isEnabled": true,
       "isReady": true,
-      "properties": {},
-      "timestamp": "2025-01-17T14:42:40.580Z",
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "timestamp": "2024-09-23T10:42:35.347Z",
       "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.balanced"
     },
     {
@@ -787,10 +792,15 @@
       "deviceId": "0",
       "feature": "heating.dhw.pumps.circulation",
       "gatewayId": "################",
-      "isEnabled": false,
+      "isEnabled": true,
       "isReady": true,
-      "properties": {},
-      "timestamp": "2025-01-17T14:42:40.580Z",
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "off"
+        }
+      },
+      "timestamp": "2024-09-23T10:42:35.347Z",
       "uri": "https://api.viessmann.com/iot/v1/features/installations/#######/gateways/################/devices/0/features/heating.dhw.pumps.circulation"
     },
     {
