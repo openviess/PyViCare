@@ -190,6 +190,6 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['data'], {
                          'hysteresis': 5})
 
-    def test_getDomesticHotWaterStorageTemperature(self):
-        self.assertEqual(
-            self.device.getDomesticHotWaterStorageTemperature(), 58.8)
+    def test_getHeatingSupplyPressure(self):
+        self.assertEqual(self.device.getHeatingSupplyPressure(), 2.1)
+        self.assertEqual(self.device.getHeatingSupplyPressureUnit(), "bar")
