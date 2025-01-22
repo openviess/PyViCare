@@ -340,3 +340,39 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPhase(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]
+
+    @handleNotSupported
+    def getHeatProductionCurrent(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.heat.production.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionCurrentUnit(self) -> str:
+        return str(self.service.getProperty(f"heating.compressors.{self.compressor}.heat.production.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrent(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionDHWThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.dhw")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.heating")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionCoolingThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionTotalThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionTotalUnit(self) -> str:
+        return str(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["unit"])
