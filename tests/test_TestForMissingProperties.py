@@ -66,6 +66,7 @@ class TestForMissingProperties(unittest.TestCase):
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.name',
+            'device.power.battery',
             'device.productIdentification',
             'device.productMatrix',
             'heating.device.variant',
