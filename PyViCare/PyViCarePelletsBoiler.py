@@ -63,3 +63,27 @@ class PelletsBoiler(HeatingDevice):
     @handleNotSupported
     def getBoilerCuircuitPumpStatus(self):
         return self.service.getProperty('heating.boiler.pumps.circuit')['properties']['status']['value']
+
+    @handleNotSupported
+    def getBufferMainTemperature(self):
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
+
+    @handleNotSupported
+    def getBufferTopTemperature(self):
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]['value']['value']
+
+    @handleNotSupported
+    def getBufferMidTopTemperature(self):
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.midTop")["properties"]['value']['value']
+
+    @handleNotSupported
+    def getBufferMiddleTemperature(self):
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.middle")["properties"]['value']['value']
+
+    @handleNotSupported
+    def getBufferMidBottomTemperature(self):
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.midBottom")["properties"]['value']['value']
+
+    @handleNotSupported
+    def getBufferBottomTemperature(self):
+        return self.service.getProperty("heating.bufferCylinder.sensors.temperature.bottom")["properties"]['value']['value']
