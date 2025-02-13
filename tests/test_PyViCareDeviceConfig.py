@@ -119,6 +119,12 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
+    def test_autoDetect_RoleVitoladens_asOilBoiler(self):
+        self.service.hasRoles = has_roles(["", "type:boiler"])
+        c = PyViCareDeviceConfig(self.service, "0", "Vitoladens", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("OilBoiler", type(device_type).__name__)
+
     def test_autoDetect_RoleGateway_asGateway(self):
         self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto1"])
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
