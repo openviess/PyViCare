@@ -124,7 +124,7 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Ecotronic", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("PelletsBoiler", type(device_type).__name__)
-        
+
     def test_autoDetect_Vitoladens_asOilBoiler(self):
         self.service.hasRoles = has_roles(["type:boiler"])
         c = PyViCareDeviceConfig(self.service, "0", "Vitoladens", "Online")
