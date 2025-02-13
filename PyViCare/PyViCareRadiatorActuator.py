@@ -9,6 +9,10 @@ class RadiatorActuator(Device):
         return self.service.getProperty("device.name")["deviceId"]
 
     @handleNotSupported
+    def getBatteryLevel(self) -> int:
+        return int(self.service.getProperty("device.power.battery")["properties"]["level"]["value"])
+
+    @handleNotSupported
     def getTemperature(self):
         return self.service.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
 

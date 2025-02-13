@@ -168,5 +168,10 @@ vicare.initWithCredentials(email, password, client_id, "token.save")
 
 with open(f"dump.json", mode='w') as output:
    output.write(vicare.devices[0].dump_secure())
+```
 
+To make the test data comparable with future updates, it must be sorted. No worries, this can be done automatically using [`jq`](https://jqlang.github.io/jq/).
+
+```sh
+jq ".data|=sort_by(.feature)" --sort-keys testData.json > testDataSorted.json
 ```

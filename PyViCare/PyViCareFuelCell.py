@@ -328,6 +328,16 @@ class FuelCell(HeatingDevice):
     def getFuelCellGasConsumptionThisYear(self):
         return self.service.getProperty("heating.gas.consumption.fuelCell")["properties"]["year"]["value"][0]
 
+    @handleNotSupported
+    def getSupplyPressureUnit(self) -> str:
+        # Returns heating supply pressure unit (e.g. bar)
+        return str(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getSupplyPressure(self) -> float:
+        # Returns heating supply pressure
+        return float(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["value"])
+
 
 class FuelCellBurner(HeatingDeviceWithComponent):
 
