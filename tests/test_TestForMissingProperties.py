@@ -64,6 +64,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage.bottom',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
+            'heating.burner', # deprecated FIXME: remove once test data is updated
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',

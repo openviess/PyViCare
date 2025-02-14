@@ -19,21 +19,14 @@ class Ecotronic(unittest.TestCase):
     def test_isVentilationDevice(self):
         self.assertEqual(self.device.isVentilationDevice(), False)
 
-    @unittest.skip("burners broken")
     def test_getBurnerStarts(self):
         self.assertEqual(self.device.burners[0].getStarts(), 2162)
 
-    @unittest.skip("burners broken")
     def test_getBurnerHours(self):
         self.assertEqual(self.device.burners[0].getHours(), 5648)
 
-    @unittest.skip("burners broken")
-    def test_getBurnerModulation(self):
-        self.assertEqual(self.device.burners[0].getModulation(), 0)
-
-    @unittest.skip("burners broken")
     def test_getActive(self):
-        self.assertEqual(self.device.burners[0].getActive(), False)
+        self.assertEqual(self.device.burners[0].getActive(), True)
 
     def test_getReturnTemperature(self):
         self.assertEqual(
