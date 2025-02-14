@@ -1,6 +1,7 @@
 import unittest
 
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -37,6 +38,22 @@ class Ecotronic(unittest.TestCase):
     def test_getReturnTemperature(self):
         self.assertEqual(
             self.device.getReturnTemperature(), 60.3)
+
+    def test_getBufferTopTemperature(self):
+        self.assertEqual(self.device.getBufferTopTemperature(), 62.1)
+
+    def test_getBufferMidTopTemperature(self):
+        self.assertEqual(self.device.getBufferMidTopTemperature(), 50.7)
+
+    def test_getBufferMiddleTemperature(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getBufferMiddleTemperature()
+
+    def test_getBufferMidBottomTemperature(self):
+        self.assertEqual(self.device.getBufferMidBottomTemperature(), 44.6)
+
+    def test_getBufferBottomTemperature(self):
+        self.assertEqual(self.device.getBufferBottomTemperature(), 43.7)
 
     def test_getFuelNeed(self):
         self.assertEqual(self.device.getFuelNeed(), 17402)
