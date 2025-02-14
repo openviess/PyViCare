@@ -98,4 +98,4 @@ class AbstractViCareOAuthManager:
             return self.post(url, data)
         except InvalidTokenError:
             self.renewToken()
-            return self.get(url)
+            return self.post(url, data)
