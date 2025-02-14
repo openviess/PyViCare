@@ -57,6 +57,10 @@ class PelletsBoiler(HeatingDevice):
         return self.service.getProperty('heating.configuration.fuel.need')['properties']['value']['value']
 
     @handleNotSupported
+    def getFuelUnit(self) -> str:
+        return str(self.service.getProperty('heating.configuration.fuel.need')['properties']['value']['unit'])
+
+    @handleNotSupported
     def getBoilerState(self):
         return self.service.getProperty('heating.boiler.operating.phase')['properties']['value']['value']
 
