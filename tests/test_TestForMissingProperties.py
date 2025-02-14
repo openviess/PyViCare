@@ -23,6 +23,11 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.device.time.offset',
             'heating.configuration.multiFamilyHouse',
             'heating.boiler.temperature',  # ignore as value is to low to be plausible in response data
+            'heating.boiler.airflaps.0.position.current',
+            'heating.boiler.airflaps.1.position.current',
+            'heating.bufferCylinder.sensors.temperature.midTop',
+            'heating.bufferCylinder.sensors.temperature.midBottom',
+            'heating.bufferCylinder.sensors.temperature.bottom',
 
             'heating.circuits.0.dhw.pumps.circulation.schedule',
             'heating.circuits.0.dhw.schedule',
@@ -71,6 +76,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.productMatrix',
             'heating.device.variant',
             'device.time.daylightSaving',
+            'heating.device.software',
 
             # gateway
             'gateway.devices',  # not used
