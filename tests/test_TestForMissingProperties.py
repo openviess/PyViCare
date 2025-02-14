@@ -47,7 +47,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.power.purchase.current',
             'heating.power.sold.cumulative',
             'heating.power.sold.current',
-            'heating.sensors.pressure.supply',
             'heating.sensors.temperature.allengra',
 
             'heating.dhw.operating.modes.active',
@@ -72,6 +71,7 @@ class TestForMissingProperties(unittest.TestCase):
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.messages.errors.raw',
             'device.name',
+            'device.power.battery',
             'device.productIdentification',
             'device.productMatrix',
             'heating.device.variant',
@@ -93,27 +93,14 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.eco',
             'ventilation.quickmodes.holiday',
             'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
-            'heating.compressors.0.heat.production.current',
-            'heating.compressors.0.power.consumption.current',
-            'heating.compressors.0.power.consumption.dhw',
-            'heating.compressors.0.power.consumption.heating',
-            'heating.compressors.0.power.consumption.total',
-            'heating.heatingRod.heat.production.current',
-            'heating.heatingRod.power.consumption.current',
-            'heating.heatingRod.power.consumption.dhw',
-            'heating.heatingRod.power.consumption.heating',
             'heating.heatingRod.power.consumption.summary.dhw',
             'heating.heatingRod.power.consumption.summary.heating',
-            'heating.heatingRod.power.consumption.total',
-            'heating.heatingRod.statistics',
             'heating.heatingRod.status',
             'heating.power.consumption.current',
             'heating.scop.dhw', # deprecated
             'heating.scop.heating', # deprecated
             'heating.scop.total', # deprecated
-            'heating.spf.dhw',
-            'heating.spf.heating',
-            'heating.spf.total',
+            'heating.dhw.comfort', # deprecated
         ]
 
         all_features = self.read_all_features()
