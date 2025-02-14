@@ -179,3 +179,7 @@ class VitovalorPT2(unittest.TestCase):
 
     def test_getFuelCellGasConsumptionThisYear(self):
         self.assertEqual(self.device.getFuelCellGasConsumptionThisYear(), 651.1)
+
+    def test_getHeatingSupplyPressure(self):
+        self.assertEqual(self.device.getSupplyPressure(), 1.7)
+        self.assertEqual(self.device.getSupplyPressureUnit(), "bar")

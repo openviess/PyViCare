@@ -6,6 +6,18 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
+      "automerge": true,
+      "platformAutomerge": true,
+      "labels": ["maintenance"],
+      "matchPackageNames": [
+        "ruff",
+        "mypy",
+        "pylint",
+        "codespell"
+      ],
+      "description": "Automerge check tools"
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "labels": ["maintenance"]
     }
