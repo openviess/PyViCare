@@ -1,28 +1,25 @@
-from PyViCare.PyViCareHeatingDevice import HeatingDevice
+from typing import Any, List
+
+from PyViCare.PyViCareHeatingDevice import (HeatingDevice, HeatingDeviceWithComponent, get_available_burners)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
 class PelletsBoiler(HeatingDevice):
 
-    @handleNotSupported
-    def getActive(self):
-        return self.service.getProperty("heating.burner")["properties"]["active"]["value"]
+    @property
+    def burners(self) -> List[Any]:
+        return list([self.getBurner(x) for x in self.getAvailableBurners()])
+
+    def getBurner(self, burner):
+        return PelletsBurner(self, burner)
 
     @handleNotSupported
-    def getBurnerModulation(self):
-        return self.service.getProperty('heating.burner.modulation')["properties"]["value"]["value"]
+    def getAvailableBurners(self):
+        return get_available_burners(self.service)
 
     @handleNotSupported
     def getBoilerTemperature(self):
         return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
-
-    @handleNotSupported
-    def getBurnerHours(self):
-        return self.service.getProperty('heating.burner.statistics')['properties']['hours']['value']
-
-    @handleNotSupported
-    def getBurnerStarts(self):
-        return self.service.getProperty('heating.burner.statistics')['properties']['starts']['value']
 
     @handleNotSupported
     def getAshLevel(self):
@@ -63,3 +60,25 @@ class PelletsBoiler(HeatingDevice):
     @handleNotSupported
     def getBoilerCuircuitPumpStatus(self):
         return self.service.getProperty('heating.boiler.pumps.circuit')['properties']['status']['value']
+
+class PelletsBurner(HeatingDeviceWithComponent):
+
+    @property
+    def burner(self) -> str:
+        return self.component
+
+    @handleNotSupported
+    def getActive(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}")["properties"]["active"]["value"]
+
+    @handleNotSupported
+    def getHours(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["hours"]["value"]
+
+    @handleNotSupported
+    def getStarts(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["starts"]["value"]
+
+    @handleNotSupported
+    def getModulation(self):
+        return self.service.getProperty(f"heating.burners.{self.burner}.modulation")["properties"]["value"]["value"]
