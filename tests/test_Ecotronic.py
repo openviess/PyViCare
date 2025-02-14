@@ -41,5 +41,8 @@ class Ecotronic(unittest.TestCase):
     def test_getFuelNeed(self):
         self.assertEqual(self.device.getFuelNeed(), 17402)
 
+    def test_getFuelUnit(self):
+        self.assertEqual(self.device.getFuelUnit(), "kg")
+
     def test_getAshLevel(self):
         self.assertEqual(self.device.getAshLevel(), 43.7)
