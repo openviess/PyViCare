@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, List
+from typing import List
 
 from PyViCare.PyViCareHeatingDevice import (HeatingDevice, HeatingDeviceWithComponent, get_available_burners)
 from PyViCare.PyViCareUtils import handleNotSupported
