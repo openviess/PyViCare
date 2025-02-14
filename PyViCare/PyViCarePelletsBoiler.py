@@ -34,7 +34,7 @@ class PelletsBoiler(HeatingDevice):
 
     @handleNotSupported
     def getAirFlapsSecondaryPosition(self):
-        return self.service.getProperty('heating.boiler.airflaps.0.position.current')['properties']['value']['value']
+        return self.service.getProperty('heating.boiler.airflaps.1.position.current')['properties']['value']['value']
 
     @handleNotSupported
     def getExhaustO2Level(self):
