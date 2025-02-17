@@ -180,7 +180,7 @@ class GazBoiler(HeatingDevice):
     # Gas consumption for Domestic Hot Water data:
     @handleNotSupported
     def getGasSummaryConsumptionDomesticHotWaterUnit(self):
-        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["unit"]["value"]
+        return self.service.getProperty("heating.gas.consumption.summary.dhw")["properties"]["currentDay"]["unit"]
 
     @handleNotSupported
     def getGasSummaryConsumptionDomesticHotWaterCurrentDay(self):
@@ -209,7 +209,7 @@ class GazBoiler(HeatingDevice):
     # Power consumption for Heating:
     @handleNotSupported
     def getPowerSummaryConsumptionHeatingUnit(self):
-        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["day"]["unit"]
+        return self.service.getProperty("heating.power.consumption.summary.heating")["properties"]["currentDay"]["unit"]
 
     @handleNotSupported
     def getPowerSummaryConsumptionHeatingCurrentDay(self):
@@ -238,7 +238,7 @@ class GazBoiler(HeatingDevice):
     # Power consumption for Domestic Hot Water:
     @handleNotSupported
     def getPowerSummaryConsumptionDomesticHotWaterUnit(self):
-        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["day"]["unit"]
+        return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"]
 
     @handleNotSupported
     def getPowerSummaryConsumptionDomesticHotWaterCurrentDay(self):
