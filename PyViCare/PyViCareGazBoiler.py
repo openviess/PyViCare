@@ -151,7 +151,7 @@ class GazBoiler(HeatingDevice):
     # Gas consumption for Heating data:
     @handleNotSupported
     def getGasSummaryConsumptionHeatingUnit(self):
-        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["day"]["unit"]
+        return self.service.getProperty("heating.gas.consumption.summary.heating")["properties"]["currentDay"]["unit"]
 
     @handleNotSupported
     def getGasSummaryConsumptionHeatingCurrentDay(self):
