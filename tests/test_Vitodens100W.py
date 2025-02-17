@@ -23,15 +23,19 @@ class Vitodens100W(unittest.TestCase):
 
     def test_getGasSummaryConsumptionHeatingCurrentDay(self):
         self.assertEqual(self.device.getGasSummaryConsumptionHeatingCurrentDay(), 11.2)
+        self.assertEqual(self.device.getGasSummaryConsumptionHeatingUnit(), "cubicMeter")
 
     def test_getGasSummaryConsumptionDomesticHotWaterCurrentMonth(self):
         self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterCurrentMonth(), 13.7)
+        self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterUnit(), "cubicMeter")
 
     def test_getPowerSummaryConsumptionHeatingCurrentDay(self):
         self.assertEqual(self.device.getPowerSummaryConsumptionHeatingCurrentDay(), 0.9)
+        self.assertEqual(self.device.getPowerSummaryConsumptionHeatingUnit(), "kilowattHour")
 
     def test_getPowerSummaryConsumptionDomesticHotWaterCurrentYear(self):
         self.assertEqual(self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentYear(), 18)
+        self.assertEqual(self.device.getPowerSummaryConsumptionDomesticHotWaterUnit(), "kilowattHour")
 
     def test_getGasSummaryConsumptionDomesticHotWaterUnit(self):
         self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterUnit(), "cubicMeter")
