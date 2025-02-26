@@ -21,7 +21,7 @@ def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
     return len(requested_roles) > 0 and set(requested_roles).issubset(set(existing_roles))
 
 def buildSetPropertyUrl(accessor, property_name, action):
-    return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
+    return f'/v1/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
 
 class ViCareDeviceAccessor:
     def __init__(self, _id: int, serial: str, device_id: str) -> None:
@@ -41,8 +41,8 @@ class ViCareService:
 
     def buildGetPropertyUrl(self, property_name):
         if self._isGateway():
-            return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/{property_name}'
-        return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/{property_name}'
+            return f'/v1/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/{property_name}'
+        return f'/v1/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/{property_name}'
 
     def hasRoles(self, requested_roles) -> bool:
         return hasRoles(requested_roles, self.roles)
@@ -58,7 +58,12 @@ class ViCareService:
         return self.oauth_manager.post(url, post_data)
 
     def fetch_all_features(self) -> Any:
-        url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
+        url = f'/v1/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
         if self._isGateway():
-            url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/'
+            url = f'/v1/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/'
         return self.oauth_manager.get(url)
+
+    def reboot_gateway(self) -> Any:
+        url = f'/v2/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/reboot'
+        data = "{}"
+        return self.oauth_manager.post(url, data)
