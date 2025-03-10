@@ -3,10 +3,16 @@ import unittest
 from PyViCare.PyViCareRoomSensor import RoomSensor
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = [
+    "type:E3",
+    "type:climateSensor",
+    "type:sensor",
+    "type:smartRoomDevice"
+]
 
 class ZK03839(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/zigbee_zk03839.json')
+        self.service = ViCareServiceMock(ROLES, 'response/zigbee_zk03839.json')
         self.device = RoomSensor(self.service)
 
     def test_getSerial(self):
