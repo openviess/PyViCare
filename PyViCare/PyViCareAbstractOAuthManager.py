@@ -13,7 +13,7 @@ from PyViCare.PyViCareUtils import (PyViCareCommandError,
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-API_BASE_URL = 'https://api.viessmann.com/iot/v1'
+API_BASE_URL = 'https://api.viessmann.com/iot/v2'
 
 
 class AbstractViCareOAuthManager:
