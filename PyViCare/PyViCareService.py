@@ -62,3 +62,8 @@ class ViCareService:
         if self._isGateway():
             url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/'
         return self.oauth_manager.get(url)
+        
+    def reboot_gateway(self) -> Any:
+        url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/reboot'
+        data = "{}"
+        return self.oauth_manager.post(url, data)
