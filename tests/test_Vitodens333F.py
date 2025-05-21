@@ -4,10 +4,11 @@ from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitodens333F(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitodens333F.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitodens333F.json')
         self.device = GazBoiler(self.service)
 
     # currently missing an up-to-date test response
