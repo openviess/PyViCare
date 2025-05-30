@@ -52,7 +52,7 @@ class PyViCare:
         for installation in self.installations:
             for gateway in installation.gateways:
                 for device in gateway.devices:
-                    if device.deviceType not in ["heating", "zigbee", "vitoconnect", "electricityStorage", "tcu", "ventilation"]:
+                    if device.deviceType not in ["heating", "zigbee", "vitoconnect", "electricityStorage", "tcu", "ventilation", "roomControl"]:
                         continue  # we are only interested in heating, photovoltaic, electricityStorage, and ventilation devices
 
                     accessor = ViCareDeviceAccessor(
