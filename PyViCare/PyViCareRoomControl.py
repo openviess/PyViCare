@@ -214,7 +214,7 @@ class Room(DeviceWithComponent):
 
     @handleAPICommandErrors
     def deactivateManualTillNextSchedule(self) -> Any:
-        return self.service.setProperty(f"rooms.{self.room}.quickmodes.manualTillNextSchedule", "deactivate")
+        return self.service.setProperty(f"rooms.{self.room}.quickmodes.manualTillNextSchedule", "deactivate", {})
 
 
 class Actor(DeviceWithComponent):
