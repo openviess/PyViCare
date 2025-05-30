@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class VitoairFs300(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/VitoairFs300E.json')
+        self.service = ViCareServiceMock(ROLES, 'response/VitoairFs300E.json')
         self.device = VentilationDevice(self.service)
 
     def test_isDomesticHotWaterDevice(self):
