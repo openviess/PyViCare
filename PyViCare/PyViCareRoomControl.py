@@ -196,6 +196,26 @@ class Room(DeviceWithComponent):
 
     # TODO: Set schedule
 
+    @handleNotSupported
+    def getManualTillNextScheduleActive(self) -> bool:
+        return bool(
+            self.service.getProperty(f"rooms.{self.room}.quickmodes.manualTillNextSchedule")["properties"]["active"][
+                "value"])
+
+    @handleAPICommandErrors
+    def setManualTillNextScheduleTemperature(self, temperature: float) -> Any:
+        return self.service.setProperty(f"rooms.{self.room}.quickmodes.manualTillNextSchedule", "setTemperature",
+                                        {'targetTemperature': temperature})
+
+    @handleAPICommandErrors
+    def activateManualTillNextSchedule(self, temperature: float) -> Any:
+        return self.service.setProperty(f"rooms.{self.room}.quickmodes.manualTillNextSchedule", "activate",
+                                        {'temperature': temperature})
+
+    @handleAPICommandErrors
+    def deactivateManualTillNextSchedule(self) -> Any:
+        return self.service.setProperty(f"rooms.{self.room}.quickmodes.manualTillNextSchedule", "deactivate")
+
 
 class Actor(DeviceWithComponent):
     @property
