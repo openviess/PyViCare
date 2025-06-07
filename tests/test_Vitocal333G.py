@@ -21,6 +21,9 @@ class Vitocal300G(unittest.TestCase):
     def test_getActiveVentilationMode(self):
         self.assertEqual("ventilation", self.device.getActiveVentilationMode())
 
+    def test_getTargetTemperature(self):
+        self.assertEqual(self.device.getCircuit(0).getTargetTemperature(), 29.9)
+
     def test_getVentilationModes(self):
         expected_modes = ['standby', 'standard', 'ventilation']
         self.assertListEqual(expected_modes, self.device.getVentilationModes())

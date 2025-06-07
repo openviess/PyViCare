@@ -62,3 +62,7 @@ class Vitodens222W(unittest.TestCase):
 
     def test_getBoilerTemperature(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBoilerTemperature)
+
+    def test_getTargetTemperature(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getCircuit(0).getTargetTemperature()

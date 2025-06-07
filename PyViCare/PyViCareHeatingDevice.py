@@ -660,6 +660,10 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "sun": properties["entries"]["value"]["sun"]
         }
 
+    @handleNotSupported
+    def getTargetTemperature(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"]
+
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self) -> Optional[float]:
