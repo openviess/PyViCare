@@ -59,7 +59,7 @@ class PyViCare:
                         installation.id, gateway.serial, device.id)
                     service = self.__buildService(accessor, device.roles)
 
-                    logger.warning("Device found (testxxx): %s", device.modelId)
+                    logger.warning("Device found (testxxx blaat): %s", device.modelId)
 
                     yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status)
 
