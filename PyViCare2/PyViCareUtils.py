@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 from typing import Callable
 
-from PyViCare import Feature
+from PyViCare2 import Feature
 
 VICARE_DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 

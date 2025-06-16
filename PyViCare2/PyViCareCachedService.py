@@ -2,10 +2,10 @@ import logging
 import threading
 from typing import Any, List
 
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
+from PyViCare2.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare2.PyViCareService import (ViCareDeviceAccessor, ViCareService,
                                       readFeature)
-from PyViCare.PyViCareUtils import PyViCareInvalidDataError, ViCareTimer
+from PyViCare2.PyViCareUtils import PyViCareInvalidDataError, ViCareTimer
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

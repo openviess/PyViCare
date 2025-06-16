@@ -1,13 +1,13 @@
 import logging
 from datetime import datetime
 
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
-from PyViCare.PyViCareCachedService import ViCareCachedService
-from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
-from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
-from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
-from PyViCare.PyViCareUtils import PyViCareInvalidDataError
+from PyViCare2.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare2.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
+from PyViCare2.PyViCareCachedService import ViCareCachedService
+from PyViCare2.PyViCareDeviceConfig import PyViCareDeviceConfig
+from PyViCare2.PyViCareOAuthManager import ViCareOAuthManager
+from PyViCare2.PyViCareService import ViCareDeviceAccessor, ViCareService
+from PyViCare2.PyViCareUtils import PyViCareInvalidDataError
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
@@ -59,7 +59,7 @@ class PyViCare:
                         installation.id, gateway.serial, device.id)
                     service = self.__buildService(accessor, device.roles)
 
-                    logger.info("Device found: %s", device.modelId)
+                    logger.warning("Device found (testxxx blaat): %s", device.modelId)
 
                     yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status)
 

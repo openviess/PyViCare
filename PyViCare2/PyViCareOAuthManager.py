@@ -8,8 +8,8 @@ import requests
 from authlib.common.security import generate_token
 from authlib.integrations.requests_client import OAuth2Session
 
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
+from PyViCare2.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare2.PyViCareUtils import (PyViCareInvalidConfigurationError,
                                     PyViCareInvalidCredentialsError)
 
 logger = logging.getLogger('ViCare')

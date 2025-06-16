@@ -1,6 +1,7 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -97,3 +98,7 @@ class Vitodens200W_2(unittest.TestCase):
     def test_getPowerConsumptionToday(self):
         self.assertEqual(
             self.device.getPowerConsumptionToday(), 0.283)
+
+    def test_getTargetTemperature(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getCircuit(1).getTargetTemperature()

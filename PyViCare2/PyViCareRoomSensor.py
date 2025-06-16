@@ -1,5 +1,5 @@
-from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare2.PyViCareDevice import Device
+from PyViCare2.PyViCareUtils import handleNotSupported
 
 
 class RoomSensor(Device):

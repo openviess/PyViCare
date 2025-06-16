@@ -5,8 +5,8 @@ from typing import Any
 from authlib.integrations.base_client import TokenExpiredError, InvalidTokenError
 from authlib.integrations.requests_client import OAuth2Session
 
-from PyViCare import Feature
-from PyViCare.PyViCareUtils import (PyViCareCommandError,
+from PyViCare2 import Feature
+from PyViCare2.PyViCareUtils import (PyViCareCommandError,
                                     PyViCareInternalServerError,
                                     PyViCareRateLimitError)
 

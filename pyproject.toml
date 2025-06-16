@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "PyViCare"
-version = "0.1.0"
+name = "PyViCare2"
+version = "0.1.1"
 description = "Library to communicate with the Viessmann ViCare API."
 authors = [
   "Simon Gillet <mail+pyvicare@gillet.ninja>"
@@ -33,7 +33,7 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 packages = [
-    { include = "PyViCare", from = "." },
+    { include = "PyViCare2", from = "." },
 ]
 
 [tool.poetry.urls]

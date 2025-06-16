@@ -1,5 +1,5 @@
-from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
+from PyViCare2.PyViCareDevice import Device
+from PyViCare2.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
 class RadiatorActuator(Device):

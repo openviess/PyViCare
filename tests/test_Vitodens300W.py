@@ -60,3 +60,7 @@ class Vitodens300W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
                           self.device.getDomesticHotWaterCirculationScheduleModes)
+
+    def test_getTargetTemperature(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getCircuit(0).getTargetTemperature()

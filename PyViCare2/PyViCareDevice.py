@@ -1,7 +1,7 @@
 from typing import Any
 
-from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
+from PyViCare2.PyViCareService import ViCareService
+from PyViCare2.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 
 class Device:
