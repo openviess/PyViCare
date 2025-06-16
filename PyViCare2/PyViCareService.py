@@ -2,8 +2,8 @@ import json
 import logging
 from typing import Any, List
 
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from PyViCare2.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare2.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

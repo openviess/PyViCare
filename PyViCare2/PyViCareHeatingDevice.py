@@ -1,10 +1,10 @@
 from contextlib import suppress
 from typing import Any, List, Optional
 
-from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareHeatCurveCalculation import (
+from PyViCare2.PyViCareDevice import Device
+from PyViCare2.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareUtils import (VICARE_DAYS,
+from PyViCare2.PyViCareUtils import (VICARE_DAYS,
                                     PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
                                     handleNotSupported, parse_time_as_delta,

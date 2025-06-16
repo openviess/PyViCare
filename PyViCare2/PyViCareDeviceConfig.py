@@ -2,18 +2,18 @@ import json
 import logging
 import re
 
-from PyViCare.PyViCareFuelCell import FuelCell
-from PyViCare.PyViCareGazBoiler import GazBoiler
-from PyViCare.PyViCareHeatingDevice import HeatingDevice
-from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareHybrid import Hybrid
-from PyViCare.PyViCareOilBoiler import OilBoiler
-from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
-from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
-from PyViCare.PyViCareRoomSensor import RoomSensor
-from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
-from PyViCare.PyViCareGateway import Gateway
-from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare2.PyViCareFuelCell import FuelCell
+from PyViCare2.PyViCareGazBoiler import GazBoiler
+from PyViCare2.PyViCareHeatingDevice import HeatingDevice
+from PyViCare2.PyViCareHeatPump import HeatPump
+from PyViCare2.PyViCareHybrid import Hybrid
+from PyViCare2.PyViCareOilBoiler import OilBoiler
+from PyViCare2.PyViCarePelletsBoiler import PelletsBoiler
+from PyViCare2.PyViCareRadiatorActuator import RadiatorActuator
+from PyViCare2.PyViCareRoomSensor import RoomSensor
+from PyViCare2.PyViCareElectricalEnergySystem import ElectricalEnergySystem
+from PyViCare2.PyViCareGateway import Gateway
+from PyViCare2.PyViCareVentilationDevice import VentilationDevice
 
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())

@@ -1,9 +1,9 @@
 from typing import Any, List
 from deprecated import deprecated
 
-from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
-from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
-from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare2.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
+from PyViCare2.PyViCareUtils import handleAPICommandErrors, handleNotSupported
+from PyViCare2.PyViCareVentilationDevice import VentilationDevice
 
 
 class HeatPump(HeatingDevice, VentilationDevice):
