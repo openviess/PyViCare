@@ -1,9 +1,9 @@
 from typing import Any, List
 
-from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
+from PyViCare2.PyViCareHeatingDevice import (HeatingDevice,
                                             HeatingDeviceWithComponent,
                                             get_available_burners)
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare2.PyViCareUtils import handleNotSupported
 
 
 class FuelCell(HeatingDevice):

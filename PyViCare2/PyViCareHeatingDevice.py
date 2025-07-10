@@ -1,10 +1,10 @@
 from contextlib import suppress
 from typing import Any, List, Optional
 
-from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareHeatCurveCalculation import (
+from PyViCare2.PyViCareDevice import Device
+from PyViCare2.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareUtils import (VICARE_DAYS,
+from PyViCare2.PyViCareUtils import (VICARE_DAYS,
                                     PyViCareNotSupportedFeatureError,
                                     ViCareTimer, handleAPICommandErrors,
                                     handleNotSupported, parse_time_as_delta,
@@ -659,6 +659,11 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
+
+    @handleNotSupported
+    def getTargetTemperature(self):
+        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"]
+        #return 18
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
