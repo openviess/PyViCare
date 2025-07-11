@@ -119,8 +119,8 @@ Follow these steps to access the API in Postman:
    - Grant Type: `Authorization Code (With PKCE)`
    - Callback URL: `vicare://oauth-callback/everest`
    - Authorize using browser: Disabled
-   - Auth URL: `https://iam.viessmann.com/idp/v3/authorize`
-   - Access Token URL: `https://iam.viessmann.com/idp/v3/token`
+   - Auth URL: `https://iam.viessmann-climatesolutions.com/idp/v3/authorize`
+   - Access Token URL: `https://iam.viessmann-climatesolutions.com/idp/v3/token`
    - Client ID: Your personal Client ID created in the developer portal.
    - Client Secret: Blank
    - Code Challenge Method: `SHA-256`
@@ -133,7 +133,7 @@ Follow these steps to access the API in Postman:
 
 2. Use this URL to access your `installationId`, `gatewaySerial` and `deviceId`:
 
-   `https://api.viessmann.com/iot/v1/equipment/installations?includeGateways=true`
+   `https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations?includeGateways=true`
 
    - `installationId` is `data[0].id`
    - `gatewaySerial` is `data[0].gateways[0].serial`
@@ -141,7 +141,7 @@ Follow these steps to access the API in Postman:
 
 3. Use above data to replace `{installationId}`, `{gatewaySerial}` and `{deviceId}` in this URL to investigate the Viessmann API:
 
-   `https://api.viessmann.com/iot/v1/features/installations/{installationId}/gateways/{gatewaySerial}/devices/{deviceId}/features`
+   `https://api.viessmann-climatesolutions.com/iot/v1/features/installations/{installationId}/gateways/{gatewaySerial}/devices/{deviceId}/features`
 
 ## Rate Limits
 

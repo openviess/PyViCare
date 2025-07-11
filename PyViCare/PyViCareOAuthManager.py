@@ -15,8 +15,8 @@ from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-AUTHORIZE_URL = 'https://iam.viessmann.com/idp/v3/authorize'
-TOKEN_URL = 'https://iam.viessmann.com/idp/v3/token'
+AUTHORIZE_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize'
+TOKEN_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/token'
 REDIRECT_URI = "vicare://oauth-callback/everest"
 VIESSMANN_SCOPE = ["IoT User"]
 
