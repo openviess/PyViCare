@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class ZK03840(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
+        self.service = ViCareServiceMock(ROLES, 'response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
 
     def test_getSerial(self):
