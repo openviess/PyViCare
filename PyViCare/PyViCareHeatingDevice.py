@@ -522,6 +522,10 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return self.deactivateProgram("comfort")
 
     @handleNotSupported
+    def getBoilerCommonSupplyTemperature(self):
+        return self.service.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
+
+    @handleNotSupported
     def getSupplyTemperature(self):
         return \
             self.service.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
