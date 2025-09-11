@@ -3,11 +3,10 @@ import unittest
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from tests.ViCareServiceMock import MockCircuitsData, ViCareServiceMock
 
-
 class GenericDeviceTest(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock(
-            None, {'data': [MockCircuitsData([0])]})
+            [], None, {'data': [MockCircuitsData([0])]})
         self.device = HeatingDevice(self.service)
 
     def test_activateComfort(self):
