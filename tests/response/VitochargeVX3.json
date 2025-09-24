@@ -71,6 +71,44 @@
       "uri": "https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations/#######/gateways/################/devices/0/features/ess.stateOfCharge"
     },
     {
+      "feature": "ess.transfer.charge.cumulated",
+      "gatewayId": "################",
+      "deviceId": "0",
+      "timestamp": "2025-09-24T16:25:08.243Z",
+      "isEnabled": true,
+      "isReady": true,
+      "apiVersion": 1,
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/0/features/ess.transfer.charge.cumulated",
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "value": 3004,
+          "unit": "wattHour"
+        },
+        "currentWeek": {
+          "type": "number",
+          "value": 6519,
+          "unit": "wattHour"
+        },
+        "currentMonth": {
+          "type": "number",
+          "value": 122090,
+          "unit": "wattHour"
+        },
+        "currentYear": {
+          "type": "number",
+          "value": 1230050,
+          "unit": "wattHour"
+        },
+        "lifeCycle": {
+          "type": "number",
+          "value": 1858108,
+          "unit": "wattHour"
+        }
+      },
+      "commands": {}
+    },
+    {
       "apiVersion": 1,
       "commands": {},
       "deviceId": "0",

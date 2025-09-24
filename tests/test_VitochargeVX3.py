@@ -63,6 +63,24 @@ class VitochargeVX3(unittest.TestCase):
     def test_getPointOfCommonCouplingTransferFeedInTotalUnit(self):
         self.assertEqual(self.device.getPointOfCommonCouplingTransferFeedInTotalUnit(), "wattHour")
 
+    def test_getElectricalEnergySystemTransferChargeCumulatedUnit(self):
+        self.assertEqual(self.device.getElectricalEnergySystemTransferChargeCumulatedUnit(), "wattHour")
+
+    def test_getElectricalEnergySystemTransferChargeCumulatedCurrentDay(self):
+        self.assertEqual(self.device.getElectricalEnergySystemTransferChargeCumulatedCurrentDay(), 3004)
+
+    def test_getElectricalEnergySystemTransferChargeCumulatedCurrentWeek(self):
+        self.assertEqual(self.device.getElectricalEnergySystemTransferChargeCumulatedCurrentWeek(), 6519)
+
+    def test_getElectricalEnergySystemTransferChargeCumulatedCurrentMonth(self):
+        self.assertEqual(self.device.getElectricalEnergySystemTransferChargeCumulatedCurrentMonth(), 122090)
+
+    def test_getElectricalEnergySystemTransferChargeCumulatedCurrentYear(self):
+        self.assertEqual(self.device.getElectricalEnergySystemTransferChargeCumulatedCurrentYear(), 1230050)
+
+    def test_getElectricalEnergySystemTransferChargeCumulatedLifeCycle(self):
+        self.assertEqual(self.device.getElectricalEnergySystemTransferChargeCumulatedLifeCycle(), 1858108)
+
     def test_getElectricalEnergySystemTransferDischargeCumulatedUnit(self):
         self.assertEqual(self.device.getElectricalEnergySystemTransferDischargeCumulatedUnit(), "wattHour")
 
