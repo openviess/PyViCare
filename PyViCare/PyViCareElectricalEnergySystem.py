@@ -89,6 +89,42 @@ class ElectricalEnergySystem(Device):
         ]["unit"]
 
     @handleNotSupported
+    def getElectricalEnergySystemTransferChargeCumulatedUnit(self):
+        return self.service.getProperty("ess.transfer.charge.cumulated")[
+            "properties"
+        ]["currentDay"]["unit"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemTransferChargeCumulatedCurrentDay(self):
+        return self.service.getProperty("ess.transfer.charge.cumulated")[
+            "properties"
+        ]["currentDay"]["value"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemTransferChargeCumulatedCurrentWeek(self):
+        return self.service.getProperty("ess.transfer.charge.cumulated")[
+            "properties"
+        ]["currentWeek"]["value"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemTransferChargeCumulatedCurrentMonth(self):
+        return self.service.getProperty("ess.transfer.charge.cumulated")[
+            "properties"
+        ]["currentMonth"]["value"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemTransferChargeCumulatedCurrentYear(self):
+        return self.service.getProperty("ess.transfer.charge.cumulated")[
+            "properties"
+        ]["currentYear"]["value"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemTransferChargeCumulatedLifeCycle(self):
+        return self.service.getProperty("ess.transfer.charge.cumulated")[
+            "properties"
+        ]["lifeCycle"]["value"]
+
+    @handleNotSupported
     def getElectricalEnergySystemTransferDischargeCumulatedUnit(self):
         return self.service.getProperty("ess.transfer.discharge.cumulated")[
             "properties"
