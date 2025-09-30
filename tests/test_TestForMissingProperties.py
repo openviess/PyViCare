@@ -69,6 +69,7 @@ class TestForMissingProperties(unittest.TestCase):
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'device.configuration.houseLocation',
             'device.etn',
+            'device.lock.malfunction',
             'device.messages.errors.raw',
             'device.name',
             'device.power.battery',
