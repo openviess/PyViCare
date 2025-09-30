@@ -67,6 +67,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.burner', # deprecated FIXME: remove once test data is updated
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
+            'device.configuration.houseLocation',
             'device.messages.errors.raw',
             'device.name',
             'device.power.battery',
