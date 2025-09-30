@@ -84,6 +84,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.timeseries.ignitionTimeSteps',
             'device.timeseries.monitoringIonization',
             'device.timeseries.water.pressure.peaks',
+            'device.zigbee.active',
             'heating.device.variant',
             'device.time.daylightSaving',
             'heating.device.software',
