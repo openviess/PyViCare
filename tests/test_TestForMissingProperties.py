@@ -75,6 +75,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.service.raw',
             'device.messages.status.raw',
             'device.name',
+            'device.parameterIdentification.version',
             'device.power.battery',
             'device.productIdentification',
             'device.productMatrix',
