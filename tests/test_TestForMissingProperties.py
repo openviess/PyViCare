@@ -72,6 +72,8 @@ class TestForMissingProperties(unittest.TestCase):
             'device.lock.malfunction',
             'device.messages.errors.raw',
             'device.messages.info.raw',
+            'device.messages.service.raw',
+            'device.messages.status.raw',
             'device.name',
             'device.power.battery',
             'device.productIdentification',
