@@ -79,6 +79,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.power.battery',
             'device.productIdentification',
             'device.productMatrix',
+            'device.timeseries.burner.stops',
             'heating.device.variant',
             'device.time.daylightSaving',
             'heating.device.software',
