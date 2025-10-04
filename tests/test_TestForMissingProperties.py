@@ -156,7 +156,6 @@ class TestForMissingProperties(unittest.TestCase):
             'photovoltaic.string.voltage',
 
             # TRVs
-            
             'trv.childLock',
             'trv.mountingMode',
             'trv.valve.position',
