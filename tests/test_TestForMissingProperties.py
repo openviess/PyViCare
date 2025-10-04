@@ -33,6 +33,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.boiler.airflaps.0.position.current',
             'heating.boiler.airflaps.1.position.current',
             'heating.boiler.pumps.internal',
+            'heating.boiler.pumps.internal.target',
 
             'heating.circuits.0.dhw.pumps.circulation.schedule',
             'heating.circuits.0.dhw.schedule',
