@@ -18,6 +18,13 @@ class TestForMissingProperties(unittest.TestCase):
         # are added to the response files
 
         ignore = [
+            # general - not yet used
+            'device.messages.info.raw',
+            'device.messages.service.raw',
+            'device.messages.status.raw',
+            'device.parameterIdentification.version',
+
+            # heating ignored for now
             'heating.operating.programs.holidayAtHome',
             'heating.operating.programs.holiday',
             'heating.device.time.offset',
@@ -99,6 +106,24 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.scop.heating', # deprecated
             'heating.scop.total', # deprecated
             'heating.dhw.comfort', # deprecated
+
+            # energy system - not yet used
+            'device.etn',
+            'device.serial.internalComponents',
+            'ess.battery.usedAverage',
+            'ess.configuration.backupBox',
+            'ess.configuration.systemType',
+            'ess.inverter.ac.power',
+            'ess.sensors.temperature.ambient',
+            'ess.version.hardware',
+            'heating.device.mainECU',
+            'pcc.ac.active.current',
+            'pcc.ac.active.power',
+            'pcc.ac.reactive.power',
+            'pcc.state.gridCode',
+            'photovoltaic.installedPeakPower',
+            'photovoltaic.string.current',
+            'photovoltaic.string.voltage',
         ]
 
         all_features = self.read_all_features()
