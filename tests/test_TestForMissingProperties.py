@@ -23,7 +23,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.service.raw',
             'device.messages.status.raw',
             'device.parameterIdentification.version',
-            
+
             'device.configuration.houseLocation',
             'device.lock.malfunction',
             'device.timeseries.burner.stops',
