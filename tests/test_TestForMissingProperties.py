@@ -23,6 +23,20 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.service.raw',
             'device.messages.status.raw',
             'device.parameterIdentification.version',
+            'device.productIdentification',
+            'device.productMatrix',
+            'device.time.daylightSaving',
+            'device.identification',
+            'device.zigbee.parent.rx',
+            'device.zigbee.parent.tx',
+            'device.heatingCircuitId',
+            'device.configuration.houseLocation',
+            'device.lock.malfunction',
+            'device.timeseries.burner.stops',
+            'device.timeseries.dhw.burner.stops',
+            'device.timeseries.ignitionTimeSteps',
+            'device.timeseries.monitoringIonization',
+            'device.timeseries.water.pressure.peaks',
 
             'device.configuration.houseLocation',
             'device.lock.malfunction',
@@ -58,7 +72,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.operating.programs.holiday',
             'heating.device.time.offset',
             'heating.configuration.multiFamilyHouse',
-            'heating.boiler.temperature',  # ignore as value is to low to be plausible in response data
             'heating.boiler.airflaps.0.position.current',
             'heating.boiler.airflaps.1.position.current',
             'heating.boiler.pumps.internal',
@@ -77,11 +90,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.hygiene.trigger',
             'heating.dhw.operating.modes.off',
             'heating.dhw.temperature.hygiene',
-            'heating.power.production.cumulative',
-            'heating.power.purchase.cumulative',
-            'heating.power.purchase.current',
-            'heating.power.sold.cumulative',
-            'heating.power.sold.current',
             'heating.sensors.temperature.allengra',
 
             'heating.dhw.operating.modes.active',
@@ -93,7 +101,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
-            'heating.dhw.sensors.temperature.dhwCylinder',
 
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
 
@@ -105,26 +112,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.burner', # deprecated FIXME: remove once test data is updated
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
-            'device.configuration.houseLocation',
-            'device.lock.malfunction',
-            'device.messages.errors.raw',
-            'device.name',
-            'device.power.battery',
-            'device.productIdentification',
-            'device.productMatrix',
-            'device.timeseries.burner.stops',
-            'device.timeseries.dhw.burner.stops',
-            'device.timeseries.ignitionTimeSteps',
-            'device.timeseries.monitoringIonization',
-            'device.timeseries.water.pressure.peaks',
-            'device.zigbee.active',
-            'device.zigbee.status',
             'heating.device.variant',
-            'device.time.daylightSaving',
             'heating.device.software',
 
             # gateway
-            'gateway.devices',  # not used
 
             # ventilation - not yet used
             'ventilation.levels.levelOne',
@@ -137,7 +128,6 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.comfort',
             'ventilation.quickmodes.eco',
             'ventilation.quickmodes.holiday',
-            'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
             'heating.heatingRod.power.consumption.summary.dhw',
             'heating.heatingRod.power.consumption.summary.heating',
             'heating.heatingRod.status',
@@ -164,6 +154,13 @@ class TestForMissingProperties(unittest.TestCase):
             'photovoltaic.installedPeakPower',
             'photovoltaic.string.current',
             'photovoltaic.string.voltage',
+
+            # TRVs
+            'device.zigbee.lqi',
+            'device.zigbee.parent.id',
+            'trv.childLock',
+            'trv.mountingMode',
+            'trv.valve.position',
         ]
 
         all_features = self.read_all_features()
