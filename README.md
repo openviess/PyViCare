@@ -180,10 +180,10 @@ jq ".data|=sort_by(.feature)" --sort-keys testData.json > testDataSorted.json
 
 ### Home Assistant
 
-To test a certain change in Home Assistant, one needs to have a `ViCare` integration installed as a custom component. Alter the dependency in the `manifest.json` to point to a GitHub branch:
+To test a certain change in Home Assistant, one needs to have a `ViCare` integration installed as a custom component.
+Change the dependency in the `manifest.json` to point to a GitHub branch or commit SHA:
 
 ```json
-...
   "requirements": [
     "PyViCare@git+https://github.com/openviess/PyViCare.git@<branchname>"
   ],
