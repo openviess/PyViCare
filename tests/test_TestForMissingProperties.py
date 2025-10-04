@@ -156,6 +156,8 @@ class TestForMissingProperties(unittest.TestCase):
             'photovoltaic.string.voltage',
 
             # TRVs
+            'device.zigbee.lqi',
+            'device.zigbee.parent.id',
             'trv.childLock',
             'trv.mountingMode',
             'trv.valve.position',
