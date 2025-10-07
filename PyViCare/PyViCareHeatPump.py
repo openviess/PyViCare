@@ -1,12 +1,12 @@
-from contextlib import suppress
 from typing import Any, List
+from deprecated import deprecated
 
-from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
-                                            HeatingDeviceWithComponent)
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
+from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 
-class HeatPump(HeatingDevice):
+class HeatPump(HeatingDevice, VentilationDevice):
 
     @property
     def compressors(self) -> List[Any]:
@@ -119,13 +119,11 @@ class HeatPump(HeatingDevice):
         return self.service.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
 
     @handleNotSupported
+    @deprecated(reason="renamed, use getVentilationModes", version="2.40.0")
     def getAvailableVentilationModes(self):
-        return self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+        return self.getVentilationModes()
 
-    @handleNotSupported
-    def getActiveVentilationMode(self):
-        return self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"]
-
+    @deprecated(reason="renamed, use activateVentilationMode", version="2.40.0")
     def setActiveVentilationMode(self, mode):
         """ Set the active mode
         Parameters
@@ -138,35 +136,12 @@ class HeatPump(HeatingDevice):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
+        return self.activateVentilationMode(mode)
 
     @handleNotSupported
+    @deprecated(reason="renamed, use getVentilationPrograms", version="2.40.0")
     def getAvailableVentilationPrograms(self):
-        available_programs = []
-        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
-            with suppress(PyViCareNotSupportedFeatureError):
-                if self.service.getProperty(f"ventilation.operating.programs.{program}") is not None:
-                    available_programs.append(program)
-        return available_programs
-
-    @handleNotSupported
-    def getActiveVentilationProgram(self):
-        return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
-
-    def activateVentilationProgram(self, program):
-        """ Activate a ventilation program
-            NOTE
-            DEVICE_COMMUNICATION_ERROR can just mean that the program is already on
-        Parameters
-        ----------
-        program : str
-
-        Returns
-        -------
-        result: json
-            json representation of the answer
-        """
-        return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
+        return self.getVentilationPrograms()
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisUnit(self) -> str:
@@ -265,6 +240,64 @@ class HeatPump(HeatingDevice):
         """
         return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
 
+    @handleNotSupported
+    def getSupplyPressureUnit(self) -> str:
+        # Returns heating supply pressure unit (e.g. bar)
+        return str(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getSupplyPressure(self) -> float:
+        # Returns heating supply pressure
+        return float(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorDHW(self) -> float:
+        return float(self.service.getProperty("heating.spf.dhw")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorHeating(self) -> float:
+        return float(self.service.getProperty("heating.spf.heating")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSeasonalPerformanceFactorTotal(self) -> float:
+        return float(self.service.getProperty("heating.spf.total")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodStarts(self) -> int:
+        return int(self.service.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHours(self) -> int:
+        return int(self.service.getProperty("heating.heatingRod.statistics")["properties"]["hours"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHeatProductionCurrent(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHeatProductionCurrentUnit(self) -> str:
+        return str(self.service.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionCurrent(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.service.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionDHWThisYear(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.dhw")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionHeatingThisYear(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.heating")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionTotalThisYear(self) -> float:
+        return float(self.service.getProperty("heating.heatingRod.power.consumption.total")["properties"]["year"]["value"][0])
+
 
 class Compressor(HeatingDeviceWithComponent):
 
@@ -307,3 +340,39 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPhase(self):
         return self.service.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]
+
+    @handleNotSupported
+    def getHeatProductionCurrent(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.heat.production.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionCurrentUnit(self) -> str:
+        return str(self.service.getProperty(f"heating.compressors.{self.compressor}.heat.production.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrent(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionDHWThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.dhw")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.heating")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionCoolingThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionTotalThisYear(self) -> float:
+        return float(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionTotalUnit(self) -> str:
+        return str(self.service.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["unit"])

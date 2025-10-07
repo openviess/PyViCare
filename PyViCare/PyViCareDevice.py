@@ -1,3 +1,5 @@
+from typing import Any
+
 from PyViCare.PyViCareService import ViCareService
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
@@ -15,6 +17,10 @@ class Device:
     @handleNotSupported
     def getSerial(self):
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getDeviceErrors(self) -> list[Any]:
+        return list[Any](self.service.getProperty("device.messages.errors.raw")["properties"]["entries"]["value"])
 
     def isLegacyDevice(self) -> bool:
         return self.service.hasRoles(["type:legacy"])

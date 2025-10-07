@@ -364,6 +364,10 @@ class HeatingDevice(Device):
         return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.return")["properties"]["value"][
             "value"]
 
+    @handleNotSupported
+    def getBoilerCommonSupplyTemperature(self):
+        return self.service.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
+
 
 class HeatingDeviceWithComponent:
     """This is the base class for all heating components"""

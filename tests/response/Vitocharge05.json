@@ -1,0 +1,295 @@
+{
+  "data": [
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "device.messages.errors.raw",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "entries": {
+          "type": "array",
+          "value": []
+        }
+      },
+      "timestamp": "2024-12-14T19:52:37.544Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/device.messages.errors.raw"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "device.productIdentification",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "product": {
+          "type": "object",
+          "value": {
+            "busAddress": 72,
+            "busType": "CanExternal",
+            "productFamily": "B_00012_VCH200",
+            "viessmannIdentificationNumber": "################"
+          }
+        }
+      },
+      "timestamp": "2024-12-14T19:52:37.544Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/device.productIdentification"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "device.serial",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "################"
+        }
+      },
+      "timestamp": "2024-12-14T19:52:37.544Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/device.serial"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "ess.operationState",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "standby"
+        }
+      },
+      "timestamp": "2024-12-18T15:13:53.165Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/ess.operationState"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "ess.power",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "watt",
+          "value": 0
+        }
+      },
+      "timestamp": "2024-12-18T15:13:54.657Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/ess.power"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "ess.stateOfCharge",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 0
+        }
+      },
+      "timestamp": "2024-12-18T13:41:08.478Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/ess.stateOfCharge"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "ess.transfer.discharge.cumulated",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 1245
+        },
+        "currentMonth": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 3982
+        },
+        "currentWeek": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 3232
+        },
+        "currentYear": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 3982
+        },
+        "lifeCycle": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 3982
+        }
+      },
+      "timestamp": "2024-12-18T15:13:56.163Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/ess.transfer.discharge.cumulated"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "heating.boiler.serial",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "################"
+        }
+      },
+      "timestamp": "2024-12-14T19:52:37.544Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/heating.boiler.serial"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "pcc.transfer.consumption.total",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 3258900
+        }
+      },
+      "timestamp": "2024-12-18T16:54:33.546Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/pcc.transfer.consumption.total"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "pcc.transfer.feedIn.total",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 29200
+        }
+      },
+      "timestamp": "2024-12-18T10:00:34.783Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/pcc.transfer.feedIn.total"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "pcc.transfer.power.exchange",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "watt",
+          "value": 6624
+        }
+      },
+      "timestamp": "2024-12-18T16:54:38.941Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/pcc.transfer.power.exchange"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "photovoltaic.production.cumulated",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "currentDay": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 4534
+        },
+        "currentMonth": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 23498
+        },
+        "currentWeek": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 12483
+        },
+        "currentYear": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 23498
+        },
+        "lifeCycle": {
+          "type": "number",
+          "unit": "wattHour",
+          "value": 23498
+        }
+      },
+      "timestamp": "2024-12-18T15:13:18.692Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/photovoltaic.production.cumulated"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "photovoltaic.production.current",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "kilowatt",
+          "value": 0
+        }
+      },
+      "timestamp": "2024-12-18T15:01:39.005Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/photovoltaic.production.current"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "################",
+      "feature": "photovoltaic.status",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "ready"
+        }
+      },
+      "timestamp": "2024-12-18T14:55:21.555Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v1/features/installations/#######/gateways/################/devices/################/features/photovoltaic.status"
+    }
+  ]
+}
