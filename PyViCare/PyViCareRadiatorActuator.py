@@ -25,8 +25,8 @@ class RadiatorActuator(Device):
         return str(self.service.getProperty("trv.childLock")["properties"]["status"]["value"])
 
     @handleNotSupported
-    def getMountingMode(self) -> boolean:
-        return boolean(self.service.getProperty("trv.mountingMode")["properties"]["active"]["value"])
+    def getMountingMode(self) -> bool:
+        return bool(self.service.getProperty("trv.mountingMode")["properties"]["active"]["value"])
 
     @handleNotSupported
     def getZigbeeLinkQuality(self) -> int:
