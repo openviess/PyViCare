@@ -1,7 +1,7 @@
 from typing import Any
 
 from PyViCare.PyViCareService import ViCareService
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
 
 
 class Device:
@@ -42,3 +42,34 @@ class Device:
             return self.service.getProperty(deviceType)["isEnabled"] and self.service.getProperty(deviceType)["properties"]["active"]["value"]
         except PyViCareNotSupportedFeatureError:
             return False
+
+
+class ZigbeeDevice(Device):
+
+    @handleNotSupported
+    def getSerial(self) -> str:
+        return str(self.service.getProperty("device.name")["deviceId"])
+
+    @handleNotSupported
+    def getZigbeeParentID(self) -> str:
+        return str(self.service.getProperty("device.zigbee.parent.id")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getZigbeeSignalStrength(self) -> int:
+        return int(self.service.getProperty("device.zigbee.lqi")["properties"]["strength"]["value"])
+
+    @handleNotSupported
+    def getName(self) -> str:
+        return str(self.service.getProperty("device.name")["properties"]["name"]["value"])
+
+    @handleAPICommandErrors
+    def setName(self, name: str) -> None:
+        self.service.setProperty("device.name", "setName", {'name': name})
+
+    @handleNotSupported
+    def getIdentification(self) -> bool:
+        return bool(self.service.getProperty("device.identification")["properties"]["triggered"]["value"])
+
+    @handleNotSupported
+    def getBatteryLevel(self) -> int:
+        return int(self.service.getProperty("device.power.battery")["properties"]["level"]["value"])
