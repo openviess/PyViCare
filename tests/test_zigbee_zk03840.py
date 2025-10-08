@@ -10,7 +10,7 @@ class ZK03840(unittest.TestCase):
         self.device = RadiatorActuator(self.service)
 
     def test_getSerial(self):
-        self.assertEqual(self.device.getSerial(), "zigbee-048727fffe196e03")
+        self.assertEqual(self.device.getSerial(), "zigbee-################")
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
@@ -23,11 +23,11 @@ class ZK03840(unittest.TestCase):
 
     def test_getTemperature(self):
         self.assertEqual(
-            self.device.getTemperature(), 18.4)
+            self.device.getTemperature(), 21.5)
 
     def test_getTargetTemperature(self):
         self.assertEqual(
-            self.device.getTargetTemperature(), 8)
+            self.device.getTargetTemperature(), 21.5)
 
     def test_setTargetTemperature(self):
         self.device.setTargetTemperature(22)
