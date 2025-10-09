@@ -95,7 +95,19 @@ class HeatingDevice(Device):
     def getDomesticHotWaterConfiguredTemperature2(self):
         return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
 
+
+    @handleNotSupported
+    def getDomesticHotWaterModes(self):
+        if self.isE3Device():
+            return self.service.getProperty("heating.dhw.operating.modes.active")["commands"]["setMode"][
+                "params"]["mode"]["constraints"]["enum"]
+        raise PyViCareNotSupportedFeatureError("getDomesticHotWaterModes")
+
     def getDomesticHotWaterActiveMode(self):
+        if self.isE3Device():
+            return self.service.getProperty("heating.dhw.operating.modes.active")["properties"]["value"][
+                "value"]
+
         schedule = self.getDomesticHotWaterSchedule()
         if schedule == "error" or schedule["active"] is not True:
             return None
@@ -116,6 +128,25 @@ class HeatingDevice(Device):
                     return VICARE_DHW_TEMP2
                 mode = s["mode"]
         return mode
+
+
+    def setDomesticHotWaterMode(self, mode):
+        """ Set the domestic hot water active mode
+        Parameters
+        ----------
+        mode : str
+            Valid mode can be obtained using getDomesticHotWaterModes()
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        if self.isE3Device():
+            r = self.service.setProperty("heating.dhw.operating.modes.active", "setMode", {'mode': mode})
+            return r
+        raise PyViCareNotSupportedFeatureError("setDomesticHotWaterMode")
+
 
     def getDomesticHotWaterDesiredTemperature(self):
         mode = self.getDomesticHotWaterActiveMode()

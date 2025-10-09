@@ -3,10 +3,11 @@ import unittest
 from PyViCare.PyViCareFuelCell import FuelCell
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class VitovalorPT2(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/VitovalorPT2.json')
+        self.service = ViCareServiceMock(ROLES, 'response/VitovalorPT2.json')
         self.device = FuelCell(self.service)
 
     def test_isDomesticHotWaterDevice(self):

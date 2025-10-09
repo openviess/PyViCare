@@ -5,10 +5,11 @@ from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
+ROLES = []
 
 class Vitocal200(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal200.json')
+        self.service = ViCareServiceMock(ROLES, 'response/Vitocal200.json')
         self.device = HeatPump(self.service)
 
     def test_getCompressorActive(self):
