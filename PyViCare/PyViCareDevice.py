@@ -48,7 +48,7 @@ class ZigbeeDevice(Device):
 
     @handleNotSupported
     def getSerial(self) -> str:
-        return str(self.service.getProperty("device.name")["deviceId"])
+        return str(self.service.getProperty("device.zigbee.parent.id")["deviceId"])
 
     @handleNotSupported
     def getZigbeeParentID(self) -> str:
