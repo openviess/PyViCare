@@ -4,7 +4,7 @@ from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class ZK03840(unittest.TestCase):
+class ZK03840ViaHeatbox2(unittest.TestCase):
     def setUp(self):
         self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
@@ -32,9 +32,6 @@ class ZK03840(unittest.TestCase):
     def test_setTargetTemperature(self):
         self.device.setTargetTemperature(22)
         self.assertEqual(len(self.service.setPropertyData), 1)
-        self.assertEqual(
-            self.service.setPropertyData[0]['property_name'], 'trv.temperature')
-        self.assertEqual(
-            self.service.setPropertyData[0]['action'], 'setTargetTemperature')
-        self.assertEqual(self.service.setPropertyData[0]['data'], {
-                         'temperature': 22})
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'trv.temperature')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'setTargetTemperature')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'temperature': 22})
