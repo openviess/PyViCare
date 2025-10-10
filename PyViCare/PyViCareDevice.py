@@ -70,6 +70,8 @@ class ZigbeeDevice(Device):
     def getIdentification(self) -> bool:
         return bool(self.service.getProperty("device.identification")["properties"]["triggered"]["value"])
 
+class ZigbeeBatteryDevice(ZigbeeDevice):
+
     @handleNotSupported
     def getBatteryLevel(self) -> int:
         return int(self.service.getProperty("device.power.battery")["properties"]["level"]["value"])

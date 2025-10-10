@@ -1,8 +1,8 @@
-from PyViCare.PyViCareDevice import ZigbeeDevice
+from PyViCare.PyViCareDevice import ZigbeeBatteryDevice
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class RoomSensor(ZigbeeDevice):
+class RoomSensor(ZigbeeBatteryDevice):
 
     @handleNotSupported
     def getSerial(self):

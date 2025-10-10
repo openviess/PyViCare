@@ -1,8 +1,8 @@
-from PyViCare.PyViCareDevice import ZigbeeDevice
+from PyViCare.PyViCareDevice import ZigbeeBatteryDevice
 from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
-class RadiatorActuator(ZigbeeDevice):
+class RadiatorActuator(ZigbeeBatteryDevice):
 
     @handleNotSupported
     def getTemperature(self):
