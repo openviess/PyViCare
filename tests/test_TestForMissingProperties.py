@@ -235,6 +235,13 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heatingRod.power.consumption.current',
             'heating.heatingRod.power.consumption.heating',
             'heating.heatingRod.power.consumption.dhw',
+            'heating.heatingRod.power.consumption.total',
+            'heating.compressors.0.power.consumption.current',
+            'heating.compressors.0.power.consumption.heating',
+            'heating.compressors.0.heat.production.current',
+            'heating.compressors.0.power.consumption.cooling',
+            'heating.compressors.0.power.consumption.dhw',
+            'heating.compressors.0.power.consumption.total',
         ]
 
         all_features = self.read_all_features()
