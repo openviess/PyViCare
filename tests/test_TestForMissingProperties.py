@@ -37,7 +37,8 @@ class TestForMissingProperties(unittest.TestCase):
             'device.timeseries.ignitionTimeSteps',
             'device.timeseries.monitoringIonization',
             'device.timeseries.water.pressure.peaks',
-
+            'device.information',
+            'device.configuration.measurementWeight',
             'device.configuration.houseLocation',
             'device.lock.malfunction',
             'device.timeseries.burner.stops',
