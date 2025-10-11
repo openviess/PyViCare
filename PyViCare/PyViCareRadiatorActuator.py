@@ -1,20 +1,24 @@
-from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareDevice import ZigbeeBatteryDevice
 from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
-class RadiatorActuator(Device):
-
-    @handleNotSupported
-    def getSerial(self):
-        return self.service.getProperty("device.name")["deviceId"]
-
-    @handleNotSupported
-    def getBatteryLevel(self) -> int:
-        return int(self.service.getProperty("device.power.battery")["properties"]["level"]["value"])
+class RadiatorActuator(ZigbeeBatteryDevice):
 
     @handleNotSupported
     def getTemperature(self):
         return self.service.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getValvePosition(self) -> int:
+        return int(self.service.getProperty("trv.valve.position")["properties"]["position"]["value"])
+
+    @handleNotSupported
+    def getChildLock(self) -> str:
+        return str(self.service.getProperty("trv.childLock")["properties"]["status"]["value"])
+
+    @handleNotSupported
+    def getMountingMode(self) -> bool:
+        return bool(self.service.getProperty("trv.mountingMode")["properties"]["active"]["value"])
 
     @handleNotSupported
     def getTargetTemperature(self):

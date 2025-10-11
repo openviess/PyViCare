@@ -4,13 +4,13 @@ from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class ZK03840(unittest.TestCase):
+class ZK03840ViaHeatbox2(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/zigbee_Smart_Device_eTRV_generic_50.json')
+        self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
         self.device = RadiatorActuator(self.service)
 
     def test_getSerial(self):
-        self.assertEqual(self.device.getSerial(), "zigbee-048727fffeb429ae")
+        self.assertEqual(self.device.getSerial(), "zigbee-################")
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
@@ -22,13 +22,12 @@ class ZK03840(unittest.TestCase):
         self.assertEqual(self.device.isVentilationDevice(), False)
 
     def test_getTemperature(self):
-        self.assertEqual(self.device.getTemperature(), 16.5)
-
-    def test_getBatteryLevel(self):
-        self.assertEqual(self.device.getBatteryLevel(), 66)
+        self.assertEqual(
+            self.device.getTemperature(), 21.5)
 
     def test_getTargetTemperature(self):
-        self.assertEqual(self.device.getTargetTemperature(), 8)
+        self.assertEqual(
+            self.device.getTargetTemperature(), 21.5)
 
     def test_setTargetTemperature(self):
         self.device.setTargetTemperature(22)

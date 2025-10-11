@@ -37,7 +37,8 @@ class TestForMissingProperties(unittest.TestCase):
             'device.timeseries.ignitionTimeSteps',
             'device.timeseries.monitoringIonization',
             'device.timeseries.water.pressure.peaks',
-
+            'device.information',
+            'device.configuration.measurementWeight',
             'device.configuration.houseLocation',
             'device.lock.malfunction',
             'device.timeseries.burner.stops',
@@ -47,6 +48,52 @@ class TestForMissingProperties(unittest.TestCase):
             'device.timeseries.water.pressure.peaks',
             'device.zigbee.active',
             'device.zigbee.status',
+            'device.actorSensorTest',
+            'device.brand',
+            'device.lock.external',
+            'device.power.consumption.limitation',
+            'device.power.statusReport.consumption',
+            'device.power.statusReport.production',
+            'device.type',
+            'device.variant',
+            'heating.boiler.pumps.internal.current',
+            'heating.boiler.temperature.current',
+            'heating.compressors.0.heater.crankcase',
+            'heating.compressors.0.sensors.pressure.inlet',
+            'heating.compressors.0.sensors.temperature.inlet',
+            'heating.compressors.0.sensors.temperature.motorChamber',
+            'heating.compressors.0.sensors.temperature.oil',
+            'heating.compressors.0.sensors.temperature.outlet',
+            'heating.compressors.0.speed.current',
+            'heating.condensors.0.sensors.temperature.liquid',
+            'heating.configuration.heatingRod.dhw',
+            'heating.configuration.heatingRod.heating',
+            'heating.configuration.internalPumpOne',
+            'heating.configuration.internalPumpTwo',
+            'heating.configuration.temperature.outside.DampingFactor',
+            'heating.economizers.0.sensors.temperature.liquid',
+            'heating.evaporators.0.heater.base',
+            'heating.evaporators.0.sensors.temperature.liquid',
+            'heating.evaporators.0.sensors.temperature.overheat',
+            'heating.external.lock',
+            'heating.heat.production.summary.cooling',
+            'heating.heater.condensatePan',
+            'heating.heater.fanRing',
+            'heating.heatingRod',
+            'heating.inverters.0.sensors.power.current',
+            'heating.inverters.0.sensors.power.output',
+            'heating.inverters.0.sensors.temperature.powerModule',
+            'heating.outdoor.defrosting',
+            'heating.power.consumption.summary.cooling',
+            'heating.primaryCircuit.fans.0.current',
+            'heating.primaryCircuit.valves.fourThreeWay',
+            'heating.secondaryCircuit.operation.state',
+            'heating.secondaryCircuit.temperature.return.minimum',
+            'heating.secondaryCircuit.valves.fourThreeWay',
+            'heating.secondaryHeatGenerator',
+            'heating.valves.fourThreeWay.position',
+            'tcu.wifi',
+
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
             'heating.burners.0.demand.temperature',
@@ -174,7 +221,8 @@ class TestForMissingProperties(unittest.TestCase):
             if not found and len(foundInFiles) > 0 and feature not in ignore:
                 missing_features[feature] = foundInFiles
 
-        self.assertDictEqual({}, missing_features)
+        self.maxDiff = None
+        self.assertDictEqual({}, missing_features, "found new data points")
 
     def test_unverifiedProperties(self):
         # with this test we want to verify if we access
@@ -183,6 +231,17 @@ class TestForMissingProperties(unittest.TestCase):
         ignore = [
             'heating.dhw.sensors.temperature.dhwCylinder.midBottom',  # FIXME: remove once test data is updated
             'ventilation.quickmodes',
+            'heating.heatingRod.heat.production.current',
+            'heating.heatingRod.power.consumption.current',
+            'heating.heatingRod.power.consumption.heating',
+            'heating.heatingRod.power.consumption.dhw',
+            'heating.heatingRod.power.consumption.total',
+            'heating.compressors.0.power.consumption.current',
+            'heating.compressors.0.power.consumption.heating',
+            'heating.compressors.0.heat.production.current',
+            'heating.compressors.0.power.consumption.cooling',
+            'heating.compressors.0.power.consumption.dhw',
+            'heating.compressors.0.power.consumption.total',
         ]
 
         all_features = self.read_all_features()
@@ -199,7 +258,8 @@ class TestForMissingProperties(unittest.TestCase):
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
-        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore))
+        self.maxDiff = None
+        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore), "found untested data points")
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")

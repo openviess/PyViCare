@@ -12,6 +12,7 @@ from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.PyViCareRepeater import Repeater
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
@@ -57,6 +58,9 @@ class PyViCareDeviceConfig:
     def asRoomSensor(self):
         return RoomSensor(self.service)
 
+    def asRepeater(self):
+        return Repeater(self.service)
+
     def asElectricalEnergySystem(self):
         return ElectricalEnergySystem(self.service)
 
@@ -94,6 +98,7 @@ class PyViCareDeviceConfig:
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
             (self.asFloorHeating, r"E3_FloorHeatingCircuitDistributorBox", ["type:fhtMain"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
+            (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
             (self.asGateway, r"E3_TCU19_x05", ["type:gateway;TCU200"]),
             (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
