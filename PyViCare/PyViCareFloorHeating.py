@@ -1,35 +1,32 @@
-from PyViCare.PyViCareHeatingDevice import HeatingDevice
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareDevice import ZigbeeDevice, Device
+from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
-class FloorHeating(HeatingDevice):
-
-    @handleNotSupported
-    def getSerial(self):
-        return self.service.getProperty("device.name")["deviceId"]
+class FloorHeating(ZigbeeDevice):
 
     @handleNotSupported
-    def getSupplyTemperature(self):
-        return self.service.getProperty("fht.sensors.temperature.supply")["properties"]["value"]["value"]
+    def getSupplyTemperature(self) -> float:
+        return float(self.service.getProperty("fht.sensors.temperature.supply")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getModes(self):
-        return self.service.getProperty("fht.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+    def getActiveMode(self) -> str:
+        return str(self.service.getProperty("fht.operating.modes.active")["properties"]["value"]["value"])
+
+
+class FloorHeatingChannel(Device):
 
     @handleNotSupported
-    def getActiveMode(self):
-        return self.service.getProperty("fht.operating.modes.active")["properties"]["value"]["value"]
+    def getSerial(self) -> str:
+        return str(self.service.getProperty("device.name")["deviceId"])
 
-    def setMode(self, mode):
-        """ Set the active mode
-        Parameters
-        ----------
-        mode : str
-            Valid mode can be obtained using getModes()
+    @handleNotSupported
+    def getName(self) -> str:
+        return str(self.service.getProperty("device.name")["properties"]["name"]["value"])
 
-        Returns
-        -------
-        result: json
-            json representation of the answer
-        """
-        return self.service.setProperty("fht.operating.modes.active", "setMode", {'mode': mode})
+    @handleAPICommandErrors
+    def setName(self, name: str) -> None:
+        self.service.setProperty("device.name", "setName", {'name': name})
+
+    @handleNotSupported
+    def getValvePosition(self) -> str:
+        return str(self.service.getProperty("fht.valve.state")["properties"]["status"]["value"])
