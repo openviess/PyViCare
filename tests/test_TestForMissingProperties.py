@@ -208,6 +208,12 @@ class TestForMissingProperties(unittest.TestCase):
             'trv.childLock',
             'trv.mountingMode',
             'trv.valve.position',
+
+            # FHT
+            'fht.configuration.floorCoolingCondensationShutdownMargin',
+            'fht.configuration.floorCoolingCondensationThreshold',
+            'fht.configuration.floorHeatingDamageProtectionThreshold',
+            'fht.valve',
         ]
 
         all_features = self.read_all_features()
