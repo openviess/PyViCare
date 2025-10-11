@@ -2,6 +2,7 @@ import json
 import logging
 import re
 
+from PyViCare.PyViCareFloorHeating import FloorHeating
 from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
@@ -51,6 +52,9 @@ class PyViCareDeviceConfig:
     def asRadiatorActuator(self):
         return RadiatorActuator(self.service)
 
+    def asFloorHeating(self):
+        return FloorHeating(self.service)
+
     def asRoomSensor(self):
         return RoomSensor(self.service)
 
@@ -92,6 +96,7 @@ class PyViCareDeviceConfig:
             (self.asVentilation, r"E3_ViAir", ["type:ventilation;central"]),
             (self.asVentilation, r"E3_VitoPure", ["type:ventilation;purifier"]),
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
+            (self.asFloorHeating, r"E3_FloorHeatingCircuitDistributorBox", ["type:fhtMain"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
