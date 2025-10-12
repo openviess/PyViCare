@@ -30,3 +30,7 @@ class FloorHeatingChannel(Device):
     @handleNotSupported
     def getValveState(self) -> str:
         return str(self.service.getProperty("fht.valve.state")["properties"]["status"]["value"])
+
+    @handleNotSupported
+    def isValveOpen(self) -> bool:
+        return bool(self.getValveState() != "closed")
