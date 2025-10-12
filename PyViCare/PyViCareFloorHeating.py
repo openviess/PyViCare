@@ -28,5 +28,5 @@ class FloorHeatingChannel(Device):
         self.service.setProperty("device.name", "setName", {'name': name})
 
     @handleNotSupported
-    def getValvePosition(self) -> str:
+    def getValveState(self) -> str:
         return str(self.service.getProperty("fht.valve.state")["properties"]["status"]["value"])

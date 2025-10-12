@@ -46,6 +46,6 @@ class ZK03838ChannelViaHeatbox2(unittest.TestCase):
         self.assertEqual(
             self.device.getName(), "Zone EG Bad")
 
-    def test_getValvePosition(self):
+    def test_getValveState(self):
         self.assertEqual(
-            self.device.getValvePosition(), "closed")
+            self.device.getValveState(), "closed")
