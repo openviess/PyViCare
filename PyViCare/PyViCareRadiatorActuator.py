@@ -13,6 +13,10 @@ class RadiatorActuator(ZigbeeBatteryDevice):
         return int(self.service.getProperty("trv.valve.position")["properties"]["position"]["value"])
 
     @handleNotSupported
+    def isValveOpen(self) -> bool:
+        return bool(self.getValvePosition() > 0)
+
+    @handleNotSupported
     def getChildLock(self) -> str:
         return str(self.service.getProperty("trv.childLock")["properties"]["status"]["value"])
 
