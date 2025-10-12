@@ -49,3 +49,6 @@ class ZK03838ChannelViaHeatbox2(unittest.TestCase):
     def test_getValveState(self):
         self.assertEqual(
             self.device.getValveState(), "closed")
+
+    def test_isValveOpen(self):
+        self.assertFalse(self.device.isValveOpen())
