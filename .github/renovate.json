@@ -18,6 +18,22 @@
       "description": "Automerge check tools"
     },
     {
+      "matchDatasources": ["pypi"],
+      "groupName": "deprecated packages",
+      "matchPackageNames": [
+        "deprecated",
+        "types-deprecated"
+      ],
+    },
+    {
+      "matchDatasources": ["pypi"],
+      "groupName": "requests packages",
+      "matchPackageNames": [
+        "requests",
+        "types-requests"
+      ],
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "labels": ["maintenance"]
     }

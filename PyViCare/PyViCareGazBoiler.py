@@ -104,10 +104,6 @@ class GazBoiler(HeatingDevice):
         return self.service.getProperty("heating.dhw.charging.level")["properties"]["value"]["value"]
 
     @handleNotSupported
-    def getBoilerCommonSupplyTemperature(self):
-        return self.service.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
-
-    @handleNotSupported
     def getPowerConsumptionUnit(self):
         return self.service.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
 
@@ -264,6 +260,15 @@ class GazBoiler(HeatingDevice):
     def getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         return self.service.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
 
+    @handleNotSupported
+    def getSupplyPressureUnit(self) -> str:
+        # Returns heating supply pressure unit (e.g. bar)
+        return str(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getSupplyPressure(self) -> float:
+        # Returns heating supply pressure
+        return float(self.service.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["value"])
 
 class GazBurner(HeatingDeviceWithComponent):
 
