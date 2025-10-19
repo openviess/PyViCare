@@ -44,6 +44,9 @@ class ViCareService:
             return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/{property_name}'
         return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/{property_name}'
 
+    # def buildSetPropertyUrl(self, property_name, action):
+    #     return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/{property_name}/commands/{action}'
+
     def hasRoles(self, requested_roles) -> bool:
         return hasRoles(requested_roles, self.roles)
 
@@ -67,3 +70,12 @@ class ViCareService:
         url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/reboot'
         data = "{}"
         return self.oauth_manager.post(url, data)
+
+
+class ViCareGatewayService(ViCareService):
+
+    def getAllFeaturesURL(self) -> str:
+        return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features?includeDevicesFeatures=true'
+
+    def fetch_all_features(self) -> Any:
+        return self.oauth_manager.get(self.getAllFeaturesURL())
