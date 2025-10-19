@@ -2,8 +2,20 @@ import unittest
 
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare.PyViCareGateway import Gateway
 from tests.ViCareServiceMock import ViCareServiceMock
+from tests.ViCareGatewayServiceMock import ViCareGatewayServiceMock
 
+
+class Vitopure350ViaGateway(unittest.TestCase):
+    def setUp(self):
+        self.service = ViCareGatewayServiceMock('response/gatewayWithDevices/tcu1/Vitopure-350.json')
+        self.device1 = VentilationDevice(self.service)
+        self.device2 = Gateway(self.service)
+
+    def test_getFromDifferentDevicesViaSameService(self):
+        self.assertEqual("sensorDriven", self.device1.getActiveVentilationMode())
+        self.assertEqual(-67, self.device2.getWifiSignalStrength())
 
 class Vitopure350(unittest.TestCase):
     def setUp(self):
