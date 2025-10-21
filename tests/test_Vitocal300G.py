@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal300G(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitocal300G.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_getCompressorActive(self):
         self.assertEqual(self.device.compressors[0].getActive(), False)

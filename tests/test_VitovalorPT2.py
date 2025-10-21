@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareFuelCell import FuelCell
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitovalorPT2(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/VitovalorPT2.json')
-        self.device = FuelCell(self.service)
+        self.device = FuelCell(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), True)

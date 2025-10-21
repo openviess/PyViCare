@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitoairFs300(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/VitoairFs300E.json')
-        self.device = VentilationDevice(self.service)
+        self.device = VentilationDevice(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)

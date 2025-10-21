@@ -1,14 +1,16 @@
 import unittest
 
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Ecotronic(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Ecotronic.json')
-        self.device = PelletsBoiler(self.service)
+        self.device = PelletsBoiler(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)

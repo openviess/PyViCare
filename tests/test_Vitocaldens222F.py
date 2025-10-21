@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareHybrid import Hybrid
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocaldens222F(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitocaldens222F.json')
-        self.device = Hybrid(self.service)
+        self.device = Hybrid(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), True)

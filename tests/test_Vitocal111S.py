@@ -2,13 +2,15 @@ import unittest
 
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal200(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitocal111S.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_ventilation_state(self):
         self.assertEqual(self.device.getVentilationDemand(), "ventilation")

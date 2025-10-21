@@ -1,14 +1,16 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitodens222W(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitodens222W.json')
-        self.device = GazBoiler(self.service)
+        self.device = GazBoiler(self.accessor, self.service)
 
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), True)

@@ -1,14 +1,16 @@
 import unittest
 
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import MockCircuitsData, ViCareServiceMock
 
 
 class GenericDeviceTest(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock(
             None, {'data': [MockCircuitsData([0])]})
-        self.device = HeatingDevice(self.service)
+        self.device = HeatingDevice(self.accessor, self.service)
 
     def test_activateComfort(self):
         self.device.circuits[0].activateComfort()

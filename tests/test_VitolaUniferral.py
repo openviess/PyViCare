@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareOilBoiler import OilBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitolaUniferral(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/VitolaUniferral.json')
-        self.device = OilBoiler(self.service)
+        self.device = OilBoiler(self.accessor, self.service)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(

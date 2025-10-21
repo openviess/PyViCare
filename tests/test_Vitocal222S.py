@@ -1,6 +1,7 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
@@ -8,8 +9,9 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitocal222S(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitocal222S.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_getDomesticHotWaterActiveMode_10_10_time(self):
         with now_is('2000-01-01 10:10:00'):

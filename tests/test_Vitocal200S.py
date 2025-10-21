@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal200S(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitocal200S.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(

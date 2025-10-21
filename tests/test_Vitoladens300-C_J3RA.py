@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareOilBoiler import OilBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitoladens300C(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitoladens300-C_J3RA.json')
-        self.device = OilBoiler(self.service)
+        self.device = OilBoiler(self.accessor, self.service)
 
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), False)

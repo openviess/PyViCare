@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class SolarTest(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Solar.json')
-        self.device = HeatingDevice(self.service)
+        self.device = HeatingDevice(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), True)

@@ -1,14 +1,16 @@
 import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitodens200W_2(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
         self.service = ViCareServiceMock('response/Vitodens200W_2.json')
-        self.device = GazBoiler(self.service)
+        self.device = GazBoiler(self.accessor, self.service)
 
     def test_getSerial(self):
         self.assertEqual(self.device.getSerial(), '################')
