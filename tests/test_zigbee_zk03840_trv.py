@@ -35,3 +35,6 @@ class ZK03840ViaHeatbox2(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'trv.temperature')
         self.assertEqual(self.service.setPropertyData[0]['action'], 'setTargetTemperature')
         self.assertEqual(self.service.setPropertyData[0]['data'], {'temperature': 22})
+
+    def test_isValveOpen(self):
+        self.assertTrue(self.device.isValveOpen())
