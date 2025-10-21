@@ -16,7 +16,7 @@ class PelletsBoiler(HeatingDevice):
 
     @handleNotSupported
     def getAvailableBurners(self):
-        return get_available_burners(self.service)
+        return get_available_burners(self.accessor, self.service)
 
     @handleNotSupported
     def getBoilerTemperature(self):
