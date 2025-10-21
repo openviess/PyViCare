@@ -60,40 +60,40 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getOutsideTemperature(self):
-        return self.service.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
+        return self.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
+        return self.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getHotWaterStorageTemperatureTop(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"][
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperatureMiddle(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.middle")["properties"]["value"][
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.middle")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperatureMidBottom(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.midBottom")["properties"]["value"][
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.midBottom")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getHotWaterStorageTemperatureBottom(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"][
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
-        return self.service.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
+        return self.getProperty("heating.dhw.temperature.temp2")["properties"]["value"]["value"]
 
     def getDomesticHotWaterActiveMode(self):
         schedule = self.getDomesticHotWaterSchedule()
@@ -129,38 +129,38 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getDomesticHotWaterOutletTemperature(self):
-        return self.service.getProperty("heating.dhw.sensors.temperature.outlet")["properties"]["value"]["value"]
+        return self.getProperty("heating.dhw.sensors.temperature.outlet")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterPumpActive(self):
-        status = self.service.getProperty("heating.dhw.pumps.primary")[
+        status = self.getProperty("heating.dhw.pumps.primary")[
             "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getDomesticHotWaterCirculationPumpActive(self):
-        status = self.service.getProperty("heating.dhw.pumps.circulation")[
+        status = self.getProperty("heating.dhw.pumps.circulation")[
             "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getDomesticHotWaterActive(self):
-        status = self.service.getProperty("heating.dhw")["properties"]["status"]["value"]
+        status = self.getProperty("heating.dhw")["properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getDomesticHotWaterMaxTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"][
+        return self.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"][
             "temperature"]["constraints"]["max"]
 
     @handleNotSupported
     def getDomesticHotWaterMinTemperature(self):
-        return self.service.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"][
+        return self.getProperty("heating.dhw.temperature.main")["commands"]["setTargetTemperature"]["params"][
             "temperature"]["constraints"]["min"]
 
     @handleNotSupported
     def getDomesticHotWaterChargingActive(self):
-        return self.service.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
+        return self.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
 
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
@@ -201,7 +201,7 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getDomesticHotWaterSchedule(self):
-        properties = self.service.getProperty(
+        properties = self.getProperty(
             "heating.dhw.schedule")["properties"]
         return {
             "active": properties["active"]["value"],
@@ -216,11 +216,11 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getSolarCollectorTemperature(self):
-        return self.service.getProperty("heating.solar.sensors.temperature.collector")["properties"]["value"]["value"]
+        return self.getProperty("heating.solar.sensors.temperature.collector")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getSolarStorageTemperature(self):
-        return self.service.getProperty("heating.solar.sensors.temperature.dhw")["properties"]["value"]["value"]
+        return self.getProperty("heating.solar.sensors.temperature.dhw")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getSolarPowerProduction(self):
@@ -228,49 +228,49 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getSolarPowerProductionUnit(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["day"]["unit"]
+        return self.getProperty("heating.solar.power.production")["properties"]["day"]["unit"]
 
     @handleNotSupported
     def getSolarPowerProductionDays(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["day"]["value"]
+        return self.getProperty("heating.solar.power.production")["properties"]["day"]["value"]
 
     @handleNotSupported
     def getSolarPowerProductionToday(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["day"]["value"][0]
+        return self.getProperty("heating.solar.power.production")["properties"]["day"]["value"][0]
 
     @handleNotSupported
     def getSolarPowerProductionWeeks(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["week"]["value"]
+        return self.getProperty("heating.solar.power.production")["properties"]["week"]["value"]
 
     @handleNotSupported
     def getSolarPowerProductionThisWeek(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["week"]["value"][0]
+        return self.getProperty("heating.solar.power.production")["properties"]["week"]["value"][0]
 
     @handleNotSupported
     def getSolarPowerProductionMonths(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["month"]["value"]
+        return self.getProperty("heating.solar.power.production")["properties"]["month"]["value"]
 
     @handleNotSupported
     def getSolarPowerProductionThisMonth(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["month"]["value"][0]
+        return self.getProperty("heating.solar.power.production")["properties"]["month"]["value"][0]
 
     @handleNotSupported
     def getSolarPowerProductionYears(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["year"]["value"]
+        return self.getProperty("heating.solar.power.production")["properties"]["year"]["value"]
 
     @handleNotSupported
     def getSolarPowerProductionThisYear(self):
-        return self.service.getProperty("heating.solar.power.production")["properties"]["year"]["value"][0]
+        return self.getProperty("heating.solar.power.production")["properties"]["year"]["value"][0]
 
     @handleNotSupported
     def getSolarPumpActive(self):
-        status = self.service.getProperty("heating.solar.pumps.circuit")[
+        status = self.getProperty("heating.solar.pumps.circuit")[
             "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getOneTimeCharge(self):
-        return self.service.getProperty("heating.dhw.oneTimeCharge")["properties"]["active"]["value"]
+        return self.getProperty("heating.dhw.oneTimeCharge")["properties"]["active"]["value"]
 
     @handleAPICommandErrors
     def deactivateOneTimeCharge(self):
@@ -287,12 +287,12 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getDomesticHotWaterCirculationScheduleModes(self):
-        return self.service.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+        return self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
             "newSchedule"]["constraints"]["modes"]
 
     @handleNotSupported
     def getDomesticHotWaterCirculationSchedule(self):
-        schedule = self.service.getProperty(
+        schedule = self.getProperty(
             "heating.dhw.pumps.circulation.schedule")
 
         properties = schedule["properties"]
@@ -330,43 +330,43 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getAvailableCircuits(self):
-        return self.service.getProperty("heating.circuits")["properties"]["enabled"]["value"]
+        return self.getProperty("heating.circuits")["properties"]["enabled"]["value"]
 
     @handleNotSupported
     def getControllerSerial(self):
-        return self.service.getProperty("heating.controller.serial")["properties"]["value"]["value"]
+        return self.getProperty("heating.controller.serial")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getBoilerSerial(self):
-        return self.service.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
+        return self.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getReturnTemperature(self):
-        return self.service.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
+        return self.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getSupplyTemperaturePrimaryCircuit(self):
-        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.supply")["properties"]["value"][
+        return self.getProperty("heating.primaryCircuit.sensors.temperature.supply")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getReturnTemperaturePrimaryCircuit(self):
-        return self.service.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"][
+        return self.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getSupplyTemperatureSecondaryCircuit(self):
-        return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"][
+        return self.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getReturnTemperatureSecondaryCircuit(self):
-        return self.service.getProperty("heating.secondaryCircuit.sensors.temperature.return")["properties"]["value"][
+        return self.getProperty("heating.secondaryCircuit.sensors.temperature.return")["properties"]["value"][
             "value"]
 
     @handleNotSupported
     def getBoilerCommonSupplyTemperature(self):
-        return self.service.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
+        return self.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
 
 
 class HeatingDeviceWithComponent:
@@ -380,6 +380,9 @@ class HeatingDeviceWithComponent:
     @property
     def id(self) -> str:
         return self.component
+
+    def getProperty(self, property_name: str) -> Any:
+        return self.device.getProperty(property_name)
 
 
 class HeatingCircuit(HeatingDeviceWithComponent):
@@ -436,15 +439,15 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getActive(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["active"]["value"]
+        return self.getProperty(f"heating.circuits.{self.circuit}")["properties"]["active"]["value"]
 
     @handleNotSupported
     def getName(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["name"]["value"]
+        return self.getProperty(f"heating.circuits.{self.circuit}")["properties"]["name"]["value"]
 
     @handleNotSupported
     def getType(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
+        return self.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
 
     @handleNotSupported
     def getActiveProgramMinTemperature(self):
@@ -466,7 +469,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         if program in ['standby']:
             return None
 
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["min"]
 
     @handleNotSupported
@@ -474,7 +477,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         if program in ['standby']:
             return None
 
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["max"]
 
     @handleNotSupported
@@ -482,7 +485,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         if program in ['standby']:
             return None
 
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")[
             "commands"]["setTemperature"]["params"]["targetTemperature"]["constraints"]["stepping"]
 
     def activateProgram(self, program):
@@ -528,64 +531,64 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getSupplyTemperature(self):
         return \
-            self.service.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
+            self.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
                 "value"]["value"]
 
     @handleNotSupported
     def getRoomTemperature(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.room")["properties"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.room")["properties"][
             "value"]["value"]
 
     @handleNotSupported
     def getModes(self):
         return \
-            self.service.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["commands"]["setMode"][
+            self.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["commands"]["setMode"][
                 "params"]["mode"]["constraints"]["enum"]
 
     @handleNotSupported
     def getActiveMode(self):
         return \
-            self.service.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["properties"]["value"][
+            self.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["properties"]["value"][
                 "value"]
 
     @handleNotSupported
     def getHeatingCurveShift(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["shift"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["shift"][
             "value"]
 
     @handleNotSupported
     def getHeatingCurveShiftMin(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
             "shift"]["constraints"]["min"]
 
     @handleNotSupported
     def getHeatingCurveShiftMax(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
             "shift"]["constraints"]["max"]
 
     @handleNotSupported
     def getHeatingCurveShiftStepping(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
             "shift"]["constraints"]["stepping"]
 
     @handleNotSupported
     def getHeatingCurveSlope(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["slope"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["slope"][
             "value"]
 
     @handleNotSupported
     def getHeatingCurveSlopeMin(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
             "slope"]["constraints"]["min"]
 
     @handleNotSupported
     def getHeatingCurveSlopeMax(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
             "slope"]["constraints"]["max"]
 
     @handleNotSupported
     def getHeatingCurveSlopeStepping(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["commands"]["setCurve"]["params"][
             "slope"]["constraints"]["stepping"]
 
     @handleAPICommandErrors
@@ -595,7 +598,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getActiveProgram(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.active")["properties"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.active")["properties"][
             "value"]["value"]
 
     @handleNotSupported
@@ -607,7 +610,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
                         'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']:
             with suppress(PyViCareNotSupportedFeatureError):
-                if self.service.getProperty(
+                if self.getProperty(
                         f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
                     available_programs.append(program)
 
@@ -616,7 +619,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getDesiredTemperatureForProgram(self, program):
         return \
-            self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"][
+            self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"][
                 "temperature"]["value"]
 
     @handleNotSupported
@@ -624,34 +627,34 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         active_program = self.getActiveProgram()
         if active_program in ['standby']:
             return None
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
             "properties"]["temperature"]["value"]
 
     @handleNotSupported
     def getFrostProtectionActive(self):
-        status = self.service.getProperty(f"heating.circuits.{self.circuit}.frostprotection")[
+        status = self.getProperty(f"heating.circuits.{self.circuit}.frostprotection")[
             "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getCirculationPumpActive(self):
-        status = self.service.getProperty(f"heating.circuits.{self.circuit}.circulation.pump")[
+        status = self.getProperty(f"heating.circuits.{self.circuit}.circulation.pump")[
             "properties"]["status"]["value"]
         return status == 'on'
 
     @handleNotSupported
     def getTemperatureLevelsMin(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["min"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["min"][
             "value"]
 
     @handleNotSupported
     def getTemperatureLevelsMax(self):
-        return self.service.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["max"][
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature.levels")["properties"]["max"][
             "value"]
 
     @handleNotSupported
     def getHeatingSchedule(self):
-        properties = self.service.getProperty(
+        properties = self.getProperty(
             f"heating.circuits.{self.circuit}.heating.schedule")["properties"]
         return {
             "active": properties["active"]["value"],

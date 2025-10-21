@@ -14,15 +14,15 @@ class VentilationDevice(Device):
 
     @handleNotSupported
     def getVentilationDemand(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
+        return str(self.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
 
     @handleNotSupported
     def getVentilationReason(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.state")["properties"]["reason"]["value"])
+        return str(self.getProperty("ventilation.operating.state")["properties"]["reason"]["value"])
 
     @handleNotSupported
     def getVentilationModes(self) -> list[str]:
-        return list[str](self.service.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"])
+        return list[str](self.getProperty("ventilation.operating.modes.active")["commands"]["setMode"]["params"]["mode"]["constraints"]["enum"])
 
     @handleNotSupported
     @deprecated(reason="renamed, use getVentilationModes", version="2.40.0")
@@ -31,15 +31,15 @@ class VentilationDevice(Device):
 
     @handleNotSupported
     def getVentilationMode(self, mode: str) -> bool:
-        return bool(self.service.getProperty(f"ventilation.operating.modes.{mode}")["properties"]["active"]["value"])
+        return bool(self.getProperty(f"ventilation.operating.modes.{mode}")["properties"]["active"]["value"])
 
     @handleNotSupported
     def getActiveVentilationMode(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"])
+        return str(self.getProperty("ventilation.operating.modes.active")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getVentilationLevels(self) -> list[str]:
-        return list[str](self.service.getProperty("ventilation.operating.modes.permanent")["commands"]["setLevel"]["params"]["level"]["constraints"]["enum"])
+        return list[str](self.getProperty("ventilation.operating.modes.permanent")["commands"]["setLevel"]["params"]["level"]["constraints"]["enum"])
 
     @handleNotSupported
     @deprecated(reason="renamed, use getVentilationLevels", version="2.40.0")
@@ -48,7 +48,7 @@ class VentilationDevice(Device):
 
     @handleNotSupported
     def getVentilationLevel(self) -> str:
-        return str(self.service.getProperty("ventilation.operating.state")["properties"]["level"]["value"])
+        return str(self.getProperty("ventilation.operating.state")["properties"]["level"]["value"])
 
     @handleAPICommandErrors
     def setVentilationLevel(self, level: str):
@@ -98,13 +98,13 @@ class VentilationDevice(Device):
         available_quickmodes = []
         for quickmode in ['comfort', 'eco', 'forcedLevelFour', 'holiday', 'standby', 'silent']:
             with suppress(PyViCareNotSupportedFeatureError):
-                if self.service.getProperty(f"ventilation.quickmodes.{quickmode}") is not None:
+                if self.getProperty(f"ventilation.quickmodes.{quickmode}") is not None:
                     available_quickmodes.append(quickmode)
         return available_quickmodes
 
     @handleNotSupported
     def getVentilationQuickmode(self, quickmode: str) -> bool:
-        return bool(self.service.getProperty(f"ventilation.quickmodes.{quickmode}")["properties"]["active"]["value"])
+        return bool(self.getProperty(f"ventilation.quickmodes.{quickmode}")["properties"]["active"]["value"])
 
     @handleNotSupported
     def activateVentilationQuickmode(self, quickmode: str) -> None:
@@ -119,7 +119,7 @@ class VentilationDevice(Device):
         available_programs = []
         for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
             with suppress(PyViCareNotSupportedFeatureError):
-                if self.service.getProperty(f"ventilation.operating.programs.{program}") is not None:
+                if self.getProperty(f"ventilation.operating.programs.{program}") is not None:
                     available_programs.append(program)
         return available_programs
 
@@ -130,7 +130,7 @@ class VentilationDevice(Device):
 
     @handleNotSupported
     def getActiveVentilationProgram(self):
-        return self.service.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
+        return self.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
 
     @handleNotSupported
     @deprecated(reason="renamed, use getActiveVentilationProgram", version="2.40.0")
@@ -197,7 +197,7 @@ class VentilationDevice(Device):
 
     @handleNotSupported
     def getVentilationSchedule(self):
-        properties = self.service.getProperty("ventilation.schedule")["properties"]
+        properties = self.getProperty("ventilation.schedule")["properties"]
         return {
             "active": properties["active"]["value"],
             "mon": properties["entries"]["value"]["mon"],
