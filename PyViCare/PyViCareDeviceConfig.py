@@ -13,6 +13,7 @@ from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
@@ -22,59 +23,60 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_id, device_model, status):
+    def __init__(self, accessor: ViCareDeviceAccessor, service: ViCareService, device_id, device_model, status):
+        self.accessor = accessor
         self.service = service
         self.device_id = device_id
         self.device_model = device_model
         self.status = status
 
     def asGeneric(self):
-        return HeatingDevice(self.service)
+        return HeatingDevice(self.accessor, self.service)
 
     def asGazBoiler(self):
-        return GazBoiler(self.service)
+        return GazBoiler(self.accessor, self.service)
 
     def asFuelCell(self):
-        return FuelCell(self.service)
+        return FuelCell(self.accessor, self.service)
 
     def asHeatPump(self):
-        return HeatPump(self.service)
+        return HeatPump(self.accessor, self.service)
 
     def asOilBoiler(self):
-        return OilBoiler(self.service)
+        return OilBoiler(self.accessor, self.service)
 
     def asPelletsBoiler(self):
-        return PelletsBoiler(self.service)
+        return PelletsBoiler(self.accessor, self.service)
 
     def asHybridDevice(self):
-        return Hybrid(self.service)
+        return Hybrid(self.accessor, self.service)
 
     def asRadiatorActuator(self):
-        return RadiatorActuator(self.service)
+        return RadiatorActuator(self.accessor, self.service)
 
     def asFloorHeating(self):
-        return FloorHeating(self.service)
+        return FloorHeating(self.accessor, self.service)
 
     def asFloorHeatingChannel(self):
-        return FloorHeatingChannel(self.service)
+        return FloorHeatingChannel(self.accessor, self.service)
 
     def asRoomSensor(self):
-        return RoomSensor(self.service)
+        return RoomSensor(self.accessor, self.service)
 
     def asRepeater(self):
-        return Repeater(self.service)
+        return Repeater(self.accessor, self.service)
 
     def asElectricalEnergySystem(self):
-        return ElectricalEnergySystem(self.service)
+        return ElectricalEnergySystem(self.accessor, self.service)
 
     def asGateway(self):
-        return Gateway(self.service)
+        return Gateway(self.accessor, self.service)
 
     def asVentilation(self):
-        return VentilationDevice(self.service)
+        return VentilationDevice(self.accessor, self.service)
 
     def getConfig(self):
-        return self.service.accessor
+        return self.accessor
 
     def getId(self):
         return self.device_id

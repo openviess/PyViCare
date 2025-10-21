@@ -32,10 +32,10 @@ class PyViCare:
     def initWithBrowserOAuth(self, client_id: str, token_file: str) -> None:
         self.initWithExternalOAuth(ViCareBrowserOAuthManager(client_id, token_file))
 
-    def __buildService(self, accessor, roles):
+    def __buildService(self, roles):
         if self.cacheDuration > 0:
-            return ViCareCachedService(self.oauth_manager, accessor, roles, self.cacheDuration)
-        return ViCareService(self.oauth_manager, accessor, roles)
+            return ViCareCachedService(self.oauth_manager, roles, self.cacheDuration)
+        return ViCareService(self.oauth_manager, roles)
 
     def __loadInstallations(self):
         installations = self.oauth_manager.get(
@@ -57,11 +57,11 @@ class PyViCare:
 
                     accessor = ViCareDeviceAccessor(
                         installation.id, gateway.serial, device.id)
-                    service = self.__buildService(accessor, device.roles)
+                    service = self.__buildService(device.roles)
 
                     logger.info("Device found: %s", device.modelId)
 
-                    yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status)
+                    yield PyViCareDeviceConfig(accessor, service, device.id, device.modelId, device.status)
 
 
 class DictWrap(object):
