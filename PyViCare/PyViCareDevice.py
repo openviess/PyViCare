@@ -14,6 +14,9 @@ class Device:
     def __init__(self, service: ViCareService) -> None:
         self.service = service
 
+    def setProperty(self, property_name: str, action: str, data: Any) -> Any:
+        return self.service.setProperty(property_name, action, data)
+
     @handleNotSupported
     def getSerial(self):
         return self.service.getProperty("device.serial")["properties"]["value"]["value"]
@@ -64,7 +67,7 @@ class ZigbeeDevice(Device):
 
     @handleAPICommandErrors
     def setName(self, name: str) -> None:
-        self.service.setProperty("device.name", "setName", {'name': name})
+        self.setProperty("device.name", "setName", {'name': name})
 
     @handleNotSupported
     def getIdentification(self) -> bool:

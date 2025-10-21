@@ -25,7 +25,7 @@ class FloorHeatingChannel(Device):
 
     @handleAPICommandErrors
     def setName(self, name: str) -> None:
-        self.service.setProperty("device.name", "setName", {'name': name})
+        self.setProperty("device.name", "setName", {'name': name})
 
     @handleNotSupported
     def getValveState(self) -> str:

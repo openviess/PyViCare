@@ -52,7 +52,7 @@ class VentilationDevice(Device):
 
     @handleAPICommandErrors
     def setVentilationLevel(self, level: str):
-        return self.service.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})
+        return self.setProperty("ventilation.operating.modes.permanent", "setLevel", {'level': level})
 
     @handleAPICommandErrors
     @deprecated(reason="renamed, use setVentilationLevel", version="2.40.0")
@@ -76,7 +76,7 @@ class VentilationDevice(Device):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
+        return self.setProperty("ventilation.operating.modes.active", "setMode", {'mode': mode})
 
     @deprecated(reason="renamed, use activateVentilationMode", version="2.40.0")
     def setActiveMode(self, mode):
@@ -108,11 +108,11 @@ class VentilationDevice(Device):
 
     @handleNotSupported
     def activateVentilationQuickmode(self, quickmode: str) -> None:
-        self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "activate", {})
+        self.setProperty(f"ventilation.quickmodes.{quickmode}", "activate", {})
 
     @handleNotSupported
     def deactivateVentilationQuickmode(self, quickmode: str) -> None:
-        self.service.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
+        self.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
 
     @handleNotSupported
     def getVentilationPrograms(self):
@@ -150,7 +150,7 @@ class VentilationDevice(Device):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
+        return self.setProperty(f"ventilation.operating.programs.{program}", "activate", {})
 
     @deprecated(reason="renamed, use activateVentilationProgram", version="2.40.0")
     def activateProgram(self, program):
@@ -179,7 +179,7 @@ class VentilationDevice(Device):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
+        return self.setProperty(f"ventilation.operating.programs.{program}", "deactivate", {})
 
     @deprecated(reason="renamed, use deactivateVentilationProgram", version="2.40.0")
     def deactivateProgram(self, program):

@@ -175,7 +175,7 @@ class HeatingDevice(Device):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("heating.dhw.temperature.main", "setTargetTemperature",
+        return self.setProperty("heating.dhw.temperature.main", "setTargetTemperature",
                                         {'temperature': int(temperature)})
 
     @handleAPICommandErrors
@@ -191,12 +191,12 @@ class HeatingDevice(Device):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
+        return self.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
 
     @handleAPICommandErrors
     def setDomesticHotWaterOperatingMode(self, mode):
-        return self.service.setProperty("heating.dhw.operating.modes.active", "setMode",
+        return self.setProperty("heating.dhw.operating.modes.active", "setMode",
                                         {'mode': mode})
 
     @handleNotSupported
@@ -274,15 +274,15 @@ class HeatingDevice(Device):
 
     @handleAPICommandErrors
     def deactivateOneTimeCharge(self):
-        return self.service.setProperty("heating.dhw.oneTimeCharge", "deactivate", {})
+        return self.setProperty("heating.dhw.oneTimeCharge", "deactivate", {})
 
     @handleAPICommandErrors
     def activateOneTimeCharge(self):
-        return self.service.setProperty("heating.dhw.oneTimeCharge", "activate", {})
+        return self.setProperty("heating.dhw.oneTimeCharge", "activate", {})
 
     @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
-        return self.service.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
+        return self.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
                                         {'newSchedule': schedule})
 
     @handleNotSupported
@@ -399,7 +399,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         result: json
             json representation of the answer
         """
-        r = self.service.setProperty(
+        r = self.device.setProperty(
             f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
         return r
 
@@ -422,7 +422,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
+        return self.device.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "setTemperature", {'targetTemperature': float(temperature)})
 
     def setReducedTemperature(self, temperature):
@@ -501,7 +501,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         """
 
         # optional temperature parameter could be passed (but not done)
-        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "activate",
+        return self.device.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "activate",
                                         {})
 
     def activateComfort(self):
@@ -519,7 +519,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
+        return self.device.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "deactivate", {})
 
     def deactivateComfort(self):
@@ -590,7 +590,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     @handleAPICommandErrors
     def setHeatingCurve(self, shift, slope):
-        return self.service.setProperty(f"heating.circuits.{self.circuit}.heating.curve", "setCurve",
+        return self.device.setProperty(f"heating.circuits.{self.circuit}.heating.curve", "setCurve",
                                         {'shift': int(shift), 'slope': round(float(slope), 1)})
 
     @handleNotSupported

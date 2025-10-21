@@ -30,4 +30,4 @@ class RadiatorActuator(ZigbeeBatteryDevice):
 
     @handleAPICommandErrors
     def setTargetTemperature(self, temperature):
-        return self.service.setProperty("trv.temperature", "setTargetTemperature", {'temperature': float(temperature)})
+        return self.setProperty("trv.temperature", "setTargetTemperature", {'temperature': float(temperature)})

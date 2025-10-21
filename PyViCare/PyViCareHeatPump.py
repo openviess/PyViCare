@@ -176,7 +176,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresis", {'hysteresis': temperature})
+        return self.setProperty("heating.dhw.temperature.hysteresis", "setHysteresis", {'hysteresis': temperature})
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisSwitchOn(self) -> float:
@@ -207,7 +207,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOnValue", {'hysteresis': temperature})
+        return self.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOnValue", {'hysteresis': temperature})
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisSwitchOff(self) -> float:
@@ -238,7 +238,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
         result: json
             json representation of the answer
         """
-        return self.service.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
+        return self.setProperty("heating.dhw.temperature.hysteresis", "setHysteresisSwitchOffValue", {'hysteresis': temperature})
 
     @handleNotSupported
     def getSupplyPressureUnit(self) -> str:
