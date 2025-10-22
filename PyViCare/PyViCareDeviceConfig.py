@@ -7,7 +7,7 @@ from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareHybrid import Hybrid
+from PyViCare.PyViCareHybrid import HeatPumpWithVentilation, Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
@@ -39,6 +39,9 @@ class PyViCareDeviceConfig:
 
     def asHeatPump(self):
         return HeatPump(self.service)
+
+    def asHeatPumpWithVentilation(self):
+        return HeatPumpWithVentilation(self.service)
 
     def asOilBoiler(self):
         return OilBoiler(self.service)
@@ -92,6 +95,7 @@ class PyViCareDeviceConfig:
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
             (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
+            (self.asHeatPumpWithVentilation, r"unknown", ["type:heatpump", "type:ventilation;integrated"]),
             (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]), # ees, it this a typo?
             (self.asElectricalEnergySystem, r"E3_VitoCharge_05", ["type:ess"]),
