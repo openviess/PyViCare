@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class VitochargeVX3(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/VitochargeVX3.json')
         self.device = ElectricalEnergySystem(self.accessor, self.service)
 

@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class ZK03839ViaHeatbox2(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "zigbee-################")
         self.service = ViCareServiceMock('response/zigbee_zk03839_cs.json')
         self.device = RoomSensor(self.accessor, self.service)
 

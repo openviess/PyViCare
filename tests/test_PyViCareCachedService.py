@@ -14,14 +14,14 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def setUp(self):
         self.oauth_mock = Mock()
         self.oauth_mock.get.return_value = {'data': [{"feature": "someprop"}]}
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareCachedService(
             self.oauth_mock, [], self.CACHE_DURATION)
 
     def test_getProperty_existing(self):
         self.service.getProperty(self.accessor, "someprop")
         self.oauth_mock.get.assert_called_once_with(
-            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/')
+            '/features/installations/[id]/gateways/[serial]/devices/0/features/')
 
     def test_getProperty_nonexisting_raises_exception(self):
 
@@ -32,7 +32,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
     def test_setProperty_works(self):
         self.service.setProperty(self.accessor, "someotherprop", "doaction", {'name': 'abc'})
         self.oauth_mock.post.assert_called_once_with(
-            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/someotherprop/commands/doaction', '{"name": "abc"}')
+            '/features/installations/[id]/gateways/[serial]/devices/0/features/someotherprop/commands/doaction', '{"name": "abc"}')
 
     def test_getProperty_existing_cached(self):
         # time+0 seconds
@@ -46,7 +46,7 @@ class PyViCareCachedServiceTest(unittest.TestCase):
 
         self.assertEqual(self.oauth_mock.get.call_count, 1)
         self.oauth_mock.get.assert_called_once_with(
-            '/features/installations/[id]/gateways/[serial]/devices/[device]/features/')
+            '/features/installations/[id]/gateways/[serial]/devices/0/features/')
 
         # time+70 seconds (must be more than CACHE_DURATION)
         with now_is('2000-01-01 00:01:10'):

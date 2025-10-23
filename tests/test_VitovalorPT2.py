@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class VitovalorPT2(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/VitovalorPT2.json')
         self.device = FuelCell(self.accessor, self.service)
 

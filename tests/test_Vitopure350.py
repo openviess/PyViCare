@@ -8,7 +8,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitopure350(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitopure350.json')
         self.device = VentilationDevice(self.accessor, self.service)
 

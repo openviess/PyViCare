@@ -8,7 +8,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitodens300W(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitodens300W.json')
         self.device = GazBoiler(self.accessor, self.service)
 

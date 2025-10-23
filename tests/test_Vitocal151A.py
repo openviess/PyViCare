@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitocal200(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocal151A.json')
         self.device = HeatPump(self.accessor, self.service)
 

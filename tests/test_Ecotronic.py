@@ -8,7 +8,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Ecotronic(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Ecotronic.json')
         self.device = PelletsBoiler(self.accessor, self.service)
 

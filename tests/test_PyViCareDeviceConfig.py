@@ -12,7 +12,7 @@ def has_roles(roles):
 class PyViCareDeviceConfigTest(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = Mock()
         self.service.hasRoles = has_roles([])
 

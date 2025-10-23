@@ -27,7 +27,7 @@ class ViCareServiceMock:
 
     def getProperty(self, accessor: ViCareDeviceAccessor, property_name):
         entities = self.testData["data"]
-        return readFeature(entities, property_name)
+        return readFeature(accessor, entities, property_name)
 
     def setProperty(self, accessor: ViCareDeviceAccessor, property_name, action, data):
         self.setPropertyData.append({

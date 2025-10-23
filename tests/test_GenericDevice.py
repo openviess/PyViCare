@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import MockCircuitsData, ViCareServiceMock
 
 class GenericDeviceTest(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock(
             None, {'data': [MockCircuitsData([0])]})
         self.device = HeatingDevice(self.accessor, self.service)

@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class VitoconnectOpto1(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "gateway")
         self.service = ViCareServiceMock('response/VitoconnectOpto1.json')
         self.device = Gateway(self.accessor, self.service)
 

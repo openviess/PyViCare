@@ -7,7 +7,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class ZK05390ViaHeatbox2(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "zigbee-################")
         self.service = ViCareServiceMock('response/zigbee_zk05390_repeater.json')
         self.device = Repeater(self.accessor, self.service)
 

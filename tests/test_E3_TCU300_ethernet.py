@@ -8,7 +8,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class TCU300_ethernet(unittest.TestCase):
     def setUp(self):
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "[device]")
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "gateway")
         self.service = ViCareServiceMock('response/TCU300_ethernet.json')
         self.device = Gateway(self.accessor, self.service)
 
