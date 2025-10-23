@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class ZK03840ViaHeatbox2(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "zigbee-################")
         self.service = ViCareServiceMock('response/zigbee_zk03840_trv.json')
-        self.device = RadiatorActuator(self.service)
+        self.device = RadiatorActuator(self.accessor, self.service)
 
     def test_getSerial(self):
         self.assertEqual(self.device.getSerial(), "zigbee-################")
