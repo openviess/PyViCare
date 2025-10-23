@@ -23,7 +23,7 @@ class ViCareCachedService(ViCareService):
     def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:
         data = self.__get_or_update_cache(accessor)
         entities = data["data"]
-        return readFeature(entities, property_name)
+        return readFeature(accessor, entities, property_name)
 
     def setProperty(self, accessor: ViCareDeviceAccessor, property_name, action, data):
         response = super().setProperty(accessor, property_name, action, data)

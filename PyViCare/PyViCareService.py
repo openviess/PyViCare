@@ -8,9 +8,15 @@ from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 logger = logging.getLogger('ViCare')
 logger.addHandler(logging.NullHandler())
 
-def readFeature(entities, property_name):
+class ViCareDeviceAccessor:
+    def __init__(self, _id: int, serial: str, device_id: str) -> None:
+        self.id = _id
+        self.serial = serial
+        self.device_id = device_id
+
+def readFeature(accessor: ViCareDeviceAccessor, entities, property_name):
     feature = next(
-        (f for f in entities if f["feature"] == property_name), None)
+        (f for f in entities if (not f.get("deviceId") or f["deviceId"] == accessor.device_id) and f["feature"] == property_name), None)
 
     if feature is None:
         raise PyViCareNotSupportedFeatureError(property_name)
@@ -22,12 +28,6 @@ def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
 
 def buildSetPropertyUrl(accessor, property_name, action):
     return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
-
-class ViCareDeviceAccessor:
-    def __init__(self, _id: int, serial: str, device_id: str) -> None:
-        self.id = _id
-        self.serial = serial
-        self.device_id = device_id
 
 class ViCareService:
     def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: List[str]) -> None:
