@@ -57,7 +57,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
         oauth_session = OAuth2Session(
             self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
         code_verifier = generate_token(48)
-        authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
+        authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier, scope="Internal openid offline_access")
         logger.debug("Auth URL is: %s", authorization_url)
 
         header = {'Content-Type': 'application/x-www-form-urlencoded'}
