@@ -49,6 +49,16 @@ class Device:
         except PyViCareNotSupportedFeatureError:
             return False
 
+class DeviceWithComponent:
+
+    def __init__(self, device: Device, component: str) -> None:
+        self.service = device.service
+        self.component = component
+        self.device = device
+
+    @property
+    def id(self) -> str:
+        return self.component
 
 class ZigbeeDevice(Device):
 

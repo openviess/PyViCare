@@ -3,6 +3,7 @@ import logging
 import re
 
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
+from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
@@ -58,6 +59,9 @@ class PyViCareDeviceConfig:
     def asFloorHeatingChannel(self):
         return FloorHeatingChannel(self.service)
 
+    def asRoomControl(self):
+        return RoomControl(self.service)
+
     def asRoomSensor(self):
         return RoomSensor(self.service)
 
@@ -99,8 +103,9 @@ class PyViCareDeviceConfig:
             (self.asVentilation, r"E3_ViAir", ["type:ventilation;central"]),
             (self.asVentilation, r"E3_VitoPure", ["type:ventilation;purifier"]),
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
-            (self.asFloorHeating, r"Smart_zigbee_fht_main|E3_FloorHeatingCircuitDistributorBox", ["type:fhtMain"]),
-            (self.asFloorHeatingChannel, r"Smart_zigbee_fht_channel", ["type:fhtChannel"]),
+            (self.asFloorHeating, r"E3_FloorHeatingCircuitDistributorBox|Smart_zigbee_fht_main|E3_FloorHeatingCircuitDistributorBox", ["type:fhtMain"]),
+            (self.asFloorHeatingChannel, r"E3_FloorHeatingCircuitChannel|Smart_zigbee_fht_channel", ["type:fhtChannel"]),
+            (self.asRoomControl, r"E3_RoomControl_One_525", ["type:virtual;smartRoomControl"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
