@@ -71,7 +71,7 @@ password = "password"
 
 vicare = PyViCare()
 vicare.initWithCredentials(email, password, client_id, "token.save")
-device = vicare.devices[0]
+device = vicare.devices[1]
 print(device.getModel())
 print("Online" if device.isOnline() else "Offline")
 
