@@ -2,6 +2,7 @@ from contextlib import suppress
 from typing import Any, List, Optional
 
 from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareService import ViCareService, ViCareDeviceAccessor
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
 from PyViCare.PyViCareUtils import (VICARE_DAYS,
@@ -17,13 +18,13 @@ def all_set(_list: List[Any]) -> bool:
     return all(v is not None for v in _list)
 
 
-def get_available_burners(service):
+def get_available_burners(accessor: ViCareDeviceAccessor, service: ViCareService):
     # workaround starting from 25.01.2022
     # see: https://github.com/somm15/PyViCare/issues/243
     available_burners = []
     for burner in ['0', '1', '2', '3', '4', '5']:
         with suppress(PyViCareNotSupportedFeatureError):
-            if service.getProperty(f"heating.burners.{burner}") is not None:
+            if service.getProperty(accessor, f"heating.burners.{burner}") is not None:
                 available_burners.append(burner)
 
     return available_burners

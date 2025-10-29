@@ -1,5 +1,6 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
@@ -7,8 +8,9 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitopure350(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitopure350.json')
-        self.device = VentilationDevice(self.service)
+        self.device = VentilationDevice(self.accessor, self.service)
 
     def test_getActiveMode(self):
         self.assertEqual("sensorDriven", self.device.getActiveMode())

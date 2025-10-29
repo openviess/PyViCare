@@ -1,13 +1,15 @@
 import unittest
 
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class ZK03838MainViaHeatbox2(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "zigbee-################")
         self.service = ViCareServiceMock('response/zigbee_zk03838_fht_main.json')
-        self.device = FloorHeating(self.service)
+        self.device = FloorHeating(self.accessor, self.service)
 
     def test_getSerial(self):
         self.assertEqual(
@@ -35,8 +37,9 @@ class ZK03838MainViaHeatbox2(unittest.TestCase):
 
 class ZK03838ChannelViaHeatbox2(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "zigbee-################-2")
         self.service = ViCareServiceMock('response/zigbee_zk03838_fht_channel.json')
-        self.device = FloorHeatingChannel(self.service)
+        self.device = FloorHeatingChannel(self.accessor, self.service)
 
     def test_getSerial(self):
         self.assertEqual(

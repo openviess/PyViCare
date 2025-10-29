@@ -13,24 +13,24 @@ logger.addHandler(logging.NullHandler())
 
 class ViCareCachedService(ViCareService):
 
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, roles: List[str], cacheDuration: int) -> None:
-        ViCareService.__init__(self, oauth_manager, accessor, roles)
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: List[str], cacheDuration: int) -> None:
+        ViCareService.__init__(self, oauth_manager, roles)
         self.__cacheDuration = cacheDuration
         self.__cache = None
         self.__cacheTime = None
         self.__lock = threading.Lock()
 
-    def getProperty(self, property_name: str) -> Any:
-        data = self.__get_or_update_cache()
+    def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:
+        data = self.__get_or_update_cache(accessor)
         entities = data["data"]
-        return readFeature(entities, property_name)
+        return readFeature(accessor, entities, property_name)
 
-    def setProperty(self, property_name, action, data):
-        response = super().setProperty(property_name, action, data)
+    def setProperty(self, accessor: ViCareDeviceAccessor, property_name, action, data):
+        response = super().setProperty(accessor, property_name, action, data)
         self.clear_cache()
         return response
 
-    def __get_or_update_cache(self):
+    def __get_or_update_cache(self, accessor: ViCareDeviceAccessor):
         with self.__lock:
             if self.is_cache_invalid():
                 # we always sett the cache time before we fetch the data
@@ -39,7 +39,7 @@ class ViCareCachedService(ViCareService):
                 # we simply return the old cache in this case
                 self.__cacheTime = ViCareTimer().now()
 
-                data = self.fetch_all_features()
+                data = self.fetch_all_features(accessor)
                 if "data" not in data:
                     logger.error("Missing 'data' property when fetching data.")
                     raise PyViCareInvalidDataError(data)
