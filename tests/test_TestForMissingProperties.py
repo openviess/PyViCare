@@ -175,8 +175,8 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.sensors.airBorneDust.pm2d5',
             'ventilation.sensors.airBorneDust.pm4',
             'ventilation.sensors.airQuality',
-            'ventilation.sensors.humidity.supply',
-            'ventilation.sensors.temperature.supply',
+            # 'ventilation.sensors.humidity.supply',
+            # 'ventilation.sensors.temperature.supply',
             'ventilation.sensors.volatileOrganicCompounds',
             'ventilation.levels.levelOne',
             'ventilation.levels.levelTwo',
@@ -261,6 +261,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.power.consumption.cooling',
             'heating.compressors.0.power.consumption.dhw',
             'heating.compressors.0.power.consumption.total',
+            'ventilation.sensors.temperature.outside',
+            'ventilation.sensors.humidity.outdoor',
         ]
 
         all_features = self.read_all_features()

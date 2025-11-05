@@ -213,3 +213,37 @@ class VentilationDevice(Device):
     @deprecated(reason="renamed, use getVentilationSchedule", version="2.40.0")
     def getSchedule(self):
         return self.getVentilationSchedule()
+
+    @handleNotSupported
+    def getOutsideTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.outside")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getOutsideHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.outdoor")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSupplyTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.supply")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSupplyHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.supply")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getVolatileOrganicCompounds(self) -> int:
+        return int(self.getProperty("ventilation.sensors.volatileOrganicCompounds")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSupplyFanHours(self) -> int:
+        return int(self.getProperty("ventilation.fan.supply.runtime")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSupplyFanSpeed(self) -> int:
+        return int(self.getProperty("ventilation.fan.supply")["properties"]["current"]["value"])
+
+    @handleNotSupported
+    def getSupplyFanTargetSpeed(self) -> int:
+        return int(self.getProperty("ventilation.fan.supply")["properties"]["target"]["value"])
+
+
