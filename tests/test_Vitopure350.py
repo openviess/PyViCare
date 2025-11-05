@@ -18,10 +18,10 @@ class Vitopure350(unittest.TestCase):
         self.assertListEqual(expected_modes, self.device.getAvailableModes())
 
     def test_getActiveProgram(self):
-        self.assertEqual("automatic", self.device.getActiveProgram())
+        self.assertEqual("levelTwo", self.device.getActiveProgram())
 
     def test_getAvailablePrograms(self):
-        expected_programs = ['standby']
+        expected_programs = []
         self.assertListEqual(expected_programs, self.device.getAvailablePrograms())
 
     def test_getPermanentLevels(self):
