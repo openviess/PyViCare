@@ -17,12 +17,12 @@ class Vitopure350(unittest.TestCase):
         expected_modes = ['permanent', 'ventilation', 'sensorDriven']
         self.assertListEqual(expected_modes, self.device.getAvailableModes())
 
-    def test_getActiveProgram(self):
-        self.assertEqual("levelTwo", self.device.getActiveProgram())
+    def test_getActiveVentilationProgram(self):
+        self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
 
-    def test_getAvailablePrograms(self):
+    def test_getVentilationPrograms(self):
         expected_programs = []
-        self.assertListEqual(expected_programs, self.device.getAvailablePrograms())
+        self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
 
     def test_getPermanentLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
