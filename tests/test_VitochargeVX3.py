@@ -6,7 +6,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class VitochargeVX3(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/VitochargeVX3.json')
+        self.service = ViCareServiceMock('response/Vitocharge03.json')
         self.device = ElectricalEnergySystem(self.service)
 
     def test_isDomesticHotWaterDevice(self):

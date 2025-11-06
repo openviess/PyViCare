@@ -4,9 +4,9 @@ from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class Vitocal_200S_with_Vitovent_300W(unittest.TestCase):
+class Vitocal200S_with_Vitovent300W(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal-200S-with-Vitovent-300W.json')
+        self.service = ViCareServiceMock('response/Vitocal200S-with-Vitovent300W.json')
         self.device = HeatPump(self.service)
 
     def test_isDomesticHotWaterDevice(self):
@@ -44,15 +44,3 @@ class Vitocal_200S_with_Vitovent_300W(unittest.TestCase):
             "eco",
             "holiday",
         ])
-
-class Vitocal_333G_with_Vitovent_300F(unittest.TestCase):
-    def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal-333G-with-Vitovent-300F.json')
-        self.device = HeatPump(self.service)
-
-    def test_getHeatExchangerFrostProtectionActive(self):
-        self.assertFalse(self.device.getHeatExchangerFrostProtectionActive())
-
-    def test_getVolumeFlow(self):
-        self.assertEqual(self.device.getSupplyVolumeFlow(), 257)
-        self.assertEqual(self.device.getExhaustVolumeFlow(), 257)

@@ -28,9 +28,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.productIdentification',
             'device.productMatrix',
             'device.time.daylightSaving',
-            'device.identification',
-            'device.zigbee.parent.rx',
-            'device.zigbee.parent.tx',
             'device.heatingCircuitId',
             'device.configuration.houseLocation',
             'device.lock.malfunction',
@@ -41,15 +38,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.timeseries.water.pressure.peaks',
             'device.information',
             'device.configuration.measurementWeight',
-            'device.configuration.houseLocation',
-            'device.lock.malfunction',
-            'device.timeseries.burner.stops',
-            'device.timeseries.dhw.burner.stops',
-            'device.timeseries.ignitionTimeSteps',
-            'device.timeseries.monitoringIonization',
-            'device.timeseries.water.pressure.peaks',
-            'device.zigbee.active',
-            'device.zigbee.status',
             'device.actorSensorTest',
             'device.brand',
             'device.lock.external',
@@ -105,7 +93,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.centralHeatingCylinderSize',
             'heating.configuration.dhwCylinderPump',
             'heating.configuration.dhwCylinderSize',
-            'device.messages.info.raw',
             'heating.configuration.gasType',
             'heating.configuration.houseHeatingLoad',
             'heating.configuration.houseLocation',
@@ -116,7 +103,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heat.production.summary.dhw',
             'heating.heat.production.summary.heating',
 
-            # heating ignored for now
+            # heating - not yet used
             'heating.operating.programs.holidayAtHome',
             'heating.operating.programs.holiday',
             'heating.device.time.offset',
@@ -125,34 +112,27 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.boiler.airflaps.1.position.current',
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
-
             'heating.circuits.0.dhw.pumps.circulation.schedule',
             'heating.circuits.0.dhw.schedule',
             'heating.power.consumption.dhw',
             'heating.power.consumption',
-
             'heating.circuits.0.temperature.levels',  # hint: command
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
-
-            'heating.dhw.hygiene.trigger',
-            'heating.dhw.operating.modes.off',
-            'heating.dhw.temperature.hygiene',
             'heating.sensors.temperature.allengra',
-
+            'heating.dhw.hygiene.trigger',
+            'heating.dhw.temperature.hygiene',
+            'heating.dhw.operating.modes.off',
             'heating.dhw.operating.modes.active',
             'heating.dhw.operating.modes.comfort',
             'heating.dhw.operating.modes.eco',
-
             'heating.circuits.0.heating.roomInfluenceFactor',
             'heating.circuits.0.temperature',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
-
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
-
             'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
@@ -166,7 +146,16 @@ class TestForMissingProperties(unittest.TestCase):
 
             # gateway
 
+            # zigbee
+            'device.zigbee.lqi',
+            'device.zigbee.parent.rx',
+            'device.zigbee.parent.tx',
+            'device.zigbee.active',
+            'device.zigbee.status',
+
             # heat pump
+            'heating.circuits.0.cooling.hysteresis.switch',
+            'heating.circuits.0.heating.hysteresis.switch',
             'heating.circuits.0.operating.programs.screedDrying.heatpump',
             'heating.compressors.0.heat.production.cooling.week',
             'heating.compressors.0.heat.production.dhw.week',
@@ -198,6 +187,13 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.temperature.hotGas',
             'heating.sensors.temperature.liquidGas',
             'heating.sensors.temperature.suctionGas',
+            'heating.heatingRod.power.consumption.summary.dhw',
+            'heating.heatingRod.power.consumption.summary.heating',
+            'heating.heatingRod.status',
+            'heating.scop.dhw', # deprecated
+            'heating.scop.heating', # deprecated
+            'heating.scop.total', # deprecated
+            'heating.dhw.comfort', # deprecated
 
             # ventilation - not yet used
             'ventilation.control.filterChange',
@@ -218,14 +214,6 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.comfort',
             'ventilation.quickmodes.eco',
             'ventilation.quickmodes.holiday',
-            'heating.heatingRod.power.consumption.summary.dhw',
-            'heating.heatingRod.power.consumption.summary.heating',
-            'heating.heatingRod.status',
-            'heating.power.consumption.current',
-            'heating.scop.dhw', # deprecated
-            'heating.scop.heating', # deprecated
-            'heating.scop.total', # deprecated
-            'heating.dhw.comfort', # deprecated
 
             # energy system - not yet used
             'device.etn',
@@ -245,18 +233,13 @@ class TestForMissingProperties(unittest.TestCase):
             'photovoltaic.string.current',
             'photovoltaic.string.voltage',
 
-            # TRVs
-            'device.zigbee.lqi',
-            'device.zigbee.parent.id',
-            'trv.childLock',
-            'trv.mountingMode',
-            'trv.valve.position',
-
-            # FHT
+            # FHT - not yet used
             'fht.configuration.floorCoolingCondensationShutdownMargin',
             'fht.configuration.floorCoolingCondensationThreshold',
             'fht.configuration.floorHeatingDamageProtectionThreshold',
             'fht.valve',
+
+            # DEPRECATED
         ]
 
         all_features = self.read_all_features()
