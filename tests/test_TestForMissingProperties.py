@@ -28,7 +28,7 @@ class TestForMissingProperties(unittest.TestCase):
             'device.productIdentification',
             'device.productMatrix',
             'device.time.daylightSaving',
-            'device.identification',
+            # 'device.identification',
             'device.zigbee.parent.rx',
             'device.zigbee.parent.tx',
             'device.heatingCircuitId',
@@ -41,13 +41,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.timeseries.water.pressure.peaks',
             'device.information',
             'device.configuration.measurementWeight',
-            'device.configuration.houseLocation',
-            'device.lock.malfunction',
-            'device.timeseries.burner.stops',
-            'device.timeseries.dhw.burner.stops',
-            'device.timeseries.ignitionTimeSteps',
-            'device.timeseries.monitoringIonization',
-            'device.timeseries.water.pressure.peaks',
             'device.zigbee.active',
             'device.zigbee.status',
             'device.actorSensorTest',
@@ -105,7 +98,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.centralHeatingCylinderSize',
             'heating.configuration.dhwCylinderPump',
             'heating.configuration.dhwCylinderSize',
-            'device.messages.info.raw',
             'heating.configuration.gasType',
             'heating.configuration.houseHeatingLoad',
             'heating.configuration.houseLocation',
@@ -167,6 +159,8 @@ class TestForMissingProperties(unittest.TestCase):
             # gateway
 
             # heat pump
+            'heating.circuits.0.cooling.hysteresis.switch',
+            'heating.circuits.0.heating.hysteresis.switch',
             'heating.circuits.0.operating.programs.screedDrying.heatpump',
             'heating.compressors.0.heat.production.cooling.week',
             'heating.compressors.0.heat.production.dhw.week',
@@ -221,7 +215,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heatingRod.power.consumption.summary.dhw',
             'heating.heatingRod.power.consumption.summary.heating',
             'heating.heatingRod.status',
-            'heating.power.consumption.current',
+            # 'heating.power.consumption.current',
             'heating.scop.dhw', # deprecated
             'heating.scop.heating', # deprecated
             'heating.scop.total', # deprecated
@@ -247,10 +241,10 @@ class TestForMissingProperties(unittest.TestCase):
 
             # TRVs
             'device.zigbee.lqi',
-            'device.zigbee.parent.id',
-            'trv.childLock',
-            'trv.mountingMode',
-            'trv.valve.position',
+            # 'device.zigbee.parent.id',
+            # 'trv.childLock',
+            # 'trv.mountingMode',
+            # 'trv.valve.position',
 
             # FHT
             'fht.configuration.floorCoolingCondensationShutdownMargin',
