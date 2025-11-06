@@ -263,6 +263,9 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.power.consumption.total',
             'ventilation.sensors.temperature.outside',
             'ventilation.sensors.humidity.outdoor',
+            'ventilation.volumeFlow.current.input',
+            'ventilation.volumeFlow.current.output',
+            'ventilation.heatExchanger.frostprotection',
         ]
 
         all_features = self.read_all_features()

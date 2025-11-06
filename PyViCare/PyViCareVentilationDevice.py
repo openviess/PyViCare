@@ -246,4 +246,14 @@ class VentilationDevice(Device):
     def getSupplyFanTargetSpeed(self) -> int:
         return int(self.getProperty("ventilation.fan.supply")["properties"]["target"]["value"])
 
+    @handleNotSupported
+    def getHeatExchangerFrostProtectionActive(self) -> bool:
+        return "off" != str(self.getProperty("ventilation.heatExchanger.frostprotection")["properties"]["status"]["value"])
 
+    @handleNotSupported
+    def getSupplyVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.volumeFlow.current.input")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExhaustVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.volumeFlow.current.output")["properties"]["value"]["value"])
