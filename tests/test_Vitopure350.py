@@ -76,3 +76,20 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(self.service.setPropertyData[0]['action'], 'deactivate')
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'ventilation.quickmodes.standby')
+
+    @unittest.skip("testdata missing")
+    def test_getOutsideTemperature(self):
+        self.assertEqual(self.device.getOutsideTemperature(), 15.0)
+        self.assertEqual(self.device.getOutsideHumidity(), 15)
+
+    def test_getSupplyTemperature(self):
+        self.assertEqual(self.device.getSupplyTemperature(), 20.8)
+        self.assertEqual(self.device.getSupplyHumidity(), 59)
+
+    def test_getVolatileOrganicCompounds(self):
+        self.assertEqual(self.device.getVolatileOrganicCompounds(), 148)
+
+    def test_getSupplyFanSpeed(self):
+        self.assertEqual(self.device.getSupplyFanSpeed(), 555)
+        self.assertEqual(self.device.getSupplyFanTargetSpeed(), 585)
+        self.assertEqual(self.device.getSupplyFanHours(), 819)

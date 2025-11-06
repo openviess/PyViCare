@@ -166,8 +166,6 @@ class TestForMissingProperties(unittest.TestCase):
 
             # ventilation - not yet used
             'ventilation.control.filterChange',
-            'ventilation.fan.supply',
-            'ventilation.fan.supply.runtime',
             'ventilation.filter.pollution.blocked',
             'ventilation.filter.runtime',
             'ventilation.sensors.airBorneDust.pm1',
@@ -175,9 +173,6 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.sensors.airBorneDust.pm2d5',
             'ventilation.sensors.airBorneDust.pm4',
             'ventilation.sensors.airQuality',
-            'ventilation.sensors.humidity.supply',
-            'ventilation.sensors.temperature.supply',
-            'ventilation.sensors.volatileOrganicCompounds',
             'ventilation.levels.levelOne',
             'ventilation.levels.levelTwo',
             'ventilation.levels.levelThree',
@@ -261,6 +256,11 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.power.consumption.cooling',
             'heating.compressors.0.power.consumption.dhw',
             'heating.compressors.0.power.consumption.total',
+            'ventilation.sensors.temperature.outside',
+            'ventilation.sensors.humidity.outdoor',
+            'ventilation.volumeFlow.current.input',
+            'ventilation.volumeFlow.current.output',
+            'ventilation.heatExchanger.frostprotection',
         ]
 
         all_features = self.read_all_features()
