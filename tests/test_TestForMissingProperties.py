@@ -22,6 +22,8 @@ class TestForMissingProperties(unittest.TestCase):
             'device.messages.info.raw',
             'device.messages.service.raw',
             'device.messages.status.raw',
+            'device.messages.errors.counter.d6',
+            'device.messages.logbook',
             'device.parameterIdentification.version',
             'device.productIdentification',
             'device.productMatrix',
@@ -164,6 +166,39 @@ class TestForMissingProperties(unittest.TestCase):
 
             # gateway
 
+            # heat pump
+            'heating.circuits.0.operating.programs.screedDrying.heatpump',
+            'heating.compressors.0.heat.production.cooling.week',
+            'heating.compressors.0.heat.production.dhw.week',
+            'heating.compressors.0.heat.production.heating.week',
+            'heating.compressors.0.heatTarget',
+            'heating.compressors.0.power',
+            'heating.compressors.0.power.consumption.dhw.week',
+            'heating.compressors.0.power.consumption.heating.week',
+            'heating.compressors.0.sensors.power',
+            'heating.compressors.0.sensors.temperature.ambient',
+            'heating.compressors.0.sensors.temperature.overheat',
+            'heating.compressors.0.statistics.load',
+            'heating.condensors.0.sensors.temperature.subcooling',
+            'heating.configuration.buffer.temperature.max',
+            'heating.configuration.flow.temperature.max',
+            'heating.configuration.flow.temperature.min',
+            'heating.coolingCircuits.0.reverse',
+            'heating.coolingCircuits.0.type',
+            'heating.cop.cooling',
+            'heating.cop.dhw',
+            'heating.cop.green',
+            'heating.cop.heating',
+            'heating.cop.total',
+            'heating.heatingRod.heatTarget',
+            'heating.heatingRod.runtime',
+            'heating.primaryCircuit.sensors.rotation',
+            'heating.sensors.pressure.hotGas',
+            'heating.sensors.pressure.suctionGas',
+            'heating.sensors.temperature.hotGas',
+            'heating.sensors.temperature.liquidGas',
+            'heating.sensors.temperature.suctionGas',
+
             # ventilation - not yet used
             'ventilation.control.filterChange',
             'ventilation.filter.pollution.blocked',
@@ -258,9 +293,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.power.consumption.total',
             'ventilation.sensors.temperature.outside',
             'ventilation.sensors.humidity.outdoor',
-            'ventilation.volumeFlow.current.input',
-            'ventilation.volumeFlow.current.output',
-            'ventilation.heatExchanger.frostprotection',
         ]
 
         all_features = self.read_all_features()
