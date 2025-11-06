@@ -198,9 +198,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.temperature.hotGas',
             'heating.sensors.temperature.liquidGas',
             'heating.sensors.temperature.suctionGas',
-            # 'ventilation.heatExchanger.frostprotection',
-            # 'ventilation.volumeFlow.current.input',
-            # 'ventilation.volumeFlow.current.output',
 
             # ventilation - not yet used
             'ventilation.control.filterChange',
@@ -296,9 +293,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.power.consumption.total',
             'ventilation.sensors.temperature.outside',
             'ventilation.sensors.humidity.outdoor',
-            'ventilation.volumeFlow.current.input',
-            'ventilation.volumeFlow.current.output',
-            'ventilation.heatExchanger.frostprotection',
         ]
 
         all_features = self.read_all_features()
