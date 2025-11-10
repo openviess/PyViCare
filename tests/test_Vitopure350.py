@@ -104,4 +104,3 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(self.device.getAirborneDustPM2d5(), 0.3)
         self.assertEqual(self.device.getAirborneDustPM4(), 0.4)
         self.assertEqual(self.device.getAirborneDustPM10(), 0.5)
-
