@@ -235,6 +235,22 @@ class VentilationDevice(Device):
         return int(self.getProperty("ventilation.sensors.volatileOrganicCompounds")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getAirborneDustPM1(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm1")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getAirborneDustPM2d5(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm2d5")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getAirborneDustPM4(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm4")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getAirborneDustPM10(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm10")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getSupplyFanHours(self) -> int:
         return int(self.getProperty("ventilation.fan.supply.runtime")["properties"]["value"]["value"])
 
