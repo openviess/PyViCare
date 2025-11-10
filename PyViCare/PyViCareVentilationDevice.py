@@ -251,6 +251,18 @@ class VentilationDevice(Device):
         return float(self.getProperty("ventilation.sensors.airBorneDust.pm10")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getFilterHours(self) -> int:
+        return int(self.getProperty("ventilation.filter.runtime")["properties"]["operatingHours"]["value"])
+
+    @handleNotSupported
+    def getFilterRemainingHours(self) -> int:
+        return int(self.getProperty("ventilation.filter.runtime")["properties"]["remainingHours"]["value"])
+
+    @handleNotSupported
+    def getFilterOverdueHours(self) -> int:
+        return int(self.getProperty("ventilation.filter.runtime")["properties"]["overdueHours"]["value"])
+
+    @handleNotSupported
     def getSupplyFanHours(self) -> int:
         return int(self.getProperty("ventilation.fan.supply.runtime")["properties"]["value"]["value"])
 

@@ -94,6 +94,11 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(self.device.getSupplyFanTargetSpeed(), 585)
         self.assertEqual(self.device.getSupplyFanHours(), 819)
 
+    def test_getFilterHours(self):
+        self.assertEqual(self.device.getFilterHours(), 5795)
+        self.assertEqual(self.device.getFilterRemainingHours(), 2965)
+        self.assertEqual(self.device.getFilterOverdueHours(), 0)
+
     def test_getAirborneDust(self):
         self.assertEqual(self.device.getAirborneDustPM1(), 0.1)
         self.assertEqual(self.device.getAirborneDustPM2d5(), 0.3)

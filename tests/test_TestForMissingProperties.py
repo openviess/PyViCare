@@ -198,7 +198,6 @@ class TestForMissingProperties(unittest.TestCase):
             # ventilation - not yet used
             'ventilation.control.filterChange',
             'ventilation.filter.pollution.blocked',
-            'ventilation.filter.runtime',
             'ventilation.sensors.airQuality',
             'ventilation.levels.levelOne',
             'ventilation.levels.levelTwo',
