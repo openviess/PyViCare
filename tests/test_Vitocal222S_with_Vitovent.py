@@ -6,9 +6,9 @@ from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class Vitocal222S(unittest.TestCase):
+class Vitocal222S_with_Vitovent(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal222S.json')
+        self.service = ViCareServiceMock('response/Vitocal222S-with-Vitovent.json')
         self.device = HeatPump(self.service)
 
     def test_getDomesticHotWaterActiveMode_10_10_time(self):
