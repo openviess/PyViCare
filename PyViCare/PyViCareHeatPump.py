@@ -41,7 +41,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
     @handleNotSupported
     def getAvailableEvaporators(self):
         return self.getProperty("heating.evaporators")["properties"]["enabled"]["value"]
-    
+
     @handleNotSupported
     def getBufferMainTemperature(self):
         return self.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
@@ -401,42 +401,42 @@ class Compressor(HeatingDeviceWithComponent):
         return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["unit"])
 
     @handleNotSupported
-    def getCompressorsPressureOutletUnit(self) -> str:
+    def getCompressorOutletPressureUnit(self) -> str:
         # Shows the first compressor outlet pressure sensor details (e.g. bar)
         return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.outlet")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getCompressorsPressureOutlet(self) -> float:
+    def getCompressorOutletPressure(self) -> float:
         # Shows the first compressor outlet pressure sensor details.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.outlet")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getCompressorsPressureInletUnit(self) -> str:
+    def getCompressorInletPressureUnit(self) -> str:
         # Shows the first compressor inlet pressure sensor details (e.g. bar)
         return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.inlet")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getCompressorsPressureInlet(self) -> float:
+    def getCompressorInletPressure(self) -> float:
         # Shows the first compressor inlet pressure sensor details.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.inlet")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getCompressorsTempOutletUnit(self) -> str:
+    def getCompressorOutletTemperatureUnit(self) -> str:
         # Shows the first compressor outlet pressure sensor details unit (e.g. celsius)
         return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.outlet")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getCompressorsTempOutlet(self) -> float:
+    def getCompressorOutletTemperature(self) -> float:
         # Shows the first compressor outlet pressure sensor details.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.outlet")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getCompressorsTempInletUnit(self) -> str:
+    def getCompressorInletTemperatureUnit(self) -> str:
         # Shows the first compressor inlet pressure sensor details unit (e.g. celsius)
         return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.inlet")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getCompressorsTempInlet(self) -> float:
+    def getCompressorInletTemperature(self) -> float:
         # Shows the first compressor inlet pressure sensor details.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.inlet")["properties"]["value"]["value"])
 
@@ -447,22 +447,22 @@ class Evaporator(HeatingDeviceWithComponent):
         return self.component
 
     @handleNotSupported
-    def getEvaporatorseTempLiquidUnit(self) -> str:
+    def getEvaporatorLiquidTemperatureUnit(self) -> str:
         # Shows the evaporator liquid temperature sensor details unit (e.g. celsius)
         return str(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.liquid")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getEvaporatorseTempLiquid(self) -> float:
+    def getEvaporatorLiquidTemperature(self) -> float:
         # Shows the evaporator liquid temperature sensor details.
         return float(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.liquid")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getEvaporatorseTempOverheatUnit(self) -> str:
+    def getEvaporatorOverheatTemperatureUnit(self) -> str:
         # Shows the evaporator overheat temperature sensor details unit (e.g. celsius)
         return str(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.overheat")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getEvaporatorseTempOverheat(self) -> float:
+    def getEvaporatorOverheatTemperature(self) -> float:
         # Shows the evaporator overheat temperature sensor details.
         return float(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.overheat")["properties"]["value"]["value"])
 
@@ -473,11 +473,21 @@ class Condensor(HeatingDeviceWithComponent):
         return self.component
 
     @handleNotSupported
-    def getCondensorsTempSubcoolingUnit(self) -> str:
-        # Shows the subcooling of the first condensor. unit (e.g. celsius)
+    def getCondensorSubcoolingTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the subcooling temperature of the condensor.
         return str(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.subcooling")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getCondensorsTempSubcooling(self) -> float:
-        # Shows the subcooling of the first condensor.
+    def getCondensorSubcoolingTemperature(self) -> float:
+        # Shows the subcooling temperature of the condensor.
         return float(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.subcooling")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getCondensorLiquidTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the liquid temperature of the condensor.
+        return str(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.liquid")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getCondensorLiquidTemperature(self) -> float:
+        # Shows the liquid temperature of the condensor.
+        return float(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.liquid")["properties"]["value"]["value"])
