@@ -28,7 +28,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return Condensor(self, condensor)
 
     @handleNotSupported
-    def getAvailableCondensor(self):
+    def getAvailableCondensors(self):
         return self.getProperty("heating.condensors")["properties"]["enabled"]["value"]
 
     @property
@@ -39,7 +39,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return Evaporator(self, evaporator)
 
     @handleNotSupported
-    def getAvailableEvaporator(self):
+    def getAvailableEvaporators(self):
         return self.getProperty("heating.evaporators")["properties"]["enabled"]["value"]
     
     @handleNotSupported
