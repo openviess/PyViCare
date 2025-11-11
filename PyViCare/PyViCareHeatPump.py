@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Any, List
 from deprecated import deprecated
 
@@ -12,8 +13,12 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def compressors(self) -> List[Any]:
         return list([self.getCompressor(x) for x in self.getAvailableCompressors()])
 
-    def getCompressor(self, compressor):
+    def getCompressor(self, compressor) -> Compressor:
         return Compressor(self, compressor)
+
+    @handleNotSupported
+    def getAvailableCompressors(self):
+        return self.getProperty("heating.compressors")["properties"]["enabled"]["value"]
 
     @property
     def condensors(self) -> List[Any]:
@@ -21,6 +26,10 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     def getCondensor(self, condensor) -> Condensor:
         return Condensor(self, condensor)
+
+    @handleNotSupported
+    def getAvailableCondensor(self):
+        return self.getProperty("heating.condensors")["properties"]["enabled"]["value"]
 
     @property
     def evaporators(self) -> List[Any]:
@@ -30,8 +39,8 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return Evaporator(self, evaporator)
 
     @handleNotSupported
-    def getAvailableCompressors(self):
-        return self.getProperty("heating.compressors")["properties"]["enabled"]["value"]
+    def getAvailableEvaporator(self):
+        return self.getProperty("heating.evaporators")["properties"]["enabled"]["value"]
     
     @handleNotSupported
     def getBufferMainTemperature(self):
