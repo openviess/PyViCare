@@ -23,3 +23,7 @@ class Vitocal333G_with_Vitovent300F(unittest.TestCase):
     def test_getEvaporatorOverheatTemperature(self):
         self.assertEqual(self.device.getEvaporator("0").getEvaporatorOverheatTemperature(), 0.0)
         self.assertEqual(self.device.getEvaporator("0").getEvaporatorOverheatTemperatureUnit(), "celsius")
+
+    def test_getEvaporatorLiquidTemperature(self):
+        self.assertEqual(self.device.getEvaporator("0").getEvaporatorLiquidTemperature(), 18.2)
+        self.assertEqual(self.device.getEvaporator("0").getEvaporatorLiquidTemperatureUnit(), "celsius")
