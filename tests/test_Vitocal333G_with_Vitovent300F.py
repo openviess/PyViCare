@@ -27,3 +27,7 @@ class Vitocal333G_with_Vitovent300F(unittest.TestCase):
     def test_getEvaporatorLiquidTemperature(self):
         self.assertEqual(self.device.getEvaporator("0").getEvaporatorLiquidTemperature(), 18.2)
         self.assertEqual(self.device.getEvaporator("0").getEvaporatorLiquidTemperatureUnit(), "celsius")
+
+    def test_getCompressorInletPressure(self):
+        self.assertEqual(self.device.getCompressor("0").getCompressorInletPressure(), 12.9)
+        self.assertEqual(self.device.getCompressor("0").getCompressorInletPressureUnit(), "bar")
