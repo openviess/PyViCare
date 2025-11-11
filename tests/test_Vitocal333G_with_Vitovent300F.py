@@ -16,6 +16,10 @@ class Vitocal333G_with_Vitovent300F(unittest.TestCase):
         self.assertEqual(self.device.getSupplyVolumeFlow(), 257)
         self.assertEqual(self.device.getExhaustVolumeFlow(), 257)
 
-    def test_CondensorSubcoolingTemperature(self):
+    def test_getCondensorSubcoolingTemperature(self):
         self.assertEqual(self.device.getCondensor("0").getCondensorSubcoolingTemperature(), -2.8)
         self.assertEqual(self.device.getCondensor("0").getCondensorSubcoolingTemperatureUnit(), "celsius")
+
+    def test_getEvaporatorOverheatTemperature(self):
+        self.assertEqual(self.device.getEvaporator("0").getEvaporatorOverheatTemperature(), 0.0)
+        self.assertEqual(self.device.getEvaporator("0").getEvaporatorOverheatTemperatureUnit(), "celsius")
