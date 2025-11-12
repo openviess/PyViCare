@@ -71,7 +71,7 @@ password = "password"
 
 vicare = PyViCare()
 vicare.initWithCredentials(email, password, client_id, "token.save")
-device = vicare.devices[0]
+device = vicare.devices[1]
 print(device.getModel())
 print("Online" if device.isOnline() else "Offline")
 
@@ -174,4 +174,23 @@ To make the test data comparable with future updates, it must be sorted. No worr
 
 ```sh
 jq ".data|=sort_by(.feature)" --sort-keys testData.json > testDataSorted.json
+```
+
+## Testing
+
+### Home Assistant
+
+To test a certain change in Home Assistant, one needs to have a `ViCare` integration installed as a custom component.
+Change the dependency in the `manifest.json` to point to a GitHub branch or commit SHA:
+
+```json
+  "requirements": [
+    "PyViCare@git+https://github.com/openviess/PyViCare.git@<branchname>"
+  ],
+```
+
+To install `ViCare` as a custom component, one can use the terminal addon to install the changes from a certain Home Assistant PR:
+
+```sh
+curl -o- -L https://gist.githubusercontent.com/bdraco/43f8043cb04b9838383fd71353e99b18/raw/core_integration_pr | bash /dev/stdin -d vicare -p <pr-number>
 ```

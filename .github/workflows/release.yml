@@ -21,12 +21,12 @@ jobs:
       id-token: write
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
       - name: 🏗 Set up Poetry
         run: pipx install poetry
       - name: 🏗 Set up Python ${{ env.DEFAULT_PYTHON }}
         id: python
-        uses: actions/setup-python@v5.6.0
+        uses: actions/setup-python@v6.0.0
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
           cache: "poetry"
@@ -45,7 +45,7 @@ jobs:
       - name: 🏗 Build package
         run: poetry build --no-interaction
       - name: 🚀 Publish to PyPi
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        uses: pypa/gh-action-pypi-publish@v1.13.0
         with:
           verbose: true
           print-hash: true

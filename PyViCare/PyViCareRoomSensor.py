@@ -1,21 +1,17 @@
-from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareDevice import ZigbeeBatteryDevice
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
-class RoomSensor(Device):
+class RoomSensor(ZigbeeBatteryDevice):
 
     @handleNotSupported
     def getSerial(self):
-        return self.service.getProperty("device.sensors.temperature")["deviceId"]
-
-    @handleNotSupported
-    def getBatteryLevel(self) -> int:
-        return int(self.service.getProperty("device.power.battery")["properties"]["level"]["value"])
+        return self.getProperty("device.sensors.temperature")["deviceId"]
 
     @handleNotSupported
     def getTemperature(self):
-        return self.service.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
+        return self.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getHumidity(self):
-        return self.service.getProperty("device.sensors.humidity")["properties"]["value"]["value"]
+        return self.getProperty("device.sensors.humidity")["properties"]["value"]["value"]

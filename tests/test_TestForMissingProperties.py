@@ -18,47 +18,120 @@ class TestForMissingProperties(unittest.TestCase):
         # are added to the response files
 
         ignore = [
+            # general - not yet used
+            'device.messages.info.raw',
+            'device.messages.service.raw',
+            'device.messages.status.raw',
+            'device.messages.errors.counter.d6',
+            'device.messages.logbook',
+            'device.parameterIdentification.version',
+            'device.productIdentification',
+            'device.productMatrix',
+            'device.time.daylightSaving',
+            'device.heatingCircuitId',
+            'device.configuration.houseLocation',
+            'device.lock.malfunction',
+            'device.timeseries.burner.stops',
+            'device.timeseries.dhw.burner.stops',
+            'device.timeseries.ignitionTimeSteps',
+            'device.timeseries.monitoringIonization',
+            'device.timeseries.water.pressure.peaks',
+            'device.information',
+            'device.configuration.measurementWeight',
+            'device.actorSensorTest',
+            'device.brand',
+            'device.lock.external',
+            'device.power.consumption.limitation',
+            'device.power.statusReport.consumption',
+            'device.power.statusReport.production',
+            'device.type',
+            'device.variant',
+            'heating.boiler.pumps.internal.current',
+            'heating.boiler.temperature.current',
+            'heating.compressors.0.heater.crankcase',
+            'heating.compressors.0.sensors.pressure.inlet',
+            'heating.compressors.0.sensors.temperature.inlet',
+            'heating.compressors.0.sensors.temperature.motorChamber',
+            'heating.compressors.0.sensors.temperature.oil',
+            'heating.compressors.0.sensors.temperature.outlet',
+            'heating.compressors.0.speed.current',
+            'heating.configuration.heatingRod.dhw',
+            'heating.configuration.heatingRod.heating',
+            'heating.configuration.internalPumpOne',
+            'heating.configuration.internalPumpTwo',
+            'heating.configuration.temperature.outside.DampingFactor',
+            'heating.economizers.0.sensors.temperature.liquid',
+            'heating.evaporators.0.heater.base',
+            'heating.evaporators.0.sensors.temperature.liquid',
+            'heating.evaporators.0.sensors.temperature.overheat',
+            'heating.external.lock',
+            'heating.heat.production.summary.cooling',
+            'heating.heater.condensatePan',
+            'heating.heater.fanRing',
+            'heating.heatingRod',
+            'heating.inverters.0.sensors.power.current',
+            'heating.inverters.0.sensors.power.output',
+            'heating.inverters.0.sensors.temperature.powerModule',
+            'heating.outdoor.defrosting',
+            'heating.power.consumption.summary.cooling',
+            'heating.primaryCircuit.fans.0.current',
+            'heating.primaryCircuit.valves.fourThreeWay',
+            'heating.secondaryCircuit.operation.state',
+            'heating.secondaryCircuit.temperature.return.minimum',
+            'heating.secondaryCircuit.valves.fourThreeWay',
+            'heating.secondaryHeatGenerator',
+            'heating.valves.fourThreeWay.position',
+            'tcu.wifi',
+
+            'heating.boiler.pumps.internal',
+            'heating.boiler.pumps.internal.target',
+            'heating.burners.0.demand.temperature',
+            'heating.calculated.temperature.outside',
+            'heating.circuits.0.configuration.summerEco.absolute',
+            'heating.configuration.bufferCylinderSize',
+            'heating.configuration.centralHeatingCylinderSize',
+            'heating.configuration.dhwCylinderPump',
+            'heating.configuration.dhwCylinderSize',
+            'heating.configuration.gasType',
+            'heating.configuration.houseHeatingLoad',
+            'heating.configuration.houseLocation',
+            'heating.configuration.houseOrientation',
+            'heating.configuration.internalPumps',
+            'heating.configuration.pressure.total',
+            'heating.dhw.scaldProtection',
+            'heating.heat.production.summary.dhw',
+            'heating.heat.production.summary.heating',
+
+            # heating - not yet used
             'heating.operating.programs.holidayAtHome',
             'heating.operating.programs.holiday',
             'heating.device.time.offset',
             'heating.configuration.multiFamilyHouse',
-            'heating.boiler.temperature',  # ignore as value is to low to be plausible in response data
             'heating.boiler.airflaps.0.position.current',
             'heating.boiler.airflaps.1.position.current',
-
+            'heating.boiler.pumps.internal',
+            'heating.boiler.pumps.internal.target',
             'heating.circuits.0.dhw.pumps.circulation.schedule',
             'heating.circuits.0.dhw.schedule',
             'heating.power.consumption.dhw',
             'heating.power.consumption',
-
             'heating.circuits.0.temperature.levels',  # hint: command
             'heating.dhw.hygiene',
             'heating.dhw.temperature',
             'heating.burners',
-
-            'heating.dhw.hygiene.trigger',
-            'heating.dhw.operating.modes.off',
-            'heating.dhw.temperature.hygiene',
-            'heating.power.production.cumulative',
-            'heating.power.purchase.cumulative',
-            'heating.power.purchase.current',
-            'heating.power.sold.cumulative',
-            'heating.power.sold.current',
             'heating.sensors.temperature.allengra',
-
+            'heating.dhw.hygiene.trigger',
+            'heating.dhw.temperature.hygiene',
+            'heating.dhw.operating.modes.off',
             'heating.dhw.operating.modes.active',
             'heating.dhw.operating.modes.comfort',
             'heating.dhw.operating.modes.eco',
-
             'heating.circuits.0.heating.roomInfluenceFactor',
             'heating.circuits.0.temperature',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.operating.programs.noDemand.hmiState',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
-            'heating.dhw.sensors.temperature.dhwCylinder',
-
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
-
             'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
             'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
@@ -67,19 +140,63 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.burner', # deprecated FIXME: remove once test data is updated
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
-            'device.messages.errors.raw',
-            'device.name',
-            'device.power.battery',
-            'device.productIdentification',
-            'device.productMatrix',
             'heating.device.variant',
-            'device.time.daylightSaving',
             'heating.device.software',
 
             # gateway
-            'gateway.devices',  # not used
+
+            # zigbee
+            'device.zigbee.lqi',
+            'device.zigbee.parent.rx',
+            'device.zigbee.parent.tx',
+            'device.zigbee.active',
+            'device.zigbee.status',
+
+            # heat pump
+            'heating.circuits.0.cooling.hysteresis.switch',
+            'heating.circuits.0.heating.hysteresis.switch',
+            'heating.circuits.0.operating.programs.screedDrying.heatpump',
+            'heating.compressors.0.heat.production.cooling.week',
+            'heating.compressors.0.heat.production.dhw.week',
+            'heating.compressors.0.heat.production.heating.week',
+            'heating.compressors.0.heatTarget',
+            'heating.compressors.0.power',
+            'heating.compressors.0.power.consumption.dhw.week',
+            'heating.compressors.0.power.consumption.heating.week',
+            'heating.compressors.0.sensors.power',
+            'heating.compressors.0.sensors.temperature.ambient',
+            'heating.compressors.0.sensors.temperature.overheat',
+            'heating.compressors.0.statistics.load',
+            'heating.configuration.buffer.temperature.max',
+            'heating.configuration.flow.temperature.max',
+            'heating.configuration.flow.temperature.min',
+            'heating.coolingCircuits.0.reverse',
+            'heating.coolingCircuits.0.type',
+            'heating.cop.cooling',
+            'heating.cop.dhw',
+            'heating.cop.green',
+            'heating.cop.heating',
+            'heating.cop.total',
+            'heating.heatingRod.heatTarget',
+            'heating.heatingRod.runtime',
+            'heating.primaryCircuit.sensors.rotation',
+            'heating.sensors.pressure.hotGas',
+            'heating.sensors.pressure.suctionGas',
+            'heating.sensors.temperature.hotGas',
+            'heating.sensors.temperature.liquidGas',
+            'heating.sensors.temperature.suctionGas',
+            'heating.heatingRod.power.consumption.summary.dhw',
+            'heating.heatingRod.power.consumption.summary.heating',
+            'heating.heatingRod.status',
+            'heating.scop.dhw', # deprecated
+            'heating.scop.heating', # deprecated
+            'heating.scop.total', # deprecated
+            'heating.dhw.comfort', # deprecated
 
             # ventilation - not yet used
+            'ventilation.control.filterChange',
+            'ventilation.filter.pollution.blocked',
+            'ventilation.sensors.airQuality',
             'ventilation.levels.levelOne',
             'ventilation.levels.levelTwo',
             'ventilation.levels.levelThree',
@@ -90,15 +207,32 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.comfort',
             'ventilation.quickmodes.eco',
             'ventilation.quickmodes.holiday',
-            'ventilation.operating.state',  # TODO: to analyse, from Vitocal 111S
-            'heating.heatingRod.power.consumption.summary.dhw',
-            'heating.heatingRod.power.consumption.summary.heating',
-            'heating.heatingRod.status',
-            'heating.power.consumption.current',
-            'heating.scop.dhw', # deprecated
-            'heating.scop.heating', # deprecated
-            'heating.scop.total', # deprecated
-            'heating.dhw.comfort', # deprecated
+
+            # energy system - not yet used
+            'device.etn',
+            'device.serial.internalComponents',
+            'ess.battery.usedAverage',
+            'ess.configuration.backupBox',
+            'ess.configuration.systemType',
+            'ess.inverter.ac.power',
+            'ess.sensors.temperature.ambient',
+            'ess.version.hardware',
+            'heating.device.mainECU',
+            'pcc.ac.active.current',
+            'pcc.ac.active.power',
+            'pcc.ac.reactive.power',
+            'pcc.state.gridCode',
+            'photovoltaic.installedPeakPower',
+            'photovoltaic.string.current',
+            'photovoltaic.string.voltage',
+
+            # FHT - not yet used
+            'fht.configuration.floorCoolingCondensationShutdownMargin',
+            'fht.configuration.floorCoolingCondensationThreshold',
+            'fht.configuration.floorHeatingDamageProtectionThreshold',
+            'fht.valve',
+
+            # DEPRECATED
         ]
 
         all_features = self.read_all_features()
@@ -112,7 +246,8 @@ class TestForMissingProperties(unittest.TestCase):
             if not found and len(foundInFiles) > 0 and feature not in ignore:
                 missing_features[feature] = foundInFiles
 
-        self.assertDictEqual({}, missing_features)
+        self.maxDiff = None
+        self.assertDictEqual({}, missing_features, "found new data points")
 
     def test_unverifiedProperties(self):
         # with this test we want to verify if we access
@@ -121,6 +256,20 @@ class TestForMissingProperties(unittest.TestCase):
         ignore = [
             'heating.dhw.sensors.temperature.dhwCylinder.midBottom',  # FIXME: remove once test data is updated
             'ventilation.quickmodes',
+            'heating.heatingRod.heat.production.current',
+            'heating.heatingRod.power.consumption.current',
+            'heating.heatingRod.power.consumption.heating',
+            'heating.heatingRod.power.consumption.dhw',
+            'heating.heatingRod.power.consumption.total',
+            'heating.compressors.0.power.consumption.current',
+            'heating.compressors.0.power.consumption.heating',
+            'heating.compressors.0.heat.production.current',
+            'heating.compressors.0.power.consumption.cooling',
+            'heating.compressors.0.power.consumption.dhw',
+            'heating.compressors.0.power.consumption.total',
+            'ventilation.sensors.temperature.outside',
+            'ventilation.sensors.humidity.outdoor',
+            'heating.compressors.0.sensors.pressure.outlet',
         ]
 
         all_features = self.read_all_features()
@@ -132,12 +281,13 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{self.(circuit|burner|compressor)}', '0', match)
+                feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
-        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore))
+        self.maxDiff = None
+        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore), "found untested data points")
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")

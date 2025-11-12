@@ -17,12 +17,12 @@ class Vitopure350(unittest.TestCase):
         expected_modes = ['permanent', 'ventilation', 'sensorDriven']
         self.assertListEqual(expected_modes, self.device.getAvailableModes())
 
-    def test_getActiveProgram(self):
-        self.assertEqual("automatic", self.device.getActiveProgram())
+    def test_getActiveVentilationProgram(self):
+        self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
 
-    def test_getAvailablePrograms(self):
-        expected_programs = ['standby']
-        self.assertListEqual(expected_programs, self.device.getAvailablePrograms())
+    def test_getVentilationPrograms(self):
+        expected_programs = []
+        self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
 
     def test_getPermanentLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
@@ -76,3 +76,31 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(len(self.service.setPropertyData), 1)
         self.assertEqual(self.service.setPropertyData[0]['action'], 'deactivate')
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'ventilation.quickmodes.standby')
+
+    @unittest.skip("testdata missing")
+    def test_getOutsideTemperature(self):
+        self.assertEqual(self.device.getOutsideTemperature(), 15.0)
+        self.assertEqual(self.device.getOutsideHumidity(), 15)
+
+    def test_getSupplyTemperature(self):
+        self.assertEqual(self.device.getSupplyTemperature(), 20.8)
+        self.assertEqual(self.device.getSupplyHumidity(), 59)
+
+    def test_getVolatileOrganicCompounds(self):
+        self.assertEqual(self.device.getVolatileOrganicCompounds(), 148)
+
+    def test_getSupplyFanSpeed(self):
+        self.assertEqual(self.device.getSupplyFanSpeed(), 555)
+        self.assertEqual(self.device.getSupplyFanTargetSpeed(), 585)
+        self.assertEqual(self.device.getSupplyFanHours(), 819)
+
+    def test_getFilterHours(self):
+        self.assertEqual(self.device.getFilterHours(), 5795)
+        self.assertEqual(self.device.getFilterRemainingHours(), 2965)
+        self.assertEqual(self.device.getFilterOverdueHours(), 0)
+
+    def test_getAirborneDust(self):
+        self.assertEqual(self.device.getAirborneDustPM1(), 0.1)
+        self.assertEqual(self.device.getAirborneDustPM2d5(), 0.3)
+        self.assertEqual(self.device.getAirborneDustPM4(), 0.4)
+        self.assertEqual(self.device.getAirborneDustPM10(), 0.5)

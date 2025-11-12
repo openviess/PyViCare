@@ -4,9 +4,9 @@ from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class Vitocal_with_Vitovent(unittest.TestCase):
+class Vitocal200S_with_Vitovent300W(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal-200S-with-Vitovent-300W.json')
+        self.service = ViCareServiceMock('response/Vitocal200S-with-Vitovent300W.json')
         self.device = HeatPump(self.service)
 
     def test_isDomesticHotWaterDevice(self):
