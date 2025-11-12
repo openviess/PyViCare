@@ -357,6 +357,10 @@ class Compressor(HeatingDeviceWithComponent):
         return self.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]
 
     @handleNotSupported
+    def getSpeed(self) -> int:
+        return int(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getHeatProductionCurrent(self) -> float:
         return float(self.getProperty(f"heating.compressors.{self.compressor}.heat.production.current")["properties"]["value"]["value"])
 
