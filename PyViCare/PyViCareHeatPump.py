@@ -44,6 +44,23 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     # Power consumption for Heating:
     @handleNotSupported
+    def getPowerConsumptionHeatingUnit(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingToday(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisMonth(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingYear(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["year"]["value"][0]
+
+    # Power summary consumption for Heating:
+    @handleNotSupported
     def getPowerSummaryConsumptionHeatingUnit(self):
         return self.getProperty("heating.power.consumption.summary.heating")["properties"]["currentDay"]["unit"]
 
@@ -88,6 +105,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getPowerConsumptionCoolingThisYear(self):
         return self.getProperty("heating.power.consumption.cooling")["properties"]["year"]["value"][0]
 
+    # Total power consumption:
     @handleNotSupported
     def getPowerConsumptionUnit(self):
         return self.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
@@ -97,10 +115,31 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return self.getProperty("heating.power.consumption.total")["properties"]["day"]["value"][0]
 
     @handleNotSupported
+    def getPowerConsumptionThisMonth(self):
+        return self.getProperty("heating.power.consumption.total")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionThisYear(self):
+        return self.getProperty("heating.power.consumption.total")["properties"]["year"]["value"][0]
+
+    # Power consumption for Domestic Hot Water:
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterUnit(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
+
+    @handleNotSupported
     def getPowerConsumptionDomesticHotWaterToday(self):
         return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["value"][0]
 
-    # Power consumption for Domestic Hot Water:
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterThisMonth(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterYear(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["year"]["value"][0]
+
+    # Power summary consumption for Domestic Hot Water:
     @handleNotSupported
     def getPowerSummaryConsumptionDomesticHotWaterUnit(self):
         return self.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"]
