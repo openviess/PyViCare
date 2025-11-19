@@ -16,18 +16,18 @@ class Vitocal333G_with_Vitovent300F(unittest.TestCase):
         self.assertEqual(self.device.getSupplyVolumeFlow(), 257)
         self.assertEqual(self.device.getExhaustVolumeFlow(), 257)
 
-    def test_getCondensorSubcoolingTemperature(self):
-        self.assertEqual(self.device.getCondensor("0").getCondensorSubcoolingTemperature(), -2.8)
-        self.assertEqual(self.device.getCondensor("0").getCondensorSubcoolingTemperatureUnit(), "celsius")
+    def test_condenser_getSubcoolingTemperature(self):
+        self.assertEqual(self.device.getCondensor("0").getSubcoolingTemperature(), -2.8)
+        self.assertEqual(self.device.getCondensor("0").getSubcoolingTemperatureUnit(), "celsius")
 
-    def test_getEvaporatorOverheatTemperature(self):
-        self.assertEqual(self.device.getEvaporator("0").getEvaporatorOverheatTemperature(), 0.0)
-        self.assertEqual(self.device.getEvaporator("0").getEvaporatorOverheatTemperatureUnit(), "celsius")
+    def test_evaporator_getOverheatTemperature(self):
+        self.assertEqual(self.device.getEvaporator("0").getOverheatTemperature(), 0.0)
+        self.assertEqual(self.device.getEvaporator("0").getOverheatTemperatureUnit(), "celsius")
 
-    def test_getEvaporatorLiquidTemperature(self):
-        self.assertEqual(self.device.getEvaporator("0").getEvaporatorLiquidTemperature(), 18.2)
-        self.assertEqual(self.device.getEvaporator("0").getEvaporatorLiquidTemperatureUnit(), "celsius")
+    def test_evaporator_getLiquidTemperature(self):
+        self.assertEqual(self.device.getEvaporator("0").getLiquidTemperature(), 18.2)
+        self.assertEqual(self.device.getEvaporator("0").getLiquidTemperatureUnit(), "celsius")
 
-    def test_getCompressorInletPressure(self):
-        self.assertEqual(self.device.getCompressor("0").getCompressorInletPressure(), 12.9)
-        self.assertEqual(self.device.getCompressor("0").getCompressorInletPressureUnit(), "bar")
+    def test_compressor_getInletPressure(self):
+        self.assertEqual(self.device.getCompressor("0").getInletPressure(), 12.9)
+        self.assertEqual(self.device.getCompressor("0").getInletPressureUnit(), "bar")
