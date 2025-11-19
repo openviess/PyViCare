@@ -18,7 +18,7 @@
           "value": "standby"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.actorSensorTest"
     },
     {
@@ -35,7 +35,7 @@
           "value": "Viessmann"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.brand"
     },
     {
@@ -53,7 +53,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.configuration.houseLocation"
     },
     {
@@ -65,7 +65,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.demand.external"
     },
     {
@@ -82,7 +82,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.lock.external"
     },
     {
@@ -99,7 +99,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.lock.malfunction"
     },
     {
@@ -128,12 +128,12 @@
               ],
               "errorCode": "I.114",
               "priority": "info",
-              "timestamp": "2025-10-06T09:39:43.000Z"
+              "timestamp": "2025-11-04T11:04:00.000Z"
             }
           ]
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.messages.info.raw"
     },
     {
@@ -150,7 +150,7 @@
           "value": []
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.messages.service.raw"
     },
     {
@@ -177,9 +177,9 @@
                 "IS-BIG-DATA",
                 "IS-MANUFACTURING-VEG"
               ],
-              "errorCode": "S.123",
+              "errorCode": "S.115",
               "priority": "status",
-              "timestamp": "2025-11-02T21:32:43.000Z"
+              "timestamp": "2025-11-19T12:00:13.000Z"
             },
             {
               "accessLevel": "customer",
@@ -193,9 +193,9 @@
                 "IS-BIG-DATA",
                 "IS-MANUFACTURING-VEG"
               ],
-              "errorCode": "S.116",
+              "errorCode": "S.125",
               "priority": "status",
-              "timestamp": "2025-11-02T12:56:25.000Z"
+              "timestamp": "2025-11-19T09:25:13.000Z"
             },
             {
               "accessLevel": "customer",
@@ -211,23 +211,7 @@
               ],
               "errorCode": "S.165",
               "priority": "status",
-              "timestamp": "2025-10-31T05:34:44.000Z"
-            },
-            {
-              "accessLevel": "customer",
-              "audiences": [
-                "IS-SUPPLIER",
-                "IS-DEVELOPMENT",
-                "IS-MANUFACTURING",
-                "IS-AFTERSALES",
-                "IS-AFTERMARKET",
-                "IS-DEVELOPER-VEG",
-                "IS-BIG-DATA",
-                "IS-MANUFACTURING-VEG"
-              ],
-              "errorCode": "S.217",
-              "priority": "status",
-              "timestamp": "2025-10-19T04:56:30.000Z"
+              "timestamp": "2025-11-19T09:25:10.000Z"
             },
             {
               "accessLevel": "customer",
@@ -243,7 +227,7 @@
               ],
               "errorCode": "S.120",
               "priority": "status",
-              "timestamp": "2025-10-06T09:39:43.000Z"
+              "timestamp": "2025-11-04T11:04:00.000Z"
             },
             {
               "accessLevel": "customer",
@@ -259,7 +243,7 @@
               ],
               "errorCode": "S.219",
               "priority": "status",
-              "timestamp": "2025-10-06T09:39:40.000Z"
+              "timestamp": "2025-11-04T11:03:57.000Z"
             },
             {
               "accessLevel": "customer",
@@ -275,7 +259,23 @@
               ],
               "errorCode": "S.218",
               "priority": "status",
-              "timestamp": "2025-10-06T09:39:40.000Z"
+              "timestamp": "2025-11-04T11:03:57.000Z"
+            },
+            {
+              "accessLevel": "customer",
+              "audiences": [
+                "IS-SUPPLIER",
+                "IS-DEVELOPMENT",
+                "IS-MANUFACTURING",
+                "IS-AFTERSALES",
+                "IS-AFTERMARKET",
+                "IS-DEVELOPER-VEG",
+                "IS-BIG-DATA",
+                "IS-MANUFACTURING-VEG"
+              ],
+              "errorCode": "S.217",
+              "priority": "status",
+              "timestamp": "2025-11-04T11:03:57.000Z"
             },
             {
               "accessLevel": "customer",
@@ -291,7 +291,7 @@
               ],
               "errorCode": "S.165",
               "priority": "status",
-              "timestamp": "2025-10-06T09:39:40.000Z"
+              "timestamp": "2025-11-04T11:03:57.000Z"
             },
             {
               "accessLevel": "customer",
@@ -307,12 +307,12 @@
               ],
               "errorCode": "S.1",
               "priority": "status",
-              "timestamp": "2025-10-06T09:39:40.000Z"
+              "timestamp": "2025-11-04T11:03:57.000Z"
             }
           ]
         }
       },
-      "timestamp": "2025-11-02T20:29:59.451Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.messages.status.raw"
     },
     {
@@ -329,7 +329,7 @@
           "value": "0030.0515.2521.0054"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.parameterIdentification.version"
     },
     {
@@ -346,7 +346,7 @@
           "value": "14aOff"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.power.consumption.limitation"
     },
     {
@@ -361,14 +361,14 @@
         "limit": {
           "type": "number",
           "unit": "watt",
-          "value": 10503
+          "value": 0
         },
         "status": {
           "type": "string",
           "value": "unlimitedAutonomous"
         }
       },
-      "timestamp": "2025-10-31T08:42:36.913Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.power.statusReport.consumption"
     },
     {
@@ -390,7 +390,7 @@
           "value": "init"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.power.statusReport.production"
     },
     {
@@ -412,7 +412,7 @@
           }
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.productIdentification"
     },
     {
@@ -436,7 +436,7 @@
           ]
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.productMatrix"
     },
     {
@@ -448,7 +448,7 @@
       "isEnabled": true,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.remoteReset"
     },
     {
@@ -465,7 +465,7 @@
           "value": "################"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.serial"
     },
     {
@@ -477,7 +477,7 @@
       "isEnabled": true,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.setDefaultValues"
     },
     {
@@ -530,7 +530,7 @@
           "value": "25-10"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.time.daylightSaving"
     },
     {
@@ -547,7 +547,7 @@
           "value": "mono"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.type"
     },
     {
@@ -564,7 +564,7 @@
           "value": "Vitocal252A"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.variant"
     },
     {
@@ -581,7 +581,7 @@
           "value": true
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.zigbee.active"
     },
     {
@@ -598,7 +598,7 @@
           "value": "connected"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/device.zigbee.status"
     },
     {
@@ -615,7 +615,7 @@
           "value": "on"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.boiler.pumps.internal"
     },
     {
@@ -630,10 +630,10 @@
         "value": {
           "type": "number",
           "unit": "percent",
-          "value": 79
+          "value": 51
         }
       },
-      "timestamp": "2025-11-02T21:13:55.747Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.boiler.pumps.internal.current"
     },
     {
@@ -648,10 +648,10 @@
         "value": {
           "type": "number",
           "unit": "percent",
-          "value": 100
+          "value": 50
         }
       },
-      "timestamp": "2025-11-02T11:53:49.916Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.boiler.pumps.internal.target"
     },
     {
@@ -670,10 +670,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 23.2
+          "value": 43.8
         }
       },
-      "timestamp": "2025-11-02T21:06:22.748Z",
+      "timestamp": "2025-11-19T11:22:45.185Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.boiler.sensors.temperature.commonSupply"
     },
     {
@@ -690,7 +690,7 @@
           "value": "################"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.boiler.serial"
     },
     {
@@ -705,10 +705,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 24.8
+          "value": 45
         }
       },
-      "timestamp": "2025-11-02T21:12:18.281Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.boiler.temperature.current"
     },
     {
@@ -724,7 +724,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.buffer.sensors.temperature.main"
     },
     {
@@ -736,7 +736,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.bufferCylinder.sensors.temperature.main"
     },
     {
@@ -755,7 +755,7 @@
           ]
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits"
     },
     {
@@ -796,7 +796,7 @@
           "value": "heatingCircuit"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0"
     },
     {
@@ -813,7 +813,7 @@
           "value": "on"
         }
       },
-      "timestamp": "2025-11-02T19:42:40.279Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.circulation.pump"
     },
     {
@@ -835,7 +835,7 @@
           "value": 20
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.configuration.summerEco.absolute"
     },
     {
@@ -847,7 +847,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.cooling.hysteresis"
     },
     {
@@ -870,7 +870,7 @@
           "value": 4
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.cooling.hysteresis.switch"
     },
     {
@@ -887,7 +887,7 @@
           "value": "off"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.frostprotection"
     },
     {
@@ -936,7 +936,7 @@
           "value": 0.6
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.heating.curve"
     },
     {
@@ -959,7 +959,7 @@
           "value": 2
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.heating.hysteresis.switch"
     },
     {
@@ -1065,7 +1065,7 @@
           }
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.heating.schedule"
     },
     {
@@ -1099,7 +1099,7 @@
           "value": "Heating"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-04T10:08:30.553Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.name"
     },
     {
@@ -1134,7 +1134,7 @@
           "value": "heating"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.active"
     },
     {
@@ -1146,7 +1146,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.cooling"
     },
     {
@@ -1163,7 +1163,7 @@
           "value": true
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.heating"
     },
     {
@@ -1175,7 +1175,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.heatingCooling"
     },
     {
@@ -1192,7 +1192,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.modes.standby"
     },
     {
@@ -1206,10 +1206,10 @@
       "properties": {
         "value": {
           "type": "string",
-          "value": "reducedHeating"
+          "value": "normalHeating"
         }
       },
-      "timestamp": "2025-11-02T17:57:17.484Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.active"
     },
     {
@@ -1221,7 +1221,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T17:57:23.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfortCooling"
     },
     {
@@ -1246,7 +1246,7 @@
           "value": "summerEco"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfortCoolingEnergySaving"
     },
     {
@@ -1271,7 +1271,7 @@
           "value": "summerEco"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfortEnergySaving"
     },
     {
@@ -1333,10 +1333,10 @@
         "temperature": {
           "type": "number",
           "unit": "celsius",
-          "value": 18
+          "value": 20
         }
       },
-      "timestamp": "2025-11-02T17:57:23.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.comfortHeating"
     },
     {
@@ -1353,7 +1353,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.fixed"
     },
     {
@@ -1383,7 +1383,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.forcedLastFromSchedule"
     },
     {
@@ -1400,7 +1400,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.frostprotection"
     },
     {
@@ -1412,7 +1412,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T17:57:23.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.normalCooling"
     },
     {
@@ -1437,7 +1437,7 @@
           "value": "summerEco"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.normalCoolingEnergySaving"
     },
     {
@@ -1462,7 +1462,7 @@
           "value": "summerEco"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.normalEnergySaving"
     },
     {
@@ -1515,7 +1515,7 @@
       "properties": {
         "active": {
           "type": "boolean",
-          "value": false
+          "value": true
         },
         "demand": {
           "type": "string",
@@ -1524,10 +1524,10 @@
         "temperature": {
           "type": "number",
           "unit": "celsius",
-          "value": 18
+          "value": 20
         }
       },
-      "timestamp": "2025-11-02T17:57:23.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.normalHeating"
     },
     {
@@ -1539,7 +1539,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T17:57:23.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.reducedCooling"
     },
     {
@@ -1564,7 +1564,7 @@
           "value": "summerEco"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.reducedCoolingEnergySaving"
     },
     {
@@ -1589,7 +1589,7 @@
           "value": "unknown"
         }
       },
-      "timestamp": "2025-11-02T17:57:17.484Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.reducedEnergySaving"
     },
     {
@@ -1642,7 +1642,7 @@
       "properties": {
         "active": {
           "type": "boolean",
-          "value": true
+          "value": false
         },
         "demand": {
           "type": "string",
@@ -1651,10 +1651,10 @@
         "temperature": {
           "type": "number",
           "unit": "celsius",
-          "value": 18
+          "value": 20
         }
       },
-      "timestamp": "2025-11-02T17:57:23.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.reducedHeating"
     },
     {
@@ -1671,7 +1671,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.standby"
     },
     {
@@ -1688,7 +1688,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-11-02T17:57:17.484Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.operating.programs.summerEco"
     },
     {
@@ -1700,7 +1700,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.sensors.humidity.dewpoint"
     },
     {
@@ -1712,7 +1712,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:47:03.578Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.sensors.temperature.room"
     },
     {
@@ -1731,10 +1731,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 23.2
+          "value": 43.8
         }
       },
-      "timestamp": "2025-11-02T21:06:22.748Z",
+      "timestamp": "2025-11-19T11:22:45.185Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.sensors.temperature.supply"
     },
     {
@@ -1749,10 +1749,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 24.8
+          "value": 31.6
         }
       },
-      "timestamp": "2025-11-02T21:12:16.182Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.temperature"
     },
     {
@@ -1833,7 +1833,7 @@
           "value": 20
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.temperature.levels"
     },
     {
@@ -1845,7 +1845,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.zone.demand"
     },
     {
@@ -1862,7 +1862,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.zone.mode"
     },
     {
@@ -1874,7 +1874,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1"
     },
     {
@@ -1886,7 +1886,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.circulation.pump"
     },
     {
@@ -1898,7 +1898,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.configuration.summerEco.absolute"
     },
     {
@@ -1910,7 +1910,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.cooling.hysteresis"
     },
     {
@@ -1922,7 +1922,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.cooling.hysteresis.switch"
     },
     {
@@ -1934,7 +1934,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.frostprotection"
     },
     {
@@ -1946,7 +1946,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.heating.curve"
     },
     {
@@ -1958,7 +1958,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.heating.hysteresis.switch"
     },
     {
@@ -1970,7 +1970,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.heating.schedule"
     },
     {
@@ -1982,7 +1982,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.active"
     },
     {
@@ -1994,7 +1994,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.cooling"
     },
     {
@@ -2006,7 +2006,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.heating"
     },
     {
@@ -2018,7 +2018,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.heatingCooling"
     },
     {
@@ -2030,7 +2030,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.modes.standby"
     },
     {
@@ -2042,7 +2042,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.active"
     },
     {
@@ -2054,7 +2054,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.comfortCooling"
     },
     {
@@ -2066,7 +2066,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.comfortCoolingEnergySaving"
     },
     {
@@ -2078,7 +2078,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.comfortEnergySaving"
     },
     {
@@ -2090,7 +2090,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.comfortHeating"
     },
     {
@@ -2102,7 +2102,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.fixed"
     },
     {
@@ -2114,7 +2114,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.forcedLastFromSchedule"
     },
     {
@@ -2126,7 +2126,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.frostprotection"
     },
     {
@@ -2138,7 +2138,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.normalCooling"
     },
     {
@@ -2150,7 +2150,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.normalCoolingEnergySaving"
     },
     {
@@ -2162,7 +2162,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.normalEnergySaving"
     },
     {
@@ -2174,7 +2174,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.normalHeating"
     },
     {
@@ -2186,7 +2186,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.reducedCooling"
     },
     {
@@ -2198,7 +2198,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.reducedCoolingEnergySaving"
     },
     {
@@ -2210,7 +2210,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.reducedEnergySaving"
     },
     {
@@ -2222,7 +2222,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.reducedHeating"
     },
     {
@@ -2234,7 +2234,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.standby"
     },
     {
@@ -2246,7 +2246,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.operating.programs.summerEco"
     },
     {
@@ -2258,7 +2258,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.sensors.humidity.dewpoint"
     },
     {
@@ -2270,7 +2270,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.sensors.temperature.room"
     },
     {
@@ -2282,7 +2282,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.sensors.temperature.supply"
     },
     {
@@ -2294,7 +2294,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.temperature"
     },
     {
@@ -2306,7 +2306,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.temperature.levels"
     },
     {
@@ -2318,7 +2318,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.zone.demand"
     },
     {
@@ -2330,7 +2330,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.1.zone.mode"
     },
     {
@@ -2342,7 +2342,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2"
     },
     {
@@ -2354,7 +2354,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.circulation.pump"
     },
     {
@@ -2366,7 +2366,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.configuration.summerEco.absolute"
     },
     {
@@ -2378,7 +2378,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.cooling.hysteresis"
     },
     {
@@ -2390,7 +2390,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.cooling.hysteresis.switch"
     },
     {
@@ -2402,7 +2402,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.frostprotection"
     },
     {
@@ -2414,7 +2414,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.heating.curve"
     },
     {
@@ -2426,7 +2426,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.heating.hysteresis.switch"
     },
     {
@@ -2438,7 +2438,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.heating.schedule"
     },
     {
@@ -2450,7 +2450,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.active"
     },
     {
@@ -2462,7 +2462,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.cooling"
     },
     {
@@ -2474,7 +2474,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.heating"
     },
     {
@@ -2486,7 +2486,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.heatingCooling"
     },
     {
@@ -2498,7 +2498,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.modes.standby"
     },
     {
@@ -2510,7 +2510,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.active"
     },
     {
@@ -2522,7 +2522,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.comfortCooling"
     },
     {
@@ -2534,7 +2534,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.comfortCoolingEnergySaving"
     },
     {
@@ -2546,7 +2546,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.comfortEnergySaving"
     },
     {
@@ -2558,7 +2558,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.comfortHeating"
     },
     {
@@ -2570,7 +2570,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.fixed"
     },
     {
@@ -2582,7 +2582,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.forcedLastFromSchedule"
     },
     {
@@ -2594,7 +2594,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.frostprotection"
     },
     {
@@ -2606,7 +2606,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.normalCooling"
     },
     {
@@ -2618,7 +2618,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.normalCoolingEnergySaving"
     },
     {
@@ -2630,7 +2630,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.normalEnergySaving"
     },
     {
@@ -2642,7 +2642,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.normalHeating"
     },
     {
@@ -2654,7 +2654,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.reducedCooling"
     },
     {
@@ -2666,7 +2666,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.reducedCoolingEnergySaving"
     },
     {
@@ -2678,7 +2678,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.reducedEnergySaving"
     },
     {
@@ -2690,7 +2690,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.reducedHeating"
     },
     {
@@ -2702,7 +2702,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.standby"
     },
     {
@@ -2714,7 +2714,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.operating.programs.summerEco"
     },
     {
@@ -2726,7 +2726,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.sensors.temperature.room"
     },
     {
@@ -2738,7 +2738,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.sensors.temperature.supply"
     },
     {
@@ -2750,7 +2750,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.temperature"
     },
     {
@@ -2762,7 +2762,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.temperature.levels"
     },
     {
@@ -2774,7 +2774,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.zone.demand"
     },
     {
@@ -2786,7 +2786,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.2.zone.mode"
     },
     {
@@ -2798,7 +2798,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3"
     },
     {
@@ -2810,7 +2810,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.circulation.pump"
     },
     {
@@ -2822,7 +2822,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.configuration.summerEco.absolute"
     },
     {
@@ -2834,7 +2834,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.cooling.hysteresis"
     },
     {
@@ -2846,7 +2846,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.cooling.hysteresis.switch"
     },
     {
@@ -2858,7 +2858,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.frostprotection"
     },
     {
@@ -2870,7 +2870,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.heating.curve"
     },
     {
@@ -2882,7 +2882,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.heating.hysteresis.switch"
     },
     {
@@ -2894,7 +2894,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.heating.schedule"
     },
     {
@@ -2906,7 +2906,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.active"
     },
     {
@@ -2918,7 +2918,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.cooling"
     },
     {
@@ -2930,7 +2930,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.heating"
     },
     {
@@ -2942,7 +2942,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.heatingCooling"
     },
     {
@@ -2954,7 +2954,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.modes.standby"
     },
     {
@@ -2966,7 +2966,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.active"
     },
     {
@@ -2978,7 +2978,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.comfortCooling"
     },
     {
@@ -2990,7 +2990,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.comfortCoolingEnergySaving"
     },
     {
@@ -3002,7 +3002,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.comfortEnergySaving"
     },
     {
@@ -3014,7 +3014,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.comfortHeating"
     },
     {
@@ -3026,7 +3026,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.fixed"
     },
     {
@@ -3038,7 +3038,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.forcedLastFromSchedule"
     },
     {
@@ -3050,7 +3050,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.frostprotection"
     },
     {
@@ -3062,7 +3062,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.normalCooling"
     },
     {
@@ -3074,7 +3074,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.normalCoolingEnergySaving"
     },
     {
@@ -3086,7 +3086,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.normalEnergySaving"
     },
     {
@@ -3098,7 +3098,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.normalHeating"
     },
     {
@@ -3110,7 +3110,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.reducedCooling"
     },
     {
@@ -3122,7 +3122,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.reducedCoolingEnergySaving"
     },
     {
@@ -3134,7 +3134,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.reducedEnergySaving"
     },
     {
@@ -3146,7 +3146,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.reducedHeating"
     },
     {
@@ -3158,7 +3158,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.standby"
     },
     {
@@ -3170,7 +3170,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.operating.programs.summerEco"
     },
     {
@@ -3182,7 +3182,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.sensors.temperature.room"
     },
     {
@@ -3194,7 +3194,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.sensors.temperature.supply"
     },
     {
@@ -3206,7 +3206,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.temperature"
     },
     {
@@ -3218,7 +3218,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.temperature.levels"
     },
     {
@@ -3230,7 +3230,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.zone.demand"
     },
     {
@@ -3242,7 +3242,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.3.zone.mode"
     },
     {
@@ -3261,7 +3261,7 @@
           ]
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors"
     },
     {
@@ -3307,14 +3307,14 @@
       "properties": {
         "active": {
           "type": "boolean",
-          "value": false
+          "value": true
         },
         "phase": {
           "type": "string",
           "value": "ready"
         }
       },
-      "timestamp": "2025-11-02T20:27:57.942Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0"
     },
     {
@@ -3331,7 +3331,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-11-02T20:01:48.592Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.heater.crankcase"
     },
     {
@@ -3350,10 +3350,10 @@
         "value": {
           "type": "number",
           "unit": "bar",
-          "value": 5.56
+          "value": 4.09
         }
       },
-      "timestamp": "2025-11-02T21:00:02.950Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.sensors.pressure.inlet"
     },
     {
@@ -3372,10 +3372,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 12.9
+          "value": 10.3
         }
       },
-      "timestamp": "2025-11-02T21:13:52.640Z",
+      "timestamp": "2025-11-19T11:20:54.135Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.sensors.temperature.inlet"
     },
     {
@@ -3394,10 +3394,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 14
+          "value": 18.1
         }
       },
-      "timestamp": "2025-11-02T21:10:27.972Z",
+      "timestamp": "2025-11-19T11:22:26.948Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.sensors.temperature.motorChamber"
     },
     {
@@ -3416,10 +3416,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 25.8
+          "value": 64
         }
       },
-      "timestamp": "2025-11-02T21:14:12.661Z",
+      "timestamp": "2025-11-19T11:22:08.191Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.sensors.temperature.oil"
     },
     {
@@ -3438,10 +3438,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 16.2
+          "value": 67.9
         }
       },
-      "timestamp": "2025-11-02T21:07:07.521Z",
+      "timestamp": "2025-11-19T11:22:20.312Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.sensors.temperature.outlet"
     },
     {
@@ -3456,10 +3456,10 @@
         "value": {
           "type": "number",
           "unit": "revolutionsPerSecond",
-          "value": 0
+          "value": 38.5
         }
       },
-      "timestamp": "2025-11-02T20:27:57.942Z",
+      "timestamp": "2025-11-19T11:22:50.666Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.speed.current"
     },
     {
@@ -3474,15 +3474,15 @@
         "hours": {
           "type": "number",
           "unit": "hour",
-          "value": 380
+          "value": 582
         },
         "starts": {
           "type": "number",
           "unit": "",
-          "value": 626
+          "value": 836
         }
       },
-      "timestamp": "2025-11-02T20:25:55.698Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.compressors.0.statistics"
     },
     {
@@ -3501,10 +3501,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 17.6
+          "value": 39.4
         }
       },
-      "timestamp": "2025-11-02T21:00:11.256Z",
+      "timestamp": "2025-11-19T11:22:57.408Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.condensors.0.sensors.temperature.liquid"
     },
     {
@@ -3522,7 +3522,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.bufferCylinderSize"
     },
     {
@@ -3540,7 +3540,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.centralHeatingCylinderSize"
     },
     {
@@ -3556,7 +3556,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.dhw.highDemand.threshold"
     },
     {
@@ -3572,7 +3572,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.dhw.highDemand.timeframe"
     },
     {
@@ -3588,7 +3588,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.dhw.temperature.comfortCharging"
     },
     {
@@ -3606,7 +3606,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.dhwCylinderSize"
     },
     {
@@ -3623,7 +3623,7 @@
           "value": true
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.heatingRod.dhw"
     },
     {
@@ -3640,7 +3640,7 @@
           "value": true
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.heatingRod.heating"
     },
     {
@@ -3658,7 +3658,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.houseHeatingLoad"
     },
     {
@@ -3690,7 +3690,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.houseLocation"
     },
     {
@@ -3713,7 +3713,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.houseOrientation"
     },
     {
@@ -3741,7 +3741,7 @@
           "value": 20
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.internalPumpOne"
     },
     {
@@ -3769,7 +3769,7 @@
           "value": 20
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.internalPumpTwo"
     },
     {
@@ -3797,7 +3797,7 @@
           "value": 20
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.internalPumps"
     },
     {
@@ -3830,7 +3830,7 @@
           "value": 0.5
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.pressure.total"
     },
     {
@@ -3848,7 +3848,7 @@
           "value": 10
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.configuration.temperature.outside.DampingFactor"
     },
     {
@@ -3860,7 +3860,7 @@
       "isEnabled": true,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T21:14:14.068Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.device.time"
     },
     {
@@ -3881,7 +3881,7 @@
           "value": "Vitocal252A"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.device.variant"
     },
     {
@@ -3902,7 +3902,7 @@
           "value": "on"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw"
     },
     {
@@ -3914,7 +3914,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.actuator"
     },
     {
@@ -3926,7 +3926,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.configuration.highDemand.threshold"
     },
     {
@@ -3938,7 +3938,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.configuration.highDemand.timeframe"
     },
     {
@@ -3950,7 +3950,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.configuration.temperature.comfortCharging"
     },
     {
@@ -3986,7 +3986,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.hygiene"
     },
     {
@@ -3998,7 +3998,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.hygiene.trigger"
     },
     {
@@ -4040,7 +4040,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.oneTimeCharge"
     },
     {
@@ -4076,7 +4076,7 @@
           "value": "efficient"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.active"
     },
     {
@@ -4088,7 +4088,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.balanced"
     },
     {
@@ -4105,7 +4105,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.comfort"
     },
     {
@@ -4122,7 +4122,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.eco"
     },
     {
@@ -4139,7 +4139,7 @@
           "value": true
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.efficient"
     },
     {
@@ -4156,7 +4156,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.efficientWithMinComfort"
     },
     {
@@ -4173,7 +4173,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.operating.modes.off"
     },
     {
@@ -4185,7 +4185,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.pumps.circulation"
     },
     {
@@ -4197,7 +4197,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.pumps.circulation.schedule"
     },
     {
@@ -4209,7 +4209,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.pumps.secondary"
     },
     {
@@ -4356,7 +4356,7 @@
           }
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.schedule"
     },
     {
@@ -4375,10 +4375,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 39.1
+          "value": 35.6
         }
       },
-      "timestamp": "2025-11-02T20:12:22.514Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.dhwCylinder"
     },
     {
@@ -4390,7 +4390,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.dhwCylinder.middle"
     },
     {
@@ -4402,7 +4402,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T20:12:22.514Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.dhwCylinder.top"
     },
     {
@@ -4425,10 +4425,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 39.1
+          "value": 35.6
         }
       },
-      "timestamp": "2025-11-02T20:12:22.514Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
     },
     {
@@ -4444,7 +4444,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage.middle"
     },
     {
@@ -4460,7 +4460,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T20:12:22.514Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage.top"
     },
     {
@@ -4472,7 +4472,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.tankLoadSystem.return"
     },
     {
@@ -4484,7 +4484,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.sensors.temperature.tankLoadSystem.supply"
     },
     {
@@ -4496,7 +4496,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.temperature.hygiene"
     },
     {
@@ -4573,7 +4573,7 @@
           "value": 6
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.temperature.hysteresis"
     },
     {
@@ -4601,7 +4601,7 @@
           "value": 10
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.temperature.levels"
     },
     {
@@ -4638,7 +4638,7 @@
           "value": 45
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.dhw.temperature.main"
     },
     {
@@ -4657,10 +4657,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 15.6
+          "value": 11.3
         }
       },
-      "timestamp": "2025-11-02T20:46:21.259Z",
+      "timestamp": "2025-11-19T11:22:29.300Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.economizers.0.sensors.temperature.liquid"
     },
     {
@@ -4677,7 +4677,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.evaporators.0.heater.base"
     },
     {
@@ -4696,10 +4696,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 11.9
+          "value": -1.3
         }
       },
-      "timestamp": "2025-11-02T20:48:19.525Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.evaporators.0.sensors.temperature.liquid"
     },
     {
@@ -4718,10 +4718,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 12.8
+          "value": -2.9
         }
       },
-      "timestamp": "2025-11-02T21:05:09.189Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.evaporators.0.sensors.temperature.overheat"
     },
     {
@@ -4742,7 +4742,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.external.lock"
     },
     {
@@ -4785,7 +4785,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heat.production.summary.cooling"
     },
     {
@@ -4800,17 +4800,17 @@
         "currentDay": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 11.2
+          "value": 7.9
         },
         "currentMonth": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 24.5
+          "value": 189.9
         },
         "currentYear": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 916
+          "value": 1081.4
         },
         "lastMonth": {
           "type": "number",
@@ -4820,7 +4820,7 @@
         "lastSevenDays": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 80
+          "value": 69.6
         },
         "lastYear": {
           "type": "number",
@@ -4828,7 +4828,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-11-02T11:55:04.504Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heat.production.summary.dhw"
     },
     {
@@ -4843,17 +4843,17 @@
         "currentDay": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 22.4
+          "value": 44.8
         },
         "currentMonth": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 37.5
+          "value": 759.7
         },
         "currentYear": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 986.7
+          "value": 1708.9
         },
         "lastMonth": {
           "type": "number",
@@ -4863,7 +4863,7 @@
         "lastSevenDays": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 180.5
+          "value": 278.5
         },
         "lastYear": {
           "type": "number",
@@ -4871,7 +4871,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-11-02T20:30:30.113Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heat.production.summary.heating"
     },
     {
@@ -4883,7 +4883,7 @@
       "isEnabled": true,
       "isReady": false,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heater.condensatePan"
     },
     {
@@ -4895,7 +4895,7 @@
       "isEnabled": true,
       "isReady": false,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heater.fanRing"
     },
     {
@@ -4912,7 +4912,7 @@
           "value": true
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heatingRod"
     },
     {
@@ -4924,7 +4924,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heatingRod.maximumOutsideTemperature"
     },
     {
@@ -4967,7 +4967,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:36.826Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heatingRod.power.consumption.summary.dhw"
     },
     {
@@ -5010,7 +5010,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:36.826Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heatingRod.power.consumption.summary.heating"
     },
     {
@@ -5033,7 +5033,7 @@
           "value": 1
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.heatingRod.statistics"
     },
     {
@@ -5052,10 +5052,10 @@
         "value": {
           "type": "number",
           "unit": "ampere",
-          "value": 0
+          "value": 8.2
         }
       },
-      "timestamp": "2025-11-02T20:28:10.427Z",
+      "timestamp": "2025-11-19T11:21:38.153Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.inverters.0.sensors.power.current"
     },
     {
@@ -5074,10 +5074,10 @@
         "value": {
           "type": "number",
           "unit": "watt",
-          "value": 0
+          "value": 1508
         }
       },
-      "timestamp": "2025-11-02T20:28:10.427Z",
+      "timestamp": "2025-11-19T11:22:50.666Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.inverters.0.sensors.power.output"
     },
     {
@@ -5096,10 +5096,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 14.3
+          "value": 34
         }
       },
-      "timestamp": "2025-11-02T21:12:28.040Z",
+      "timestamp": "2025-11-19T11:22:38.336Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.inverters.0.sensors.temperature.powerModule"
     },
     {
@@ -5111,7 +5111,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.levels.maxReduced"
     },
     {
@@ -5123,7 +5123,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.levels.notReduced"
     },
     {
@@ -5135,7 +5135,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.levels.slightlyReduced"
     },
     {
@@ -5151,7 +5151,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.operating.programs.active"
     },
     {
@@ -5167,7 +5167,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.operating.programs.maxReduced"
     },
     {
@@ -5183,7 +5183,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.operating.programs.notReduced"
     },
     {
@@ -5199,7 +5199,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.noise.reduction.operating.programs.slightlyReduced"
     },
     {
@@ -5268,7 +5268,7 @@
           "value": ""
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.operating.programs.holiday"
     },
     {
@@ -5337,7 +5337,7 @@
           "value": "2000-01-01"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.operating.programs.holidayAtHome"
     },
     {
@@ -5354,7 +5354,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.outdoor.defrosting"
     },
     {
@@ -5366,7 +5366,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-11-02T21:13:52.640Z",
+      "timestamp": "2025-11-19T11:22:38.336Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.outdoor.defrosting.thermalEnergy"
     },
     {
@@ -5378,7 +5378,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T22:59:25.324Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.cooling"
     },
     {
@@ -5394,25 +5394,25 @@
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            0,
-            2.5,
-            2.1,
             2.3,
-            2.5,
-            2.9,
-            3.2,
-            2.8
+            3.3,
+            2.4,
+            2.3,
+            2.3,
+            2,
+            2.1,
+            2.5
           ]
         },
         "dayValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "month": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            0,
+            45.2,
             70.5,
             44.6,
             51.6,
@@ -5429,13 +5429,16 @@
         },
         "monthValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "week": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            12.299999999999999,
+            8,
+            16.6,
+            15.7,
+            17.2,
             17.1,
             16.5,
             11.700000000000001
@@ -5443,22 +5446,22 @@
         },
         "weekValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "year": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            175.1,
+            215.4,
             0
           ]
         },
         "yearValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         }
       },
-      "timestamp": "2025-11-02T13:01:18.327Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.dhw"
     },
     {
@@ -5474,25 +5477,25 @@
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            0,
-            5,
-            3.1,
-            3.3,
-            3.7,
-            6.1,
-            6.8,
-            4.8
+            10.7,
+            17.4,
+            9.4,
+            4.4,
+            2.2,
+            2.7,
+            4.9,
+            7.1
           ]
         },
         "dayValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "month": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            0,
+            130.9,
             97.8,
             30.2,
             2.3,
@@ -5509,13 +5512,16 @@
         },
         "monthValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "week": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            21.199999999999996,
+            37.5,
+            33.5,
+            54.9,
+            26.199999999999996,
             26.3,
             20.8,
             11
@@ -5523,22 +5529,22 @@
         },
         "weekValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "year": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            137.1,
+            263.2,
             0
           ]
         },
         "yearValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.320Z"
+          "value": "2025-11-19T11:19:12.533Z"
         }
       },
-      "timestamp": "2025-11-02T21:08:55.962Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.heating"
     },
     {
@@ -5581,7 +5587,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.summary.cooling"
     },
     {
@@ -5596,17 +5602,17 @@
         "currentDay": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 0
+          "value": 2.3
         },
         "currentMonth": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 0
+          "value": 45.2
         },
         "currentYear": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 170.2
+          "value": 215.4
         },
         "lastMonth": {
           "type": "number",
@@ -5616,7 +5622,7 @@
         "lastSevenDays": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 15.5
+          "value": 16.7
         },
         "lastYear": {
           "type": "number",
@@ -5624,7 +5630,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-11-02T11:55:04.504Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.summary.dhw"
     },
     {
@@ -5639,17 +5645,17 @@
         "currentDay": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 0
+          "value": 10.7
         },
         "currentMonth": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 0
+          "value": 130.9
         },
         "currentYear": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 132.3
+          "value": 263.2
         },
         "lastMonth": {
           "type": "number",
@@ -5659,7 +5665,7 @@
         "lastSevenDays": {
           "type": "number",
           "unit": "kilowattHour",
-          "value": 28
+          "value": 51.7
         },
         "lastYear": {
           "type": "number",
@@ -5667,7 +5673,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-11-02T20:30:30.113Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.summary.heating"
     },
     {
@@ -5683,25 +5689,25 @@
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            0,
-            7.5,
-            5.2,
-            5.6,
-            6.2,
-            9,
-            10,
-            7.6
+            13,
+            20.7,
+            11.8,
+            6.7,
+            4.5,
+            4.7,
+            7,
+            9.6
           ]
         },
         "dayValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.315Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "month": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            0,
+            176.10000000000002,
             168.3,
             74.8,
             53.9,
@@ -5718,13 +5724,16 @@
         },
         "monthValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.315Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "week": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            33.49999999999999,
+            45.5,
+            50.1,
+            70.6,
+            43.39999999999999,
             43.400000000000006,
             37.3,
             22.700000000000003
@@ -5732,22 +5741,22 @@
         },
         "weekValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.315Z"
+          "value": "2025-11-19T11:19:12.533Z"
         },
         "year": {
           "type": "array",
           "unit": "kilowattHour",
           "value": [
-            312.2,
+            478.6,
             0
           ]
         },
         "yearValueReadAt": {
           "type": "string",
-          "value": "2025-10-31T08:42:35.315Z"
+          "value": "2025-11-19T11:19:12.533Z"
         }
       },
-      "timestamp": "2025-11-02T21:08:55.962Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.power.consumption.total"
     },
     {
@@ -5766,10 +5775,10 @@
         "value": {
           "type": "number",
           "unit": "percent",
-          "value": 0
+          "value": 40
         }
       },
-      "timestamp": "2025-11-02T20:31:02.206Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.primaryCircuit.fans.0.current"
     },
     {
@@ -5788,10 +5797,10 @@
         "value": {
           "type": "number",
           "unit": "percent",
-          "value": 0
+          "value": 45
         }
       },
-      "timestamp": "2025-11-02T20:31:02.206Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.primaryCircuit.fans.1.current"
     },
     {
@@ -5810,10 +5819,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 6.4
+          "value": 3
         }
       },
-      "timestamp": "2025-11-02T20:49:21.745Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.primaryCircuit.sensors.temperature.supply"
     },
     {
@@ -5830,7 +5839,7 @@
           "value": false
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.primaryCircuit.valves.fourThreeWay"
     },
     {
@@ -5852,7 +5861,7 @@
           "value": 5.2
         }
       },
-      "timestamp": "2025-10-31T22:57:24.233Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.scop.dhw"
     },
     {
@@ -5874,7 +5883,7 @@
           "value": 7.1
         }
       },
-      "timestamp": "2025-10-31T22:57:24.233Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.scop.heating"
     },
     {
@@ -5896,7 +5905,7 @@
           "value": 6
         }
       },
-      "timestamp": "2025-10-31T22:57:24.233Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.scop.total"
     },
     {
@@ -5910,14 +5919,14 @@
       "properties": {
         "currentValue": {
           "type": "string",
-          "value": "standby"
+          "value": "heating"
         },
         "targetValue": {
           "type": "string",
-          "value": "standby"
+          "value": "heating"
         }
       },
-      "timestamp": "2025-11-02T20:27:57.942Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryCircuit.operation.state"
     },
     {
@@ -5936,10 +5945,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 23.1
+          "value": 43.2
         }
       },
-      "timestamp": "2025-11-02T21:01:16.426Z",
+      "timestamp": "2025-11-19T11:21:39.988Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryCircuit.sensors.temperature.supply"
     },
     {
@@ -5957,7 +5966,7 @@
           "value": 5
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryCircuit.temperature.return.minimum"
     },
     {
@@ -5972,15 +5981,15 @@
         "current": {
           "type": "number",
           "unit": "percent",
-          "value": 0
+          "value": 100
         },
         "target": {
           "type": "number",
           "unit": "percent",
-          "value": 0
+          "value": 100
         }
       },
-      "timestamp": "2025-11-02T11:54:00.788Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryCircuit.valves.fourThreeWay"
     },
     {
@@ -6001,7 +6010,7 @@
           "value": "unknown"
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator"
     },
     {
@@ -6013,7 +6022,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.defrosting"
     },
     {
@@ -6025,7 +6034,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.dhw"
     },
     {
@@ -6037,7 +6046,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.dhw.comfortEnsuring"
     },
     {
@@ -6049,7 +6058,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.frostprotection"
     },
     {
@@ -6061,7 +6070,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.heating"
     },
     {
@@ -6073,7 +6082,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.heating.comfortEnsuring"
     },
     {
@@ -6085,7 +6094,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.hygiene"
     },
     {
@@ -6097,7 +6106,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.refrigerationCircuitExceeded"
     },
     {
@@ -6109,7 +6118,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.runtime"
     },
     {
@@ -6121,7 +6130,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.configuration.screedDrying"
     },
     {
@@ -6133,7 +6142,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.electricity.energyFactor"
     },
     {
@@ -6145,7 +6154,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.electricity.price.low"
     },
     {
@@ -6157,7 +6166,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.electricity.price.normal"
     },
     {
@@ -6169,7 +6178,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.fossil.energyFactor"
     },
     {
@@ -6181,7 +6190,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.fossil.price.normal"
     },
     {
@@ -6193,7 +6202,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.state"
     },
     {
@@ -6205,7 +6214,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.status"
     },
     {
@@ -6217,7 +6226,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.temperature.current"
     },
     {
@@ -6229,7 +6238,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.secondaryHeatGenerator.valves.threeWay"
     },
     {
@@ -6241,7 +6250,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.seer.cooling"
     },
     {
@@ -6260,10 +6269,10 @@
         "value": {
           "type": "number",
           "unit": "bar",
-          "value": 2
+          "value": 1.6
         }
       },
-      "timestamp": "2025-11-02T11:53:49.916Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.pressure.supply"
     },
     {
@@ -6285,7 +6294,7 @@
           "value": 0
         }
       },
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.temperature.allengra"
     },
     {
@@ -6297,7 +6306,7 @@
       "isEnabled": false,
       "isReady": true,
       "properties": {},
-      "timestamp": "2025-10-31T08:42:22.961Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.temperature.hydraulicSeparator"
     },
     {
@@ -6316,10 +6325,10 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 9
+          "value": 3.3
         }
       },
-      "timestamp": "2025-11-02T20:29:40.361Z",
+      "timestamp": "2025-11-19T11:19:14.148Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.temperature.outside"
     },
     {
@@ -6338,11 +6347,47 @@
         "value": {
           "type": "number",
           "unit": "celsius",
-          "value": 23.3
+          "value": 39.3
         }
       },
-      "timestamp": "2025-11-02T21:05:29.535Z",
+      "timestamp": "2025-11-19T11:21:43.936Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.temperature.return"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.sensors.valve.0.expansion.target",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 0
+        }
+      },
+      "timestamp": "2025-11-19T11:19:09.880Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.valve.0.expansion.target"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {},
+      "deviceId": "0",
+      "feature": "heating.sensors.valve.1.expansion.target",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 0
+        }
+      },
+      "timestamp": "2025-11-19T11:19:09.880Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.valve.1.expansion.target"
     },
     {
       "apiVersion": 1,
@@ -6360,10 +6405,10 @@
         "value": {
           "type": "number",
           "unit": "liter/hour",
-          "value": 1530
+          "value": 970
         }
       },
-      "timestamp": "2025-11-02T21:14:08.565Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.sensors.volumetricFlow.allengra"
     },
     {
@@ -6381,7 +6426,7 @@
           "value": 5.2
         }
       },
-      "timestamp": "2025-10-31T22:57:24.233Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.spf.dhw"
     },
     {
@@ -6399,7 +6444,7 @@
           "value": 7.1
         }
       },
-      "timestamp": "2025-10-31T22:57:24.233Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.spf.heating"
     },
     {
@@ -6417,7 +6462,7 @@
           "value": 6
         }
       },
-      "timestamp": "2025-10-31T22:57:24.233Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.spf.total"
     },
     {
@@ -6431,10 +6476,10 @@
       "properties": {
         "value": {
           "type": "string",
-          "value": "climateCircuitOne"
+          "value": "domesticHotWater"
         }
       },
-      "timestamp": "2025-11-02T11:53:49.916Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.valves.fourThreeWay.position"
     },
     {
@@ -6449,10 +6494,10 @@
         "strength": {
           "type": "number",
           "unit": "",
-          "value": -62
+          "value": -66
         }
       },
-      "timestamp": "2025-10-31T08:42:36.826Z",
+      "timestamp": "2025-11-19T11:19:09.880Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/tcu.wifi"
     }
   ]
