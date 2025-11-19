@@ -10,21 +10,21 @@ class Vitocal252A(unittest.TestCase):
         self.service = ViCareServiceMock('response/Vitocal252A.json')
         self.device = HeatPump(self.service)
 
-    def test_getCompressorActive(self):
+    def test_compressor_getActive(self):
         self.assertFalse(self.device.compressors[0].getActive())
 
-    def test_getCompressorHours(self):
+    def test_compressor_getHours(self):
         self.assertEqual(
             self.device.compressors[0].getHours(), 380)
 
-    def test_getCompressorStarts(self):
+    def test_compressor_getStarts(self):
         self.assertEqual(
             self.device.compressors[0].getStarts(), 626)
 
-    def test_getCompressorPowerConsumptionThisYear(self):
+    def test_compressor_getPowerConsumptionThisYear(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.compressors[0].getPowerConsumptionCoolingThisYear)
 
-    def test_getPowerConsumptionCoolingThisYear(self):
+    def test_compressor_getPowerConsumptionCoolingThisYear(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionCoolingThisYear)
 
     def test_getHeatingCurveSlope(self):
@@ -169,7 +169,7 @@ class Vitocal252A(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionDomesticHotWaterLastYear(), 0)
 
-    def test_getCompressorPhase(self):
+    def test_compressor_getPhase(self):
         self.assertEqual(
             self.device.getCompressor(0).getPhase(), "ready")
 
