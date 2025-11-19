@@ -50,6 +50,7 @@ class Vitocal252A(unittest.TestCase):
         expected_modes = ['heating', 'standby']
         self.assertListEqual(expected_modes, self.device.circuits[0].getModes())
 
+    # Total power consumption:
     def test_getPowerConsumptionUnit(self):
         self.assertEqual(
             self.device.getPowerConsumptionUnit(), "kilowattHour")
@@ -58,6 +59,15 @@ class Vitocal252A(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionToday(), 0)
 
+    def test_getPowerConsumptionThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisMonth(), 0)
+
+    def test_getPowerConsumptionThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisYear(), 312.2)
+
+    # Power consumption for Domestic Hot Water:
     def test_getPowerConsumptionDomesticHotWaterToday(self):
         self.assertEqual(
             self.device.getPowerConsumptionDomesticHotWaterToday(), 0)
