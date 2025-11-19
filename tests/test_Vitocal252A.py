@@ -24,6 +24,9 @@ class Vitocal252A(unittest.TestCase):
     def test_getCompressorPowerConsumptionThisYear(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.compressors[0].getPowerConsumptionCoolingThisYear)
 
+    def test_getPowerConsumptionCoolingThisYear(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionCoolingThisYear)
+
     def test_getHeatingCurveSlope(self):
         self.assertEqual(
             self.device.circuits[0].getHeatingCurveSlope(), 0.6)
@@ -59,6 +62,24 @@ class Vitocal252A(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionDomesticHotWaterToday(), 0)
 
+    # Power consumption for Heating:
+    def test_getPowerConsumptionHeatingUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionHeatingToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingToday(), 0)
+
+    def test_getPowerConsumptionHeatingThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingThisMonth(), 0)
+
+    def test_getPowerConsumptionHeatingYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingYear(), 137.1)
+
+    # Power summary consumption for Heating:
     def test_getPowerSummaryConsumptionHeatingCurrentDay(self):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionHeatingCurrentDay(), 0)
