@@ -21,6 +21,10 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(
             self.device.compressors[0].getStarts(), 1502)
 
+    def test_compressor_getPhase(self):
+        self.assertEqual(
+            self.device.getCompressor(0).getPhase(), "ready")
+
     # def test_compressor_getHeatProduction(self):
     #     self.assertEqual(self.device.compressors[0].getHeatProductionCurrent(), 13.317)
     #     self.assertEqual(self.device.compressors[0].getHeatProductionCurrentUnit(), "watt")
@@ -35,6 +39,12 @@ class Vitocal250A(unittest.TestCase):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.compressors[0].getPowerConsumptionCoolingThisYear)
         # self.assertEqual(self.device.compressors[0].getPowerConsumptionTotalThisYear(), 198.2)
         # self.assertEqual(self.device.compressors[0].getPowerConsumptionTotalUnit(), "kilowattHour")
+
+    def test_compressor_getOilTemperature(self):
+        self.assertEqual(self.device.getCompressor(0).getOilTemperature(), 41.3)
+
+    def test_compressor_getMotorChamberTemperature(self):
+        self.assertEqual(self.device.getCompressor(0).getMotorChamberTemperature(), 24.2)
 
     def test_getHeatingCurveSlope(self):
         self.assertEqual(
@@ -139,10 +149,6 @@ class Vitocal250A(unittest.TestCase):
     def test_getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         self.assertEqual(
             self.device.getPowerSummaryConsumptionDomesticHotWaterLastYear(), 1536.8)
-
-    def test_compressor_getPhase(self):
-        self.assertEqual(
-            self.device.getCompressor(0).getPhase(), "ready")
 
     def test_getDomesticHotWaterHysteresis(self):
         self.assertEqual(
