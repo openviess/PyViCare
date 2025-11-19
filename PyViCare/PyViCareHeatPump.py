@@ -546,7 +546,7 @@ class Condensor(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getSubcoolingTemperatureUnit(self) -> str:
-        # Shows the unit of measurement of the subcooling temperature of the condensor.
+        # Shows the unit of measurement of the subcooling temperature of the condenser.
         return str(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.subcooling")["properties"]["value"]["unit"])
 
     #TODO: remove deprecated method in 03.2026 release
@@ -557,7 +557,7 @@ class Condensor(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getSubcoolingTemperature(self) -> float:
-        # Shows the subcooling temperature of the condensor.
+        # Shows the subcooling temperature of the condenser.
         return float(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.subcooling")["properties"]["value"]["value"])
 
     #TODO: remove deprecated method in 03.2026 release
@@ -568,7 +568,7 @@ class Condensor(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getLiquidTemperatureUnit(self) -> str:
-        # Shows the unit of measurement of the liquid temperature of the condensor.
+        # Shows the unit of measurement of the liquid temperature of the condenser.
         return str(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.liquid")["properties"]["value"]["unit"])
 
     #TODO: remove deprecated method in 03.2026 release
@@ -579,5 +579,5 @@ class Condensor(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getLiquidTemperature(self) -> float:
-        # Shows the liquid temperature of the condensor.
+        # Shows the liquid temperature of the condenser.
         return float(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.liquid")["properties"]["value"]["value"])
