@@ -226,3 +226,12 @@ class Vitocal250A(unittest.TestCase):
         # self.assertEqual(self.device.getHeatingRodPowerConsumptionHeatingThisYear(), 0)
         self.assertEqual(self.device.getHeatingRodStarts(), 314)
         self.assertEqual(self.device.getHeatingRodHours(), 31)
+
+    def test_inverter_getCurrent(self):
+        self.assertEqual(self.device.inverters[0].getCurrent(), 0)
+
+    def test_inverter_getPower(self):
+        self.assertEqual(self.device.inverters[0].getPower(), 0)
+
+    def test_inverter_getTemperature(self):
+        self.assertEqual(self.device.inverters[0].getTemperature(), 26.3)

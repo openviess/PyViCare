@@ -69,9 +69,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heater.condensatePan',
             'heating.heater.fanRing',
             'heating.heatingRod',
-            'heating.inverters.0.sensors.power.current',
-            'heating.inverters.0.sensors.power.output',
-            'heating.inverters.0.sensors.temperature.powerModule',
             'heating.outdoor.defrosting',
             'heating.power.consumption.summary.cooling',
             'heating.primaryCircuit.fans.0.current',
@@ -305,7 +302,7 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator)}', '0', match)
+                feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
