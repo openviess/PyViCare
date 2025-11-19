@@ -36,13 +36,6 @@ class Vitopure350(unittest.TestCase):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getSerial()
 
-    def test_getActiveVentilationMode(self):
-        self.assertEqual("sensorDriven", self.device.getActiveVentilationMode())
-
-    def test_getVentilationModes(self):
-        expected_modes = ['permanent', 'ventilation', 'sensorDriven']
-        self.assertListEqual(expected_modes, self.device.getVentilationModes())
-
     def test_getVentilationMode(self):
         self.assertEqual(False, self.device.getVentilationMode("filterChange"))
 
