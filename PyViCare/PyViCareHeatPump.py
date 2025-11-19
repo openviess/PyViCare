@@ -396,7 +396,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getOutletPressureUnit", version="2.55.1")
     def getCompressorOutletPressureUnit(self) -> str:
-        return self.getOutletPressureUnit()
+        return str(self.getOutletPressureUnit())
 
     @handleNotSupported
     def getOutletPressureUnit(self) -> str:
@@ -407,7 +407,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getOutletPressure", version="2.55.1")
     def getCompressorOutletPressure(self) -> float:
-        return self.getOutletPressure()
+        return float(self.getOutletPressure())
 
     @handleNotSupported
     def getOutletPressure(self) -> float:
@@ -418,7 +418,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getInletPressureUnit", version="2.55.1")
     def getCompressorInletPressureUnit(self) -> str:
-        return self.getInletPressureUnit()
+        return str(self.getInletPressureUnit())
 
     @handleNotSupported
     def getInletPressureUnit(self) -> str:
@@ -429,7 +429,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getInletPressure", version="2.55.1")
     def getCompressorInletPressure(self) -> float:
-        return self.getInletPressure()
+        return float(self.getInletPressure())
 
     @handleNotSupported
     def getInletPressure(self) -> float:
@@ -440,7 +440,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getOutletTemperatureUnit", version="2.55.1")
     def getCompressorOutletTemperatureUnit(self) -> str:
-        return self.getOutletTemperatureUnit()
+        return str(self.getOutletTemperatureUnit())
 
     @handleNotSupported
     def getOutletTemperatureUnit(self) -> str:
@@ -451,7 +451,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getOutletTemperature", version="2.55.1")
     def getCompressorOutletTemperature(self) -> float:
-        return self.getOutletTemperature()
+        return float(self.getOutletTemperature())
 
     @handleNotSupported
     def getOutletTemperature(self) -> float:
@@ -462,7 +462,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getInletTemperatureUnit", version="2.55.1")
     def getCompressorInletTemperatureUnit(self) -> str:
-        return self.getInletTemperatureUnit()
+        return str(self.getInletTemperatureUnit())
 
     @handleNotSupported
     def getInletTemperatureUnit(self) -> str:
@@ -473,7 +473,7 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getInletTemperature", version="2.55.1")
     def getCompressorInletTemperature(self) -> float:
-        return self.getInletTemperature()
+        return float(self.getInletTemperature())
 
     @handleNotSupported
     def getInletTemperature(self) -> float:
@@ -491,7 +491,7 @@ class Evaporator(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getLiquidTemperatureUnit", version="2.55.1")
     def getEvaporatorLiquidTemperatureUnit(self) -> str:
-        return self.getLiquidTemperatureUnit()
+        return str(self.getLiquidTemperatureUnit())
 
     @handleNotSupported
     def getLiquidTemperatureUnit(self) -> str:
@@ -502,7 +502,7 @@ class Evaporator(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getLiquidTemperature", version="2.55.1")
     def getEvaporatorLiquidTemperature(self) -> float:
-        return self.getLiquidTemperature()
+        return float(self.getLiquidTemperature())
 
     @handleNotSupported
     def getLiquidTemperature(self) -> float:
@@ -513,7 +513,7 @@ class Evaporator(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getOverheatTemperatureUnit", version="2.55.1")
     def getEvaporatorOverheatTemperatureUnit(self) -> str:
-        return self.getOverheatTemperatureUnit()
+        return str(self.getOverheatTemperatureUnit())
 
     @handleNotSupported
     def getOverheatTemperatureUnit(self) -> str:
@@ -524,7 +524,7 @@ class Evaporator(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getOverheatTemperature", version="2.55.1")
     def getEvaporatorOverheatTemperature(self) -> float:
-        return self.getOverheatTemperature()
+        return float(self.getOverheatTemperature())
 
     @handleNotSupported
     def getOverheatTemperature(self) -> float:
@@ -542,7 +542,7 @@ class Condensor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getSubcoolingTemperatureUnit", version="2.55.1")
     def getCondensorSubcoolingTemperatureUnit(self) -> str:
-        return self.getSubcoolingTemperatureUnit()
+        return str(self.getSubcoolingTemperatureUnit())
 
     @handleNotSupported
     def getSubcoolingTemperatureUnit(self) -> str:
@@ -553,7 +553,7 @@ class Condensor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getSubcoolingTemperature", version="2.55.1")
     def getCondensorSubcoolingTemperature(self) -> float:
-        return self.getSubcoolingTemperature()
+        return float(self.getSubcoolingTemperature())
 
     @handleNotSupported
     def getSubcoolingTemperature(self) -> float:
@@ -564,7 +564,7 @@ class Condensor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getLiquidTemperatureUnit", version="2.55.1")
     def getCondensorLiquidTemperatureUnit(self) -> str:
-        return self.getLiquidTemperatureUnit()
+        return str(self.getLiquidTemperatureUnit())
 
     @handleNotSupported
     def getLiquidTemperatureUnit(self) -> str:
@@ -575,7 +575,7 @@ class Condensor(HeatingDeviceWithComponent):
     @handleNotSupported
     @deprecated(reason="renamed, use getLiquidTemperature", version="2.55.1")
     def getCondensorLiquidTemperature(self) -> float:
-        return self.getLiquidTemperature()
+        return float(self.getLiquidTemperature())
 
     @handleNotSupported
     def getLiquidTemperature(self) -> float:
