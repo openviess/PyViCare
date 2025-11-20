@@ -48,6 +48,23 @@ class VitovalorPT2(unittest.TestCase):
     def test_getHydraulicSeparatorTemperature(self):
         self.assertEqual(self.device.getHydraulicSeparatorTemperature(), 35.1)
 
+    # Total power consumption:
+    def test_getPowerConsumptionUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionToday(), 0.9)
+
+    def test_getPowerConsumptionThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisMonth(), 16.3)
+
+    def test_getPowerConsumptionThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisYear(), 350.8)
+
     def test_getPowerConsumptionDays(self):
         expected_consumption = [0.9, 1.2, 1.3, 1.2, 1.2, 1.2, 1.2, 1.2]
         self.assertListEqual(self.device.getPowerConsumptionDays(), expected_consumption)
@@ -56,6 +73,7 @@ class VitovalorPT2(unittest.TestCase):
         expected_consumption = [0.9, 1.2, 1.3, 1.2, 1.2, 1.2, 1.2, 1.2]
         self.assertListEqual(self.device.getPowerConsumptionHeatingDays(), expected_consumption)
 
+    # GasConsumption 
     def test_getGasConsumptionTotalDays(self):
         expected_consumption = [5.8, 8.8, 8.899999999999999, 9, 9.4, 10.2, 10, 8.1]
         self.assertListEqual(self.device.getGasConsumptionTotalDays(), expected_consumption)
