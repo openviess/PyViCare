@@ -145,7 +145,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.hygiene.trigger',
             'heating.dhw.temperature.hygiene',
             'heating.dhw.operating.modes.off',
-            'heating.dhw.operating.modes.active',
             'heating.dhw.operating.modes.comfort',
             'heating.dhw.operating.modes.eco',
             'heating.circuits.0.heating.roomInfluenceFactor',
