@@ -62,3 +62,51 @@ class Vitodens222W(unittest.TestCase):
 
     def test_getBoilerTemperature(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBoilerTemperature)
+
+    # Total power consumption:
+    def test_getPowerConsumptionUnit(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionUnit)
+
+    def test_getPowerConsumptionToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionToday(), 0.4)
+
+    def test_getPowerConsumptionThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisMonth(), 6.0)
+
+    def test_getPowerConsumptionThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisYear(), 181.1)
+
+    # Power consumption for Domestic Hot Water:
+    def test_getPowerConsumptionDomesticHotWaterUnit(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDomesticHotWaterUnit)
+
+    def test_getPowerConsumptionDomesticHotWaterToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterToday(), 0)
+
+    def test_getPowerConsumptionDomesticHotWaterThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterThisMonth(), 2.2)
+
+    def test_getPowerConsumptionDomesticHotWaterYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterYear(), 32.9)
+
+    # Power consumption for Heating:
+    def test_getPowerConsumptionHeatingUnit(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionHeatingUnit)
+
+    def test_getPowerConsumptionHeatingToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingToday(), 0.4)
+
+    def test_getPowerConsumptionHeatingThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingThisMonth(), 3.8)
+
+    def test_getPowerConsumptionHeatingYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingYear(), 148.2)
