@@ -106,7 +106,10 @@ class GazBoiler(HeatingDevice):
     # Total power consumption:
     @handleNotSupported
     def getPowerConsumptionUnit(self):
-        return self.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
+        try :
+            return self.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
+        except KeyError:
+            return self.getProperty("heating.power.consumption.total")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
@@ -207,7 +210,10 @@ class GazBoiler(HeatingDevice):
     # Power consumption for Heating:
     @handleNotSupported
     def getPowerConsumptionHeatingUnit(self):
-        return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
+        try:
+            self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
+        except KeyError:
+            return self.getProperty("heating.power.consumption.heating")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionHeatingToday(self):
@@ -253,7 +259,10 @@ class GazBoiler(HeatingDevice):
     # Power consumption for Domestic Hot Water:
     @handleNotSupported
     def getPowerConsumptionDomesticHotWaterUnit(self):
-        return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
+        try:
+            self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
+        except KeyError:
+            return self.getProperty("heating.power.consumption.dhw")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionDomesticHotWaterToday(self):

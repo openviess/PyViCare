@@ -65,7 +65,8 @@ class Vitodens222W(unittest.TestCase):
 
     # Total power consumption:
     def test_getPowerConsumptionUnit(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionUnit)
+        self.assertEqual(
+            self.device.getPowerConsumptionUnit(), "kilowattHour")
 
     def test_getPowerConsumptionToday(self):
         self.assertEqual(
@@ -81,7 +82,8 @@ class Vitodens222W(unittest.TestCase):
 
     # Power consumption for Domestic Hot Water:
     def test_getPowerConsumptionDomesticHotWaterUnit(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionDomesticHotWaterUnit)
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterUnit(), "kilowattHour")
 
     def test_getPowerConsumptionDomesticHotWaterToday(self):
         self.assertEqual(
@@ -97,7 +99,8 @@ class Vitodens222W(unittest.TestCase):
 
     # Power consumption for Heating:
     def test_getPowerConsumptionHeatingUnit(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getPowerConsumptionHeatingUnit)
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingUnit(), "kilowattHour")
 
     def test_getPowerConsumptionHeatingToday(self):
         self.assertEqual(
