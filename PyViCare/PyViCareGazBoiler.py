@@ -211,7 +211,7 @@ class GazBoiler(HeatingDevice):
     @handleNotSupported
     def getPowerConsumptionHeatingUnit(self):
         try:
-            self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
+            return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
         except KeyError:
             return self.getProperty("heating.power.consumption.heating")["properties"]["unit"]["value"]
 
@@ -260,7 +260,7 @@ class GazBoiler(HeatingDevice):
     @handleNotSupported
     def getPowerConsumptionDomesticHotWaterUnit(self):
         try:
-            self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
+            return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
         except KeyError:
             return self.getProperty("heating.power.consumption.dhw")["properties"]["unit"]["value"]
 
