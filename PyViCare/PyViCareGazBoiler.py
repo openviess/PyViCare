@@ -224,7 +224,7 @@ class GazBoiler(HeatingDevice):
         return self.getProperty("heating.power.consumption.heating")["properties"]["month"]["value"][0]
 
     @handleNotSupported
-    def getPowerConsumptionHeatingYear(self):
+    def getPowerConsumptionHeatingThisYear(self):
         return self.getProperty("heating.power.consumption.heating")["properties"]["year"]["value"][0]
 
     # Power summary consumption for Heating:

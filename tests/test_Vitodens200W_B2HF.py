@@ -62,6 +62,6 @@ class Vitodens200W_B2HF(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionHeatingThisMonth(), 5.1)
 
-    def test_getPowerConsumptionHeatingYear(self):
+    def test_getPowerConsumptionHeatingThisYear(self):
         self.assertEqual(
-            self.device.getPowerConsumptionHeatingYear(), 79.8)
+            self.device.getPowerConsumptionHeatingThisYear(), 79.8)

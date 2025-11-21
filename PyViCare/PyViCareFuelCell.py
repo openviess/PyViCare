@@ -97,10 +97,6 @@ class FuelCell(HeatingDevice):
     def getPowerConsumptionHeatingThisYear(self):
         return self.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
 
-    @handleNotSupported
-    def getPowerConsumptionHeatingYear(self):
-        return self.getProperty("heating.power.consumption.heating")["properties"]["year"]["value"][0]
-
     # Power consumption for Domestic Hot Water:
     @handleNotSupported
     def getPowerConsumptionDomesticHotWaterUnit(self):

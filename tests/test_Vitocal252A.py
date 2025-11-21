@@ -97,9 +97,9 @@ class Vitocal252A(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionHeatingThisMonth(), 130.9)
 
-    def test_getPowerConsumptionHeatingYear(self):
+    def test_getPowerConsumptionHeatingThisYear(self):
         self.assertEqual(
-            self.device.getPowerConsumptionHeatingYear(), 263.2)
+            self.device.getPowerConsumptionHeatingThisYear(), 263.2)
 
     # Power summary consumption for Heating:
     def test_getPowerSummaryConsumptionHeatingCurrentDay(self):
