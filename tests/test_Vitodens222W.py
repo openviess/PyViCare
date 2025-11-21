@@ -93,9 +93,9 @@ class Vitodens222W(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionDomesticHotWaterThisMonth(), 2.2)
 
-    def test_getPowerConsumptionDomesticHotWaterYear(self):
+    def test_getPowerConsumptionDomesticHotWaterThisYear(self):
         self.assertEqual(
-            self.device.getPowerConsumptionDomesticHotWaterYear(), 32.9)
+            self.device.getPowerConsumptionDomesticHotWaterThisYear(), 32.9)
 
     # Power consumption for Heating:
     def test_getPowerConsumptionHeatingUnit(self):

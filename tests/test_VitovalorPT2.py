@@ -86,9 +86,9 @@ class VitovalorPT2(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionDomesticHotWaterThisMonth(), 0)
 
-    def test_getPowerConsumptionDomesticHotWaterYear(self):
+    def test_getPowerConsumptionDomesticHotWaterThisYear(self):
         self.assertEqual(
-            self.device.getPowerConsumptionDomesticHotWaterYear(), 5.1)
+            self.device.getPowerConsumptionDomesticHotWaterThisYear(), 5.1)
 
     # Power consumption for Heating:
     def test_getPowerConsumptionHeatingUnit(self):

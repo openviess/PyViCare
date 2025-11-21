@@ -111,7 +111,7 @@ class FuelCell(HeatingDevice):
         return self.getProperty("heating.power.consumption.dhw")["properties"]["month"]["value"][0]
 
     @handleNotSupported
-    def getPowerConsumptionDomesticHotWaterYear(self):
+    def getPowerConsumptionDomesticHotWaterThisYear(self):
         return self.getProperty("heating.power.consumption.dhw")["properties"]["year"]["value"][0]
 
     # Gas consumption:
