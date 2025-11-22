@@ -13,6 +13,42 @@ class PythonFile:
 
 
 class TestForMissingProperties(unittest.TestCase):
+
+    @unittest.skip("just for manual execution")
+    def test_list_deprecated_properties(self):
+        deprecated_features = self.read_all_deprecated_features()
+        self.assertListEqual(deprecated_features.keys(), [], f"found deprecated features: {list(deprecated_features.keys())}")
+
+    def test_deprecatedProperties(self):
+        # with this test we want to check if deprecated properties are used in the code
+
+        ignore = [
+            # add deprecated properties here
+            'heating.circuits.0.operating.programs.noDemand',
+            'heating.circuits.0.operating.programs.summerEco',
+            'ventilation.operating.programs.comfort',
+            'ventilation.operating.programs.eco',
+            'ventilation.operating.programs.holiday',
+            'ventilation.operating.programs.levelFour',
+            'ventilation.operating.programs.levelOne',
+            'ventilation.operating.programs.levelThree',
+            'ventilation.operating.programs.levelTwo',
+            'ventilation.operating.programs.forcedLevelFour',
+            'ventilation.operating.programs.silent',
+        ]
+
+        all_features = self.read_all_deprecated_features()
+        all_python_files = self.read_all_python_code()
+        deprecated_features = []
+        for feature in all_features:
+            if feature in ignore:
+                continue
+            if self.find_feature_in_code(all_python_files, feature):
+                deprecated_features.append(feature)
+
+        self.maxDiff = None
+        self.assertListEqual([], deprecated_features, "found deprecated features in code")
+
     def test_missingProperties(self):
         # with this test we want to check if new properties
         # are added to the response files
@@ -49,12 +85,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.boiler.pumps.internal.current',
             'heating.boiler.temperature.current',
             'heating.compressors.0.heater.crankcase',
-            'heating.compressors.0.sensors.pressure.inlet',
-            'heating.compressors.0.sensors.temperature.inlet',
-            'heating.compressors.0.sensors.temperature.motorChamber',
-            'heating.compressors.0.sensors.temperature.oil',
-            'heating.compressors.0.sensors.temperature.outlet',
-            'heating.compressors.0.speed.current',
             'heating.configuration.heatingRod.dhw',
             'heating.configuration.heatingRod.heating',
             'heating.configuration.internalPumpOne',
@@ -62,16 +92,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.temperature.outside.DampingFactor',
             'heating.economizers.0.sensors.temperature.liquid',
             'heating.evaporators.0.heater.base',
-            'heating.evaporators.0.sensors.temperature.liquid',
-            'heating.evaporators.0.sensors.temperature.overheat',
-            'heating.external.lock',
             'heating.heat.production.summary.cooling',
             'heating.heater.condensatePan',
             'heating.heater.fanRing',
             'heating.heatingRod',
-            'heating.inverters.0.sensors.power.current',
-            'heating.inverters.0.sensors.power.output',
-            'heating.inverters.0.sensors.temperature.powerModule',
             'heating.outdoor.defrosting',
             'heating.power.consumption.summary.cooling',
             'heating.primaryCircuit.fans.0.current',
@@ -92,9 +116,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.centralHeatingCylinderSize',
             'heating.configuration.dhwCylinderPump',
             'heating.configuration.dhwCylinderSize',
-            'heating.configuration.gasType',
             'heating.configuration.houseHeatingLoad',
-            'heating.configuration.houseLocation',
             'heating.configuration.houseOrientation',
             'heating.configuration.internalPumps',
             'heating.configuration.pressure.total',
@@ -134,15 +156,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
-            'heating.buffer.sensors.temperature.main',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.buffer.sensors.temperature.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.dhw.sensors.temperature.hotWaterStorage',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.dhw.sensors.temperature.hotWaterStorage.top',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',  # deprecated, removed 2024-09-15 FIXME: remove once data point is removed and test data is updated
-            'heating.burner', # deprecated FIXME: remove once test data is updated
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
-            'heating.device.variant',
             'heating.device.software',
 
             # gateway
@@ -164,16 +179,10 @@ class TestForMissingProperties(unittest.TestCase):
             'fuelCell.sensors.temperature.return',
             'fuelCell.sensors.temperature.supply',
             'fuelCell.statistics',
-            'heating.buffer.hysteresis',
             'heating.bufferCylinder.hysteresis',
             'heating.burners.0.preConditions',
             'heating.circuits.0.circulation.secondaryPump',
             'heating.dhw.pumps.secondary',
-            'heating.fuelCell.electricalEnergyConsumption.value',
-            'heating.fuelCell.managers.energy.prediction.power.consumption',
-            'heating.fuelCell.managers.energy.prediction.runtime',
-            'heating.fuelCell.managers.energy.timeTillNextStart',
-            'heating.fuelCell.prediction.heating.deficit',
             'heating.increasedReturn.temperature',
             'heating.power.production.demandCoverage.current',
             'heating.power.production.productionCoverage.current',
@@ -190,8 +199,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.power.consumption.dhw.week',
             'heating.compressors.0.power.consumption.heating.week',
             'heating.compressors.0.sensors.power',
-            'heating.compressors.0.sensors.temperature.ambient',
-            'heating.compressors.0.sensors.temperature.overheat',
             'heating.compressors.0.statistics.load',
             'heating.configuration.buffer.temperature.max',
             'heating.configuration.flow.temperature.max',
@@ -222,7 +229,6 @@ class TestForMissingProperties(unittest.TestCase):
             # ventilation - not yet used
             'ventilation.control.filterChange',
             'ventilation.filter.pollution.blocked',
-            'ventilation.sensors.airQuality',
             'ventilation.levels.levelOne',
             'ventilation.levels.levelTwo',
             'ventilation.levels.levelThree',
@@ -258,7 +264,55 @@ class TestForMissingProperties(unittest.TestCase):
             'fht.configuration.floorHeatingDamageProtectionThreshold',
             'fht.valve',
 
-            # DEPRECATED
+            # DEPRECATED - remove once data point is removed and test data is updated
+            'heating.burner', # deprecated FIXME: remove once test data is updated
+            'heating.buffer.hysteresis',
+            'heating.buffer.sensors.temperature.main',
+            'heating.configuration.houseLocation',
+            'heating.dhw.sensors.temperature.hotWaterStorage',
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',
+            'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
+            'heating.dhw.sensors.temperature.hotWaterStorage.middle',
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',
+            'heating.external.lock',
+            'heating.fuelCell.electricalEnergyConsumption.value',
+            'heating.fuelCell.managers.energy',
+            'heating.fuelCell.managers.energy.prediction.power.consumption',
+            'heating.fuelCell.managers.energy.prediction.runtime',
+            'heating.fuelCell.managers.energy.timeTillNextStart',
+            'heating.fuelCell.operating.phase',
+            'heating.fuelCell.prediction.heating.deficit',
+            'heating.fuelCell.sensors.temperature.return',
+            'heating.fuelCell.sensors.temperature.supply',
+            'heating.fuelCell.statistics',
+            'heating.circuits.0.operating.programs.noDemand',
+            'heating.dhw.comfort',
+            'heating.circuits.0.operating.programs.summerEco',
+            'heating.buffer.sensors.temperature.top',
+            'heating.configuration.dhw.temperature.dhwCylinder.max',
+            'ventilation.operating.programs.comfort',
+            'ventilation.operating.programs.eco',
+            'ventilation.operating.programs.holiday',
+            'ventilation.operating.programs.levelFour',
+            'ventilation.operating.programs.levelOne',
+            'ventilation.operating.programs.levelThree',
+            'ventilation.operating.programs.levelTwo',
+            'heating.configuration.dhw.highDemand.threshold',
+            'heating.configuration.dhw.highDemand.timeframe',
+            'heating.configuration.dhw.temperature.comfortCharging',
+            'heating.device.variant',
+            'heating.noise.reduction.operating.programs.active',
+            'heating.noise.reduction.operating.programs.maxReduced',
+            'heating.noise.reduction.operating.programs.notReduced',
+            'heating.noise.reduction.operating.programs.slightlyReduced',
+            'heating.scop.dhw',
+            'heating.scop.heating',
+            'heating.scop.total',
+            'heating.configuration.dhw.temperature.hotWaterStorage.max',
+            'heating.configuration.gasType',
+            'ventilation.sensors.airQuality',
+            'ventilation.operating.programs.forcedLevelFour',
+            'ventilation.operating.programs.silent',
         ]
 
         all_features = self.read_all_features()
@@ -307,7 +361,7 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator)}', '0', match)
+                feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
@@ -354,6 +408,30 @@ class TestForMissingProperties(unittest.TestCase):
                 files.append(PythonFile(f, path))
 
         return files
+
+    def read_all_deprecated_features(self):
+        response_path = join(dirname(__file__), './response')
+        response_files = [f for f in listdir(response_path) if isfile(join(response_path, f))]
+
+        all_features = {}
+        for response in response_files:
+            data = readJson(join(response_path, response))
+            if "data" in data:
+                for feature in data["data"]:
+                    if "deprecated" in feature and feature["deprecated"]:
+                        name = re.sub(r"\b\d\b", "0", feature["feature"])
+                        if name not in all_features:
+                            all_features[name] = {'files': []}
+
+                        all_features[name]['files'].append(response)
+                    # name = re.sub(r"\b\d\b", "0", feature["feature"])
+                    # isDeprecated = feature["deprecated"] if "deprecated" in feature else None
+                    # if name not in all_features:
+                    #     all_features[name] = {'files': []}
+
+                    # if feature['isEnabled'] and feature['properties'] != {}:
+                    #     all_features[name]['files'].append(response)
+        return all_features
 
     def read_all_features(self):
         response_path = join(dirname(__file__), './response')

@@ -20,3 +20,6 @@ class Vitocal222S(unittest.TestCase):
     def test_compressor_getOutletTemperature(self):
         self.assertEqual(self.device.getCompressor(0).getOutletTemperature(), 32.8)
         self.assertEqual(self.device.getCompressor(0).getOutletTemperatureUnit(), "celsius")
+
+    def test_compressor_getSpeed(self):
+        self.assertEqual(self.device.getCompressor(0).getSpeed(), 20)
