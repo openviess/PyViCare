@@ -107,7 +107,7 @@ class VitovalorPT2(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionHeatingThisYear(), 345.7)
 
-    # GasConsumption 
+    # GasConsumption
     def test_getGasConsumptionTotalDays(self):
         expected_consumption = [5.8, 8.8, 8.899999999999999, 9, 9.4, 10.2, 10, 8.1]
         self.assertListEqual(self.device.getGasConsumptionTotalDays(), expected_consumption)
