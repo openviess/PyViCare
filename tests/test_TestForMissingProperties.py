@@ -142,6 +142,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.temperature',
             'heating.burners',
             'heating.sensors.temperature.allengra',
+            'heating.sensors.valve.0.expansion.target',
+            'heating.sensors.valve.1.expansion.target',
             'heating.dhw.hygiene.trigger',
             'heating.dhw.temperature.hygiene',
             'heating.dhw.operating.modes.off',
