@@ -43,21 +43,13 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getInverter(self, inverter) -> Inverter:
         return Inverter(self, inverter)
 
+    @handleNotSupported
     def getBufferMainTemperature(self):
-        """Get buffer tank main temperature. Tries 'buffer' path first, then 'bufferCylinder'."""
-        with suppress(KeyError):
-            return self.getProperty("heating.buffer.sensors.temperature.main")["properties"]['value']['value']
-        with suppress(KeyError):
-            return self.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
-        raise PyViCareNotSupportedFeatureError("getBufferMainTemperature")
+        return self.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]["value"]["value"]
 
+    @handleNotSupported
     def getBufferTopTemperature(self):
-        """Get buffer tank top temperature. Tries 'buffer' path first, then 'bufferCylinder'."""
-        with suppress(KeyError):
-            return self.getProperty("heating.buffer.sensors.temperature.top")["properties"]['value']['value']
-        with suppress(KeyError):
-            return self.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]['value']['value']
-        raise PyViCareNotSupportedFeatureError("getBufferTopTemperature")
+        return self.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]["value"]["value"]
 
     # Power consumption for Heating:
     @handleNotSupported
