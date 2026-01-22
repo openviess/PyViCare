@@ -35,6 +35,14 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.programs.levelTwo',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
+            # Alternative naming conventions used as fallback for device compatibility
+            'heating.buffer.sensors.temperature.main',
+            'heating.buffer.sensors.temperature.top',
+            'heating.dhw.sensors.temperature.hotWaterStorage',
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',
+            'heating.dhw.sensors.temperature.hotWaterStorage.middle',
+            'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
         ]
 
         all_features = self.read_all_deprecated_features()
@@ -361,6 +369,7 @@ class TestForMissingProperties(unittest.TestCase):
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
+                feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 

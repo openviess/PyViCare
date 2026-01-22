@@ -66,30 +66,45 @@ class HeatingDevice(Device):
     def getDomesticHotWaterConfiguredTemperature(self):
         return self.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
 
-    @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
-            "value"]
+        """Get DHW storage temperature. Tries 'hotWaterStorage' path first, then 'dhwCylinder'."""
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage")["properties"]["value"]["value"]
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"]["value"]
+        raise PyViCareNotSupportedFeatureError("getDomesticHotWaterStorageTemperature")
 
-    @handleNotSupported
     def getHotWaterStorageTemperatureTop(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"][
-            "value"]
+        """Get DHW storage top temperature. Tries 'hotWaterStorage.top' path first, then 'dhwCylinder.top'."""
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.top")["properties"]["value"]["value"]
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHotWaterStorageTemperatureTop")
 
-    @handleNotSupported
     def getDomesticHotWaterStorageTemperatureMiddle(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.middle")["properties"]["value"][
-            "value"]
+        """Get DHW storage middle temperature. Tries 'hotWaterStorage.middle' path first, then 'dhwCylinder.middle'."""
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.middle")["properties"]["value"]["value"]
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.middle")["properties"]["value"]["value"]
+        raise PyViCareNotSupportedFeatureError("getDomesticHotWaterStorageTemperatureMiddle")
 
-    @handleNotSupported
     def getDomesticHotWaterStorageTemperatureMidBottom(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.midBottom")["properties"]["value"][
-            "value"]
+        """Get DHW storage mid-bottom temperature. Tries 'hotWaterStorage.midBottom' path first, then 'dhwCylinder.midBottom'."""
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.midBottom")["properties"]["value"]["value"]
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.midBottom")["properties"]["value"]["value"]
+        raise PyViCareNotSupportedFeatureError("getDomesticHotWaterStorageTemperatureMidBottom")
 
-    @handleNotSupported
     def getHotWaterStorageTemperatureBottom(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"][
-            "value"]
+        """Get DHW storage bottom temperature. Tries 'hotWaterStorage.bottom' path first, then 'dhwCylinder.bottom'."""
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.hotWaterStorage.bottom")["properties"]["value"]["value"]
+        with suppress(KeyError):
+            return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHotWaterStorageTemperatureBottom")
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
@@ -355,6 +370,15 @@ class HeatingDevice(Device):
             "value"]
 
     @handleNotSupported
+    def getPrimaryCircuitPumpRotation(self):
+        """Get primary circuit pump rotation/speed as percentage."""
+        return self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getPrimaryCircuitPumpRotationUnit(self):
+        return self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["unit"]
+
+    @handleNotSupported
     def getSupplyTemperatureSecondaryCircuit(self):
         return self.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"][
             "value"]
@@ -533,6 +557,15 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return \
             self.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
                 "value"]["value"]
+
+    @handleNotSupported
+    def getTemperature(self):
+        """Get the circuit flow temperature setpoint."""
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getTemperatureUnit(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getRoomTemperature(self):
