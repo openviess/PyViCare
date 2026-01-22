@@ -224,8 +224,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.temperature.hotGas',
             'heating.sensors.temperature.liquidGas',
             'heating.sensors.temperature.suctionGas',
-            'heating.heatingRod.power.consumption.summary.dhw',
-            'heating.heatingRod.power.consumption.summary.heating',
             'heating.heatingRod.status',
             'heating.scop.dhw', # deprecated
             'heating.scop.heating', # deprecated
