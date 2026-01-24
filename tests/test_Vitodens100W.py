@@ -39,3 +39,6 @@ class Vitodens100W(unittest.TestCase):
 
     def test_getGasSummaryConsumptionDomesticHotWaterUnit(self):
         self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterUnit(), "cubicMeter")
+
+    def test_getWifiSignalStrength(self):
+        self.assertEqual(self.device.getWifiSignalStrength(), -65)
