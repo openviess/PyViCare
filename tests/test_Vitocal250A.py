@@ -243,4 +243,4 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.inverters[0].getTemperature(), 26.3)
 
     def test_getWifiSignalStrength(self):
-        self.assertEqual(self.device.getWifiSignalStrength(), -70)
+        self.assertEqual(self.device.getWifiSignalStrength(), -30)
