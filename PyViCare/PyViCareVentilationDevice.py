@@ -13,6 +13,10 @@ class VentilationDevice(Device):
     """
 
     @handleNotSupported
+    def getWifiSignalStrength(self):
+        return self.getProperty("tcu.wifi")["properties"]["strength"]["value"]
+
+    @handleNotSupported
     def getVentilationDemand(self) -> str:
         return str(self.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
 
