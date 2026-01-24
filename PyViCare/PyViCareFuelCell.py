@@ -23,6 +23,7 @@ class FuelCell(HeatingDevice):
     def getReturnTemperature(self):
         return self.getProperty("heating.sensors.temperature.return")["properties"]["value"]["value"]
 
+    # Total power consumption:
     @handleNotSupported
     def getPowerConsumptionUnit(self):
         return self.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
@@ -59,6 +60,7 @@ class FuelCell(HeatingDevice):
     def getPowerConsumptionThisYear(self):
         return self.getProperty('heating.power.consumption.total')['properties']['year']['value'][0]
 
+    # Power consumption for Heating:
     @handleNotSupported
     def getPowerConsumptionHeatingUnit(self):
         return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
@@ -95,6 +97,24 @@ class FuelCell(HeatingDevice):
     def getPowerConsumptionHeatingThisYear(self):
         return self.getProperty('heating.power.consumption.heating')['properties']['year']['value'][0]
 
+    # Power consumption for Domestic Hot Water:
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterUnit(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterToday(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterThisMonth(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterThisYear(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["year"]["value"][0]
+
+    # Gas consumption:
     @handleNotSupported
     def getGasConsumptionUnit(self):
         return self.getProperty("heating.gas.consumption.total")["properties"]["day"]["unit"]
