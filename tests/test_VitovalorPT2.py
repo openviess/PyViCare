@@ -202,3 +202,6 @@ class VitovalorPT2(unittest.TestCase):
     def test_getSupplyPressure(self):
         self.assertEqual(self.device.getSupplyPressure(), 1.7)
         self.assertEqual(self.device.getSupplyPressureUnit(), "bar")
+
+    def test_getWifiSignalStrength(self):
+        self.assertEqual(self.device.getWifiSignalStrength(), -47)
