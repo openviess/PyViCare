@@ -37,8 +37,8 @@ class HeatingDevice(Device):
     """
 
     @handleNotSupported
-    def getWifiSignalStrength(self):
-        return self.getProperty("tcu.wifi")["properties"]["strength"]["value"]
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
 
     @property
     def circuits(self) -> List[Any]:
