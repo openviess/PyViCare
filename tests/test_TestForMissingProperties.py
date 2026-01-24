@@ -105,7 +105,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.secondaryCircuit.valves.fourThreeWay',
             'heating.secondaryHeatGenerator',
             'heating.valves.fourThreeWay.position',
-            'tcu.wifi',
 
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
