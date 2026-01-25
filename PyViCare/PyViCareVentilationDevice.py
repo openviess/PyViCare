@@ -231,6 +231,14 @@ class VentilationDevice(Device):
         return float(self.getProperty("ventilation.sensors.temperature.supply")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getExhaustTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.exhaust")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExtractTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.extract")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getSupplyHumidity(self) -> int:
         return int(self.getProperty("ventilation.sensors.humidity.supply")["properties"]["value"]["value"])
 
@@ -281,6 +289,10 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getHeatExchangerFrostProtectionActive(self) -> bool:
         return "off" != str(self.getProperty("ventilation.heatExchanger.frostprotection")["properties"]["status"]["value"])
+
+    @handleNotSupported
+    def getHeatRecoveryEfficiency(self) -> float:
+        return float(self.getProperty("ventilation.heating.recovery")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getSupplyVolumeFlow(self) -> int:
