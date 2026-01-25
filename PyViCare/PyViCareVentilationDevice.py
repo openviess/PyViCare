@@ -243,6 +243,14 @@ class VentilationDevice(Device):
         return int(self.getProperty("ventilation.sensors.humidity.supply")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getExhaustHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.exhaust")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExtractHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.extract")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getVolatileOrganicCompounds(self) -> int:
         return int(self.getProperty("ventilation.sensors.volatileOrganicCompounds")["properties"]["value"]["value"])
 
