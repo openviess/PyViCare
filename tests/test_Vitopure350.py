@@ -75,6 +75,15 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(self.device.getSupplyTemperature(), 20.8)
         self.assertEqual(self.device.getSupplyHumidity(), 59)
 
+    def test_getExhaustTemperature(self):
+        self.assertEqual(self.device.getExhaustTemperature(), 18.5)
+
+    def test_getExtractTemperature(self):
+        self.assertEqual(self.device.getExtractTemperature(), 21.2)
+
+    def test_getHeatRecoveryEfficiency(self):
+        self.assertEqual(self.device.getHeatRecoveryEfficiency(), 87.5)
+
     def test_getVolatileOrganicCompounds(self):
         self.assertEqual(self.device.getVolatileOrganicCompounds(), 148)
 
