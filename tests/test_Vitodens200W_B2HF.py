@@ -14,3 +14,6 @@ class Vitodens200W_B2HF(unittest.TestCase):
 
     def test_getSupplyPressureUnit(self):
         self.assertEqual(self.device.getSupplyPressureUnit(), 'bar')
+
+    def test_getDomesticHotWaterOperatingMode(self):
+        self.assertEqual(self.device.getDomesticHotWaterOperatingMode(), "balanced")

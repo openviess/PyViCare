@@ -166,6 +166,10 @@ class HeatingDevice(Device):
     def getDomesticHotWaterChargingActive(self):
         return self.getProperty("heating.dhw.charging")["properties"]["active"]["value"]
 
+    @handleNotSupported
+    def getDomesticHotWaterOperatingMode(self):
+        return self.service.getProperty("heating.dhw.operating.modes.active")["properties"]["value"]["value"]
+
     @handleAPICommandErrors
     def setDomesticHotWaterTemperature(self, temperature):
         """ Set the target temperature for domestic host water
