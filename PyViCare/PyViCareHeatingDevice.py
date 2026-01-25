@@ -72,28 +72,23 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperature(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"][
-            "value"]
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getHotWaterStorageTemperatureTop(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"][
-            "value"]
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.top")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperatureMiddle(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.middle")["properties"]["value"][
-            "value"]
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.middle")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterStorageTemperatureMidBottom(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.midBottom")["properties"]["value"][
-            "value"]
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.midBottom")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getHotWaterStorageTemperatureBottom(self):
-        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"][
-            "value"]
+        return self.getProperty("heating.dhw.sensors.temperature.dhwCylinder.bottom")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature2(self):
@@ -359,6 +354,15 @@ class HeatingDevice(Device):
             "value"]
 
     @handleNotSupported
+    def getPrimaryCircuitPumpRotation(self):
+        """Get primary circuit pump rotation/speed as percentage."""
+        return self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getPrimaryCircuitPumpRotationUnit(self):
+        return self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["unit"]
+
+    @handleNotSupported
     def getSupplyTemperatureSecondaryCircuit(self):
         return self.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"][
             "value"]
@@ -537,6 +541,15 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return \
             self.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
                 "value"]["value"]
+
+    @handleNotSupported
+    def getTemperature(self):
+        """Get the circuit flow temperature setpoint."""
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getTemperatureUnit(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getRoomTemperature(self):
