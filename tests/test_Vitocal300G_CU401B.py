@@ -156,9 +156,9 @@ class Vitocal300G_CU401B(unittest.TestCase):
         self.assertEqual(
             self.device.circuits[0].getActiveProgram(), "normal")
 
-    def test_circuit_getTemperature(self):
+    def test_circuit_getTargetTemperature(self):
         self.assertAlmostEqual(
-            self.device.circuits[0].getTemperature(), 40)
+            self.device.circuits[0].getTargetTemperature(), 40)
 
     # Primary circuit pump tests
     def test_getPrimaryCircuitPumpRotation(self):

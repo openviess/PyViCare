@@ -544,12 +544,12 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                 "value"]["value"]
 
     @handleNotSupported
-    def getTemperature(self):
-        """Get the circuit flow temperature setpoint."""
+    def getTargetTemperature(self):
+        """Get the circuit target temperature."""
         return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"]
 
     @handleNotSupported
-    def getTemperatureUnit(self):
+    def getTargetTemperatureUnit(self):
         return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["unit"]
 
     @handleNotSupported
