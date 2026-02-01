@@ -47,14 +47,14 @@ class Vitocal300G(unittest.TestCase):
         self.assertAlmostEqual(
             self.device.compressors[0].getHoursLoadClass5(), 3)
 
-    # This device uses circuit 1 instead of circuit 0
+    # This device only has circuit "1" enabled (circuits[0] in the list)
     def test_getHeatingCurveSlope(self):
         self.assertAlmostEqual(
-            self.device.circuits[1].getHeatingCurveSlope(), 1.0)
+            self.device.circuits[0].getHeatingCurveSlope(), 1.0)
 
     def test_getHeatingCurveShift(self):
         self.assertAlmostEqual(
-            self.device.circuits[1].getHeatingCurveShift(), 2)
+            self.device.circuits[0].getHeatingCurveShift(), 2)
 
     def test_getReturnTemperature(self):
         self.assertAlmostEqual(self.device.getReturnTemperature(), 35.8)
@@ -69,12 +69,12 @@ class Vitocal300G(unittest.TestCase):
     def test_getPrograms(self):
         expected_programs = ['comfort', 'eco', 'fixed', 'normal', 'reduced', 'standby']
         self.assertListEqual(
-            self.device.circuits[1].getPrograms(), expected_programs)
+            self.device.circuits[0].getPrograms(), expected_programs)
 
     def test_getModes(self):
         expected_modes = ['dhw', 'dhwAndHeating', 'forcedNormal', 'forcedReduced', 'normalStandby', 'standby']
         self.assertListEqual(
-            self.device.circuits[1].getModes(), expected_modes)
+            self.device.circuits[0].getModes(), expected_modes)
 
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(
