@@ -6,7 +6,7 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitocal300G(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/Vitocal300G.json')
+        self.service = ViCareServiceMock('response/Vitocal300G_CU401B.json')
         self.device = HeatPump(self.service)
 
     def test_compressor_getActive(self):
