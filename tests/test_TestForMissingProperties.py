@@ -198,6 +198,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.sensors.power',
             'heating.compressors.0.statistics.load',
             'heating.configuration.buffer.temperature.max',
+            'heating.configuration.dhwHeater',
             'heating.configuration.flow.temperature.max',
             'heating.configuration.flow.temperature.min',
             'heating.coolingCircuits.0.reverse',
