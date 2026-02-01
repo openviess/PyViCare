@@ -9,34 +9,34 @@ class Vitocal300G(unittest.TestCase):
         self.service = ViCareServiceMock('response/Vitocal300G.json')
         self.device = HeatPump(self.service)
 
-    def test_getCompressorActive(self):
+    def test_compressor_getActive(self):
         self.assertEqual(self.device.compressors[0].getActive(), False)
 
-    def test_getCompressorHours(self):
+    def test_compressor_getHours(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHours(), 1762.41)
 
-    def test_getCompressorStarts(self):
+    def test_compressor_getStarts(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getStarts(), 3012)
 
-    def test_getCompressorHoursLoadClass1(self):
+    def test_compressor_getHoursLoadClass1(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHoursLoadClass1(), 30)
 
-    def test_getCompressorHoursLoadClass2(self):
+    def test_compressor_getHoursLoadClass2(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHoursLoadClass2(), 703)
 
-    def test_getCompressorHoursLoadClass3(self):
+    def test_compressor_getHoursLoadClass3(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHoursLoadClass3(), 878)
 
-    def test_getCompressorHoursLoadClass4(self):
+    def test_compressor_getHoursLoadClass4(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHoursLoadClass4(), 117)
 
-    def test_getCompressorHoursLoadClass5(self):
+    def test_compressor_getHoursLoadClass5(self):
         self.assertAlmostEqual(
             self.device.compressors[0].getHoursLoadClass5(), 20)
 

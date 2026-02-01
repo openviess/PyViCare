@@ -1,8 +1,6 @@
 import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
-from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -11,45 +9,17 @@ class Vitocal222S(unittest.TestCase):
         self.service = ViCareServiceMock('response/Vitocal222S.json')
         self.device = HeatPump(self.service)
 
-    def test_getDomesticHotWaterActiveMode_10_10_time(self):
-        with now_is('2000-01-01 10:10:00'):
-            self.assertEqual(
-                self.device.getDomesticHotWaterActiveMode(), 'normal')
+    def test_condensers_getLiquidTemperature(self):
+        self.assertEqual(self.device.getCondensor(0).getLiquidTemperature(), 26.1)
+        self.assertEqual(self.device.getCondensor(0).getLiquidTemperatureUnit(), "celsius")
 
-    def test_getCurrentDesiredTemperature(self):
-        self.assertEqual(
-            self.device.circuits[0].getCurrentDesiredTemperature(), 23)
+    def test_compressor_getInletTemperature(self):
+        self.assertEqual(self.device.getCompressor(0).getInletTemperature(), 0.0)
+        self.assertEqual(self.device.getCompressor(0).getInletTemperatureUnit(), "celsius")
 
-    def test_isDomesticHotWaterDevice(self):
-        self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
+    def test_compressor_getOutletTemperature(self):
+        self.assertEqual(self.device.getCompressor(0).getOutletTemperature(), 32.8)
+        self.assertEqual(self.device.getCompressor(0).getOutletTemperatureUnit(), "celsius")
 
-    def test_isSolarThermalDevice(self):
-        self.assertEqual(self.device.isSolarThermalDevice(), False)
-
-    def test_isVentilationDevice(self):
-        self.assertEqual(self.device.isVentilationDevice(), True)
-
-    def test_getActiveVentilationMode(self):
-        self.assertEqual("ventilation", self.device.getActiveVentilationMode())
-
-    def test_getVentilationModes(self):
-        expected_modes = ['standby', 'standard', 'ventilation']
-        self.assertListEqual(expected_modes, self.device.getVentilationModes())
-
-    def test_getVentilationMode(self):
-        self.assertEqual(False, self.device.getVentilationMode("standby"))
-
-    def test_ventilationState(self):
-        with self.assertRaises(PyViCareNotSupportedFeatureError):
-            self.device.getVentilationDemand()
-        with self.assertRaises(PyViCareNotSupportedFeatureError):
-            self.device.getVentilationLevel()
-        with self.assertRaises(PyViCareNotSupportedFeatureError):
-            self.device.getVentilationReason()
-
-    def test_ventilationQuickmode(self):
-        with self.assertRaises(PyViCareNotSupportedFeatureError):
-            self.device.getVentilationQuickmode("standby")
-
-    def test_ventilationQuickmodes(self):
-        self.assertEqual(self.device.getVentilationQuickmodes(), [])
+    def test_compressor_getSpeed(self):
+        self.assertEqual(self.device.getCompressor(0).getSpeed(), 20)

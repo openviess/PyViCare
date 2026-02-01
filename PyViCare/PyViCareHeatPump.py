@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Any, List
 from deprecated import deprecated
 
@@ -9,15 +10,36 @@ from PyViCare.PyViCareVentilationDevice import VentilationDevice
 class HeatPump(HeatingDevice, VentilationDevice):
 
     @property
-    def compressors(self) -> List[Any]:
-        return list([self.getCompressor(x) for x in self.getAvailableCompressors()])
+    def compressors(self) -> List[Compressor]:
+        return [self.getCompressor(x) for x in self.getAvailableCompressors()]
 
-    def getCompressor(self, compressor):
+    def getCompressor(self, compressor) -> Compressor:
         return Compressor(self, compressor)
 
     @handleNotSupported
     def getAvailableCompressors(self):
         return self.getProperty("heating.compressors")["properties"]["enabled"]["value"]
+
+    @property
+    def condensors(self) -> List[Condensor]:
+        return [self.getCondensor(x) for x in self.getAvailableCompressors()]
+
+    def getCondensor(self, condensor) -> Condensor:
+        return Condensor(self, condensor)
+
+    @property
+    def evaporators(self) -> List[Evaporator]:
+        return [self.getEvaporator(x) for x in self.getAvailableCompressors()]
+
+    def getEvaporator(self, evaporator) -> Evaporator:
+        return Evaporator(self, evaporator)
+
+    @property
+    def inverters(self) -> List[Inverter]:
+        return [self.getInverter(x) for x in self.getAvailableCompressors()]
+
+    def getInverter(self, inverter) -> Inverter:
+        return Inverter(self, inverter)
 
     @handleNotSupported
     def getBufferMainTemperature(self):
@@ -342,6 +364,10 @@ class Compressor(HeatingDeviceWithComponent):
         return self.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]
 
     @handleNotSupported
+    def getSpeed(self) -> int:
+        return int(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getHeatProductionCurrent(self) -> float:
         return float(self.getProperty(f"heating.compressors.{self.compressor}.heat.production.current")["properties"]["value"]["value"])
 
@@ -376,3 +402,229 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPowerConsumptionTotalUnit(self) -> str:
         return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getOutletPressureUnit", version="2.55.1")
+    def getCompressorOutletPressureUnit(self) -> str:
+        return str(self.getOutletPressureUnit())
+
+    @handleNotSupported
+    def getOutletPressureUnit(self) -> str:
+        # Shows the unit of measurement of the outlet pressure.
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.outlet")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getOutletPressure", version="2.55.1")
+    def getCompressorOutletPressure(self) -> float:
+        return float(self.getOutletPressure())
+
+    @handleNotSupported
+    def getOutletPressure(self) -> float:
+        # Shows the outlet pressure of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.outlet")["properties"]["value"]["value"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getInletPressureUnit", version="2.55.1")
+    def getCompressorInletPressureUnit(self) -> str:
+        return str(self.getInletPressureUnit())
+
+    @handleNotSupported
+    def getInletPressureUnit(self) -> str:
+        # Shows the unit of measurement of the inlet pressure.
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.inlet")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getInletPressure", version="2.55.1")
+    def getCompressorInletPressure(self) -> float:
+        return float(self.getInletPressure())
+
+    @handleNotSupported
+    def getInletPressure(self) -> float:
+        # Shows the inlet pressure of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.pressure.inlet")["properties"]["value"]["value"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getOutletTemperatureUnit", version="2.55.1")
+    def getCompressorOutletTemperatureUnit(self) -> str:
+        return str(self.getOutletTemperatureUnit())
+
+    @handleNotSupported
+    def getOutletTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the outlet temperature.
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.outlet")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getOutletTemperature", version="2.55.1")
+    def getCompressorOutletTemperature(self) -> float:
+        return float(self.getOutletTemperature())
+
+    @handleNotSupported
+    def getOutletTemperature(self) -> float:
+        # Shows the outlet temperature of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.outlet")["properties"]["value"]["value"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getInletTemperatureUnit", version="2.55.1")
+    def getCompressorInletTemperatureUnit(self) -> str:
+        return str(self.getInletTemperatureUnit())
+
+    @handleNotSupported
+    def getInletTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the inlet temperature.
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.inlet")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getInletTemperature", version="2.55.1")
+    def getCompressorInletTemperature(self) -> float:
+        return float(self.getInletTemperature())
+
+    @handleNotSupported
+    def getInletTemperature(self) -> float:
+        # Shows the inlet temperature of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.inlet")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getOilTemperature(self) -> float:
+        # Shows the oil temperature of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.oil")["properties"]["value"]["value"])
+
+    def getMotorChamberTemperature(self) -> float:
+        # Shows the motor chamber temperature of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.motorChamber")["properties"]["value"]["value"])
+
+    def getAmbientTemperature(self) -> float:
+        # Shows the ambient temperature of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.ambient")["properties"]["value"]["value"])
+
+    def getOverheatTemperature(self) -> float:
+        # Shows the overheat temperature of the compressor.
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.overheat")["properties"]["value"]["value"])
+
+
+class Evaporator(HeatingDeviceWithComponent):
+
+    @property
+    def evaporator(self) -> str:
+        return self.component
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getLiquidTemperatureUnit", version="2.55.1")
+    def getEvaporatorLiquidTemperatureUnit(self) -> str:
+        return str(self.getLiquidTemperatureUnit())
+
+    @handleNotSupported
+    def getLiquidTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the liquid temperature of the evaporator.
+        return str(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.liquid")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getLiquidTemperature", version="2.55.1")
+    def getEvaporatorLiquidTemperature(self) -> float:
+        return float(self.getLiquidTemperature())
+
+    @handleNotSupported
+    def getLiquidTemperature(self) -> float:
+        # Shows the liquid temperature of the evaporator.
+        return float(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.liquid")["properties"]["value"]["value"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getOverheatTemperatureUnit", version="2.55.1")
+    def getEvaporatorOverheatTemperatureUnit(self) -> str:
+        return str(self.getOverheatTemperatureUnit())
+
+    @handleNotSupported
+    def getOverheatTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the overheat temperature of the evaporator.
+        return str(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.overheat")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getOverheatTemperature", version="2.55.1")
+    def getEvaporatorOverheatTemperature(self) -> float:
+        return float(self.getOverheatTemperature())
+
+    @handleNotSupported
+    def getOverheatTemperature(self) -> float:
+        # Shows the overheat temperature of the evaporator.
+        return float(self.getProperty(f"heating.evaporators.{self.evaporator}.sensors.temperature.overheat")["properties"]["value"]["value"])
+
+
+class Condensor(HeatingDeviceWithComponent):
+
+    @property
+    def condensor(self) -> str:
+        return self.component
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getSubcoolingTemperatureUnit", version="2.55.1")
+    def getCondensorSubcoolingTemperatureUnit(self) -> str:
+        return str(self.getSubcoolingTemperatureUnit())
+
+    @handleNotSupported
+    def getSubcoolingTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the subcooling temperature of the condenser.
+        return str(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.subcooling")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getSubcoolingTemperature", version="2.55.1")
+    def getCondensorSubcoolingTemperature(self) -> float:
+        return float(self.getSubcoolingTemperature())
+
+    @handleNotSupported
+    def getSubcoolingTemperature(self) -> float:
+        # Shows the subcooling temperature of the condenser.
+        return float(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.subcooling")["properties"]["value"]["value"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getLiquidTemperatureUnit", version="2.55.1")
+    def getCondensorLiquidTemperatureUnit(self) -> str:
+        return str(self.getLiquidTemperatureUnit())
+
+    @handleNotSupported
+    def getLiquidTemperatureUnit(self) -> str:
+        # Shows the unit of measurement of the liquid temperature of the condenser.
+        return str(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.liquid")["properties"]["value"]["unit"])
+
+    #TODO: remove deprecated method in 03.2026 release
+    @handleNotSupported
+    @deprecated(reason="renamed, use getLiquidTemperature", version="2.55.1")
+    def getCondensorLiquidTemperature(self) -> float:
+        return float(self.getLiquidTemperature())
+
+    @handleNotSupported
+    def getLiquidTemperature(self) -> float:
+        # Shows the liquid temperature of the condenser.
+        return float(self.getProperty(f"heating.condensors.{self.condensor}.sensors.temperature.liquid")["properties"]["value"]["value"])
+
+
+class Inverter(HeatingDeviceWithComponent):
+
+    @property
+    def inverter(self) -> str:
+        return self.component
+
+    @handleNotSupported
+    def getCurrent(self) -> float:
+        return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.power.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPower(self) -> float:
+        return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.power.output")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getTemperature(self) -> float:
+        return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.temperature.powerModule")["properties"]["value"]["value"])

@@ -36,6 +36,10 @@ class HeatingDevice(Device):
     Note that currently, a new token is generated for each run.
     """
 
+    @handleNotSupported
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
+
     @property
     def circuits(self) -> List[Any]:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
