@@ -45,11 +45,11 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     @handleNotSupported
     def getBufferMainTemperature(self):
-        return self.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]['value']['value']
+        return self.getProperty("heating.bufferCylinder.sensors.temperature.main")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getBufferTopTemperature(self):
-        return self.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]['value']['value']
+        return self.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]["value"]["value"]
 
     # Power consumption for Heating:
     @handleNotSupported
@@ -325,6 +325,28 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getSeasonalPerformanceFactorTotal(self) -> float:
         return float(self.getProperty("heating.spf.total")["properties"]["value"]["value"])
 
+    # COP (Coefficient of Performance) - instantaneous efficiency metrics
+    # Some devices expose COP instead of SPF
+    @handleNotSupported
+    def getCoefficientOfPerformanceHeating(self) -> float:
+        return float(self.getProperty("heating.cop.heating")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getCoefficientOfPerformanceDHW(self) -> float:
+        return float(self.getProperty("heating.cop.dhw")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getCoefficientOfPerformanceTotal(self) -> float:
+        return float(self.getProperty("heating.cop.total")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getCoefficientOfPerformanceCooling(self) -> float:
+        return float(self.getProperty("heating.cop.cooling")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getCoefficientOfPerformanceGreen(self) -> float:
+        return float(self.getProperty("heating.cop.green")["properties"]["value"]["value"])
+
     @handleNotSupported
     def getHeatingRodStarts(self) -> int:
         return int(self.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
@@ -360,6 +382,157 @@ class HeatPump(HeatingDevice, VentilationDevice):
     @handleNotSupported
     def getHeatingRodPowerConsumptionTotalThisYear(self) -> float:
         return float(self.getProperty("heating.heatingRod.power.consumption.total")["properties"]["year"]["value"][0])
+
+    # Heating rod power consumption summary for DHW:
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWLastMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWLastYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastYear"]["value"])
+
+    # Heating rod power consumption summary for Heating:
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingLastMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingLastYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastYear"]["value"])
+
+    # Heating rod runtime by level
+    @handleNotSupported
+    def getHeatingRodRuntimeLevelOne(self) -> int:
+        return int(self.getProperty("heating.heatingRod.runtime")["properties"]["levelOne"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodRuntimeLevelTwo(self) -> int:
+        return int(self.getProperty("heating.heatingRod.runtime")["properties"]["levelTwo"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodRuntimeLevelOneUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.runtime")["properties"]["levelOne"]["unit"])
+
+    # Additional pressure sensors (refrigerant circuit)
+    @handleNotSupported
+    def getHotGasPressure(self) -> float:
+        return float(self.getProperty("heating.sensors.pressure.hotGas")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHotGasPressureUnit(self) -> str:
+        return str(self.getProperty("heating.sensors.pressure.hotGas")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getSuctionGasPressure(self) -> float:
+        return float(self.getProperty("heating.sensors.pressure.suctionGas")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSuctionGasPressureUnit(self) -> str:
+        return str(self.getProperty("heating.sensors.pressure.suctionGas")["properties"]["value"]["unit"])
+
+    # Additional temperature sensors (refrigerant circuit)
+    @handleNotSupported
+    def getHotGasTemperature(self) -> float:
+        return float(self.getProperty("heating.sensors.temperature.hotGas")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHotGasTemperatureUnit(self) -> str:
+        return str(self.getProperty("heating.sensors.temperature.hotGas")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getLiquidGasTemperature(self) -> float:
+        return float(self.getProperty("heating.sensors.temperature.liquidGas")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getLiquidGasTemperatureUnit(self) -> str:
+        return str(self.getProperty("heating.sensors.temperature.liquidGas")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getSuctionGasTemperature(self) -> float:
+        return float(self.getProperty("heating.sensors.temperature.suctionGas")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSuctionGasTemperatureUnit(self) -> str:
+        return str(self.getProperty("heating.sensors.temperature.suctionGas")["properties"]["value"]["unit"])
+
+    # Main ECU runtime
+    @handleNotSupported
+    def getMainECURuntime(self) -> int:
+        return int(self.getProperty("heating.device.mainECU")["properties"]["runtime"]["value"])
+
+    @handleNotSupported
+    def getMainECURuntimeUnit(self) -> str:
+        return str(self.getProperty("heating.device.mainECU")["properties"]["runtime"]["unit"])
+
+    # Configuration values
+    @handleNotSupported
+    def getConfigurationBufferTemperatureMax(self) -> float:
+        return float(self.getProperty("heating.configuration.buffer.temperature.max")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getConfigurationBufferTemperatureMaxUnit(self) -> str:
+        return str(self.getProperty("heating.configuration.buffer.temperature.max")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getConfigurationOutsideTemperatureDampingFactor(self) -> int:
+        return int(self.getProperty("heating.configuration.temperature.outside.DampingFactor")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getConfigurationOutsideTemperatureDampingFactorUnit(self) -> str:
+        return str(self.getProperty("heating.configuration.temperature.outside.DampingFactor")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getConfigurationHeatingRodDHWApproved(self) -> bool:
+        return bool(self.getProperty("heating.configuration.heatingRod.dhw")["properties"]["useApproved"]["value"])
+
+    @handleNotSupported
+    def getConfigurationHeatingRodHeatingApproved(self) -> bool:
+        return bool(self.getProperty("heating.configuration.heatingRod.heating")["properties"]["useApproved"]["value"])
+
+    @handleNotSupported
+    def getConfigurationDHWHeaterApproved(self) -> bool:
+        return bool(self.getProperty("heating.configuration.dhwHeater")["properties"]["useApproved"]["value"])
 
     # Cooling circuits
     @property
@@ -409,25 +582,45 @@ class Compressor(HeatingDeviceWithComponent):
     def getHours(self):
         return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hours"]["value"]
 
-    @handleNotSupported
     def getHoursLoadClass1(self):
-        return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassOne"]["value"]
+        """Get hours in load class 1. Tries 'statistics' path first, then 'statistics.load'."""
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassOne"]["value"]
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics.load")["properties"]["hoursLoadClassOne"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHoursLoadClass1")
 
-    @handleNotSupported
     def getHoursLoadClass2(self):
-        return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassTwo"]["value"]
+        """Get hours in load class 2. Tries 'statistics' path first, then 'statistics.load'."""
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassTwo"]["value"]
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics.load")["properties"]["hoursLoadClassTwo"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHoursLoadClass2")
 
-    @handleNotSupported
     def getHoursLoadClass3(self):
-        return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassThree"]["value"]
+        """Get hours in load class 3. Tries 'statistics' path first, then 'statistics.load'."""
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassThree"]["value"]
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics.load")["properties"]["hoursLoadClassThree"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHoursLoadClass3")
 
-    @handleNotSupported
     def getHoursLoadClass4(self):
-        return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassFour"]["value"]
+        """Get hours in load class 4. Tries 'statistics' path first, then 'statistics.load'."""
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassFour"]["value"]
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics.load")["properties"]["hoursLoadClassFour"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHoursLoadClass4")
 
-    @handleNotSupported
     def getHoursLoadClass5(self):
-        return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassFive"]["value"]
+        """Get hours in load class 5. Tries 'statistics' path first, then 'statistics.load'."""
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics")["properties"]["hoursLoadClassFive"]["value"]
+        with suppress(KeyError):
+            return self.getProperty(f"heating.compressors.{self.compressor}.statistics.load")["properties"]["hoursLoadClassFive"]["value"]
+        raise PyViCareNotSupportedFeatureError("getHoursLoadClass5")
 
     @handleNotSupported
     def getActive(self):
@@ -436,6 +629,24 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPhase(self):
         return self.getProperty(f"heating.compressors.{self.compressor}")["properties"]["phase"]["value"]
+
+    @handleNotSupported
+    def getPower(self) -> float:
+        # Returns the nominal/maximum power of the compressor in kW
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getModulation(self) -> int:
+        # Returns the current compressor modulation/power level as percentage (0-100)
+        return int(self.getProperty(f"heating.compressors.{self.compressor}.sensors.power")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getModulationUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.power")["properties"]["value"]["unit"])
 
     @handleNotSupported
     def getSpeed(self) -> int:
