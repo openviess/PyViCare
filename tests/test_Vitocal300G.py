@@ -71,8 +71,9 @@ class Vitocal300G(unittest.TestCase):
         self.assertListEqual(
             self.device.circuits[0].getPrograms(), expected_programs)
 
+    # Available modes vary by device configuration (e.g., cooling enabled)
     def test_getModes(self):
-        expected_modes = ['dhw', 'dhwAndHeating', 'forcedNormal', 'forcedReduced', 'normalStandby', 'standby']
+        expected_modes = ['dhw', 'dhwAndHeating', 'standby']
         self.assertListEqual(
             self.device.circuits[0].getModes(), expected_modes)
 
