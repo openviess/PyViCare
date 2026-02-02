@@ -113,7 +113,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.secondaryCircuit.valves.fourThreeWay',
             'heating.secondaryHeatGenerator',
             'heating.valves.fourThreeWay.position',
-            'tcu.wifi',
 
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
@@ -207,6 +206,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.sensors.power',
             'heating.compressors.0.statistics.load',
             'heating.configuration.buffer.temperature.max',
+            'heating.configuration.dhwHeater',
             'heating.configuration.flow.temperature.max',
             'heating.configuration.flow.temperature.min',
             'heating.coolingCircuits.0.reverse',
