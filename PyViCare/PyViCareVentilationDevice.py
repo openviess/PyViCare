@@ -289,3 +289,19 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getExhaustVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.volumeFlow.current.output")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getLevelOneVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelOne")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getLevelTwoVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelTwo")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getLevelThreeVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelThree")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getLevelFourVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelFour")["properties"]["volumeFlow"]["value"])
