@@ -22,11 +22,12 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_id, device_model, status):
+    def __init__(self, service, device_id, device_model, status, device_type=None):
         self.service = service
         self.device_id = device_id
         self.device_model = device_model
         self.status = status
+        self.device_type = device_type
 
     def asGeneric(self):
         return HeatingDevice(self.service)
@@ -84,6 +85,12 @@ class PyViCareDeviceConfig:
 
     def isOnline(self):
         return self.status == "Online"
+
+    def getDeviceType(self):
+        return self.device_type
+
+    def isGateway(self):
+        return self.device_type == "vitoconnect"
 
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):

@@ -174,3 +174,23 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device = c.asAutoDetectDevice()
         self.assertEqual(device.isLegacyDevice(), False)
         self.assertEqual(device.isE3Device(), True)
+
+    def test_getDeviceType_heating(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
+        self.assertEqual(c.getDeviceType(), "heating")
+
+    def test_getDeviceType_vitoconnect(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
+        self.assertEqual(c.getDeviceType(), "vitoconnect")
+
+    def test_getDeviceType_none_when_not_provided(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
+        self.assertIsNone(c.getDeviceType())
+
+    def test_isGateway_true_for_vitoconnect(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
+        self.assertTrue(c.isGateway())
+
+    def test_isGateway_false_for_heating(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
+        self.assertFalse(c.isGateway())
