@@ -183,9 +183,19 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
         self.assertEqual(c.getDeviceType(), "vitoconnect")
 
+
     def test_getDeviceType_none_when_not_provided(self):
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
         self.assertIsNone(c.getDeviceType())
+
+    def test_getRoles(self):
+        roles = ["type:heatpump", "type:E3"]
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating", roles)
+        self.assertEqual(c.getRoles(), roles)
+
+    def test_getRoles_empty_when_not_provided(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
+        self.assertEqual(c.getRoles(), [])
 
     def test_isGateway_true_for_gateway_role(self):
         self.service._isGateway = Mock(return_value=True)  # pylint: disable=protected-access
@@ -196,3 +206,29 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.service._isGateway = Mock(return_value=False)  # pylint: disable=protected-access
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
         self.assertFalse(c.isGateway())
+
+    def test_isHeating_true(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
+        self.assertTrue(c.isHeating())
+
+    def test_isHeating_false(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
+        self.assertFalse(c.isHeating())
+
+    def test_isVentilation_true(self):
+        c = PyViCareDeviceConfig(self.service, "0", "E3_ViAir", "Online", "ventilation")
+        self.assertTrue(c.isVentilation())
+
+    def test_isVentilation_false(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
+        self.assertFalse(c.isVentilation())
+
+    def test_get_device_info(self):
+        roles = ["type:heatpump", "type:E3"]
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating", roles)
+        info = c.get_device_info()
+        self.assertEqual(info["id"], "0")
+        self.assertEqual(info["modelId"], "Vitocal")
+        self.assertEqual(info["type"], "heating")
+        self.assertEqual(info["status"], "Online")
+        self.assertEqual(info["roles"], roles)

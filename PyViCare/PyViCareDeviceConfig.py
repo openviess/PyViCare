@@ -23,12 +23,13 @@ logger.addHandler(logging.NullHandler())
 
 class PyViCareDeviceConfig:
     # pylint: disable=too-many-arguments,too-many-positional-arguments
-    def __init__(self, service, device_id, device_model, status, device_type=None):
+    def __init__(self, service, device_id, device_model, status, device_type=None, roles=None):
         self.service = service
         self.device_id = device_id
         self.device_model = device_model
         self.status = status
         self.device_type = device_type
+        self.roles = roles if roles is not None else []
 
     def asGeneric(self):
         return HeatingDevice(self.service)
@@ -90,8 +91,27 @@ class PyViCareDeviceConfig:
     def getDeviceType(self):
         return self.device_type
 
+    def getRoles(self):
+        return self.roles
+
     def isGateway(self):
         return self.service._isGateway()  # pylint: disable=protected-access
+
+    def isHeating(self):
+        return self.device_type == "heating"
+
+    def isVentilation(self):
+        return self.device_type == "ventilation"
+
+    def get_device_info(self):
+        """Return device metadata as a dictionary."""
+        return {
+            "id": self.device_id,
+            "modelId": self.device_model,
+            "type": self.device_type,
+            "status": self.status,
+            "roles": self.roles
+        }
 
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
@@ -130,12 +150,18 @@ class PyViCareDeviceConfig:
         return self.service.fetch_all_features()
 
     def dump_secure(self, flat=False):
+        raw_data = self.get_raw_json()
+        output = {
+            "device": self.get_device_info(),
+            "data": raw_data['data']
+        }
+
         if flat:
-            inner = ',\n'.join([json.dumps(x, sort_keys=True) for x in self.get_raw_json()['data']])
-            outer = json.dumps({'data': ['placeholder']}, indent=0)
+            inner = ',\n'.join([json.dumps(x, sort_keys=True) for x in output['data']])
+            outer = json.dumps({'device': output['device'], 'data': ['placeholder']}, indent=0, sort_keys=True)
             dumpJSON = outer.replace('"placeholder"', inner)
         else:
-            dumpJSON = json.dumps(self.get_raw_json(), indent=4, sort_keys=True)
+            dumpJSON = json.dumps(output, indent=4, sort_keys=True)
 
         def repl(m):
             return m.group(1) + ('#' * len(m.group(2))) + m.group(3)
