@@ -48,6 +48,23 @@ class VitovalorPT2(unittest.TestCase):
     def test_getHydraulicSeparatorTemperature(self):
         self.assertEqual(self.device.getHydraulicSeparatorTemperature(), 35.1)
 
+    # Total power consumption:
+    def test_getPowerConsumptionUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionToday(), 0.9)
+
+    def test_getPowerConsumptionThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisMonth(), 16.3)
+
+    def test_getPowerConsumptionThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisYear(), 350.8)
+
     def test_getPowerConsumptionDays(self):
         expected_consumption = [0.9, 1.2, 1.3, 1.2, 1.2, 1.2, 1.2, 1.2]
         self.assertListEqual(self.device.getPowerConsumptionDays(), expected_consumption)
@@ -56,6 +73,41 @@ class VitovalorPT2(unittest.TestCase):
         expected_consumption = [0.9, 1.2, 1.3, 1.2, 1.2, 1.2, 1.2, 1.2]
         self.assertListEqual(self.device.getPowerConsumptionHeatingDays(), expected_consumption)
 
+    # Power consumption for Domestic Hot Water:
+    def test_getPowerConsumptionDomesticHotWaterUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionDomesticHotWaterToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterToday(), 0)
+
+    def test_getPowerConsumptionDomesticHotWaterThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterThisMonth(), 0)
+
+    def test_getPowerConsumptionDomesticHotWaterThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionDomesticHotWaterThisYear(), 5.1)
+
+    # Power consumption for Heating:
+    def test_getPowerConsumptionHeatingUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionHeatingToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingToday(), 0.9)
+
+    def test_getPowerConsumptionHeatingThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingThisMonth(), 16.3)
+
+    def test_getPowerConsumptionHeatingThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionHeatingThisYear(), 345.7)
+
+    # GasConsumption
     def test_getGasConsumptionTotalDays(self):
         expected_consumption = [5.8, 8.8, 8.899999999999999, 9, 9.4, 10.2, 10, 8.1]
         self.assertListEqual(self.device.getGasConsumptionTotalDays(), expected_consumption)
