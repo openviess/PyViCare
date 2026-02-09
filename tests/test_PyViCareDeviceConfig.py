@@ -188,11 +188,11 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertIsNone(c.getDeviceType())
 
     def test_isGateway_true_for_gateway_role(self):
-        self.service._isGateway = Mock(return_value=True)
+        self.service._isGateway = Mock(return_value=True)  # pylint: disable=protected-access
         c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
         self.assertTrue(c.isGateway())
 
     def test_isGateway_false_for_non_gateway_role(self):
-        self.service._isGateway = Mock(return_value=False)
+        self.service._isGateway = Mock(return_value=False)  # pylint: disable=protected-access
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
         self.assertFalse(c.isGateway())
