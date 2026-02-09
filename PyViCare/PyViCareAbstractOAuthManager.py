@@ -7,6 +7,7 @@ from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare import Feature
 from PyViCare.PyViCareUtils import (PyViCareCommandError,
+                                    PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
                                     PyViCareRateLimitError)
 
@@ -39,6 +40,7 @@ class AbstractViCareOAuthManager:
             logger.debug("Response to get request: %s", response)
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
+            self.__handle_device_communication_error(response)
             self.__handle_server_error(response)
             return response
         except TokenExpiredError:
@@ -58,6 +60,10 @@ class AbstractViCareOAuthManager:
 
         if ("statusCode" in response and response["statusCode"] == 429):
             raise PyViCareRateLimitError(response)
+
+    def __handle_device_communication_error(self, response):
+        if response.get("errorType") == "DEVICE_COMMUNICATION_ERROR":
+            raise PyViCareDeviceCommunicationError(response)
 
     def __handle_server_error(self, response):
         if ("statusCode" in response and response["statusCode"] >= 500):
