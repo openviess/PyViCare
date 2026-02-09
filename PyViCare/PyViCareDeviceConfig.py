@@ -91,7 +91,7 @@ class PyViCareDeviceConfig:
         return self.device_type
 
     def isGateway(self):
-        return self.device_type in ["vitoconnect", "tcu"]
+        return self.service._isGateway()  # pylint: disable=protected-access
 
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
