@@ -105,6 +105,18 @@ class PyViCareInvalidDataError(Exception):
     pass
 
 
+class PyViCareDeviceCommunicationError(Exception):
+    def __init__(self, response):
+        extended_payload = response.get("extendedPayload", {})
+        reason = extended_payload.get("reason", "Unknown")
+
+        msg = f'Device communication error. Reason: {reason}'
+
+        super().__init__(self, msg)
+        self.message = msg
+        self.reason = reason
+
+
 class PyViCareRateLimitError(Exception):
 
     def __init__(self, response):
