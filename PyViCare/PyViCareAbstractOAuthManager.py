@@ -62,7 +62,7 @@ class AbstractViCareOAuthManager:
             raise PyViCareRateLimitError(response)
 
     def __handle_device_communication_error(self, response):
-        if response.get("errorType") == "DEVICE_COMMUNICATION_ERROR":
+        if ("errorType" in response and response["errorType"] == "DEVICE_COMMUNICATION_ERROR"):
             raise PyViCareDeviceCommunicationError(response)
 
     def __handle_server_error(self, response):
