@@ -97,22 +97,6 @@ class PyViCareDeviceConfig:
     def isGateway(self):
         return self.service._isGateway()  # pylint: disable=protected-access
 
-    def isHeating(self):
-        return self.device_type == "heating"
-
-    def isVentilation(self):
-        return self.device_type == "ventilation"
-
-    def get_device_info(self):
-        """Return device metadata as a dictionary."""
-        return {
-            "id": self.device_id,
-            "modelId": self.device_model,
-            "type": self.device_type,
-            "status": self.status,
-            "roles": self.roles
-        }
-
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
@@ -151,8 +135,15 @@ class PyViCareDeviceConfig:
 
     def dump_secure(self, flat=False):
         raw_data = self.get_raw_json()
+        device_info = {
+            "id": self.device_id,
+            "modelId": self.device_model,
+            "type": self.device_type,
+            "status": self.status,
+            "roles": self.roles
+        }
         output = {
-            "device": self.get_device_info(),
+            "device": device_info,
             "data": raw_data['data']
         }
 
