@@ -1,9 +1,11 @@
 from __future__ import annotations
+from contextlib import suppress
 from typing import Any, List
 from deprecated import deprecated
 
 from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
-from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
+                                    handleAPICommandErrors, handleNotSupported)
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 
@@ -319,6 +321,39 @@ class HeatPump(HeatingDevice, VentilationDevice):
     @handleNotSupported
     def getHeatingRodPowerConsumptionTotalThisYear(self) -> float:
         return float(self.getProperty("heating.heatingRod.power.consumption.total")["properties"]["year"]["value"][0])
+
+    # Cooling circuits
+    @property
+    def coolingCircuits(self) -> List[CoolingCircuit]:
+        return [self.getCoolingCircuit(x) for x in self.getAvailableCoolingCircuits()]
+
+    def getCoolingCircuit(self, circuit) -> CoolingCircuit:
+        return CoolingCircuit(self, circuit)
+
+    def getAvailableCoolingCircuits(self):
+        """Detect available cooling circuits (0, 1, 2, etc.)."""
+        available = []
+        for circuit in ['0', '1', '2', '3']:
+            with suppress(KeyError, PyViCareNotSupportedFeatureError):
+                if self.getProperty(f"heating.coolingCircuits.{circuit}.type") is not None:
+                    available.append(circuit)
+        return available
+
+
+class CoolingCircuit(HeatingDeviceWithComponent):
+    """Cooling circuit component for heat pumps with cooling capability."""
+
+    @property
+    def circuit(self) -> str:
+        return self.component
+
+    @handleNotSupported
+    def getType(self) -> str:
+        return str(self.getProperty(f"heating.coolingCircuits.{self.circuit}.type")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getReverseActive(self) -> bool:
+        return bool(self.getProperty(f"heating.coolingCircuits.{self.circuit}.reverse")["properties"]["active"]["value"])
 
 
 class Compressor(HeatingDeviceWithComponent):
