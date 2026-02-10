@@ -206,4 +206,3 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.service._isGateway = Mock(return_value=False)  # pylint: disable=protected-access
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
         self.assertFalse(c.isGateway())
-
