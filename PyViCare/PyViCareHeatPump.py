@@ -344,10 +344,6 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return float(self.getProperty("heating.cop.cooling")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getCoefficientOfPerformanceGreen(self) -> float:
-        return float(self.getProperty("heating.cop.green")["properties"]["value"]["value"])
-
-    @handleNotSupported
     def getHeatingRodStarts(self) -> int:
         return int(self.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
 
@@ -566,6 +562,7 @@ class CoolingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getReverseActive(self) -> bool:
         return bool(self.getProperty(f"heating.coolingCircuits.{self.circuit}.reverse")["properties"]["active"]["value"])
+
 
 
 class Compressor(HeatingDeviceWithComponent):

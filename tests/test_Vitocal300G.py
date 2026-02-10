@@ -26,10 +26,6 @@ class Vitocal300G(unittest.TestCase):
         self.assertAlmostEqual(
             self.device.getCoefficientOfPerformanceCooling(), 0.0)
 
-    def test_getCoefficientOfPerformanceGreen(self):
-        self.assertAlmostEqual(
-            self.device.getCoefficientOfPerformanceGreen(), 0.0)
-
     # Compressor power tests
     def test_compressor_getPower(self):
         self.assertAlmostEqual(
