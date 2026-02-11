@@ -80,3 +80,8 @@ class Vitocal300G(unittest.TestCase):
     def test_getDomesticHotWaterCirculationPumpActive(self):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationPumpActive(), False)
+
+    def test_getHeatingScheduleModes(self):
+        expected_modes = {'reduced', 'normal', 'fixed'}
+        self.assertSetEqual(
+            set(self.device.circuits[0].getHeatingScheduleModes()), expected_modes)
