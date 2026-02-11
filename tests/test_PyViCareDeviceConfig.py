@@ -183,9 +183,19 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
         self.assertEqual(c.getDeviceType(), "vitoconnect")
 
+
     def test_getDeviceType_none_when_not_provided(self):
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
         self.assertIsNone(c.getDeviceType())
+
+    def test_getRoles(self):
+        roles = ["type:heatpump", "type:E3"]
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating", roles)
+        self.assertEqual(c.getRoles(), roles)
+
+    def test_getRoles_empty_when_not_provided(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
+        self.assertEqual(c.getRoles(), [])
 
     def test_isGateway_true_for_gateway_role(self):
         self.service._isGateway = Mock(return_value=True)  # pylint: disable=protected-access
