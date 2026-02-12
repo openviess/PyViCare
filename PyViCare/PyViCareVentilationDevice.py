@@ -291,17 +291,17 @@ class VentilationDevice(Device):
         return int(self.getProperty("ventilation.volumeFlow.current.output")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getLevelOneVolumeFlow(self) -> int:
+    def getConfiguredLevelOneVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.levels.levelOne")["properties"]["volumeFlow"]["value"])
 
     @handleNotSupported
-    def getLevelTwoVolumeFlow(self) -> int:
+    def getConfiguredLevelTwoVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.levels.levelTwo")["properties"]["volumeFlow"]["value"])
 
     @handleNotSupported
-    def getLevelThreeVolumeFlow(self) -> int:
+    def getConfiguredLevelThreeVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.levels.levelThree")["properties"]["volumeFlow"]["value"])
 
     @handleNotSupported
-    def getLevelFourVolumeFlow(self) -> int:
+    def getConfiguredLevelFourVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.levels.levelFour")["properties"]["volumeFlow"]["value"])
