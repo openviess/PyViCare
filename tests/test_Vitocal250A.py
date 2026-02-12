@@ -226,44 +226,40 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.getSeasonalPerformanceFactorTotal(), 3.9)
 
     def test_getHeatingRod(self):
-        # self.assertEqual(self.device.getHeatingRodHeatProductionCurrent(), 0) # not in dump
-        # self.assertEqual(self.device.getHeatingRodPowerConsumptionCurrent(), 0) # not in dump
-        # self.assertEqual(self.device.getHeatingRodPowerConsumptionDHWThisYear(), 0)
-        # self.assertEqual(self.device.getHeatingRodPowerConsumptionHeatingThisYear(), 0)
-        self.assertEqual(self.device.getHeatingRodStarts(), 314)
-        self.assertEqual(self.device.getHeatingRodHours(), 31)
+        self.assertEqual(self.device.heatingRod.getStarts(), 314)
+        self.assertEqual(self.device.heatingRod.getHours(), 31)
 
     def test_getHeatingRodPowerConsumptionSummaryDHW(self):
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWUnit(), "kilowattHour")
+            self.device.heatingRod.getPowerConsumptionSummaryDHWUnit(), "kilowattHour")
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWCurrentDay(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryDHWCurrentDay(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWCurrentMonth(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryDHWCurrentMonth(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWCurrentYear(), 3.3)
+            self.device.heatingRod.getPowerConsumptionSummaryDHWCurrentYear(), 3.3)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWLastMonth(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryDHWLastMonth(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWLastSevenDays(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryDHWLastSevenDays(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryDHWLastYear(), 28)
+            self.device.heatingRod.getPowerConsumptionSummaryDHWLastYear(), 28)
 
     def test_getHeatingRodPowerConsumptionSummaryHeating(self):
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingUnit(), "kilowattHour")
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingUnit(), "kilowattHour")
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingCurrentDay(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingCurrentDay(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingCurrentMonth(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingCurrentMonth(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingCurrentYear(), 29.5)
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingCurrentYear(), 29.5)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingLastMonth(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingLastMonth(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingLastSevenDays(), 0)
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingLastSevenDays(), 0)
         self.assertEqual(
-            self.device.getHeatingRodPowerConsumptionSummaryHeatingLastYear(), 53.6)
+            self.device.heatingRod.getPowerConsumptionSummaryHeatingLastYear(), 53.6)
 
     def test_inverter_getCurrent(self):
         self.assertEqual(self.device.inverters[0].getCurrent(), 0)

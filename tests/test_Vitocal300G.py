@@ -223,11 +223,11 @@ class Vitocal300G(unittest.TestCase):
     # Heating rod runtime tests
     def test_getHeatingRodRuntimeLevelOne(self):
         self.assertEqual(
-            self.device.getHeatingRodRuntimeLevelOne(), 886682)
+            self.device.heatingRod.getRuntimeLevelOne(), 886682)
 
     def test_getHeatingRodRuntimeLevelTwo(self):
         self.assertEqual(
-            self.device.getHeatingRodRuntimeLevelTwo(), 287877)
+            self.device.heatingRod.getRuntimeLevelTwo(), 287877)
 
     # Configuration tests
     def test_getConfigurationBufferTemperatureMax(self):
