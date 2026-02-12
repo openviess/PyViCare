@@ -174,3 +174,35 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device = c.asAutoDetectDevice()
         self.assertEqual(device.isLegacyDevice(), False)
         self.assertEqual(device.isE3Device(), True)
+
+    def test_getDeviceType_heating(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
+        self.assertEqual(c.getDeviceType(), "heating")
+
+    def test_getDeviceType_vitoconnect(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
+        self.assertEqual(c.getDeviceType(), "vitoconnect")
+
+
+    def test_getDeviceType_none_when_not_provided(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
+        self.assertIsNone(c.getDeviceType())
+
+    def test_getRoles(self):
+        roles = ["type:heatpump", "type:E3"]
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating", roles)
+        self.assertEqual(c.getRoles(), roles)
+
+    def test_getRoles_empty_when_not_provided(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online")
+        self.assertEqual(c.getRoles(), [])
+
+    def test_isGateway_true_for_gateway_role(self):
+        self.service._isGateway = Mock(return_value=True)  # pylint: disable=protected-access
+        c = PyViCareDeviceConfig(self.service, "0", "Heatbox1", "Online", "vitoconnect")
+        self.assertTrue(c.isGateway())
+
+    def test_isGateway_false_for_non_gateway_role(self):
+        self.service._isGateway = Mock(return_value=False)  # pylint: disable=protected-access
+        c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
+        self.assertFalse(c.isGateway())

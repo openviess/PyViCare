@@ -23,3 +23,12 @@ class Vitocal222S(unittest.TestCase):
 
     def test_compressor_getSpeed(self):
         self.assertEqual(self.device.getCompressor(0).getSpeed(), 20)
+
+    def test_getDomesticHotWaterOperatingModes(self):
+        self.assertListEqual(
+            self.device.getDomesticHotWaterOperatingModes(),
+            ['efficientWithMinComfort', 'efficient', 'off'])
+
+    def test_getDomesticHotWaterActiveOperatingMode(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterActiveOperatingMode(), 'efficient')

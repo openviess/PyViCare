@@ -3,6 +3,7 @@ from unittest.mock import Mock
 
 from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import (PyViCareCommandError,
+                                    PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
                                     PyViCareRateLimitError)
 from tests.helper import readJson
@@ -53,6 +54,22 @@ class PyViCareServiceTest(unittest.TestCase):
         def func():
             return self.manager.get("/")
         self.assertRaises(PyViCareInternalServerError, func)
+
+    def test_get_raisedevicecommunicationerror_gateway_offline(self):
+        self.oauth_mock.get.return_value = FakeResponse(
+            'response/errors/gateway_offline.json')
+
+        def func():
+            return self.manager.get("/")
+        self.assertRaises(PyViCareDeviceCommunicationError, func)
+
+    def test_get_raisedevicecommunicationerror_device_offline(self):
+        self.oauth_mock.get.return_value = FakeResponse(
+            'response/errors/device_offline.json')
+
+        def func():
+            return self.manager.get("/")
+        self.assertRaises(PyViCareDeviceCommunicationError, func)
 
     def test_get_renewtoken_ifexpired(self):
         self.oauth_mock.get.side_effect = [

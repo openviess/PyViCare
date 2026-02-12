@@ -203,5 +203,14 @@ class VitovalorPT2(unittest.TestCase):
         self.assertEqual(self.device.getSupplyPressure(), 1.7)
         self.assertEqual(self.device.getSupplyPressureUnit(), "bar")
 
+    def test_getDomesticHotWaterOperatingModes(self):
+        self.assertListEqual(
+            self.device.getDomesticHotWaterOperatingModes(),
+            ['balanced', 'off'])
+
+    def test_getDomesticHotWaterActiveOperatingMode(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterActiveOperatingMode(), 'balanced')
+
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -47)
