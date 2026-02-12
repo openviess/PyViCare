@@ -1,0 +1,2610 @@
+{
+    "data": [
+        {
+            "feature": "gateway.devices",
+            "gatewayId": "1234567812345678",
+            "timestamp": "2025-10-15T01:22:15.903Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/features/gateway.devices",
+            "properties": {
+                "devices": {
+                    "type": "DeviceList",
+                    "value": [
+                        {
+                            "id": "gateway",
+                            "fingerprint": "gw:hb2,mj:2,mi:51,p:5",
+                            "modelId": "Heatbox2_SRC",
+                            "modelVersion": "4kpuORsfPdzAPz3mRmDbihveTRA",
+                            "name": "Heatbox2_SRC",
+                            "type": "vitoconnect",
+                            "roles": [
+                                "capability:src",
+                                "type:gateway;VitoconnectOpto2/OT2",
+                                "type:gatewayConfiguration",
+                                "type:hb2",
+                                "type:legacy"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "id": "RoomControl-1",
+                            "fingerprint": "src:hb2:ext,mj:2,mi:51,p:5",
+                            "modelId": "Smart_RoomControl",
+                            "modelVersion": "JL6oCC5_OSGxElBWK5kOOHeL0eI",
+                            "name": "Smart_RoomControl",
+                            "type": "roomControl",
+                            "roles": [
+                                "capability:monetization;FTDC",
+                                "capability:monetization;OWD",
+                                "capability:src;FTDC",
+                                "capability:src;OWD",
+                                "capability:zigbeeCoordinator",
+                                "type:legacy",
+                                "type:virtual;smartRoomControl"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "id": "0",
+                            "fingerprint": "gg:20,gk:cb,si:43,esi:65535",
+                            "modelId": "VScotHO1_40",
+                            "modelVersion": "M5va9BMCLzvTp6q3kD5NIOS25oU",
+                            "name": "VScotHO1",
+                            "type": "heating",
+                            "roles": [
+                                "capability:productionReport;electric",
+                                "type:boiler",
+                                "type:brand;Viessmann",
+                                "type:dhw;integrated",
+                                "type:heating;integrated",
+                                "type:legacy",
+                                "type:product;VScotHO1"
+                            ],
+                            "status": "online"
+                        },
+                        {
+                            "id": "zigbee-1234567890abcdef",
+                            "fingerprint": "zigbee:trv,mj:2,mi:51,p:5",
+                            "modelId": "Smart_Device_eTRV_generic_50",
+                            "modelVersion": "ryss_zsbny6eKZG3frt9O4XRuS8",
+                            "name": "Smart_Device_eTRV_generic",
+                            "type": "zigbee",
+                            "roles": [
+                                "type:actuator",
+                                "type:legacy",
+                                "type:radiator",
+                                "type:smartRoomDevice"
+                            ],
+                            "status": "online"
+                        }
+                    ]
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "gateway.bmuconnection",
+            "gatewayId": "1234567812345678",
+            "timestamp": "2025-10-15T01:07:41.773Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/features/gateway.bmuconnection",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "OK"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "gateway.wifi",
+            "gatewayId": "1234567812345678",
+            "timestamp": "2025-10-16T11:26:55.930Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/features/gateway.wifi",
+            "properties": {
+                "strength": {
+                    "type": "number",
+                    "value": -72,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.timezone",
+            "gatewayId": "1234567812345678",
+            "deviceId": "gateway",
+            "timestamp": "2025-10-15T01:22:16.368Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/gateway/features/device.timezone",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": "Europe/Berlin"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "tcu.wifi",
+            "gatewayId": "1234567812345678",
+            "deviceId": "gateway",
+            "timestamp": "2025-10-16T11:26:55.873Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/gateway/features/tcu.wifi",
+            "properties": {
+                "strength": {
+                    "type": "number",
+                    "value": -72,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms",
+            "properties": {
+                "enabled": {
+                    "type": "array",
+                    "value": [
+                        "0"
+                    ]
+                }
+            },
+            "commands": {
+                "add": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms/commands/add",
+                    "name": "add",
+                    "isExecutable": true,
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "minLength": 1,
+                                "maxLength": 40,
+                                "regEx": "^[\\p{L}0-9]+( [\\p{L}0-9]+)*$"
+                            }
+                        },
+                        "type": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "enum": [
+                                    "bathroom",
+                                    "bedroom",
+                                    "hallway",
+                                    "livingroom",
+                                    "kitchen",
+                                    "office",
+                                    "nursery",
+                                    "toilet",
+                                    "other"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "rooms.0",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "value": "Arbeitszimmer"
+                },
+                "type": {
+                    "type": "string",
+                    "value": "office"
+                },
+                "actors": {
+                    "type": "array",
+                    "value": [
+                        {
+                            "deviceId": "zigbee-1234567890abcdef",
+                            "heatingCircuit": 0
+                        }
+                    ]
+                }
+            },
+            "commands": {
+                "addActor": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0/commands/addActor",
+                    "name": "addActor",
+                    "isExecutable": true,
+                    "params": {
+                        "actorDeviceId": {
+                            "type": "string",
+                            "constraints": {},
+                            "required": true
+                        },
+                        "heatingCircuit": {
+                            "type": "number",
+                            "constraints": {
+                                "min": 0,
+                                "max": 3,
+                                "stepping": 1
+                            },
+                            "required": false
+                        }
+                    },
+                    "constraints": {
+                        "enum": [
+                            "cs",
+                            "fht",
+                            "trv",
+                            "airQualitySensor",
+                            "remoteControllerSensor"
+                        ]
+                    }
+                },
+                "moveActor": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0/commands/moveActor",
+                    "name": "moveActor",
+                    "isExecutable": true,
+                    "params": {
+                        "actorDeviceId": {
+                            "type": "string",
+                            "constraints": {},
+                            "required": true
+                        },
+                        "heatingCircuit": {
+                            "type": "number",
+                            "constraints": {
+                                "min": 0,
+                                "max": 3,
+                                "stepping": 1
+                            },
+                            "required": false
+                        },
+                        "newRoomId": {
+                            "type": "number",
+                            "constraints": {
+                                "min": 0,
+                                "max": 23,
+                                "stepping": 1
+                            },
+                            "required": true
+                        }
+                    }
+                },
+                "setName": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0/commands/setName",
+                    "name": "setName",
+                    "isExecutable": true,
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "regEx": "^[\\p{L}0-9]+( [\\p{L}0-9]+)*$",
+                                "minLength": 1,
+                                "maxLength": 40
+                            }
+                        }
+                    }
+                },
+                "setType": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0/commands/setType",
+                    "name": "setType",
+                    "isExecutable": true,
+                    "params": {
+                        "type": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "enum": [
+                                    "bathroom",
+                                    "bedroom",
+                                    "hallway",
+                                    "livingroom",
+                                    "kitchen",
+                                    "office",
+                                    "nursery",
+                                    "toilet",
+                                    "other"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "removeActor": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0/commands/removeActor",
+                    "name": "removeActor",
+                    "isExecutable": true,
+                    "params": {
+                        "actorDeviceId": {
+                            "type": "string",
+                            "constraints": {},
+                            "required": true
+                        }
+                    }
+                },
+                "remove": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0/commands/remove",
+                    "name": "remove",
+                    "isExecutable": true,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "rooms.0.algorithm",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.algorithm",
+            "properties": {
+                "configuration": {
+                    "type": "object",
+                    "value": {
+                        "hydraulicBalance": true,
+                        "heatupSpeed": "normal",
+                        "trvAlgoActive": false,
+                        "openPointDetection": true,
+                        "virtualClimateSensor": false,
+                        "etrvSync": true,
+                        "useTrvOpenWindow": true,
+                        "heatOnTime": false
+                    }
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.childLock",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.childLock",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "inactive"
+                },
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {
+                "activate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.childLock/commands/activate",
+                    "name": "activate",
+                    "isExecutable": true,
+                    "params": {}
+                },
+                "deactivate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.childLock/commands/deactivate",
+                    "name": "deactivate",
+                    "isExecutable": true,
+                    "params": {}
+                },
+                "setActive": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.childLock/commands/setActive",
+                    "name": "setActive",
+                    "isExecutable": true,
+                    "params": {
+                        "active": {
+                            "type": "boolean",
+                            "required": true,
+                            "constraints": {}
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "rooms.0.condensationRisk",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.condensationRisk",
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.configuration.hydraulicBalancing",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.configuration.hydraulicBalancing",
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.configuration.openWindow",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.configuration.openWindow",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.configuration.trvAlgorithmActive",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.configuration.trvAlgorithmActive",
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.configuration.window.openState",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.configuration.window.openState",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2024-09-15",
+                "info": "none"
+            }
+        },
+        {
+            "feature": "rooms.0.operating.programs.normalHeating",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-16T04:01:13.325Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.operating.programs.normalHeating",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                },
+                "temperature": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {
+                "setTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.operating.programs.normalHeating/commands/setTemperature",
+                    "name": "setTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "targetTemperature": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 8,
+                                "max": 30,
+                                "stepping": 0.5
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "rooms.0.operating.programs.reducedHeating",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-16T03:15:12.758Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.operating.programs.reducedHeating",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "temperature": {
+                    "type": "number",
+                    "value": 18,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {
+                "setTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.operating.programs.reducedHeating/commands/setTemperature",
+                    "name": "setTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "targetTemperature": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 8,
+                                "max": 30,
+                                "stepping": 0.5
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "rooms.0.operating.state",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-16T04:01:13.325Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.operating.state",
+            "properties": {
+                "level": {
+                    "type": "string",
+                    "value": "normal"
+                },
+                "demand": {
+                    "type": "string",
+                    "value": "heating"
+                },
+                "reason": {
+                    "type": "string",
+                    "value": "schedule"
+                },
+                "modifier": {
+                    "type": "string",
+                    "value": "none"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.quickmodes.manual",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-16T04:00:12.181Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.quickmodes.manual",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "defaultDuration": {
+                    "type": "number",
+                    "value": 120,
+                    "unit": ""
+                }
+            },
+            "commands": {
+                "activate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.quickmodes.manual/commands/activate",
+                    "name": "activate",
+                    "isExecutable": true,
+                    "params": {
+                        "temperature": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 8,
+                                "max": 30,
+                                "stepping": 0.5
+                            }
+                        },
+                        "duration": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "enum": [
+                                    30,
+                                    60,
+                                    90,
+                                    120,
+                                    180,
+                                    210,
+                                    240,
+                                    360
+                                ]
+                            }
+                        }
+                    }
+                },
+                "setTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.quickmodes.manual/commands/setTemperature",
+                    "name": "setTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "targetTemperature": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 8,
+                                "max": 30,
+                                "stepping": 0.5
+                            }
+                        }
+                    }
+                },
+                "deactivate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.quickmodes.manual/commands/deactivate",
+                    "name": "deactivate",
+                    "isExecutable": true,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "rooms.0.schedule",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.schedule",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                },
+                "entries": {
+                    "type": "Schedule",
+                    "value": {
+                        "mon": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ],
+                        "tue": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ],
+                        "wed": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ],
+                        "thu": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ],
+                        "fri": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ],
+                        "sat": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ],
+                        "sun": [
+                            {
+                                "position": 0,
+                                "mode": "normal",
+                                "start": "06:00",
+                                "end": "22:00"
+                            }
+                        ]
+                    }
+                }
+            },
+            "commands": {
+                "setSchedule": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.schedule/commands/setSchedule",
+                    "name": "setSchedule",
+                    "isExecutable": true,
+                    "params": {
+                        "newSchedule": {
+                            "type": "Schedule",
+                            "required": true,
+                            "constraints": {
+                                "modes": [
+                                    "normal"
+                                ],
+                                "maxEntries": 4,
+                                "resolution": 10,
+                                "defaultMode": "reduced",
+                                "overlapAllowed": false
+                            }
+                        }
+                    }
+                },
+                "resetSchedule": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.schedule/commands/resetSchedule",
+                    "name": "resetSchedule",
+                    "isExecutable": true,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "rooms.0.sensors.co2",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.sensors.co2",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "notConnected"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.sensors.humidity",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.sensors.humidity",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "notConnected"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.sensors.openWindow",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T11:11:12.476Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.sensors.openWindow",
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.sensors.temperature",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-16T11:26:13.133Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.sensors.temperature",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                },
+                "value": {
+                    "type": "number",
+                    "value": 20.6,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.sensors.window.openState",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T11:11:12.476Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.sensors.window.openState",
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2024-09-15",
+                "info": "none"
+            }
+        },
+        {
+            "feature": "rooms.0.temperature.levels.normal.heating",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.temperature.levels.normal.heating",
+            "properties": {
+                "temperature": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.temperature.levels.normal.perceived",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.temperature.levels.normal.perceived",
+            "properties": {
+                "temperature": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.temperature.levels.reduced.heating",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.temperature.levels.reduced.heating",
+            "properties": {
+                "temperature": {
+                    "type": "number",
+                    "value": 18,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.0.temperature.reference",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.0.temperature.reference",
+            "properties": {},
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel0FTDC",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel0FTDC",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel0FTDCUseValveInformation",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel0FTDCUseValveInformation",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2025-09-09",
+                "info": "replaced by rooms.features.supplyChannel0PumpControl"
+            }
+        },
+        {
+            "feature": "rooms.features.supplyChannel0PumpControl",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel0PumpControl",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel1FTDC",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel1FTDC",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel1FTDCUseValveInformation",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel1FTDCUseValveInformation",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2025-09-09",
+                "info": "replaced by rooms.features.supplyChannel1PumpControl"
+            }
+        },
+        {
+            "feature": "rooms.features.supplyChannel1PumpControl",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel1PumpControl",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel2FTDC",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel2FTDC",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel2FTDCUseValveInformation",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel2FTDCUseValveInformation",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2025-09-09",
+                "info": "replaced by rooms.features.supplyChannel2PumpControl"
+            }
+        },
+        {
+            "feature": "rooms.features.supplyChannel2PumpControl",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel2PumpControl",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel3FTDC",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel3FTDC",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.features.supplyChannel3FTDCUseValveInformation",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel3FTDCUseValveInformation",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2025-09-09",
+                "info": "replaced by rooms.features.supplyChannel3PumpControl"
+            }
+        },
+        {
+            "feature": "rooms.features.supplyChannel3PumpControl",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.features.supplyChannel3PumpControl",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "rooms.others",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.others",
+            "properties": {
+                "enabled": {
+                    "type": "array",
+                    "value": []
+                }
+            },
+            "commands": {
+                "add": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.others/commands/add",
+                    "name": "add",
+                    "isExecutable": true,
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "minLength": 1,
+                                "maxLength": 40
+                            }
+                        },
+                        "heatingCircuit": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "enum": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "rooms.status",
+            "gatewayId": "1234567812345678",
+            "deviceId": "RoomControl-1",
+            "timestamp": "2025-10-15T01:22:16.385Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.status",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                },
+                "variant": {
+                    "type": "string",
+                    "value": "full"
+                }
+            },
+            "commands": {
+                "activate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.status/commands/activate",
+                    "name": "activate",
+                    "isExecutable": true,
+                    "params": {}
+                },
+                "deactivate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.status/commands/deactivate",
+                    "name": "deactivate",
+                    "isExecutable": true,
+                    "params": {}
+                },
+                "setActive": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/RoomControl-1/features/rooms.status/commands/setActive",
+                    "name": "setActive",
+                    "isExecutable": true,
+                    "params": {
+                        "active": {
+                            "type": "boolean",
+                            "required": true,
+                            "constraints": {}
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "device.serial",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/device.serial",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": "################"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.boiler.pumps.internal",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.boiler.pumps.internal",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "on"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.boiler.sensors.temperature.main",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:27:42.672Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.boiler.sensors.temperature.main",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 26,
+                    "unit": "celsius"
+                },
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.boiler.serial",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.boiler.serial",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": "################"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.boiler.temperature",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:16:34.131Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.boiler.temperature",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 33,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.burners",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.burners",
+            "properties": {
+                "enabled": {
+                    "type": "array",
+                    "value": [
+                        "0"
+                    ]
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.burners.0.modulation",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:04:10.719Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.burners.0.modulation",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 0,
+                    "unit": "percent"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.burners.0.statistics",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:03:38.222Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.burners.0.statistics",
+            "properties": {
+                "hours": {
+                    "type": "number",
+                    "value": 51146,
+                    "unit": "hour"
+                },
+                "starts": {
+                    "type": "number",
+                    "value": 229928,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.burners.0",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:03:58.752Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.burners.0",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.burners.0.automatic",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.burners.0.automatic",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "ok"
+                },
+                "errorCode": {
+                    "type": "number",
+                    "value": 0,
+                    "unit": ""
+                },
+                "errorDetails": {
+                    "type": "string",
+                    "value": "error"
+                },
+                "audience": {
+                    "type": "string",
+                    "value": "internal"
+                }
+            },
+            "commands": {},
+            "deprecated": {
+                "removalDate": "2024-09-15",
+                "info": "none"
+            }
+        },
+        {
+            "feature": "heating.burners.0.errorStatus",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.burners.0.errorStatus",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "ok"
+                },
+                "errorCode": {
+                    "type": "number",
+                    "value": 0,
+                    "unit": ""
+                },
+                "errorDetails": {
+                    "type": "string",
+                    "value": "error"
+                },
+                "audience": {
+                    "type": "string",
+                    "value": "internal"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits",
+            "properties": {
+                "enabled": {
+                    "type": "array",
+                    "value": [
+                        "0"
+                    ]
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.circulation.pump",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.circulation.pump",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "on"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.frostprotection",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.frostprotection",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "off"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.heating.curve",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.heating.curve",
+            "properties": {
+                "shift": {
+                    "type": "number",
+                    "value": 2,
+                    "unit": ""
+                },
+                "slope": {
+                    "type": "number",
+                    "value": 1.4,
+                    "unit": ""
+                }
+            },
+            "commands": {
+                "setCurve": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.heating.curve/commands/setCurve",
+                    "name": "setCurve",
+                    "isExecutable": true,
+                    "params": {
+                        "slope": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 0.2,
+                                "max": 3.5,
+                                "stepping": 0.1
+                            }
+                        },
+                        "shift": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": -13,
+                                "max": 40,
+                                "stepping": 1
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.heating.schedule",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.heating.schedule",
+            "properties": {
+                "entries": {
+                    "type": "Schedule",
+                    "value": {
+                        "mon": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ],
+                        "tue": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ],
+                        "wed": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ],
+                        "thu": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ],
+                        "fri": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ],
+                        "sat": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ],
+                        "sun": [
+                            {
+                                "start": "06:00",
+                                "end": "22:00",
+                                "mode": "normal",
+                                "position": 0
+                            }
+                        ]
+                    }
+                },
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {
+                "setSchedule": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.heating.schedule/commands/setSchedule",
+                    "name": "setSchedule",
+                    "isExecutable": true,
+                    "params": {
+                        "newSchedule": {
+                            "type": "Schedule",
+                            "required": true,
+                            "constraints": {
+                                "modes": [
+                                    "normal"
+                                ],
+                                "maxEntries": 4,
+                                "resolution": 10,
+                                "defaultMode": "reduced",
+                                "overlapAllowed": true
+                            }
+                        }
+                    }
+                },
+                "resetSchedule": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.heating.schedule/commands/resetSchedule",
+                    "name": "resetSchedule",
+                    "isExecutable": true,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.operating.modes.active",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.modes.active",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": "heating"
+                }
+            },
+            "commands": {
+                "setMode": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.modes.active/commands/setMode",
+                    "name": "setMode",
+                    "isExecutable": true,
+                    "params": {
+                        "mode": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "enum": [
+                                    "heating",
+                                    "standby"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.operating.modes.forcedNormal",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.modes.forcedNormal",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.operating.modes.forcedReduced",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.modes.forcedReduced",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.operating.modes.heating",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.modes.heating",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.operating.modes.standby",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.modes.standby",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.active",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:19:42.996Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.active",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": "normal"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.comfort",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.comfort",
+            "properties": {
+                "temperature": {
+                    "type": "number",
+                    "value": 21,
+                    "unit": "celsius"
+                },
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "demand": {
+                    "type": "string",
+                    "value": "unknown"
+                }
+            },
+            "commands": {
+                "activate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.comfort/commands/activate",
+                    "name": "activate",
+                    "isExecutable": false,
+                    "params": {
+                        "temperature": {
+                            "type": "number",
+                            "required": false,
+                            "constraints": {
+                                "min": 4,
+                                "max": 37,
+                                "stepping": 1
+                            }
+                        }
+                    }
+                },
+                "setTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.comfort/commands/setTemperature",
+                    "name": "setTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "targetTemperature": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 4,
+                                "max": 37,
+                                "stepping": 1
+                            }
+                        }
+                    }
+                },
+                "deactivate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.comfort/commands/deactivate",
+                    "name": "deactivate",
+                    "isExecutable": false,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.eco",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T04:00:14.298Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.eco",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "temperature": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {
+                "activate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.eco/commands/activate",
+                    "name": "activate",
+                    "isExecutable": false,
+                    "params": {}
+                },
+                "deactivate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.eco/commands/deactivate",
+                    "name": "deactivate",
+                    "isExecutable": false,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.external",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:19:42.996Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.external",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "temperature": {
+                    "type": "number",
+                    "value": 0,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.normal",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T04:00:14.298Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.normal",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                },
+                "demand": {
+                    "type": "string",
+                    "value": "unknown"
+                },
+                "temperature": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {
+                "setTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.normal/commands/setTemperature",
+                    "name": "setTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "targetTemperature": {
+                            "required": true,
+                            "constraints": {
+                                "min": 3,
+                                "max": 37,
+                                "stepping": 1
+                            },
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.reduced",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T04:00:14.298Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.reduced",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "demand": {
+                    "type": "string",
+                    "value": "unknown"
+                },
+                "temperature": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {
+                "setTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.reduced/commands/setTemperature",
+                    "name": "setTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "targetTemperature": {
+                            "required": true,
+                            "constraints": {
+                                "min": 3,
+                                "max": 37,
+                                "stepping": 1
+                            },
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "heating.circuits.0.operating.programs.standby",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.operating.programs.standby",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0.sensors.temperature.supply",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:27:32.993Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.sensors.temperature.supply",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 26,
+                    "unit": "celsius"
+                },
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.circuits.0",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": true
+                },
+                "name": {
+                    "type": "string",
+                    "value": "Heizkreis OG"
+                },
+                "type": {
+                    "type": "string",
+                    "value": "heatingCircuit"
+                }
+            },
+            "commands": {
+                "setName": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0/commands/setName",
+                    "name": "setName",
+                    "isExecutable": true,
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "minLength": 1,
+                                "maxLength": 20
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "heating.controller.serial",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.controller.serial",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.flue.sensors.temperature.main",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:08:48.027Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.flue.sensors.temperature.main",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                },
+                "value": {
+                    "type": "number",
+                    "value": 27.3,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "heating.operating.programs.holiday",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.operating.programs.holiday",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                },
+                "start": {
+                    "type": "string",
+                    "value": ""
+                },
+                "end": {
+                    "type": "string",
+                    "value": ""
+                }
+            },
+            "commands": {
+                "changeEndDate": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.operating.programs.holiday/commands/changeEndDate",
+                    "name": "changeEndDate",
+                    "isExecutable": false,
+                    "params": {
+                        "end": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$",
+                                "sameDayAllowed": false
+                            }
+                        }
+                    }
+                },
+                "schedule": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.operating.programs.holiday/commands/schedule",
+                    "name": "schedule",
+                    "isExecutable": true,
+                    "params": {
+                        "start": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$"
+                            }
+                        },
+                        "end": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "regEx": "^[\\d]{4}-[\\d]{2}-[\\d]{2}$",
+                                "sameDayAllowed": false
+                            }
+                        }
+                    }
+                },
+                "unschedule": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.operating.programs.holiday/commands/unschedule",
+                    "name": "unschedule",
+                    "isExecutable": true,
+                    "params": {}
+                }
+            }
+        },
+        {
+            "feature": "heating.sensors.temperature.outside",
+            "gatewayId": "1234567812345678",
+            "deviceId": "0",
+            "timestamp": "2025-10-16T11:27:12.141Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.sensors.temperature.outside",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 18.2,
+                    "unit": "celsius"
+                },
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.configuration.measurementWeight",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:22:16.561Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.configuration.measurementWeight",
+            "properties": {
+                "weight": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.heatingCircuitId",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.heatingCircuitId",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 0,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.identification",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.identification",
+            "properties": {
+                "triggered": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.information",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:22:16.561Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.information",
+            "properties": {
+                "manufacturer": {
+                    "type": "string",
+                    "value": "Viessmann"
+                },
+                "modelId": {
+                    "type": "string",
+                    "value": "7637434"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.messages.status.raw",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.messages.status.raw",
+            "properties": {
+                "entries": {
+                    "type": "array",
+                    "value": []
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.name",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.name",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "value": ""
+                }
+            },
+            "commands": {
+                "setName": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.name/commands/setName",
+                    "name": "setName",
+                    "isExecutable": true,
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "regEx": "^[\\p{L}0-9]+( [\\p{L}0-9]+)*$",
+                                "minLength": 1,
+                                "maxLength": 40
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "device.power.battery",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.power.battery",
+            "properties": {
+                "level": {
+                    "type": "number",
+                    "value": 92,
+                    "unit": "percent"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.sensors.temperature",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-16T11:20:55.446Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.sensors.temperature",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "connected"
+                },
+                "value": {
+                    "type": "number",
+                    "value": 20.8,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.zigbee.lqi",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-16T11:19:12.569Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.zigbee.lqi",
+            "properties": {
+                "strength": {
+                    "type": "number",
+                    "value": 21,
+                    "unit": "percent"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.zigbee.parent.id",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.zigbee.parent.id",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "value": "fedcba0987654321"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.zigbee.parent.rx",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-16T11:26:13.735Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.zigbee.parent.rx",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 58,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "device.zigbee.parent.tx",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-16T11:25:57.826Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/device.zigbee.parent.tx",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 76,
+                    "unit": ""
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "trv.childLock",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/trv.childLock",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "value": "inactive"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "trv.mountingMode",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-15T01:25:32.977Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/trv.mountingMode",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "commands": {}
+        },
+        {
+            "feature": "trv.temperature",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-16T04:00:12.215Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/trv.temperature",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "value": 20,
+                    "unit": "celsius"
+                }
+            },
+            "commands": {
+                "setTargetTemperature": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/trv.temperature/commands/setTargetTemperature",
+                    "name": "setTargetTemperature",
+                    "isExecutable": true,
+                    "params": {
+                        "temperature": {
+                            "type": "number",
+                            "required": true,
+                            "constraints": {
+                                "min": 8,
+                                "max": 30,
+                                "stepping": 0.5
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "feature": "trv.valve.position",
+            "gatewayId": "1234567812345678",
+            "deviceId": "zigbee-1234567890abcdef",
+            "timestamp": "2025-10-16T11:25:12.316Z",
+            "isEnabled": true,
+            "isReady": true,
+            "apiVersion": 1,
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/zigbee-1234567890abcdef/features/trv.valve.position",
+            "properties": {
+                "position": {
+                    "type": "number",
+                    "value": 17,
+                    "unit": "percent"
+                }
+            },
+            "commands": {}
+        },
+        {
+            "apiVersion": 1,
+            "isEnabled": true,
+            "isReady": true,
+            "timestamp": "2025-10-15T01:22:16.351Z",
+            "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.name",
+            "feature": "heating.circuits.0.name",
+            "deviceId": "0",
+            "gatewayId": "1234567812345678",
+            "components": [],
+            "commands": {
+                "setName": {
+                    "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/2323232/gateways/1234567812345678/devices/0/features/heating.circuits.0.name/commands/setName",
+                    "name": "setName",
+                    "isExecutable": true,
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "required": true,
+                            "constraints": {
+                                "minLength": 1,
+                                "maxLength": 20
+                            }
+                        }
+                    }
+                }
+            },
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "value": "Heizkreis OG"
+                }
+            }
+        }
+    ]
+}
