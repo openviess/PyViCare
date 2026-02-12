@@ -28,3 +28,18 @@ jobs:
             -exec sh -c 'mv $1 $1.tmp; jq ".data|=sort_by(.feature)" --sort-keys $1.tmp > $1; rm $1.tmp' shell {} ";"
       - name: 🔍 Verify
         run: git diff --name-only --exit-code
+
+  deprecations:
+    name: validate deprecation database
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code from GitHub
+        uses: actions/checkout@v6.0.2
+      - name: Set up Python
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON }}
+      - name: Update deprecation database
+        run: python check_deprecations.py --update
+      - name: Verify no changes
+        run: git diff --name-only --exit-code
