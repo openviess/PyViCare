@@ -36,6 +36,10 @@ class HeatingDevice(Device):
     Note that currently, a new token is generated for each run.
     """
 
+    @handleNotSupported
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
+
     @property
     def circuits(self) -> List[Any]:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
@@ -193,6 +197,16 @@ class HeatingDevice(Device):
         """
         return self.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
+
+    @handleNotSupported
+    def getDomesticHotWaterOperatingModes(self):
+        return self.getProperty("heating.dhw.operating.modes.active")[
+            "commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+
+    @handleNotSupported
+    def getDomesticHotWaterActiveOperatingMode(self):
+        return self.getProperty("heating.dhw.operating.modes.active")[
+            "properties"]["value"]["value"]
 
     @handleAPICommandErrors
     def setDomesticHotWaterOperatingMode(self, mode):
