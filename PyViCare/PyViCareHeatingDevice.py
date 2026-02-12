@@ -198,6 +198,16 @@ class HeatingDevice(Device):
         return self.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
 
+    @handleNotSupported
+    def getDomesticHotWaterOperatingModes(self):
+        return self.getProperty("heating.dhw.operating.modes.active")[
+            "commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+
+    @handleNotSupported
+    def getDomesticHotWaterActiveOperatingMode(self):
+        return self.getProperty("heating.dhw.operating.modes.active")[
+            "properties"]["value"]["value"]
+
     @handleAPICommandErrors
     def setDomesticHotWaterOperatingMode(self, mode):
         return self.setProperty("heating.dhw.operating.modes.active", "setMode",
