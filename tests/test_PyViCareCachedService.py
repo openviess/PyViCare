@@ -3,7 +3,10 @@ from unittest.mock import Mock
 
 from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareService import ViCareDeviceAccessor
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
+                                    PyViCareInternalServerError,
+                                    PyViCareInvalidDataError,
+                                    PyViCareNotSupportedFeatureError)
 from tests.helper import now_is
 
 
@@ -67,3 +70,67 @@ class PyViCareCachedServiceTest(unittest.TestCase):
 
             self.service.getProperty("someprop")
             self.assertEqual(self.oauth_mock.get.call_count, 2)
+
+    def test_device_communication_error_returns_stale_cache(self):
+        """When device goes offline after successful fetch, return stale cache."""
+        with now_is('2000-01-01 00:00:00'):
+            self.service.getProperty("someprop")
+
+        # Device goes offline after cache expires
+        self.oauth_mock.get.side_effect = PyViCareDeviceCommunicationError(
+            {"errorType": "DEVICE_COMMUNICATION_ERROR",
+             "extendedPayload": {"reason": "GATEWAY_OFFLINE"}})
+
+        with now_is('2000-01-01 00:01:10'):
+            result = self.service.getProperty("someprop")
+
+        self.assertIsNotNone(result)
+
+    def test_server_error_returns_stale_cache(self):
+        """When server returns 500 after successful fetch, return stale cache."""
+        with now_is('2000-01-01 00:00:00'):
+            self.service.getProperty("someprop")
+
+        self.oauth_mock.get.side_effect = PyViCareInternalServerError(
+            {"statusCode": 500, "message": "Internal server error",
+             "viErrorId": "test"})
+
+        with now_is('2000-01-01 00:01:10'):
+            result = self.service.getProperty("someprop")
+
+        self.assertIsNotNone(result)
+
+    def test_device_communication_error_raises_without_cache(self):
+        """When device is offline on first fetch (no cache), must raise."""
+        self.oauth_mock.get.side_effect = PyViCareDeviceCommunicationError(
+            {"errorType": "DEVICE_COMMUNICATION_ERROR",
+             "extendedPayload": {"reason": "DEVICE_OFFLINE"}})
+
+        with now_is('2000-01-01 00:00:00'):
+            self.assertRaises(
+                PyViCareDeviceCommunicationError,
+                self.service.getProperty, "someprop")
+
+    def test_server_error_raises_without_cache(self):
+        """When server errors on first fetch (no cache), must raise."""
+        self.oauth_mock.get.side_effect = PyViCareInternalServerError(
+            {"statusCode": 500, "message": "Internal server error",
+             "viErrorId": "test"})
+
+        with now_is('2000-01-01 00:00:00'):
+            self.assertRaises(
+                PyViCareInternalServerError,
+                self.service.getProperty, "someprop")
+
+    def test_invalid_data_still_raises_with_cache(self):
+        """PyViCareInvalidDataError (genuine bad data) must still raise even with cache."""
+        with now_is('2000-01-01 00:00:00'):
+            self.service.getProperty("someprop")
+
+        self.oauth_mock.get.side_effect = None
+        self.oauth_mock.get.return_value = {"unexpected": "response"}
+
+        with now_is('2000-01-01 00:01:10'):
+            self.assertRaises(
+                PyViCareInvalidDataError,
+                self.service.getProperty, "someprop")
