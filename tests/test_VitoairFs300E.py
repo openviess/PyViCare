@@ -55,3 +55,15 @@ class VitoairFs300(unittest.TestCase):
             "forcedLevelFour",
             "silent",
         ])
+
+    def test_getConfiguredLevelOneVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelOneVolumeFlow(), 55)
+
+    def test_getConfiguredLevelTwoVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelTwoVolumeFlow(), 129)
+
+    def test_getConfiguredLevelThreeVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelThreeVolumeFlow(), 185)
+
+    def test_getConfiguredLevelFourVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 240)
