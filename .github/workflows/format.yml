@@ -33,7 +33,7 @@ jobs:
     name: validate deprecation database
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code from GitHub
+      - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v6.0.2
       - name: Set up Python
         uses: actions/setup-python@v6.2.0
@@ -43,3 +43,4 @@ jobs:
         run: python check_deprecations.py --update
       - name: Verify no changes
         run: git diff --name-only --exit-code
+        if: always()
