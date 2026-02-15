@@ -1,3 +1,4 @@
+import json
 import re
 import unittest
 from os import listdir
@@ -410,6 +411,18 @@ class TestForMissingProperties(unittest.TestCase):
         response_files = [f for f in listdir(response_path) if isfile(join(response_path, f))]
 
         all_features = {}
+
+        # Load from deprecation database (maintained by check_deprecations.py)
+        db_path = join(dirname(__file__), 'deprecated_features.json')
+        if isfile(db_path):
+            with open(db_path) as f:
+                db = json.load(f)
+            for name, info in db.get('features', {}).items():
+                normalized = re.sub(r"\b\d\b", "0", name)
+                if normalized not in all_features:
+                    all_features[normalized] = {'files': info.get('sources', [])}
+
+        # Also scan test response files directly (catches new deprecations not yet in db)
         for response in response_files:
             data = readJson(join(response_path, response))
             if "data" in data:
@@ -418,15 +431,8 @@ class TestForMissingProperties(unittest.TestCase):
                         name = re.sub(r"\b\d\b", "0", feature["feature"])
                         if name not in all_features:
                             all_features[name] = {'files': []}
-
                         all_features[name]['files'].append(response)
-                    # name = re.sub(r"\b\d\b", "0", feature["feature"])
-                    # isDeprecated = feature["deprecated"] if "deprecated" in feature else None
-                    # if name not in all_features:
-                    #     all_features[name] = {'files': []}
 
-                    # if feature['isEnabled'] and feature['properties'] != {}:
-                    #     all_features[name]['files'].append(response)
         return all_features
 
     def read_all_features(self):
