@@ -77,6 +77,7 @@ def scan_json_file(filepath, source_label):
 def update_database(extra_files=None):
     """Rescan test data and optional extra files, merge into database. Returns new features."""
     db = load_database()
+    db_snapshot = json.dumps(db, sort_keys=True)
     new_features = {}
     today = str(date.today())
 
@@ -109,7 +110,8 @@ def update_database(extra_files=None):
         for feat, info in scan_json_file(filepath, label).items():
             add_feature(feat, info, label)
 
-    save_database(db)
+    if json.dumps(db, sort_keys=True) != db_snapshot:
+        save_database(db)
     return new_features
 
 
