@@ -910,5 +910,3 @@ class Inverter(HeatingDeviceWithComponent):
     @handleNotSupported
     def getTemperature(self) -> float:
         return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.temperature.powerModule")["properties"]["value"]["value"])
-
-
