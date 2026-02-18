@@ -343,9 +343,112 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getCoefficientOfPerformanceCooling(self) -> float:
         return float(self.getProperty("heating.cop.cooling")["properties"]["value"]["value"])
 
-    @property
-    def heatingRod(self) -> HeatingRod:
-        return HeatingRod(self)
+    @handleNotSupported
+    def getHeatingRodStarts(self) -> int:
+        return int(self.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHours(self) -> int:
+        return int(self.getProperty("heating.heatingRod.statistics")["properties"]["hours"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHeatProductionCurrent(self) -> float:
+        return float(self.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodHeatProductionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionCurrent(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionDHWThisYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.dhw")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionHeatingThisYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.heating")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionTotalThisYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.total")["properties"]["year"]["value"][0])
+
+    # Heating rod power consumption summary for DHW:
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWLastMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryDHWLastYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastYear"]["value"])
+
+    # Heating rod power consumption summary for Heating:
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingLastMonth(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodPowerConsumptionSummaryHeatingLastYear(self) -> float:
+        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastYear"]["value"])
+
+    # Heating rod runtime by level
+    @handleNotSupported
+    def getHeatingRodRuntimeLevelOne(self) -> int:
+        return int(self.getProperty("heating.heatingRod.runtime")["properties"]["levelOne"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodRuntimeLevelTwo(self) -> int:
+        return int(self.getProperty("heating.heatingRod.runtime")["properties"]["levelTwo"]["value"])
+
+    @handleNotSupported
+    def getHeatingRodRuntimeLevelOneUnit(self) -> str:
+        return str(self.getProperty("heating.heatingRod.runtime")["properties"]["levelOne"]["unit"])
 
     # Additional pressure sensors (refrigerant circuit)
     @handleNotSupported
@@ -809,117 +912,3 @@ class Inverter(HeatingDeviceWithComponent):
         return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.temperature.powerModule")["properties"]["value"]["value"])
 
 
-class HeatingRod:
-
-    def __init__(self, device: HeatPump) -> None:
-        self.service = device.service
-
-    def getProperty(self, property_name: str) -> Any:
-        return self.service.getProperty(property_name)
-
-    @handleNotSupported
-    def getStarts(self) -> int:
-        return int(self.getProperty("heating.heatingRod.statistics")["properties"]["starts"]["value"])
-
-    @handleNotSupported
-    def getHours(self) -> int:
-        return int(self.getProperty("heating.heatingRod.statistics")["properties"]["hours"]["value"])
-
-    @handleNotSupported
-    def getHeatProductionCurrent(self) -> float:
-        return float(self.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["value"])
-
-    @handleNotSupported
-    def getHeatProductionCurrentUnit(self) -> str:
-        return str(self.getProperty("heating.heatingRod.heat.production.current")["properties"]["value"]["unit"])
-
-    @handleNotSupported
-    def getPowerConsumptionCurrent(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionCurrentUnit(self) -> str:
-        return str(self.getProperty("heating.heatingRod.power.consumption.current")["properties"]["value"]["unit"])
-
-    @handleNotSupported
-    def getPowerConsumptionDHWThisYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.dhw")["properties"]["year"]["value"][0])
-
-    @handleNotSupported
-    def getPowerConsumptionHeatingThisYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.heating")["properties"]["year"]["value"][0])
-
-    @handleNotSupported
-    def getPowerConsumptionTotalThisYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.total")["properties"]["year"]["value"][0])
-
-    # Power consumption summary for DHW:
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWUnit(self) -> str:
-        return str(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWCurrentDay(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentDay"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWCurrentMonth(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentMonth"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWCurrentYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["currentYear"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWLastMonth(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastMonth"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWLastSevenDays(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastSevenDays"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryDHWLastYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.dhw")["properties"]["lastYear"]["value"])
-
-    # Power consumption summary for Heating:
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingUnit(self) -> str:
-        return str(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentDay"]["unit"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingCurrentDay(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentDay"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingCurrentMonth(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentMonth"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingCurrentYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["currentYear"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingLastMonth(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastMonth"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingLastSevenDays(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastSevenDays"]["value"])
-
-    @handleNotSupported
-    def getPowerConsumptionSummaryHeatingLastYear(self) -> float:
-        return float(self.getProperty("heating.heatingRod.power.consumption.summary.heating")["properties"]["lastYear"]["value"])
-
-    # Runtime by level
-    @handleNotSupported
-    def getRuntimeLevelOne(self) -> int:
-        return int(self.getProperty("heating.heatingRod.runtime")["properties"]["levelOne"]["value"])
-
-    @handleNotSupported
-    def getRuntimeLevelTwo(self) -> int:
-        return int(self.getProperty("heating.heatingRod.runtime")["properties"]["levelTwo"]["value"])
-
-    @handleNotSupported
-    def getRuntimeLevelOneUnit(self) -> str:
-        return str(self.getProperty("heating.heatingRod.runtime")["properties"]["levelOne"]["unit"])
