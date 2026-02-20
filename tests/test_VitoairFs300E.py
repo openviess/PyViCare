@@ -18,37 +18,30 @@ class VitoairFs300(unittest.TestCase):
     def test_isVentilationDevice(self):
         self.assertEqual(self.device.isVentilationDevice(), True)
 
-    def test_getActiveMode(self):
-        self.assertEqual(self.device.getActiveMode(), "sensorOverride")
-
-    def test_getActiveProgram(self):
-        self.assertEqual(self.device.getActiveProgram(), "levelFour")
-
-    def test_getAvailableModes(self):
-        expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
-        self.assertListEqual(self.device.getAvailableModes(), expected_modes)
-
-    def test_getAvailablePrograms(self):
-        expected_programs = ['standby']
-        self.assertListEqual(self.device.getAvailablePrograms(), expected_programs)
-
-    def test_getPermanentLevels(self):
-        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
-        self.assertListEqual(expected_levels, self.device.getPermanentLevels())
-
-    def test_getSchedule(self):
-        keys = ['active', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-        self.assertListEqual(list(self.device.getSchedule().keys()), keys)
-
-    def test_getSerial(self):
-        self.assertEqual(self.device.getSerial(), "################")
-
     def test_getActiveVentilationMode(self):
-        self.assertEqual("sensorOverride", self.device.getActiveVentilationMode())
+        self.assertEqual(self.device.getActiveVentilationMode(), "sensorOverride")
+
+    def test_getActiveVentilationProgram(self):
+        self.assertEqual(self.device.getActiveVentilationProgram(), "levelFour")
 
     def test_getVentilationModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
-        self.assertListEqual(expected_modes, self.device.getVentilationModes())
+        self.assertListEqual(self.device.getVentilationModes(), expected_modes)
+
+    def test_getVentilationPrograms(self):
+        expected_programs = ['standby']
+        self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
+
+    def test_getVentilationLevels(self):
+        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
+        self.assertListEqual(expected_levels, self.device.getVentilationLevels())
+
+    def test_getVentilationSchedule(self):
+        keys = ['active', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        self.assertListEqual(list(self.device.getVentilationSchedule().keys()), keys)
+
+    def test_getSerial(self):
+        self.assertEqual(self.device.getSerial(), "################")
 
     def test_getVentilationMode(self):
         self.assertEqual(False, self.device.getVentilationMode("filterChange"))
@@ -62,3 +55,15 @@ class VitoairFs300(unittest.TestCase):
             "forcedLevelFour",
             "silent",
         ])
+
+    def test_getConfiguredLevelOneVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelOneVolumeFlow(), 55)
+
+    def test_getConfiguredLevelTwoVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelTwoVolumeFlow(), 129)
+
+    def test_getConfiguredLevelThreeVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelThreeVolumeFlow(), 185)
+
+    def test_getConfiguredLevelFourVolumeFlow(self):
+        self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 240)

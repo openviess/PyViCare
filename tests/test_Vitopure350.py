@@ -10,12 +10,12 @@ class Vitopure350(unittest.TestCase):
         self.service = ViCareServiceMock('response/Vitopure350.json')
         self.device = VentilationDevice(self.service)
 
-    def test_getActiveMode(self):
-        self.assertEqual("sensorDriven", self.device.getActiveMode())
+    def test_getActiveVentilationMode(self):
+        self.assertEqual("sensorDriven", self.device.getActiveVentilationMode())
 
-    def test_getAvailableModes(self):
+    def test_getVentilationModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorDriven']
-        self.assertListEqual(expected_modes, self.device.getAvailableModes())
+        self.assertListEqual(expected_modes, self.device.getVentilationModes())
 
     def test_getActiveVentilationProgram(self):
         self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
@@ -24,31 +24,20 @@ class Vitopure350(unittest.TestCase):
         expected_programs = []
         self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
 
-    def test_getPermanentLevels(self):
+    def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
-        self.assertListEqual(expected_levels, self.device.getPermanentLevels())
+        self.assertListEqual(expected_levels, self.device.getVentilationLevels())
 
-    def test_getSchedule(self):
+    def test_getVentilationSchedule(self):
         keys = ['active', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-        self.assertListEqual(keys, list(self.device.getSchedule().keys()))
+        self.assertListEqual(keys, list(self.device.getVentilationSchedule().keys()))
 
     def test_getSerial(self):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getSerial()
 
-    def test_getActiveVentilationMode(self):
-        self.assertEqual("sensorDriven", self.device.getActiveVentilationMode())
-
-    def test_getVentilationModes(self):
-        expected_modes = ['permanent', 'ventilation', 'sensorDriven']
-        self.assertListEqual(expected_modes, self.device.getVentilationModes())
-
     def test_getVentilationMode(self):
         self.assertEqual(False, self.device.getVentilationMode("filterChange"))
-
-    def test_getVentilationLevels(self):
-        expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
-        self.assertListEqual(expected_levels, self.device.getVentilationLevels())
 
     def test_ventilationState(self):
         self.assertEqual(self.device.getVentilationDemand(), "unknown")
@@ -93,3 +82,17 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(self.device.getSupplyFanSpeed(), 555)
         self.assertEqual(self.device.getSupplyFanTargetSpeed(), 585)
         self.assertEqual(self.device.getSupplyFanHours(), 819)
+
+    def test_getFilterHours(self):
+        self.assertEqual(self.device.getFilterHours(), 5795)
+        self.assertEqual(self.device.getFilterRemainingHours(), 2965)
+        self.assertEqual(self.device.getFilterOverdueHours(), 0)
+
+    def test_getAirborneDust(self):
+        self.assertEqual(self.device.getAirborneDustPM1(), 0.1)
+        self.assertEqual(self.device.getAirborneDustPM2d5(), 0.3)
+        self.assertEqual(self.device.getAirborneDustPM4(), 0.4)
+        self.assertEqual(self.device.getAirborneDustPM10(), 0.5)
+
+    def test_getWifiSignalStrength(self):
+        self.assertEqual(self.device.getWifiSignalStrength(), -41)

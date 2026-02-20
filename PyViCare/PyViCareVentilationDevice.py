@@ -13,6 +13,10 @@ class VentilationDevice(Device):
     """
 
     @handleNotSupported
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
+
+    @handleNotSupported
     def getVentilationDemand(self) -> str:
         return str(self.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
 
@@ -235,6 +239,34 @@ class VentilationDevice(Device):
         return int(self.getProperty("ventilation.sensors.volatileOrganicCompounds")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getAirborneDustPM1(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm1")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getAirborneDustPM2d5(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm2d5")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getAirborneDustPM4(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm4")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getAirborneDustPM10(self) -> float:
+        return float(self.getProperty("ventilation.sensors.airBorneDust.pm10")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFilterHours(self) -> int:
+        return int(self.getProperty("ventilation.filter.runtime")["properties"]["operatingHours"]["value"])
+
+    @handleNotSupported
+    def getFilterRemainingHours(self) -> int:
+        return int(self.getProperty("ventilation.filter.runtime")["properties"]["remainingHours"]["value"])
+
+    @handleNotSupported
+    def getFilterOverdueHours(self) -> int:
+        return int(self.getProperty("ventilation.filter.runtime")["properties"]["overdueHours"]["value"])
+
+    @handleNotSupported
     def getSupplyFanHours(self) -> int:
         return int(self.getProperty("ventilation.fan.supply.runtime")["properties"]["value"]["value"])
 
@@ -257,3 +289,19 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getExhaustVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.volumeFlow.current.output")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelOneVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelOne")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelTwoVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelTwo")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelThreeVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelThree")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelFourVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelFour")["properties"]["volumeFlow"]["value"])

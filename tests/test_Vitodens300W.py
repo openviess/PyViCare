@@ -60,3 +60,20 @@ class Vitodens300W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
                           self.device.getDomesticHotWaterCirculationScheduleModes)
+
+    # Total power consumption:
+    def test_getPowerConsumptionUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionToday(), 0.219)
+
+    def test_getPowerConsumptionThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisMonth(), 7.843)
+
+    def test_getPowerConsumptionThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisYear(), 207.106)
