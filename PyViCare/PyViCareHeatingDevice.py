@@ -369,6 +369,15 @@ class HeatingDevice(Device):
             "value"]
 
     @handleNotSupported
+    def getPrimaryCircuitPumpRotation(self) -> float:
+        """Get primary circuit pump rotation/speed as percentage."""
+        return float(self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPrimaryCircuitPumpRotationUnit(self):
+        return self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["unit"]
+
+    @handleNotSupported
     def getSupplyTemperatureSecondaryCircuit(self):
         return self.getProperty("heating.secondaryCircuit.sensors.temperature.supply")["properties"]["value"][
             "value"]
@@ -547,6 +556,15 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return \
             self.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
                 "value"]["value"]
+
+    @handleNotSupported
+    def getTargetTemperature(self) -> float:
+        """Get the circuit target temperature."""
+        return float(self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getTargetTemperatureUnit(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getRoomTemperature(self):
