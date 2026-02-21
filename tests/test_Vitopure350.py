@@ -1,5 +1,6 @@
 import unittest
 
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
