@@ -699,6 +699,16 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "sun": properties["entries"]["value"]["sun"]
         }
 
+    @handleAPICommandErrors
+    def setHeatingSchedule(self, schedule: dict) -> None:
+        self.service.setProperty(f"heating.circuits.{self.circuit}.heating.schedule",
+                                 "setSchedule", {'newSchedule': schedule})
+
+    @handleNotSupported
+    def getHeatingScheduleModes(self) -> list:  # type: ignore[type-arg]
+        return list(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"
+            )["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"]["modes"])
+
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
     def getTargetSupplyTemperature(self) -> Optional[float]:
