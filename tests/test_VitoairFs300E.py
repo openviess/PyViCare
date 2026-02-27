@@ -22,7 +22,7 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getActiveVentilationMode(), "sensorOverride")
 
     def test_getActiveVentilationProgram(self):
-        self.assertEqual(self.device.getActiveVentilationProgram(), "levelFour")
+        self.assertEqual(self.device.getActiveVentilationProgram(), "levelTwo")
 
     def test_getVentilationModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
@@ -56,14 +56,29 @@ class VitoairFs300(unittest.TestCase):
             "silent",
         ])
 
+    def test_getExhaustTemperature(self):
+        self.assertEqual(self.device.getExhaustTemperature(), 7.5)
+
+    def test_getExtractTemperature(self):
+        self.assertEqual(self.device.getExtractTemperature(), 20.5)
+
+    def test_getExhaustHumidity(self):
+        self.assertEqual(self.device.getExhaustHumidity(), 80)
+
+    def test_getExtractHumidity(self):
+        self.assertEqual(self.device.getExtractHumidity(), 57)
+
+    def test_getHeatRecoveryEfficiency(self):
+        self.assertEqual(self.device.getHeatRecoveryEfficiency(), 77.0)
+
     def test_getConfiguredLevelOneVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelOneVolumeFlow(), 55)
+        self.assertEqual(self.device.getConfiguredLevelOneVolumeFlow(), 140)
 
     def test_getConfiguredLevelTwoVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelTwoVolumeFlow(), 129)
+        self.assertEqual(self.device.getConfiguredLevelTwoVolumeFlow(), 200)
 
     def test_getConfiguredLevelThreeVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelThreeVolumeFlow(), 185)
+        self.assertEqual(self.device.getConfiguredLevelThreeVolumeFlow(), 260)
 
     def test_getConfiguredLevelFourVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 240)
+        self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 275)
