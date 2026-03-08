@@ -1,6 +1,5 @@
 import unittest
 
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -33,8 +32,7 @@ class Vitopure350(unittest.TestCase):
         self.assertListEqual(keys, list(self.device.getVentilationSchedule().keys()))
 
     def test_getSerial(self):
-        with self.assertRaises(PyViCareNotSupportedFeatureError):
-            self.device.getSerial()
+        self.assertEqual(self.device.getSerial(), '################')
 
     def test_getVentilationMode(self):
         self.assertEqual(False, self.device.getVentilationMode("filterChange"))
@@ -42,10 +40,10 @@ class Vitopure350(unittest.TestCase):
     def test_ventilationState(self):
         self.assertEqual(self.device.getVentilationDemand(), "unknown")
         self.assertEqual(self.device.getVentilationLevel(), "unknown")
-        self.assertEqual(self.device.getVentilationReason(), "sensorDriven")
+        self.assertEqual(self.device.getVentilationReason(), "standby")
 
     def test_ventilationQuickmode(self):
-        self.assertEqual(self.device.getVentilationQuickmode("standby"), False)
+        self.assertEqual(self.device.getVentilationQuickmode("standby"), True)
 
     def test_ventilationQuickmodes(self):
         self.assertEqual(self.device.getVentilationQuickmodes(), [
@@ -72,27 +70,27 @@ class Vitopure350(unittest.TestCase):
         self.assertEqual(self.device.getOutsideHumidity(), 15)
 
     def test_getSupplyTemperature(self):
-        self.assertEqual(self.device.getSupplyTemperature(), 20.8)
-        self.assertEqual(self.device.getSupplyHumidity(), 59)
+        self.assertEqual(self.device.getSupplyTemperature(), 20.7)
+        self.assertEqual(self.device.getSupplyHumidity(), 43)
 
     def test_getVolatileOrganicCompounds(self):
-        self.assertEqual(self.device.getVolatileOrganicCompounds(), 148)
+        self.assertEqual(self.device.getVolatileOrganicCompounds(), 68)
 
     def test_getSupplyFanSpeed(self):
-        self.assertEqual(self.device.getSupplyFanSpeed(), 555)
-        self.assertEqual(self.device.getSupplyFanTargetSpeed(), 585)
-        self.assertEqual(self.device.getSupplyFanHours(), 819)
+        self.assertEqual(self.device.getSupplyFanSpeed(), 1181)
+        self.assertEqual(self.device.getSupplyFanTargetSpeed(), 1181)
+        self.assertEqual(self.device.getSupplyFanHours(), 1171)
 
     def test_getFilterHours(self):
-        self.assertEqual(self.device.getFilterHours(), 5795)
-        self.assertEqual(self.device.getFilterRemainingHours(), 2965)
+        self.assertEqual(self.device.getFilterHours(), 6994)
+        self.assertEqual(self.device.getFilterRemainingHours(), 1766)
         self.assertEqual(self.device.getFilterOverdueHours(), 0)
 
     def test_getAirborneDust(self):
-        self.assertEqual(self.device.getAirborneDustPM1(), 0.1)
+        self.assertEqual(self.device.getAirborneDustPM1(), 0.3)
         self.assertEqual(self.device.getAirborneDustPM2d5(), 0.3)
-        self.assertEqual(self.device.getAirborneDustPM4(), 0.4)
-        self.assertEqual(self.device.getAirborneDustPM10(), 0.5)
+        self.assertEqual(self.device.getAirborneDustPM4(), 0.3)
+        self.assertEqual(self.device.getAirborneDustPM10(), 0.3)
 
     def test_getWifiSignalStrength(self):
-        self.assertEqual(self.device.getWifiSignalStrength(), -41)
+        self.assertEqual(self.device.getWifiSignalStrength(), -61)
