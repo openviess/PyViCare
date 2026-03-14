@@ -29,7 +29,7 @@ class VitoairFs300(unittest.TestCase):
         self.assertListEqual(self.device.getVentilationModes(), expected_modes)
 
     def test_getVentilationPrograms(self):
-        expected_programs = ['standby']
+        expected_programs = 'active'
         self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
 
     def test_getVentilationLevels(self):
