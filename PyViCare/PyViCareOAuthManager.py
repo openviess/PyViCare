@@ -11,7 +11,6 @@ from authlib.integrations.requests_client import OAuth2Session
 from PyViCare.PyViCareAbstractOAuthManager import (
     AUTHORIZE_URL,
     SCOPE_IOT,
-    SCOPE_OFFLINE_ACCESS,
     SCOPE_USER,
     TOKEN_URL,
     AbstractViCareOAuthManager,
