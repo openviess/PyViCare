@@ -10,8 +10,10 @@ from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare.PyViCareAbstractOAuthManager import (
     AUTHORIZE_URL,
+    SCOPE_IOT,
+    SCOPE_OFFLINE_ACCESS,
+    SCOPE_USER,
     TOKEN_URL,
-    VIESSMANN_SCOPE,
     AbstractViCareOAuthManager,
 )
 from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
@@ -57,7 +59,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             oauth sessions object
         """
         oauth_session = OAuth2Session(
-            self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
+            self.client_id, redirect_uri=REDIRECT_URI, scope=[SCOPE_IOT, SCOPE_USER, SCOPE_OFFLINE_ACCESS], code_challenge_method='S256')
         code_verifier = generate_token(48)
         authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
         logger.debug("Auth URL is: %s", authorization_url)

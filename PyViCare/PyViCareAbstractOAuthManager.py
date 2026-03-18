@@ -17,7 +17,11 @@ logger.addHandler(logging.NullHandler())
 API_BASE_URL = 'https://api.viessmann-climatesolutions.com/iot/v2'
 AUTHORIZE_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize'
 TOKEN_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/token'
-VIESSMANN_SCOPE = ["IoT User", "offline_access"]
+
+SCOPE_IOT = "IoT"
+SCOPE_USER = "User"
+SCOPE_OFFLINE_ACCESS = "offline_access"
+SCOPE_INTERNAL = "internal"
 
 
 class AbstractViCareOAuthManager:
