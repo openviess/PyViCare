@@ -3931,5 +3931,25 @@
       "timestamp": "2026-01-22T00:00:00.000Z",
       "uri": "https://api.viessmann-platform.io/iot/v1/equipment/installations/######/gateways/################/devices/0/features/ventilation.volumeFlow.current.output"
     }
-  ]
+  ],
+  "device": {
+    "id": "0",
+    "modelId": "CU401B_G",
+    "roles": [
+      "capability:consumptionReport;electric",
+      "capability:monetization;AdvancedReport",
+      "capability:productionReport;electric",
+      "capability:productionReport;thermal",
+      "capability:service;AdvancedReport",
+      "type:brand;Viessmann",
+      "type:cooling;integrated",
+      "type:dhw;integrated",
+      "type:heating;integrated",
+      "type:heatpump",
+      "type:legacy",
+      "type:product;CU401B"
+    ],
+    "status": "Online",
+    "type": "heating"
+  }
 }

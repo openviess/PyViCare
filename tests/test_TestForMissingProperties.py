@@ -1,3 +1,4 @@
+import json
 import re
 import unittest
 from os import listdir
@@ -35,6 +36,15 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.programs.levelTwo',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
+            # Alternative naming conventions used as fallback for device compatibility
+            'heating.buffer.sensors.temperature.main',
+            'heating.buffer.sensors.temperature.top',
+            'heating.dhw.sensors.temperature.hotWaterStorage',
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',
+            'heating.dhw.sensors.temperature.hotWaterStorage.middle',
+            'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
+            'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
         ]
 
         all_features = self.read_all_deprecated_features()
@@ -141,6 +151,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.temperature',
             'heating.burners',
             'heating.sensors.temperature.allengra',
+            'heating.sensors.valve.0.expansion.target',
+            'heating.sensors.valve.1.expansion.target',
             'heating.dhw.hygiene.trigger',
             'heating.dhw.temperature.hygiene',
             'heating.dhw.operating.modes.off',
@@ -198,12 +210,11 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.compressors.0.sensors.power',
             'heating.compressors.0.statistics.load',
             'heating.configuration.buffer.temperature.max',
-            'heating.configuration.dhwHeater',
             'heating.configuration.flow.temperature.max',
             'heating.configuration.flow.temperature.min',
             'heating.cop.cooling',
             'heating.cop.dhw',
-            'heating.cop.green',
+            'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
             'heating.cop.heating',
             'heating.cop.total',
             'heating.heatingRod.heatTarget',
@@ -214,8 +225,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.temperature.hotGas',
             'heating.sensors.temperature.liquidGas',
             'heating.sensors.temperature.suctionGas',
-            'heating.heatingRod.power.consumption.summary.dhw',
-            'heating.heatingRod.power.consumption.summary.heating',
             'heating.heatingRod.status',
             'heating.scop.dhw', # deprecated
             'heating.scop.heating', # deprecated
@@ -359,6 +368,7 @@ class TestForMissingProperties(unittest.TestCase):
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
+                feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
@@ -410,6 +420,18 @@ class TestForMissingProperties(unittest.TestCase):
         response_files = [f for f in listdir(response_path) if isfile(join(response_path, f))]
 
         all_features = {}
+
+        # Load from deprecation database (maintained by check_deprecations.py)
+        db_path = join(dirname(__file__), 'deprecated_features.json')
+        if isfile(db_path):
+            with open(db_path) as f:
+                db = json.load(f)
+            for name, info in db.get('features', {}).items():
+                normalized = re.sub(r"\b\d\b", "0", name)
+                if normalized not in all_features:
+                    all_features[normalized] = {'files': info.get('sources', [])}
+
+        # Also scan test response files directly (catches new deprecations not yet in db)
         for response in response_files:
             data = readJson(join(response_path, response))
             if "data" in data:
@@ -418,15 +440,8 @@ class TestForMissingProperties(unittest.TestCase):
                         name = re.sub(r"\b\d\b", "0", feature["feature"])
                         if name not in all_features:
                             all_features[name] = {'files': []}
-
                         all_features[name]['files'].append(response)
-                    # name = re.sub(r"\b\d\b", "0", feature["feature"])
-                    # isDeprecated = feature["deprecated"] if "deprecated" in feature else None
-                    # if name not in all_features:
-                    #     all_features[name] = {'files': []}
 
-                    # if feature['isEnabled'] and feature['properties'] != {}:
-                    #     all_features[name]['files'].append(response)
         return all_features
 
     def read_all_features(self):
