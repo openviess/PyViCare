@@ -18,7 +18,7 @@ from PyViCare.PyViCareAbstractOAuthManager import (
 from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
                                     PyViCareInvalidCredentialsError)
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 REDIRECT_PORT = 51125

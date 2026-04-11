@@ -18,7 +18,7 @@ from PyViCare.PyViCareAbstractOAuthManager import (
 from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
                                     PyViCareInvalidCredentialsError)
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 REDIRECT_URI = "vicare://oauth-callback/everest"
