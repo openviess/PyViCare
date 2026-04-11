@@ -17,7 +17,7 @@ from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 

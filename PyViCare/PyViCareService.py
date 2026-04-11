@@ -5,7 +5,7 @@ from typing import Any, List
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 def readFeature(entities, property_name):
