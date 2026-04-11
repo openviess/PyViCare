@@ -9,6 +9,7 @@ from PyViCare import Feature
 from PyViCare.PyViCareUtils import (PyViCareCommandError,
                                     PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
+                                    PyViCareNotPaidForError,
                                     PyViCareRateLimitError)
 
 logger = logging.getLogger('ViCare')
@@ -48,6 +49,7 @@ class AbstractViCareOAuthManager:
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
             self.__handle_device_communication_error(response)
+            self.__handle_not_paid_for(response)
             self.__handle_server_error(response)
             return response
         except TokenExpiredError:
@@ -71,6 +73,10 @@ class AbstractViCareOAuthManager:
     def __handle_device_communication_error(self, response):
         if ("errorType" in response and response["errorType"] == "DEVICE_COMMUNICATION_ERROR"):
             raise PyViCareDeviceCommunicationError(response)
+
+    def __handle_not_paid_for(self, response):
+        if ("errorType" in response and response["errorType"] == "PACKAGE_NOT_PAID_FOR"):
+            raise PyViCareNotPaidForError(response)
 
     def __handle_server_error(self, response):
         if ("statusCode" in response and response["statusCode"] >= 500):
