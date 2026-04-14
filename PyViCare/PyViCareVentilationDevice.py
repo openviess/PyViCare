@@ -121,7 +121,7 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getVentilationPrograms(self):
         available_programs = []
-        for program in ['active','basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
+        for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
             with suppress(PyViCareNotSupportedFeatureError):
                 if self.getProperty(f"ventilation.operating.programs.{program}") is not None:
                     available_programs.append(program)
