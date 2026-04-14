@@ -8,6 +8,8 @@ from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
 from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
                                     PyViCareInvalidDataError,
                                     PyViCareInternalServerError,
+                                    PyViCareNotPaidForError,
+                                    PyViCareNotSupportedFeatureError,
                                     ViCareTimer)
 
 logger = logging.getLogger(__name__)
@@ -44,6 +46,11 @@ class ViCareCachedService(ViCareService):
 
                 try:
                     data = self.fetch_all_features()
+                except PyViCareNotPaidForError as e:
+                    logger.error("Viessmann API denied access (PACKAGE_NOT_PAID_FOR). Features unavailable: %s", e)
+                    if self.__cache is not None:
+                        return self.__cache
+                    raise PyViCareNotSupportedFeatureError("PACKAGE_NOT_PAID_FOR")
                 except (PyViCareDeviceCommunicationError, PyViCareInternalServerError) as e:
                     if self.__cache is not None:
                         logger.warning("API error, returning stale cache: %s", e)
