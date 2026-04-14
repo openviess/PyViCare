@@ -10,7 +10,7 @@ from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
                                     ViCareTimer)
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 

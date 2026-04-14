@@ -11,7 +11,7 @@ from PyViCare.PyViCareUtils import (PyViCareCommandError,
                                     PyViCareInternalServerError,
                                     PyViCareRateLimitError)
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 API_BASE_URL = 'https://api.viessmann-climatesolutions.com/iot/v2'
