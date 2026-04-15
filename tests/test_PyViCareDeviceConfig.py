@@ -214,7 +214,7 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
 
     def test_autoDetect_feature_fetch_failure_keeps_original(self):
         self.service.hasRoles = has_roles(["type:heatpump"])
-        self.service.fetch_all_features = Mock(side_effect=Exception("API error"))
+        self.service.fetch_all_features = Mock(side_effect=OSError("API error"))
         c = PyViCareDeviceConfig(
             self.service, "0", "CU401B_S", "Online")
         device_type = c.asAutoDetectDevice()

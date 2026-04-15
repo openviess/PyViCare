@@ -143,7 +143,7 @@ class PyViCareDeviceConfig:
             has_burners = any(f.startswith("heating.burners") for f in feature_names)
             has_compressors = any(f.startswith("heating.compressors") for f in feature_names)
             return has_burners and has_compressors
-        except Exception:
+        except (KeyError, TypeError, AttributeError, OSError):
             logger.debug("Could not fetch features for hybrid detection of %s", self.device_model)
             return False
 
