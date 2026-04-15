@@ -175,6 +175,51 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual(device.isLegacyDevice(), False)
         self.assertEqual(device.isE3Device(), True)
 
+    def test_autoDetect_CU401B_S_with_burners_and_compressors_asHybrid(self):
+        self.service.hasRoles = has_roles(["type:heatpump"])
+        self.service.fetch_all_features = Mock(return_value={"data": [
+            {"feature": "heating.burners"},
+            {"feature": "heating.burners.0"},
+            {"feature": "heating.compressors"},
+            {"feature": "heating.compressors.0"},
+        ]})
+        c = PyViCareDeviceConfig(
+            self.service, "0", "CU401B_S", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("Hybrid", type(device_type).__name__)
+
+    def test_autoDetect_HeatPump_without_burners_stays_HeatPump(self):
+        self.service.hasRoles = has_roles(["type:heatpump"])
+        self.service.fetch_all_features = Mock(return_value={"data": [
+            {"feature": "heating.compressors"},
+            {"feature": "heating.compressors.0"},
+        ]})
+        c = PyViCareDeviceConfig(
+            self.service, "0", "Vitocal300", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("HeatPump", type(device_type).__name__)
+
+    def test_autoDetect_GazBoiler_with_compressors_asHybrid(self):
+        self.service.hasRoles = has_roles(["type:boiler"])
+        self.service.fetch_all_features = Mock(return_value={"data": [
+            {"feature": "heating.burners"},
+            {"feature": "heating.burners.0"},
+            {"feature": "heating.compressors"},
+            {"feature": "heating.compressors.0"},
+        ]})
+        c = PyViCareDeviceConfig(
+            self.service, "0", "Vitodens200", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("Hybrid", type(device_type).__name__)
+
+    def test_autoDetect_feature_fetch_failure_keeps_original(self):
+        self.service.hasRoles = has_roles(["type:heatpump"])
+        self.service.fetch_all_features = Mock(side_effect=Exception("API error"))
+        c = PyViCareDeviceConfig(
+            self.service, "0", "CU401B_S", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("HeatPump", type(device_type).__name__)
+
     def test_getDeviceType_heating(self):
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")
         self.assertEqual(c.getDeviceType(), "heating")
