@@ -44,7 +44,9 @@ class AbstractViCareOAuthManager:
     def get(self, url: str) -> Any:
         try:
             logger.debug(self.__oauth)
-            response = self.__oauth.get(f"{API_BASE_URL}{url}", timeout=31).json()
+            raw_response = self.__oauth.get(f"{API_BASE_URL}{url}", timeout=31)
+            self.__raise_on_non_json_error(raw_response)
+            response = raw_response.json()
             logger.debug("Response to get request: %s", response)
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
@@ -58,6 +60,21 @@ class AbstractViCareOAuthManager:
         except InvalidTokenError:
             self.renewToken()
             return self.get(url)
+        except OSError as e:
+            raise PyViCareInternalServerError(
+                {"statusCode": 0,
+                 "message": str(e),
+                 "viErrorId": "n/a"}) from e
+
+    def __raise_on_non_json_error(self, response):
+        """Guard against non-JSON error responses (e.g. 502 HTML pages from API gateway)."""
+        if response.status_code >= 500:
+            content_type = response.headers.get('content-type', '')
+            if 'application/json' not in content_type:
+                raise PyViCareInternalServerError(
+                    {"statusCode": response.status_code,
+                     "message": f"Non-JSON {response.status_code} response",
+                     "viErrorId": "n/a"})
 
     def __handle_expired_token(self, response):
         if ("error" in response and response["error"] == "EXPIRED TOKEN"):
@@ -81,6 +98,13 @@ class AbstractViCareOAuthManager:
     def __handle_server_error(self, response):
         if ("statusCode" in response and response["statusCode"] >= 500):
             raise PyViCareInternalServerError(response)
+
+        extended = response.get("extendedPayload", {})
+        if isinstance(extended, dict) and extended.get("code") in ("500", "502", "503"):
+            raise PyViCareInternalServerError(
+                {"statusCode": int(extended["code"]),
+                 "message": extended.get("reason", ""),
+                 "viErrorId": response.get("viErrorId", "n/a")})
 
     def __handle_command_error(self, response):
         if not Feature.raise_exception_on_command_failure:
@@ -106,8 +130,10 @@ class AbstractViCareOAuthManager:
         headers = {"Content-Type": "application/json",
                    "Accept": "application/vnd.siren+json"}
         try:
-            response = self.__oauth.post(
-                f"{API_BASE_URL}{url}", data, headers=headers).json()
+            raw_response = self.__oauth.post(
+                f"{API_BASE_URL}{url}", data, headers=headers)
+            self.__raise_on_non_json_error(raw_response)
+            response = raw_response.json()
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
             self.__handle_command_error(response)
@@ -118,3 +144,8 @@ class AbstractViCareOAuthManager:
         except InvalidTokenError:
             self.renewToken()
             return self.post(url, data)
+        except OSError as e:
+            raise PyViCareInternalServerError(
+                {"statusCode": 0,
+                 "message": str(e),
+                 "viErrorId": "n/a"}) from e
