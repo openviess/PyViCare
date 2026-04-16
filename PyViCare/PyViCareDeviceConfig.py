@@ -125,10 +125,27 @@ class PyViCareDeviceConfig:
         for (creator_method, type_name, roles) in device_types:
             if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
                 logger.info("detected %s %s", self.device_model, creator_method.__name__)
-                return creator_method()
+                device = creator_method()
+                if isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid):
+                    if self._isHybridByFeatures():
+                        logger.info("upgrading %s to Hybrid based on API features", self.device_model)
+                        return self.asHybridDevice()
+                return device
 
         logger.info("Could not auto detect %s. Use generic device.", self.device_model)
         return self.asGeneric()
+
+    def _isHybridByFeatures(self):
+        """Check API features to detect hybrid devices (both burners and compressors)."""
+        try:
+            features = self.service.fetch_all_features()
+            feature_names = [f["feature"] for f in features.get("data", [])]
+            has_burners = any(f.startswith("heating.burners") for f in feature_names)
+            has_compressors = any(f.startswith("heating.compressors") for f in feature_names)
+            return has_burners and has_compressors
+        except (KeyError, TypeError, AttributeError, OSError):
+            logger.debug("Could not fetch features for hybrid detection of %s", self.device_model)
+            return False
 
     def get_raw_json(self):
         return self.service.fetch_all_features()
