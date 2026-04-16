@@ -4,6 +4,7 @@ import re
 
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
 from PyViCare.PyViCareFuelCell import FuelCell
+from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
@@ -30,6 +31,8 @@ class PyViCareDeviceConfig:
         self.status = status
         self.device_type = device_type
         self.roles = roles if roles is not None else []
+        self._room_control = None
+        self._room_id = None
 
     def asGeneric(self):
         return HeatingDevice(self.service)
@@ -62,7 +65,18 @@ class PyViCareDeviceConfig:
         return FloorHeatingChannel(self.service)
 
     def asRoomSensor(self):
-        return RoomSensor(self.service)
+        sensor = RoomSensor(self.service)
+        if self._room_control is not None:
+            sensor.setRoomControl(self._room_control, self._room_id)
+        return sensor
+
+    def asRoomControl(self):
+        return RoomControl(self.service)
+
+    def setRoomControlEnrichment(self, room_control, room_id):
+        """Store RoomControl enrichment data to apply when creating a RoomSensor."""
+        self._room_control = room_control
+        self._room_id = room_id
 
     def asRepeater(self):
         return Repeater(self.service)
@@ -113,6 +127,7 @@ class PyViCareDeviceConfig:
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
             (self.asFloorHeating, r"Smart_zigbee_fht_main|E3_FloorHeatingCircuitDistributorBox", ["type:fhtMain"]),
             (self.asFloorHeatingChannel, r"Smart_zigbee_fht_channel", ["type:fhtChannel"]),
+            (self.asRoomControl, r"E3_RoomControl|Smart_RoomControl", ["type:virtual;smartRoomControl"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
