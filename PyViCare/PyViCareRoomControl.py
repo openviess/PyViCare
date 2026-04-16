@@ -1,5 +1,4 @@
 import logging
-from typing import Any
 
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported, handleAPICommandErrors

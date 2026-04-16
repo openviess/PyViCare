@@ -2,6 +2,11 @@ import unittest
 
 from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.PyViCareUtils import (
+    PyViCareCommandError,
+    PyViCareNotSupportedFeatureError,
+    isSupported,
+)
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -121,7 +126,16 @@ class RoomSensorEnrichmentTest(unittest.TestCase):
         result = self.sensor.getManualTillNextScheduleActive()
         self.assertIsInstance(result, bool)
 
-    def test_without_enrichment_returns_none(self):
+    def test_without_enrichment_reports_not_supported(self):
         sensor = RoomSensor(self.sensor_service)
-        self.assertIsNone(sensor.getRoomName())
-        self.assertIsNone(sensor.getNormalHeatingTemperature())
+        self.assertFalse(isSupported(sensor.getRoomName))
+        self.assertFalse(isSupported(sensor.getNormalHeatingTemperature))
+
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            sensor.getRoomName()
+
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            sensor.getNormalHeatingTemperature()
+
+        with self.assertRaises(PyViCareCommandError):
+            sensor.setNormalHeatingTemperature(20)

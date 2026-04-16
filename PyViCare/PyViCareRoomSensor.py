@@ -14,6 +14,11 @@ class RoomSensor(ZigbeeBatteryDevice):
         self._room_control = room_control
         self._room_id = room_id
 
+    def _getRoomControl(self):
+        if self._room_control is None:
+            raise KeyError("roomControl")
+        return self._room_control
+
     @handleNotSupported
     def getSerial(self):
         return self.getProperty("device.sensors.temperature")["deviceId"]
@@ -34,99 +39,72 @@ class RoomSensor(ZigbeeBatteryDevice):
 
     @handleNotSupported
     def getCO2(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomCO2(self._room_id)
-        return None
+        return self._getRoomControl().getRoomCO2(self._room_id)
 
     @handleNotSupported
     def getRoomName(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomName(self._room_id)
-        return None
+        return self._getRoomControl().getRoomName(self._room_id)
 
     @handleNotSupported
     def getRoomType(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomType(self._room_id)
-        return None
+        return self._getRoomControl().getRoomType(self._room_id)
 
     @handleNotSupported
     def getCondensationRisk(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomCondensationRisk(self._room_id)
-        return None
+        return self._getRoomControl().getRoomCondensationRisk(self._room_id)
 
     # --- Operating state ---
 
     @handleNotSupported
     def getOperatingStateLevel(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomOperatingStateLevel(self._room_id)
-        return None
+        return self._getRoomControl().getRoomOperatingStateLevel(self._room_id)
 
     @handleNotSupported
     def getOperatingStateDemand(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomOperatingStateDemand(self._room_id)
-        return None
+        return self._getRoomControl().getRoomOperatingStateDemand(self._room_id)
 
     # --- Heating programs ---
 
     @handleNotSupported
     def getNormalHeatingTemperature(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomNormalHeatingTemperature(self._room_id)
-        return None
+        return self._getRoomControl().getRoomNormalHeatingTemperature(self._room_id)
 
     @handleAPICommandErrors
     def setNormalHeatingTemperature(self, temperature):
-        if self._room_control is not None:
-            return self._room_control.setRoomNormalHeatingTemperature(self._room_id, temperature)
+        return self._getRoomControl().setRoomNormalHeatingTemperature(self._room_id, temperature)
 
     @handleNotSupported
     def getReducedHeatingTemperature(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomReducedHeatingTemperature(self._room_id)
-        return None
+        return self._getRoomControl().getRoomReducedHeatingTemperature(self._room_id)
 
     @handleAPICommandErrors
     def setReducedHeatingTemperature(self, temperature):
-        if self._room_control is not None:
-            return self._room_control.setRoomReducedHeatingTemperature(self._room_id, temperature)
+        return self._getRoomControl().setRoomReducedHeatingTemperature(self._room_id, temperature)
 
     @handleNotSupported
     def getComfortHeatingTemperature(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomComfortHeatingTemperature(self._room_id)
-        return None
+        return self._getRoomControl().getRoomComfortHeatingTemperature(self._room_id)
 
     @handleAPICommandErrors
     def setComfortHeatingTemperature(self, temperature):
-        if self._room_control is not None:
-            return self._room_control.setRoomComfortHeatingTemperature(self._room_id, temperature)
+        return self._getRoomControl().setRoomComfortHeatingTemperature(self._room_id, temperature)
 
     # --- Quick modes ---
 
     @handleNotSupported
     def getManualTillNextScheduleActive(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomManualTillNextScheduleActive(self._room_id)
-        return None
+        return self._getRoomControl().getRoomManualTillNextScheduleActive(self._room_id)
 
     @handleAPICommandErrors
     def activateManualTillNextSchedule(self, temperature):
-        if self._room_control is not None:
-            return self._room_control.activateRoomManualTillNextSchedule(self._room_id, temperature)
+        return self._getRoomControl().activateRoomManualTillNextSchedule(self._room_id, temperature)
 
     @handleAPICommandErrors
     def deactivateManualTillNextSchedule(self):
-        if self._room_control is not None:
-            return self._room_control.deactivateRoomManualTillNextSchedule(self._room_id)
+        return self._getRoomControl().deactivateRoomManualTillNextSchedule(self._room_id)
 
     # --- Schedule ---
 
     @handleNotSupported
     def getSchedule(self):
-        if self._room_control is not None:
-            return self._room_control.getRoomSchedule(self._room_id)
-        return None
+        return self._getRoomControl().getRoomSchedule(self._room_id)
