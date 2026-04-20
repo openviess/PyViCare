@@ -8,17 +8,20 @@ import requests
 from authlib.common.security import generate_token
 from authlib.integrations.requests_client import OAuth2Session
 
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare.PyViCareAbstractOAuthManager import (
+    AUTHORIZE_URL,
+    SCOPE_IOT,
+    SCOPE_USER,
+    TOKEN_URL,
+    AbstractViCareOAuthManager,
+)
 from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
                                     PyViCareInvalidCredentialsError)
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
-AUTHORIZE_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize'
-TOKEN_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/token'
 REDIRECT_URI = "vicare://oauth-callback/everest"
-VIESSMANN_SCOPE = ["IoT User"]
 
 
 class ViCareOAuthManager(AbstractViCareOAuthManager):
@@ -55,7 +58,7 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             oauth sessions object
         """
         oauth_session = OAuth2Session(
-            self.client_id, redirect_uri=REDIRECT_URI, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
+            self.client_id, redirect_uri=REDIRECT_URI, scope=[SCOPE_IOT, SCOPE_USER], code_challenge_method='S256')
         code_verifier = generate_token(48)
         authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
         logger.debug("Auth URL is: %s", authorization_url)

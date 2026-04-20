@@ -1,0 +1,1052 @@
+{
+  "_meta": {
+    "description": "Known deprecated Viessmann API features, merged from test data and device dumps.",
+    "updated": "2026-02-10",
+    "feature_count": 106
+  },
+  "features": {
+    "heating.buffer.hysteresis": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.bufferCylinder.hysteresis",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.buffer.sensors.temperature.main": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.bufferCylinder.sensors.temperature.main",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json",
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "Vitocal252.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "Vitodens200W_B2HF.json",
+        "VitovalorPT2.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.buffer.sensors.temperature.top": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.bufferCylinder.sensors.temperature.top",
+      "firstSeenIn": "Ecotronic.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Ecotronic.json",
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json",
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.circuits.0.operating.programs.noDemand": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving",
+      "firstSeenIn": "Vitodens050W.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitodens050W.json",
+        "Vitodens100W.json",
+        "Vitodens200W_B2HF.json",
+        "Vitodens_100_BHC_0421.json"
+      ]
+    },
+    "heating.circuits.0.operating.programs.summerEco": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving and heating.circuits.0.operating.programs.eco",
+      "firstSeenIn": "Vitocal252.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal252.json"
+      ]
+    },
+    "heating.circuits.1.operating.programs.noDemand": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving",
+      "firstSeenIn": "Vitodens100W.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitodens100W.json",
+        "Vitodens200W_B2HF.json",
+        "Vitodens_100_BHC_0421.json"
+      ]
+    },
+    "heating.circuits.1.operating.programs.summerEco": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving and heating.circuits.0.operating.programs.eco",
+      "firstSeenIn": "Vitocal252.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal252.json"
+      ]
+    },
+    "heating.circuits.2.operating.programs.noDemand": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving",
+      "firstSeenIn": "Vitodens200W_B2HF.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitodens200W_B2HF.json"
+      ]
+    },
+    "heating.circuits.2.operating.programs.summerEco": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving and heating.circuits.0.operating.programs.eco",
+      "firstSeenIn": "Vitocal252.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal252.json"
+      ]
+    },
+    "heating.circuits.3.operating.programs.noDemand": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving",
+      "firstSeenIn": "Vitodens200W_B2HF.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitodens200W_B2HF.json"
+      ]
+    },
+    "heating.circuits.3.operating.programs.summerEco": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.circuits.N.operating.programs.reducedEnergySaving and heating.circuits.0.operating.programs.eco",
+      "firstSeenIn": "Vitocal252.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal252.json"
+      ]
+    },
+    "heating.configuration.dhw.highDemand.threshold": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.configuration.highDemand.threshold",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.configuration.dhw.highDemand.timeframe": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.configuration.highDemand.timeframe",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.configuration.dhw.temperature.comfortCharging": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.configuration.temperature.comfortCharging",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.configuration.dhw.temperature.dhwCylinder.max": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.configuration.temperature.dhwCylinder.max",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json",
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.configuration.dhw.temperature.hotWaterStorage.max": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.configuration.dhw.temperature.dhwCylinder.max",
+      "firstSeenIn": "Vitocal200S_AWB-M-E-AC-201.D10.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.configuration.gasType": {
+      "removalDate": "2025-09-15",
+      "info": "replaced by heating.gas.configuration.type",
+      "firstSeenIn": "Vitodens100W.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitodens100W.json",
+        "Vitodens200W_B2HF.json"
+      ]
+    },
+    "heating.configuration.houseLocation": {
+      "removalDate": "2025-03-15",
+      "info": "replaced by device.configuration.houseLocation",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "Vitodens100W.json",
+        "Vitodens200W_B2HF.json",
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.cop.green": {
+      "removalDate": "2025-12-31",
+      "info": "replaced by heating.cop.photovoltaic",
+      "firstSeenIn": "dump:device_0_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.device.variant": {
+      "removalDate": "2025-03-15",
+      "info": "replaced by device.variant",
+      "firstSeenIn": "Ecotronic.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Ecotronic.json",
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "Vitopure350.json"
+      ]
+    },
+    "heating.dhw.comfort": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.operating.modes.active / heating.dhw.operating.modes.eco / heating.dhw.operating.modes.comfort",
+      "firstSeenIn": "Vitodens050W.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitodens050W.json",
+        "Vitodens100W.json",
+        "Vitodens_100_BHC_0421.json"
+      ]
+    },
+    "heating.dhw.sensors.temperature.hotWaterStorage": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.sensors.temperature.dhwCylinder",
+      "firstSeenIn": "Ecotronic.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Ecotronic.json",
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json",
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "Vitocal252.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "Vitodens050W.json",
+        "Vitodens100NA.json",
+        "Vitodens100W.json",
+        "Vitodens200W_B2HF.json",
+        "Vitodens_100_BHC_0421.json",
+        "Vitoladens300-C_J3RA.json",
+        "VitovalorPT2.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.dhw.sensors.temperature.hotWaterStorage.bottom": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.sensors.temperature.dhwCylinder.bottom",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json",
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "VitovalorPT2.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.dhw.sensors.temperature.hotWaterStorage.midBottom": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.sensors.temperature.dhwCylinder.midBottom",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.dhw.sensors.temperature.hotWaterStorage.middle": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.sensors.temperature.dhwCylinder.middle",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "Vitocal252.json",
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.dhw.sensors.temperature.hotWaterStorage.top": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.sensors.temperature.dhwCylinder.top",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json",
+        "Vitocal200S_AWB-M-E-AC-201.D10.json",
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "Vitocal252.json",
+        "Vitocal333G-with-Vitovent300F.json",
+        "VitovalorPT2.json",
+        "dump:device_0_features.json"
+      ]
+    },
+    "heating.external.lock": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by device.lock.external",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json",
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.electricalEnergyConsumption.value": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.electricalEnergyConsumption.value",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.managers.energy": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.managers.energy",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.managers.energy.prediction.power.consumption": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.managers.energy.prediction.power.consumption",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.managers.energy.prediction.runtime": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.managers.energy.prediction.runtime",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.managers.energy.timeTillNextStart": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.managers.energy.timeTillNextStart",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.operating.phase": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.operating.phase",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.prediction.heating.deficit": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.prediction.deficit",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.sensors.temperature.return": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.sensors.temperature.return",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.sensors.temperature.supply": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.sensors.temperature.supply",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.fuelCell.statistics": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by fuelCell.statistics",
+      "firstSeenIn": "VitovalorPT2.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitovalorPT2.json"
+      ]
+    },
+    "heating.noise.reduction.operating.programs.active": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.noise.reduction.operating.state",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.noise.reduction.operating.programs.maxReduced": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.noise.reduction.levels.maxReduced",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.noise.reduction.operating.programs.notReduced": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.noise.reduction.levels.notReduced",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.noise.reduction.operating.programs.slightlyReduced": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.noise.reduction.levels.slightlyReduced",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.scop.dhw": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.spf.dhw",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.scop.heating": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.spf.heating",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "heating.scop.total": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.spf.total",
+      "firstSeenIn": "Vitocal222S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal222S.json",
+        "Vitocal250A.json"
+      ]
+    },
+    "rooms.0.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.0.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.1.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.1.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.10.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.10.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.11.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.11.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.12.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.12.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.13.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.13.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.14.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.14.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.15.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.15.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.16.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.16.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.17.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.17.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.18.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.18.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.19.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.19.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.2.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.2.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.20.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.20.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.21.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.21.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.22.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.22.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.23.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.23.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.3.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.3.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.4.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.4.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.5.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.5.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.6.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.6.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.7.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.7.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.8.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.8.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.9.configuration.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.9.sensors.window.openState": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.features.supplyChannel0FTDCUseValveInformation": {
+      "removalDate": "2025-09-09",
+      "info": "replaced by rooms.features.supplyChannel0PumpControl",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.features.supplyChannel1FTDCUseValveInformation": {
+      "removalDate": "2025-09-09",
+      "info": "replaced by rooms.features.supplyChannel1PumpControl",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.features.supplyChannel2FTDCUseValveInformation": {
+      "removalDate": "2025-09-09",
+      "info": "replaced by rooms.features.supplyChannel2PumpControl",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "rooms.features.supplyChannel3FTDCUseValveInformation": {
+      "removalDate": "2025-09-09",
+      "info": "replaced by rooms.features.supplyChannel3PumpControl",
+      "firstSeenIn": "dump:device_RoomControl-1_features.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "dump:device_RoomControl-1_features.json"
+      ]
+    },
+    "ventilation.operating.programs.comfort": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.eco": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.forcedLevelFour": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitoairFs300E.json"
+      ]
+    },
+    "ventilation.operating.programs.holiday": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "Vitocal111S.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.levelFour": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitoairFs300E.json",
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.levelOne": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitoairFs300E.json",
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.levelThree": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitoairFs300E.json",
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.levelTwo": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitoairFs300E.json",
+        "Vitocal111S.json",
+        "Vitocal200S-with-Vitovent300W.json"
+      ]
+    },
+    "ventilation.operating.programs.silent": {
+      "removalDate": "2024-09-15",
+      "info": "none",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "VitoairFs300E.json"
+      ]
+    },
+    "ventilation.sensors.airQuality": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by ventilation.airQuality.abstract",
+      "firstSeenIn": "Vitopure350.json",
+      "firstSeenOn": "2026-02-10",
+      "sources": [
+        "Vitopure350.json"
+      ]
+    }
+  }
+}

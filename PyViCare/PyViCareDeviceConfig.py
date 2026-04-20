@@ -17,16 +17,19 @@ from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    def __init__(self, service, device_id, device_model, status):
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    def __init__(self, service, device_id, device_model, status, device_type=None, roles=None):
         self.service = service
         self.device_id = device_id
         self.device_model = device_model
         self.status = status
+        self.device_type = device_type
+        self.roles = roles if roles is not None else []
 
     def asGeneric(self):
         return HeatingDevice(self.service)
@@ -85,6 +88,15 @@ class PyViCareDeviceConfig:
     def isOnline(self):
         return self.status == "Online"
 
+    def getDeviceType(self):
+        return self.device_type
+
+    def getRoles(self):
+        return self.roles
+
+    def isGateway(self):
+        return self.service._isGateway()  # pylint: disable=protected-access
+
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
         device_types = [
@@ -113,21 +125,51 @@ class PyViCareDeviceConfig:
         for (creator_method, type_name, roles) in device_types:
             if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
                 logger.info("detected %s %s", self.device_model, creator_method.__name__)
-                return creator_method()
+                device = creator_method()
+                if isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid):
+                    if self._isHybridByFeatures():
+                        logger.info("upgrading %s to Hybrid based on API features", self.device_model)
+                        return self.asHybridDevice()
+                return device
 
         logger.info("Could not auto detect %s. Use generic device.", self.device_model)
         return self.asGeneric()
+
+    def _isHybridByFeatures(self):
+        """Check API features to detect hybrid devices (both burners and compressors)."""
+        try:
+            features = self.service.fetch_all_features()
+            feature_names = [f["feature"] for f in features.get("data", [])]
+            has_burners = any(f.startswith("heating.burners") for f in feature_names)
+            has_compressors = any(f.startswith("heating.compressors") for f in feature_names)
+            return has_burners and has_compressors
+        except (KeyError, TypeError, AttributeError, OSError):
+            logger.debug("Could not fetch features for hybrid detection of %s", self.device_model)
+            return False
 
     def get_raw_json(self):
         return self.service.fetch_all_features()
 
     def dump_secure(self, flat=False):
+        raw_data = self.get_raw_json()
+        device_info = {
+            "id": self.device_id,
+            "modelId": self.device_model,
+            "type": self.device_type,
+            "status": self.status,
+            "roles": self.roles
+        }
+        output = {
+            "device": device_info,
+            "data": raw_data['data']
+        }
+
         if flat:
-            inner = ',\n'.join([json.dumps(x, sort_keys=True) for x in self.get_raw_json()['data']])
-            outer = json.dumps({'data': ['placeholder']}, indent=0)
+            inner = ',\n'.join([json.dumps(x, sort_keys=True) for x in output['data']])
+            outer = json.dumps({'device': output['device'], 'data': ['placeholder']}, indent=0, sort_keys=True)
             dumpJSON = outer.replace('"placeholder"', inner)
         else:
-            dumpJSON = json.dumps(self.get_raw_json(), indent=4, sort_keys=True)
+            dumpJSON = json.dumps(output, indent=4, sort_keys=True)
 
         def repl(m):
             return m.group(1) + ('#' * len(m.group(2))) + m.group(3)

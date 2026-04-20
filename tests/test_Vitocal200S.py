@@ -31,3 +31,14 @@ class Vitocal200S(unittest.TestCase):
     def test_getReturnTemperatureSecondaryCircuit(self):
         self.assertEqual(
             self.device.getReturnTemperatureSecondaryCircuit(), 27.9)
+
+class Vitocal200S_AWB(unittest.TestCase):
+    def setUp(self):
+        self.service = ViCareServiceMock('response/Vitocal200S_AWB-M-E-AC-201.D10.json')
+        self.device = HeatPump(self.service)
+
+    def test_compressor_getAmbientTemperature(self):
+        self.assertEqual(self.device.getCompressor(0).getAmbientTemperature(), 17.6)
+
+    def test_compressor_getOverheatTemperature(self):
+        self.assertEqual(self.device.getCompressor(0).getOverheatTemperature(), 0.6)

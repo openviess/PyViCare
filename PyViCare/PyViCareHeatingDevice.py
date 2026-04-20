@@ -36,6 +36,10 @@ class HeatingDevice(Device):
     Note that currently, a new token is generated for each run.
     """
 
+    @handleNotSupported
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
+
     @property
     def circuits(self) -> List[Any]:
         return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
@@ -193,6 +197,16 @@ class HeatingDevice(Device):
         """
         return self.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
+
+    @handleNotSupported
+    def getDomesticHotWaterOperatingModes(self):
+        return self.getProperty("heating.dhw.operating.modes.active")[
+            "commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
+
+    @handleNotSupported
+    def getDomesticHotWaterActiveOperatingMode(self):
+        return self.getProperty("heating.dhw.operating.modes.active")[
+            "properties"]["value"]["value"]
 
     @handleAPICommandErrors
     def setDomesticHotWaterOperatingMode(self, mode):
@@ -353,6 +367,15 @@ class HeatingDevice(Device):
     def getReturnTemperaturePrimaryCircuit(self):
         return self.getProperty("heating.primaryCircuit.sensors.temperature.return")["properties"]["value"][
             "value"]
+
+    @handleNotSupported
+    def getPrimaryCircuitPumpRotation(self) -> float:
+        """Get primary circuit pump rotation/speed as percentage."""
+        return float(self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPrimaryCircuitPumpRotationUnit(self):
+        return self.getProperty("heating.primaryCircuit.sensors.rotation")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getSupplyTemperatureSecondaryCircuit(self):
@@ -533,6 +556,15 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return \
             self.getProperty(f"heating.circuits.{self.circuit}.sensors.temperature.supply")["properties"][
                 "value"]["value"]
+
+    @handleNotSupported
+    def getTargetTemperature(self) -> float:
+        """Get the circuit target temperature."""
+        return float(self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getTargetTemperatureUnit(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.temperature")["properties"]["value"]["unit"]
 
     @handleNotSupported
     def getRoomTemperature(self):

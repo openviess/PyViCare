@@ -49,7 +49,7 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getBurnerModulation(self):
         self.assertEqual(self.device.getBurner(0).getModulation(), 0)
 
-    def test_getCompressorHours(self):
+    def test_compressor_getHours(self):
         self.assertEqual(self.device.getCompressor(0).getHours(), 1.4)
 
     def test_getPrograms(self):

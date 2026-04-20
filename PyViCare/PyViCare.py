@@ -9,7 +9,7 @@ from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareUtils import PyViCareInvalidDataError
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
@@ -61,7 +61,7 @@ class PyViCare:
 
                     logger.info("Device found: %s", device.modelId)
 
-                    yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status)
+                    yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status, device.deviceType, device.roles)
 
 
 class DictWrap(object):

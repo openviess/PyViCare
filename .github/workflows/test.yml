@@ -18,15 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.10", "3.11", "3.12"]
+        python: ["3.10", "3.11", "3.12", "3.13"]
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v6.0.2
       - name: 🏗 Set up Poetry
         run: pipx install poetry
       - name: 🏗 Set up Python ${{ matrix.python }}
         id: python
-        uses: actions/setup-python@v6.0.0
+        uses: actions/setup-python@v6.2.0
         with:
           python-version: ${{ matrix.python }}
           cache: "poetry"
@@ -39,7 +39,7 @@ jobs:
       - name: 🚀 Run pytest
         run: poetry run pytest --cov PyViCare
       - name: ⬆️ Upload coverage artifact
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: coverage-${{ matrix.python }}
           path: .coverage

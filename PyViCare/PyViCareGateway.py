@@ -9,5 +9,5 @@ class Gateway(Device):
         return self.getProperty("gateway.devices")["gatewayId"]
 
     @handleNotSupported
-    def getWifiSignalStrength(self):
-        return self.getProperty("gateway.wifi")["properties"]["strength"]["value"]
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("gateway.wifi")["properties"]["strength"]["value"])

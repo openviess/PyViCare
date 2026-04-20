@@ -13,6 +13,10 @@ class VentilationDevice(Device):
     """
 
     @handleNotSupported
+    def getWifiSignalStrength(self) -> int:
+        return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
+
+    @handleNotSupported
     def getVentilationDemand(self) -> str:
         return str(self.getProperty("ventilation.operating.state")["properties"]["demand"]["value"])
 
@@ -227,8 +231,24 @@ class VentilationDevice(Device):
         return float(self.getProperty("ventilation.sensors.temperature.supply")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getExhaustTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.exhaust")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExtractTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.extract")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getSupplyHumidity(self) -> int:
         return int(self.getProperty("ventilation.sensors.humidity.supply")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExhaustHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.exhaust")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExtractHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.extract")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getVolatileOrganicCompounds(self) -> int:
@@ -279,9 +299,29 @@ class VentilationDevice(Device):
         return "off" != str(self.getProperty("ventilation.heatExchanger.frostprotection")["properties"]["status"]["value"])
 
     @handleNotSupported
+    def getHeatRecoveryEfficiency(self) -> float:
+        return float(self.getProperty("ventilation.heating.recovery")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getSupplyVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.volumeFlow.current.input")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getExhaustVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.volumeFlow.current.output")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelOneVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelOne")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelTwoVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelTwo")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelThreeVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelThree")["properties"]["volumeFlow"]["value"])
+
+    @handleNotSupported
+    def getConfiguredLevelFourVolumeFlow(self) -> int:
+        return int(self.getProperty("ventilation.levels.levelFour")["properties"]["volumeFlow"]["value"])
