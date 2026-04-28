@@ -8,7 +8,7 @@ from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
 from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
-from PyViCare.PyViCareUtils import PyViCareInvalidDataError, PyViCareNotSupportedFeatureError
+from PyViCare.PyViCareUtils import PyViCareInvalidDataError
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -86,7 +86,7 @@ class PyViCare:
             room_control = RoomControl(device_config.service)
             try:
                 actor_map = room_control.buildActorRoomMap()
-            except (KeyError, IndexError, PyViCareNotSupportedFeatureError):
+            except Exception:
                 logger.debug("Could not build actor map for %s", device_config.getModel(), exc_info=True)
                 continue
 
