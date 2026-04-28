@@ -19,97 +19,114 @@ class RoomSensor(ZigbeeBatteryDevice):
         self._room_control = room_control
         self._room_id = room_id
 
-    def _getRoomControl(self) -> RoomControl:
-        if self._room_control is None:
+    def _getRoomContext(self) -> tuple[RoomControl, str]:
+        """Return (room_control, room_id), raising if not enriched."""
+        if self._room_control is None or self._room_id is None:
             raise KeyError("roomControl")
-        return self._room_control
+        return self._room_control, self._room_id
 
     @handleNotSupported
-    def getSerial(self) -> Any:
-        return self.getProperty("device.sensors.temperature")["deviceId"]
+    def getSerial(self) -> str:
+        return str(self.getProperty("device.sensors.temperature")["deviceId"])
 
     # --- Sensors (enriched from RoomControl) ---
 
     @handleNotSupported
-    def getTemperature(self) -> Any:
-        if self._room_control is not None:
+    def getTemperature(self) -> float:
+        if self._room_control is not None and self._room_id is not None:
             return self._room_control.getRoomTemperature(self._room_id)
-        return self.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
+        return float(self.getProperty("device.sensors.temperature")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getHumidity(self) -> Any:
-        if self._room_control is not None:
+    def getHumidity(self) -> float:
+        if self._room_control is not None and self._room_id is not None:
             return self._room_control.getRoomHumidity(self._room_id)
-        return self.getProperty("device.sensors.humidity")["properties"]["value"]["value"]
+        return float(self.getProperty("device.sensors.humidity")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getCO2(self) -> Any:
-        return self._getRoomControl().getRoomCO2(self._room_id)
+    def getCO2(self) -> int:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomCO2(rid)
 
     @handleNotSupported
-    def getRoomName(self) -> Any:
-        return self._getRoomControl().getRoomName(self._room_id)
+    def getRoomName(self) -> str | None:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomName(rid)
 
     @handleNotSupported
-    def getRoomType(self) -> Any:
-        return self._getRoomControl().getRoomType(self._room_id)
+    def getRoomType(self) -> str | None:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomType(rid)
 
     @handleNotSupported
-    def getCondensationRisk(self) -> Any:
-        return self._getRoomControl().getRoomCondensationRisk(self._room_id)
+    def getCondensationRisk(self) -> bool:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomCondensationRisk(rid)
 
     # --- Operating state ---
 
     @handleNotSupported
-    def getOperatingStateLevel(self) -> Any:
-        return self._getRoomControl().getRoomOperatingStateLevel(self._room_id)
+    def getOperatingStateLevel(self) -> str:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomOperatingStateLevel(rid)
 
     @handleNotSupported
-    def getOperatingStateDemand(self) -> Any:
-        return self._getRoomControl().getRoomOperatingStateDemand(self._room_id)
+    def getOperatingStateDemand(self) -> str:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomOperatingStateDemand(rid)
 
     # --- Heating programs ---
 
     @handleNotSupported
-    def getNormalHeatingTemperature(self) -> Any:
-        return self._getRoomControl().getRoomNormalHeatingTemperature(self._room_id)
+    def getNormalHeatingTemperature(self) -> float:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomNormalHeatingTemperature(rid)
 
     @handleAPICommandErrors
     def setNormalHeatingTemperature(self, temperature: float) -> None:
-        self._getRoomControl().setRoomNormalHeatingTemperature(self._room_id, temperature)
+        rc, rid = self._getRoomContext()
+        rc.setRoomNormalHeatingTemperature(rid, temperature)
 
     @handleNotSupported
-    def getReducedHeatingTemperature(self) -> Any:
-        return self._getRoomControl().getRoomReducedHeatingTemperature(self._room_id)
+    def getReducedHeatingTemperature(self) -> float:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomReducedHeatingTemperature(rid)
 
     @handleAPICommandErrors
     def setReducedHeatingTemperature(self, temperature: float) -> None:
-        self._getRoomControl().setRoomReducedHeatingTemperature(self._room_id, temperature)
+        rc, rid = self._getRoomContext()
+        rc.setRoomReducedHeatingTemperature(rid, temperature)
 
     @handleNotSupported
-    def getComfortHeatingTemperature(self) -> Any:
-        return self._getRoomControl().getRoomComfortHeatingTemperature(self._room_id)
+    def getComfortHeatingTemperature(self) -> float:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomComfortHeatingTemperature(rid)
 
     @handleAPICommandErrors
     def setComfortHeatingTemperature(self, temperature: float) -> None:
-        self._getRoomControl().setRoomComfortHeatingTemperature(self._room_id, temperature)
+        rc, rid = self._getRoomContext()
+        rc.setRoomComfortHeatingTemperature(rid, temperature)
 
     # --- Quick modes ---
 
     @handleNotSupported
-    def getManualTillNextScheduleActive(self) -> Any:
-        return self._getRoomControl().getRoomManualTillNextScheduleActive(self._room_id)
+    def getManualTillNextScheduleActive(self) -> bool:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomManualTillNextScheduleActive(rid)
 
     @handleAPICommandErrors
     def activateManualTillNextSchedule(self, temperature: float) -> None:
-        self._getRoomControl().activateRoomManualTillNextSchedule(self._room_id, temperature)
+        rc, rid = self._getRoomContext()
+        rc.activateRoomManualTillNextSchedule(rid, temperature)
 
     @handleAPICommandErrors
     def deactivateManualTillNextSchedule(self) -> None:
-        self._getRoomControl().deactivateRoomManualTillNextSchedule(self._room_id)
+        rc, rid = self._getRoomContext()
+        rc.deactivateRoomManualTillNextSchedule(rid)
 
     # --- Schedule ---
 
     @handleNotSupported
-    def getSchedule(self) -> Any:
-        return self._getRoomControl().getRoomSchedule(self._room_id)
+    def getSchedule(self) -> dict[str, Any]:
+        rc, rid = self._getRoomContext()
+        return rc.getRoomSchedule(rid)
