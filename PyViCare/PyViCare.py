@@ -86,7 +86,7 @@ class PyViCare:
             room_control = RoomControl(device_config.service)
             try:
                 actor_map = room_control.buildActorRoomMap()
-            except Exception:
+            except Exception:  # pylint: disable=broad-exception-caught
                 logger.debug("Could not build actor map for %s", device_config.getModel(), exc_info=True)
                 continue
 
