@@ -300,39 +300,6 @@ class TestForMissingProperties(unittest.TestCase):
             'fht.configuration.floorHeatingDamageProtectionThreshold',
             'fht.valve',
 
-            # RoomControl - room sensor data, used by enrichment (#743)
-            'rooms',
-            'rooms.0',
-            'rooms.0.sensors.humidity',
-            'rooms.0.sensors.temperature',
-            'rooms.1',
-            'rooms.1.sensors.humidity',
-            'rooms.1.sensors.temperature',
-            'rooms.2',
-            'rooms.2.sensors.humidity',
-            'rooms.2.sensors.temperature',
-            'rooms.3',
-            'rooms.3.sensors.humidity',
-            'rooms.3.sensors.temperature',
-            'rooms.4',
-            'rooms.4.sensors.humidity',
-            'rooms.4.sensors.temperature',
-            'rooms.5',
-            'rooms.5.sensors.humidity',
-            'rooms.5.sensors.temperature',
-            'rooms.6',
-            'rooms.6.sensors.humidity',
-            'rooms.6.sensors.temperature',
-            'rooms.7',
-            'rooms.7.sensors.humidity',
-            'rooms.7.sensors.temperature',
-            'rooms.8',
-            'rooms.8.sensors.humidity',
-            'rooms.8.sensors.temperature',
-            'rooms.9',
-            'rooms.9.sensors.humidity',
-            'rooms.9.sensors.temperature',
-
             # DEPRECATED - remove once data point is removed and test data is updated
             'heating.burner', # deprecated FIXME: remove once test data is updated
             'heating.buffer.hysteresis',
@@ -430,7 +397,7 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
+                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|room_id)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)

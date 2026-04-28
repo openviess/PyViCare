@@ -89,6 +89,22 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device_type = c.asAutoDetectDevice()
         self.assertEqual("ElectricalEnergySystem", type(device_type).__name__)
 
+    def test_autoDetect_E3_RoomControl_asRoomControl(self):
+        c = PyViCareDeviceConfig(self.service, "0", "E3_RoomControl_One_525", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
+
+    def test_autoDetect_Smart_RoomControl_asRoomControl(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Smart_RoomControl", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
+
+    def test_autoDetect_RoleRoomControl_asRoomControl(self):
+        self.service.hasRoles = has_roles(["type:virtual;smartRoomControl"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
+
     def test_autoDetect_Vitocharge05_asElectricalEnergySystem(self):
         c = PyViCareDeviceConfig(self.service, "0", "E3_VitoCharge_05", "Online")
         device_type = c.asAutoDetectDevice()
