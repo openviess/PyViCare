@@ -23,7 +23,7 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-instance-attributes
     def __init__(self, service, device_id, device_model, status, device_type=None, roles=None):
         self.service = service
         self.device_id = device_id
