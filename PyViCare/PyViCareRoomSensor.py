@@ -38,10 +38,10 @@ class RoomSensor(ZigbeeBatteryDevice):
         return float(self.getProperty("device.sensors.temperature")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getHumidity(self) -> float:
+    def getHumidity(self) -> int:
         if self._room_control is not None and self._room_id is not None:
             return self._room_control.getRoomHumidity(self._room_id)
-        return float(self.getProperty("device.sensors.humidity")["properties"]["value"]["value"])
+        return int(self.getProperty("device.sensors.humidity")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getCO2(self) -> int:
