@@ -44,8 +44,8 @@ class RoomControl(Device):
     def getRoomTemperature(self, room_id: str) -> float:
         return float(self.service.getProperty(f"rooms.{room_id}.sensors.temperature")["properties"]["value"]["value"])
 
-    def getRoomHumidity(self, room_id: str) -> float:
-        return float(self.service.getProperty(f"rooms.{room_id}.sensors.humidity")["properties"]["value"]["value"])
+    def getRoomHumidity(self, room_id: str) -> int:
+        return int(self.service.getProperty(f"rooms.{room_id}.sensors.humidity")["properties"]["value"]["value"])
 
     def getRoomCO2(self, room_id: str) -> int:
         return int(self.service.getProperty(f"rooms.{room_id}.sensors.co2")["properties"]["value"]["value"])
