@@ -584,6 +584,10 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                 "value"]
 
     @handleNotSupported
+    def getCoolingActive(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.modes.cooling")["properties"]["active"]["value"]
+
+    @handleNotSupported
     def getHeatingCurveShift(self):
         return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["shift"][
             "value"]
