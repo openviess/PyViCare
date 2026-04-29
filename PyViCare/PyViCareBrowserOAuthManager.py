@@ -56,7 +56,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
         oauth_session = OAuth2Session(
             self.client_id, redirect_uri=redirect_uri, scope=[SCOPE_IOT, SCOPE_USER, SCOPE_OFFLINE_ACCESS], code_challenge_method='S256')
         code_verifier = generate_token(48)
-        authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
+        authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier, scope="Internal openid offline_access")
 
         webbrowser.open(authorization_url)
 
