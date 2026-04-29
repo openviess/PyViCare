@@ -262,3 +262,8 @@ class Vitocal300G(unittest.TestCase):
     def test_coolingCircuit_getReverseActive(self):
         self.assertEqual(
             self.device.coolingCircuits[0].getReverseActive(), False)
+
+    def test_getHeatingScheduleModes(self):
+        expected_modes = {'reduced', 'normal', 'fixed'}
+        self.assertSetEqual(
+            set(self.device.circuits[0].getHeatingScheduleModes()), expected_modes)
