@@ -30,3 +30,6 @@ class Vitocal200(unittest.TestCase):
             "eco",
             "holiday",
         ])
+
+    def test_cooling_active(self):
+        self.assertEqual(self.device.circuits[0].getCoolingActive(), False)
