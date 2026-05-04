@@ -45,7 +45,7 @@ jobs:
       - name: 🏗 Build package
         run: poetry build --no-interaction
       - name: 🚀 Publish to PyPi
-        uses: pypa/gh-action-pypi-publish@v1.13.0
+        uses: pypa/gh-action-pypi-publish@v1.14.0
         with:
           verbose: true
           print-hash: true

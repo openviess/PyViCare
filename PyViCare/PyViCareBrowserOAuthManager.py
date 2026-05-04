@@ -7,17 +7,21 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from authlib.common.security import generate_token
 from authlib.integrations.requests_client import OAuth2Session
 
-from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
+from PyViCare.PyViCareAbstractOAuthManager import (
+    AUTHORIZE_URL,
+    SCOPE_IOT,
+    SCOPE_OFFLINE_ACCESS,
+    SCOPE_USER,
+    TOKEN_URL,
+    AbstractViCareOAuthManager,
+)
 from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
                                     PyViCareInvalidCredentialsError)
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
-AUTHORIZE_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize'
-TOKEN_URL = 'https://iam.viessmann-climatesolutions.com/idp/v3/token'
 REDIRECT_PORT = 51125
-VIESSMANN_SCOPE = ["IoT User", "offline_access"]
 AUTH_TIMEOUT = 60 * 3
 
 
@@ -50,7 +54,7 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
     def __execute_browser_authentication(self):
         redirect_uri = f"http://localhost:{REDIRECT_PORT}"
         oauth_session = OAuth2Session(
-            self.client_id, redirect_uri=redirect_uri, scope=VIESSMANN_SCOPE, code_challenge_method='S256')
+            self.client_id, redirect_uri=redirect_uri, scope=[SCOPE_IOT, SCOPE_USER, SCOPE_OFFLINE_ACCESS], code_challenge_method='S256')
         code_verifier = generate_token(48)
         authorization_url, _ = oauth_session.create_authorization_url(AUTHORIZE_URL, code_verifier=code_verifier)
 

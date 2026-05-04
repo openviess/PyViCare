@@ -6,10 +6,11 @@ from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
 from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareOAuthManager import ViCareOAuthManager
+from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareUtils import PyViCareInvalidDataError
 
-logger = logging.getLogger('ViCare')
+logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
@@ -46,22 +47,56 @@ class PyViCare:
 
         data = installations['data']
         self.installations = Wrap(data)
-        self.devices = list(self.__extract_devices())
+        self.all_devices = list(self.__extract_all_devices())
+        self.devices = [d for d in self.all_devices
+                        if d.device_type in self.SUPPORTED_DEVICE_TYPES]
+        self.__enrichZigbeeDevices()
 
-    def __extract_devices(self):
+    SUPPORTED_DEVICE_TYPES = [
+        "heating", "zigbee", "vitoconnect", "electricityStorage",
+        "tcu", "ventilation", "roomControl",
+    ]
+
+    def __extract_all_devices(self):
         for installation in self.installations:
             for gateway in installation.gateways:
                 for device in gateway.devices:
-                    if device.deviceType not in ["heating", "zigbee", "vitoconnect", "electricityStorage", "tcu", "ventilation"]:
-                        continue  # we are only interested in heating, photovoltaic, electricityStorage, and ventilation devices
-
                     accessor = ViCareDeviceAccessor(
                         installation.id, gateway.serial, device.id)
                     service = self.__buildService(accessor, device.roles)
 
-                    logger.info("Device found: %s", device.modelId)
+                    logger.info("Device found: %s (type=%s)", device.modelId, device.deviceType)
 
                     yield PyViCareDeviceConfig(service, device.id, device.modelId, device.status, device.deviceType, device.roles)
+
+    def __enrichZigbeeDevices(self):
+        """Enrich Zigbee devices with sensor data from RoomControl.
+
+        Viessmann moved temperature/humidity data from physical Zigbee
+        sensors to the RoomControl virtual device. This reverses that
+        mapping by cross-referencing RoomControl actors with Zigbee
+        device IDs.
+        """
+        devices_by_id = {device_config.device_id: device_config for device_config in self.devices}
+
+        for device_config in self.devices:
+            if device_config.device_type != "roomControl":
+                continue
+
+            room_control = RoomControl(device_config.service)
+            try:
+                actor_map = room_control.buildActorRoomMap()
+            except Exception:  # pylint: disable=broad-exception-caught
+                logger.debug("Could not build actor map for %s", device_config.getModel(), exc_info=True)
+                continue
+
+            for device_id, room_id in actor_map.items():
+                zigbee_config = devices_by_id.get(device_id)
+                if zigbee_config is None:
+                    continue
+                zigbee_config.setRoomControlEnrichment(room_control, room_id)
+                logger.info("Enriched %s with room %s data from %s",
+                            zigbee_config.device_id, room_id, device_config.getModel())
 
 
 class DictWrap(object):

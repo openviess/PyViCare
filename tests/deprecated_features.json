@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Known deprecated Viessmann API features, merged from test data and device dumps.",
-    "updated": "2026-02-10",
-    "feature_count": 106
+    "updated": "2026-04-28",
+    "feature_count": 107
   },
   "features": {
     "heating.buffer.hysteresis": {
@@ -29,7 +29,8 @@
         "Vitocal333G-with-Vitovent300F.json",
         "Vitodens200W_B2HF.json",
         "VitovalorPT2.json",
-        "dump:device_0_features.json"
+        "dump:device_0_features.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.buffer.sensors.temperature.top": {
@@ -130,7 +131,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.configuration.dhw.highDemand.timeframe": {
@@ -140,7 +142,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.configuration.dhw.temperature.comfortCharging": {
@@ -150,7 +153,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.configuration.dhw.temperature.dhwCylinder.max": {
@@ -197,7 +201,9 @@
         "Vitocal250A.json",
         "Vitodens100W.json",
         "Vitodens200W_B2HF.json",
-        "VitovalorPT2.json"
+        "VitovalorPT2.json",
+        "VitoairFs300E.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.cop.green": {
@@ -218,7 +224,8 @@
         "Ecotronic.json",
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitopure350.json"
+        "Vitopure350.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.dhw.comfort": {
@@ -253,7 +260,8 @@
         "Vitodens_100_BHC_0421.json",
         "Vitoladens300-C_J3RA.json",
         "VitovalorPT2.json",
-        "dump:device_0_features.json"
+        "dump:device_0_features.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.bottom": {
@@ -288,7 +296,8 @@
         "Vitocal222S.json",
         "Vitocal250A.json",
         "Vitocal252.json",
-        "VitovalorPT2.json"
+        "VitovalorPT2.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.top": {
@@ -305,7 +314,8 @@
         "Vitocal252.json",
         "Vitocal333G-with-Vitovent300F.json",
         "VitovalorPT2.json",
-        "dump:device_0_features.json"
+        "dump:device_0_features.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.external.lock": {
@@ -316,7 +326,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "VitovalorPT2.json"
+        "VitovalorPT2.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.fuelCell.electricalEnergyConsumption.value": {
@@ -416,7 +427,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.noise.reduction.operating.programs.maxReduced": {
@@ -426,7 +438,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.noise.reduction.operating.programs.notReduced": {
@@ -436,7 +449,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.noise.reduction.operating.programs.slightlyReduced": {
@@ -446,7 +460,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.scop.dhw": {
@@ -456,7 +471,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.scop.heating": {
@@ -466,7 +482,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "heating.scop.total": {
@@ -476,7 +493,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitocal222S.json",
-        "Vitocal250A.json"
+        "Vitocal250A.json",
+        "Vitocal252A.json"
       ]
     },
     "rooms.0.configuration.window.openState": {
@@ -947,6 +965,15 @@
         "dump:device_RoomControl-1_features.json"
       ]
     },
+    "ventilation.external.lock": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by device.lock.external",
+      "firstSeenIn": "VitoairFs300E.json",
+      "firstSeenOn": "2026-04-28",
+      "sources": [
+        "VitoairFs300E.json"
+      ]
+    },
     "ventilation.operating.programs.comfort": {
       "removalDate": "2024-09-15",
       "info": "none",
@@ -1045,7 +1072,8 @@
       "firstSeenIn": "Vitopure350.json",
       "firstSeenOn": "2026-02-10",
       "sources": [
-        "Vitopure350.json"
+        "Vitopure350.json",
+        "VitoairFs300E.json"
       ]
     }
   }
