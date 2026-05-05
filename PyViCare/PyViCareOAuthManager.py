@@ -1,6 +1,7 @@
 import logging
 import os
 import pickle
+import warnings
 from contextlib import suppress
 from pickle import UnpicklingError
 
@@ -31,6 +32,12 @@ def obtain_token_via_basic_auth_pkce(
 ) -> dict[str, object]:
     """Obtain an OAuth2 token via PKCE auth-code flow with HTTP Basic auth.
 
+    .. deprecated::
+        One-shot migration helper for Home Assistant's password-to-OAuth2
+        migration (see home-assistant/core#165621). Scheduled for removal
+        once the migration window has closed. New code should use the
+        standard OAuth2 auth-code flow.
+
     Viessmann's authorization endpoint accepts HTTP Basic auth and returns
     the auth code in the redirect Location header (no browser involved).
     Useful for one-shot migration from stored username/password to OAuth2,
@@ -45,6 +52,13 @@ def obtain_token_via_basic_auth_pkce(
     credentials rejected, token exchange failed). Failures are logged at
     WARNING level.
     """
+    warnings.warn(
+        "obtain_token_via_basic_auth_pkce is a one-shot migration helper "
+        "for Home Assistant's password-to-OAuth2 migration and is scheduled "
+        "for removal. New code should use the standard OAuth2 auth-code flow.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     oauth = OAuth2Session(
         client_id,
         redirect_uri=REDIRECT_URI,

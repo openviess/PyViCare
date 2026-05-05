@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 
+import pytest
 import requests
 from authlib.integrations.base_client.errors import OAuthError
 
@@ -151,6 +152,9 @@ class PyViCareServiceTest(unittest.TestCase):
         self.oauth_mock.renewToken.assert_called_once()
 
 
+@pytest.mark.filterwarnings(
+    "ignore:obtain_token_via_basic_auth_pkce:DeprecationWarning"
+)
 class ObtainTokenViaBasicAuthPkceTest(unittest.TestCase):
 
     @patch('PyViCare.PyViCareOAuthManager.OAuth2Session')
