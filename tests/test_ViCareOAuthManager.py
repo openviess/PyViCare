@@ -1,7 +1,12 @@
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
-from PyViCare.PyViCareOAuthManager import AbstractViCareOAuthManager
+import pytest
+import requests
+from authlib.integrations.base_client.errors import OAuthError
+
+from PyViCare.PyViCareOAuthManager import (AbstractViCareOAuthManager,
+                                           obtain_token_via_basic_auth_pkce)
 from PyViCare.PyViCareUtils import (PyViCareCommandError,
                                     PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
@@ -145,3 +150,71 @@ class PyViCareServiceTest(unittest.TestCase):
         ]
         self.manager.post("/", "some")
         self.oauth_mock.renewToken.assert_called_once()
+
+
+@pytest.mark.filterwarnings(
+    "ignore:obtain_token_via_basic_auth_pkce:DeprecationWarning"
+)
+class ObtainTokenViaBasicAuthPkceTest(unittest.TestCase):
+
+    @patch('PyViCare.PyViCareOAuthManager.OAuth2Session')
+    @patch('PyViCare.PyViCareOAuthManager.requests.post')
+    def test_returns_token_on_success(self, mock_post, mock_oauth_cls):
+        mock_oauth = Mock()
+        mock_oauth.create_authorization_url.return_value = ('http://auth', 'state')
+        mock_oauth.token = {'access_token': 'a', 'refresh_token': 'r'}
+        mock_oauth_cls.return_value = mock_oauth
+
+        mock_post.return_value = Mock(
+            status_code=302,
+            headers={'Location': 'vicare://oauth-callback/everest?code=xyz'},
+        )
+
+        token = obtain_token_via_basic_auth_pkce('client', 'user', 'pass')
+        self.assertEqual(token, {'access_token': 'a', 'refresh_token': 'r'})
+        mock_oauth.fetch_token.assert_called_once()
+
+    @patch('PyViCare.PyViCareOAuthManager.requests.post')
+    def test_returns_empty_on_request_exception(self, mock_post):
+        mock_post.side_effect = requests.RequestException("network down")
+        self.assertEqual(
+            obtain_token_via_basic_auth_pkce('client', 'user', 'pass'), {})
+
+    @patch('PyViCare.PyViCareOAuthManager.OAuth2Session')
+    @patch('PyViCare.PyViCareOAuthManager.requests.post')
+    def test_returns_empty_on_non_redirect_response(self, mock_post, mock_oauth_cls):
+        mock_oauth_cls.return_value.create_authorization_url.return_value = (
+            'http://auth', 'state')
+        mock_post.return_value = Mock(status_code=401, headers={})
+        self.assertEqual(
+            obtain_token_via_basic_auth_pkce('client', 'user', 'pass'), {})
+
+    @patch('PyViCare.PyViCareOAuthManager.OAuth2Session')
+    @patch('PyViCare.PyViCareOAuthManager.requests.post')
+    def test_returns_empty_on_token_exchange_failure(self, mock_post, mock_oauth_cls):
+        mock_oauth = Mock()
+        mock_oauth.create_authorization_url.return_value = ('http://auth', 'state')
+        mock_oauth.fetch_token.side_effect = requests.RequestException("fail")
+        mock_oauth_cls.return_value = mock_oauth
+
+        mock_post.return_value = Mock(
+            status_code=302,
+            headers={'Location': 'vicare://oauth-callback/everest?code=xyz'},
+        )
+        self.assertEqual(
+            obtain_token_via_basic_auth_pkce('client', 'user', 'pass'), {})
+
+    @patch('PyViCare.PyViCareOAuthManager.OAuth2Session')
+    @patch('PyViCare.PyViCareOAuthManager.requests.post')
+    def test_returns_empty_on_authlib_oauth_error(self, mock_post, mock_oauth_cls):
+        mock_oauth = Mock()
+        mock_oauth.create_authorization_url.return_value = ('http://auth', 'state')
+        mock_oauth.fetch_token.side_effect = OAuthError("invalid_grant")
+        mock_oauth_cls.return_value = mock_oauth
+
+        mock_post.return_value = Mock(
+            status_code=302,
+            headers={'Location': 'vicare://oauth-callback/everest?code=xyz'},
+        )
+        self.assertEqual(
+            obtain_token_via_basic_auth_pkce('client', 'user', 'pass'), {})
