@@ -349,6 +349,24 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.sensors.airQuality',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
+            # Vitoset Aqua water softener (testdata only, no class yet)
+            'device.status',
+            'water.consumption.flow.current',
+            'water.consumption.flow.max',
+            'water.consumption.summary',
+            'water.leakDetection.configuration.flowAlert',
+            'water.leakDetection.sensors.leakage.0',
+            'water.leakDetection.sensors.leakage.0.battery',
+            'water.leakDetection.sensors.leakage.0.id',
+            'water.leakDetection.sensors.leakage.0.name',
+            'water.leakDetection.sensors.leakage.0.rssi',
+            'water.leakDetection.sensors.leakage.0.version.hardware',
+            'water.leakDetection.sensors.leakage.0.version.software',
+            'water.softener.configuration.lowSaltAlert',
+            'water.softener.salt.level.days',
+            'water.valves.shutoff.holiday',
+            'water.valves.shutoff.motor',
+            'water.valves.shutoff.position',
         ]
 
         all_features = self.read_all_features()
