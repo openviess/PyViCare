@@ -1,45 +1,13 @@
-import logging
-from typing import Any, cast
-
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported, handleAPICommandErrors
-
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.NullHandler())
 
 
 class RoomControl(Device):
     """Viessmann RoomControl virtual device.
 
-    Aggregates room sensor data and heating programs.
-    Used to enrich physical Zigbee devices with room data.
+    Exposes per-room sensor readings. The IoT scope only returns sensor
+    data; room metadata, schedules and operating programs are not
+    available to public client_ids.
     """
-
-    @handleNotSupported
-    def getAvailableRooms(self) -> list[str]:
-        return cast(list[str], self.service.getProperty("rooms")["properties"]["enabled"]["value"])
-
-    def getRoomActorIds(self, room_id: str) -> list[str]:
-        """Return list of actor device IDs for a room."""
-        try:
-            actors = self.service.getProperty(f"rooms.{room_id}")["properties"]["actors"]["value"]
-            return [str(a["deviceId"]) for a in actors]
-        except (PyViCareNotSupportedFeatureError, KeyError):
-            return []
-
-    def getRoomName(self, room_id: str) -> str | None:
-        try:
-            return str(self.service.getProperty(f"rooms.{room_id}")["properties"]["name"]["value"])
-        except (PyViCareNotSupportedFeatureError, KeyError):
-            return None
-
-    def getRoomType(self, room_id: str) -> str | None:
-        try:
-            return str(self.service.getProperty(f"rooms.{room_id}")["properties"]["type"]["value"])
-        except (PyViCareNotSupportedFeatureError, KeyError):
-            return None
-
-    # --- Sensors ---
 
     def getRoomTemperature(self, room_id: str) -> float:
         return float(self.service.getProperty(f"rooms.{room_id}.sensors.temperature")["properties"]["value"]["value"])
@@ -48,89 +16,7 @@ class RoomControl(Device):
         return float(self.service.getProperty(f"rooms.{room_id}.sensors.humidity")["properties"]["value"]["value"])
 
     def getRoomCO2(self, room_id: str) -> int:
-        return int(self.service.getProperty(f"rooms.{room_id}.sensors.co2")["properties"]["value"]["value"])
+        return int(self.service.getProperty(f"rooms.{room_id}.co2")["properties"]["concentration"]["value"])
 
     def getRoomCondensationRisk(self, room_id: str) -> bool:
         return bool(self.service.getProperty(f"rooms.{room_id}.condensationRisk")["properties"]["value"]["value"])
-
-    # --- Operating state ---
-
-    def getRoomOperatingStateLevel(self, room_id: str) -> str:
-        return str(self.service.getProperty(f"rooms.{room_id}.operating.state")["properties"]["level"]["value"])
-
-    def getRoomOperatingStateDemand(self, room_id: str) -> str:
-        return str(self.service.getProperty(f"rooms.{room_id}.operating.state")["properties"]["demand"]["value"])
-
-    def getRoomOperatingStateReason(self, room_id: str) -> str:
-        return str(self.service.getProperty(f"rooms.{room_id}.operating.state")["properties"]["reason"]["value"])
-
-    # --- Heating programs ---
-
-    def getRoomNormalHeatingTemperature(self, room_id: str) -> float:
-        return float(self.service.getProperty(f"rooms.{room_id}.operating.programs.normalHeating")["properties"]["temperature"]["value"])
-
-    @handleAPICommandErrors
-    def setRoomNormalHeatingTemperature(self, room_id: str, temperature: float) -> None:
-        self.service.setProperty(f"rooms.{room_id}.operating.programs.normalHeating", "setTemperature",
-                                 {"targetTemperature": temperature})
-
-    def getRoomReducedHeatingTemperature(self, room_id: str) -> float:
-        return float(self.service.getProperty(f"rooms.{room_id}.operating.programs.reducedHeating")["properties"]["temperature"]["value"])
-
-    @handleAPICommandErrors
-    def setRoomReducedHeatingTemperature(self, room_id: str, temperature: float) -> None:
-        self.service.setProperty(f"rooms.{room_id}.operating.programs.reducedHeating", "setTemperature",
-                                 {"targetTemperature": temperature})
-
-    def getRoomComfortHeatingTemperature(self, room_id: str) -> float:
-        return float(self.service.getProperty(f"rooms.{room_id}.operating.programs.comfortHeating")["properties"]["temperature"]["value"])
-
-    @handleAPICommandErrors
-    def setRoomComfortHeatingTemperature(self, room_id: str, temperature: float) -> None:
-        self.service.setProperty(f"rooms.{room_id}.operating.programs.comfortHeating", "setTemperature",
-                                 {"targetTemperature": temperature})
-
-    # --- Schedule ---
-
-    def getRoomSchedule(self, room_id: str) -> dict[str, Any]:
-        props = self.service.getProperty(f"rooms.{room_id}.schedule")["properties"]
-        return {
-            "active": props["active"]["value"],
-            "mon": props["entries"]["value"]["mon"],
-            "tue": props["entries"]["value"]["tue"],
-            "wed": props["entries"]["value"]["wed"],
-            "thu": props["entries"]["value"]["thu"],
-            "fri": props["entries"]["value"]["fri"],
-            "sat": props["entries"]["value"]["sat"],
-            "sun": props["entries"]["value"]["sun"],
-        }
-
-    # --- Quick modes ---
-
-    def getRoomManualTillNextScheduleActive(self, room_id: str) -> bool:
-        return bool(self.service.getProperty(
-            f"rooms.{room_id}.quickmodes.manualTillNextSchedule")["properties"]["active"]["value"])
-
-    @handleAPICommandErrors
-    def activateRoomManualTillNextSchedule(self, room_id: str, temperature: float) -> None:
-        self.service.setProperty(f"rooms.{room_id}.quickmodes.manualTillNextSchedule", "activate",
-                                 {"temperature": temperature})
-
-    @handleAPICommandErrors
-    def deactivateRoomManualTillNextSchedule(self, room_id: str) -> None:
-        self.service.setProperty(f"rooms.{room_id}.quickmodes.manualTillNextSchedule", "deactivate", {})
-
-    # --- Mapping ---
-
-    def buildActorRoomMap(self) -> dict[str, str]:
-        """Build a mapping of actor device ID -> room ID."""
-        actor_map: dict[str, str] = {}
-        try:
-            rooms = self.getAvailableRooms()
-        except PyViCareNotSupportedFeatureError:
-            return actor_map
-
-        for room_id in rooms:
-            for actor_id in self.getRoomActorIds(room_id):
-                actor_map[actor_id] = room_id
-        return actor_map
