@@ -177,6 +177,22 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
+    def test_autoDetect_VitosetAqua19D_asWaterTreatment(self):
+        c = PyViCareDeviceConfig(self.service, "0", "VitosetAqua19D", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("WaterTreatment", type(device_type).__name__)
+
+    def test_autoDetect_VitosetAqua42D_asWaterTreatment(self):
+        c = PyViCareDeviceConfig(self.service, "0", "VitosetAqua42D", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("WaterTreatment", type(device_type).__name__)
+
+    def test_autoDetect_RoleWaterTreatment_asWaterTreatment(self):
+        self.service.hasRoles = has_roles(["type:waterTreatment"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("WaterTreatment", type(device_type).__name__)
+
     def test_legacy_device(self):
         self.service.hasRoles = has_roles(["type:legacy"])
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")

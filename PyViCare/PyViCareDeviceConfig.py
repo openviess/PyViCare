@@ -17,6 +17,7 @@ from PyViCare.PyViCareRepeater import Repeater
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare.PyViCareWaterTreatment import WaterTreatment
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -80,6 +81,9 @@ class PyViCareDeviceConfig:
     def asVentilation(self):
         return VentilationDevice(self.service)
 
+    def asWaterTreatment(self):
+        return WaterTreatment(self.service)
+
     def getConfig(self):
         return self.service.accessor
 
@@ -120,6 +124,7 @@ class PyViCareDeviceConfig:
             (self.asRoomControl, r"E3_RoomControl|Smart_RoomControl", ["type:virtual;smartRoomControl"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
+            (self.asWaterTreatment, r"VitosetAqua", ["type:waterTreatment"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
             (self.asGateway, r"E3_TCU19_x05", ["type:gateway;TCU200"]),
             (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
