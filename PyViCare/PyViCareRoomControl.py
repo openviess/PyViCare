@@ -11,8 +11,7 @@ logger.addHandler(logging.NullHandler())
 class RoomControl(Device):
     """Viessmann RoomControl virtual device.
 
-    Aggregates room sensor data and heating programs.
-    Used to enrich physical Zigbee devices with room data.
+    Aggregates room sensor data and heating programs per room.
     """
 
     @handleNotSupported
@@ -119,18 +118,3 @@ class RoomControl(Device):
     @handleAPICommandErrors
     def deactivateRoomManualTillNextSchedule(self, room_id: str) -> None:
         self.service.setProperty(f"rooms.{room_id}.quickmodes.manualTillNextSchedule", "deactivate", {})
-
-    # --- Mapping ---
-
-    def buildActorRoomMap(self) -> dict[str, str]:
-        """Build a mapping of actor device ID -> room ID."""
-        actor_map: dict[str, str] = {}
-        try:
-            rooms = self.getAvailableRooms()
-        except PyViCareNotSupportedFeatureError:
-            return actor_map
-
-        for room_id in rooms:
-            for actor_id in self.getRoomActorIds(room_id):
-                actor_map[actor_id] = room_id
-        return actor_map
