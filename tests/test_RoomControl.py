@@ -71,3 +71,7 @@ class RoomControlTest(unittest.TestCase):
     def test_getRoomTrvAlgorithmEnabled(self):
         self.assertFalse(self.device.getRoomTrvAlgorithmEnabled("0"))
         self.assertTrue(self.device.getRoomTrvAlgorithmEnabled("1"))
+
+    def test_getRoomHeatOnTimeEnabled(self):
+        self.assertFalse(self.device.getRoomHeatOnTimeEnabled("0"))
+        self.assertTrue(self.device.getRoomHeatOnTimeEnabled("1"))

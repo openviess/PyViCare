@@ -108,3 +108,7 @@ class RoomControl(Device):
     @handleNotSupported
     def getRoomTrvAlgorithmEnabled(self, room_id: str) -> bool:
         return bool(self.service.getProperty(f"rooms.{room_id}.configuration.trvAlgorithmActive")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getRoomHeatOnTimeEnabled(self, room_id: str) -> bool:
+        return bool(self.service.getProperty(f"rooms.{room_id}.configuration.heatOnTime")["properties"]["active"]["value"])
