@@ -31,6 +31,9 @@ class ViCareServiceMock:
         entities = self.testData["data"]
         return readFeature(entities, property_name)
 
+    def fetch_all_features(self):
+        return self.testData
+
     def setProperty(self, property_name, action, data):
         self.setPropertyData.append({
             "url": buildSetPropertyUrl(self.accessor, property_name, action),
