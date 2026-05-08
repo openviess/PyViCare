@@ -31,8 +31,6 @@ class PyViCareDeviceConfig:
         self.status = status
         self.device_type = device_type
         self.roles = roles if roles is not None else []
-        self._room_control = None
-        self._room_id = None
 
     def asGeneric(self):
         return HeatingDevice(self.service)
@@ -65,18 +63,10 @@ class PyViCareDeviceConfig:
         return FloorHeatingChannel(self.service)
 
     def asRoomSensor(self):
-        sensor = RoomSensor(self.service)
-        if self._room_control is not None:
-            sensor.setRoomControl(self._room_control, self._room_id)
-        return sensor
+        return RoomSensor(self.service)
 
     def asRoomControl(self):
         return RoomControl(self.service)
-
-    def setRoomControlEnrichment(self, room_control, room_id):
-        """Store RoomControl enrichment data to apply when creating a RoomSensor."""
-        self._room_control = room_control
-        self._room_id = room_id
 
     def asRepeater(self):
         return Repeater(self.service)
