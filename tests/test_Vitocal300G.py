@@ -262,3 +262,28 @@ class Vitocal300G(unittest.TestCase):
     def test_coolingCircuit_getReverseActive(self):
         self.assertEqual(
             self.device.coolingCircuits[0].getReverseActive(), False)
+
+    def test_getHeatingScheduleModes(self):
+        expected_modes = {'reduced', 'normal', 'fixed'}
+        self.assertSetEqual(
+            set(self.device.circuits[0].getHeatingScheduleModes()), expected_modes)
+
+    def test_setHeatingSchedule(self):
+        schedule = {
+            "mon": [{"start": "06:00", "end": "22:00", "mode": "normal", "position": 0}],
+            "tue": [],
+            "wed": [],
+            "thu": [],
+            "fri": [],
+            "sat": [],
+            "sun": [],
+        }
+        self.device.circuits[0].setHeatingSchedule(schedule)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'],
+            f'heating.circuits.{self.device.circuits[0].circuit}.heating.schedule')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setSchedule')
+        self.assertEqual(
+            self.service.setPropertyData[0]['data'], {'newSchedule': schedule})
