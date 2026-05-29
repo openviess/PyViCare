@@ -1,16 +1,19 @@
 import logging
 import os
 import pickle
+import warnings
 from contextlib import suppress
 from pickle import UnpicklingError
 
 import requests
 from authlib.common.security import generate_token
+from authlib.integrations.base_client.errors import OAuthError
 from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare.PyViCareAbstractOAuthManager import (
     AUTHORIZE_URL,
     SCOPE_IOT,
+    SCOPE_OFFLINE_ACCESS,
     SCOPE_USER,
     TOKEN_URL,
     AbstractViCareOAuthManager,
@@ -22,6 +25,79 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 REDIRECT_URI = "vicare://oauth-callback/everest"
+
+
+def obtain_token_via_basic_auth_pkce(
+    client_id: str, username: str, password: str
+) -> dict[str, object]:
+    """Obtain an OAuth2 token via PKCE auth-code flow with HTTP Basic auth.
+
+    .. deprecated::
+        One-shot migration helper for Home Assistant's password-to-OAuth2
+        migration (see home-assistant/core#165621). Scheduled for removal
+        once the migration window has closed. New code should use the
+        standard OAuth2 auth-code flow.
+
+    Viessmann's authorization endpoint accepts HTTP Basic auth and returns
+    the auth code in the redirect Location header (no browser involved).
+    Useful for one-shot migration from stored username/password to OAuth2,
+    so users don't need to re-authenticate interactively.
+
+    Requests scopes ``IoT`` and ``offline_access`` (sufficient for all
+    PyViCare API endpoints; ``offline_access`` is required to receive a
+    refresh token).
+
+    Returns the token dict (access_token, refresh_token, expires_at, etc.)
+    on success, or an empty dict on any failure (auth server unreachable,
+    credentials rejected, token exchange failed). Failures are logged at
+    WARNING level.
+    """
+    warnings.warn(
+        "obtain_token_via_basic_auth_pkce is a one-shot migration helper "
+        "for Home Assistant's password-to-OAuth2 migration and is scheduled "
+        "for removal. New code should use the standard OAuth2 auth-code flow.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    oauth = OAuth2Session(
+        client_id,
+        redirect_uri=REDIRECT_URI,
+        scope=[SCOPE_IOT, SCOPE_OFFLINE_ACCESS],
+        code_challenge_method="S256",
+    )
+    code_verifier = generate_token(48)
+    auth_url, _ = oauth.create_authorization_url(
+        AUTHORIZE_URL, code_verifier=code_verifier
+    )
+
+    try:
+        response = requests.post(
+            auth_url,
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            auth=(username, password),
+            allow_redirects=False,
+            timeout=15,
+        )
+    except requests.RequestException:
+        logger.warning("Failed to reach Viessmann auth server")
+        return {}
+
+    if response.status_code != 302 or "Location" not in response.headers:
+        logger.warning("Basic-auth authorization failed")
+        return {}
+
+    try:
+        oauth.fetch_token(
+            TOKEN_URL,
+            authorization_response=response.headers["Location"],
+            code_verifier=code_verifier,
+            timeout=15,
+        )
+    except (requests.RequestException, OAuthError, KeyError, ValueError):
+        logger.warning("Token exchange failed")
+        return {}
+
+    return dict(oauth.token)
 
 
 class ViCareOAuthManager(AbstractViCareOAuthManager):

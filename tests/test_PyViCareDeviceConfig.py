@@ -1,8 +1,10 @@
+import json
 import unittest
 from unittest.mock import Mock
 
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareService import hasRoles
+from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 
 
 def has_roles(roles):
@@ -88,6 +90,22 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("ElectricalEnergySystem", type(device_type).__name__)
+
+    def test_autoDetect_E3_RoomControl_asRoomControl(self):
+        c = PyViCareDeviceConfig(self.service, "0", "E3_RoomControl_One_525", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
+
+    def test_autoDetect_Smart_RoomControl_asRoomControl(self):
+        c = PyViCareDeviceConfig(self.service, "0", "Smart_RoomControl", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
+
+    def test_autoDetect_RoleRoomControl_asRoomControl(self):
+        self.service.hasRoles = has_roles(["type:virtual;smartRoomControl"])
+        c = PyViCareDeviceConfig(self.service, "0", "Unknown", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
 
     def test_autoDetect_Vitocharge05_asElectricalEnergySystem(self):
         c = PyViCareDeviceConfig(self.service, "0", "E3_VitoCharge_05", "Online")
@@ -219,6 +237,29 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
             self.service, "0", "CU401B_S", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("HeatPump", type(device_type).__name__)
+
+    def test_autoDetect_NotPaidFor_keeps_original(self):
+        self.service.hasRoles = has_roles(["type:heatpump"])
+        self.service.fetch_all_features = Mock(
+            side_effect=PyViCareNotPaidForError({"errorType": "PACKAGE_NOT_PAID_FOR"}))
+        c = PyViCareDeviceConfig(
+            self.service, "0", "CU401B_S", "Online")
+        device_type = c.asAutoDetectDevice()
+        # Without the fix, asAutoDetectDevice would propagate the exception
+        # and crash integration setup. With the fix, hybrid detection falls
+        # back to non-hybrid and the device is created as HeatPump.
+        self.assertEqual("HeatPump", type(device_type).__name__)
+
+    def test_dump_secure_NotPaidFor_emits_placeholder(self):
+        self.service.fetch_all_features = Mock(
+            side_effect=PyViCareNotPaidForError({"errorType": "PACKAGE_NOT_PAID_FOR"}))
+        c = PyViCareDeviceConfig(
+            self.service, "0", "CU401B_S", "Online")
+        dump = json.loads(c.dump_secure())
+        # Diagnostics should produce a usable dump rather than crashing
+        # when the account lacks the paid feature package.
+        self.assertEqual(dump["device"]["dataUnavailableReason"], "PACKAGE_NOT_PAID_FOR")
+        self.assertEqual(dump["data"], [])
 
     def test_getDeviceType_heating(self):
         c = PyViCareDeviceConfig(self.service, "0", "Vitocal", "Online", "heating")

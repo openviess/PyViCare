@@ -4,6 +4,7 @@ import re
 
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
 from PyViCare.PyViCareFuelCell import FuelCell
+from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
@@ -15,6 +16,7 @@ from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
+from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 logger = logging.getLogger(__name__)
@@ -22,7 +24,7 @@ logger.addHandler(logging.NullHandler())
 
 
 class PyViCareDeviceConfig:
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-instance-attributes
     def __init__(self, service, device_id, device_model, status, device_type=None, roles=None):
         self.service = service
         self.device_id = device_id
@@ -63,6 +65,9 @@ class PyViCareDeviceConfig:
 
     def asRoomSensor(self):
         return RoomSensor(self.service)
+
+    def asRoomControl(self):
+        return RoomControl(self.service)
 
     def asRepeater(self):
         return Repeater(self.service)
@@ -113,6 +118,7 @@ class PyViCareDeviceConfig:
             (self.asRadiatorActuator, r"E3_RadiatorActuator", ["type:radiator"]),
             (self.asFloorHeating, r"Smart_zigbee_fht_main|E3_FloorHeatingCircuitDistributorBox", ["type:fhtMain"]),
             (self.asFloorHeatingChannel, r"Smart_zigbee_fht_channel", ["type:fhtChannel"]),
+            (self.asRoomControl, r"E3_RoomControl|Smart_RoomControl", ["type:virtual;smartRoomControl"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
@@ -143,6 +149,14 @@ class PyViCareDeviceConfig:
             has_burners = any(f.startswith("heating.burners") for f in feature_names)
             has_compressors = any(f.startswith("heating.compressors") for f in feature_names)
             return has_burners and has_compressors
+        except PyViCareNotPaidForError:
+            # Account lacks the paid feature package, so feature listing is
+            # unavailable. Treat as non-hybrid and let downstream feature
+            # access fall back to PyViCareNotSupportedFeatureError via the
+            # cached service. Without this, auto-detection crashes the
+            # integration setup before any device is created.
+            logger.debug("PACKAGE_NOT_PAID_FOR while detecting hybrid for %s, treating as non-hybrid", self.device_model)
+            return False
         except (KeyError, TypeError, AttributeError, OSError):
             logger.debug("Could not fetch features for hybrid detection of %s", self.device_model)
             return False
@@ -151,7 +165,6 @@ class PyViCareDeviceConfig:
         return self.service.fetch_all_features()
 
     def dump_secure(self, flat=False):
-        raw_data = self.get_raw_json()
         device_info = {
             "id": self.device_id,
             "modelId": self.device_model,
@@ -159,9 +172,20 @@ class PyViCareDeviceConfig:
             "status": self.status,
             "roles": self.roles
         }
+        try:
+            raw_data = self.get_raw_json()
+            data = raw_data['data']
+        except PyViCareNotPaidForError:
+            # Feature listing requires a paid package the account does not
+            # have. Emit a placeholder so diagnostics still produce a usable
+            # dump (device metadata plus an unavailable-reason marker)
+            # rather than crashing the diagnostics endpoint.
+            logger.debug("PACKAGE_NOT_PAID_FOR while dumping features for %s", self.device_model)
+            data = []
+            device_info["dataUnavailableReason"] = "PACKAGE_NOT_PAID_FOR"
         output = {
             "device": device_info,
-            "data": raw_data['data']
+            "data": data
         }
 
         if flat:
