@@ -1,4 +1,5 @@
-from typing import Any
+from contextlib import suppress
+from typing import Any, List, Optional
 
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
@@ -40,42 +41,18 @@ class WaterTreatment(Device):
 
     # --- Leak Detection ---
 
-    def getLeakSensors(self) -> list[dict[str, Any]]:
-        """Return all connected leak sensors.
+    @property
+    def leakSensors(self) -> List["LeakSensor"]:
+        return [LeakSensor(self, slot) for slot in self.getAvailableLeakSensorSlots()]
 
-        Each Vitoset Aqua exposes 5 sensor slots; only slots that report data
-        are returned.
-        """
-        sensors: list[dict[str, Any]] = []
+    def getAvailableLeakSensorSlots(self) -> List[int]:
+        available: List[int] = []
         for slot in range(_LEAK_SENSOR_SLOTS):
-            base = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}")
-            if not base:
-                continue
-            id_props = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}.id")
-            name_props = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}.name")
-            battery_props = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}.battery")
-            rssi_props = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}.rssi")
-            hw_props = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}.version.hardware")
-            sw_props = self._readProperties(f"water.leakDetection.sensors.leakage.{slot}.version.software")
-            sensors.append({
-                "slot": slot,
-                "status": base.get("status", {}).get("value"),
-                "leak_detected": base.get("value", {}).get("value"),
-                "id": id_props.get("value", {}).get("value"),
-                "name": name_props.get("name", {}).get("value"),
-                "battery_percent": battery_props.get("level", {}).get("value"),
-                "rssi_dbm": rssi_props.get("value", {}).get("value"),
-                "hardware_version": _versionDict(hw_props),
-                "software_version": _versionDict(sw_props),
-            })
-        return sensors
-
-    def _readProperties(self, feature: str) -> dict[str, Any]:
-        try:
-            data = self.getProperty(feature)
-        except PyViCareNotSupportedFeatureError:
-            return {}
-        return data.get("properties") or {}
+            with suppress(PyViCareNotSupportedFeatureError):
+                feature = self.getProperty(f"water.leakDetection.sensors.leakage.{slot}")
+                if feature.get("isEnabled"):
+                    available.append(slot)
+        return available
 
     @handleNotSupported
     def getFlowAlertMaxDuration(self) -> int:
@@ -100,11 +77,65 @@ class WaterTreatment(Device):
         return bool(self.getProperty("water.valves.shutoff.holiday")["properties"]["active"]["value"])
 
 
-def _versionDict(props: dict[str, Any]) -> dict[str, int] | None:
-    if not props:
-        return None
-    return {
-        field: int(props[field]["value"])
-        for field in ("build", "family", "revision", "version")
-        if field in props
-    }
+class LeakSensor:
+    """Single wireless leakage sensor connected to a Vitoset Aqua."""
+
+    def __init__(self, device: WaterTreatment, slot: int) -> None:
+        self.service = device.service
+        self.slot = slot
+        self.device = device
+
+    @property
+    def id(self) -> int:
+        return self.slot
+
+    def getProperty(self, property_name: str) -> Any:
+        return self.device.getProperty(property_name)
+
+    @handleNotSupported
+    def getStatus(self) -> str:
+        return str(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}")["properties"]["status"]["value"])
+
+    @handleNotSupported
+    def getLeakDetected(self) -> bool:
+        return bool(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSensorId(self) -> str:
+        return str(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.id")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getName(self) -> str:
+        return str(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.name")["properties"]["name"]["value"])
+
+    @handleNotSupported
+    def getBatteryPercent(self) -> int:
+        return int(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.battery")["properties"]["level"]["value"])
+
+    @handleNotSupported
+    def getRssi(self) -> int:
+        return int(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.rssi")["properties"]["value"]["value"])
+
+    def getHardwareVersion(self) -> Optional[dict[str, int]]:
+        try:
+            feature = self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.version.hardware")
+        except PyViCareNotSupportedFeatureError:
+            return None
+        return self._versionFields(feature.get("properties") or {})
+
+    def getSoftwareVersion(self) -> Optional[dict[str, int]]:
+        try:
+            feature = self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.version.software")
+        except PyViCareNotSupportedFeatureError:
+            return None
+        return self._versionFields(feature.get("properties") or {})
+
+    @staticmethod
+    def _versionFields(props: dict[str, Any]) -> Optional[dict[str, int]]:
+        if not props:
+            return None
+        return {
+            field: int(props[field]["value"])
+            for field in ("build", "family", "revision", "version")
+            if field in props
+        }

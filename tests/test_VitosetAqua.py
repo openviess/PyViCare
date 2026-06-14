@@ -1,6 +1,6 @@
 import unittest
 
-from PyViCare.PyViCareWaterTreatment import WaterTreatment
+from PyViCare.PyViCareWaterTreatment import LeakSensor, WaterTreatment
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -30,24 +30,26 @@ class VitosetAquaTest(unittest.TestCase):
 
     # --- Leak Detection ---
 
-    def test_getLeakSensors_returns_only_connected(self):
-        sensors = self.device.getLeakSensors()
-        self.assertEqual(len(sensors), 1)
+    def test_leakSensors_returns_only_connected(self):
+        self.assertEqual(len(self.device.leakSensors), 1)
 
-    def test_getLeakSensors_first_sensor_fields(self):
-        sensor = self.device.getLeakSensors()[0]
-        self.assertEqual(sensor["slot"], 0)
-        self.assertEqual(sensor["status"], "connected")
-        self.assertFalse(sensor["leak_detected"])
-        self.assertEqual(sensor["id"], "00:00:00:00:00:00:00:00")
-        self.assertEqual(sensor["name"], "Basement")
-        self.assertEqual(sensor["battery_percent"], 100)
-        self.assertEqual(sensor["rssi_dbm"], 0)
-        self.assertIsInstance(sensor["hardware_version"], dict)
-        self.assertIsInstance(sensor["software_version"], dict)
+    def test_getAvailableLeakSensorSlots(self):
+        self.assertEqual(self.device.getAvailableLeakSensorSlots(), [0])
+
+    def test_leakSensor_fields(self):
+        sensor = self.device.leakSensors[0]
+        self.assertIsInstance(sensor, LeakSensor)
+        self.assertEqual(sensor.slot, 0)
+        self.assertEqual(sensor.id, 0)
+        self.assertEqual(sensor.getStatus(), "connected")
+        self.assertFalse(sensor.getLeakDetected())
+        self.assertEqual(sensor.getSensorId(), "00:00:00:00:00:00:00:00")
+        self.assertEqual(sensor.getName(), "Basement")
+        self.assertEqual(sensor.getBatteryPercent(), 100)
+        self.assertEqual(sensor.getRssi(), 0)
         for field in ("build", "family", "revision", "version"):
-            self.assertIn(field, sensor["hardware_version"])
-            self.assertIn(field, sensor["software_version"])
+            self.assertIn(field, sensor.getHardwareVersion())
+            self.assertIn(field, sensor.getSoftwareVersion())
 
     def test_getFlowAlertMaxDuration(self):
         self.assertEqual(self.device.getFlowAlertMaxDuration(), 0)
