@@ -22,7 +22,8 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getActiveVentilationMode(), "sensorOverride")
 
     def test_getActiveVentilationProgram(self):
-        self.assertEqual(self.device.getActiveVentilationProgram(), "levelTwo")
+        with self.assertWarns(DeprecationWarning):
+            self.assertEqual(self.device.getActiveVentilationProgram(), "levelTwo")
 
     def test_getVentilationModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
@@ -30,7 +31,8 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getVentilationPrograms(self):
         expected_programs = []
-        self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
+        with self.assertWarns(DeprecationWarning):
+            self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
 
     def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']

@@ -17,11 +17,13 @@ class Vitopure350(unittest.TestCase):
         self.assertListEqual(expected_modes, self.device.getVentilationModes())
 
     def test_getActiveVentilationProgram(self):
-        self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
+        with self.assertWarns(DeprecationWarning):
+            self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
 
     def test_getVentilationPrograms(self):
         expected_programs = []
-        self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
+        with self.assertWarns(DeprecationWarning):
+            self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
 
     def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
