@@ -35,14 +35,6 @@ class WaterTreatment(Device):
         return float(self.getProperty("water.consumption.flow.max")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getCurrentDayConsumption(self) -> int:
-        return int(self.getProperty("water.consumption.summary")["properties"]["currentDay"]["value"])
-
-    @handleNotSupported
-    def getLastSevenDaysConsumption(self) -> int:
-        return int(self.getProperty("water.consumption.summary")["properties"]["lastSevenDays"]["value"])
-
-    @handleNotSupported
     def getTotalConsumption(self) -> int:
         return int(self.getProperty("water.consumption.summary")["properties"]["total"]["value"])
 

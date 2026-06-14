@@ -25,12 +25,6 @@ class VitosetAquaTest(unittest.TestCase):
     def test_getMaxFlow(self):
         self.assertAlmostEqual(self.device.getMaxFlow(), 40.2)
 
-    def test_getCurrentDayConsumption(self):
-        self.assertEqual(self.device.getCurrentDayConsumption(), 144)
-
-    def test_getLastSevenDaysConsumption(self):
-        self.assertEqual(self.device.getLastSevenDaysConsumption(), 201)
-
     def test_getTotalConsumption(self):
         self.assertEqual(self.device.getTotalConsumption(), 45510)
 
