@@ -14,6 +14,7 @@ Exit code 1 if deprecated features are used in code (outside the ignore list).
 """
 
 import argparse
+import ast
 import glob
 import json
 import re
@@ -116,58 +117,91 @@ def update_database(extra_files=None):
 
 
 def find_code_usage():
-    """Find all feature paths referenced via getProperty() in PyViCare code."""
-    usage = {}  # feature pattern -> [files]
-    sources = {}  # filename -> full source content
+    """Find all feature paths referenced via getProperty() in PyViCare code.
+
+    Returns:
+      usage: dict mapping feature pattern -> list of (filename, function_source) tuples.
+        The function source is the body text of the enclosing function (or the full
+        file text for top-level calls) and is used by feature_matches_code to
+        confirm wildcard segments via local string literals — file-wide literal
+        search produced false positives across orthogonal functions sharing a
+        token (e.g. "comfort" appearing both in a `ventilation.quickmodes.*` loop
+        and in a `ventilation.operating.programs.*` lookup).
+    """
+    usage = {}  # feature pattern -> list of (filename, function_source)
+    pattern_re = re.compile(r'getProperty\(\s*f?"([^"]+)"\s*\)')
 
     for filepath in sorted(glob.glob(f"{PYVICARE_DIR}/**/*.py", recursive=True)):
         filename = Path(filepath).name
         with open(filepath) as f:
             content = f.read()
-        sources[filename] = content
 
-        for match in re.findall(r'getProperty\(\s*f?"([^"]+)"\s*\)', content):
-            normalized = re.sub(r"\{[^}]+\}", "*", match)
-            if normalized not in usage:
-                usage[normalized] = []
-            usage[normalized].append(filename)
+        try:
+            tree = ast.parse(content)
+        except SyntaxError:
+            continue
 
-    return usage, sources
+        scopes = []  # list of source-text scopes to scan independently
+        seen_lines = set()
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                segment = ast.get_source_segment(content, node)
+                if segment is not None:
+                    scopes.append(segment)
+                    for line in range(node.lineno, getattr(node, "end_lineno", node.lineno) + 1):
+                        seen_lines.add(line)
+
+        # Cover code outside any function (top-level / class body statements) by
+        # scanning the remaining lines as one extra scope.
+        remaining = "\n".join(
+            line for i, line in enumerate(content.splitlines(), start=1)
+            if i not in seen_lines
+        )
+        if remaining:
+            scopes.append(remaining)
+
+        for scope in scopes:
+            for match in pattern_re.findall(scope):
+                normalized = re.sub(r"\{[^}]+\}", "*", match)
+                usage.setdefault(normalized, []).append((filename, scope))
+
+    return usage
 
 
-def feature_matches_code(feature, code_usage, sources):
+def feature_matches_code(feature, code_usage):
     """Check if a deprecated feature is used in code.
 
     For wildcard matches (e.g., heating.circuits.*.operating.programs.*),
-    verifies that the specific segment value appears as a string literal
-    in the source file to avoid false positives from dynamic iteration.
+    verifies that the specific segment value appears as a string literal in the
+    same function scope as the getProperty call — file-wide literal search
+    produced false positives across orthogonal functions sharing a token.
     """
     matching_files = []
-    for pattern, files in code_usage.items():
+    for pattern, occurrences in code_usage.items():
         if "*" in pattern:
             regex = re.escape(pattern).replace(r"\*", r"([^.]+)")
             m = re.fullmatch(regex, feature)
             if m:
                 segments = m.groups()
-                all_confirmed = True
-                for seg in segments:
-                    if seg.isdigit():
-                        continue
-                    for f in files:
-                        if f"'{seg}'" in sources.get(f, "") or f'"{seg}"' in sources.get(f, ""):
+                for filename, scope in occurrences:
+                    confirmed = True
+                    for seg in segments:
+                        if seg.isdigit():
+                            continue
+                        if f"'{seg}'" not in scope and f'"{seg}"' not in scope:
+                            confirmed = False
                             break
-                    else:
-                        all_confirmed = False
-                if all_confirmed:
-                    matching_files.extend(files)
+                    if confirmed:
+                        matching_files.append(filename)
         elif pattern == feature:
-            matching_files.extend(files)
+            for filename, _scope in occurrences:
+                matching_files.append(filename)
     return list(set(matching_files))
 
 
 def report(db):
     """Print deprecation report and return exit code."""
-    code_usage, sources = find_code_usage()
+    code_usage = find_code_usage()
     today = date.today()
 
     used_in_code = []
@@ -179,7 +213,7 @@ def report(db):
         removal_str = info.get("removalDate", "")
         replacement = info.get("info", "")
         feature_sources = info.get("sources", [])
-        code_files = feature_matches_code(feature, code_usage, sources)
+        code_files = feature_matches_code(feature, code_usage)
 
         try:
             removal_date = datetime.strptime(removal_str, "%Y-%m-%d").date()
