@@ -23,18 +23,25 @@ class ViCareServiceMock:
         else:
             self.testData = rawInput
 
-        self.accessor = ViCareDeviceAccessor(
-            '[id]', '[serial]', '[deviceid]')
         self.setPropertyData = []
 
-    def getProperty(self, property_name):
+    def getProperty(self, accessor: ViCareDeviceAccessor, property_name):
         entities = self.testData["data"]
         return readFeature(entities, property_name)
 
-    def setProperty(self, property_name, action, data):
+    def setProperty(self, accessor: ViCareDeviceAccessor, property_name, action, data):
         self.setPropertyData.append({
-            "url": buildSetPropertyUrl(self.accessor, property_name, action),
+            "url": buildSetPropertyUrl(accessor, property_name, action),
             "property_name": property_name,
             "action": action,
             "data": data
         })
+
+    def fetch_all_features(self, accessor: ViCareDeviceAccessor):
+        return self.testData
+
+    def hasRoles(self, requested_roles):
+        return False
+
+    def _isGateway(self):
+        return False

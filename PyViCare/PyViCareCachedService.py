@@ -1,6 +1,7 @@
 import logging
 import threading
-from typing import Any, List
+from datetime import datetime
+from typing import Any, List, Optional
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
@@ -18,24 +19,24 @@ logger.addHandler(logging.NullHandler())
 
 class ViCareCachedService(ViCareService):
 
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, roles: List[str], cacheDuration: int) -> None:
-        ViCareService.__init__(self, oauth_manager, accessor, roles)
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: List[str], cacheDuration: int) -> None:
+        ViCareService.__init__(self, oauth_manager, roles)
         self.__cacheDuration = cacheDuration
-        self.__cache = None
-        self.__cacheTime = None
+        self.__cache: Optional[dict] = None
+        self.__cacheTime: Optional[datetime] = None
         self.__lock = threading.Lock()
 
-    def getProperty(self, property_name: str) -> Any:
-        data = self.__get_or_update_cache()
+    def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:
+        data = self.__get_or_update_cache(accessor)
         entities = data["data"]
         return readFeature(entities, property_name)
 
-    def setProperty(self, property_name, action, data):
-        response = super().setProperty(property_name, action, data)
+    def setProperty(self, accessor: ViCareDeviceAccessor, property_name: str, action: str, data: Any) -> Any:
+        response = super().setProperty(accessor, property_name, action, data)
         self.clear_cache()
         return response
 
-    def __get_or_update_cache(self):
+    def __get_or_update_cache(self, accessor: ViCareDeviceAccessor):
         with self.__lock:
             if self.is_cache_invalid():
                 # we always set the cache time before we fetch the data
@@ -45,7 +46,7 @@ class ViCareCachedService(ViCareService):
                 self.__cacheTime = ViCareTimer().now()
 
                 try:
-                    data = self.fetch_all_features()
+                    data = self.fetch_all_features(accessor)
                 except PyViCareNotPaidForError as e:
                     logger.error("Viessmann API denied access (PACKAGE_NOT_PAID_FOR). Features unavailable: %s", e)
                     if self.__cache is not None:

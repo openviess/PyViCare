@@ -17,13 +17,13 @@ def all_set(_list: List[Any]) -> bool:
     return all(v is not None for v in _list)
 
 
-def get_available_burners(service):
+def get_available_burners(device):
     # workaround starting from 25.01.2022
     # see: https://github.com/somm15/PyViCare/issues/243
     available_burners = []
     for burner in ['0', '1', '2', '3', '4', '5']:
         with suppress(PyViCareNotSupportedFeatureError):
-            if service.getProperty(f"heating.burners.{burner}") is not None:
+            if device.getProperty(f"heating.burners.{burner}") is not None:
                 available_burners.append(burner)
 
     return available_burners
@@ -701,8 +701,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     @handleAPICommandErrors
     def setHeatingSchedule(self, schedule: dict) -> None:
-        self.service.setProperty(f"heating.circuits.{self.circuit}.heating.schedule",
-                                 "setSchedule", {'newSchedule': schedule})
+        self.device.setProperty(f"heating.circuits.{self.circuit}.heating.schedule",
+                                "setSchedule", {'newSchedule': schedule})
 
     @handleNotSupported
     def getHeatingScheduleModes(self) -> list:  # type: ignore[type-arg]

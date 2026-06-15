@@ -30,19 +30,18 @@ class ViCareDeviceAccessor:
         self.device_id = device_id
 
 class ViCareService:
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, accessor: ViCareDeviceAccessor, roles: List[str]) -> None:
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: List[str]) -> None:
         self.oauth_manager = oauth_manager
-        self.accessor = accessor
         self.roles = roles
 
-    def getProperty(self, property_name: str) -> Any:
-        url = self.buildGetPropertyUrl(property_name)
+    def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:
+        url = self.buildGetPropertyUrl(accessor, property_name)
         return self.oauth_manager.get(url)
 
-    def buildGetPropertyUrl(self, property_name):
+    def buildGetPropertyUrl(self, accessor: ViCareDeviceAccessor, property_name):
         if self._isGateway():
-            return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/{property_name}'
-        return f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/{property_name}'
+            return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/features/{property_name}'
+        return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}'
 
     def hasRoles(self, requested_roles) -> bool:
         return hasRoles(requested_roles, self.roles)
@@ -50,20 +49,19 @@ class ViCareService:
     def _isGateway(self) -> bool:
         return self.hasRoles(["type:gateway;VitoconnectOpto1"]) or self.hasRoles(["type:gateway;VitoconnectOpto2/OT2"]) or self.hasRoles(["type:gateway;TCU100"]) or self.hasRoles(["type:gateway;TCU200"]) or self.hasRoles(["type:gateway;TCU300"])
 
-    def setProperty(self, property_name: str, action: str, data: Any) -> Any:
-        url = buildSetPropertyUrl(
-            self.accessor, property_name, action)
+    def setProperty(self, accessor: ViCareDeviceAccessor, property_name: str, action: str, data: Any) -> Any:
+        url = buildSetPropertyUrl(accessor, property_name, action)
 
         post_data = data if isinstance(data, str) else json.dumps(data)
         return self.oauth_manager.post(url, post_data)
 
-    def fetch_all_features(self) -> Any:
-        url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/devices/{self.accessor.device_id}/features/'
+    def fetch_all_features(self, accessor: ViCareDeviceAccessor) -> Any:
+        url = f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/'
         if self._isGateway():
-            url = f'/features/installations/{self.accessor.id}/gateways/{self.accessor.serial}/features/'
+            url = f'/features/installations/{accessor.id}/gateways/{accessor.serial}/features/'
         return self.oauth_manager.get(url)
 
-    def reboot_gateway(self) -> Any:
-        url = f'/equipment/installations/{self.accessor.id}/gateways/{self.accessor.serial}/reboot'
+    def reboot_gateway(self, accessor: ViCareDeviceAccessor) -> Any:
+        url = f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/reboot'
         data = "{}"
         return self.oauth_manager.post(url, data)

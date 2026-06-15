@@ -16,6 +16,7 @@ from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
@@ -25,64 +26,65 @@ logger.addHandler(logging.NullHandler())
 
 class PyViCareDeviceConfig:
     # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-instance-attributes
-    def __init__(self, service, device_id, device_model, status, device_type=None, roles=None):
+    def __init__(self, accessor: ViCareDeviceAccessor, service: ViCareService, device_model, status, device_type=None, roles=None):
+        self.accessor = accessor
         self.service = service
-        self.device_id = device_id
+        self.device_id = accessor.device_id
         self.device_model = device_model
         self.status = status
         self.device_type = device_type
         self.roles = roles if roles is not None else []
 
     def asGeneric(self):
-        return HeatingDevice(self.service)
+        return HeatingDevice(self.accessor, self.service)
 
     def asGazBoiler(self):
-        return GazBoiler(self.service)
+        return GazBoiler(self.accessor, self.service)
 
     def asFuelCell(self):
-        return FuelCell(self.service)
+        return FuelCell(self.accessor, self.service)
 
     def asHeatPump(self):
-        return HeatPump(self.service)
+        return HeatPump(self.accessor, self.service)
 
     def asOilBoiler(self):
-        return OilBoiler(self.service)
+        return OilBoiler(self.accessor, self.service)
 
     def asPelletsBoiler(self):
-        return PelletsBoiler(self.service)
+        return PelletsBoiler(self.accessor, self.service)
 
     def asHybridDevice(self):
-        return Hybrid(self.service)
+        return Hybrid(self.accessor, self.service)
 
     def asRadiatorActuator(self):
-        return RadiatorActuator(self.service)
+        return RadiatorActuator(self.accessor, self.service)
 
     def asFloorHeating(self):
-        return FloorHeating(self.service)
+        return FloorHeating(self.accessor, self.service)
 
     def asFloorHeatingChannel(self):
-        return FloorHeatingChannel(self.service)
+        return FloorHeatingChannel(self.accessor, self.service)
 
     def asRoomSensor(self):
-        return RoomSensor(self.service)
+        return RoomSensor(self.accessor, self.service)
 
     def asRoomControl(self):
-        return RoomControl(self.service)
+        return RoomControl(self.accessor, self.service)
 
     def asRepeater(self):
-        return Repeater(self.service)
+        return Repeater(self.accessor, self.service)
 
     def asElectricalEnergySystem(self):
-        return ElectricalEnergySystem(self.service)
+        return ElectricalEnergySystem(self.accessor, self.service)
 
     def asGateway(self):
-        return Gateway(self.service)
+        return Gateway(self.accessor, self.service)
 
     def asVentilation(self):
-        return VentilationDevice(self.service)
+        return VentilationDevice(self.accessor, self.service)
 
     def getConfig(self):
-        return self.service.accessor
+        return self.accessor
 
     def getId(self):
         return self.device_id
@@ -144,7 +146,7 @@ class PyViCareDeviceConfig:
     def _isHybridByFeatures(self):
         """Check API features to detect hybrid devices (both burners and compressors)."""
         try:
-            features = self.service.fetch_all_features()
+            features = self.service.fetch_all_features(self.accessor)
             feature_names = [f["feature"] for f in features.get("data", [])]
             has_burners = any(f.startswith("heating.burners") for f in feature_names)
             has_compressors = any(f.startswith("heating.compressors") for f in feature_names)
@@ -162,7 +164,7 @@ class PyViCareDeviceConfig:
             return False
 
     def get_raw_json(self):
-        return self.service.fetch_all_features()
+        return self.service.fetch_all_features(self.accessor)
 
     def dump_secure(self, flat=False):
         device_info = {
