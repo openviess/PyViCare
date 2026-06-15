@@ -25,7 +25,7 @@ class ViCareServiceMock:
 
         self.setPropertyData = []
 
-    def getProperty(self, accessor: ViCareDeviceAccessor, property_name):
+    def getProperty(self, _accessor: ViCareDeviceAccessor, property_name):
         entities = self.testData["data"]
         return readFeature(entities, property_name)
 
@@ -37,10 +37,10 @@ class ViCareServiceMock:
             "data": data
         })
 
-    def fetch_all_features(self, accessor: ViCareDeviceAccessor):
+    def fetch_all_features(self, _accessor: ViCareDeviceAccessor):
         return self.testData
 
-    def hasRoles(self, requested_roles):
+    def hasRoles(self, _requested_roles):
         return False
 
     def _isGateway(self):

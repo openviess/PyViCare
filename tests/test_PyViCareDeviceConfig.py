@@ -16,7 +16,7 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
     def setUp(self) -> None:
         self.service = Mock()
         self.service.hasRoles = has_roles([])
-        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
+        self.accessor = ViCareDeviceAccessor(0, "[serial]", "0")
 
     def test_autoDetect_Vitodens_asGazBoiler(self):
         c = PyViCareDeviceConfig(
