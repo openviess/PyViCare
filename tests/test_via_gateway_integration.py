@@ -9,6 +9,7 @@ import unittest
 from unittest.mock import Mock
 
 from PyViCare.PyViCare import PyViCare
+from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareCachedServiceViaGateway import \
     ViCareCachedServiceViaGateway
 from tests.helper import readJson
@@ -98,7 +99,6 @@ class PyViCareViaGatewayIntegrationTest(unittest.TestCase):
 
     def test_default_mode_uses_per_device_service(self):
         # Without loadViaGateway, behavior is unchanged: per-device cached service
-        from PyViCare.PyViCareCachedService import ViCareCachedService
         oauth = Mock()
         oauth.get.return_value = INSTALLATIONS_HEATBOX1
         vicare = PyViCare()
