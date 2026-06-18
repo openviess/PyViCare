@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareGateway import Gateway
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitoconnectOpto2(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/VitoconnectOpto2.json')
-        self.device = Gateway(self.service)
+        self.device = Gateway(self.accessor, self.service)
 
     def test_getSerial(self):
         self.assertEqual(
