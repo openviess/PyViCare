@@ -16,7 +16,7 @@ from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
-from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
 from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
@@ -36,52 +36,52 @@ class PyViCareDeviceConfig:
         self.roles = roles if roles is not None else []
 
     def asGeneric(self):
-        return HeatingDevice(self.accessor, self.service)
+        return HeatingDevice(self.accessor, self.service, self.roles)
 
     def asGazBoiler(self):
-        return GazBoiler(self.accessor, self.service)
+        return GazBoiler(self.accessor, self.service, self.roles)
 
     def asFuelCell(self):
-        return FuelCell(self.accessor, self.service)
+        return FuelCell(self.accessor, self.service, self.roles)
 
     def asHeatPump(self):
-        return HeatPump(self.accessor, self.service)
+        return HeatPump(self.accessor, self.service, self.roles)
 
     def asOilBoiler(self):
-        return OilBoiler(self.accessor, self.service)
+        return OilBoiler(self.accessor, self.service, self.roles)
 
     def asPelletsBoiler(self):
-        return PelletsBoiler(self.accessor, self.service)
+        return PelletsBoiler(self.accessor, self.service, self.roles)
 
     def asHybridDevice(self):
-        return Hybrid(self.accessor, self.service)
+        return Hybrid(self.accessor, self.service, self.roles)
 
     def asRadiatorActuator(self):
-        return RadiatorActuator(self.accessor, self.service)
+        return RadiatorActuator(self.accessor, self.service, self.roles)
 
     def asFloorHeating(self):
-        return FloorHeating(self.accessor, self.service)
+        return FloorHeating(self.accessor, self.service, self.roles)
 
     def asFloorHeatingChannel(self):
-        return FloorHeatingChannel(self.accessor, self.service)
+        return FloorHeatingChannel(self.accessor, self.service, self.roles)
 
     def asRoomSensor(self):
-        return RoomSensor(self.accessor, self.service)
+        return RoomSensor(self.accessor, self.service, self.roles)
 
     def asRoomControl(self):
-        return RoomControl(self.accessor, self.service)
+        return RoomControl(self.accessor, self.service, self.roles)
 
     def asRepeater(self):
-        return Repeater(self.accessor, self.service)
+        return Repeater(self.accessor, self.service, self.roles)
 
     def asElectricalEnergySystem(self):
-        return ElectricalEnergySystem(self.accessor, self.service)
+        return ElectricalEnergySystem(self.accessor, self.service, self.roles)
 
     def asGateway(self):
-        return Gateway(self.accessor, self.service)
+        return Gateway(self.accessor, self.service, self.roles)
 
     def asVentilation(self):
-        return VentilationDevice(self.accessor, self.service)
+        return VentilationDevice(self.accessor, self.service, self.roles)
 
     def getConfig(self):
         return self.accessor
@@ -101,8 +101,17 @@ class PyViCareDeviceConfig:
     def getRoles(self):
         return self.roles
 
+    def hasRoles(self, requested_roles):
+        return hasRoles(requested_roles, self.roles)
+
     def isGateway(self):
-        return self.service._isGateway()  # pylint: disable=protected-access
+        return (
+            self.hasRoles(["type:gateway;VitoconnectOpto1"])
+            or self.hasRoles(["type:gateway;VitoconnectOpto2/OT2"])
+            or self.hasRoles(["type:gateway;TCU100"])
+            or self.hasRoles(["type:gateway;TCU200"])
+            or self.hasRoles(["type:gateway;TCU300"])
+        )
 
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
@@ -131,7 +140,7 @@ class PyViCareDeviceConfig:
         ]
 
         for (creator_method, type_name, roles) in device_types:
-            if re.search(type_name, self.device_model) or self.service.hasRoles(roles):
+            if re.search(type_name, self.device_model) or self.hasRoles(roles):
                 logger.info("detected %s %s", self.device_model, creator_method.__name__)
                 device = creator_method()
                 if isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid):

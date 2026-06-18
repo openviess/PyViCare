@@ -3,19 +3,14 @@ import unittest
 from unittest.mock import Mock
 
 from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
-from PyViCare.PyViCareService import ViCareDeviceAccessor, hasRoles
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotPaidForError
-
-
-def has_roles(roles):
-    return lambda requested_roles: hasRoles(requested_roles, roles)
 
 
 class PyViCareDeviceConfigTest(unittest.TestCase):
 
     def setUp(self) -> None:
         self.service = Mock()
-        self.service.hasRoles = has_roles([])
         self.accessor = ViCareDeviceAccessor(0, "[serial]", "0")
 
     def test_autoDetect_Vitodens_asGazBoiler(self):
@@ -37,44 +32,38 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("GazBoiler", type(device_type).__name__)
 
     def test_autoDetect_RoleBoiler_asGazBoiler(self):
-        self.service.hasRoles = has_roles(["type:boiler"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:boiler"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("GazBoiler", type(device_type).__name__)
 
     def test_autoDetect_RoleHeatpump_asHeatpump(self):
-        self.service.hasRoles = has_roles(["type:heatpump"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:heatpump"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("HeatPump", type(device_type).__name__)
 
     def test_autoDetect_RoleRadiator_asRadiatorActuator(self):
-        self.service.hasRoles = has_roles(["type:radiator"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:radiator"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("RadiatorActuator", type(device_type).__name__)
 
     def test_autoDetect_RoleClimateSensor_asRoomSensor(self):
-        self.service.hasRoles = has_roles(["type:climateSensor"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:climateSensor"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("RoomSensor", type(device_type).__name__)
 
     def test_autoDetect_RoleVentilation_asVentilation(self):
-        self.service.hasRoles = has_roles(["type:ventilation"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:ventilation"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("VentilationDevice", type(device_type).__name__)
 
     def test_autoDetect_RoleVentilationCentral_asVentilation(self):
-        self.service.hasRoles = has_roles(["type:ventilation;central"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:ventilation;central"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("VentilationDevice", type(device_type).__name__)
 
@@ -85,9 +74,8 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("VentilationDevice", type(device_type).__name__)
 
     def test_autoDetect_RoleVentilationPurifier_asVentilation(self):
-        self.service.hasRoles = has_roles(["type:ventilation;purifier"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:ventilation;purifier"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("VentilationDevice", type(device_type).__name__)
 
@@ -98,9 +86,8 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("VentilationDevice", type(device_type).__name__)
 
     def test_autoDetect_RoleESS_asElectricalEnergySystem(self):
-        self.service.hasRoles = has_roles(["type:ess"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:ess"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("ElectricalEnergySystem", type(device_type).__name__)
 
@@ -117,9 +104,8 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("RoomControl", type(device_type).__name__)
 
     def test_autoDetect_RoleRoomControl_asRoomControl(self):
-        self.service.hasRoles = has_roles(["type:virtual;smartRoomControl"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:virtual;smartRoomControl"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("RoomControl", type(device_type).__name__)
 
@@ -160,72 +146,62 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_Ecotronic_asPelletsBoiler(self):
-        self.service.hasRoles = has_roles(["type:boiler"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Ecotronic", "Online")
+            self.accessor, self.service, "Ecotronic", "Online", roles=["type:boiler"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("PelletsBoiler", type(device_type).__name__)
 
     def test_autoDetect_Vitoladens_asOilBoiler(self):
-        self.service.hasRoles = has_roles(["type:boiler"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Vitoladens", "Online")
+            self.accessor, self.service, "Vitoladens", "Online", roles=["type:boiler"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("OilBoiler", type(device_type).__name__)
 
     def test_autoDetect_RoleGateway_asGateway(self):
-        self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto1"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:gateway;VitoconnectOpto1"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_RoleGateway_asGateway_vc_opto2(self):
-        self.service.hasRoles = has_roles(["type:gateway;VitoconnectOpto2/OT2"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:gateway;VitoconnectOpto2/OT2"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_RoleGateway_asGateway_TCU100(self):
-        self.service.hasRoles = has_roles(["type:gateway;TCU100"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:gateway;TCU100"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_RoleGateway_asGateway_TCU200(self):
-        self.service.hasRoles = has_roles(["type:gateway;TCU200"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:gateway;TCU200"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_RoleGateway_asGateway_TCU300(self):
-        self.service.hasRoles = has_roles(["type:gateway;TCU300"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:gateway;TCU300"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_legacy_device(self):
-        self.service.hasRoles = has_roles(["type:legacy"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:legacy"])
         device = c.asAutoDetectDevice()
         self.assertEqual(device.isLegacyDevice(), True)
         self.assertEqual(device.isE3Device(), False)
 
     def test_e3_device(self):
-        self.service.hasRoles = has_roles(["type:E3"])
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Unknown", "Online")
+            self.accessor, self.service, "Unknown", "Online", roles=["type:E3"])
         device = c.asAutoDetectDevice()
         self.assertEqual(device.isLegacyDevice(), False)
         self.assertEqual(device.isE3Device(), True)
 
     def test_autoDetect_CU401B_S_with_burners_and_compressors_asHybrid(self):
-        self.service.hasRoles = has_roles(["type:heatpump"])
         self.service.fetch_all_features = Mock(return_value={"data": [
             {"feature": "heating.burners"},
             {"feature": "heating.burners.0"},
@@ -233,23 +209,21 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
             {"feature": "heating.compressors.0"},
         ]})
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "CU401B_S", "Online")
+            self.accessor, self.service, "CU401B_S", "Online", roles=["type:heatpump"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Hybrid", type(device_type).__name__)
 
     def test_autoDetect_HeatPump_without_burners_stays_HeatPump(self):
-        self.service.hasRoles = has_roles(["type:heatpump"])
         self.service.fetch_all_features = Mock(return_value={"data": [
             {"feature": "heating.compressors"},
             {"feature": "heating.compressors.0"},
         ]})
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Vitocal300", "Online")
+            self.accessor, self.service, "Vitocal300", "Online", roles=["type:heatpump"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("HeatPump", type(device_type).__name__)
 
     def test_autoDetect_GazBoiler_with_compressors_asHybrid(self):
-        self.service.hasRoles = has_roles(["type:boiler"])
         self.service.fetch_all_features = Mock(return_value={"data": [
             {"feature": "heating.burners"},
             {"feature": "heating.burners.0"},
@@ -257,24 +231,22 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
             {"feature": "heating.compressors.0"},
         ]})
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Vitodens200", "Online")
+            self.accessor, self.service, "Vitodens200", "Online", roles=["type:boiler"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Hybrid", type(device_type).__name__)
 
     def test_autoDetect_feature_fetch_failure_keeps_original(self):
-        self.service.hasRoles = has_roles(["type:heatpump"])
         self.service.fetch_all_features = Mock(side_effect=OSError("API error"))
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "CU401B_S", "Online")
+            self.accessor, self.service, "CU401B_S", "Online", roles=["type:heatpump"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("HeatPump", type(device_type).__name__)
 
     def test_autoDetect_NotPaidFor_keeps_original(self):
-        self.service.hasRoles = has_roles(["type:heatpump"])
         self.service.fetch_all_features = Mock(
             side_effect=PyViCareNotPaidForError({"errorType": "PACKAGE_NOT_PAID_FOR"}))
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "CU401B_S", "Online")
+            self.accessor, self.service, "CU401B_S", "Online", roles=["type:heatpump"])
         device_type = c.asAutoDetectDevice()
         # Without the fix, asAutoDetectDevice would propagate the exception
         # and crash integration setup. With the fix, hybrid detection falls
@@ -320,13 +292,13 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual(c.getRoles(), [])
 
     def test_isGateway_true_for_gateway_role(self):
-        self.service._isGateway = Mock(return_value=True)  # pylint: disable=protected-access
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Heatbox1", "Online", "vitoconnect")
+            self.accessor, self.service, "Heatbox1", "Online", "vitoconnect",
+            roles=["type:gateway;VitoconnectOpto1"])
         self.assertTrue(c.isGateway())
 
     def test_isGateway_false_for_non_gateway_role(self):
-        self.service._isGateway = Mock(return_value=False)  # pylint: disable=protected-access
         c = PyViCareDeviceConfig(
-            self.accessor, self.service, "Vitocal", "Online", "heating")
+            self.accessor, self.service, "Vitocal", "Online", "heating",
+            roles=["type:heatpump"])
         self.assertFalse(c.isGateway())
