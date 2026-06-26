@@ -18,6 +18,13 @@
       "description": "Automerge check tools"
     },
     {
+      "automerge": true,
+      "platformAutomerge": true,
+      "labels": ["maintenance"],
+      "matchManagers": ["github-actions"],
+      "description": "Automerge GitHub Actions"
+    },
+    {
       "matchDatasources": ["pypi"],
       "groupName": "deprecated packages",
       "matchPackageNames": [
