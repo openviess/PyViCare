@@ -58,3 +58,6 @@ class Ecotronic(unittest.TestCase):
 
     def test_getAshLevel(self):
         self.assertEqual(self.device.getAshLevel(), 43.7)
+
+    def test_getBoilerTemperature(self):
+        self.assertEqual(self.device.getBoilerTemperature(), 63)
