@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHybrid import Hybrid
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocaldens222F(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocaldens222F.json')
-        self.device = Hybrid(self.service)
+        self.device = Hybrid(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
@@ -49,7 +51,7 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getBurnerModulation(self):
         self.assertEqual(self.device.getBurner(0).getModulation(), 0)
 
-    def test_getCompressorHours(self):
+    def test_compressor_getHours(self):
         self.assertEqual(self.device.getCompressor(0).getHours(), 1.4)
 
     def test_getPrograms(self):

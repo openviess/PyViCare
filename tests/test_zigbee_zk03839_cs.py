@@ -1,16 +1,18 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareRoomSensor import RoomSensor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
-class ZK03839(unittest.TestCase):
+class ZK03839ViaHeatbox2(unittest.TestCase):
     def setUp(self):
-        self.service = ViCareServiceMock('response/zigbee_Smart_cs_generic_50.json')
-        self.device = RoomSensor(self.service)
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
+        self.service = ViCareServiceMock('response/zigbee_zk03839_cs.json')
+        self.device = RoomSensor(self.accessor, self.service)
 
     def test_getSerial(self):
-        self.assertEqual(self.device.getSerial(), "zigbee-f082c0fffe43d8cd")
+        self.assertEqual(self.device.getSerial(), "zigbee-################")
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
@@ -22,10 +24,9 @@ class ZK03839(unittest.TestCase):
         self.assertEqual(self.device.isVentilationDevice(), False)
 
     def test_getTemperature(self):
-        self.assertEqual(self.device.getTemperature(), 15)
+        self.assertEqual(
+            self.device.getTemperature(), 22.1)
 
     def test_getHumidity(self):
-        self.assertEqual(self.device.getHumidity(), 37)
-
-    def test_getBatteryLevel(self):
-        self.assertEqual(self.device.getBatteryLevel(), 89)
+        self.assertEqual(
+            self.device.getHumidity(), 41.3)

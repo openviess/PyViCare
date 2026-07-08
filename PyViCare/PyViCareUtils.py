@@ -105,6 +105,29 @@ class PyViCareInvalidDataError(Exception):
     pass
 
 
+class PyViCareNotPaidForError(Exception):
+    def __init__(self, response):
+        extended_payload = response.get("extendedPayload", {})
+        monetization = extended_payload.get("monetization", "Unknown")
+
+        msg = f"Feature not available: {monetization}"
+
+        super().__init__(self, msg)
+        self.message = msg
+
+
+class PyViCareDeviceCommunicationError(Exception):
+    def __init__(self, response):
+        extended_payload = response.get("extendedPayload", {})
+        reason = extended_payload.get("reason", "Unknown")
+
+        msg = f'Device communication error. Reason: {reason}'
+
+        super().__init__(self, msg)
+        self.message = msg
+        self.reason = reason
+
+
 class PyViCareRateLimitError(Exception):
 
     def __init__(self, response):
