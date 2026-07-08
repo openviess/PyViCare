@@ -17,11 +17,11 @@ class OilBoiler(HeatingDevice):
 
     @handleNotSupported
     def getAvailableBurners(self):
-        return get_available_burners(self.service)
+        return get_available_burners(self)
 
     @handleNotSupported
     def getBoilerTemperature(self):
-        return self.service.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
+        return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
 
 class OilBurner(HeatingDeviceWithComponent):
@@ -32,16 +32,16 @@ class OilBurner(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getActive(self):
-        return self.service.getProperty(f"heating.burners.{self.burner}")["properties"]["active"]["value"]
+        return self.getProperty(f"heating.burners.{self.burner}")["properties"]["active"]["value"]
 
     @handleNotSupported
     def getHours(self):
-        return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["hours"]["value"]
+        return self.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["hours"]["value"]
 
     @handleNotSupported
     def getStarts(self):
-        return self.service.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["starts"]["value"]
+        return self.getProperty(f"heating.burners.{self.burner}.statistics")["properties"]["starts"]["value"]
 
     @handleNotSupported
     def getModulation(self):
-        return self.service.getProperty(f"heating.burners.{self.burner}.modulation")["properties"]["value"]["value"]
+        return self.getProperty(f"heating.burners.{self.burner}.modulation")["properties"]["value"]["value"]

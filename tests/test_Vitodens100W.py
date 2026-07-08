@@ -1,41 +1,46 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitodens100W(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitodens100W.json')
-        self.device = GazBoiler(self.service)
+        self.device = GazBoiler(self.accessor, self.service)
 
     def test_getActive(self):
-        self.assertEqual(self.device.burners[0].getActive(), False)
+        self.assertEqual(self.device.burners[0].getActive(), True)
 
     def test_getBurnerStarts(self):
-        self.assertEqual(self.device.burners[0].getStarts(), 6826)
+        self.assertEqual(self.device.burners[0].getStarts(), 18187)
 
     def test_getBurnerHours(self):
-        self.assertEqual(self.device.burners[0].getHours(), 675)
+        self.assertEqual(self.device.burners[0].getHours(), 5598)
 
     def test_getBurnerModulation(self):
-        self.assertEqual(self.device.burners[0].getModulation(), 0)
+        self.assertEqual(self.device.burners[0].getModulation(), 86.9)
 
     def test_getGasSummaryConsumptionHeatingCurrentDay(self):
-        self.assertEqual(self.device.getGasSummaryConsumptionHeatingCurrentDay(), 11.2)
+        self.assertEqual(self.device.getGasSummaryConsumptionHeatingCurrentDay(), 1.6)
         self.assertEqual(self.device.getGasSummaryConsumptionHeatingUnit(), "cubicMeter")
 
     def test_getGasSummaryConsumptionDomesticHotWaterCurrentMonth(self):
-        self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterCurrentMonth(), 13.7)
+        self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterCurrentMonth(), 0.8)
         self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterUnit(), "cubicMeter")
 
     def test_getPowerSummaryConsumptionHeatingCurrentDay(self):
-        self.assertEqual(self.device.getPowerSummaryConsumptionHeatingCurrentDay(), 0.9)
+        self.assertEqual(self.device.getPowerSummaryConsumptionHeatingCurrentDay(), 0.1)
         self.assertEqual(self.device.getPowerSummaryConsumptionHeatingUnit(), "kilowattHour")
 
     def test_getPowerSummaryConsumptionDomesticHotWaterCurrentYear(self):
-        self.assertEqual(self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentYear(), 18)
+        self.assertEqual(self.device.getPowerSummaryConsumptionDomesticHotWaterCurrentYear(), 1.4)
         self.assertEqual(self.device.getPowerSummaryConsumptionDomesticHotWaterUnit(), "kilowattHour")
 
     def test_getGasSummaryConsumptionDomesticHotWaterUnit(self):
         self.assertEqual(self.device.getGasSummaryConsumptionDomesticHotWaterUnit(), "cubicMeter")
+
+    def test_getWifiSignalStrength(self):
+        self.assertEqual(self.device.getWifiSignalStrength(), -65)
