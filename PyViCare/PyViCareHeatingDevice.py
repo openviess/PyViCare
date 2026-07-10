@@ -391,6 +391,10 @@ class HeatingDevice(Device):
     def getBoilerCommonSupplyTemperature(self):
         return self.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getBoilerTemperature(self):
+        return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
+
 
 class HeatingDeviceWithComponent:
     """This is the base class for all heating components"""

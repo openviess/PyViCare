@@ -92,10 +92,6 @@ class GazBoiler(HeatingDevice):
         return self.getProperty("heating.gas.consumption.dhw")["properties"]["year"]["value"][0]
 
     @handleNotSupported
-    def getBoilerTemperature(self):
-        return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
-
-    @handleNotSupported
     def getBoilerTargetTemperature(self):
         return self.getProperty("heating.boiler.temperature")["properties"]["value"]["value"]
 
