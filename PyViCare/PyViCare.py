@@ -17,9 +17,10 @@ logger.addHandler(logging.NullHandler())
 
 class PyViCare:
     """"Viessmann ViCare API Python tools"""
+    viaGateway = False
+
     def __init__(self) -> None:
         self.cacheDuration = 60
-        self.viaGateway = False
 
     def setCacheDuration(self, cache_duration):
         self.cacheDuration = int(cache_duration)

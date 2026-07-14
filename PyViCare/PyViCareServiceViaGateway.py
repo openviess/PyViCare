@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
-def filter_features_for_device(entities, device_id: str):
+def filter_features_for_device(entities: list[dict[str, Any]], device_id: str) -> list[dict[str, Any]]:
     device_segment = f"/devices/{device_id}/"
     return [e for e in entities if device_segment in e.get("uri", "")]
 

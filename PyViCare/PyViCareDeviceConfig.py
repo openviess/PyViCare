@@ -16,7 +16,8 @@ from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareGateway import Gateway
-from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
+from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
+                                      hasRoles, is_gateway_role)
 from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
@@ -105,13 +106,7 @@ class PyViCareDeviceConfig:
         return hasRoles(requested_roles, self.roles)
 
     def isGateway(self):
-        return (
-            self.hasRoles(["type:gateway;VitoconnectOpto1"])
-            or self.hasRoles(["type:gateway;VitoconnectOpto2/OT2"])
-            or self.hasRoles(["type:gateway;TCU100"])
-            or self.hasRoles(["type:gateway;TCU200"])
-            or self.hasRoles(["type:gateway;TCU300"])
-        )
+        return is_gateway_role(self.roles)
 
     # see: https://vitodata300.viessmann.com/vd300/ApplicationHelp/VD300/1031_de_DE/Ger%C3%A4teliste.html
     def asAutoDetectDevice(self):
