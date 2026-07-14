@@ -3,7 +3,8 @@ import threading
 from datetime import datetime
 from typing import Any, Optional
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor, readFeature
+from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
+                                      readFeature)
 from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
                                     PyViCareInvalidDataError,
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
-class ViCareCachedServiceBase:
+class ViCareCachedServiceBase(ViCareService):
     """Time-based caching shared by the per-device and per-gateway services.
 
     Subclasses provide `_fetch_uncached` (the HTTP fetch) and `_extract_entities`
@@ -34,8 +35,7 @@ class ViCareCachedServiceBase:
         return readFeature(entities, property_name)
 
     def setProperty(self, accessor: ViCareDeviceAccessor, property_name: str, action: str, data: Any) -> Any:
-        # super() -> concrete service via MRO
-        response = super().setProperty(accessor, property_name, action, data)  # type: ignore[misc]
+        response = super().setProperty(accessor, property_name, action, data)
         self.clear_cache()
         return response
 

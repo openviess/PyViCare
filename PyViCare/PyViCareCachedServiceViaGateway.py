@@ -19,7 +19,7 @@ class ViCareCachedServiceViaGateway(ViCareCachedServiceBase, ViCareServiceViaGat
     whole cache.
     """
 
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, cacheDuration: int) -> None:
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, cacheDuration: int) -> None:  # pylint: disable=super-init-not-called
         ViCareServiceViaGateway.__init__(self, oauth_manager)
         self._init_cache(cacheDuration)
 
