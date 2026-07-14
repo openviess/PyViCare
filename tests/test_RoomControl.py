@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareRoomControl import RoomControl
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class RoomControlTest(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/RoomControl.json')
-        self.device = RoomControl(self.service)
+        self.device = RoomControl(self.accessor, self.service)
 
     def test_getAvailableRooms(self):
         rooms = self.device.getAvailableRooms()

@@ -1,5 +1,6 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
@@ -8,8 +9,9 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitocal200(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocal200.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_getAvailableCompressors(self):
         self.assertEqual(self.device.getAvailableCompressors(), ['0'])

@@ -119,6 +119,13 @@ class VentilationDevice(Device):
         self.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
 
     @handleNotSupported
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use getVentilationModes() instead."
+        ),
+        version="2.61.0",
+    )
     def getVentilationPrograms(self):
         available_programs = []
         for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
@@ -133,6 +140,14 @@ class VentilationDevice(Device):
         return self.getVentilationPrograms()
 
     @handleNotSupported
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use getVentilationLevel() to read the current fan level "
+            "(from ventilation.operating.state) instead."
+        ),
+        version="2.61.0",
+    )
     def getActiveVentilationProgram(self):
         return self.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
 
@@ -141,6 +156,13 @@ class VentilationDevice(Device):
     def getActiveProgram(self):
         return self.getActiveVentilationProgram()
 
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use activateVentilationMode() and setVentilationLevel() instead."
+        ),
+        version="2.61.0",
+    )
     def activateVentilationProgram(self, program):
         """ Activate a program
             NOTE
@@ -172,6 +194,13 @@ class VentilationDevice(Device):
         """
         return self.activateVentilationProgram(program)
 
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use activateVentilationMode() with a different mode instead."
+        ),
+        version="2.61.0",
+    )
     def deactivateVentilationProgram(self, program):
         """ Deactivate a program
         Parameters

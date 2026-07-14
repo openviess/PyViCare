@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitoairFs300(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/VitoairFs300E.json')
-        self.device = VentilationDevice(self.service)
+        self.device = VentilationDevice(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
@@ -22,7 +24,8 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getActiveVentilationMode(), "sensorOverride")
 
     def test_getActiveVentilationProgram(self):
-        self.assertEqual(self.device.getActiveVentilationProgram(), "levelTwo")
+        with self.assertWarns(DeprecationWarning):
+            self.assertEqual(self.device.getActiveVentilationProgram(), "levelTwo")
 
     def test_getVentilationModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
@@ -30,7 +33,8 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getVentilationPrograms(self):
         expected_programs = []
-        self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
+        with self.assertWarns(DeprecationWarning):
+            self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
 
     def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
