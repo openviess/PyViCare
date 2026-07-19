@@ -244,6 +244,37 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.comfort',
             'ventilation.quickmodes.eco',
             'ventilation.quickmodes.holiday',
+            # additional ventilation features seen in VitoairFs300E.json
+            'device.commissioning.information',
+            'ventilation.air.balance.offset',
+            'ventilation.airQuality.co',
+            'ventilation.airQuality.co2',
+            'ventilation.airQuality.organicComponents',
+            'ventilation.airQuality.pm10',
+            'ventilation.airQuality.pm2d5',
+            'ventilation.airQuality.temperature',
+            'ventilation.bypass',
+            'ventilation.bypass.configuration.temperature.perceived',
+            'ventilation.bypass.configuration.temperature.supply.dynamicRegulation',
+            'ventilation.bypass.configuration.temperature.supply.smoothRegulation',
+            'ventilation.bypass.operating.modes.active',
+            'ventilation.bypass.operating.modes.automatic',
+            'ventilation.bypass.operating.modes.open',
+            'ventilation.bypass.position',
+            'ventilation.external.lock',
+            'ventilation.fan.assignmentSwitch',
+            'ventilation.fan.exhaust',
+            'ventilation.fan.exhaust.runtime',
+            'ventilation.features.co',
+            'ventilation.features.co2',
+            'ventilation.features.dust',
+            'ventilation.features.finedust',
+            'ventilation.features.organicComponent',
+            'ventilation.filter.information',
+            'ventilation.lockExternal',
+            'ventilation.quickmodes.temporaryShutdown',
+            'ventilation.sensors.actuator.selftest',
+            'ventilation.switchActivation',
 
             # energy system - not yet used
             'device.etn',
@@ -318,6 +349,24 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.sensors.airQuality',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
+            # Vitoset Aqua water softener (testdata only, no class yet)
+            'device.status',
+            'water.consumption.flow.current',
+            'water.consumption.flow.max',
+            'water.consumption.summary',
+            'water.leakDetection.configuration.flowAlert',
+            'water.leakDetection.sensors.leakage.0',
+            'water.leakDetection.sensors.leakage.0.battery',
+            'water.leakDetection.sensors.leakage.0.id',
+            'water.leakDetection.sensors.leakage.0.name',
+            'water.leakDetection.sensors.leakage.0.rssi',
+            'water.leakDetection.sensors.leakage.0.version.hardware',
+            'water.leakDetection.sensors.leakage.0.version.software',
+            'water.softener.configuration.lowSaltAlert',
+            'water.softener.salt.level.days',
+            'water.valves.shutoff.holiday',
+            'water.valves.shutoff.motor',
+            'water.valves.shutoff.position',
         ]
 
         all_features = self.read_all_features()
@@ -366,7 +415,7 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
+                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|room_id)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)

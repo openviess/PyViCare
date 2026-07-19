@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitopure350(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitopure350.json')
-        self.device = VentilationDevice(self.service)
+        self.device = VentilationDevice(self.accessor, self.service)
 
     def test_getActiveVentilationMode(self):
         self.assertEqual("sensorDriven", self.device.getActiveVentilationMode())
@@ -17,11 +19,13 @@ class Vitopure350(unittest.TestCase):
         self.assertListEqual(expected_modes, self.device.getVentilationModes())
 
     def test_getActiveVentilationProgram(self):
-        self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
+        with self.assertWarns(DeprecationWarning):
+            self.assertEqual("levelTwo", self.device.getActiveVentilationProgram())
 
     def test_getVentilationPrograms(self):
         expected_programs = []
-        self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
+        with self.assertWarns(DeprecationWarning):
+            self.assertListEqual(expected_programs, self.device.getVentilationPrograms())
 
     def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
