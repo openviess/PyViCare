@@ -67,3 +67,18 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getConfiguredLevelFourVolumeFlow(self):
         self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 240)
+
+    def test_getBypassActive(self):
+        service = ViCareServiceMock('response/VitoairFs300E_back.json')
+        device = VentilationDevice(service)
+        self.assertEqual(device.getBypassActive(), True)
+
+    def test_getBypassPosition(self):
+        service = ViCareServiceMock('response/VitoairFs300E_back.json')
+        device = VentilationDevice(service)
+        self.assertEqual(device.getBypassPosition(), 0)
+
+    def test_getBypassAutomaticMode(self):
+        service = ViCareServiceMock('response/VitoairFs300E_back.json')
+        device = VentilationDevice(service)
+        self.assertEqual(device.getBypassAutomaticMode(), True)
