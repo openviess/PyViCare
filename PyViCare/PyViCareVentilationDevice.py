@@ -337,6 +337,18 @@ class VentilationDevice(Device):
         return float(self.getProperty("ventilation.heating.recovery")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getBypassActive(self) -> bool:
+        return bool(self.getProperty("ventilation.bypass")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getBypassPosition(self) -> int:
+        return int(self.getProperty("ventilation.bypass.position")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getBypassAutomaticMode(self) -> bool:
+        return bool(self.getProperty("ventilation.bypass.operating.modes.automatic")["properties"]["active"]["value"])
+
+    @handleNotSupported
     def getSupplyVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.volumeFlow.current.input")["properties"]["value"]["value"])
 
