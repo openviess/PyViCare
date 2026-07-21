@@ -86,7 +86,7 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getConfiguredLevelFourVolumeFlow(self):
         self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 275)
-        
+
     def test_getBypassActive(self):
         self.assertEqual(self.device.getBypassActive(), True)
 
