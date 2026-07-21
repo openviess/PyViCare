@@ -95,3 +95,12 @@ class VitoairFs300(unittest.TestCase):
 
     def test_getBypassAutomaticMode(self):
         self.assertEqual(self.device.getBypassAutomaticMode(), True)
+
+    def test_getBypassOperatingModeLevel(self):
+        self.assertEqual(self.device.getBypassOperatingModeLevel(), "dynamicRegulationMode")
+
+    def test_getBypassOperatingModeState(self):
+        self.assertEqual(self.device.getBypassOperatingModeState(), "automatic")
+
+    def test_getBypassOperatingModeValue(self):
+        self.assertEqual(self.device.getBypassOperatingModeValue(), "automatic")

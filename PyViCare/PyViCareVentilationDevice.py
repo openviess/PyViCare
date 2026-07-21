@@ -344,6 +344,18 @@ class VentilationDevice(Device):
         return bool(self.getProperty("ventilation.bypass.operating.modes.automatic")["properties"]["active"]["value"])
 
     @handleNotSupported
+    def getBypassOperatingModeLevel(self) -> str:
+        return str(self.getProperty("ventilation.bypass.operating.modes.active")["properties"]["level"]["value"])
+
+    @handleNotSupported
+    def getBypassOperatingModeState(self) -> str:
+        return str(self.getProperty("ventilation.bypass.operating.modes.active")["properties"]["state"]["value"])
+
+    @handleNotSupported
+    def getBypassOperatingModeValue(self) -> str:
+        return str(self.getProperty("ventilation.bypass.operating.modes.active")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getSupplyVolumeFlow(self) -> int:
         return int(self.getProperty("ventilation.volumeFlow.current.input")["properties"]["value"]["value"])
 
