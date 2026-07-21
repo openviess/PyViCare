@@ -17,7 +17,7 @@ class FuelCell(HeatingDevice):
 
     @handleNotSupported
     def getAvailableBurners(self):
-        return get_available_burners(self.service)
+        return get_available_burners(self)
 
     @handleNotSupported
     def getReturnTemperature(self):

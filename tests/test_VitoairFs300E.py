@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitoairFs300(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/VitoairFs300E.json')
-        self.device = VentilationDevice(self.service)
+        self.device = VentilationDevice(self.accessor, self.service)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), False)
@@ -22,15 +24,17 @@ class VitoairFs300(unittest.TestCase):
         self.assertEqual(self.device.getActiveVentilationMode(), "sensorOverride")
 
     def test_getActiveVentilationProgram(self):
-        self.assertEqual(self.device.getActiveVentilationProgram(), "levelFour")
+        with self.assertWarns(DeprecationWarning):
+            self.assertEqual(self.device.getActiveVentilationProgram(), "levelTwo")
 
     def test_getVentilationModes(self):
         expected_modes = ['permanent', 'ventilation', 'sensorOverride', 'sensorDriven']
         self.assertListEqual(self.device.getVentilationModes(), expected_modes)
 
     def test_getVentilationPrograms(self):
-        expected_programs = ['standby']
-        self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
+        expected_programs = []
+        with self.assertWarns(DeprecationWarning):
+            self.assertListEqual(self.device.getVentilationPrograms(), expected_programs)
 
     def test_getVentilationLevels(self):
         expected_levels = ['levelOne', 'levelTwo', 'levelThree', 'levelFour']
@@ -56,18 +60,33 @@ class VitoairFs300(unittest.TestCase):
             "silent",
         ])
 
+    def test_getExhaustTemperature(self):
+        self.assertEqual(self.device.getExhaustTemperature(), 7.5)
+
+    def test_getExtractTemperature(self):
+        self.assertEqual(self.device.getExtractTemperature(), 20.5)
+
+    def test_getExhaustHumidity(self):
+        self.assertEqual(self.device.getExhaustHumidity(), 80)
+
+    def test_getExtractHumidity(self):
+        self.assertEqual(self.device.getExtractHumidity(), 57)
+
+    def test_getHeatRecoveryEfficiency(self):
+        self.assertEqual(self.device.getHeatRecoveryEfficiency(), 77.0)
+
     def test_getConfiguredLevelOneVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelOneVolumeFlow(), 55)
+        self.assertEqual(self.device.getConfiguredLevelOneVolumeFlow(), 140)
 
     def test_getConfiguredLevelTwoVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelTwoVolumeFlow(), 129)
+        self.assertEqual(self.device.getConfiguredLevelTwoVolumeFlow(), 200)
 
     def test_getConfiguredLevelThreeVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelThreeVolumeFlow(), 185)
+        self.assertEqual(self.device.getConfiguredLevelThreeVolumeFlow(), 260)
 
     def test_getConfiguredLevelFourVolumeFlow(self):
-        self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 240)
-
+        self.assertEqual(self.device.getConfiguredLevelFourVolumeFlow(), 275)
+        
     def test_getBypassActive(self):
         service = ViCareServiceMock('response/VitoairFs300E_back.json')
         device = VentilationDevice(service)

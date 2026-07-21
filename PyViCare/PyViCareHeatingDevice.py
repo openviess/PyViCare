@@ -2,6 +2,7 @@ from contextlib import suppress
 from typing import Any, List, Optional
 
 from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareService import hasRoles
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
 from PyViCare.PyViCareUtils import (VICARE_DAYS,
@@ -17,13 +18,13 @@ def all_set(_list: List[Any]) -> bool:
     return all(v is not None for v in _list)
 
 
-def get_available_burners(service):
+def get_available_burners(device):
     # workaround starting from 25.01.2022
     # see: https://github.com/somm15/PyViCare/issues/243
     available_burners = []
     for burner in ['0', '1', '2', '3', '4', '5']:
         with suppress(PyViCareNotSupportedFeatureError):
-            if service.getProperty(f"heating.burners.{burner}") is not None:
+            if device.getProperty(f"heating.burners.{burner}") is not None:
                 available_burners.append(burner)
 
     return available_burners
@@ -48,9 +49,9 @@ class HeatingDevice(Device):
         return HeatingCircuit(self, circuit)
 
     def get_heat_curve_formular(self):
-        if self.service.hasRoles(["type:heatpump", "type:E3"]):
+        if hasRoles(["type:heatpump", "type:E3"], self.roles):
             return heat_curve_formular_variant1
-        if self.service.hasRoles(["type:heatpump"]) and len(self.getAvailableCircuits()) == 1:
+        if hasRoles(["type:heatpump"], self.roles) and len(self.getAvailableCircuits()) == 1:
             return heat_curve_formular_variant2
         return heat_curve_formular_variant1
 
@@ -391,6 +392,10 @@ class HeatingDevice(Device):
     def getBoilerCommonSupplyTemperature(self):
         return self.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getBoilerTemperature(self):
+        return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
+
 
 class HeatingDeviceWithComponent:
     """This is the base class for all heating components"""
@@ -698,6 +703,16 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             "sat": properties["entries"]["value"]["sat"],
             "sun": properties["entries"]["value"]["sun"]
         }
+
+    @handleAPICommandErrors
+    def setHeatingSchedule(self, schedule: dict) -> None:
+        self.device.setProperty(f"heating.circuits.{self.circuit}.heating.schedule",
+                                "setSchedule", {'newSchedule': schedule})
+
+    @handleNotSupported
+    def getHeatingScheduleModes(self) -> list:  # type: ignore[type-arg]
+        return list(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"
+            )["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"]["modes"])
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556

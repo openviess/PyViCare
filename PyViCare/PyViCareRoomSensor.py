@@ -5,13 +5,13 @@ from PyViCare.PyViCareUtils import handleNotSupported
 class RoomSensor(ZigbeeBatteryDevice):
 
     @handleNotSupported
-    def getSerial(self):
-        return self.getProperty("device.sensors.temperature")["deviceId"]
+    def getSerial(self) -> str:
+        return str(self.getProperty("device.sensors.temperature")["deviceId"])
 
     @handleNotSupported
-    def getTemperature(self):
-        return self.getProperty("device.sensors.temperature")["properties"]["value"]["value"]
+    def getTemperature(self) -> float:
+        return float(self.getProperty("device.sensors.temperature")["properties"]["value"]["value"])
 
     @handleNotSupported
-    def getHumidity(self):
-        return self.getProperty("device.sensors.humidity")["properties"]["value"]["value"]
+    def getHumidity(self) -> float:
+        return float(self.getProperty("device.sensors.humidity")["properties"]["value"]["value"])

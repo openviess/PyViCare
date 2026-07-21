@@ -119,6 +119,13 @@ class VentilationDevice(Device):
         self.setProperty(f"ventilation.quickmodes.{quickmode}", "deactivate", {})
 
     @handleNotSupported
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use getVentilationModes() instead."
+        ),
+        version="2.61.0",
+    )
     def getVentilationPrograms(self):
         available_programs = []
         for program in ['basic', 'intensive', 'reduced', 'standard', 'standby', 'holidayAtHome', 'permanent']:
@@ -133,6 +140,14 @@ class VentilationDevice(Device):
         return self.getVentilationPrograms()
 
     @handleNotSupported
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use getVentilationLevel() to read the current fan level "
+            "(from ventilation.operating.state) instead."
+        ),
+        version="2.61.0",
+    )
     def getActiveVentilationProgram(self):
         return self.getProperty("ventilation.operating.programs.active")["properties"]["value"]["value"]
 
@@ -141,6 +156,13 @@ class VentilationDevice(Device):
     def getActiveProgram(self):
         return self.getActiveVentilationProgram()
 
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use activateVentilationMode() and setVentilationLevel() instead."
+        ),
+        version="2.61.0",
+    )
     def activateVentilationProgram(self, program):
         """ Activate a program
             NOTE
@@ -172,6 +194,13 @@ class VentilationDevice(Device):
         """
         return self.activateVentilationProgram(program)
 
+    @deprecated(
+        reason=(
+            "ventilation.operating.programs.* was deprecated by Viessmann on 2024-09-15. "
+            "Use activateVentilationMode() with a different mode instead."
+        ),
+        version="2.61.0",
+    )
     def deactivateVentilationProgram(self, program):
         """ Deactivate a program
         Parameters
@@ -231,8 +260,24 @@ class VentilationDevice(Device):
         return float(self.getProperty("ventilation.sensors.temperature.supply")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getExhaustTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.exhaust")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExtractTemperature(self) -> float:
+        return float(self.getProperty("ventilation.sensors.temperature.extract")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getSupplyHumidity(self) -> int:
         return int(self.getProperty("ventilation.sensors.humidity.supply")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExhaustHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.exhaust")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getExtractHumidity(self) -> int:
+        return int(self.getProperty("ventilation.sensors.humidity.extract")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getVolatileOrganicCompounds(self) -> int:
@@ -281,6 +326,10 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getHeatExchangerFrostProtectionActive(self) -> bool:
         return "off" != str(self.getProperty("ventilation.heatExchanger.frostprotection")["properties"]["status"]["value"])
+
+    @handleNotSupported
+    def getHeatRecoveryEfficiency(self) -> float:
+        return float(self.getProperty("ventilation.heating.recovery")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getBypassActive(self) -> bool:
