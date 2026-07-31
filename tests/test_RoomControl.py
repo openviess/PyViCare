@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareRoomControl import RoomControl
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -24,56 +25,62 @@ class RoomControlTest(unittest.TestCase):
 
     def test_getRoomCO2(self):
         self.assertEqual(self.device.getRoomCO2("0"), 1000)
-        self.assertEqual(self.device.getRoomCO2("1"), 850)
+        self.assertEqual(self.device.getRoomCO2("1"), 1000)
 
     def test_getRoomCondensationRisk(self):
         self.assertFalse(self.device.getRoomCondensationRisk("0"))
         self.assertFalse(self.device.getRoomCondensationRisk("1"))
 
     def test_getRoomSetpointComfortHeating(self):
-        self.assertEqual(self.device.getRoomSetpointComfortHeating("0"), 22)
+        self.assertEqual(self.device.getRoomSetpointComfortHeating("0"), 20)
         self.assertEqual(self.device.getRoomSetpointComfortHeating("1"), 23)
 
     def test_getRoomSetpointNormalHeating(self):
-        self.assertEqual(self.device.getRoomSetpointNormalHeating("0"), 21)
-        self.assertEqual(self.device.getRoomSetpointNormalHeating("1"), 20)
+        self.assertEqual(self.device.getRoomSetpointNormalHeating("0"), 18)
+        self.assertEqual(self.device.getRoomSetpointNormalHeating("1"), 22)
 
     def test_getRoomSetpointReducedHeating(self):
-        self.assertEqual(self.device.getRoomSetpointReducedHeating("0"), 19)
-        self.assertEqual(self.device.getRoomSetpointReducedHeating("1"), 17)
+        self.assertEqual(self.device.getRoomSetpointReducedHeating("0"), 16)
+        self.assertEqual(self.device.getRoomSetpointReducedHeating("1"), 21)
 
     def test_getRoomSetpointNormalPerceived(self):
-        self.assertEqual(self.device.getRoomSetpointNormalPerceived("0"), 21)
-        self.assertEqual(self.device.getRoomSetpointNormalPerceived("1"), 20)
+        self.assertEqual(self.device.getRoomSetpointNormalPerceived("0"), 18)
+        self.assertEqual(self.device.getRoomSetpointNormalPerceived("1"), 22)
 
     def test_getRoomSetpointComfortPerceived(self):
-        self.assertEqual(self.device.getRoomSetpointComfortPerceived("0"), 22)
+        self.assertEqual(self.device.getRoomSetpointComfortPerceived("0"), 20)
         self.assertEqual(self.device.getRoomSetpointComfortPerceived("1"), 23)
+
+    def test_getRoomSetpointCoolingNotSupportedWhenDisabled(self):
+        # Cooling levels exist on the API but return no value on this scope
+        # for heating-only rooms; the getter surfaces that as NotSupported.
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getRoomSetpointNormalCooling("0")
 
     def test_getRoomChildLockActive(self):
         self.assertFalse(self.device.getRoomChildLockActive("0"))
-        self.assertTrue(self.device.getRoomChildLockActive("1"))
+        self.assertFalse(self.device.getRoomChildLockActive("1"))
 
     def test_getRoomChildLockStatus(self):
         self.assertEqual(self.device.getRoomChildLockStatus("0"), "inactive")
-        self.assertEqual(self.device.getRoomChildLockStatus("1"), "active")
+        self.assertEqual(self.device.getRoomChildLockStatus("1"), "inactive")
 
     def test_getRoomWindowOpen(self):
         self.assertFalse(self.device.getRoomWindowOpen("0"))
-        self.assertTrue(self.device.getRoomWindowOpen("1"))
+        self.assertFalse(self.device.getRoomWindowOpen("1"))
 
     def test_getRoomOpenWindowDetectionEnabled(self):
-        self.assertTrue(self.device.getRoomOpenWindowDetectionEnabled("0"))
-        self.assertFalse(self.device.getRoomOpenWindowDetectionEnabled("1"))
+        self.assertFalse(self.device.getRoomOpenWindowDetectionEnabled("0"))
+        self.assertTrue(self.device.getRoomOpenWindowDetectionEnabled("1"))
 
     def test_getRoomHydraulicBalancingEnabled(self):
         self.assertTrue(self.device.getRoomHydraulicBalancingEnabled("0"))
-        self.assertFalse(self.device.getRoomHydraulicBalancingEnabled("1"))
+        self.assertTrue(self.device.getRoomHydraulicBalancingEnabled("1"))
 
     def test_getRoomTrvAlgorithmEnabled(self):
         self.assertFalse(self.device.getRoomTrvAlgorithmEnabled("0"))
-        self.assertTrue(self.device.getRoomTrvAlgorithmEnabled("1"))
+        self.assertFalse(self.device.getRoomTrvAlgorithmEnabled("1"))
 
     def test_getRoomHeatOnTimeEnabled(self):
-        self.assertFalse(self.device.getRoomHeatOnTimeEnabled("0"))
-        self.assertTrue(self.device.getRoomHeatOnTimeEnabled("1"))
+        self.assertTrue(self.device.getRoomHeatOnTimeEnabled("0"))
+        self.assertFalse(self.device.getRoomHeatOnTimeEnabled("1"))
