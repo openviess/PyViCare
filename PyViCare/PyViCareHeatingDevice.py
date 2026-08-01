@@ -242,6 +242,10 @@ class HeatingDevice(Device):
         return self.getSolarPowerProductionDays()
 
     @handleNotSupported
+    def getSolarPowerProductionCumulativeProduced(self):
+        return self.service.getProperty("heating.solar.power.cumulativeProduced")["properties"]["value"]["value"]
+
+    @handleNotSupported
     def getSolarPowerProductionUnit(self):
         return self.getProperty("heating.solar.power.production")["properties"]["day"]["unit"]
 
