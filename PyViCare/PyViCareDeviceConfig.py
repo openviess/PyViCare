@@ -86,7 +86,7 @@ class PyViCareDeviceConfig:
         return VentilationDevice(self.accessor, self.service, self.roles)
 
     def asWaterTreatment(self):
-        return WaterTreatment(self.service)
+        return WaterTreatment(self.accessor, self.service, self.roles)
 
     def getConfig(self):
         return self.accessor

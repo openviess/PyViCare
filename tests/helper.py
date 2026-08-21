@@ -8,7 +8,7 @@ from PyViCare.PyViCareUtils import ViCareTimer
 
 def readJson(fileName):
     test_filename = os.path.join(os.path.dirname(__file__), fileName)
-    with open(test_filename, mode='rb') as json_file:
+    with open(test_filename, mode='r', encoding='utf-8') as json_file:
         return json.load(json_file)
 
 

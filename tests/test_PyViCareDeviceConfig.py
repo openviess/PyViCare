@@ -188,12 +188,12 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         self.assertEqual("Gateway", type(device_type).__name__)
 
     def test_autoDetect_VitosetAqua19D_asWaterTreatment(self):
-        PyViCareDeviceConfig(self.accessor, self.service, "VitosetAqua19D", "Online")
+        c = PyViCareDeviceConfig(self.accessor, self.service, "VitosetAqua19D", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("WaterTreatment", type(device_type).__name__)
 
     def test_autoDetect_VitosetAqua42D_asWaterTreatment(self):
-        PyViCareDeviceConfig(self.accessor, self.service, "VitosetAqua42D", "Online")
+        c = PyViCareDeviceConfig(self.accessor, self.service, "VitosetAqua42D", "Online")
         device_type = c.asAutoDetectDevice()
         self.assertEqual("WaterTreatment", type(device_type).__name__)
 
