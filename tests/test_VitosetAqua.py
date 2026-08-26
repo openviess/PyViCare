@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareWaterTreatment import LeakSensor, WaterTreatment
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class VitosetAquaTest(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/VitosetAqua.json')
-        self.device = WaterTreatment(self.service)
+        self.device = WaterTreatment(self.accessor, self.service)
 
     # --- Softener ---
 
