@@ -34,6 +34,11 @@ class ViCareCachedServiceBase(ViCareService):
         entities = self._extract_entities(data, accessor)
         return readFeature(entities, property_name)
 
+    def fetch_all_features(self, accessor: ViCareDeviceAccessor) -> Any:
+        # cached, so a caller refreshing with fetch_all_features() warms the
+        # cache the following getProperty calls read from
+        return self._get_or_update_cache(accessor)
+
     def setProperty(self, accessor: ViCareDeviceAccessor, property_name: str, action: str, data: Any) -> Any:
         response = super().setProperty(accessor, property_name, action, data)
         self.clear_cache()
