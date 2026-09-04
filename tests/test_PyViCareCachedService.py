@@ -21,6 +21,17 @@ class PyViCareCachedServiceTest(unittest.TestCase):
         self.service = ViCareCachedService(
             self.oauth_mock, [], self.CACHE_DURATION)
 
+    def test_fetch_all_features_is_cached(self):
+        """fetch_all_features() must warm the cache, like the gateway variant.
+
+        Callers that refresh with fetch_all_features() and then read properties
+        would otherwise pay for two requests per interval.
+        """
+        with now_is('2000-01-01 00:00:00'):
+            self.service.fetch_all_features(self.accessor)
+            self.service.getProperty(self.accessor, "someprop")
+        self.assertEqual(self.oauth_mock.get.call_count, 1)
+
     def test_getProperty_existing(self):
         self.service.getProperty(self.accessor, "someprop")
         self.oauth_mock.get.assert_called_once_with(
