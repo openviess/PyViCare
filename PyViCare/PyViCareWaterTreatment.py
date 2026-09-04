@@ -1,7 +1,8 @@
 from contextlib import suppress
-from typing import Any, List, Optional
+from typing import Any, List, Optional, cast, overload
 
 from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
 
 
@@ -14,6 +15,30 @@ class WaterTreatment(Device):
     Combines water softener, leak detection (up to 5 sensors), consumption metering
     and main shutoff valve in one device.
     """
+
+    @overload
+    def __init__(self, accessor: ViCareService) -> None: ...
+
+    @overload
+    def __init__(
+        self,
+        accessor: ViCareDeviceAccessor,
+        service: ViCareService,
+        roles: list[str] | None = None,
+    ) -> None: ...
+
+    def __init__(
+        self,
+        accessor: ViCareDeviceAccessor | ViCareService,
+        service: ViCareService | None = None,
+        roles: list[str] | None = None,
+    ) -> None:
+        if service is None:
+            service = cast(ViCareService, accessor)
+            accessor = ViCareDeviceAccessor(0, "", "")
+        else:
+            accessor = cast(ViCareDeviceAccessor, accessor)
+        super().__init__(accessor, service, roles)
 
     # --- Softener ---
 

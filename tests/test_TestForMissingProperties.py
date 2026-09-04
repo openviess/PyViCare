@@ -450,7 +450,7 @@ class TestForMissingProperties(unittest.TestCase):
 
     def read_all_deprecated_features(self):
         response_path = join(dirname(__file__), './response')
-        response_files = [f for f in listdir(response_path) if isfile(join(response_path, f))]
+        response_files = [f for f in listdir(response_path) if f.endswith('.json') and isfile(join(response_path, f))]
 
         all_features = {}
 
@@ -479,7 +479,7 @@ class TestForMissingProperties(unittest.TestCase):
 
     def read_all_features(self):
         response_path = join(dirname(__file__), './response')
-        response_files = [f for f in listdir(response_path) if isfile(join(response_path, f))]
+        response_files = [f for f in listdir(response_path) if f.endswith('.json') and isfile(join(response_path, f))]
 
         all_features = {}
         for response in response_files:
