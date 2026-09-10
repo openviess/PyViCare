@@ -880,6 +880,40 @@
     {
       "apiVersion": 1,
       "commands": {
+        "setName": {
+          "isExecutable": true,
+          "name": "setName",
+          "params": {
+            "name": {
+              "constraints": {
+                "maxLength": 39,
+                "minLength": 1
+              },
+              "required": true,
+              "type": "string"
+            }
+          },
+          "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/################/features/heating.circuits.0.name/commands/setName"
+        }
+      },
+      "components": [],
+      "deviceId": "0",
+      "feature": "heating.circuits.0.name",
+      "gatewayId": "################",
+      "isEnabled": true,
+      "isReady": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "value": ""
+        }
+      },
+      "timestamp": "2026-09-10T16:02:11.081Z",
+      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.name"
+    },
+    {
+      "apiVersion": 1,
+      "commands": {
         "setMode": {
           "isExecutable": true,
           "name": "setMode",
@@ -5208,40 +5242,6 @@
       },
       "timestamp": "2026-09-10T17:59:16.994Z",
       "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/tcu.wifi"
-    },
-    {
-      "apiVersion": 1,
-      "commands": {
-        "setName": {
-          "isExecutable": true,
-          "name": "setName",
-          "params": {
-            "name": {
-              "constraints": {
-                "maxLength": 39,
-                "minLength": 1
-              },
-              "required": true,
-              "type": "string"
-            }
-          },
-          "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/################/features/heating.circuits.0.name/commands/setName"
-        }
-      },
-      "components": [],
-      "deviceId": "0",
-      "feature": "heating.circuits.0.name",
-      "gatewayId": "################",
-      "isEnabled": true,
-      "isReady": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "value": ""
-        }
-      },
-      "timestamp": "2026-09-10T16:02:11.081Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/#######/gateways/################/devices/0/features/heating.circuits.0.name"
     }
   ]
 }
