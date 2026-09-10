@@ -6,7 +6,8 @@ from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
                                     PyViCareInternalServerError,
                                     PyViCareInvalidDataError,
-                                    PyViCareNotSupportedFeatureError)
+                                    PyViCareNotSupportedFeatureError,
+                                    PyViCareRateLimitError)
 from tests.helper import now_is
 
 
@@ -132,6 +133,101 @@ class PyViCareCachedServiceTest(unittest.TestCase):
             self.assertRaises(
                 PyViCareInternalServerError,
                 self.service.getProperty, self.accessor, "someprop")
+
+    def test_failed_fetch_is_not_retried_within_the_cache_window(self):
+        """A failed fetch must cost one request, not one per reader.
+
+        Every device on a gateway reads through the same service, so without
+        this each of them would issue its own request for the rest of the
+        window and burn the daily quota within the hour.
+        """
+        self.oauth_mock.get.side_effect = PyViCareDeviceCommunicationError(
+            {"errorType": "DEVICE_COMMUNICATION_ERROR",
+             "extendedPayload": {"reason": "DEVICE_OFFLINE"}})
+
+        with now_is('2000-01-01 00:00:00'):
+            for _ in range(5):
+                self.assertRaises(
+                    PyViCareDeviceCommunicationError,
+                    self.service.getProperty, self.accessor, "someprop")
+
+        with now_is('2000-01-01 00:00:30'):
+            self.assertRaises(
+                PyViCareDeviceCommunicationError,
+                self.service.getProperty, self.accessor, "someprop")
+
+        self.assertEqual(self.oauth_mock.get.call_count, 1)
+
+        # the window is over, one more request is due
+        with now_is('2000-01-01 00:01:10'):
+            self.assertRaises(
+                PyViCareDeviceCommunicationError,
+                self.service.getProperty, self.accessor, "someprop")
+
+        self.assertEqual(self.oauth_mock.get.call_count, 2)
+
+    def test_rate_limit_is_replayed_within_the_cache_window(self):
+        """Hitting the limit must not keep spending requests against it."""
+        self.oauth_mock.get.side_effect = PyViCareRateLimitError(
+            {"extendedPayload": {"name": "portal", "requestCountLimit": 3000,
+                                 "limitReset": 946771204000}})
+
+        with now_is('2000-01-01 00:00:00'):
+            for _ in range(5):
+                self.assertRaises(
+                    PyViCareRateLimitError,
+                    self.service.getProperty, self.accessor, "someprop")
+
+        self.assertEqual(self.oauth_mock.get.call_count, 1)
+
+    def test_invalid_data_leaves_the_stale_cache_readable(self):
+        """A malformed response must not hide data we already hold."""
+        with now_is('2000-01-01 00:00:00'):
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.oauth_mock.get.return_value = {"unexpected": "response"}
+
+        with now_is('2000-01-01 00:01:10'):
+            self.assertRaises(
+                PyViCareInvalidDataError,
+                self.service.getProperty, self.accessor, "someprop")
+            self.assertIsNotNone(
+                self.service.getProperty(self.accessor, "someprop"))
+
+        self.assertEqual(self.oauth_mock.get.call_count, 2)
+
+    def test_failed_fetch_recovers_when_the_api_returns(self):
+        self.oauth_mock.get.side_effect = PyViCareInternalServerError(
+            {"statusCode": 500, "message": "Internal server error",
+             "viErrorId": "test"})
+
+        with now_is('2000-01-01 00:00:00'):
+            self.assertRaises(
+                PyViCareInternalServerError,
+                self.service.getProperty, self.accessor, "someprop")
+
+        self.oauth_mock.get.side_effect = None
+
+        with now_is('2000-01-01 00:01:10'):
+            self.assertIsNotNone(
+                self.service.getProperty(self.accessor, "someprop"))
+
+    def test_clear_cache_retries_immediately(self):
+        """clear_cache() is an explicit request for fresh data."""
+        self.oauth_mock.get.side_effect = PyViCareDeviceCommunicationError(
+            {"errorType": "DEVICE_COMMUNICATION_ERROR",
+             "extendedPayload": {"reason": "DEVICE_OFFLINE"}})
+
+        with now_is('2000-01-01 00:00:00'):
+            self.assertRaises(
+                PyViCareDeviceCommunicationError,
+                self.service.getProperty, self.accessor, "someprop")
+            self.service.clear_cache()
+            self.assertRaises(
+                PyViCareDeviceCommunicationError,
+                self.service.getProperty, self.accessor, "someprop")
+
+        self.assertEqual(self.oauth_mock.get.call_count, 2)
 
     def test_invalid_data_still_raises_with_cache(self):
         """PyViCareInvalidDataError (genuine bad data) must still raise even with cache."""

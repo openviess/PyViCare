@@ -144,3 +144,21 @@ class PyViCareCachedServiceViaGatewayTest(unittest.TestCase):
             self.assertRaises(
                 PyViCareInvalidDataError,
                 self.service.getProperty, self.accessor1, "device.serial")
+
+    def test_failed_fetch_costs_one_request_for_the_whole_gateway(self):
+        """Every device on the gateway shares the failed attempt.
+
+        Otherwise each of them retries on its own schedule and the requests
+        multiply by the number of devices behind the gateway.
+        """
+        self.oauth_mock.get.side_effect = PyViCareDeviceCommunicationError(
+            {"errorType": "DEVICE_COMMUNICATION_ERROR",
+             "extendedPayload": {"reason": "DEVICE_OFFLINE"}})
+
+        with now_is('2000-01-01 00:00:00'):
+            for accessor in (self.accessor1, self.accessor2, self.accessor1):
+                self.assertRaises(
+                    PyViCareDeviceCommunicationError,
+                    self.service.getProperty, accessor, "device.serial")
+
+        self.assertEqual(self.oauth_mock.get.call_count, 1)
