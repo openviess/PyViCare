@@ -45,6 +45,7 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage.middle',
             'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
             'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
+            'heating.sensors.volumetricFlow.allengra',  # deprecated, replaced by heating.secondaryCircuit.sensors.volumetricFlow
         ]
 
         all_features = self.read_all_deprecated_features()
@@ -230,6 +231,21 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.scop.heating', # deprecated
             'heating.scop.total', # deprecated
             'heating.dhw.comfort', # deprecated
+
+            # new Vitocal generation - not yet used
+            'heating.compressors.0.speed.setpoint',
+            'heating.dhw.actuator',
+            'heating.heat.production.current',
+            'heating.noise.reduction.levels.maxReduced',
+            'heating.noise.reduction.levels.notReduced',
+            'heating.noise.reduction.levels.slightlyReduced',
+            'heating.power.consumption.current',
+            'system.temperature.outside',
+            'tcu.ethernet.0.config',
+            'tcu.features.eebus',
+            'tcu.features.hems',
+            'tcu.features.solarLog',
+            'tcu.features.wirelessRemoteController',
 
             # ventilation - not yet used
             'ventilation.control.filterChange',

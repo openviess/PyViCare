@@ -28,6 +28,13 @@ DB_PATH = ROOT / "tests" / "deprecated_features.json"
 RESPONSE_DIR = ROOT / "tests" / "response"
 PYVICARE_DIR = ROOT / "PyViCare"
 
+# Deprecated features we knowingly keep reading, with the reason. Only for cases where the
+# replacement cannot be used yet, not to silence work we owe.
+IGNORED_IN_CODE = {
+    "heating.sensors.volumetricFlow.allengra":
+        "replacement heating.secondaryCircuit.sensors.volumetricFlow is on no known device",
+}
+
 
 def load_database():
     """Load the deprecation database, or return empty if it doesn't exist."""
@@ -205,6 +212,7 @@ def report(db):
     today = date.today()
 
     used_in_code = []
+    ignored = []
     past_due = []
     upcoming = []
 
@@ -234,7 +242,10 @@ def report(db):
             "is_past_due": is_past_due,
         }
 
-        if code_files:
+        if code_files and feature in IGNORED_IN_CODE:
+            entry["reason"] = IGNORED_IN_CODE[feature]
+            ignored.append(entry)
+        elif code_files:
             used_in_code.append(entry)
         elif is_past_due:
             past_due.append(entry)
@@ -277,6 +288,12 @@ def report(db):
         for entry in collapse_entries(used_in_code):
             print_entry(entry)
 
+    if ignored:
+        print("=== Used in code, ignored on purpose ===\n")
+        for entry in collapse_entries(ignored):
+            print_entry(entry)
+            print(f"    Reason: {entry['reason']}\n")
+
     if past_due:
         print(f"=== Past removal date (not used in code): {len(past_due)} features ===\n")
         for entry in collapse_entries(past_due):
@@ -292,6 +309,7 @@ def report(db):
     print("=== Summary ===")
     print(f"{total} deprecated features in database")
     print(f"{in_code} used in code {'(ACTION NEEDED)' if in_code else '(clean)'}")
+    print(f"{len(ignored)} used in code but ignored")
     print(f"{len(past_due)} past removal date")
     print(f"{len(upcoming)} upcoming")
 
