@@ -1,4 +1,4 @@
-"""The device list is filtered by device type, so a new type is invisible to consumers."""
+"""PyViCare.devices exposes only known device types."""
 import unittest
 from unittest.mock import Mock
 
@@ -58,5 +58,5 @@ class DeviceTypeFilterTest(unittest.TestCase):
     def test_indoor_unit_is_dropped(self):
         self.assertNotIn("OBNG_HIOU", self.models())
 
-    def test_all_devices_still_holds_every_device(self):
+    def test_all_devices_is_unfiltered(self):
         self.assertEqual(len(self.vicare.all_devices), 4)
