@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHeatPump import HeatPump
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -33,3 +34,15 @@ class Vitocal333G_with_Vitovent300F(unittest.TestCase):
     def test_compressor_getInletPressure(self):
         self.assertEqual(self.device.getCompressor("0").getInletPressure(), 12.9)
         self.assertEqual(self.device.getCompressor("0").getInletPressureUnit(), "bar")
+
+    def test_compressor_getPowerConsumptionHeatingThisWeek(self):
+        self.assertEqual(self.device.getCompressor("0").getPowerConsumptionHeatingThisWeek(), 6.3)
+        self.assertEqual(self.device.getCompressor("0").getPowerConsumptionHeatingThisWeekUnit(), "kilowattHour")
+
+    def test_compressor_getPowerConsumptionDHWThisWeek(self):
+        self.assertEqual(self.device.getCompressor("0").getPowerConsumptionDHWThisWeek(), 2.3)
+        self.assertEqual(self.device.getCompressor("0").getPowerConsumptionDHWThisWeekUnit(), "kilowattHour")
+
+    def test_compressor_getPowerConsumptionCoolingThisWeek_notSupported(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getCompressor("0").getPowerConsumptionCoolingThisWeek()
