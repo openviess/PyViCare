@@ -42,6 +42,3 @@ class ViCareServiceMock:
 
     def hasRoles(self, _requested_roles):
         return False
-
-    def _isGateway(self):
-        return False

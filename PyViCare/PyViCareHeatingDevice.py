@@ -2,6 +2,7 @@ from contextlib import suppress
 from typing import Any, List, Optional
 
 from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareService import hasRoles
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1, heat_curve_formular_variant2)
 from PyViCare.PyViCareUtils import (VICARE_DAYS,
@@ -48,9 +49,9 @@ class HeatingDevice(Device):
         return HeatingCircuit(self, circuit)
 
     def get_heat_curve_formular(self):
-        if self.service.hasRoles(["type:heatpump", "type:E3"]):
+        if hasRoles(["type:heatpump", "type:E3"], self.roles):
             return heat_curve_formular_variant1
-        if self.service.hasRoles(["type:heatpump"]) and len(self.getAvailableCircuits()) == 1:
+        if hasRoles(["type:heatpump"], self.roles) and len(self.getAvailableCircuits()) == 1:
             return heat_curve_formular_variant2
         return heat_curve_formular_variant1
 
@@ -390,6 +391,10 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getBoilerCommonSupplyTemperature(self):
         return self.getProperty("heating.boiler.sensors.temperature.commonSupply")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getBoilerTemperature(self):
+        return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
 
 
 class HeatingDeviceWithComponent:
