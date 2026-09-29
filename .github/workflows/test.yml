@@ -9,9 +9,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  DEFAULT_PYTHON: "3.11"
-
 jobs:
   pytest:
     name: Python ${{ matrix.python }}

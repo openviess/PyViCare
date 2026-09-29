@@ -9,9 +9,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  DEFAULT_PYTHON: "3.11"
-
 jobs:
   sort:
     name: sort testdata
@@ -38,7 +35,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: ${{ env.DEFAULT_PYTHON }}
+          python-version-file: .python-version
       - name: Update deprecation database
         run: python check_deprecations.py --update
       - name: Verify no changes
