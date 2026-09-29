@@ -33,9 +33,9 @@ jobs:
           version="${{ github.event.release.tag_name }}"
           version="${version,,}"
           version="${version#v}"
-          uv tool version --no-interaction "${version}"
+          uv version --frozen "${version}"
       - name: 🏗 Build package
-        run: uv tool build --no-interaction
+        run: uv build
       - name: 🚀 Publish to PyPi
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
         with:

@@ -55,13 +55,10 @@ dev = [
 ]
 
 [tool.hatch.build.targets.sdist]
-include = ["./PyViCare"]
+include = ["PyViCare"]
 
 [tool.hatch.build.targets.wheel]
-include = ["./PyViCare"]
-
-[tool.hatch.build.targets.wheel.sources]
-"./PyViCare" = "PyViCare"
+packages = ["PyViCare"]
 
 [build-system]
 requires = ["hatchling"]
