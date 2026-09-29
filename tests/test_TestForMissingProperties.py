@@ -422,7 +422,7 @@ class TestForMissingProperties(unittest.TestCase):
                 used_features.append(feature_name)
 
         self.maxDiff = None
-        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore), "found untested data points")
+        self.assertSetEqual(set(), set(used_features) - set(all_features) - set(ignore), "found untested data points")
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")
@@ -485,7 +485,7 @@ class TestForMissingProperties(unittest.TestCase):
             data = readJson(join(response_path, response))
             if "data" in data:
                 for feature in data["data"]:
-                    if "deprecated" in feature and feature["deprecated"]:
+                    if feature.get("deprecated"):
                         name = re.sub(r"\b\d\b", "0", feature["feature"])
                         if name not in all_features:
                             all_features[name] = {'files': []}

@@ -3,11 +3,13 @@ from unittest.mock import Mock
 
 from PyViCare.PyViCareCachedService import ViCareCachedService
 from PyViCare.PyViCareService import ViCareDeviceAccessor
-from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
-                                    PyViCareInternalServerError,
-                                    PyViCareInvalidDataError,
-                                    PyViCareNotSupportedFeatureError,
-                                    PyViCareRateLimitError)
+from PyViCare.PyViCareUtils import (
+    PyViCareDeviceCommunicationError,
+    PyViCareInternalServerError,
+    PyViCareInvalidDataError,
+    PyViCareNotSupportedFeatureError,
+    PyViCareRateLimitError,
+)
 from tests.helper import now_is
 
 

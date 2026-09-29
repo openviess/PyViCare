@@ -15,8 +15,10 @@ from PyViCare.PyViCareAbstractOAuthManager import (
     TOKEN_URL,
     AbstractViCareOAuthManager,
 )
-from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
-                                    PyViCareInvalidCredentialsError)
+from PyViCare.PyViCareUtils import (
+    PyViCareBrowserOAuthTimeoutReachedError,
+    PyViCareInvalidCredentialsError,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())

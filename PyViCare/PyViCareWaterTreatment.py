@@ -1,9 +1,8 @@
 from contextlib import suppress
-from typing import Any, List, Optional
+from typing import Any
 
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported
-
 
 _LEAK_SENSOR_SLOTS = 5
 
@@ -42,11 +41,11 @@ class WaterTreatment(Device):
     # --- Leak Detection ---
 
     @property
-    def leakSensors(self) -> List["LeakSensor"]:
+    def leakSensors(self) -> list["LeakSensor"]:
         return [LeakSensor(self, slot) for slot in self.getAvailableLeakSensorSlots()]
 
-    def getAvailableLeakSensorSlots(self) -> List[int]:
-        available: List[int] = []
+    def getAvailableLeakSensorSlots(self) -> list[int]:
+        available: list[int] = []
         for slot in range(_LEAK_SENSOR_SLOTS):
             with suppress(PyViCareNotSupportedFeatureError):
                 feature = self.getProperty(f"water.leakDetection.sensors.leakage.{slot}")
@@ -116,14 +115,14 @@ class LeakSensor:
     def getRssi(self) -> int:
         return int(self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.rssi")["properties"]["value"]["value"])
 
-    def getHardwareVersion(self) -> Optional[dict[str, int]]:
+    def getHardwareVersion(self) -> dict[str, int] | None:
         try:
             feature = self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.version.hardware")
         except PyViCareNotSupportedFeatureError:
             return None
         return self._versionFields(feature.get("properties") or {})
 
-    def getSoftwareVersion(self) -> Optional[dict[str, int]]:
+    def getSoftwareVersion(self) -> dict[str, int] | None:
         try:
             feature = self.getProperty(f"water.leakDetection.sensors.leakage.{self.slot}.version.software")
         except PyViCareNotSupportedFeatureError:
@@ -131,7 +130,7 @@ class LeakSensor:
         return self._versionFields(feature.get("properties") or {})
 
     @staticmethod
-    def _versionFields(props: dict[str, Any]) -> Optional[dict[str, int]]:
+    def _versionFields(props: dict[str, Any]) -> dict[str, int] | None:
         if not props:
             return None
         return {

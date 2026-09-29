@@ -2,9 +2,10 @@ import json
 import logging
 import re
 
+from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
 from PyViCare.PyViCareFuelCell import FuelCell
-from PyViCare.PyViCareRoomControl import RoomControl
+from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
@@ -12,12 +13,15 @@ from PyViCare.PyViCareHybrid import Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
-from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
-from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
-from PyViCare.PyViCareGateway import Gateway
-from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
-                                      hasRoles, is_gateway_role)
+from PyViCare.PyViCareRoomControl import RoomControl
+from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.PyViCareService import (
+    ViCareDeviceAccessor,
+    ViCareService,
+    hasRoles,
+    is_gateway_role,
+)
 from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 from PyViCare.PyViCareWaterTreatment import WaterTreatment
@@ -143,10 +147,10 @@ class PyViCareDeviceConfig:
             if re.search(type_name, self.device_model) or self.hasRoles(roles):
                 logger.info("detected %s %s", self.device_model, creator_method.__name__)
                 device = creator_method()
-                if isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid):
-                    if self._isHybridByFeatures():
-                        logger.info("upgrading %s to Hybrid based on API features", self.device_model)
-                        return self.asHybridDevice()
+                if (isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid)
+                        and self._isHybridByFeatures()):
+                    logger.info("upgrading %s to Hybrid based on API features", self.device_model)
+                    return self.asHybridDevice()
                 return device
 
         logger.info("Could not auto detect %s. Use generic device.", self.device_model)

@@ -1,8 +1,13 @@
 from contextlib import suppress
+
 from deprecated import deprecated
 
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported)
+from PyViCare.PyViCareUtils import (
+    PyViCareNotSupportedFeatureError,
+    handleAPICommandErrors,
+    handleNotSupported,
+)
 
 
 class VentilationDevice(Device):

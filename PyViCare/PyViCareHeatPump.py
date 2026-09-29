@@ -1,18 +1,23 @@
 from __future__ import annotations
+
 from contextlib import suppress
-from typing import Any, List
+from typing import Any
+
 from deprecated import deprecated
 
 from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
-                                    handleAPICommandErrors, handleNotSupported)
+from PyViCare.PyViCareUtils import (
+    PyViCareNotSupportedFeatureError,
+    handleAPICommandErrors,
+    handleNotSupported,
+)
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 
 class HeatPump(HeatingDevice, VentilationDevice):
 
     @property
-    def compressors(self) -> List[Compressor]:
+    def compressors(self) -> list[Compressor]:
         return [self.getCompressor(x) for x in self.getAvailableCompressors()]
 
     def getCompressor(self, compressor) -> Compressor:
@@ -23,21 +28,21 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return self.getProperty("heating.compressors")["properties"]["enabled"]["value"]
 
     @property
-    def condensors(self) -> List[Condensor]:
+    def condensors(self) -> list[Condensor]:
         return [self.getCondensor(x) for x in self.getAvailableCompressors()]
 
     def getCondensor(self, condensor) -> Condensor:
         return Condensor(self, condensor)
 
     @property
-    def evaporators(self) -> List[Evaporator]:
+    def evaporators(self) -> list[Evaporator]:
         return [self.getEvaporator(x) for x in self.getAvailableCompressors()]
 
     def getEvaporator(self, evaporator) -> Evaporator:
         return Evaporator(self, evaporator)
 
     @property
-    def inverters(self) -> List[Inverter]:
+    def inverters(self) -> list[Inverter]:
         return [self.getInverter(x) for x in self.getAvailableCompressors()]
 
     def getInverter(self, inverter) -> Inverter:
@@ -532,7 +537,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     # Cooling circuits
     @property
-    def coolingCircuits(self) -> List[CoolingCircuit]:
+    def coolingCircuits(self) -> list[CoolingCircuit]:
         return [self.getCoolingCircuit(x) for x in self.getAvailableCoolingCircuits()]
 
     def getCoolingCircuit(self, circuit) -> CoolingCircuit:

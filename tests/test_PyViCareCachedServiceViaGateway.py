@@ -1,15 +1,15 @@
 import unittest
 from unittest.mock import Mock
 
-from PyViCare.PyViCareCachedServiceViaGateway import \
-    ViCareCachedServiceViaGateway
+from PyViCare.PyViCareCachedServiceViaGateway import ViCareCachedServiceViaGateway
 from PyViCare.PyViCareService import ViCareDeviceAccessor
-from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
-                                    PyViCareInternalServerError,
-                                    PyViCareInvalidDataError,
-                                    PyViCareNotSupportedFeatureError)
+from PyViCare.PyViCareUtils import (
+    PyViCareDeviceCommunicationError,
+    PyViCareInternalServerError,
+    PyViCareInvalidDataError,
+    PyViCareNotSupportedFeatureError,
+)
 from tests.helper import now_is
-
 
 BULK_RESPONSE = {
     "data": [
