@@ -28,7 +28,3 @@ class ViCareCachedServiceViaGateway(ViCareCachedServiceBase, ViCareServiceViaGat
 
     def _extract_entities(self, data: dict, accessor: ViCareDeviceAccessor) -> list[dict[str, Any]]:
         return filter_features_for_device(data["data"], accessor.device_id)
-
-    def fetch_all_features(self, accessor: ViCareDeviceAccessor) -> Any:
-        # cached too, so per-device coordinators share one bulk fetch
-        return self._get_or_update_cache(accessor)

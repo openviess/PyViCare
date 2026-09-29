@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Known deprecated Viessmann API features, merged from test data and device dumps.",
-    "updated": "2026-06-10",
-    "feature_count": 107
+    "updated": "2026-09-10",
+    "feature_count": 109
   },
   "features": {
     "heating.buffer.hysteresis": {
@@ -30,7 +30,8 @@
         "Vitodens200W_B2HF.json",
         "VitovalorPT2.json",
         "dump:device_0_features.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.buffer.sensors.temperature.top": {
@@ -226,7 +227,8 @@
         "Vitocal250A.json",
         "Vitopure350.json",
         "Vitocal252A.json",
-        "VitosetAqua.json"
+        "VitosetAqua.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.dhw.comfort": {
@@ -262,7 +264,8 @@
         "Vitoladens300-C_J3RA.json",
         "VitovalorPT2.json",
         "dump:device_0_features.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.bottom": {
@@ -316,7 +319,8 @@
         "Vitocal333G-with-Vitovent300F.json",
         "VitovalorPT2.json",
         "dump:device_0_features.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.external.lock": {
@@ -328,7 +332,8 @@
         "Vitocal222S.json",
         "Vitocal250A.json",
         "VitovalorPT2.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.fuelCell.electricalEnergyConsumption.value": {
@@ -421,6 +426,15 @@
         "VitovalorPT2.json"
       ]
     },
+    "heating.heatingRod": {
+      "removalDate": "2026-06-30",
+      "info": "replaced by heating.heatingRod.heating",
+      "firstSeenIn": "Vitocal200A_SystemController.json",
+      "firstSeenOn": "2026-09-10",
+      "sources": [
+        "Vitocal200A_SystemController.json"
+      ]
+    },
     "heating.noise.reduction.operating.programs.active": {
       "removalDate": "2024-09-15",
       "info": "replaced by heating.noise.reduction.operating.state",
@@ -429,7 +443,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.noise.reduction.operating.programs.maxReduced": {
@@ -440,7 +455,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.noise.reduction.operating.programs.notReduced": {
@@ -451,7 +467,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.noise.reduction.operating.programs.slightlyReduced": {
@@ -462,7 +479,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.scop.dhw": {
@@ -473,7 +491,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.scop.heating": {
@@ -484,7 +503,8 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
       ]
     },
     "heating.scop.total": {
@@ -495,7 +515,17 @@
       "sources": [
         "Vitocal222S.json",
         "Vitocal250A.json",
-        "Vitocal252A.json"
+        "Vitocal252A.json",
+        "Vitocal200A_SystemController.json"
+      ]
+    },
+    "heating.sensors.volumetricFlow.allengra": {
+      "removalDate": "2027-06-15",
+      "info": "replaced by heating.secondaryCircuit.sensors.volumetricFlow",
+      "firstSeenIn": "Vitocal200A_OutdoorUnit.json",
+      "firstSeenOn": "2026-09-10",
+      "sources": [
+        "Vitocal200A_OutdoorUnit.json"
       ]
     },
     "rooms.0.configuration.window.openState": {
