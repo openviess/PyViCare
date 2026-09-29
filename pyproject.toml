@@ -54,7 +54,7 @@ pytest = "9.1.1"
 pytest-cov = "7.1.0"
 ruff = "0.16.9"
 types-deprecated = "^1.2.15.20241117"
-types-requests = ">=2.31"
+types-requests = "==2.33.0.20260906"
 
 [tool.mypy]
 # Specify the target platform details in config, so your developers are
