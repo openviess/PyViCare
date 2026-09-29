@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: 🚀 Sort test response data
         run: |
           find './tests/response' \
@@ -28,3 +28,19 @@ jobs:
             -exec sh -c 'mv $1 $1.tmp; jq ".data|=sort_by(.feature)" --sort-keys $1.tmp > $1; rm $1.tmp' shell {} ";"
       - name: 🔍 Verify
         run: git diff --name-only --exit-code
+
+  deprecations:
+    name: validate deprecation database
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON }}
+      - name: Update deprecation database
+        run: python check_deprecations.py --update
+      - name: Verify no changes
+        run: git diff --exit-code
+        if: always()

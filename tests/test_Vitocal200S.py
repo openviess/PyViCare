@@ -1,13 +1,15 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHeatPump import HeatPump
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
 class Vitocal200S(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocal200S.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_getDomesticHotWaterConfiguredTemperature(self):
         self.assertEqual(
@@ -34,8 +36,9 @@ class Vitocal200S(unittest.TestCase):
 
 class Vitocal200S_AWB(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocal200S_AWB-M-E-AC-201.D10.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_compressor_getAmbientTemperature(self):
         self.assertEqual(self.device.getCompressor(0).getAmbientTemperature(), 17.6)

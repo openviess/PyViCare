@@ -1,5 +1,6 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
@@ -7,8 +8,9 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitodens300W(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitodens300W.json')
-        self.device = GazBoiler(self.service)
+        self.device = GazBoiler(self.accessor, self.service)
 
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), False)
@@ -60,3 +62,20 @@ class Vitodens300W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
                           self.device.getDomesticHotWaterCirculationScheduleModes)
+
+    # Total power consumption:
+    def test_getPowerConsumptionUnit(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionUnit(), "kilowattHour")
+
+    def test_getPowerConsumptionToday(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionToday(), 0.219)
+
+    def test_getPowerConsumptionThisMonth(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisMonth(), 7.843)
+
+    def test_getPowerConsumptionThisYear(self):
+        self.assertEqual(
+            self.device.getPowerConsumptionThisYear(), 207.106)

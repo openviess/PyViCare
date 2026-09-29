@@ -1,5 +1,6 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
@@ -7,8 +8,9 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitocal300G(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocal333G.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_getDomesticHotWaterStorageTemperature(self):
         self.assertEqual(

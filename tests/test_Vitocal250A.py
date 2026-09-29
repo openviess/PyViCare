@@ -1,5 +1,6 @@
 import unittest
 
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
@@ -7,8 +8,9 @@ from tests.ViCareServiceMock import ViCareServiceMock
 
 class Vitocal250A(unittest.TestCase):
     def setUp(self):
+        self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")
         self.service = ViCareServiceMock('response/Vitocal250A.json')
-        self.device = HeatPump(self.service)
+        self.device = HeatPump(self.accessor, self.service)
 
     def test_compressor_getActive(self):
         self.assertFalse(self.device.compressors[0].getActive())
@@ -226,12 +228,40 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.getSeasonalPerformanceFactorTotal(), 3.9)
 
     def test_getHeatingRod(self):
-        # self.assertEqual(self.device.getHeatingRodHeatProductionCurrent(), 0) # not in dump
-        # self.assertEqual(self.device.getHeatingRodPowerConsumptionCurrent(), 0) # not in dump
-        # self.assertEqual(self.device.getHeatingRodPowerConsumptionDHWThisYear(), 0)
-        # self.assertEqual(self.device.getHeatingRodPowerConsumptionHeatingThisYear(), 0)
         self.assertEqual(self.device.getHeatingRodStarts(), 314)
         self.assertEqual(self.device.getHeatingRodHours(), 31)
+
+    def test_getHeatingRodPowerConsumptionSummaryDHW(self):
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWUnit(), "kilowattHour")
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWCurrentDay(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWCurrentMonth(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWCurrentYear(), 3.3)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWLastMonth(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWLastSevenDays(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryDHWLastYear(), 28)
+
+    def test_getHeatingRodPowerConsumptionSummaryHeating(self):
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingUnit(), "kilowattHour")
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingCurrentDay(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingCurrentMonth(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingCurrentYear(), 29.5)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingLastMonth(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingLastSevenDays(), 0)
+        self.assertEqual(
+            self.device.getHeatingRodPowerConsumptionSummaryHeatingLastYear(), 53.6)
 
     def test_inverter_getCurrent(self):
         self.assertEqual(self.device.inverters[0].getCurrent(), 0)
@@ -241,6 +271,15 @@ class Vitocal250A(unittest.TestCase):
 
     def test_inverter_getTemperature(self):
         self.assertEqual(self.device.inverters[0].getTemperature(), 26.3)
+
+    def test_getDomesticHotWaterOperatingModes(self):
+        self.assertListEqual(
+            self.device.getDomesticHotWaterOperatingModes(),
+            ['efficientWithMinComfort', 'efficient', 'off'])
+
+    def test_getDomesticHotWaterActiveOperatingMode(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterActiveOperatingMode(), 'efficient')
 
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -30)

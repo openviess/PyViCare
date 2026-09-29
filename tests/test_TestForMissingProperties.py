@@ -1,3 +1,4 @@
+import json
 import re
 import unittest
 from os import listdir
@@ -35,6 +36,16 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.programs.levelTwo',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
+            # Alternative naming conventions used as fallback for device compatibility
+            'heating.buffer.sensors.temperature.main',
+            'heating.buffer.sensors.temperature.top',
+            'heating.dhw.sensors.temperature.hotWaterStorage',
+            'heating.dhw.sensors.temperature.hotWaterStorage.top',
+            'heating.dhw.sensors.temperature.hotWaterStorage.bottom',
+            'heating.dhw.sensors.temperature.hotWaterStorage.middle',
+            'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
+            'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
+            'heating.sensors.volumetricFlow.allengra',  # deprecated, replaced by heating.secondaryCircuit.sensors.volumetricFlow
         ]
 
         all_features = self.read_all_deprecated_features()
@@ -141,6 +152,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.temperature',
             'heating.burners',
             'heating.sensors.temperature.allengra',
+            'heating.sensors.valve.0.expansion.target',
+            'heating.sensors.valve.1.expansion.target',
             'heating.dhw.hygiene.trigger',
             'heating.dhw.temperature.hygiene',
             'heating.dhw.operating.modes.off',
@@ -200,11 +213,9 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.buffer.temperature.max',
             'heating.configuration.flow.temperature.max',
             'heating.configuration.flow.temperature.min',
-            'heating.coolingCircuits.0.reverse',
-            'heating.coolingCircuits.0.type',
             'heating.cop.cooling',
             'heating.cop.dhw',
-            'heating.cop.green',
+            'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
             'heating.cop.heating',
             'heating.cop.total',
             'heating.heatingRod.heatTarget',
@@ -215,13 +226,26 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.sensors.temperature.hotGas',
             'heating.sensors.temperature.liquidGas',
             'heating.sensors.temperature.suctionGas',
-            'heating.heatingRod.power.consumption.summary.dhw',
-            'heating.heatingRod.power.consumption.summary.heating',
             'heating.heatingRod.status',
             'heating.scop.dhw', # deprecated
             'heating.scop.heating', # deprecated
             'heating.scop.total', # deprecated
             'heating.dhw.comfort', # deprecated
+
+            # new Vitocal generation - not yet used
+            'heating.compressors.0.speed.setpoint',
+            'heating.dhw.actuator',
+            'heating.heat.production.current',
+            'heating.noise.reduction.levels.maxReduced',
+            'heating.noise.reduction.levels.notReduced',
+            'heating.noise.reduction.levels.slightlyReduced',
+            'heating.power.consumption.current',
+            'system.temperature.outside',
+            'tcu.ethernet.0.config',
+            'tcu.features.eebus',
+            'tcu.features.hems',
+            'tcu.features.solarLog',
+            'tcu.features.wirelessRemoteController',
 
             # ventilation - not yet used
             'ventilation.control.filterChange',
@@ -236,6 +260,37 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.quickmodes.comfort',
             'ventilation.quickmodes.eco',
             'ventilation.quickmodes.holiday',
+            # additional ventilation features seen in VitoairFs300E.json
+            'device.commissioning.information',
+            'ventilation.air.balance.offset',
+            'ventilation.airQuality.co',
+            'ventilation.airQuality.co2',
+            'ventilation.airQuality.organicComponents',
+            'ventilation.airQuality.pm10',
+            'ventilation.airQuality.pm2d5',
+            'ventilation.airQuality.temperature',
+            'ventilation.bypass',
+            'ventilation.bypass.configuration.temperature.perceived',
+            'ventilation.bypass.configuration.temperature.supply.dynamicRegulation',
+            'ventilation.bypass.configuration.temperature.supply.smoothRegulation',
+            'ventilation.bypass.operating.modes.active',
+            'ventilation.bypass.operating.modes.automatic',
+            'ventilation.bypass.operating.modes.open',
+            'ventilation.bypass.position',
+            'ventilation.external.lock',
+            'ventilation.fan.assignmentSwitch',
+            'ventilation.fan.exhaust',
+            'ventilation.fan.exhaust.runtime',
+            'ventilation.features.co',
+            'ventilation.features.co2',
+            'ventilation.features.dust',
+            'ventilation.features.finedust',
+            'ventilation.features.organicComponent',
+            'ventilation.filter.information',
+            'ventilation.lockExternal',
+            'ventilation.quickmodes.temporaryShutdown',
+            'ventilation.sensors.actuator.selftest',
+            'ventilation.switchActivation',
 
             # energy system - not yet used
             'device.etn',
@@ -310,6 +365,8 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.sensors.airQuality',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
+            # Vitoset Aqua water softener: device-level status not yet exposed
+            'device.status',
         ]
 
         all_features = self.read_all_features()
@@ -358,8 +415,9 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{self.(circuit|burner|compressor|condensor|evaporator|inverter)}', '0', match)
+                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|room_id|slot)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
+                feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
@@ -411,6 +469,18 @@ class TestForMissingProperties(unittest.TestCase):
         response_files = [f for f in listdir(response_path) if isfile(join(response_path, f))]
 
         all_features = {}
+
+        # Load from deprecation database (maintained by check_deprecations.py)
+        db_path = join(dirname(__file__), 'deprecated_features.json')
+        if isfile(db_path):
+            with open(db_path) as f:
+                db = json.load(f)
+            for name, info in db.get('features', {}).items():
+                normalized = re.sub(r"\b\d\b", "0", name)
+                if normalized not in all_features:
+                    all_features[normalized] = {'files': info.get('sources', [])}
+
+        # Also scan test response files directly (catches new deprecations not yet in db)
         for response in response_files:
             data = readJson(join(response_path, response))
             if "data" in data:
@@ -419,15 +489,8 @@ class TestForMissingProperties(unittest.TestCase):
                         name = re.sub(r"\b\d\b", "0", feature["feature"])
                         if name not in all_features:
                             all_features[name] = {'files': []}
-
                         all_features[name]['files'].append(response)
-                    # name = re.sub(r"\b\d\b", "0", feature["feature"])
-                    # isDeprecated = feature["deprecated"] if "deprecated" in feature else None
-                    # if name not in all_features:
-                    #     all_features[name] = {'files': []}
 
-                    # if feature['isEnabled'] and feature['properties'] != {}:
-                    #     all_features[name]['files'].append(response)
         return all_features
 
     def read_all_features(self):

@@ -21,7 +21,7 @@ jobs:
       id-token: write
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: 🏗 Set up UV
         uses: astral-sh/setup-uv@v7
         with:
@@ -37,7 +37,7 @@ jobs:
       - name: 🏗 Build package
         run: uv tool build --no-interaction
       - name: 🚀 Publish to PyPi
-        uses: pypa/gh-action-pypi-publish@v1.13.0
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
         with:
           verbose: true
           print-hash: true

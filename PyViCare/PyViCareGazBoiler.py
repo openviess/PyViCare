@@ -17,7 +17,7 @@ class GazBoiler(HeatingDevice):
 
     @handleNotSupported
     def getAvailableBurners(self):
-        return get_available_burners(self.service)
+        return get_available_burners(self)
 
     @handleNotSupported
     def getGasConsumptionHeatingUnit(self):
@@ -92,10 +92,6 @@ class GazBoiler(HeatingDevice):
         return self.getProperty("heating.gas.consumption.dhw")["properties"]["year"]["value"][0]
 
     @handleNotSupported
-    def getBoilerTemperature(self):
-        return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
-
-    @handleNotSupported
     def getBoilerTargetTemperature(self):
         return self.getProperty("heating.boiler.temperature")["properties"]["value"]["value"]
 
@@ -103,9 +99,13 @@ class GazBoiler(HeatingDevice):
     def getDomesticHotWaterChargingLevel(self):
         return self.getProperty("heating.dhw.charging.level")["properties"]["value"]["value"]
 
+    # Total power consumption:
     @handleNotSupported
     def getPowerConsumptionUnit(self):
-        return self.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
+        try :
+            return self.getProperty("heating.power.consumption.total")["properties"]["day"]["unit"]
+        except KeyError:
+            return self.getProperty("heating.power.consumption.total")["properties"]["unit"]["value"]
 
     @handleNotSupported
     def getPowerConsumptionDays(self):
@@ -139,6 +139,7 @@ class GazBoiler(HeatingDevice):
     def getPowerConsumptionThisYear(self):
         return self.getProperty("heating.power.consumption.total")["properties"]["year"]["value"][0]
 
+    # Flow
     @handleNotSupported
     def getVolumetricFlowReturn(self):
         return self.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]["value"]["value"]
@@ -204,6 +205,26 @@ class GazBoiler(HeatingDevice):
 
     # Power consumption for Heating:
     @handleNotSupported
+    def getPowerConsumptionHeatingUnit(self):
+        try:
+            return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["unit"]
+        except KeyError:
+            return self.getProperty("heating.power.consumption.heating")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingToday(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisMonth(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisYear(self):
+        return self.getProperty("heating.power.consumption.heating")["properties"]["year"]["value"][0]
+
+    # Power summary consumption for Heating:
+    @handleNotSupported
     def getPowerSummaryConsumptionHeatingUnit(self):
         return self.getProperty("heating.power.consumption.summary.heating")["properties"]["currentDay"]["unit"]
 
@@ -232,6 +253,26 @@ class GazBoiler(HeatingDevice):
         return self.getProperty("heating.power.consumption.summary.heating")["properties"]["lastYear"]["value"]
 
     # Power consumption for Domestic Hot Water:
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterUnit(self):
+        try:
+            return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["unit"]
+        except KeyError:
+            return self.getProperty("heating.power.consumption.dhw")["properties"]["unit"]["value"]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterToday(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["day"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterThisMonth(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["month"]["value"][0]
+
+    @handleNotSupported
+    def getPowerConsumptionDomesticHotWaterThisYear(self):
+        return self.getProperty("heating.power.consumption.dhw")["properties"]["year"]["value"][0]
+
+    # Power summary consumption for Domestic Hot Water:
     @handleNotSupported
     def getPowerSummaryConsumptionDomesticHotWaterUnit(self):
         return self.getProperty("heating.power.consumption.summary.dhw")["properties"]["currentDay"]["unit"]
