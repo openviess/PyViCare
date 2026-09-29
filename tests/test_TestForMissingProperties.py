@@ -46,6 +46,11 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
             'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
             'heating.sensors.volumetricFlow.allengra',  # deprecated, replaced by heating.secondaryCircuit.sensors.volumetricFlow
+            # deprecated (removal 2026-09-30), replaced by heatingRods.heatGeneration.N[.statistics],
+            # but the replacement is not yet delivered by the API (Vitocal 250-A, 2026-09)
+            'heating.configuration.heatingRod.dhw',
+            'heating.configuration.heatingRod.heating',
+            'heating.heatingRod.statistics',
         ]
 
         all_features = self.read_all_deprecated_features()
