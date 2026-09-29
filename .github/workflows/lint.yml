@@ -16,22 +16,14 @@ jobs:
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: 🏗 Set up Poetry
-        run: pipx install poetry
-      - name: 🏗 Set up Python ${{ env.DEFAULT_PYTHON }}
-        id: python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      - name: 🏗 Set up UV
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
-          cache: "poetry"
-      - name: 🏗 Install workflow dependencies
-        run: |
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project true
-      - name: 🏗 Install Python dependencies
-        run: poetry install --no-interaction
+      - name: 🏗 Install dependencies
+        run: uv sync --frozen --no-progress
       - name: 🚀 Check code for common misspellings
-        run: poetry run codespell **/*.py
+        run: uv run --frozen codespell **/*.py
 
   ruff:
     name: ruff
@@ -39,22 +31,14 @@ jobs:
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: 🏗 Set up Poetry
-        run: pipx install poetry
-      - name: 🏗 Set up Python ${{ env.DEFAULT_PYTHON }}
-        id: python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      - name: 🏗 Set up UV
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
-          cache: "poetry"
-      - name: 🏗 Install workflow dependencies
-        run: |
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project true
-      - name: 🏗 Install Python dependencies
-        run: poetry install --no-interaction
+      - name: 🏗 Install dependencies
+        run: uv sync --frozen --no-progress
       - name: 🚀 Run ruff linter
-        run: poetry run ruff check --output-format=github .
+        run: uv run --frozen ruff check --output-format=github .
     #   - name: 🚀 Run ruff formatter
     #     run: poetry run ruff format --check .
 
@@ -64,19 +48,11 @@ jobs:
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: 🏗 Set up Poetry
-        run: pipx install poetry
-      - name: 🏗 Set up Python ${{ env.DEFAULT_PYTHON }}
-        id: python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      - name: 🏗 Set up UV
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
-          cache: "poetry"
-      - name: 🏗 Install workflow dependencies
-        run: |
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project true
-      - name: 🏗 Install Python dependencies
-        run: poetry install --no-interaction
+      - name: 🏗 Install dependencies
+        run: uv sync --frozen --no-progress
       - name: 🚀 Run pylint
-        run: poetry run pylint **/*.py
+        run: uv run --frozen pylint **/*.py
