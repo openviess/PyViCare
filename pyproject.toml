@@ -97,6 +97,9 @@ warn_unused_ignores = true
 module = "authlib.*"
 ignore_missing_imports = true
 
+[tool.pylint.MAIN]
+py-version = "3.11"
+
 [tool.pylint."MESSAGES CONTROL"]
 disable = [
     "duplicate-code",
