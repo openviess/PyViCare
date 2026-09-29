@@ -22,7 +22,7 @@ jobs:
           python-version: ${{ env.DEFAULT_PYTHON }}
       - name: 🏗 Install dependencies
         run: uv sync --frozen --no-progress
-      - name: 🚀 Run mypy
+      - name: 🚀 Check code for common misspellings
         run: uv tool run codespell **/*.py
 
   ruff:
