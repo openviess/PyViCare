@@ -23,7 +23,7 @@ jobs:
       - name: 🏗 Install dependencies
         run: uv sync --frozen --no-progress
       - name: 🚀 Check code for common misspellings
-        run: uv tool run codespell **/*.py
+        run: uv run --frozen codespell **/*.py
 
   ruff:
     name: ruff
@@ -38,7 +38,7 @@ jobs:
       - name: 🏗 Install dependencies
         run: uv sync --frozen --no-progress
       - name: 🚀 Run ruff linter
-        run: uv tool run ruff check --output-format=github .
+        run: uv run --frozen ruff check --output-format=github .
     #   - name: 🚀 Run ruff formatter
     #     run: poetry run ruff format --check .
 
@@ -55,4 +55,4 @@ jobs:
       - name: 🏗 Install dependencies
         run: uv sync --frozen --no-progress
       - name: 🚀 Run pylint
-        run: uv tool run pylint **/*.py
+        run: uv run --frozen pylint **/*.py

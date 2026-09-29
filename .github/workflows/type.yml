@@ -26,4 +26,4 @@ jobs:
       - name: 🏗 Install dependencies
         run: uv sync --frozen --no-progress
       - name: 🚀 Run mypy
-        run: uv tool run mypy PyViCare/ tests/
+        run: uv run --frozen mypy PyViCare/ tests/
