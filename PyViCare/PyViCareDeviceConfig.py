@@ -119,7 +119,7 @@ class PyViCareDeviceConfig:
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
             (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
-            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
+            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B|OBNG_SCU|OBNG_OCU", ["type:heatpump"]),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]), # ees, it this a typo?
             (self.asElectricalEnergySystem, r"E3_VitoCharge_05", ["type:ess"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),

@@ -72,7 +72,8 @@ class PyViCare:
 
     SUPPORTED_DEVICE_TYPES = [
         "heating", "zigbee", "vitoconnect", "electricityStorage",
-        "tcu", "ventilation", "roomControl",
+        "tcu", "ventilation", "roomControl", "systemController",
+        "outdoorUnit",
     ]
 
     def __extract_all_devices(self):
