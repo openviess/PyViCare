@@ -121,3 +121,11 @@ disable = [
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
+
+[tool.ruff.lint]
+ignore = [
+  # module names are part of the public API (e.g. PyViCare.PyViCare)
+  "N999",
+  # switching to timezone-aware datetimes changes behavior
+  "DTZ",
+]

@@ -1,4 +1,4 @@
-from PyViCare.PyViCareDevice import ZigbeeDevice, Device
+from PyViCare.PyViCareDevice import Device, ZigbeeDevice
 from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 

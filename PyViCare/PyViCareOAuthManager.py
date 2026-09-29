@@ -18,8 +18,10 @@ from PyViCare.PyViCareAbstractOAuthManager import (
     TOKEN_URL,
     AbstractViCareOAuthManager,
 )
-from PyViCare.PyViCareUtils import (PyViCareInvalidConfigurationError,
-                                    PyViCareInvalidCredentialsError)
+from PyViCare.PyViCareUtils import (
+    PyViCareInvalidConfigurationError,
+    PyViCareInvalidCredentialsError,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -184,10 +186,9 @@ class ViCareOAuthManager(AbstractViCareOAuthManager):
             return None
 
         logger.info("Token file exists")
-        with suppress(UnpicklingError):
-            with open(token_file, mode='rb') as binary_file:
-                s_token = pickle.load(binary_file)
-                logger.info("Token restored from file")
-                return s_token
+        with suppress(UnpicklingError), open(token_file, mode='rb') as binary_file:
+            s_token = pickle.load(binary_file)
+            logger.info("Token restored from file")
+            return s_token
         logger.warning("Could not restore token")
         return None

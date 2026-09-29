@@ -5,7 +5,9 @@ from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareCachedServiceBase import ViCareCachedServiceBase
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareServiceViaGateway import (
-    ViCareServiceViaGateway, filter_features_for_device)
+    ViCareServiceViaGateway,
+    filter_features_for_device,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())

@@ -2,15 +2,17 @@ import logging
 from abc import abstractmethod
 from typing import Any
 
-from authlib.integrations.base_client import TokenExpiredError, InvalidTokenError
+from authlib.integrations.base_client import InvalidTokenError, TokenExpiredError
 from authlib.integrations.requests_client import OAuth2Session
 
 from PyViCare import Feature
-from PyViCare.PyViCareUtils import (PyViCareCommandError,
-                                    PyViCareDeviceCommunicationError,
-                                    PyViCareInternalServerError,
-                                    PyViCareNotPaidForError,
-                                    PyViCareRateLimitError)
+from PyViCare.PyViCareUtils import (
+    PyViCareCommandError,
+    PyViCareDeviceCommunicationError,
+    PyViCareInternalServerError,
+    PyViCareNotPaidForError,
+    PyViCareRateLimitError,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
