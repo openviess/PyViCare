@@ -678,6 +678,30 @@ class Compressor(HeatingDeviceWithComponent):
         return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling")["properties"]["year"]["value"][0])
 
     @handleNotSupported
+    def getPowerConsumptionHeatingThisWeek(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.heating.week")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisWeekUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.heating.week")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionDHWThisWeek(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.dhw.week")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionDHWThisWeekUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.dhw.week")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionCoolingThisWeek(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling.week")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCoolingThisWeekUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling.week")["properties"]["value"]["unit"])
+
+    @handleNotSupported
     def getPowerConsumptionTotalThisYear(self) -> float:
         return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.total")["properties"]["year"]["value"][0])
 
