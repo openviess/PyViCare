@@ -49,7 +49,7 @@ dev = [
     "pylint==4.0.10",
     "pytest==9.1.1",
     "pytest-cov==7.1.0",
-    "ruff==0.15.22",
+    "ruff==0.16.9",
     "types-deprecated>=1.2.15.20241117,<2",
     "types-requests>=2.31",
 ]
@@ -123,4 +123,12 @@ disable = [
     "unspecified-encoding",
     "useless-object-inheritance",
     "useless-parent-delegation",
+]
+
+[tool.ruff.lint]
+ignore = [
+  # module names are part of the public API (e.g. PyViCare.PyViCare)
+  "N999",
+  # switching to timezone-aware datetimes changes behavior
+  "DTZ",
 ]

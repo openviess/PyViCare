@@ -2,8 +2,7 @@ import logging
 from typing import Any
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
-                                      readFeature)
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, readFeature
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())

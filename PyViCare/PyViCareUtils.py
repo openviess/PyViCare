@@ -1,6 +1,6 @@
+from collections.abc import Callable
 from datetime import datetime, timedelta
 from functools import wraps
-from typing import Callable
 
 from PyViCare import Feature
 

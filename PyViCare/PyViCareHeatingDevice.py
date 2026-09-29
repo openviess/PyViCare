@@ -1,20 +1,26 @@
 from contextlib import suppress
-from typing import Any, List, Optional
+from typing import Any
 
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareService import hasRoles
 from PyViCare.PyViCareHeatCurveCalculation import (
-    heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareUtils import (VICARE_DAYS,
-                                    PyViCareNotSupportedFeatureError,
-                                    ViCareTimer, handleAPICommandErrors,
-                                    handleNotSupported, parse_time_as_delta,
-                                    time_as_delta)
+    heat_curve_formular_variant1,
+    heat_curve_formular_variant2,
+)
+from PyViCare.PyViCareService import hasRoles
+from PyViCare.PyViCareUtils import (
+    VICARE_DAYS,
+    PyViCareNotSupportedFeatureError,
+    ViCareTimer,
+    handleAPICommandErrors,
+    handleNotSupported,
+    parse_time_as_delta,
+    time_as_delta,
+)
 
 VICARE_DHW_TEMP2 = "temp-2"
 
 
-def all_set(_list: List[Any]) -> bool:
+def all_set(_list: list[Any]) -> bool:
     return all(v is not None for v in _list)
 
 
@@ -42,8 +48,8 @@ class HeatingDevice(Device):
         return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
 
     @property
-    def circuits(self) -> List[Any]:
-        return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
+    def circuits(self) -> list[Any]:
+        return [self.getCircuit(x) for x in self.getAvailableCircuits()]
 
     def getCircuit(self, circuit):
         return HeatingCircuit(self, circuit)
@@ -56,11 +62,11 @@ class HeatingDevice(Device):
         return heat_curve_formular_variant1
 
     @property
-    def burners(self) -> List[Any]:
+    def burners(self) -> list[Any]:
         return []
 
     @property
-    def compressors(self) -> List[Any]:
+    def compressors(self) -> list[Any]:
         return []
 
     @handleNotSupported
@@ -116,7 +122,7 @@ class HeatingDevice(Device):
         for s in schedule[current_day]:
             startTime = parse_time_as_delta(s["start"])
             endTime = parse_time_as_delta(s["end"])
-            if startTime <= currentTime and currentTime <= endTime:
+            if startTime <= currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return VICARE_DHW_TEMP2
                 mode = s["mode"]
@@ -339,7 +345,7 @@ class HeatingDevice(Device):
         for s in schedule[current_day]:
             startTime = parse_time_as_delta(s["start"])
             endTime = parse_time_as_delta(s["end"])
-            if startTime <= currentTime and currentTime <= endTime:
+            if startTime <= currentTime <= endTime:
                 return s["mode"]
         return schedule['default_mode']
 
@@ -716,7 +722,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
-    def getTargetSupplyTemperature(self) -> Optional[float]:
+    def getTargetSupplyTemperature(self) -> float | None:
         inside = None
         outside = None
         shift = None

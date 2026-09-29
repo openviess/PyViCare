@@ -1,16 +1,18 @@
-from typing import Any, List
+from typing import Any
 
-from PyViCare.PyViCareHeatingDevice import (HeatingDevice,
-                                            HeatingDeviceWithComponent,
-                                            get_available_burners)
+from PyViCare.PyViCareHeatingDevice import (
+    HeatingDevice,
+    HeatingDeviceWithComponent,
+    get_available_burners,
+)
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
 class GazBoiler(HeatingDevice):
 
     @property
-    def burners(self) -> List[Any]:
-        return list([self.getBurner(x) for x in self.getAvailableBurners()])
+    def burners(self) -> list[Any]:
+        return [self.getBurner(x) for x in self.getAvailableBurners()]
 
     def getBurner(self, burner):
         return GazBurner(self, burner)
