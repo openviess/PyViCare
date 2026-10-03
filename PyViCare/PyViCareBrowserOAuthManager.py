@@ -111,5 +111,5 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             return OAuth2Session(self.client_id, token=token)
 
     def renewToken(self) -> None:  # type: ignore
-        refresh_token = self.oauth_session.refresh_token
+        refresh_token = self.oauth_session.token.get("refresh_token")
         self.oauth_session.refresh_token(TOKEN_URL, refresh_token=refresh_token)
