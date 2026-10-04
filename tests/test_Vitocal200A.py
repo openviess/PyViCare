@@ -38,6 +38,21 @@ class Vitocal200ASystemController(unittest.TestCase):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getAvailableCompressors()
 
+    def test_getHeatProductionCurrent(self):
+        self.assertEqual(self.device.getHeatProductionCurrent(), 0)
+        self.assertEqual(self.device.getHeatProductionCurrentUnit(), "kilowatt")
+
+    def test_getPowerConsumptionCurrent(self):
+        self.assertEqual(self.device.getPowerConsumptionCurrent(), 0)
+        self.assertEqual(self.device.getPowerConsumptionCurrentUnit(), "kilowatt")
+
+    def test_getFourThreeWayValvePosition(self):
+        self.assertEqual(self.device.getFourThreeWayValvePosition(), "climateCircuitOne")
+
+    def test_getPowerConsumptionLimit(self):
+        self.assertEqual(self.device.getPowerConsumptionLimit(), 1000000)
+        self.assertEqual(self.device.getPowerConsumptionLimitStatus(), "unlimitedAutonomous")
+
 
 class Vitocal200AOutdoorUnit(unittest.TestCase):
 
