@@ -19,6 +19,10 @@ class Vitocal200ASystemController(unittest.TestCase):
     def test_getActiveMode(self):
         self.assertEqual(self.device.circuits[0].getActiveMode(), 'heating')
 
+    def test_getPowerConsumptionCurrent(self):
+        self.assertEqual(self.device.getPowerConsumptionCurrent(), 0.0)
+        self.assertEqual(self.device.getPowerConsumptionCurrentUnit(), "kilowatt")
+
     def test_getActiveProgram(self):
         self.assertEqual(self.device.circuits[0].getActiveProgram(), 'normalHeating')
 

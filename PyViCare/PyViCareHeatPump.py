@@ -56,6 +56,14 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getBufferTopTemperature(self):
         return self.getProperty("heating.bufferCylinder.sensors.temperature.top")["properties"]["value"]["value"]
 
+    @handleNotSupported
+    def getPowerConsumptionCurrent(self) -> float:
+        return float(self.getProperty("heating.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.power.consumption.current")["properties"]["value"]["unit"])
+
     # Power consumption for Heating:
     @handleNotSupported
     def getPowerConsumptionHeatingUnit(self):

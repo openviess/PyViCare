@@ -239,7 +239,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.noise.reduction.levels.maxReduced',
             'heating.noise.reduction.levels.notReduced',
             'heating.noise.reduction.levels.slightlyReduced',
-            'heating.power.consumption.current',
             'system.temperature.outside',
             'tcu.ethernet.0.config',
             'tcu.features.eebus',
