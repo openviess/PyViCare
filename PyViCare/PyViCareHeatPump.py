@@ -696,8 +696,8 @@ class Compressor(HeatingDeviceWithComponent):
         return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.power")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getSpeed(self) -> float:
-        return float(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
+    def getSpeed(self) -> int:
+        return int(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getSpeedUnit(self) -> str:
@@ -856,17 +856,14 @@ class Compressor(HeatingDeviceWithComponent):
         # Shows the oil temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.oil")["properties"]["value"]["value"])
 
-    @handleNotSupported
     def getMotorChamberTemperature(self) -> float:
         # Shows the motor chamber temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.motorChamber")["properties"]["value"]["value"])
 
-    @handleNotSupported
     def getAmbientTemperature(self) -> float:
         # Shows the ambient temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.ambient")["properties"]["value"]["value"])
 
-    @handleNotSupported
     def getOverheatTemperature(self) -> float:
         # Shows the overheat temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.overheat")["properties"]["value"]["value"])

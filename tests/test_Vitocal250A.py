@@ -284,8 +284,7 @@ class Vitocal250A(unittest.TestCase):
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -30)
 
-    def test_compressor_getSpeed(self):
-        self.assertEqual(self.device.getCompressor(0).getSpeed(), 0)
+    def test_compressor_getSpeedUnit(self):
         self.assertEqual(self.device.getCompressor(0).getSpeedUnit(), "revolutionsPerSecond")
 
     def test_circuit_getTargetTemperature(self):

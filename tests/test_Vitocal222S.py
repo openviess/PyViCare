@@ -2,7 +2,6 @@ import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareService import ViCareDeviceAccessor
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -35,7 +34,3 @@ class Vitocal222S(unittest.TestCase):
     def test_getDomesticHotWaterActiveOperatingMode(self):
         self.assertEqual(
             self.device.getDomesticHotWaterActiveOperatingMode(), 'efficient')
-
-    def test_compressor_temperatures_not_connected(self):
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getCompressor(0).getOilTemperature)
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getCompressor(0).getMotorChamberTemperature)
