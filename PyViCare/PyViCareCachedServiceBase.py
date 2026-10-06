@@ -1,16 +1,17 @@
 import logging
 import threading
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
-from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
-                                      readFeature)
-from PyViCare.PyViCareUtils import (PyViCareDeviceCommunicationError,
-                                    PyViCareInternalServerError,
-                                    PyViCareInvalidDataError,
-                                    PyViCareNotPaidForError,
-                                    PyViCareNotSupportedFeatureError,
-                                    ViCareTimer)
+from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, readFeature
+from PyViCare.PyViCareUtils import (
+    PyViCareDeviceCommunicationError,
+    PyViCareInternalServerError,
+    PyViCareInvalidDataError,
+    PyViCareNotPaidForError,
+    PyViCareNotSupportedFeatureError,
+    ViCareTimer,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -25,9 +26,9 @@ class ViCareCachedServiceBase(ViCareService):
 
     def _init_cache(self, cacheDuration: int) -> None:
         self._cacheDuration = cacheDuration
-        self._cache: Optional[dict] = None
-        self._cacheTime: Optional[datetime] = None
-        self._cacheError: Optional[Exception] = None
+        self._cache: dict | None = None
+        self._cacheTime: datetime | None = None
+        self._cacheError: Exception | None = None
         self._cacheLock = threading.Lock()
 
     def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:

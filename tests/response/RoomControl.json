@@ -1,48 +1,91 @@
 {
   "data": [
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
-      "feature": "rooms.0.co2",
-      "gatewayId": "################",
+      "feature": "rooms.0.childLock",
       "isEnabled": true,
-      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "status": {
+          "type": "string",
+          "value": "inactive"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.co2",
+      "isEnabled": true,
       "properties": {
         "concentration": {
           "type": "number",
           "unit": "partsPerMillion",
           "value": 1000
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.0.co2"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
       "feature": "rooms.0.condensationRisk",
-      "gatewayId": "################",
       "isEnabled": true,
-      "isReady": true,
       "properties": {
         "value": {
           "type": "boolean",
           "value": false
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.0.condensationRisk"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
-      "feature": "rooms.0.sensors.humidity",
-      "gatewayId": "################",
+      "feature": "rooms.0.configuration.heatOnTime",
       "isEnabled": true,
-      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.hydraulicBalancing",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.trvAlgorithmActive",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.sensors.humidity",
+      "isEnabled": true,
       "properties": {
         "status": {
           "type": "string",
@@ -53,18 +96,23 @@
           "unit": "percent",
           "value": 49
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.0.sensors.humidity"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
-      "feature": "rooms.0.sensors.temperature",
-      "gatewayId": "################",
+      "feature": "rooms.0.sensors.openWindow",
       "isEnabled": true,
-      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.sensors.temperature",
+      "isEnabled": true,
       "properties": {
         "status": {
           "type": "string",
@@ -75,53 +123,166 @@
           "unit": "celsius",
           "value": 23.4
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.0.sensors.temperature"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
-      "feature": "rooms.1.co2",
-      "gatewayId": "################",
+      "feature": "rooms.0.temperature.levels.comfort.heating",
       "isEnabled": true,
-      "isReady": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.comfort.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.normal.cooling",
+      "isEnabled": false,
+      "properties": {}
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.normal.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 18
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.normal.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 18
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.reduced.cooling",
+      "isEnabled": false,
+      "properties": {}
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.reduced.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 16
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.childLock",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "status": {
+          "type": "string",
+          "value": "inactive"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.co2",
+      "isEnabled": true,
       "properties": {
         "concentration": {
           "type": "number",
           "unit": "partsPerMillion",
-          "value": 850
+          "value": 1000
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.1.co2"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
       "feature": "rooms.1.condensationRisk",
-      "gatewayId": "################",
       "isEnabled": true,
-      "isReady": true,
       "properties": {
         "value": {
           "type": "boolean",
           "value": false
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.1.condensationRisk"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
-      "feature": "rooms.1.sensors.humidity",
-      "gatewayId": "################",
+      "feature": "rooms.1.configuration.heatOnTime",
       "isEnabled": true,
-      "isReady": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.hydraulicBalancing",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.trvAlgorithmActive",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.sensors.humidity",
+      "isEnabled": true,
       "properties": {
         "status": {
           "type": "string",
@@ -132,18 +293,23 @@
           "unit": "percent",
           "value": 56
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.1.sensors.humidity"
+      }
     },
     {
-      "apiVersion": 1,
       "commands": {},
-      "deviceId": "RoomControl-1",
-      "feature": "rooms.1.sensors.temperature",
-      "gatewayId": "################",
+      "feature": "rooms.1.sensors.openWindow",
       "isEnabled": true,
-      "isReady": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.sensors.temperature",
+      "isEnabled": true,
       "properties": {
         "status": {
           "type": "string",
@@ -154,9 +320,67 @@
           "unit": "celsius",
           "value": 22.8
         }
-      },
-      "timestamp": "2026-05-07T00:00:00.000Z",
-      "uri": "https://api.viessmann-climatesolutions.com/iot/v2/features/installations/0/gateways/################/devices/RoomControl-1/features/rooms.1.sensors.temperature"
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.comfort.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 23
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.comfort.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 23
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.normal.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 22
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.normal.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 22
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.reduced.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 21
+        }
+      }
     }
   ]
 }

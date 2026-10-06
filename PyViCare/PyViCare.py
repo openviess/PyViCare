@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from typing import ClassVar
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareBrowserOAuthManager import ViCareBrowserOAuthManager
@@ -70,7 +71,7 @@ class PyViCare:
         self.devices = [d for d in self.all_devices
                         if d.device_type in self.SUPPORTED_DEVICE_TYPES]
 
-    SUPPORTED_DEVICE_TYPES = [
+    SUPPORTED_DEVICE_TYPES: ClassVar[list[str]] = [
         "heating", "zigbee", "vitoconnect", "electricityStorage",
         "tcu", "ventilation", "roomControl", "systemController",
         "outdoorUnit",
@@ -90,7 +91,7 @@ class PyViCare:
                     yield PyViCareDeviceConfig(accessor, service, device.modelId, device.status, device.deviceType, device.roles)
 
 
-class DictWrap(object):
+class DictWrap:
     def __init__(self, d):
         for k, v in d.items():
             setattr(self, k, Wrap(v))
