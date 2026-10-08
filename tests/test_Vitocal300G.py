@@ -289,3 +289,22 @@ class Vitocal300G(unittest.TestCase):
             self.service.setPropertyData[0]['action'], 'setSchedule')
         self.assertEqual(
             self.service.setPropertyData[0]['data'], {'newSchedule': schedule})
+
+    def test_setDomesticHotWaterSchedule(self):
+        schedule = {
+            "mon": [{"start": "00:00", "end": "24:00", "mode": "normal", "position": 0}],
+            "tue": [],
+            "wed": [],
+            "thu": [],
+            "fri": [],
+            "sat": [],
+            "sun": [],
+        }
+        self.device.setDomesticHotWaterSchedule(schedule)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.schedule')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setSchedule')
+        self.assertEqual(
+            self.service.setPropertyData[0]['data'], {'newSchedule': schedule})
