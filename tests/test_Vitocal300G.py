@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -289,3 +290,13 @@ class Vitocal300G(unittest.TestCase):
             self.service.setPropertyData[0]['action'], 'setSchedule')
         self.assertEqual(
             self.service.setPropertyData[0]['data'], {'newSchedule': schedule})
+
+    def test_getHoliday_unset(self):
+        # This device reports an empty string instead of 2000-01-01.
+        self.assertFalse(self.device.getHolidayActive())
+        self.assertIsNone(self.device.getHolidayStart())
+        self.assertIsNone(self.device.getHolidayEnd())
+
+    def test_getHolidayAtHome_not_supported(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getHolidayAtHomeActive()

@@ -135,8 +135,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heat.production.summary.heating',
 
             # heating - not yet used
-            'heating.operating.programs.holidayAtHome',
-            'heating.operating.programs.holiday',
             'heating.device.time.offset',
             'heating.configuration.multiFamilyHouse',
             'heating.boiler.airflaps.0.position.current',
