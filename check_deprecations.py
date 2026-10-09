@@ -33,6 +33,12 @@ PYVICARE_DIR = ROOT / "PyViCare"
 IGNORED_IN_CODE = {
     "heating.sensors.volumetricFlow.allengra":
         "replacement heating.secondaryCircuit.sensors.volumetricFlow is on no known device",
+    "heating.configuration.heatingRod.dhw":
+        "replacement heatingRods.heatGeneration.N is still missing (Vitocal 250-A, 2026-10-06)",
+    "heating.configuration.heatingRod.heating":
+        "replacement heatingRods.heatGeneration.N is still missing (Vitocal 250-A, 2026-10-06)",
+    "heating.heatingRod.statistics":
+        "replacement heatingRods.heatGeneration.N.statistics is still missing (Vitocal 250-A, 2026-10-06)",
 }
 
 
