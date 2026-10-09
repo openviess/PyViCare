@@ -1,8 +1,9 @@
 import unittest
 
-from PyViCare.PyViCareRoomControl import RoomControl
+from PyViCare.PyViCareRoomControl import Room, RoomControl
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.helper import readJson
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -14,6 +15,27 @@ class RoomControlTest(unittest.TestCase):
 
     def test_getAvailableRoomIds(self):
         self.assertEqual(self.device.getAvailableRoomIds(), ["0", "1"])
+
+    def test_getAvailableRoomIds_skips_placeholders(self):
+        # Without configured rooms the API still lists slots whose features are all disabled.
+        placeholder = [
+            {"feature": "rooms.2.sensors.temperature", "isEnabled": False, "properties": {}, "commands": {}},
+            {"feature": "rooms.2.condensationRisk", "isEnabled": False, "properties": {}, "commands": {}},
+        ]
+        data = readJson('response/RoomControl.json')
+        service = ViCareServiceMock(None, {"data": data["data"] + placeholder})
+        device = RoomControl(self.accessor, service)
+        self.assertEqual(device.getAvailableRoomIds(), ["0", "1"])
+
+    def test_rooms(self):
+        rooms = self.device.rooms
+        self.assertEqual([room.id for room in rooms], ["0", "1"])
+        self.assertIsInstance(rooms[0], Room)
+        self.assertAlmostEqual(rooms[0].getTemperature(), 23.4)
+        self.assertAlmostEqual(rooms[1].getTemperature(), 22.8)
+        self.assertEqual(rooms[0].getHumidity(), 49)
+        self.assertEqual(rooms[1].getCO2(), 1000)
+        self.assertFalse(rooms[1].getCondensationRisk())
 
     def test_getRoomTemperature(self):
         self.assertAlmostEqual(self.device.getRoomTemperature("0"), 23.4)
