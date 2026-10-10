@@ -182,6 +182,51 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         return self.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
 
+    # Current values of the whole heat pump, Compressor has the per-compressor ones:
+    @handleNotSupported
+    def getHeatProductionCurrent(self) -> float:
+        return float(self.getProperty("heating.heat.production.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrent(self) -> float:
+        return float(self.getProperty("heating.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.power.consumption.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getDefrostingActive(self) -> bool:
+        return bool(self.getProperty("heating.outdoor.defrosting")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getFourThreeWayValvePosition(self) -> str:
+        return str(self.getProperty("heating.valves.fourThreeWay.position")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitOperationState(self) -> str:
+        return str(self.getProperty("heating.secondaryCircuit.operation.state")["properties"]["currentValue"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitOperationStateTarget(self) -> str:
+        return str(self.getProperty("heating.secondaryCircuit.operation.state")["properties"]["targetValue"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitFourThreeWayValvePosition(self) -> int:
+        return int(self.getProperty("heating.secondaryCircuit.valves.fourThreeWay")["properties"]["current"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitFourThreeWayValvePositionTarget(self) -> int:
+        return int(self.getProperty("heating.secondaryCircuit.valves.fourThreeWay")["properties"]["target"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitFourThreeWayValvePositionUnit(self) -> str:
+        return str(self.getProperty("heating.secondaryCircuit.valves.fourThreeWay")["properties"]["current"]["unit"])
+
     @handleNotSupported
     def getVolumetricFlowReturn(self):
         return self.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
@@ -653,6 +698,10 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getSpeed(self) -> int:
         return int(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSpeedUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["unit"])
 
     @handleNotSupported
     def getHeatProductionCurrent(self) -> float:
