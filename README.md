@@ -92,12 +92,11 @@ print(circuit.getHeatingCurveSlope())
 print(circuit.getActiveProgram())
 print(circuit.getPrograms())
 
-print(circuit.getCurrentDesiredTemperature())
-print(circuit.getDesiredTemperatureForProgram("comfort"))
+print(circuit.getActiveProgramTemperature())
+print(circuit.getProgramTemperature("comfort"))
 print(circuit.getActiveMode())
 
-print(circuit.getDesiredTemperatureForProgram("comfort"))
-print(circuit.setProgramTemperature("comfort",21))
+print(circuit.setProgramTemperature("comfort", 21))
 print(circuit.activateProgram("comfort"))
 print(circuit.deactivateComfort())
 
