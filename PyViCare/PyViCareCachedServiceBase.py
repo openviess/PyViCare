@@ -31,6 +31,10 @@ class ViCareCachedServiceBase(ViCareService):
         self._cacheError: Exception | None = None
         self._cacheLock = threading.Lock()
 
+    @property
+    def cache_time(self):
+        return self._cacheTime
+
     def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:
         data = self._get_or_update_cache(accessor)
         entities = self._extract_entities(data, accessor)
