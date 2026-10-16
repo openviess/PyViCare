@@ -312,6 +312,21 @@ class HeatingDevice(Device):
             "newSchedule"]["constraints"]["modes"]
 
     @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleMaxEntries(self) -> int:
+        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["maxEntries"])
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleOverlapAllowed(self) -> bool:
+        return bool(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["overlapAllowed"])
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleResolution(self) -> int:
+        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["resolution"])
+
+    @handleNotSupported
     def getDomesticHotWaterCirculationSchedule(self):
         schedule = self.getProperty(
             "heating.dhw.pumps.circulation.schedule")
