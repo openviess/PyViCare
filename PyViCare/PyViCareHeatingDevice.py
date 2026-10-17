@@ -320,7 +320,7 @@ class HeatingDevice(Device):
 
     @handleAPICommandErrors
     def scheduleHoliday(self, start: str, end: str):
-        """Dates as YYYY-MM-DD, end must be after start."""
+        """Dates as YYYY-MM-DD. Whether end may equal start depends on the device."""
         return self.setProperty("heating.operating.programs.holiday", "schedule", {'start': start, 'end': end})
 
     @handleAPICommandErrors
@@ -345,7 +345,7 @@ class HeatingDevice(Device):
 
     @handleAPICommandErrors
     def scheduleHolidayAtHome(self, start: str, end: str):
-        """Dates as YYYY-MM-DD, end must be after start."""
+        """Dates as YYYY-MM-DD. Whether end may equal start depends on the device."""
         return self.setProperty("heating.operating.programs.holidayAtHome", "schedule", {'start': start, 'end': end})
 
     @handleAPICommandErrors
