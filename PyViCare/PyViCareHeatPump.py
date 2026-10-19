@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from contextlib import suppress
+from itertools import count
 from typing import Any
 
 from deprecated import deprecated
@@ -47,6 +48,26 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     def getInverter(self, inverter) -> Inverter:
         return Inverter(self, inverter)
+
+    @property
+    def fans(self) -> list[Fan]:
+        return [self.getFan(x) for x in self.getAvailableFans()]
+
+    def getFan(self, fan: str) -> Fan:
+        return Fan(self, fan)
+
+    @handleNotSupported
+    def getAvailableFans(self) -> list[str]:
+        fan_count = 0
+        for fan in count():
+            try:
+                self.getProperty(f"heating.primaryCircuit.fans.{fan}.current")
+                fan_count += 1
+            except PyViCareNotSupportedFeatureError:
+                break
+        if fan_count == 0:
+            raise PyViCareNotSupportedFeatureError("heating.primaryCircuit.fans.0.current")
+        return [str(x) for x in range(fan_count)]
 
     @handleNotSupported
     def getBufferMainTemperature(self):
@@ -939,3 +960,14 @@ class Inverter(HeatingDeviceWithComponent):
     @handleNotSupported
     def getTemperature(self) -> float:
         return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.temperature.powerModule")["properties"]["value"]["value"])
+
+
+class Fan(HeatingDeviceWithComponent):
+
+    @property
+    def fan(self) -> str:
+        return self.component
+
+    @handleNotSupported
+    def getSpeed(self) -> float:
+        return float(self.getProperty(f"heating.primaryCircuit.fans.{self.fan}.current")["properties"]["value"]["value"])

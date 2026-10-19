@@ -70,3 +70,6 @@ class Vitocal200AOutdoorUnit(unittest.TestCase):
     def test_no_circuits_on_the_outdoor_unit(self):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getAvailableCircuits()
+
+    def test_getAvailableFans(self):
+        self.assertEqual(self.device.getAvailableFans(), ['0', '1'])
