@@ -34,3 +34,6 @@ class Vitocal222S(unittest.TestCase):
     def test_getDomesticHotWaterActiveOperatingMode(self):
         self.assertEqual(
             self.device.getDomesticHotWaterActiveOperatingMode(), 'efficient')
+
+    def test_getAvailableFans(self):
+        self.assertEqual(self.device.getAvailableFans(), ['0', '1'])

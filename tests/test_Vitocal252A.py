@@ -253,3 +253,6 @@ class Vitocal252A(unittest.TestCase):
     def test_getHeatingRod(self):
         self.assertEqual(self.device.getHeatingRodStarts(), 1)
         self.assertEqual(self.device.getHeatingRodHours(), 0)
+
+    def test_getAvailableFans(self):
+        self.assertEqual(self.device.getAvailableFans(), ['0', '1'])
