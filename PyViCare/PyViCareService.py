@@ -1,9 +1,15 @@
 import json
 import logging
+from datetime import UTC, datetime
 from typing import Any
+from urllib.parse import urlencode
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from PyViCare.PyViCareEvent import ViCareEventPage
+from PyViCare.PyViCareUtils import (
+    PyViCareInvalidDataError,
+    PyViCareNotSupportedFeatureError,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -33,6 +39,19 @@ def is_gateway_role(roles: list[str]) -> bool:
 
 def buildSetPropertyUrl(accessor, property_name, action):
     return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
+
+
+def format_query_datetime(value: datetime | str | None) -> str | None:
+    """Format a datetime as the ISO 8601 UTC string the API expects.
+
+    Strings pass through unchanged, naive datetimes are read as UTC.
+    """
+    if value is None or isinstance(value, str):
+        return value
+
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=UTC)
+    return value.astimezone(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')
 
 class ViCareDeviceAccessor:
     def __init__(self, _id: int, serial: str, device_id: str) -> None:
@@ -73,3 +92,49 @@ class ViCareService:
         url = f'/equipment/installations/{accessor.id}/gateways/{accessor.serial}/reboot'
         data = "{}"
         return self.oauth_manager.post(url, data)
+
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    def build_events_url(self,
+                         accessor: ViCareDeviceAccessor,
+                         event_type: str | None = None,
+                         since: datetime | str | None = None,
+                         until: datetime | str | None = None,
+                         limit: int | None = None,
+                         cursor: str | None = None) -> str:
+        params = {
+            'eventType': event_type,
+            'from': format_query_datetime(since),
+            'to': format_query_datetime(until),
+            'limit': limit,
+            'cursor': cursor,
+        }
+        # the cursor is base64 and the timestamps contain colons, so encode them
+        query = urlencode({key: value for key, value in params.items() if value is not None})
+        url = f'/events-history/installations/{accessor.id}/events'
+        return f'{url}?{query}' if query else url
+
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    def fetch_events(self,
+                     accessor: ViCareDeviceAccessor,
+                     event_type: str | None = None,
+                     since: datetime | str | None = None,
+                     until: datetime | str | None = None,
+                     limit: int | None = None,
+                     cursor: str | None = None) -> ViCareEventPage:
+        """Events of the installation this accessor belongs to, newest first.
+
+        The event history is per installation, not per device, so `eventType`
+        is the only server-side filter. Pass the `next_cursor` of a page as
+        `cursor` to fetch the following one.
+
+        `event_type` is matched exactly and is not validated; several values
+        such as "device-error,device-message-warning" are OR-ed by the API.
+        """
+        url = self.build_events_url(accessor, event_type, since, until, limit, cursor)
+        response = self.oauth_manager.get(url)
+
+        if not isinstance(response, dict) or 'data' not in response:
+            logger.error("Missing 'data' property when fetching events.")
+            raise PyViCareInvalidDataError(response)
+
+        return ViCareEventPage.from_payload(response)
