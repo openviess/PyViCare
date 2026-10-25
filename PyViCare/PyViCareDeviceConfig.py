@@ -1,8 +1,14 @@
 import json
 import logging
 import re
+from datetime import datetime
 
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
+from PyViCare.PyViCareEvent import (
+    EVENT_TYPE_DEVICE_ERROR,
+    ViCareEvent,
+    ViCareEventPage,
+)
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
 from PyViCare.PyViCareFuelCell import FuelCell
 from PyViCare.PyViCareGateway import Gateway
@@ -178,6 +184,37 @@ class PyViCareDeviceConfig:
 
     def get_raw_json(self):
         return self.service.fetch_all_features(self.accessor)
+
+    def getEventPage(self,
+                     event_type: str | None = None,
+                     since: datetime | str | None = None,
+                     until: datetime | str | None = None,
+                     limit: int | None = 10,
+                     cursor: str | None = None) -> ViCareEventPage:
+        """One page of the installation's event history."""
+        return self.service.fetch_events(self.accessor, event_type, since, until, limit, cursor)
+
+    def getEvents(self,
+                  event_type: str | None = None,
+                  since: datetime | str | None = None,
+                  until: datetime | str | None = None,
+                  limit: int | None = 10,
+                  cursor: str | None = None) -> list[ViCareEvent]:
+        """Events of this device, newest first.
+
+        `limit` applies before the device filter, so fewer events come back
+        when other devices have events in the same page.
+        """
+        page = self.getEventPage(event_type, since, until, limit, cursor)
+        return [event for event in page.events if event.device_id == self.device_id]
+
+    def getErrorEvents(self,
+                       since: datetime | str | None = None,
+                       until: datetime | str | None = None,
+                       limit: int | None = 10,
+                       cursor: str | None = None) -> list[ViCareEvent]:
+        """Device errors of this device, newest first."""
+        return self.getEvents(EVENT_TYPE_DEVICE_ERROR, since, until, limit, cursor)
 
     def dump_secure(self, flat=False):
         device_info = {
