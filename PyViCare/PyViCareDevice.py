@@ -1,5 +1,11 @@
+from datetime import date, datetime
 from typing import Any
 
+from PyViCare.PyViCareEvent import (
+    EVENT_TYPE_DEVICE_ERROR,
+    ViCareEvent,
+    ViCareEventPage,
+)
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
 from PyViCare.PyViCareUtils import (
     PyViCareNotSupportedFeatureError,
@@ -33,6 +39,50 @@ class Device:
     @handleNotSupported
     def getDeviceErrors(self) -> list[Any]:
         return list[Any](self.getProperty("device.messages.errors.raw")["properties"]["entries"]["value"])
+
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    def getEventPage(self,
+                     event_type: str | None = None,
+                     last_days: int | None = None,
+                     since: datetime | str | None = None,
+                     on_date: date | datetime | str | None = None,
+                     limit: int | None = 10,
+                     cursor: str | None = None) -> ViCareEventPage:
+        """One page of the installation's event history.
+
+        The page holds the events of every device on every gateway. Use
+        `getEvents` for this device only.
+        """
+        return self.service.fetch_events(self.accessor, event_type, last_days, since, on_date, limit, cursor)
+
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    def getEvents(self,
+                  event_type: str | None = None,
+                  last_days: int | None = None,
+                  since: datetime | str | None = None,
+                  on_date: date | datetime | str | None = None,
+                  limit: int | None = 10,
+                  cursor: str | None = None) -> list[ViCareEvent]:
+        """Events of this device, newest first.
+
+        `limit` applies before the device filter, so fewer events come back
+        when other devices have events in the same page.
+        """
+        page = self.getEventPage(event_type, last_days, since, on_date, limit, cursor)
+        return [event for event in page.events if event.device_id == self.accessor.device_id]
+
+    def getErrorEvents(self,
+                       last_days: int | None = None,
+                       since: datetime | str | None = None,
+                       on_date: date | datetime | str | None = None,
+                       limit: int | None = 10,
+                       cursor: str | None = None) -> list[ViCareEvent]:
+        """Device errors of this device, newest first.
+
+        An error comes as two events: `active` is True when it was raised and
+        False when it was cleared.
+        """
+        return self.getEvents(EVENT_TYPE_DEVICE_ERROR, last_days, since, on_date, limit, cursor)
 
     def isLegacyDevice(self) -> bool:
         return hasRoles(["type:legacy"], self.roles)
