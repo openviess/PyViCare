@@ -357,6 +357,10 @@ class HeatingDevice(Device):
         return self.setProperty("heating.operating.programs.holidayAtHome", "unschedule", {})
 
     @handleAPICommandErrors
+    def setDomesticHotWaterSchedule(self, schedule: dict) -> None:
+        self.setProperty("heating.dhw.schedule", "setSchedule", {'newSchedule': schedule})
+
+    @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
         return self.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
                                         {'newSchedule': schedule})
