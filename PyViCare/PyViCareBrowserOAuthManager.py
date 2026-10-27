@@ -15,8 +15,10 @@ from PyViCare.PyViCareAbstractOAuthManager import (
     TOKEN_URL,
     AbstractViCareOAuthManager,
 )
-from PyViCare.PyViCareUtils import (PyViCareBrowserOAuthTimeoutReachedError,
-                                    PyViCareInvalidCredentialsError)
+from PyViCare.PyViCareUtils import (
+    PyViCareBrowserOAuthTimeoutReachedError,
+    PyViCareInvalidCredentialsError,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -109,5 +111,4 @@ class ViCareBrowserOAuthManager(AbstractViCareOAuthManager):
             return OAuth2Session(self.client_id, token=token)
 
     def renewToken(self) -> None:  # type: ignore
-        refresh_token = self.oauth_session.refresh_token
-        self.oauth_session.refresh_token(TOKEN_URL, refresh_token=refresh_token)
+        self.oauth_session.refresh_token(TOKEN_URL)

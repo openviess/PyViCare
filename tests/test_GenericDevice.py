@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import MockCircuitsData, ViCareServiceMock
 
 

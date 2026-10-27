@@ -10,10 +10,8 @@ from unittest.mock import Mock
 
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareCachedService import ViCareCachedService
-from PyViCare.PyViCareCachedServiceViaGateway import \
-    ViCareCachedServiceViaGateway
+from PyViCare.PyViCareCachedServiceViaGateway import ViCareCachedServiceViaGateway
 from tests.helper import readJson
-
 
 INSTALLATIONS_HEATBOX1 = {
     "data": [{

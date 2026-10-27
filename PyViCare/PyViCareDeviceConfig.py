@@ -2,9 +2,10 @@ import json
 import logging
 import re
 
+from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareFloorHeating import FloorHeating, FloorHeatingChannel
 from PyViCare.PyViCareFuelCell import FuelCell
-from PyViCare.PyViCareRoomControl import RoomControl
+from PyViCare.PyViCareGateway import Gateway
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareHeatingDevice import HeatingDevice
 from PyViCare.PyViCareHeatPump import HeatPump
@@ -12,14 +13,18 @@ from PyViCare.PyViCareHybrid import Hybrid
 from PyViCare.PyViCareOilBoiler import OilBoiler
 from PyViCare.PyViCarePelletsBoiler import PelletsBoiler
 from PyViCare.PyViCareRadiatorActuator import RadiatorActuator
-from PyViCare.PyViCareRoomSensor import RoomSensor
 from PyViCare.PyViCareRepeater import Repeater
-from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
-from PyViCare.PyViCareGateway import Gateway
-from PyViCare.PyViCareService import (ViCareDeviceAccessor, ViCareService,
-                                      hasRoles, is_gateway_role)
+from PyViCare.PyViCareRoomControl import RoomControl
+from PyViCare.PyViCareRoomSensor import RoomSensor
+from PyViCare.PyViCareService import (
+    ViCareDeviceAccessor,
+    ViCareService,
+    hasRoles,
+    is_gateway_role,
+)
 from PyViCare.PyViCareUtils import PyViCareNotPaidForError
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
+from PyViCare.PyViCareWaterTreatment import WaterTreatment
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -84,6 +89,9 @@ class PyViCareDeviceConfig:
     def asVentilation(self):
         return VentilationDevice(self.accessor, self.service, self.roles)
 
+    def asWaterTreatment(self):
+        return WaterTreatment(self.accessor, self.service, self.roles)
+
     def getConfig(self):
         return self.accessor
 
@@ -115,7 +123,7 @@ class PyViCareDeviceConfig:
             (self.asPelletsBoiler, r"Vitoligno|Ecotronic|VBC550P", []),
             (self.asOilBoiler, r"Vitoladens|Vitoradial|Vitorondens|VPlusH|V200KW2_6", []),
             (self.asGazBoiler, r"Vitodens|VScotH|Vitocrossal|VDensH|Vitopend|VPendH|OT_Heating_System", ["type:boiler"]),
-            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B", ["type:heatpump"]),
+            (self.asHeatPump, r"Vitocal|VBC70|V200WO1A|CU401B|OBNG_SCU|OBNG_OCU", ["type:heatpump"]),
             (self.asElectricalEnergySystem, r"E3_VitoCharge_03", ["type:ees"]), # ees, it this a typo?
             (self.asElectricalEnergySystem, r"E3_VitoCharge_05", ["type:ess"]),
             (self.asVentilation, r"E3_ViAir", ["type:ventilation"]),
@@ -127,6 +135,7 @@ class PyViCareDeviceConfig:
             (self.asRoomControl, r"E3_RoomControl|Smart_RoomControl", ["type:virtual;smartRoomControl"]),
             (self.asRoomSensor, r"E3_RoomSensor", ["type:climateSensor"]),
             (self.asRepeater, r"E3_Repeater", ["type:repeater"]),
+            (self.asWaterTreatment, r"VitosetAqua", ["type:waterTreatment"]),
             (self.asGateway, r"E3_TCU41_x04", ["type:gateway;TCU100"]),
             (self.asGateway, r"E3_TCU19_x05", ["type:gateway;TCU200"]),
             (self.asGateway, r"E3_TCU10_x07", ["type:gateway;TCU300"]),
@@ -138,10 +147,10 @@ class PyViCareDeviceConfig:
             if re.search(type_name, self.device_model) or self.hasRoles(roles):
                 logger.info("detected %s %s", self.device_model, creator_method.__name__)
                 device = creator_method()
-                if isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid):
-                    if self._isHybridByFeatures():
-                        logger.info("upgrading %s to Hybrid based on API features", self.device_model)
-                        return self.asHybridDevice()
+                if (isinstance(device, (GazBoiler, HeatPump)) and not isinstance(device, Hybrid)
+                        and self._isHybridByFeatures()):
+                    logger.info("upgrading %s to Hybrid based on API features", self.device_model)
+                    return self.asHybridDevice()
                 return device
 
         logger.info("Could not auto detect %s. Use generic device.", self.device_model)

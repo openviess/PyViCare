@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareOilBoiler import OilBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

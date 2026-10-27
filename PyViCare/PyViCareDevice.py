@@ -1,7 +1,11 @@
 from typing import Any
 
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareUtils import (
+    PyViCareNotSupportedFeatureError,
+    handleAPICommandErrors,
+    handleNotSupported,
+)
 
 
 class Device:

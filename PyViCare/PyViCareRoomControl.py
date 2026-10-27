@@ -1,120 +1,114 @@
-import logging
-from typing import Any, cast
+import re
 
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleNotSupported, handleAPICommandErrors
-
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.NullHandler())
+from PyViCare.PyViCareUtils import handleNotSupported
 
 
 class RoomControl(Device):
     """Viessmann RoomControl virtual device.
 
-    Aggregates room sensor data and heating programs per room.
+    Exposes per-room sensor readings, setpoints and configuration flags
+    on the public IoT scope. All accessors are read-only; the API does
+    not return write commands for room features on this scope.
     """
 
     @handleNotSupported
-    def getAvailableRooms(self) -> list[str]:
-        return cast(list[str], self.getProperty("rooms")["properties"]["enabled"]["value"])
+    def getAvailableRoomIds(self) -> list[str]:
+        """Return the list of room indices for which the API returns data.
 
-    def getRoomActorIds(self, room_id: str) -> list[str]:
-        """Return list of actor device IDs for a room."""
-        try:
-            actors = self.getProperty(f"rooms.{room_id}")["properties"]["actors"]["value"]
-            return [str(a["deviceId"]) for a in actors]
-        except (PyViCareNotSupportedFeatureError, KeyError):
-            return []
+        IoT scope no longer exposes a `rooms` parent feature, so we scan
+        the full feature list for `rooms.<n>.*` prefixes and report the
+        unique numeric indices, sorted numerically.
+        """
+        features = self.service.fetch_all_features(self.accessor).get("data", [])
+        ids = set()
+        pattern = re.compile(r"^rooms\.(\d+)\.")
+        for feature in features:
+            name = feature.get("feature", "")
+            match = pattern.match(name)
+            if match:
+                ids.add(match.group(1))
+        return sorted(ids, key=int)
 
-    def getRoomName(self, room_id: str) -> str | None:
-        try:
-            return str(self.getProperty(f"rooms.{room_id}")["properties"]["name"]["value"])
-        except (PyViCareNotSupportedFeatureError, KeyError):
-            return None
+    # --- sensor readings ---
 
-    def getRoomType(self, room_id: str) -> str | None:
-        try:
-            return str(self.getProperty(f"rooms.{room_id}")["properties"]["type"]["value"])
-        except (PyViCareNotSupportedFeatureError, KeyError):
-            return None
-
-    # --- Sensors ---
-
+    @handleNotSupported
     def getRoomTemperature(self, room_id: str) -> float:
         return float(self.getProperty(f"rooms.{room_id}.sensors.temperature")["properties"]["value"]["value"])
 
+    @handleNotSupported
     def getRoomHumidity(self, room_id: str) -> float:
         return float(self.getProperty(f"rooms.{room_id}.sensors.humidity")["properties"]["value"]["value"])
 
+    @handleNotSupported
     def getRoomCO2(self, room_id: str) -> int:
-        return int(self.getProperty(f"rooms.{room_id}.sensors.co2")["properties"]["value"]["value"])
+        return int(self.getProperty(f"rooms.{room_id}.co2")["properties"]["concentration"]["value"])
 
+    @handleNotSupported
     def getRoomCondensationRisk(self, room_id: str) -> bool:
         return bool(self.getProperty(f"rooms.{room_id}.condensationRisk")["properties"]["value"]["value"])
 
-    # --- Operating state ---
+    # --- temperature setpoints per program-level (°C) ---
 
-    def getRoomOperatingStateLevel(self, room_id: str) -> str:
-        return str(self.getProperty(f"rooms.{room_id}.operating.state")["properties"]["level"]["value"])
+    @handleNotSupported
+    def getRoomSetpointComfortHeating(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.comfort.heating")["properties"]["temperature"]["value"])
 
-    def getRoomOperatingStateDemand(self, room_id: str) -> str:
-        return str(self.getProperty(f"rooms.{room_id}.operating.state")["properties"]["demand"]["value"])
+    @handleNotSupported
+    def getRoomSetpointNormalHeating(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.normal.heating")["properties"]["temperature"]["value"])
 
-    def getRoomOperatingStateReason(self, room_id: str) -> str:
-        return str(self.getProperty(f"rooms.{room_id}.operating.state")["properties"]["reason"]["value"])
+    @handleNotSupported
+    def getRoomSetpointReducedHeating(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.reduced.heating")["properties"]["temperature"]["value"])
 
-    # --- Heating programs ---
+    @handleNotSupported
+    def getRoomSetpointNormalCooling(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.normal.cooling")["properties"]["temperature"]["value"])
 
-    def getRoomNormalHeatingTemperature(self, room_id: str) -> float:
-        return float(self.getProperty(f"rooms.{room_id}.operating.programs.normalHeating")["properties"]["temperature"]["value"])
+    @handleNotSupported
+    def getRoomSetpointReducedCooling(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.reduced.cooling")["properties"]["temperature"]["value"])
 
-    @handleAPICommandErrors
-    def setRoomNormalHeatingTemperature(self, room_id: str, temperature: float) -> None:
-        self.setProperty(f"rooms.{room_id}.operating.programs.normalHeating", "setTemperature",
-                                 {"targetTemperature": temperature})
+    @handleNotSupported
+    def getRoomSetpointNormalPerceived(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.normal.perceived")["properties"]["temperature"]["value"])
 
-    def getRoomReducedHeatingTemperature(self, room_id: str) -> float:
-        return float(self.getProperty(f"rooms.{room_id}.operating.programs.reducedHeating")["properties"]["temperature"]["value"])
+    @handleNotSupported
+    def getRoomSetpointComfortPerceived(self, room_id: str) -> float:
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.comfort.perceived")["properties"]["temperature"]["value"])
 
-    @handleAPICommandErrors
-    def setRoomReducedHeatingTemperature(self, room_id: str, temperature: float) -> None:
-        self.setProperty(f"rooms.{room_id}.operating.programs.reducedHeating", "setTemperature",
-                                 {"targetTemperature": temperature})
+    # --- room state flags ---
 
-    def getRoomComfortHeatingTemperature(self, room_id: str) -> float:
-        return float(self.getProperty(f"rooms.{room_id}.operating.programs.comfortHeating")["properties"]["temperature"]["value"])
+    @handleNotSupported
+    def getRoomChildLockActive(self, room_id: str) -> bool:
+        return bool(self.getProperty(f"rooms.{room_id}.childLock")["properties"]["active"]["value"])
 
-    @handleAPICommandErrors
-    def setRoomComfortHeatingTemperature(self, room_id: str, temperature: float) -> None:
-        self.setProperty(f"rooms.{room_id}.operating.programs.comfortHeating", "setTemperature",
-                                 {"targetTemperature": temperature})
+    @handleNotSupported
+    def getRoomChildLockStatus(self, room_id: str) -> str:
+        return str(self.getProperty(f"rooms.{room_id}.childLock")["properties"]["status"]["value"])
 
-    # --- Schedule ---
+    @handleNotSupported
+    def getRoomWindowOpen(self, room_id: str) -> bool:
+        # Uses the modern `rooms.X.sensors.openWindow` feature; the legacy
+        # `rooms.X.sensors.window.openState` path is in the deprecation
+        # database (removal date 2024-09-15).
+        return bool(self.getProperty(f"rooms.{room_id}.sensors.openWindow")["properties"]["value"]["value"])
 
-    def getRoomSchedule(self, room_id: str) -> dict[str, Any]:
-        props = self.getProperty(f"rooms.{room_id}.schedule")["properties"]
-        return {
-            "active": props["active"]["value"],
-            "mon": props["entries"]["value"]["mon"],
-            "tue": props["entries"]["value"]["tue"],
-            "wed": props["entries"]["value"]["wed"],
-            "thu": props["entries"]["value"]["thu"],
-            "fri": props["entries"]["value"]["fri"],
-            "sat": props["entries"]["value"]["sat"],
-            "sun": props["entries"]["value"]["sun"],
-        }
+    # --- room configuration flags (whether a feature is enabled, not its value) ---
 
-    # --- Quick modes ---
+    @handleNotSupported
+    def getRoomOpenWindowDetectionEnabled(self, room_id: str) -> bool:
+        return bool(self.getProperty(f"rooms.{room_id}.configuration.openWindow")["properties"]["active"]["value"])
 
-    def getRoomManualTillNextScheduleActive(self, room_id: str) -> bool:
-        return bool(self.getProperty(
-            f"rooms.{room_id}.quickmodes.manualTillNextSchedule")["properties"]["active"]["value"])
+    @handleNotSupported
+    def getRoomHydraulicBalancingEnabled(self, room_id: str) -> bool:
+        return bool(self.getProperty(f"rooms.{room_id}.configuration.hydraulicBalancing")["properties"]["value"]["value"])
 
-    @handleAPICommandErrors
-    def activateRoomManualTillNextSchedule(self, room_id: str, temperature: float) -> None:
-        self.setProperty(f"rooms.{room_id}.quickmodes.manualTillNextSchedule", "activate",
-                                 {"temperature": temperature})
+    @handleNotSupported
+    def getRoomTrvAlgorithmEnabled(self, room_id: str) -> bool:
+        return bool(self.getProperty(f"rooms.{room_id}.configuration.trvAlgorithmActive")["properties"]["value"]["value"])
 
-    @handleAPICommandErrors
-    def deactivateRoomManualTillNextSchedule(self, room_id: str) -> None:
-        self.setProperty(f"rooms.{room_id}.quickmodes.manualTillNextSchedule", "deactivate", {})
+    @handleNotSupported
+    def getRoomHeatOnTimeEnabled(self, room_id: str) -> bool:
+        return bool(self.getProperty(f"rooms.{room_id}.configuration.heatOnTime")["properties"]["active"]["value"])

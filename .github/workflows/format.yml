@@ -9,16 +9,13 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  DEFAULT_PYTHON: "3.11"
-
 jobs:
   sort:
     name: sort testdata
     runs-on: ubuntu-latest
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: 🚀 Sort test response data
         run: |
           find './tests/response' \
@@ -34,11 +31,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Set up Python
-        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: ${{ env.DEFAULT_PYTHON }}
+          python-version-file: .python-version
       - name: Update deprecation database
         run: python check_deprecations.py --update
       - name: Verify no changes

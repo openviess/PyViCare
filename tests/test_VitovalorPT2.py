@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareFuelCell import FuelCell
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
