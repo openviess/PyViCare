@@ -1,6 +1,8 @@
 import re
+from typing import Any
 
 from PyViCare.PyViCareDevice import Device
+from PyViCare.PyViCareHeatingDevice import HeatingDeviceWithComponent
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
@@ -18,7 +20,8 @@ class RoomControl(Device):
 
         IoT scope no longer exposes a `rooms` parent feature, so we scan
         the full feature list for `rooms.<n>.*` prefixes and report the
-        unique numeric indices, sorted numerically.
+        unique numeric indices, sorted numerically. Placeholder slots whose
+        features are all disabled are skipped.
         """
         features = self.service.fetch_all_features(self.accessor).get("data", [])
         ids = set()
@@ -26,9 +29,13 @@ class RoomControl(Device):
         for feature in features:
             name = feature.get("feature", "")
             match = pattern.match(name)
-            if match:
+            if match and feature.get("isEnabled"):
                 ids.add(match.group(1))
         return sorted(ids, key=int)
+
+    @property
+    def rooms(self) -> list[Any]:
+        return [Room(self, room_id) for room_id in self.getAvailableRoomIds()]
 
     # --- sensor readings ---
 
@@ -112,3 +119,24 @@ class RoomControl(Device):
     @handleNotSupported
     def getRoomHeatOnTimeEnabled(self, room_id: str) -> bool:
         return bool(self.getProperty(f"rooms.{room_id}.configuration.heatOnTime")["properties"]["active"]["value"])
+
+
+class Room(HeatingDeviceWithComponent):
+    """One room of a RoomControl device."""
+
+    def __init__(self, device: RoomControl, room_id: str) -> None:
+        # The base class only uses service and getProperty, which RoomControl has.
+        super().__init__(device, room_id)  # type: ignore[arg-type]
+        self.room_control = device
+
+    def getTemperature(self):
+        return self.room_control.getRoomTemperature(self.id)
+
+    def getHumidity(self):
+        return self.room_control.getRoomHumidity(self.id)
+
+    def getCO2(self):
+        return self.room_control.getRoomCO2(self.id)
+
+    def getCondensationRisk(self):
+        return self.room_control.getRoomCondensationRisk(self.id)

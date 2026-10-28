@@ -301,6 +301,65 @@ class HeatingDevice(Device):
     def activateOneTimeCharge(self):
         return self.setProperty("heating.dhw.oneTimeCharge", "activate", {})
 
+    # Viessmann reports an unset holiday date as "" or "2000-01-01".
+    def _getHolidayDate(self, program: str, field: str) -> str | None:
+        value = self.getProperty(f"heating.operating.programs.{program}")["properties"][field]["value"]
+        return value if value not in ("", "2000-01-01") else None
+
+    @handleNotSupported
+    def getHolidayActive(self) -> bool:
+        return bool(self.getProperty("heating.operating.programs.holiday")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getHolidayStart(self) -> str | None:
+        return self._getHolidayDate("holiday", "start")
+
+    @handleNotSupported
+    def getHolidayEnd(self) -> str | None:
+        return self._getHolidayDate("holiday", "end")
+
+    @handleAPICommandErrors
+    def scheduleHoliday(self, start: str, end: str):
+        """Dates as YYYY-MM-DD. Whether end may equal start depends on the device."""
+        return self.setProperty("heating.operating.programs.holiday", "schedule", {'start': start, 'end': end})
+
+    @handleAPICommandErrors
+    def changeHolidayEndDate(self, end: str):
+        return self.setProperty("heating.operating.programs.holiday", "changeEndDate", {'end': end})
+
+    @handleAPICommandErrors
+    def unscheduleHoliday(self):
+        return self.setProperty("heating.operating.programs.holiday", "unschedule", {})
+
+    @handleNotSupported
+    def getHolidayAtHomeActive(self) -> bool:
+        return bool(self.getProperty("heating.operating.programs.holidayAtHome")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getHolidayAtHomeStart(self) -> str | None:
+        return self._getHolidayDate("holidayAtHome", "start")
+
+    @handleNotSupported
+    def getHolidayAtHomeEnd(self) -> str | None:
+        return self._getHolidayDate("holidayAtHome", "end")
+
+    @handleAPICommandErrors
+    def scheduleHolidayAtHome(self, start: str, end: str):
+        """Dates as YYYY-MM-DD. Whether end may equal start depends on the device."""
+        return self.setProperty("heating.operating.programs.holidayAtHome", "schedule", {'start': start, 'end': end})
+
+    @handleAPICommandErrors
+    def changeHolidayAtHomeEndDate(self, end: str):
+        return self.setProperty("heating.operating.programs.holidayAtHome", "changeEndDate", {'end': end})
+
+    @handleAPICommandErrors
+    def unscheduleHolidayAtHome(self):
+        return self.setProperty("heating.operating.programs.holidayAtHome", "unschedule", {})
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterSchedule(self, schedule: dict) -> None:
+        self.setProperty("heating.dhw.schedule", "setSchedule", {'newSchedule': schedule})
+
     @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
         return self.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
@@ -651,6 +710,10 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         return \
             self.getProperty(f"heating.circuits.{self.circuit}.operating.modes.active")["properties"]["value"][
                 "value"]
+
+    @handleNotSupported
+    def getCoolingActive(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.modes.cooling")["properties"]["active"]["value"]
 
     @handleNotSupported
     def getHeatingCurveShift(self):
