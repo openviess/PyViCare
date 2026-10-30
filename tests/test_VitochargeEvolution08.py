@@ -46,6 +46,14 @@ class VitochargeEvolution08(unittest.TestCase):
         with self.assertRaises(PyViCareNotSupportedFeatureError):
             self.device.getPhotovoltaicStringPower(1)
 
+    def test_getPowerProductionLimit(self):
+        self.assertEqual(self.device.getPowerProductionLimit(), 14255)
+        self.assertEqual(self.device.getPowerProductionLimitUnit(), "watt")
+        self.assertEqual(self.device.getPowerProductionLimitStatus(), "limited")
+
+    def test_getPowerConsumptionLimitationSource(self):
+        self.assertEqual(self.device.getPowerConsumptionLimitationSource(), "14aEEBUS")
+
     def test_getElectricalEnergySystemBatteryControlMode(self):
         self.assertEqual(self.device.getElectricalEnergySystemBatteryControlMode(), "nothing")
 

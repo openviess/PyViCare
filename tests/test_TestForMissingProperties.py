@@ -95,7 +95,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.actorSensorTest',
             'device.brand',
             'device.lock.external',
-            'device.power.statusReport.production',
             'device.type',
             'device.variant',
             'heating.boiler.pumps.internal.current',
