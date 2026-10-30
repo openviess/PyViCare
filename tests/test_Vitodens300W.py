@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -62,6 +62,14 @@ class Vitodens300W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertRaises(PyViCareNotSupportedFeatureError,
                           self.device.getDomesticHotWaterCirculationScheduleModes)
+
+    def test_getDomesticHotWaterCirculationScheduleConstraints(self):
+        for getter in (
+            self.device.getDomesticHotWaterCirculationScheduleMaxEntries,
+            self.device.getDomesticHotWaterCirculationScheduleOverlapAllowed,
+            self.device.getDomesticHotWaterCirculationScheduleResolution,
+        ):
+            self.assertRaises(PyViCareNotSupportedFeatureError, getter)
 
     # Total power consumption:
     def test_getPowerConsumptionUnit(self):

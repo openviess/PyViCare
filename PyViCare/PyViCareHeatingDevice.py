@@ -1,20 +1,26 @@
 from contextlib import suppress
-from typing import Any, List, Optional
+from typing import Any
 
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareService import hasRoles
 from PyViCare.PyViCareHeatCurveCalculation import (
-    heat_curve_formular_variant1, heat_curve_formular_variant2)
-from PyViCare.PyViCareUtils import (VICARE_DAYS,
-                                    PyViCareNotSupportedFeatureError,
-                                    ViCareTimer, handleAPICommandErrors,
-                                    handleNotSupported, parse_time_as_delta,
-                                    time_as_delta)
+    heat_curve_formular_variant1,
+    heat_curve_formular_variant2,
+)
+from PyViCare.PyViCareService import hasRoles
+from PyViCare.PyViCareUtils import (
+    VICARE_DAYS,
+    PyViCareNotSupportedFeatureError,
+    ViCareTimer,
+    handleAPICommandErrors,
+    handleNotSupported,
+    parse_time_as_delta,
+    time_as_delta,
+)
 
 VICARE_DHW_TEMP2 = "temp-2"
 
 
-def all_set(_list: List[Any]) -> bool:
+def all_set(_list: list[Any]) -> bool:
     return all(v is not None for v in _list)
 
 
@@ -42,8 +48,8 @@ class HeatingDevice(Device):
         return int(self.getProperty("tcu.wifi")["properties"]["strength"]["value"])
 
     @property
-    def circuits(self) -> List[Any]:
-        return list([self.getCircuit(x) for x in self.getAvailableCircuits()])
+    def circuits(self) -> list[Any]:
+        return [self.getCircuit(x) for x in self.getAvailableCircuits()]
 
     def getCircuit(self, circuit):
         return HeatingCircuit(self, circuit)
@@ -56,11 +62,11 @@ class HeatingDevice(Device):
         return heat_curve_formular_variant1
 
     @property
-    def burners(self) -> List[Any]:
+    def burners(self) -> list[Any]:
         return []
 
     @property
-    def compressors(self) -> List[Any]:
+    def compressors(self) -> list[Any]:
         return []
 
     @handleNotSupported
@@ -116,7 +122,7 @@ class HeatingDevice(Device):
         for s in schedule[current_day]:
             startTime = parse_time_as_delta(s["start"])
             endTime = parse_time_as_delta(s["end"])
-            if startTime <= currentTime and currentTime <= endTime:
+            if startTime <= currentTime <= endTime:
                 if s["mode"] == VICARE_DHW_TEMP2:  # temp-2 overrides all other modes
                     return VICARE_DHW_TEMP2
                 mode = s["mode"]
@@ -295,6 +301,65 @@ class HeatingDevice(Device):
     def activateOneTimeCharge(self):
         return self.setProperty("heating.dhw.oneTimeCharge", "activate", {})
 
+    # Viessmann reports an unset holiday date as "" or "2000-01-01".
+    def _getHolidayDate(self, program: str, field: str) -> str | None:
+        value = self.getProperty(f"heating.operating.programs.{program}")["properties"][field]["value"]
+        return value if value not in ("", "2000-01-01") else None
+
+    @handleNotSupported
+    def getHolidayActive(self) -> bool:
+        return bool(self.getProperty("heating.operating.programs.holiday")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getHolidayStart(self) -> str | None:
+        return self._getHolidayDate("holiday", "start")
+
+    @handleNotSupported
+    def getHolidayEnd(self) -> str | None:
+        return self._getHolidayDate("holiday", "end")
+
+    @handleAPICommandErrors
+    def scheduleHoliday(self, start: str, end: str):
+        """Dates as YYYY-MM-DD. Whether end may equal start depends on the device."""
+        return self.setProperty("heating.operating.programs.holiday", "schedule", {'start': start, 'end': end})
+
+    @handleAPICommandErrors
+    def changeHolidayEndDate(self, end: str):
+        return self.setProperty("heating.operating.programs.holiday", "changeEndDate", {'end': end})
+
+    @handleAPICommandErrors
+    def unscheduleHoliday(self):
+        return self.setProperty("heating.operating.programs.holiday", "unschedule", {})
+
+    @handleNotSupported
+    def getHolidayAtHomeActive(self) -> bool:
+        return bool(self.getProperty("heating.operating.programs.holidayAtHome")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getHolidayAtHomeStart(self) -> str | None:
+        return self._getHolidayDate("holidayAtHome", "start")
+
+    @handleNotSupported
+    def getHolidayAtHomeEnd(self) -> str | None:
+        return self._getHolidayDate("holidayAtHome", "end")
+
+    @handleAPICommandErrors
+    def scheduleHolidayAtHome(self, start: str, end: str):
+        """Dates as YYYY-MM-DD. Whether end may equal start depends on the device."""
+        return self.setProperty("heating.operating.programs.holidayAtHome", "schedule", {'start': start, 'end': end})
+
+    @handleAPICommandErrors
+    def changeHolidayAtHomeEndDate(self, end: str):
+        return self.setProperty("heating.operating.programs.holidayAtHome", "changeEndDate", {'end': end})
+
+    @handleAPICommandErrors
+    def unscheduleHolidayAtHome(self):
+        return self.setProperty("heating.operating.programs.holidayAtHome", "unschedule", {})
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterSchedule(self, schedule: dict) -> None:
+        self.setProperty("heating.dhw.schedule", "setSchedule", {'newSchedule': schedule})
+
     @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
         return self.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
@@ -304,6 +369,21 @@ class HeatingDevice(Device):
     def getDomesticHotWaterCirculationScheduleModes(self):
         return self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
             "newSchedule"]["constraints"]["modes"]
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleMaxEntries(self) -> int:
+        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["maxEntries"])
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleOverlapAllowed(self) -> bool:
+        return bool(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["overlapAllowed"])
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleResolution(self) -> int:
+        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["resolution"])
 
     @handleNotSupported
     def getDomesticHotWaterCirculationSchedule(self):
@@ -339,7 +419,7 @@ class HeatingDevice(Device):
         for s in schedule[current_day]:
             startTime = parse_time_as_delta(s["start"])
             endTime = parse_time_as_delta(s["end"])
-            if startTime <= currentTime and currentTime <= endTime:
+            if startTime <= currentTime <= endTime:
                 return s["mode"]
         return schedule['default_mode']
 
@@ -395,6 +475,64 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getBoilerTemperature(self):
         return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
+
+    # Heat production summary for Heating:
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingLastMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingLastYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["lastYear"]["value"])
+
+    # Heat production summary for Domestic Hot Water:
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterLastMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterLastYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastYear"]["value"])
 
 
 class HeatingDeviceWithComponent:
@@ -589,6 +727,10 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                 "value"]
 
     @handleNotSupported
+    def getCoolingActive(self):
+        return self.getProperty(f"heating.circuits.{self.circuit}.operating.modes.cooling")["properties"]["active"]["value"]
+
+    @handleNotSupported
     def getHeatingCurveShift(self):
         return self.getProperty(f"heating.circuits.{self.circuit}.heating.curve")["properties"]["shift"][
             "value"]
@@ -716,7 +858,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
-    def getTargetSupplyTemperature(self) -> Optional[float]:
+    def getTargetSupplyTemperature(self) -> float | None:
         inside = None
         outside = None
         shift = None

@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareHybrid import Hybrid
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -79,6 +79,14 @@ class Vitocaldens222F(unittest.TestCase):
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationScheduleModes(), ['5/25-cycles', '5/10-cycles', 'on'])
+
+    def test_getDomesticHotWaterCirculationScheduleConstraints(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleMaxEntries(), 8)
+        self.assertTrue(
+            self.device.getDomesticHotWaterCirculationScheduleOverlapAllowed())
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleResolution(), 10)
 
     def test_getOutsideTemperature(self):
         self.assertEqual(

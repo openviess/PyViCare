@@ -5,7 +5,9 @@ from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareCachedServiceBase import ViCareCachedServiceBase
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareServiceViaGateway import (
-    ViCareServiceViaGateway, filter_features_for_device)
+    ViCareServiceViaGateway,
+    filter_features_for_device,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -28,7 +30,3 @@ class ViCareCachedServiceViaGateway(ViCareCachedServiceBase, ViCareServiceViaGat
 
     def _extract_entities(self, data: dict, accessor: ViCareDeviceAccessor) -> list[dict[str, Any]]:
         return filter_features_for_device(data["data"], accessor.device_id)
-
-    def fetch_all_features(self, accessor: ViCareDeviceAccessor) -> Any:
-        # cached too, so per-device coordinators share one bulk fetch
-        return self._get_or_update_cache(accessor)

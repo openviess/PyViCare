@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareGazBoiler import GazBoiler
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -81,6 +81,14 @@ class Vitodens200W(unittest.TestCase):
     def test_getDomesticHotWaterCirculationScheduleModes(self):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationScheduleModes(), ['on'])
+
+    def test_getDomesticHotWaterCirculationScheduleConstraints(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleMaxEntries(), 4)
+        self.assertFalse(
+            self.device.getDomesticHotWaterCirculationScheduleOverlapAllowed())
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleResolution(), 10)
 
     def test_getDomesticHotWaterCirculationMode_wed_07_30_time(self):
         with now_is('2021-09-08 07:30:00'):

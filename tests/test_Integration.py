@@ -22,7 +22,7 @@ def all_getter_methods(obj):
 
 def pretty_print_results(result):
     # format dictionary and lists nicely
-    if isinstance(result, dict) or isinstance(result, list):
+    if isinstance(result, (dict, list)):
         formatted = json.dumps(result, sort_keys=True, indent=2)
         indented = formatted.replace('\n', '\n' + ' ' * 45)
         return indented
@@ -112,7 +112,7 @@ class Integration(unittest.TestCase):
     @unittest.skipIf(not EXEC_INTEGRATION_TEST, "environments needed")
     def test_dump(self):
         with enablePrintStatementsForTest(self):
-            vicare = vicare = create_client()
+            vicare = create_client()
 
             with open("dump.json", mode='w', encoding="utf-8") as output:
                 output.write(vicare.devices[0].dump_secure())

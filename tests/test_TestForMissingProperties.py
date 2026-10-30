@@ -45,6 +45,14 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage.middle',
             'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
             'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
+            'heating.sensors.volumetricFlow.allengra',  # deprecated, replaced by heating.secondaryCircuit.sensors.volumetricFlow
+            # The following 3 lines are heating rod features that the API marks as deprecated
+            # (first seen in the Vitocal 250-A dump of 2026-09, removalDate 2026-09-30),
+            # to be replaced by heatingRods.heatGeneration.N and heatingRods.heatGeneration.N.statistics.
+            # The replacements are not yet delivered by the API, so the getters still use the old features.
+            'heating.configuration.heatingRod.dhw',
+            'heating.configuration.heatingRod.heating',
+            'heating.heatingRod.statistics',
         ]
 
         all_features = self.read_all_deprecated_features()
@@ -87,8 +95,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.actorSensorTest',
             'device.brand',
             'device.lock.external',
-            'device.power.consumption.limitation',
-            'device.power.statusReport.consumption',
             'device.power.statusReport.production',
             'device.type',
             'device.variant',
@@ -106,15 +112,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heater.condensatePan',
             'heating.heater.fanRing',
             'heating.heatingRod',
-            'heating.outdoor.defrosting',
             'heating.power.consumption.summary.cooling',
-            'heating.primaryCircuit.fans.0.current',
             'heating.primaryCircuit.valves.fourThreeWay',
-            'heating.secondaryCircuit.operation.state',
             'heating.secondaryCircuit.temperature.return.minimum',
-            'heating.secondaryCircuit.valves.fourThreeWay',
             'heating.secondaryHeatGenerator',
-            'heating.valves.fourThreeWay.position',
 
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
@@ -130,12 +131,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.internalPumps',
             'heating.configuration.pressure.total',
             'heating.dhw.scaldProtection',
-            'heating.heat.production.summary.dhw',
-            'heating.heat.production.summary.heating',
 
             # heating - not yet used
-            'heating.operating.programs.holidayAtHome',
-            'heating.operating.programs.holiday',
             'heating.device.time.offset',
             'heating.configuration.multiFamilyHouse',
             'heating.boiler.airflaps.0.position.current',
@@ -230,6 +227,19 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.scop.heating', # deprecated
             'heating.scop.total', # deprecated
             'heating.dhw.comfort', # deprecated
+
+            # new Vitocal generation - not yet used
+            'heating.compressors.0.speed.setpoint',
+            'heating.dhw.actuator',
+            'heating.noise.reduction.levels.maxReduced',
+            'heating.noise.reduction.levels.notReduced',
+            'heating.noise.reduction.levels.slightlyReduced',
+            'system.temperature.outside',
+            'tcu.ethernet.0.config',
+            'tcu.features.eebus',
+            'tcu.features.hems',
+            'tcu.features.solarLog',
+            'tcu.features.wirelessRemoteController',
 
             # ventilation - not yet used
             'ventilation.control.filterChange',
@@ -349,24 +359,8 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.sensors.airQuality',
             'ventilation.operating.programs.forcedLevelFour',
             'ventilation.operating.programs.silent',
-            # Vitoset Aqua water softener (testdata only, no class yet)
+            # Vitoset Aqua water softener: device-level status not yet exposed
             'device.status',
-            'water.consumption.flow.current',
-            'water.consumption.flow.max',
-            'water.consumption.summary',
-            'water.leakDetection.configuration.flowAlert',
-            'water.leakDetection.sensors.leakage.0',
-            'water.leakDetection.sensors.leakage.0.battery',
-            'water.leakDetection.sensors.leakage.0.id',
-            'water.leakDetection.sensors.leakage.0.name',
-            'water.leakDetection.sensors.leakage.0.rssi',
-            'water.leakDetection.sensors.leakage.0.version.hardware',
-            'water.leakDetection.sensors.leakage.0.version.software',
-            'water.softener.configuration.lowSaltAlert',
-            'water.softener.salt.level.days',
-            'water.valves.shutoff.holiday',
-            'water.valves.shutoff.motor',
-            'water.valves.shutoff.position',
         ]
 
         all_features = self.read_all_features()
@@ -415,14 +409,14 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|room_id)}', '0', match)
+                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|fan|room_id|slot)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
                 used_features.append(feature_name)
 
         self.maxDiff = None
-        self.assertSetEqual(set([]), set(used_features) - set(all_features) - set(ignore), "found untested data points")
+        self.assertSetEqual(set(), set(used_features) - set(all_features) - set(ignore), "found untested data points")
 
     def find_feature_in_code(self, all_python_files, feature):
         search_string = f'[\'"]{feature}[\'"]'.replace(".", r"\.")
@@ -485,7 +479,7 @@ class TestForMissingProperties(unittest.TestCase):
             data = readJson(join(response_path, response))
             if "data" in data:
                 for feature in data["data"]:
-                    if "deprecated" in feature and feature["deprecated"]:
+                    if feature.get("deprecated"):
                         name = re.sub(r"\b\d\b", "0", feature["feature"])
                         if name not in all_features:
                             all_features[name] = {'files': []}
