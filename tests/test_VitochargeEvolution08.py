@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -16,6 +17,34 @@ class VitochargeEvolution08(unittest.TestCase):
 
     def test_getElectricalEnergySystemOperationState(self):
         self.assertEqual(self.device.getElectricalEnergySystemOperationState(), "discharge")
+
+    def test_getPhotovoltaicInstalledPeakPower(self):
+        self.assertEqual(self.device.getPhotovoltaicInstalledPeakPower(), 12.5)
+
+    def test_getPhotovoltaicInstalledPeakPowerUnit(self):
+        self.assertEqual(self.device.getPhotovoltaicInstalledPeakPowerUnit(), "kilowattpeak")
+
+    def test_getPhotovoltaicStrings(self):
+        self.assertEqual(self.device.getPhotovoltaicStrings(), [0, 2])
+
+    def test_getPhotovoltaicStringName(self):
+        self.assertEqual(self.device.getPhotovoltaicStringName(0), "B")
+
+    def test_getPhotovoltaicStringPower(self):
+        self.assertEqual(self.device.getPhotovoltaicStringPower(0), 0)
+
+    def test_getPhotovoltaicStringPowerUnit(self):
+        self.assertEqual(self.device.getPhotovoltaicStringPowerUnit(0), "kilowatt")
+
+    def test_getPhotovoltaicStringVoltage(self):
+        self.assertEqual(self.device.getPhotovoltaicStringVoltage(0), 196.8)
+
+    def test_getPhotovoltaicStringCurrent(self):
+        self.assertEqual(self.device.getPhotovoltaicStringCurrent(0), 0)
+
+    def test_getPhotovoltaicStringPowerDisabledString(self):
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getPhotovoltaicStringPower(1)
 
     def test_getElectricalEnergySystemBatteryControlMode(self):
         self.assertEqual(self.device.getElectricalEnergySystemBatteryControlMode(), "nothing")
