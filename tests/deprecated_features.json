@@ -2,7 +2,7 @@
   "_meta": {
     "description": "Known deprecated Viessmann API features, merged from test data and device dumps.",
     "updated": "2026-10-30",
-    "feature_count": 115
+    "feature_count": 116
   },
   "features": {
     "heating.buffer.hysteresis": {
@@ -614,6 +614,15 @@
       "sources": [
         "Vitocal200A_OutdoorUnit.json",
         "Vitocal250A_TwoCircuits.json"
+      ]
+    },
+    "pcc.state.gridCode": {
+      "removalDate": "2025-03-11",
+      "info": "replaced by ess.inverter.configuration.countryCode",
+      "firstSeenIn": "VitochargeEvolution08.json",
+      "firstSeenOn": "2026-10-30",
+      "sources": [
+        "VitochargeEvolution08.json"
       ]
     },
     "rooms.0.configuration.window.openState": {

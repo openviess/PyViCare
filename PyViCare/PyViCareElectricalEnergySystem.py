@@ -1,5 +1,5 @@
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
 class ElectricalEnergySystem(Device):
@@ -185,3 +185,21 @@ class ElectricalEnergySystem(Device):
         return self.getProperty("ess.operationState")["properties"]["value"][
             "value"
         ]
+
+    @handleNotSupported
+    def getElectricalEnergySystemBatteryControlMode(self):
+        return self.getProperty("ess.battery.control.mode.active")["properties"][
+            "value"
+        ]["value"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemBatteryControlModes(self):
+        return self.getProperty("ess.battery.control.mode.active")["commands"][
+            "setMode"
+        ]["params"]["value"]["constraints"]["enum"]
+
+    @handleAPICommandErrors
+    def setElectricalEnergySystemBatteryControlMode(self, mode: str):
+        return self.setProperty(
+            "ess.battery.control.mode.active", "setMode", {"value": mode}
+        )
