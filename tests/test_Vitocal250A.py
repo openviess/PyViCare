@@ -313,6 +313,11 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.getPowerConsumptionLimitUnit(), "watt")
         self.assertEqual(self.device.getPowerConsumptionLimitStatus(), "unlimitedAutonomous")
 
+    def test_getPowerProductionLimit(self):
+        self.assertEqual(self.device.getPowerProductionLimit(), 0)
+        self.assertEqual(self.device.getPowerProductionLimitUnit(), "watt")
+        self.assertEqual(self.device.getPowerProductionLimitStatus(), "init")
+
     def test_getPowerConsumptionLimitationSource(self):
         self.assertEqual(self.device.getPowerConsumptionLimitationSource(), "14aOff")
 
