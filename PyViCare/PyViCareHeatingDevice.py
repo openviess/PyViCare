@@ -371,6 +371,21 @@ class HeatingDevice(Device):
             "newSchedule"]["constraints"]["modes"]
 
     @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleMaxEntries(self) -> int:
+        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["maxEntries"])
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleOverlapAllowed(self) -> bool:
+        return bool(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["overlapAllowed"])
+
+    @handleNotSupported
+    def getDomesticHotWaterCirculationScheduleResolution(self) -> int:
+        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["resolution"])
+
+    @handleNotSupported
     def getDomesticHotWaterCirculationSchedule(self):
         schedule = self.getProperty(
             "heating.dhw.pumps.circulation.schedule")
@@ -460,6 +475,64 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getBoilerTemperature(self):
         return self.getProperty("heating.boiler.sensors.temperature.main")["properties"]["value"]["value"]
+
+    # Heat production summary for Heating:
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingLastMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryHeatingLastYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.heating")["properties"]["lastYear"]["value"])
+
+    # Heat production summary for Domestic Hot Water:
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterLastMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryDomesticHotWaterLastYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastYear"]["value"])
 
 
 class HeatingDeviceWithComponent:

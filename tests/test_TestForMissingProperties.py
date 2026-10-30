@@ -95,8 +95,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.actorSensorTest',
             'device.brand',
             'device.lock.external',
-            'device.power.consumption.limitation',
-            'device.power.statusReport.consumption',
             'device.power.statusReport.production',
             'device.type',
             'device.variant',
@@ -114,15 +112,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heater.condensatePan',
             'heating.heater.fanRing',
             'heating.heatingRod',
-            'heating.outdoor.defrosting',
             'heating.power.consumption.summary.cooling',
-            'heating.primaryCircuit.fans.0.current',
             'heating.primaryCircuit.valves.fourThreeWay',
-            'heating.secondaryCircuit.operation.state',
             'heating.secondaryCircuit.temperature.return.minimum',
-            'heating.secondaryCircuit.valves.fourThreeWay',
             'heating.secondaryHeatGenerator',
-            'heating.valves.fourThreeWay.position',
 
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
@@ -138,8 +131,6 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.internalPumps',
             'heating.configuration.pressure.total',
             'heating.dhw.scaldProtection',
-            'heating.heat.production.summary.dhw',
-            'heating.heat.production.summary.heating',
 
             # heating - not yet used
             'heating.device.time.offset',
@@ -171,6 +162,11 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.circuits.0.name',  # TODO: to analyse, from Vitodens 100W
             'heating.circuits.0.zone.mode',  # TODO: to analyse, from Vitocal 250A
             'heating.configuration.dhw.temperature.dhwCylinder.max',  # TODO: to analyse, from Vitocal 333G
+            'heating.dhw.configuration.pumps.circulation.parallelDhwHeating',  # TODO: to analyse, from Vitocal 262A
+            'heating.dhw.configuration.pumps.circulation.parallelHygiene',  # TODO: to analyse, from Vitocal 262A
+            'heating.dhw.configuration.temperature.minimumComfort',  # TODO: to analyse, from Vitocal 262A
+            'heating.dhw.dhwCylinder.frostprotection',  # TODO: to analyse, from Vitocal 262A
+            'heating.dhw.sensors.dhwCylinder.rustSurveillance.anode',  # TODO: to analyse, from Vitocal 262A
 
             # Ignored for now as they are not documented in https://documentation.viessmann.com/static/iot/data-points
             'heating.device.software',
@@ -240,11 +236,9 @@ class TestForMissingProperties(unittest.TestCase):
             # new Vitocal generation - not yet used
             'heating.compressors.0.speed.setpoint',
             'heating.dhw.actuator',
-            'heating.heat.production.current',
             'heating.noise.reduction.levels.maxReduced',
             'heating.noise.reduction.levels.notReduced',
             'heating.noise.reduction.levels.slightlyReduced',
-            'heating.power.consumption.current',
             'system.temperature.outside',
             'tcu.ethernet.0.config',
             'tcu.features.eebus',
@@ -332,6 +326,7 @@ class TestForMissingProperties(unittest.TestCase):
             'fht.valve',
 
             # DEPRECATED - remove once data point is removed and test data is updated
+            'heating.configuration.dhw.temperature.minimumComfort',
             'heating.burner', # deprecated FIXME: remove once test data is updated
             'heating.buffer.hysteresis',
             'heating.buffer.sensors.temperature.main',
@@ -430,7 +425,7 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|room_id|slot)}', '0', match)
+                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|fan|room_id|slot)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)

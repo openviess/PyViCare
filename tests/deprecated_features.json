@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Known deprecated Viessmann API features, merged from test data and device dumps.",
-    "updated": "2026-10-29",
-    "feature_count": 115
+    "updated": "2026-10-30",
+    "feature_count": 116
   },
   "features": {
     "heating.buffer.hysteresis": {
@@ -186,6 +186,15 @@
         "dump:device_0_features.json"
       ]
     },
+    "heating.configuration.dhw.temperature.minimumComfort": {
+      "removalDate": "2024-09-15",
+      "info": "replaced by heating.dhw.configuration.temperature.minimumComfort",
+      "firstSeenIn": "Vitocal262A_T2H-R290.json",
+      "firstSeenOn": "2026-10-30",
+      "sources": [
+        "Vitocal262A_T2H-R290.json"
+      ]
+    },
     "heating.configuration.gasType": {
       "removalDate": "2025-09-15",
       "info": "replaced by heating.gas.configuration.type",
@@ -202,7 +211,8 @@
       "firstSeenIn": "Vitocal250A_TwoCircuits.json",
       "firstSeenOn": "2026-10-06",
       "sources": [
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.configuration.heatingRod.heating": {
@@ -211,7 +221,8 @@
       "firstSeenIn": "Vitocal250A_TwoCircuits.json",
       "firstSeenOn": "2026-10-06",
       "sources": [
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.configuration.houseLocation": {
@@ -252,7 +263,8 @@
         "Vitocal252A.json",
         "VitosetAqua.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.dhw.comfort": {
@@ -290,7 +302,8 @@
         "dump:device_0_features.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.bottom": {
@@ -304,7 +317,8 @@
         "Vitocal200S_AWB-M-E-AC-201.D10.json",
         "Vitocal333G-with-Vitovent300F.json",
         "VitovalorPT2.json",
-        "dump:device_0_features.json"
+        "dump:device_0_features.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.midBottom": {
@@ -327,7 +341,8 @@
         "Vitocal252.json",
         "VitovalorPT2.json",
         "Vitocal252A.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.top": {
@@ -347,7 +362,8 @@
         "dump:device_0_features.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.external.lock": {
@@ -461,7 +477,8 @@
       "firstSeenOn": "2026-09-10",
       "sources": [
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.heatingRod.maximumOutsideTemperature": {
@@ -479,7 +496,8 @@
       "firstSeenIn": "Vitocal250A_TwoCircuits.json",
       "firstSeenOn": "2026-10-06",
       "sources": [
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.noise.reduction.operating.programs.active": {
@@ -492,7 +510,8 @@
         "Vitocal250A.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.noise.reduction.operating.programs.maxReduced": {
@@ -518,7 +537,8 @@
         "Vitocal250A.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.noise.reduction.operating.programs.slightlyReduced": {
@@ -531,7 +551,8 @@
         "Vitocal250A.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.scop.dhw": {
@@ -544,7 +565,8 @@
         "Vitocal250A.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.scop.heating": {
@@ -557,7 +579,8 @@
         "Vitocal250A.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.scop.total": {
@@ -570,7 +593,8 @@
         "Vitocal250A.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitocal262A_T2H-R290.json"
       ]
     },
     "heating.sensors.temperature.allengra": {
@@ -596,7 +620,7 @@
       "removalDate": "2025-03-11",
       "info": "replaced by ess.inverter.configuration.countryCode",
       "firstSeenIn": "VitochargeEvolution08.json",
-      "firstSeenOn": "2026-10-29",
+      "firstSeenOn": "2026-10-30",
       "sources": [
         "VitochargeEvolution08.json"
       ]
