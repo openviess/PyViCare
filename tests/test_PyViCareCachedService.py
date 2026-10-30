@@ -243,3 +243,50 @@ class PyViCareCachedServiceTest(unittest.TestCase):
             self.assertRaises(
                 PyViCareInvalidDataError,
                 self.service.getProperty, self.accessor, "someprop")
+
+    def test_cache_time_is_updated(self):
+        # time+0 seconds
+        with now_is('2000-01-01 00:00:00'):
+            self.service.getProperty(self.accessor, "someprop")
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.assertEqual(self.service.cache_time.strftime('%Y-%m-%d %H:%M:%S'), '2000-01-01 00:00:00')
+
+        # time+30 seconds
+        with now_is('2000-01-01 00:00:30'):
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.assertEqual(self.service.cache_time.strftime('%Y-%m-%d %H:%M:%S'), '2000-01-01 00:00:00')
+
+        # time+70 seconds (must be more than CACHE_DURATION)
+        with now_is('2000-01-01 00:01:10'):
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.assertEqual(self.service.cache_time.strftime('%Y-%m-%d %H:%M:%S'), '2000-01-01 00:01:10')
+
+    def test_failed_fetch_does_not_update_cache_time(self):
+        # time+0 seconds
+        with now_is('2000-01-01 00:00:00'):
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.assertEqual(self.service.cache_time.strftime('%Y-%m-%d %H:%M:%S'), '2000-01-01 00:00:00')
+
+        # if API requests fail, cache_time must not be updated
+        self.oauth_mock.get.side_effect = PyViCareDeviceCommunicationError(
+            {"errorType": "DEVICE_COMMUNICATION_ERROR",
+             "extendedPayload": {"reason": "DEVICE_OFFLINE"}})
+
+        # time+70 seconds (must be more than CACHE_DURATION)
+        with now_is('2000-01-01 00:01:10'):
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.assertEqual(self.service.cache_time.strftime('%Y-%m-%d %H:%M:%S'), '2000-01-01 00:00:00')
+
+        # if API request succeeds again, cache_time must be updated
+        self.oauth_mock.get.side_effect = None
+
+        # time+140 seconds (must be more than 2x CACHE_DURATION)
+        with now_is('2000-01-01 00:02:20'):
+            self.service.getProperty(self.accessor, "someprop")
+
+        self.assertEqual(self.service.cache_time.strftime('%Y-%m-%d %H:%M:%S'), '2000-01-01 00:02:20')
