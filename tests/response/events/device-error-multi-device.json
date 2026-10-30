@@ -1,0 +1,43 @@
+{
+  "cursor": {
+    "next": "NDcyZWQxNzRmNmYwNTQxNjk0NTg5ZGNiOGMyMzY0MjkwODUwODkwMQ=="
+  },
+  "data": [
+    {
+      "eventType": "device-error",
+      "gatewaySerial": "[serial]",
+      "body": {
+        "errorCode": "A9",
+        "deviceId": "gateway",
+        "modelId": "Heatbox1",
+        "active": true,
+        "equipmentType": "Gateway",
+        "errorEventType": "Error",
+        "errorDescription": "Kommunikationsfehler"
+      },
+      "createdAt": "2026-10-18T08:12:10.121Z",
+      "eventTimestamp": "2026-10-18T08:11:40.000Z",
+      "editedBy": "system",
+      "origin": "system",
+      "audiences": null
+    },
+    {
+      "eventType": "device-error",
+      "gatewaySerial": "[serial]",
+      "body": {
+        "errorCode": "fb",
+        "deviceId": "0",
+        "modelId": "VPlusHO1_4",
+        "active": false,
+        "equipmentType": "Boiler",
+        "errorEventType": "Error",
+        "errorDescription": "Flammenausfall im Betrieb"
+      },
+      "createdAt": "2026-10-17T04:58:14.805Z",
+      "eventTimestamp": "2026-10-17T04:58:14.000Z",
+      "editedBy": "system",
+      "origin": "system",
+      "audiences": null
+    }
+  ]
+}

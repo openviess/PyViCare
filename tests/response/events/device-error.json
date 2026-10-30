@@ -1,0 +1,43 @@
+{
+  "cursor": {
+    "next": ""
+  },
+  "data": [
+    {
+      "eventType": "device-error",
+      "gatewaySerial": "[serial]",
+      "body": {
+        "errorCode": "f4",
+        "deviceId": "0",
+        "modelId": "VPlusHO1_4",
+        "active": false,
+        "equipmentType": "Boiler",
+        "errorEventType": "Error",
+        "errorDescription": "Keine Flammenbildung"
+      },
+      "createdAt": "2026-10-17T05:02:26.803Z",
+      "eventTimestamp": "2026-10-17T05:01:56.000Z",
+      "editedBy": "system",
+      "origin": "system",
+      "audiences": null
+    },
+    {
+      "eventType": "device-error",
+      "gatewaySerial": "[serial]",
+      "body": {
+        "errorCode": "f4",
+        "deviceId": "0",
+        "modelId": "VPlusHO1_4",
+        "active": true,
+        "equipmentType": "Boiler",
+        "errorEventType": "Error",
+        "errorDescription": "Keine Flammenbildung"
+      },
+      "createdAt": "2026-10-17T05:01:45.949Z",
+      "eventTimestamp": "2026-10-17T05:01:15.000Z",
+      "editedBy": "system",
+      "origin": "system",
+      "audiences": null
+    }
+  ]
+}
