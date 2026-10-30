@@ -283,3 +283,50 @@ class Vitocal250A(unittest.TestCase):
 
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -30)
+
+    def test_compressor_getSpeedUnit(self):
+        self.assertEqual(self.device.getCompressor(0).getSpeedUnit(), "revolutionsPerSecond")
+
+    def test_circuit_getTargetTemperature(self):
+        self.assertEqual(self.device.circuits[0].getTargetTemperature(), 30)
+
+    def test_getDefrostingActive(self):
+        self.assertFalse(self.device.getDefrostingActive())
+
+    def test_getFourThreeWayValvePosition(self):
+        self.assertEqual(self.device.getFourThreeWayValvePosition(), "climatCircuitTwoDefrost")
+
+    def test_getSecondaryCircuitOperationState(self):
+        self.assertEqual(self.device.getSecondaryCircuitOperationState(), "standby")
+        self.assertEqual(self.device.getSecondaryCircuitOperationStateTarget(), "standby")
+
+    def test_getSecondaryCircuitFourThreeWayValvePosition(self):
+        self.assertEqual(self.device.getSecondaryCircuitFourThreeWayValvePosition(), 52)
+        self.assertEqual(self.device.getSecondaryCircuitFourThreeWayValvePositionTarget(), 50)
+        self.assertEqual(self.device.getSecondaryCircuitFourThreeWayValvePositionUnit(), "percent")
+
+    def test_getPowerConsumptionLimit(self):
+        self.assertEqual(self.device.getPowerConsumptionLimit(), 0)
+        self.assertEqual(self.device.getPowerConsumptionLimitUnit(), "watt")
+        self.assertEqual(self.device.getPowerConsumptionLimitStatus(), "unlimitedAutonomous")
+
+    def test_getPowerConsumptionLimitationSource(self):
+        self.assertEqual(self.device.getPowerConsumptionLimitationSource(), "14aOff")
+
+    def test_getHeatProductionSummaryHeating(self):
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingUnit(), "kilowattHour")
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingCurrentDay(), 22.8)
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingCurrentMonth(), 164.3)
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingCurrentYear(), 10024.2)
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingLastMonth(), 183.1)
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingLastSevenDays(), 206.3)
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingLastYear(), 15472.4)
+
+    def test_getHeatProductionSummaryDomesticHotWater(self):
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterUnit(), "kilowattHour")
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterCurrentDay(), 9.6)
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterCurrentMonth(), 61.8)
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterCurrentYear(), 3382.9)
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastMonth(), 389.9)
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastSevenDays(), 96.7)
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastYear(), 5903.8)

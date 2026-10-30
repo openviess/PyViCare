@@ -44,3 +44,8 @@ class Vitodens100W(unittest.TestCase):
 
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -65)
+
+    def test_getHeatProductionSummary(self):
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingCurrentDay(), 17)
+        self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterCurrentYear(), 163.2)
+        self.assertEqual(self.device.getHeatProductionSummaryHeatingUnit(), "kilowattHour")
