@@ -309,12 +309,6 @@ class TestForMissingProperties(unittest.TestCase):
             'pcc.ac.active.power',
             'pcc.ac.reactive.power',
             'pcc.state.gridCode',
-            'photovoltaic.installedPeakPower',
-            'photovoltaic.string',
-            'photovoltaic.string.0',
-            'photovoltaic.string.0.electricity',
-            'photovoltaic.string.0.power',
-            'photovoltaic.string.0.voltage',
             'photovoltaic.string.current',
             'photovoltaic.string.voltage',
 
@@ -424,7 +418,7 @@ class TestForMissingProperties(unittest.TestCase):
                 continue
 
             for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
-                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|fan|room_id|slot)}', '0', match)
+                feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|fan|room_id|slot|string)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
                 feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
