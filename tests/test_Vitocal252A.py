@@ -254,6 +254,9 @@ class Vitocal252A(unittest.TestCase):
         self.assertEqual(self.device.getHeatingRodStarts(), 1)
         self.assertEqual(self.device.getHeatingRodHours(), 0)
 
+    def test_getAvailableFans(self):
+        self.assertEqual(self.device.getAvailableFans(), ['0', '1'])
+
     def test_compressor_getSpeedUnit(self):
         self.assertEqual(self.device.getCompressor(0).getSpeedUnit(), "revolutionsPerSecond")
 

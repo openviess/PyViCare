@@ -36,6 +36,9 @@ class Vitocal222S(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterActiveOperatingMode(), 'efficient')
 
+    def test_getAvailableFans(self):
+        self.assertEqual(self.device.getAvailableFans(), ['0', '1'])
+
     def test_compressor_temperatures_not_connected(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getCompressor(0).getOilTemperature)
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getCompressor(0).getMotorChamberTemperature)
