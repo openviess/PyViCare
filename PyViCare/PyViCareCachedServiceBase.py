@@ -30,6 +30,7 @@ class ViCareCachedServiceBase(ViCareService):
         self._cacheTime: datetime | None = None
         self._cacheError: Exception | None = None
         self._cacheLock = threading.Lock()
+        self._lastFetchTime: datetime | None = None
 
     @property
     def cache_time(self):
@@ -57,7 +58,7 @@ class ViCareCachedServiceBase(ViCareService):
                 # to avoid consuming all the api calls if the api is down
                 # see https://github.com/home-assistant/core/issues/67052
                 # we simply return the old cache in this case
-                self._cacheTime = ViCareTimer().now()
+                self._lastFetchTime = ViCareTimer().now()
                 self._cacheError = None
 
                 try:
@@ -82,6 +83,7 @@ class ViCareCachedServiceBase(ViCareService):
                     raise
 
                 self._cache = data
+                self._cacheTime = self._lastFetchTime
             elif self._cache is None and self._cacheError is not None:
                 # The fetch that opened this window failed and left nothing to
                 # read. Replaying its error keeps every other reader from
@@ -91,13 +93,14 @@ class ViCareCachedServiceBase(ViCareService):
             return self._cache
 
     def is_cache_invalid(self) -> bool:
-        return self._cacheTime is None or (ViCareTimer().now() - self._cacheTime).seconds > self._cacheDuration
+        return self._lastFetchTime is None or (ViCareTimer().now() - self._lastFetchTime).seconds > self._cacheDuration
 
     def clear_cache(self):
         with self._cacheLock:
             self._cache = None
             self._cacheTime = None
             self._cacheError = None
+            self._lastFetchTime = None
 
     def _fetch_uncached(self, accessor: ViCareDeviceAccessor) -> Any:
         raise NotImplementedError
