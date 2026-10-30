@@ -80,6 +80,14 @@ class Vitocaldens222F(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationScheduleModes(), ['5/25-cycles', '5/10-cycles', 'on'])
 
+    def test_getDomesticHotWaterCirculationScheduleConstraints(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleMaxEntries(), 8)
+        self.assertTrue(
+            self.device.getDomesticHotWaterCirculationScheduleOverlapAllowed())
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleResolution(), 10)
+
     def test_getOutsideTemperature(self):
         self.assertEqual(
             self.device.getOutsideTemperature(), 15.3)

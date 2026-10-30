@@ -82,6 +82,14 @@ class Vitodens200W(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationScheduleModes(), ['on'])
 
+    def test_getDomesticHotWaterCirculationScheduleConstraints(self):
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleMaxEntries(), 4)
+        self.assertFalse(
+            self.device.getDomesticHotWaterCirculationScheduleOverlapAllowed())
+        self.assertEqual(
+            self.device.getDomesticHotWaterCirculationScheduleResolution(), 10)
+
     def test_getDomesticHotWaterCirculationMode_wed_07_30_time(self):
         with now_is('2021-09-08 07:30:00'):
             self.assertEqual(
