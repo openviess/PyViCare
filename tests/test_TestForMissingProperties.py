@@ -46,6 +46,13 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.dhw.sensors.temperature.hotWaterStorage.midBottom',
             'heating.cop.green',  # deprecated, replaced by heating.cop.photovoltaic
             'heating.sensors.volumetricFlow.allengra',  # deprecated, replaced by heating.secondaryCircuit.sensors.volumetricFlow
+            # The following 3 lines are heating rod features that the API marks as deprecated
+            # (first seen in the Vitocal 250-A dump of 2026-09, removalDate 2026-09-30),
+            # to be replaced by heatingRods.heatGeneration.N and heatingRods.heatGeneration.N.statistics.
+            # The replacements are not yet delivered by the API, so the getters still use the old features.
+            'heating.configuration.heatingRod.dhw',
+            'heating.configuration.heatingRod.heating',
+            'heating.heatingRod.statistics',
         ]
 
         all_features = self.read_all_deprecated_features()
@@ -88,8 +95,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.actorSensorTest',
             'device.brand',
             'device.lock.external',
-            'device.power.consumption.limitation',
-            'device.power.statusReport.consumption',
             'device.power.statusReport.production',
             'device.type',
             'device.variant',
@@ -107,14 +112,10 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.heater.condensatePan',
             'heating.heater.fanRing',
             'heating.heatingRod',
-            'heating.outdoor.defrosting',
             'heating.power.consumption.summary.cooling',
             'heating.primaryCircuit.valves.fourThreeWay',
-            'heating.secondaryCircuit.operation.state',
             'heating.secondaryCircuit.temperature.return.minimum',
-            'heating.secondaryCircuit.valves.fourThreeWay',
             'heating.secondaryHeatGenerator',
-            'heating.valves.fourThreeWay.position',
 
             'heating.boiler.pumps.internal',
             'heating.boiler.pumps.internal.target',
@@ -130,12 +131,8 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.internalPumps',
             'heating.configuration.pressure.total',
             'heating.dhw.scaldProtection',
-            'heating.heat.production.summary.dhw',
-            'heating.heat.production.summary.heating',
 
             # heating - not yet used
-            'heating.operating.programs.holidayAtHome',
-            'heating.operating.programs.holiday',
             'heating.device.time.offset',
             'heating.configuration.multiFamilyHouse',
             'heating.boiler.airflaps.0.position.current',
@@ -234,11 +231,9 @@ class TestForMissingProperties(unittest.TestCase):
             # new Vitocal generation - not yet used
             'heating.compressors.0.speed.setpoint',
             'heating.dhw.actuator',
-            'heating.heat.production.current',
             'heating.noise.reduction.levels.maxReduced',
             'heating.noise.reduction.levels.notReduced',
             'heating.noise.reduction.levels.slightlyReduced',
-            'heating.power.consumption.current',
             'system.temperature.outside',
             'tcu.ethernet.0.config',
             'tcu.features.eebus',

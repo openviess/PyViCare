@@ -256,3 +256,13 @@ class Vitocal252A(unittest.TestCase):
 
     def test_getAvailableFans(self):
         self.assertEqual(self.device.getAvailableFans(), ['0', '1'])
+
+    def test_compressor_getSpeedUnit(self):
+        self.assertEqual(self.device.getCompressor(0).getSpeedUnit(), "revolutionsPerSecond")
+
+    def test_getFourThreeWayValvePosition(self):
+        self.assertEqual(self.device.getFourThreeWayValvePosition(), "domesticHotWater")
+
+    def test_getSecondaryCircuitOperationState(self):
+        self.assertEqual(self.device.getSecondaryCircuitOperationState(), "heating")
+        self.assertEqual(self.device.getSecondaryCircuitOperationStateTarget(), "heating")
