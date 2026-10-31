@@ -338,3 +338,63 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastMonth(), 389.9)
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastSevenDays(), 96.7)
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastYear(), 5903.8)
+
+    def test_getActiveProgram(self):
+        self.assertEqual(self.device.circuits[0].getActiveProgram(), 'normalHeating')
+
+    def test_getProgramTemperatures(self):
+        self.assertEqual(self.device.circuits[0].getReducedTemperature(), 18)
+        self.assertEqual(self.device.circuits[0].getComfortTemperature(), 22)
+        self.assertEqual(self.device.circuits[0].getNormalTemperature(), 20)
+
+        # active program is 'normalHeating'
+        self.assertEqual(self.device.circuits[0].getActiveProgramTemperature(), 20)
+
+    def test_setProgramTemperatures(self):
+        self.device.circuits[0].setReducedTemperature(19)
+        self.device.circuits[0].setComfortTemperature(23)
+        self.device.circuits[0].setNormalTemperature(21)
+
+        self.assertEqual(len(self.service.setPropertyData), 3)
+
+        for i, program, temperature in [(0, 'reduced', 19), (1, 'comfort', 23), (2, 'normal', 21)]:
+            self.assertEqual(
+                self.service.setPropertyData[i]['property_name'],
+                f'heating.circuits.0.operating.programs.{program}Heating'
+            )
+            self.assertEqual(
+                self.service.setPropertyData[i]['action'],
+                'setTemperature'
+            )
+            self.assertEqual(
+                self.service.setPropertyData[i]['data'],
+                {'targetTemperature': temperature}
+            )
+
+    def test_activateComfort(self):
+        self.device.circuits[0].activateComfort()
+
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'],
+            'heating.circuits.0.operating.programs.comfortHeating'
+        )
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'],
+            'activate'
+        )
+        self.assertEqual(self.service.setPropertyData[0]['data'], {})
+
+    def test_deactivateComfort(self):
+        self.device.circuits[0].deactivateComfort()
+
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'],
+            'heating.circuits.0.operating.programs.comfortHeating'
+        )
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'],
+            'deactivate'
+        )
+        self.assertEqual(self.service.setPropertyData[0]['data'], {})
