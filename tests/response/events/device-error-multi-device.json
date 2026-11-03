@@ -5,24 +5,6 @@
   "data": [
     {
       "eventType": "device-error",
-      "gatewaySerial": "[other-serial]",
-      "body": {
-        "errorCode": "f4",
-        "deviceId": "0",
-        "modelId": "VITOCAL_250_A",
-        "active": true,
-        "equipmentType": "HeatPump",
-        "errorEventType": "Error",
-        "errorDescription": "Kommunikationsfehler"
-      },
-      "createdAt": "2026-10-19T09:00:00.000Z",
-      "eventTimestamp": "2026-10-19T08:59:30.000Z",
-      "editedBy": "system",
-      "origin": "system",
-      "audiences": null
-    },
-    {
-      "eventType": "device-error",
       "gatewaySerial": "[serial]",
       "body": {
         "errorCode": "A9",

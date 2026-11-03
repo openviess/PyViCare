@@ -60,9 +60,10 @@ for event in device.getErrorEvents(limit=10):
     print(event.event_timestamp, state, event.error_code, event.error_description)
 ```
 
-`active=True` is the raise, `active=False` the clear, so the newest event of an
-error code is its current state. `getErrorEvents()` filters the installation
-history by device id and gateway serial; paging and other event types are on
+`active=True` is the raise, `active=False` the clear, so the event of an error
+code with the latest `event_timestamp` is its current state. `getErrorEvents()`
+asks the API for its gateway serial and filters the page by device id, so
+`limit` counts that gateway's events. Paging and other event types are on
 `device.service.fetch_events()`.
 
 ## Types of heatings

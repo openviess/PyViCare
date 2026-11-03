@@ -26,7 +26,7 @@ def readFeature(entities, property_name):
 def hasRoles(requested_roles: list[str], existing_roles: list[str]) -> bool:
     return len(requested_roles) > 0 and set(requested_roles).issubset(set(existing_roles))
 
-MAX_EVENT_LIMIT = 1000
+_MAX_EVENT_LIMIT = 1000
 
 GATEWAY_ROLES = [
     "type:gateway;VitoconnectOpto1",
@@ -43,36 +43,38 @@ def buildSetPropertyUrl(accessor, property_name, action):
     return f'/features/installations/{accessor.id}/gateways/{accessor.serial}/devices/{accessor.device_id}/features/{property_name}/commands/{action}'
 
 
-def format_query_datetime(value: datetime | str | None) -> str | None:
+def _format_query_datetime(value: datetime | None) -> str | None:
     """Format a datetime as the ISO 8601 UTC string the API expects.
 
-    Strings pass through unchanged, naive datetimes are read as UTC.
+    Naive datetimes are read as UTC.
     """
-    if value is None or isinstance(value, str):
-        return value
+    if value is None:
+        return None
 
     if value.tzinfo is None:
         value = value.replace(tzinfo=UTC)
     return value.astimezone(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')
 
 
-def format_query_date(value: date | datetime | str | None) -> str | None:
-    """Format a date or datetime as the ISO 8601 date the API expects."""
-    if value is None or isinstance(value, str):
-        return value
+def _format_query_date(value: date | None) -> str | None:
+    """Format a date as the ISO 8601 date the API expects."""
+    if value is None:
+        return None
 
     if isinstance(value, datetime):
-        value = value.date()
+        raise TypeError("on_date takes a datetime.date, not datetime.datetime")
     return value.isoformat()
 
 
-def event_query_limit(limit: int | None) -> int | None:
-    """Clamp the page size to what the API accepts (1000), 0 means no limit."""
+def _event_query_limit(limit: int | None) -> int | None:
+    """Clamp the page size to what the API accepts (1000)."""
     if limit is None:
         return None
 
-    limit = min(int(limit), MAX_EVENT_LIMIT)
-    return limit if limit > 0 else None
+    if limit < 1:
+        raise ValueError("limit must be 1 or more")
+    return min(limit, _MAX_EVENT_LIMIT)
+
 
 class ViCareDeviceAccessor:
     def __init__(self, _id: int, serial: str, device_id: str) -> None:
@@ -114,15 +116,17 @@ class ViCareService:
         data = "{}"
         return self.oauth_manager.post(url, data)
 
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
-    def build_events_url(self,
-                         accessor: ViCareDeviceAccessor,
-                         event_type: str | None = None,
-                         last_days: int | None = None,
-                         since: datetime | str | None = None,
-                         on_date: date | datetime | str | None = None,
-                         limit: int | None = None,
-                         cursor: str | None = None) -> str:
+    # pylint: disable=too-many-arguments
+    def _build_events_url(self,
+                          accessor: ViCareDeviceAccessor,
+                          event_type: str | None = None,
+                          *,
+                          last_days: int | None = None,
+                          since: datetime | None = None,
+                          on_date: date | None = None,
+                          gateway_serials: str | None = None,
+                          limit: int | None = None,
+                          cursor: str | None = None) -> str:
         if sum(window is not None for window in (last_days, since, on_date)) > 1:
             raise ValueError("last_days, since and on_date cannot be combined")
         if last_days is not None and last_days < 1:
@@ -131,9 +135,10 @@ class ViCareService:
         params = {
             'eventType': event_type,
             'lastNDays': last_days,
-            'timestamp': format_query_datetime(since),
-            'date': format_query_date(on_date),
-            'limit': event_query_limit(limit),
+            'timestamp': _format_query_datetime(since),
+            'date': _format_query_date(on_date),
+            'gatewaySerials': gateway_serials,
+            'limit': _event_query_limit(limit),
             'cursor': cursor,
         }
         # the cursor is base64 and the timestamps contain colons, so encode them
@@ -141,29 +146,39 @@ class ViCareService:
         url = f'/events-history/installations/{accessor.id}/events'
         return f'{url}?{query}' if query else url
 
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
+    # pylint: disable=too-many-arguments
     def fetch_events(self,
                      accessor: ViCareDeviceAccessor,
                      event_type: str | None = None,
+                     *,
                      last_days: int | None = None,
-                     since: datetime | str | None = None,
-                     on_date: date | datetime | str | None = None,
+                     since: datetime | None = None,
+                     on_date: date | None = None,
+                     gateway_serials: str | None = None,
                      limit: int | None = None,
                      cursor: str | None = None) -> ViCareEventPage:
-        """Events of the installation this accessor belongs to, newest first.
+        """Events of the installation this accessor belongs to.
 
-        The event history is per installation, not per device, so `eventType`
-        is the only server-side filter. Pass the `next_cursor` of a page as
-        `cursor` to fetch the following one.
+        The API returns them newest ingestion first, so a late arriving event
+        can precede an older one. Compare `event_timestamp` when the chronology
+        matters.
+
+        The API filters by `event_type`, `gateway_serials` (comma separated),
+        one time window and the page size; the device id is not a parameter and
+        is filtered by the caller. Pass the `next_cursor` of a page as `cursor`
+        to fetch the following one.
 
         The time window is `last_days`, `since` (from that instant until now)
         or `on_date` (events of one day). Only one of them may be given, the
-        API rejects combinations. `limit` is capped at the API maximum of 1000.
+        API rejects combinations. `limit` defaults to 50 on the server, values
+        above 1000 are clamped, values below 1 raise ValueError.
 
         `event_type` is matched exactly and is not validated; several values
         such as "device-error,device-message-warning" are OR-ed by the API.
         """
-        url = self.build_events_url(accessor, event_type, last_days, since, on_date, limit, cursor)
+        url = self._build_events_url(
+            accessor, event_type, last_days=last_days, since=since, on_date=on_date,
+            gateway_serials=gateway_serials, limit=limit, cursor=cursor)
         response = self.oauth_manager.get(url)
 
         if not isinstance(response, dict) or 'data' not in response:

@@ -1,11 +1,10 @@
 import unittest
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any, ClassVar
 from unittest.mock import Mock
 
 from PyViCare.PyViCare import PyViCare
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareDeviceConfig import PyViCareDeviceConfig
 from PyViCare.PyViCareEvent import ViCareEventPage
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.helper import readJson
@@ -24,11 +23,6 @@ class DeviceErrorEventsTest(unittest.TestCase):
         events = self.device.getErrorEvents()
         self.assertEqual([event.error_code for event in events], ['fb'])
 
-    def test_same_device_id_on_another_gateway_is_excluded(self):
-        other = Device(ViCareDeviceAccessor('[id]', '[other-serial]', '0'), self.service)
-        events = other.getErrorEvents()
-        self.assertEqual([event.error_code for event in events], ['f4'])
-
     def test_gateway_device_events(self):
         gateway = Device(ViCareDeviceAccessor('[id]', '[serial]', 'gateway'), self.service)
         events = gateway.getErrorEvents()
@@ -38,46 +32,34 @@ class DeviceErrorEventsTest(unittest.TestCase):
         other = Device(ViCareDeviceAccessor('[id]', '[serial]', '1'), self.service)
         self.assertEqual(other.getErrorEvents(), [])
 
-    def test_requests_device_error_type(self):
+    def test_requests_its_gateway_and_device_error_type(self):
         self.device.getErrorEvents()
         self.service.fetch_events.assert_called_once_with(
-            self.accessor, 'device-error', None, None, None, 10)
+            self.accessor, 'device-error',
+            last_days=None, since=None, on_date=None,
+            gateway_serials='[serial]', limit=10)
 
     def test_forwards_window_and_limit(self):
         self.device.getErrorEvents(last_days=7, limit=5)
         self.service.fetch_events.assert_called_once_with(
-            self.accessor, 'device-error', 7, None, None, 5)
+            self.accessor, 'device-error',
+            last_days=7, since=None, on_date=None,
+            gateway_serials='[serial]', limit=5)
 
     def test_forwards_since(self):
         moment = datetime(2026, 10, 1, tzinfo=UTC)
         self.device.getErrorEvents(since=moment)
         self.service.fetch_events.assert_called_once_with(
-            self.accessor, 'device-error', None, moment, None, 10)
+            self.accessor, 'device-error',
+            last_days=None, since=moment, on_date=None,
+            gateway_serials='[serial]', limit=10)
 
-
-class DeviceConfigErrorEventsTest(unittest.TestCase):
-
-    def setUp(self):
-        self.service = Mock()
-        self.service.fetch_events.return_value = ViCareEventPage.from_payload(
-            readJson('response/events/device-error-multi-device.json'))
-        self.accessor = ViCareDeviceAccessor('[id]', '[serial]', '0')
-        self.config = PyViCareDeviceConfig(self.accessor, self.service, 'VPlusHO1_4', 'Online')
-
-    def test_filters_by_device_and_gateway(self):
-        events = self.config.getErrorEvents()
-        self.assertEqual([event.error_code for event in events], ['fb'])
-
-    def test_same_device_id_on_another_gateway_is_excluded(self):
-        config = PyViCareDeviceConfig(
-            ViCareDeviceAccessor('[id]', '[other-serial]', '0'), self.service, 'VITOCAL_250_A', 'Online')
-        events = config.getErrorEvents()
-        self.assertEqual([event.error_code for event in events], ['f4'])
-
-    def test_requests_device_error_type(self):
-        self.config.getErrorEvents(limit=2)
+    def test_forwards_on_date(self):
+        self.device.getErrorEvents(on_date=date(2026, 10, 17))
         self.service.fetch_events.assert_called_once_with(
-            self.accessor, 'device-error', None, None, None, 2)
+            self.accessor, 'device-error',
+            last_days=None, since=None, on_date=date(2026, 10, 17),
+            gateway_serials='[serial]', limit=10)
 
 
 class GatewayModeEventsTest(unittest.TestCase):
@@ -114,16 +96,22 @@ class GatewayModeEventsTest(unittest.TestCase):
 
     def test_fetch_events_is_installation_scoped(self):
         device = self.vicare.devices[0]
-        page = device.service.fetch_events(device.accessor, 'device-error', limit=2)
-        self.assertEqual(len(page.events), 3)
+        page = device.service.fetch_events(
+            device.accessor, 'device-error', gateway_serials='[serial]', limit=2)
+        self.assertEqual(len(page.events), 2)
         self.assertEqual(
             self._event_urls(),
-            ['/events-history/installations/1234567/events?eventType=device-error&limit=2'])
+            [('/events-history/installations/1234567/events'
+              '?eventType=device-error&gatewaySerials=%5Bserial%5D&limit=2')])
 
     def test_get_error_events_costs_one_request_per_call(self):
         # no event cache: a consumer that wants every device should call
         # fetch_events() once and filter itself
-        for device in self.vicare.devices:
-            device.getErrorEvents()
+        for config in self.vicare.devices:
+            config.asAutoDetectDevice().getErrorEvents()
 
         self.assertEqual(len(self._event_urls()), len(self.vicare.devices))
+
+    def test_get_error_events_sends_the_gateway(self):
+        self.vicare.devices[-1].asAutoDetectDevice().getErrorEvents()
+        self.assertIn('gatewaySerials=%5Bserial%5D', self._event_urls()[0])

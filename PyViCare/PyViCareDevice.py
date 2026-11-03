@@ -67,27 +67,26 @@ class Device:
         return str(self.getProperty("device.power.statusReport.production")["properties"]["status"]["value"])
 
     def getErrorEvents(self,
+                       *,
                        last_days: int | None = None,
-                       since: datetime | str | None = None,
-                       on_date: date | datetime | str | None = None,
+                       since: datetime | None = None,
+                       on_date: date | None = None,
                        limit: int | None = 10) -> list[ViCareEvent]:
-        """Device errors of this device, newest first.
+        """Device errors of this device, in the order the API returns them.
 
-        The installation history is filtered by device id and gateway serial,
-        because two gateways can each have a device with the same id.
-
-        `limit` sizes the page before that filter, so fewer events come back
-        when other devices fill the page. For paging and other event types use
-        `service.fetch_events()`.
+        The API is asked for this gateway (`gatewaySerials`) and the page is
+        then filtered by device id, so `limit` counts this gateway's events.
 
         An error comes as two events: `active` is True when it was raised and
-        False when it was cleared.
+        False when it was cleared. For paging and other event types use
+        `service.fetch_events()`.
         """
         page = self.service.fetch_events(
-            self.accessor, EVENT_TYPE_DEVICE_ERROR, last_days, since, on_date, limit)
+            self.accessor, EVENT_TYPE_DEVICE_ERROR,
+            last_days=last_days, since=since, on_date=on_date,
+            gateway_serials=self.accessor.serial, limit=limit)
         return [event for event in page.events
-                if event.device_id == self.accessor.device_id
-                and event.gateway_serial == self.accessor.serial]
+                if event.device_id == self.accessor.device_id]
 
     def isLegacyDevice(self) -> bool:
         return hasRoles(["type:legacy"], self.roles)

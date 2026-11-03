@@ -3,9 +3,9 @@ from datetime import UTC, date, datetime, timedelta, timezone
 
 from PyViCare.PyViCareEvent import ViCareEvent, ViCareEventPage
 from PyViCare.PyViCareService import (
-    event_query_limit,
-    format_query_date,
-    format_query_datetime,
+    _event_query_limit,
+    _format_query_date,
+    _format_query_datetime,
 )
 from tests.helper import readJson
 
@@ -65,11 +65,9 @@ class ViCareEventTest(unittest.TestCase):
     def test_page_with_cursor(self):
         payload = readJson('response/events/device-error-multi-device.json')
         page = ViCareEventPage.from_payload(payload)
-        self.assertEqual(len(page.events), 3)
+        self.assertEqual(len(page.events), 2)
         self.assertEqual(page.next_cursor, 'NDcyZWQxNzRmNmYwNTQxNjk0NTg5ZGNiOGMyMzY0MjkwODUwODkwMQ==')
-        self.assertEqual([e.device_id for e in page.events], ['0', 'gateway', '0'])
-        self.assertEqual([e.gateway_serial for e in page.events],
-                         ['[other-serial]', '[serial]', '[serial]'])
+        self.assertEqual([e.device_id for e in page.events], ['gateway', '0'])
 
     def test_page_last_page_has_no_cursor(self):
         page = ViCareEventPage.from_payload(self.payload)
@@ -92,48 +90,42 @@ class ViCareEventTest(unittest.TestCase):
 class QueryDatetimeTest(unittest.TestCase):
 
     def test_none_passes_through(self):
-        self.assertIsNone(format_query_datetime(None))
-
-    def test_string_passes_through(self):
-        self.assertEqual(format_query_datetime('2026-10-01T00:00:00Z'), '2026-10-01T00:00:00Z')
+        self.assertIsNone(_format_query_datetime(None))
 
     def test_naive_datetime_is_utc(self):
-        self.assertEqual(format_query_datetime(datetime(2026, 10, 1)), '2026-10-01T00:00:00Z')
+        self.assertEqual(_format_query_datetime(datetime(2026, 10, 1)), '2026-10-01T00:00:00Z')
 
     def test_aware_datetime_is_converted(self):
         value = datetime(2026, 10, 18, 2, 0, 0, tzinfo=timezone(timedelta(hours=2)))
-        self.assertEqual(format_query_datetime(value), '2026-10-18T00:00:00Z')
+        self.assertEqual(_format_query_datetime(value), '2026-10-18T00:00:00Z')
 
 
 class QueryDateTest(unittest.TestCase):
 
     def test_none_passes_through(self):
-        self.assertIsNone(format_query_date(None))
-
-    def test_string_passes_through(self):
-        self.assertEqual(format_query_date('2026-10-17'), '2026-10-17')
+        self.assertIsNone(_format_query_date(None))
 
     def test_date(self):
-        self.assertEqual(format_query_date(date(2026, 10, 17)), '2026-10-17')
+        self.assertEqual(_format_query_date(date(2026, 10, 17)), '2026-10-17')
 
-    def test_datetime_uses_its_date(self):
+    def test_datetime_is_rejected(self):
         value = datetime(2026, 10, 17, 23, 59, tzinfo=timezone(timedelta(hours=2)))
-        self.assertEqual(format_query_date(value), '2026-10-17')
+        self.assertRaises(TypeError, _format_query_date, value)
 
 
 class EventLimitTest(unittest.TestCase):
 
     def test_none_stays_none(self):
-        self.assertIsNone(event_query_limit(None))
+        self.assertIsNone(_event_query_limit(None))
 
     def test_passed_through(self):
-        self.assertEqual(event_query_limit(50), 50)
+        self.assertEqual(_event_query_limit(50), 50)
 
     def test_clamped_to_the_api_maximum(self):
-        self.assertEqual(event_query_limit(5000), 1000)
+        self.assertEqual(_event_query_limit(5000), 1000)
 
-    def test_zero_means_unset(self):
-        self.assertIsNone(event_query_limit(0))
+    def test_zero_is_rejected(self):
+        self.assertRaises(ValueError, _event_query_limit, 0)
 
-    def test_negative_means_unset(self):
-        self.assertIsNone(event_query_limit(-1))
+    def test_negative_is_rejected(self):
+        self.assertRaises(ValueError, _event_query_limit, -1)
