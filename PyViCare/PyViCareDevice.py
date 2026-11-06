@@ -1,7 +1,11 @@
 from typing import Any
 
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
-from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported
+from PyViCare.PyViCareUtils import (
+    PyViCareNotSupportedFeatureError,
+    handleAPICommandErrors,
+    handleNotSupported,
+)
 
 
 class Device:
@@ -29,6 +33,36 @@ class Device:
     @handleNotSupported
     def getDeviceErrors(self) -> list[Any]:
         return list[Any](self.getProperty("device.messages.errors.raw")["properties"]["entries"]["value"])
+
+    # Power consumption limitation (§14a EnWG):
+    @handleNotSupported
+    def getPowerConsumptionLimit(self) -> int:
+        return int(self.getProperty("device.power.statusReport.consumption")["properties"]["limit"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionLimitUnit(self) -> str:
+        return str(self.getProperty("device.power.statusReport.consumption")["properties"]["limit"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionLimitStatus(self) -> str:
+        return str(self.getProperty("device.power.statusReport.consumption")["properties"]["status"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionLimitationSource(self) -> str:
+        return str(self.getProperty("device.power.consumption.limitation")["properties"]["value"]["value"])
+
+    # Power production limitation (feed-in):
+    @handleNotSupported
+    def getPowerProductionLimit(self) -> int:
+        return int(self.getProperty("device.power.statusReport.production")["properties"]["limit"]["value"])
+
+    @handleNotSupported
+    def getPowerProductionLimitUnit(self) -> str:
+        return str(self.getProperty("device.power.statusReport.production")["properties"]["limit"]["unit"])
+
+    @handleNotSupported
+    def getPowerProductionLimitStatus(self) -> str:
+        return str(self.getProperty("device.power.statusReport.production")["properties"]["status"]["value"])
 
     def isLegacyDevice(self) -> bool:
         return hasRoles(["type:legacy"], self.roles)

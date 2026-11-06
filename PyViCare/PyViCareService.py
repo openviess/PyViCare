@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Any, List
+from typing import Any
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
@@ -17,7 +17,7 @@ def readFeature(entities, property_name):
 
     return feature
 
-def hasRoles(requested_roles: List[str], existing_roles: List[str]) -> bool:
+def hasRoles(requested_roles: list[str], existing_roles: list[str]) -> bool:
     return len(requested_roles) > 0 and set(requested_roles).issubset(set(existing_roles))
 
 GATEWAY_ROLES = [
@@ -28,7 +28,7 @@ GATEWAY_ROLES = [
     "type:gateway;TCU300",
 ]
 
-def is_gateway_role(roles: List[str]) -> bool:
+def is_gateway_role(roles: list[str]) -> bool:
     return any(hasRoles([role], roles) for role in GATEWAY_ROLES)
 
 def buildSetPropertyUrl(accessor, property_name, action):
@@ -41,7 +41,7 @@ class ViCareDeviceAccessor:
         self.device_id = device_id
 
 class ViCareService:
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: List[str]) -> None:
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: list[str]) -> None:
         self.oauth_manager = oauth_manager
         self.roles = roles
 

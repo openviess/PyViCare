@@ -5,12 +5,16 @@ import pytest
 import requests
 from authlib.integrations.base_client.errors import OAuthError
 
-from PyViCare.PyViCareOAuthManager import (AbstractViCareOAuthManager,
-                                           obtain_token_via_basic_auth_pkce)
-from PyViCare.PyViCareUtils import (PyViCareCommandError,
-                                    PyViCareDeviceCommunicationError,
-                                    PyViCareInternalServerError,
-                                    PyViCareRateLimitError)
+from PyViCare.PyViCareOAuthManager import (
+    AbstractViCareOAuthManager,
+    obtain_token_via_basic_auth_pkce,
+)
+from PyViCare.PyViCareUtils import (
+    PyViCareCommandError,
+    PyViCareDeviceCommunicationError,
+    PyViCareInternalServerError,
+    PyViCareRateLimitError,
+)
 from tests.helper import readJson
 
 

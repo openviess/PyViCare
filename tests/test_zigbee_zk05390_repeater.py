@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareRepeater import Repeater
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 

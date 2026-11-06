@@ -1,5 +1,5 @@
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import handleNotSupported
+from PyViCare.PyViCareUtils import handleAPICommandErrors, handleNotSupported
 
 
 class ElectricalEnergySystem(Device):
@@ -51,6 +51,54 @@ class ElectricalEnergySystem(Device):
         return self.getProperty("photovoltaic.status")["properties"]["status"][
             "value"
         ]
+
+    @handleNotSupported
+    def getPhotovoltaicInstalledPeakPower(self):
+        return self.getProperty("photovoltaic.installedPeakPower")["properties"][
+            "value"
+        ]["value"]
+
+    @handleNotSupported
+    def getPhotovoltaicInstalledPeakPowerUnit(self):
+        return self.getProperty("photovoltaic.installedPeakPower")["properties"][
+            "value"
+        ]["unit"]
+
+    @handleNotSupported
+    def getPhotovoltaicStrings(self):
+        return self.getProperty("photovoltaic.string")["properties"]["enabled"][
+            "value"
+        ]
+
+    @handleNotSupported
+    def getPhotovoltaicStringName(self, string):
+        return self.getProperty(f"photovoltaic.string.{string}")["properties"][
+            "name"
+        ]["value"]
+
+    @handleNotSupported
+    def getPhotovoltaicStringPower(self, string):
+        return self.getProperty(f"photovoltaic.string.{string}.power")["properties"][
+            "value"
+        ]["value"]
+
+    @handleNotSupported
+    def getPhotovoltaicStringPowerUnit(self, string):
+        return self.getProperty(f"photovoltaic.string.{string}.power")["properties"][
+            "value"
+        ]["unit"]
+
+    @handleNotSupported
+    def getPhotovoltaicStringVoltage(self, string):
+        return self.getProperty(f"photovoltaic.string.{string}.voltage")["properties"][
+            "value"
+        ]["value"]
+
+    @handleNotSupported
+    def getPhotovoltaicStringCurrent(self, string):
+        return self.getProperty(f"photovoltaic.string.{string}.electricity")[
+            "properties"
+        ]["value"]["value"]
 
     @handleNotSupported
     def getPhotovoltaicProductionCurrent(self):
@@ -185,3 +233,21 @@ class ElectricalEnergySystem(Device):
         return self.getProperty("ess.operationState")["properties"]["value"][
             "value"
         ]
+
+    @handleNotSupported
+    def getElectricalEnergySystemBatteryControlMode(self):
+        return self.getProperty("ess.battery.control.mode.active")["properties"][
+            "value"
+        ]["value"]
+
+    @handleNotSupported
+    def getElectricalEnergySystemBatteryControlModes(self):
+        return self.getProperty("ess.battery.control.mode.active")["commands"][
+            "setMode"
+        ]["params"]["value"]["constraints"]["enum"]
+
+    @handleAPICommandErrors
+    def setElectricalEnergySystemBatteryControlMode(self, mode: str):
+        return self.setProperty(
+            "ess.battery.control.mode.active", "setMode", {"value": mode}
+        )

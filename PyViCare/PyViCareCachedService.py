@@ -1,5 +1,5 @@
 import logging
-from typing import Any, List
+from typing import Any
 
 from PyViCare.PyViCareAbstractOAuthManager import AbstractViCareOAuthManager
 from PyViCare.PyViCareCachedServiceBase import ViCareCachedServiceBase
@@ -11,7 +11,7 @@ logger.addHandler(logging.NullHandler())
 
 class ViCareCachedService(ViCareCachedServiceBase, ViCareService):
 
-    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: List[str], cacheDuration: int) -> None:
+    def __init__(self, oauth_manager: AbstractViCareOAuthManager, roles: list[str], cacheDuration: int) -> None:
         ViCareService.__init__(self, oauth_manager, roles)
         self._init_cache(cacheDuration)
 

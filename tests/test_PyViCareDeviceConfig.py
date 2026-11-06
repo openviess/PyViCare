@@ -91,6 +91,25 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
         device_type = c.asAutoDetectDevice()
         self.assertEqual("ElectricalEnergySystem", type(device_type).__name__)
 
+    def test_autoDetect_OBNG_SCU_asHeatPump(self):
+        c = PyViCareDeviceConfig(
+            self.accessor, self.service, "OBNG_SCU_01", "Online", "systemController")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("HeatPump", type(device_type).__name__)
+
+    def test_autoDetect_OBNG_OCU_asHeatPump(self):
+        c = PyViCareDeviceConfig(
+            self.accessor, self.service, "OBNG_OCU", "Online", "outdoorUnit")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("HeatPump", type(device_type).__name__)
+
+    def test_autoDetect_OBNG_RoomControl_asRoomControl(self):
+        c = PyViCareDeviceConfig(
+            self.accessor, self.service, "OBNG_RoomControl_One_01", "Online", "roomControl",
+            roles=["type:OBNG", "type:virtual;smartRoomControl"])
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("RoomControl", type(device_type).__name__)
+
     def test_autoDetect_E3_RoomControl_asRoomControl(self):
         c = PyViCareDeviceConfig(
             self.accessor, self.service, "E3_RoomControl_One_525", "Online")
@@ -186,6 +205,25 @@ class PyViCareDeviceConfigTest(unittest.TestCase):
             self.accessor, self.service, "Unknown", "Online", roles=["type:gateway;TCU300"])
         device_type = c.asAutoDetectDevice()
         self.assertEqual("Gateway", type(device_type).__name__)
+
+    def test_autoDetect_VitosetAqua19D_asWaterTreatment(self):
+        c = PyViCareDeviceConfig(
+            self.accessor, self.service, "VitosetAqua19D", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("WaterTreatment", type(device_type).__name__)
+
+    def test_autoDetect_VitosetAqua42D_asWaterTreatment(self):
+        c = PyViCareDeviceConfig(
+            self.accessor, self.service, "VitosetAqua42D", "Online")
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("WaterTreatment", type(device_type).__name__)
+
+    def test_autoDetect_RoleWaterTreatment_asWaterTreatment(self):
+        c = PyViCareDeviceConfig(
+            self.accessor, self.service, "Unknown", "Online",
+            roles=["type:waterTreatment"])
+        device_type = c.asAutoDetectDevice()
+        self.assertEqual("WaterTreatment", type(device_type).__name__)
 
     def test_legacy_device(self):
         c = PyViCareDeviceConfig(

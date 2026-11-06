@@ -1,7 +1,7 @@
 import unittest
 
-from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareElectricalEnergySystem import ElectricalEnergySystem
+from PyViCare.PyViCareService import ViCareDeviceAccessor
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -43,6 +43,9 @@ class VitochargeVX3(unittest.TestCase):
 
     def test_getPhotovoltaicProductionCumulatedLifeCycle(self):
         self.assertEqual(self.device.getPhotovoltaicProductionCumulatedLifeCycle(), 15510008)
+
+    def test_getPhotovoltaicInstalledPeakPower(self):
+        self.assertEqual(self.device.getPhotovoltaicInstalledPeakPower(), 10.3)
 
     def test_getPhotovoltaicStatus(self):
         self.assertEqual(self.device.getPhotovoltaicStatus(), "ready")

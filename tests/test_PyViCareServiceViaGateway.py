@@ -1,15 +1,18 @@
 import unittest
+from typing import Any, ClassVar
 from unittest.mock import Mock
 
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareServiceViaGateway import (
-    ViCareServiceViaGateway, filter_features_for_device)
+    ViCareServiceViaGateway,
+    filter_features_for_device,
+)
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 
 
 class PyViCareServiceViaGatewayTest(unittest.TestCase):
 
-    BULK_RESPONSE = {
+    BULK_RESPONSE: ClassVar[dict[str, Any]] = {
         "data": [
             {
                 "feature": "device.serial",

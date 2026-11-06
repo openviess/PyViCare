@@ -1,8 +1,13 @@
 from contextlib import suppress
+
 from deprecated import deprecated
 
 from PyViCare.PyViCareDevice import Device
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError, handleAPICommandErrors, handleNotSupported)
+from PyViCare.PyViCareUtils import (
+    PyViCareNotSupportedFeatureError,
+    handleAPICommandErrors,
+    handleNotSupported,
+)
 
 
 class VentilationDevice(Device):
@@ -330,6 +335,34 @@ class VentilationDevice(Device):
     @handleNotSupported
     def getHeatRecoveryEfficiency(self) -> float:
         return float(self.getProperty("ventilation.heating.recovery")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getBypassActive(self) -> bool:
+        return bool(self.getProperty("ventilation.bypass")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getBypassPosition(self) -> int:
+        return int(self.getProperty("ventilation.bypass.position")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getBypassAutomaticMode(self) -> bool:
+        return bool(self.getProperty("ventilation.bypass.operating.modes.automatic")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getBypassOpenMode(self) -> bool:
+        return bool(self.getProperty("ventilation.bypass.operating.modes.open")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getBypassOperatingModeLevel(self) -> str:
+        return str(self.getProperty("ventilation.bypass.operating.modes.active")["properties"]["level"]["value"])
+
+    @handleNotSupported
+    def getBypassOperatingModeState(self) -> str:
+        return str(self.getProperty("ventilation.bypass.operating.modes.active")["properties"]["state"]["value"])
+
+    @handleNotSupported
+    def getBypassOperatingModeValue(self) -> str:
+        return str(self.getProperty("ventilation.bypass.operating.modes.active")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getSupplyVolumeFlow(self) -> int:

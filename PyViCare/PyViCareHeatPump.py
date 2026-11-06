@@ -1,18 +1,25 @@
+# pylint: disable=too-many-lines
 from __future__ import annotations
+
 from contextlib import suppress
-from typing import Any, List
+from itertools import count
+from typing import Any
+
 from deprecated import deprecated
 
 from PyViCare.PyViCareHeatingDevice import HeatingDevice, HeatingDeviceWithComponent
-from PyViCare.PyViCareUtils import (PyViCareNotSupportedFeatureError,
-                                    handleAPICommandErrors, handleNotSupported)
+from PyViCare.PyViCareUtils import (
+    PyViCareNotSupportedFeatureError,
+    handleAPICommandErrors,
+    handleNotSupported,
+)
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
 
 class HeatPump(HeatingDevice, VentilationDevice):
 
     @property
-    def compressors(self) -> List[Compressor]:
+    def compressors(self) -> list[Compressor]:
         return [self.getCompressor(x) for x in self.getAvailableCompressors()]
 
     def getCompressor(self, compressor) -> Compressor:
@@ -23,25 +30,45 @@ class HeatPump(HeatingDevice, VentilationDevice):
         return self.getProperty("heating.compressors")["properties"]["enabled"]["value"]
 
     @property
-    def condensors(self) -> List[Condensor]:
+    def condensors(self) -> list[Condensor]:
         return [self.getCondensor(x) for x in self.getAvailableCompressors()]
 
     def getCondensor(self, condensor) -> Condensor:
         return Condensor(self, condensor)
 
     @property
-    def evaporators(self) -> List[Evaporator]:
+    def evaporators(self) -> list[Evaporator]:
         return [self.getEvaporator(x) for x in self.getAvailableCompressors()]
 
     def getEvaporator(self, evaporator) -> Evaporator:
         return Evaporator(self, evaporator)
 
     @property
-    def inverters(self) -> List[Inverter]:
+    def inverters(self) -> list[Inverter]:
         return [self.getInverter(x) for x in self.getAvailableCompressors()]
 
     def getInverter(self, inverter) -> Inverter:
         return Inverter(self, inverter)
+
+    @property
+    def fans(self) -> list[Fan]:
+        return [self.getFan(x) for x in self.getAvailableFans()]
+
+    def getFan(self, fan: str) -> Fan:
+        return Fan(self, fan)
+
+    @handleNotSupported
+    def getAvailableFans(self) -> list[str]:
+        fan_count = 0
+        for fan in count():
+            try:
+                self.getProperty(f"heating.primaryCircuit.fans.{fan}.current")
+                fan_count += 1
+            except PyViCareNotSupportedFeatureError:
+                break
+        if fan_count == 0:
+            raise PyViCareNotSupportedFeatureError("heating.primaryCircuit.fans.0.current")
+        return [str(x) for x in range(fan_count)]
 
     @handleNotSupported
     def getBufferMainTemperature(self):
@@ -176,6 +203,51 @@ class HeatPump(HeatingDevice, VentilationDevice):
     @handleNotSupported
     def getPowerSummaryConsumptionDomesticHotWaterLastYear(self):
         return self.getProperty("heating.power.consumption.summary.dhw")["properties"]["lastYear"]["value"]
+
+    # Current values of the whole heat pump, Compressor has the per-compressor ones:
+    @handleNotSupported
+    def getHeatProductionCurrent(self) -> float:
+        return float(self.getProperty("heating.heat.production.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrent(self) -> float:
+        return float(self.getProperty("heating.power.consumption.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCurrentUnit(self) -> str:
+        return str(self.getProperty("heating.power.consumption.current")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getDefrostingActive(self) -> bool:
+        return bool(self.getProperty("heating.outdoor.defrosting")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getFourThreeWayValvePosition(self) -> str:
+        return str(self.getProperty("heating.valves.fourThreeWay.position")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitOperationState(self) -> str:
+        return str(self.getProperty("heating.secondaryCircuit.operation.state")["properties"]["currentValue"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitOperationStateTarget(self) -> str:
+        return str(self.getProperty("heating.secondaryCircuit.operation.state")["properties"]["targetValue"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitFourThreeWayValvePosition(self) -> int:
+        return int(self.getProperty("heating.secondaryCircuit.valves.fourThreeWay")["properties"]["current"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitFourThreeWayValvePositionTarget(self) -> int:
+        return int(self.getProperty("heating.secondaryCircuit.valves.fourThreeWay")["properties"]["target"]["value"])
+
+    @handleNotSupported
+    def getSecondaryCircuitFourThreeWayValvePositionUnit(self) -> str:
+        return str(self.getProperty("heating.secondaryCircuit.valves.fourThreeWay")["properties"]["current"]["unit"])
 
     @handleNotSupported
     def getVolumetricFlowReturn(self):
@@ -532,7 +604,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     # Cooling circuits
     @property
-    def coolingCircuits(self) -> List[CoolingCircuit]:
+    def coolingCircuits(self) -> list[CoolingCircuit]:
         return [self.getCoolingCircuit(x) for x in self.getAvailableCoolingCircuits()]
 
     def getCoolingCircuit(self, circuit) -> CoolingCircuit:
@@ -646,8 +718,12 @@ class Compressor(HeatingDeviceWithComponent):
         return str(self.getProperty(f"heating.compressors.{self.compressor}.sensors.power")["properties"]["value"]["unit"])
 
     @handleNotSupported
-    def getSpeed(self) -> int:
-        return int(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
+    def getSpeed(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getSpeedUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.speed.current")["properties"]["value"]["unit"])
 
     @handleNotSupported
     def getHeatProductionCurrent(self) -> float:
@@ -676,6 +752,30 @@ class Compressor(HeatingDeviceWithComponent):
     @handleNotSupported
     def getPowerConsumptionCoolingThisYear(self) -> float:
         return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling")["properties"]["year"]["value"][0])
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisWeek(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.heating.week")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionHeatingThisWeekUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.heating.week")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionDHWThisWeek(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.dhw.week")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionDHWThisWeekUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.dhw.week")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getPowerConsumptionCoolingThisWeek(self) -> float:
+        return float(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling.week")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getPowerConsumptionCoolingThisWeekUnit(self) -> str:
+        return str(self.getProperty(f"heating.compressors.{self.compressor}.power.consumption.cooling.week")["properties"]["value"]["unit"])
 
     @handleNotSupported
     def getPowerConsumptionTotalThisYear(self) -> float:
@@ -778,14 +878,17 @@ class Compressor(HeatingDeviceWithComponent):
         # Shows the oil temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.oil")["properties"]["value"]["value"])
 
+    @handleNotSupported
     def getMotorChamberTemperature(self) -> float:
         # Shows the motor chamber temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.motorChamber")["properties"]["value"]["value"])
 
+    @handleNotSupported
     def getAmbientTemperature(self) -> float:
         # Shows the ambient temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.ambient")["properties"]["value"]["value"])
 
+    @handleNotSupported
     def getOverheatTemperature(self) -> float:
         # Shows the overheat temperature of the compressor.
         return float(self.getProperty(f"heating.compressors.{self.compressor}.sensors.temperature.overheat")["properties"]["value"]["value"])
@@ -910,3 +1013,14 @@ class Inverter(HeatingDeviceWithComponent):
     @handleNotSupported
     def getTemperature(self) -> float:
         return float(self.getProperty(f"heating.inverters.{self.inverter}.sensors.temperature.powerModule")["properties"]["value"]["value"])
+
+
+class Fan(HeatingDeviceWithComponent):
+
+    @property
+    def fan(self) -> str:
+        return self.component
+
+    @handleNotSupported
+    def getSpeed(self) -> float:
+        return float(self.getProperty(f"heating.primaryCircuit.fans.{self.fan}.current")["properties"]["value"]["value"])
