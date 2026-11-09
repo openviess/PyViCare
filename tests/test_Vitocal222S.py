@@ -70,3 +70,7 @@ class Vitocal222S(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.operating.programs.holidayAtHome')
         self.assertEqual(self.service.setPropertyData[0]['action'], 'unschedule')
         self.assertEqual(self.service.setPropertyData[0]['data'], {})
+
+    def test_getBufferCylinderSize(self):
+        # 0 litres means no buffer cylinder is configured.
+        self.assertEqual(self.device.getBufferCylinderSize(), 0)

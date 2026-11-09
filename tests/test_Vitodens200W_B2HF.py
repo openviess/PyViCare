@@ -67,3 +67,6 @@ class Vitodens200W_B2HF(unittest.TestCase):
     def test_getPowerConsumptionHeatingThisYear(self):
         self.assertEqual(
             self.device.getPowerConsumptionHeatingThisYear(), 79.8)
+
+    def test_getBufferCylinderSize(self):
+        self.assertEqual(self.device.getBufferCylinderSize(), 300)
