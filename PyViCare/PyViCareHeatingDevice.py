@@ -74,6 +74,10 @@ class HeatingDevice(Device):
         return self.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getHydraulicSeparatorTemperature(self):
+        return self.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
+
+    @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
         return self.getProperty("heating.dhw.temperature.main")["properties"]["value"]["value"]
 
