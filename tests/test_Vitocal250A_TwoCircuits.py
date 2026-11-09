@@ -102,3 +102,38 @@ class Vitocal250ATwoCircuits(unittest.TestCase):
 
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -63)
+
+    def test_getDomesticHotWaterHygieneEnabled(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneEnabled(), True)
+
+    def test_getDomesticHotWaterHygieneActive(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneActive(), False)
+
+    def test_getDomesticHotWaterHygieneTriggerStartHour(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTriggerStartHour(), 2)
+
+    def test_getDomesticHotWaterHygieneTriggerStartMinute(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTriggerStartMinute(), 0)
+
+    def test_getDomesticHotWaterHygieneTriggerWeekdays(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTriggerWeekdays(), ['Tue'])
+
+    def test_setDomesticHotWaterHygieneEnabled(self):
+        # This device serves setEnabled, which is preferred over enable/disable.
+        self.device.setDomesticHotWaterHygieneEnabled(False)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.hygiene')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'setEnabled')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'enabled': False})
+
+    def test_setDomesticHotWaterHygieneTriggerDaily(self):
+        self.device.setDomesticHotWaterHygieneTriggerDaily(4, 30)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.hygiene.trigger')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'triggerDaily')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'startHour': 4, 'startMinute': 30})
+
+    def test_setDomesticHotWaterHygieneTriggerOncePerWeek(self):
+        self.device.setDomesticHotWaterHygieneTriggerOncePerWeek('Wed', 4, 30)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.hygiene.trigger')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'triggerOncePerWeek')
+        self.assertEqual(self.service.setPropertyData[0]['data'],
+                         {'weekday': 'Wed', 'startHour': 4, 'startMinute': 30})

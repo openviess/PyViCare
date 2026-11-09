@@ -424,6 +424,78 @@ class HeatingDevice(Device):
         return schedule['default_mode']
 
     @handleNotSupported
+    def getDomesticHotWaterHygieneEnabled(self) -> bool:
+        return bool(self.getProperty("heating.dhw.hygiene")["properties"]["enabled"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneActive(self) -> bool:
+        """Whether the hygiene heat-up is running right now.
+
+        Served only by devices that have the function enabled: one with it
+        switched off carries `enabled` alone, and this raises
+        PyViCareNotSupportedFeatureError there.
+        """
+        return bool(self.getProperty("heating.dhw.hygiene")["properties"]["active"]["value"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneEnabled(self, enabled: bool) -> Any:
+        """Enable or disable the hygiene function.
+
+        Two generations of commands sit on the same feature: the newer
+        `setEnabled` takes the flag as a parameter, the older `enable`/`disable`
+        pair carries it in the command name. The newer one is preferred, the
+        pair is the fallback for devices that only serve it.
+
+        Which of the two a device accepts also depends on its state - while the
+        function is off only `enable` is executable, and the other way round -
+        so a refused command surfaces as PyViCareCommandError.
+        """
+        feature = self.getProperty("heating.dhw.hygiene")
+        commands = feature.get("commands") or {}
+        if "setEnabled" in commands:
+            return self.setProperty("heating.dhw.hygiene", "setEnabled", {'enabled': enabled})
+        return self.setProperty("heating.dhw.hygiene", "enable" if enabled else "disable", {})
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTriggerStartHour(self) -> int:
+        """Hour at which the hygiene heat-up starts.
+
+        `heating.dhw.hygiene.trigger` carries no properties while the function
+        is disabled, so this raises PyViCareNotSupportedFeatureError there.
+        """
+        return int(self.getProperty("heating.dhw.hygiene.trigger")["properties"]["startHour"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTriggerStartMinute(self) -> int:
+        """Minute at which the hygiene heat-up starts."""
+        return int(self.getProperty("heating.dhw.hygiene.trigger")["properties"]["startMinute"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTriggerWeekdays(self) -> list[str]:
+        """Weekdays on which the hygiene heat-up runs.
+
+        One entry for a weekly heat-up, all seven for a daily one - the API
+        knows no separate daily flag. Abbreviated as the API reports them,
+        `Mon` to `Sun`.
+        """
+        return list(self.getProperty("heating.dhw.hygiene.trigger")["properties"]["weekdays"]["value"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTriggerDaily(self, startHour: int, startMinute: int) -> Any:
+        """Run the hygiene heat-up every day at the given time."""
+        return self.setProperty("heating.dhw.hygiene.trigger", "triggerDaily",
+                                {'startHour': startHour, 'startMinute': startMinute})
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTriggerOncePerWeek(self, weekday: str, startHour: int, startMinute: int) -> Any:
+        """Run the hygiene heat-up once a week, on `weekday` at the given time.
+
+        `weekday` is the abbreviation the API uses, `Mon` to `Sun`.
+        """
+        return self.setProperty("heating.dhw.hygiene.trigger", "triggerOncePerWeek",
+                                {'weekday': weekday, 'startHour': startHour, 'startMinute': startMinute})
+
+    @handleNotSupported
     def getAvailableCircuits(self):
         return self.getProperty("heating.circuits")["properties"]["enabled"]["value"]
 
