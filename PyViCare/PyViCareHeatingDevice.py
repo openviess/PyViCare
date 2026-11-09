@@ -155,6 +155,12 @@ class HeatingDevice(Device):
         return status == 'on'
 
     @handleNotSupported
+    def getBoilerInternalPumpActive(self):
+        status = self.getProperty("heating.boiler.pumps.internal")[
+            "properties"]["status"]["value"]
+        return status == 'on'
+
+    @handleNotSupported
     def getDomesticHotWaterActive(self):
         status = self.getProperty("heating.dhw")["properties"]["status"]["value"]
         return status == 'on'
