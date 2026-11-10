@@ -850,11 +850,11 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
         return self._programAliases[program]
 
-    @deprecated(reason="renamed, use getProgramTemperature", version="2.64.0")
+    @deprecated(reason="renamed, use getProgramTemperature", version="2.66.0")
     def getDesiredTemperatureForProgram(self, program):
         return self.getProgramTemperature(program)
 
-    @deprecated(reason="renamed, use getActiveProgramTemperature", version="2.64.0")
+    @deprecated(reason="renamed, use getActiveProgramTemperature", version="2.66.0")
     def getCurrentDesiredTemperature(self):
         return self.getActiveProgramTemperature()
 
