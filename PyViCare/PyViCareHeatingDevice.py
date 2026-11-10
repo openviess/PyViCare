@@ -580,21 +580,23 @@ class HeatingCircuit(HeatingDeviceWithComponent):
 
     @handleNotSupported
     def getProgramTemperature(self, program: str):
-        program = self.resolveProgramName(program)
         feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")
         return feature["properties"]["temperature"]["value"]
 
     @handleNotSupported
     def getReducedTemperature(self):
-        return self.getProgramTemperature("reduced")
+        program = self.resolveProgramName("reduced")
+        return self.getProgramTemperature(program)
 
     @handleNotSupported
     def getComfortTemperature(self):
-        return self.getProgramTemperature("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.getProgramTemperature(program)
 
     @handleNotSupported
     def getNormalTemperature(self):
-        return self.getProgramTemperature("normal")
+        program = self.resolveProgramName("normal")
+        return self.getProgramTemperature(program)
 
     def setProgramTemperature(self, program: str, temperature: float):
         # Works for normal, reduced, comfort
@@ -615,18 +617,20 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         result: json
             json representation of the answer
         """
-        program = self.resolveProgramName(program)
         return self.device.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "setTemperature", {'targetTemperature': float(temperature)})
 
     def setReducedTemperature(self, temperature):
-        return self.setProgramTemperature("reduced", temperature)
+        program = self.resolveProgramName("reduced")
+        return self.setProgramTemperature(program, temperature)
 
     def setComfortTemperature(self, temperature):
-        return self.setProgramTemperature("comfort", temperature)
+        program = self.resolveProgramName("comfort")
+        return self.setProgramTemperature(program, temperature)
 
     def setNormalTemperature(self, temperature):
-        return self.setProgramTemperature("normal", temperature)
+        program = self.resolveProgramName("normal")
+        return self.setProgramTemperature(program, temperature)
 
     @handleNotSupported
     def getActive(self):
@@ -707,14 +711,14 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         result: json
             json representation of the answer
         """
-        program = self.resolveProgramName(program)
 
         # optional temperature parameter could be passed (but not done)
         return self.device.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}", "activate",
                                         {})
 
     def activateComfort(self):
-        return self.activateProgram("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.activateProgram(program)
 
     def deactivateProgram(self, program):
         """ Deactivate a program
@@ -728,12 +732,12 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         result: json
             json representation of the answer
         """
-        program = self.resolveProgramName(program)
         return self.device.setProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}",
                                         "deactivate", {})
 
     def deactivateComfort(self):
-        return self.deactivateProgram("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.deactivateProgram(program)
 
     @handleNotSupported
     def getSupplyTemperature(self):
