@@ -100,6 +100,9 @@ class Vitodens200W_2(unittest.TestCase):
         self.assertEqual(
             self.device.getPowerConsumptionToday(), 0.283)
 
+    def test_resolveProgramName(self):
+        self.assertEqual(self.device.circuits[0].resolveProgramName('comfort'), 'comfort')
+
     def test_getActiveProgram(self):
         self.assertEqual(self.device.circuits[0].getActiveProgram(), 'standby')
 

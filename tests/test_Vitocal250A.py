@@ -339,6 +339,9 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastSevenDays(), 96.7)
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastYear(), 5903.8)
 
+    def test_resolveProgramName(self):
+        self.assertEqual(self.device.circuits[0].resolveProgramName('comfort'), 'comfortHeating')
+
     def test_getActiveProgram(self):
         self.assertEqual(self.device.circuits[0].getActiveProgram(), 'normalHeating')
 
