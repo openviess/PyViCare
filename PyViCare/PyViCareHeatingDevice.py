@@ -834,8 +834,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
                         'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']:
             with suppress(PyViCareNotSupportedFeatureError):
-                if self.getProperty(
-                        f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
+                feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")
+                if feature is not None and "properties" in feature:
                     available_programs.append(program)
 
         return available_programs
@@ -845,12 +845,12 @@ class HeatingCircuit(HeatingDeviceWithComponent):
             return program
 
         if program not in self._programAliases:
-            self._programAliases[program] = program
-
+            program_alias = program
             with suppress(PyViCareNotSupportedFeatureError):
-                program_key = f"heating.circuits.{self.circuit}.operating.programs.{program}Heating"
-                if self.getProperty(program_key) is not None:
-                    self._programAliases[program] = f"{program}Heating"
+                feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}Heating")
+                if feature is not None and "properties" in feature:
+                    program_alias = f"{program}Heating"
+            self._programAliases[program] = program_alias
 
         return self._programAliases[program]
 
