@@ -917,7 +917,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         shift = None
         slope = None
         with suppress(PyViCareNotSupportedFeatureError):
-            inside = self.getCurrentDesiredTemperature()
+            inside = self.getActiveProgramTemperature()
             outside = self.device.getOutsideTemperature()
             shift = self.getHeatingCurveShift()
             slope = self.getHeatingCurveSlope()
