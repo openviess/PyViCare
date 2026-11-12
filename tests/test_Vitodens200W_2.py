@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.helper import now_is
 from tests.ViCareServiceMock import ViCareServiceMock
 
@@ -114,6 +115,13 @@ class Vitodens200W_2(unittest.TestCase):
         # active program is 'standby', so there's no active temperature
         self.assertIsNone(self.device.circuits[0].getActiveProgramTemperature())
 
+    def test_getProgramTemperature(self):
+        self.assertEqual(self.device.circuits[0].getProgramTemperature('normal'), 21)
+
+        # using the wrong naming scheme raises PyViCareNotSupportedFeatureError
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.circuits[0].getProgramTemperature('normalHeating')
+
     def test_setProgramTemperatures(self):
         self.device.circuits[0].setReducedTemperature(18)
         self.device.circuits[0].setComfortTemperature(23)
@@ -134,6 +142,23 @@ class Vitodens200W_2(unittest.TestCase):
                 self.service.setPropertyData[i]['data'],
                 {'targetTemperature': temperature}
             )
+
+    def test_setProgramTemperature(self):
+        self.device.circuits[0].setProgramTemperature('normal', 20)
+
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'],
+            'heating.circuits.0.operating.programs.normal'
+        )
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'],
+            'setTemperature'
+        )
+        self.assertEqual(
+            self.service.setPropertyData[0]['data'],
+            {'targetTemperature': 20}
+        )
 
     def test_activateComfort(self):
         self.device.circuits[0].activateComfort()
