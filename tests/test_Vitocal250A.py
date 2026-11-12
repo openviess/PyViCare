@@ -338,3 +338,12 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastMonth(), 389.9)
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastSevenDays(), 96.7)
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterLastYear(), 5903.8)
+
+    def test_getHeatProductionSummaryCooling(self):
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingUnit(), "kilowattHour")
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingCurrentDay(), 0)
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingCurrentMonth(), 0)
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingCurrentYear(), 0)
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingLastMonth(), 0)
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingLastSevenDays(), 0)
+        self.assertEqual(self.device.getHeatProductionSummaryCoolingLastYear(), 0)
