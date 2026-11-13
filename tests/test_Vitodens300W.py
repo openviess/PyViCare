@@ -50,9 +50,9 @@ class Vitodens300W(unittest.TestCase):
         self.assertEqual(
             self.device.getDomesticHotWaterCirculationPumpActive(), True)
 
-    def test_getCurrentDesiredTemperature(self):
+    def test_getActiveProgramTemperature(self):
         self.assertEqual(
-            self.device.circuits[0].getCurrentDesiredTemperature(), None)
+            self.device.circuits[0].getActiveProgramTemperature(), None)
 
     # Is currently (August, 2021) not supported by the Viessman API even though it works for the Vitodens 200W.
     def test_getDomesticHotWaterOutletTemperature(self):

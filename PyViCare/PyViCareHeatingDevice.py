@@ -1,6 +1,8 @@
 from contextlib import suppress
 from typing import Any
 
+from deprecated import deprecated
+
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareHeatCurveCalculation import (
     heat_curve_formular_variant1,
@@ -558,6 +560,10 @@ class HeatingDeviceWithComponent:
 
 
 class HeatingCircuit(HeatingDeviceWithComponent):
+    def __init__(self, device: HeatingDevice, component: str) -> None:
+        super().__init__(device, component)
+        self._programAliases: dict[str, str] = {}
+
     @property
     def circuit(self) -> str:
         return self.component
@@ -577,6 +583,26 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         r = self.device.setProperty(
             f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
         return r
+
+    @handleNotSupported
+    def getProgramTemperature(self, program: str):
+        feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")
+        return feature["properties"]["temperature"]["value"]
+
+    @handleNotSupported
+    def getReducedTemperature(self):
+        program = self.resolveProgramName("reduced")
+        return self.getProgramTemperature(program)
+
+    @handleNotSupported
+    def getComfortTemperature(self):
+        program = self.resolveProgramName("comfort")
+        return self.getProgramTemperature(program)
+
+    @handleNotSupported
+    def getNormalTemperature(self):
+        program = self.resolveProgramName("normal")
+        return self.getProgramTemperature(program)
 
     def setProgramTemperature(self, program: str, temperature: float):
         # Works for normal, reduced, comfort
@@ -601,13 +627,16 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                         "setTemperature", {'targetTemperature': float(temperature)})
 
     def setReducedTemperature(self, temperature):
-        return self.setProgramTemperature("reduced", temperature)
+        program = self.resolveProgramName("reduced")
+        return self.setProgramTemperature(program, temperature)
 
     def setComfortTemperature(self, temperature):
-        return self.setProgramTemperature("comfort", temperature)
+        program = self.resolveProgramName("comfort")
+        return self.setProgramTemperature(program, temperature)
 
     def setNormalTemperature(self, temperature):
-        return self.setProgramTemperature("normal", temperature)
+        program = self.resolveProgramName("normal")
+        return self.setProgramTemperature(program, temperature)
 
     @handleNotSupported
     def getActive(self):
@@ -620,6 +649,20 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getType(self):
         return self.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
+
+    @handleNotSupported
+    def getActiveProgramTemperature(self):
+        active_program = self.getActiveProgram()
+        try:
+            feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")
+            return feature["properties"]["temperature"]["value"]
+        except (PyViCareNotSupportedFeatureError, KeyError):
+            match active_program:
+                case "standby":
+                    return None
+                case "holiday":
+                    return self.getReducedTemperature()
+            raise
 
     @handleNotSupported
     def getActiveProgramMinTemperature(self):
@@ -680,7 +723,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                         {})
 
     def activateComfort(self):
-        return self.activateProgram("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.activateProgram(program)
 
     def deactivateProgram(self, program):
         """ Deactivate a program
@@ -698,7 +742,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                         "deactivate", {})
 
     def deactivateComfort(self):
-        return self.deactivateProgram("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.deactivateProgram(program)
 
     @handleNotSupported
     def getSupplyTemperature(self):
@@ -795,25 +840,33 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
                         'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']:
             with suppress(PyViCareNotSupportedFeatureError):
-                if self.getProperty(
-                        f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
+                feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")
+                if feature is not None and "properties" in feature:
                     available_programs.append(program)
 
         return available_programs
 
-    @handleNotSupported
-    def getDesiredTemperatureForProgram(self, program):
-        return \
-            self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"][
-                "temperature"]["value"]
+    def resolveProgramName(self, program: str) -> str:
+        if program not in ["reduced", "comfort", "normal"]:
+            return program
 
-    @handleNotSupported
+        if program not in self._programAliases:
+            program_alias = program
+            with suppress(PyViCareNotSupportedFeatureError):
+                feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}Heating")
+                if feature is not None and "properties" in feature:
+                    program_alias = f"{program}Heating"
+            self._programAliases[program] = program_alias
+
+        return self._programAliases[program]
+
+    @deprecated(reason="renamed, use getProgramTemperature", version="2.66.0")
+    def getDesiredTemperatureForProgram(self, program):
+        return self.getProgramTemperature(program)
+
+    @deprecated(reason="renamed, use getActiveProgramTemperature", version="2.66.0")
     def getCurrentDesiredTemperature(self):
-        active_program = self.getActiveProgram()
-        if active_program in ['standby']:
-            return None
-        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
-            "properties"]["temperature"]["value"]
+        return self.getActiveProgramTemperature()
 
     @handleNotSupported
     def getFrostProtectionActive(self):
@@ -870,7 +923,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         shift = None
         slope = None
         with suppress(PyViCareNotSupportedFeatureError):
-            inside = self.getCurrentDesiredTemperature()
+            inside = self.getActiveProgramTemperature()
             outside = self.device.getOutsideTemperature()
             shift = self.getHeatingCurveShift()
             slope = self.getHeatingCurveSlope()
