@@ -208,6 +208,22 @@ class VitovalorPT2(unittest.TestCase):
     def test_getFuelCellFlowSupplyTemperature(self):
         self.assertEqual(self.device.getFuelCellFlowSupplyTemperature(), 67.2)
 
+    def test_getFuelCellPredictedPowerConsumption(self):
+        self.assertEqual(self.device.getFuelCellPredictedPowerConsumptionUnit(), "wattHour")
+        self.assertEqual(self.device.getFuelCellPredictedPowerConsumption(), 79)
+
+    def test_getFuelCellPredictedRuntime(self):
+        self.assertEqual(self.device.getFuelCellPredictedRuntimeUnit(), "hours")
+        self.assertEqual(self.device.getFuelCellPredictedRuntime(), 2.7)
+
+    def test_getFuelCellTimeTillNextStart(self):
+        self.assertEqual(self.device.getFuelCellTimeTillNextStartUnit(), "hours")
+        self.assertEqual(self.device.getFuelCellTimeTillNextStart(), 0)
+
+    def test_getFuelCellPredictedHeatingDeficit(self):
+        self.assertEqual(self.device.getFuelCellPredictedHeatingDeficitUnit(), "kiloJoule")
+        self.assertEqual(self.device.getFuelCellPredictedHeatingDeficit(), 3012)
+
     def test_getFuelCellOperationHours(self):
         self.assertEqual(self.device.getFuelCellOperationHours(), 41932)
 

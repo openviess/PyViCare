@@ -295,6 +295,38 @@ class FuelCell(HeatingDevice):
         return float(self.getProperty("fuelCell.sensors.temperature.supply")["properties"]["value"]["value"])
 
     @handleNotSupported
+    def getFuelCellPredictedPowerConsumptionUnit(self) -> str:
+        return str(self.getProperty("fuelCell.managers.energy.prediction.power.consumption")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellPredictedPowerConsumption(self) -> float:
+        return float(self.getProperty("fuelCell.managers.energy.prediction.power.consumption")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellPredictedRuntimeUnit(self) -> str:
+        return str(self.getProperty("fuelCell.managers.energy.prediction.runtime")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellPredictedRuntime(self) -> float:
+        return float(self.getProperty("fuelCell.managers.energy.prediction.runtime")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellTimeTillNextStartUnit(self) -> str:
+        return str(self.getProperty("fuelCell.managers.energy.timeTillNextStart")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellTimeTillNextStart(self) -> float:
+        return float(self.getProperty("fuelCell.managers.energy.timeTillNextStart")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellPredictedHeatingDeficitUnit(self) -> str:
+        return str(self.getProperty("fuelCell.prediction.heating.deficit")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellPredictedHeatingDeficit(self) -> float:
+        return float(self.getProperty("fuelCell.prediction.heating.deficit")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getFuelCellOperationHours(self) -> int:
         # Returns the operation hours of the fuel cell
         return int(self.getProperty("fuelCell.statistics")["properties"]["operationHours"]["value"])
