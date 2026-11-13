@@ -58,6 +58,15 @@ class PyViCareServiceTest(unittest.TestCase):
             return self.manager.post("/", {})
         self.assertRaises(PyViCareCommandError, func)
 
+    def test_post_logs_response(self):
+        response = Mock(status_code=200, headers={'content-type': 'application/json'})
+        response.json.return_value = {"data": {"success": True}}
+        self.oauth_mock.post.return_value = response
+
+        with self.assertLogs('PyViCare.PyViCareAbstractOAuthManager', level='DEBUG') as logs:
+            self.manager.post("/", {})
+        self.assertIn("Response to post request: {'data': {'success': True}}", logs.output[0])
+
     def test_get_raiseservererror_ifthatreponse(self):
         self.oauth_mock.get.return_value = FakeResponse(
             'response/errors/error_500.json')

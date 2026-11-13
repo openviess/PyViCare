@@ -18,9 +18,9 @@ class Vitocal222S_with_Vitovent(unittest.TestCase):
             self.assertEqual(
                 self.device.getDomesticHotWaterActiveMode(), 'normal')
 
-    def test_getCurrentDesiredTemperature(self):
+    def test_getActiveProgramTemperature(self):
         self.assertEqual(
-            self.device.circuits[0].getCurrentDesiredTemperature(), 23)
+            self.device.circuits[0].getActiveProgramTemperature(), 23)
 
     def test_isDomesticHotWaterDevice(self):
         self.assertEqual(self.device.isDomesticHotWaterDevice(), True)
