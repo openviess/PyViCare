@@ -89,7 +89,11 @@ class ViCareService:
 
     def getProperty(self, accessor: ViCareDeviceAccessor, property_name: str) -> Any:
         url = self.buildGetPropertyUrl(accessor, property_name)
-        return self.oauth_manager.get(url)
+        response = self.oauth_manager.get(url)
+        # A missing feature comes back as a 404 body, not as an exception.
+        if "data" not in response:
+            raise PyViCareNotSupportedFeatureError(property_name)
+        return response["data"]
 
     def buildGetPropertyUrl(self, accessor: ViCareDeviceAccessor, property_name):
         if is_gateway_role(self.roles):
