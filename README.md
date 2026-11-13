@@ -49,6 +49,23 @@ Depending on the device, some features are not available/supported. This results
 
 Tip: You can use Pythons [contextlib.suppress](https://docs.python.org/3/library/contextlib.html#contextlib.suppress) to handle it gracefully.
 
+### Error events
+
+`getDeviceErrors()` reads a feature that some gateways do not offer. The event
+history keeps those errors, including the ones that already cleared:
+
+```python
+for event in device.getErrorEvents(limit=10):
+    state = "active" if event.active else "cleared"
+    print(event.event_timestamp, state, event.error_code, event.error_description)
+```
+
+`active=True` is the raise, `active=False` the clear, so the event of an error
+code with the latest `event_timestamp` is its current state. `getErrorEvents()`
+asks the API for its gateway serial and filters the page by device id, so
+`limit` counts that gateway's events. Paging and other event types are on
+`device.service.fetch_events()`.
+
 ## Types of heatings
 
 - Use `asGazBoiler` for gas heatings
