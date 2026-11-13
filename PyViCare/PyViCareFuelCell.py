@@ -165,10 +165,6 @@ class FuelCell(HeatingDevice):
     def getDomesticHotWaterMinTemperatureLevel(self):
         return self.getProperty("heating.dhw.temperature.levels")["properties"]["min"]["value"]
 
-    @handleNotSupported
-    def getHydraulicSeparatorTemperature(self):
-        return self.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
-
     # ---- Actual FuelCell-relevant methods (they require paid "Advanced" API plan):
 
     @handleNotSupported
