@@ -136,6 +136,7 @@ class AbstractViCareOAuthManager:
                 f"{API_BASE_URL}{url}", data, headers=headers)
             self.__raise_on_non_json_error(raw_response)
             response = raw_response.json()
+            logger.debug("Response to post request: %s", response)
             self.__handle_expired_token(response)
             self.__handle_rate_limit(response)
             self.__handle_command_error(response)

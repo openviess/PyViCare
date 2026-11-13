@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 from contextlib import suppress
 from typing import Any
 
@@ -74,6 +75,10 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getOutsideTemperature(self):
         return self.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHydraulicSeparatorTemperature(self):
+        return self.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
@@ -212,6 +217,41 @@ class HeatingDevice(Device):
         """
         return self.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperature(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureMin(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureMax(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureStepping(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["stepping"]
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTemperature(self, temperature):
+        """ Set the target temperature of the domestic hot water hygiene function
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.setProperty("heating.dhw.temperature.hygiene", "setTemperature",
+                                        {"targetTemperature": int(temperature)})
 
     @handleNotSupported
     def getDomesticHotWaterOperatingModes(self):
@@ -613,6 +653,35 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getHeatProductionSummaryDomesticHotWaterLastYear(self) -> float:
         return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastYear"]["value"])
+
+    # Heat production summary for cooling:
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingLastMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingLastYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["lastYear"]["value"])
 
 
 class HeatingDeviceWithComponent:
