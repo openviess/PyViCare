@@ -93,11 +93,11 @@ print(circuit.getActiveProgram())
 print(circuit.getPrograms())
 
 print(circuit.getActiveProgramTemperature())
-print(circuit.getProgramTemperature("comfort"))
+print(circuit.getComfortTemperature())
 print(circuit.getActiveMode())
 
-print(circuit.setProgramTemperature("comfort", 21))
-print(circuit.activateProgram("comfort"))
+print(circuit.setComfortTemperature(21))
+print(circuit.activateComfort())
 print(circuit.deactivateComfort())
 
 burner = t.burners[0] #select burner
