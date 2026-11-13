@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Known deprecated Viessmann API features, merged from test data and device dumps.",
-    "updated": "2026-10-30",
+    "updated": "2026-11-06",
     "feature_count": 116
   },
   "features": {
@@ -32,7 +32,8 @@
         "dump:device_0_features.json",
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitodens300W_B3HF-19.json"
       ]
     },
     "heating.buffer.sensors.temperature.top": {
@@ -202,7 +203,8 @@
       "firstSeenOn": "2026-02-10",
       "sources": [
         "Vitodens100W.json",
-        "Vitodens200W_B2HF.json"
+        "Vitodens200W_B2HF.json",
+        "Vitodens300W_B3HF-19.json"
       ]
     },
     "heating.configuration.heatingRod.dhw": {
@@ -238,7 +240,8 @@
         "VitovalorPT2.json",
         "VitoairFs300E.json",
         "Vitocal252A.json",
-        "Vitocal250A_TwoCircuits.json"
+        "Vitocal250A_TwoCircuits.json",
+        "Vitodens300W_B3HF-19.json"
       ]
     },
     "heating.cop.green": {
@@ -303,7 +306,8 @@
         "Vitocal252A.json",
         "Vitocal200A_SystemController.json",
         "Vitocal250A_TwoCircuits.json",
-        "Vitocal262A_T2H-R290.json"
+        "Vitocal262A_T2H-R290.json",
+        "Vitodens300W_B3HF-19.json"
       ]
     },
     "heating.dhw.sensors.temperature.hotWaterStorage.bottom": {

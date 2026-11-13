@@ -49,14 +49,16 @@ class Vitocal250ATwoCircuits(unittest.TestCase):
         self.assertEqual(self.device.circuits[0].getActiveProgram(), 'normalHeating')
         self.assertEqual(self.device.circuits[1].getActiveProgram(), 'normalHeating')
 
-    def test_circuit_getDesiredTemperatureForProgram(self):
+    def test_circuit_getProgramTemperature(self):
         radiators, underfloor = self.device.circuits
-        self.assertEqual(radiators.getDesiredTemperatureForProgram('comfortHeating'), 22)
-        self.assertEqual(radiators.getDesiredTemperatureForProgram('normalHeating'), 19)
-        self.assertEqual(radiators.getDesiredTemperatureForProgram('reducedHeating'), 18)
-        self.assertEqual(underfloor.getDesiredTemperatureForProgram('comfortHeating'), 22)
-        self.assertEqual(underfloor.getDesiredTemperatureForProgram('normalHeating'), 20)
-        self.assertEqual(underfloor.getDesiredTemperatureForProgram('reducedHeating'), 17)
+        self.assertEqual(radiators.getProgramTemperature('normalHeating'), 19)
+        self.assertEqual(radiators.getComfortTemperature(), 22)
+        self.assertEqual(radiators.getNormalTemperature(), 19)
+        self.assertEqual(radiators.getReducedTemperature(), 18)
+        self.assertEqual(underfloor.getProgramTemperature('normalHeating'), 20)
+        self.assertEqual(underfloor.getComfortTemperature(), 22)
+        self.assertEqual(underfloor.getNormalTemperature(), 20)
+        self.assertEqual(underfloor.getReducedTemperature(), 17)
 
     def test_circuit_getFrostProtectionActive(self):
         self.assertFalse(self.device.circuits[0].getFrostProtectionActive())
