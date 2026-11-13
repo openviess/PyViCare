@@ -30,6 +30,12 @@ class VitosetAquaTest(unittest.TestCase):
     def test_getTotalConsumption(self):
         self.assertEqual(self.device.getTotalConsumption(), 45510)
 
+    def test_getCurrentDayConsumption(self):
+        self.assertEqual(self.device.getCurrentDayConsumption(), 144)
+
+    def test_getLastSevenDaysConsumption(self):
+        self.assertEqual(self.device.getLastSevenDaysConsumption(), 201)
+
     # --- Leak Detection ---
 
     def test_leakSensors_returns_only_connected(self):
