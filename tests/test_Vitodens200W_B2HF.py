@@ -67,3 +67,19 @@ class Vitodens200W_B2HF(unittest.TestCase):
     def test_getPowerConsumptionHeatingThisYear(self):
         self.assertEqual(
             self.device.getPowerConsumptionHeatingThisYear(), 79.8)
+
+    def test_getDomesticHotWaterHygieneTemperature(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperature(), 70)
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperatureMin(), 10)
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperatureMax(), 85)
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperatureStepping(), 1)
+
+    def test_setDomesticHotWaterHygieneTemperature(self):
+        self.device.setDomesticHotWaterHygieneTemperature(65)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature.hygiene')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setTemperature')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {
+                         'targetTemperature': 65})

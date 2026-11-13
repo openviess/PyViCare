@@ -1,5 +1,7 @@
+from datetime import date, datetime
 from typing import Any
 
+from PyViCare.PyViCareEvent import EVENT_TYPE_DEVICE_ERROR, ViCareEvent
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
 from PyViCare.PyViCareUtils import (
     PyViCareNotSupportedFeatureError,
@@ -63,6 +65,28 @@ class Device:
     @handleNotSupported
     def getPowerProductionLimitStatus(self) -> str:
         return str(self.getProperty("device.power.statusReport.production")["properties"]["status"]["value"])
+
+    def getErrorEvents(self,
+                       *,
+                       last_days: int | None = None,
+                       since: datetime | None = None,
+                       on_date: date | None = None,
+                       limit: int | None = 10) -> list[ViCareEvent]:
+        """Device errors of this device, in the order the API returns them.
+
+        The API is asked for this gateway (`gatewaySerials`) and the page is
+        then filtered by device id, so `limit` counts this gateway's events.
+
+        An error comes as two events: `active` is True when it was raised and
+        False when it was cleared. For paging and other event types use
+        `service.fetch_events()`.
+        """
+        page = self.service.fetch_events(
+            self.accessor, EVENT_TYPE_DEVICE_ERROR,
+            last_days=last_days, since=since, on_date=on_date,
+            gateway_serials=self.accessor.serial, limit=limit)
+        return [event for event in page.events
+                if event.device_id == self.accessor.device_id]
 
     def isLegacyDevice(self) -> bool:
         return hasRoles(["type:legacy"], self.roles)
