@@ -56,6 +56,9 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(
             self.device.circuits[0].getHeatingCurveShift(), 4)
 
+    def test_getBoilerInternalPumpActive(self):
+        self.assertEqual(self.device.getBoilerInternalPumpActive(), False)
+
     def test_getReturnTemperature(self):
         self.assertEqual(self.device.getReturnTemperature(), 34.2)
 
