@@ -421,7 +421,7 @@ class TestForMissingProperties(unittest.TestCase):
                 feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|fan|room_id|slot|string)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops
-                feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}', '', feature_name)
+                feature_name = re.sub(r'\.{(quickmode|mode|program|active_program)}[^.]*', '', feature_name)
                 used_features.append(feature_name)
 
         self.maxDiff = None

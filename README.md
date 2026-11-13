@@ -92,13 +92,12 @@ print(circuit.getHeatingCurveSlope())
 print(circuit.getActiveProgram())
 print(circuit.getPrograms())
 
-print(circuit.getCurrentDesiredTemperature())
-print(circuit.getDesiredTemperatureForProgram("comfort"))
+print(circuit.getActiveProgramTemperature())
+print(circuit.getComfortTemperature())
 print(circuit.getActiveMode())
 
-print(circuit.getDesiredTemperatureForProgram("comfort"))
-print(circuit.setProgramTemperature("comfort",21))
-print(circuit.activateProgram("comfort"))
+print(circuit.setComfortTemperature(21))
+print(circuit.activateComfort())
 print(circuit.deactivateComfort())
 
 burner = t.burners[0] #select burner
