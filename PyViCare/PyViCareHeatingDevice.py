@@ -218,6 +218,41 @@ class HeatingDevice(Device):
                                         {"temperature": int(temperature)})
 
     @handleNotSupported
+    def getDomesticHotWaterHygieneTemperature(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureMin(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureMax(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureStepping(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["stepping"]
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTemperature(self, temperature):
+        """ Set the target temperature of the domestic hot water hygiene function
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.setProperty("heating.dhw.temperature.hygiene", "setTemperature",
+                                        {"targetTemperature": int(temperature)})
+
+    @handleNotSupported
     def getDomesticHotWaterOperatingModes(self):
         return self.getProperty("heating.dhw.operating.modes.active")[
             "commands"]["setMode"]["params"]["mode"]["constraints"]["enum"]
