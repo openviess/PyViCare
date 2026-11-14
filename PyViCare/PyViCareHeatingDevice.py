@@ -562,6 +562,17 @@ class HeatingDevice(Device):
         return self.getProperty("heating.controller.serial")["properties"]["value"]["value"]
 
     @handleNotSupported
+    def getBufferCylinderSize(self) -> float:
+        """Configured size of the heating water buffer cylinder, in litres.
+
+        `heating.configuration.bufferCylinderSize` is a commissioning
+        parameter, not a measurement. Devices report 0 here while still
+        serving buffer cylinder temperatures, so a 0 does not imply that no
+        buffer cylinder is present.
+        """
+        return float(self.getProperty("heating.configuration.bufferCylinderSize")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getBoilerSerial(self):
         return self.getProperty("heating.boiler.serial")["properties"]["value"]["value"]
 

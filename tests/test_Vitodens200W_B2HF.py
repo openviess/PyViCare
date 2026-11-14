@@ -94,3 +94,6 @@ class Vitodens200W_B2HF(unittest.TestCase):
         # This device reports the target but not the current modulation.
         self.assertRaises(PyViCareNotSupportedFeatureError,
                           self.device.getBoilerInternalPumpCurrent)
+
+    def test_getBufferCylinderSize(self):
+        self.assertEqual(self.device.getBufferCylinderSize(), 300)

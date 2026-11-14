@@ -76,3 +76,6 @@ class Vitocal222S(unittest.TestCase):
 
     def test_getBoilerInternalPumpTarget(self):
         self.assertEqual(self.device.getBoilerInternalPumpTarget(), 95)
+
+    def test_getBufferCylinderSize(self):
+        self.assertEqual(self.device.getBufferCylinderSize(), 0)
