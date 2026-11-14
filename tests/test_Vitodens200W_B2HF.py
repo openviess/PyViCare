@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -67,6 +68,32 @@ class Vitodens200W_B2HF(unittest.TestCase):
     def test_getPowerConsumptionHeatingThisYear(self):
         self.assertEqual(
             self.device.getPowerConsumptionHeatingThisYear(), 79.8)
+
+    def test_getDomesticHotWaterHygieneTemperature(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperature(), 70)
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperatureMin(), 10)
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperatureMax(), 85)
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTemperatureStepping(), 1)
+
+    def test_setDomesticHotWaterHygieneTemperature(self):
+        self.device.setDomesticHotWaterHygieneTemperature(65)
+        self.assertEqual(len(self.service.setPropertyData), 1)
+        self.assertEqual(
+            self.service.setPropertyData[0]['property_name'], 'heating.dhw.temperature.hygiene')
+        self.assertEqual(
+            self.service.setPropertyData[0]['action'], 'setTemperature')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {
+                         'targetTemperature': 65})
+
+    def test_getBoilerInternalPumpTarget(self):
+        # A gas boiler serves the internal pump too, which is why these getters
+        # live on HeatingDevice rather than on HeatPump.
+        self.assertEqual(self.device.getBoilerInternalPumpTarget(), 60)
+
+    def test_getBoilerInternalPumpCurrentNotSupported(self):
+        # This device reports the target but not the current modulation.
+        self.assertRaises(PyViCareNotSupportedFeatureError,
+                          self.device.getBoilerInternalPumpCurrent)
 
     def test_getBufferCylinderSize(self):
         self.assertEqual(self.device.getBufferCylinderSize(), 300)

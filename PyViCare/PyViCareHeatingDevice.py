@@ -1,5 +1,8 @@
+# pylint: disable=too-many-lines
 from contextlib import suppress
 from typing import Any
+
+from deprecated import deprecated
 
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareHeatCurveCalculation import (
@@ -72,6 +75,10 @@ class HeatingDevice(Device):
     @handleNotSupported
     def getOutsideTemperature(self):
         return self.getProperty("heating.sensors.temperature.outside")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getHydraulicSeparatorTemperature(self):
+        return self.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
 
     @handleNotSupported
     def getDomesticHotWaterConfiguredTemperature(self):
@@ -155,6 +162,22 @@ class HeatingDevice(Device):
         return status == 'on'
 
     @handleNotSupported
+    def getBoilerInternalPumpActive(self):
+        status = self.getProperty("heating.boiler.pumps.internal")[
+            "properties"]["status"]["value"]
+        return status == 'on'
+
+    @handleNotSupported
+    def getBoilerInternalPumpCurrent(self) -> float:
+        """Current modulation of the boiler's internal pump, in percent."""
+        return float(self.getProperty("heating.boiler.pumps.internal.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getBoilerInternalPumpTarget(self) -> float:
+        """Target modulation of the boiler's internal pump, in percent."""
+        return float(self.getProperty("heating.boiler.pumps.internal.target")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getDomesticHotWaterActive(self):
         status = self.getProperty("heating.dhw")["properties"]["status"]["value"]
         return status == 'on'
@@ -204,6 +227,41 @@ class HeatingDevice(Device):
         """
         return self.setProperty("heating.dhw.temperature.temp2", "setTargetTemperature",
                                         {"temperature": int(temperature)})
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperature(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["properties"]["value"]["value"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureMin(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["min"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureMax(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["max"]
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTemperatureStepping(self):
+        return self.getProperty("heating.dhw.temperature.hygiene")["commands"]["setTemperature"]["params"][
+            "targetTemperature"]["constraints"]["stepping"]
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTemperature(self, temperature):
+        """ Set the target temperature of the domestic hot water hygiene function
+        Parameters
+        ----------
+        temperature : int
+            Target temperature
+
+        Returns
+        -------
+        result: json
+            json representation of the answer
+        """
+        return self.setProperty("heating.dhw.temperature.hygiene", "setTemperature",
+                                        {"targetTemperature": int(temperature)})
 
     @handleNotSupported
     def getDomesticHotWaterOperatingModes(self):
@@ -424,6 +482,78 @@ class HeatingDevice(Device):
         return schedule['default_mode']
 
     @handleNotSupported
+    def getDomesticHotWaterHygieneEnabled(self) -> bool:
+        return bool(self.getProperty("heating.dhw.hygiene")["properties"]["enabled"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneActive(self) -> bool:
+        """Whether the hygiene heat-up is running right now.
+
+        Served only by devices that have the function enabled: one with it
+        switched off carries `enabled` alone, and this raises
+        PyViCareNotSupportedFeatureError there.
+        """
+        return bool(self.getProperty("heating.dhw.hygiene")["properties"]["active"]["value"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneEnabled(self, enabled: bool) -> Any:
+        """Enable or disable the hygiene function.
+
+        Two generations of commands sit on the same feature: the newer
+        `setEnabled` takes the flag as a parameter, the older `enable`/`disable`
+        pair carries it in the command name. The newer one is preferred, the
+        pair is the fallback for devices that only serve it.
+
+        Which of the two a device accepts also depends on its state - while the
+        function is off only `enable` is executable, and the other way round -
+        so a refused command surfaces as PyViCareCommandError.
+        """
+        feature = self.getProperty("heating.dhw.hygiene")
+        commands = feature.get("commands") or {}
+        if "setEnabled" in commands:
+            return self.setProperty("heating.dhw.hygiene", "setEnabled", {'enabled': enabled})
+        return self.setProperty("heating.dhw.hygiene", "enable" if enabled else "disable", {})
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTriggerStartHour(self) -> int:
+        """Hour at which the hygiene heat-up starts.
+
+        `heating.dhw.hygiene.trigger` carries no properties while the function
+        is disabled, so this raises PyViCareNotSupportedFeatureError there.
+        """
+        return int(self.getProperty("heating.dhw.hygiene.trigger")["properties"]["startHour"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTriggerStartMinute(self) -> int:
+        """Minute at which the hygiene heat-up starts."""
+        return int(self.getProperty("heating.dhw.hygiene.trigger")["properties"]["startMinute"]["value"])
+
+    @handleNotSupported
+    def getDomesticHotWaterHygieneTriggerWeekdays(self) -> list[str]:
+        """Weekdays on which the hygiene heat-up runs.
+
+        One entry for a weekly heat-up, all seven for a daily one - the API
+        knows no separate daily flag. Abbreviated as the API reports them,
+        `Mon` to `Sun`.
+        """
+        return list(self.getProperty("heating.dhw.hygiene.trigger")["properties"]["weekdays"]["value"])
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTriggerDaily(self, startHour: int, startMinute: int) -> Any:
+        """Run the hygiene heat-up every day at the given time."""
+        return self.setProperty("heating.dhw.hygiene.trigger", "triggerDaily",
+                                {'startHour': startHour, 'startMinute': startMinute})
+
+    @handleAPICommandErrors
+    def setDomesticHotWaterHygieneTriggerOncePerWeek(self, weekday: str, startHour: int, startMinute: int) -> Any:
+        """Run the hygiene heat-up once a week, on `weekday` at the given time.
+
+        `weekday` is the abbreviation the API uses, `Mon` to `Sun`.
+        """
+        return self.setProperty("heating.dhw.hygiene.trigger", "triggerOncePerWeek",
+                                {'weekday': weekday, 'startHour': startHour, 'startMinute': startMinute})
+
+    @handleNotSupported
     def getAvailableCircuits(self):
         return self.getProperty("heating.circuits")["properties"]["enabled"]["value"]
 
@@ -545,6 +675,35 @@ class HeatingDevice(Device):
     def getHeatProductionSummaryDomesticHotWaterLastYear(self) -> float:
         return float(self.getProperty("heating.heat.production.summary.dhw")["properties"]["lastYear"]["value"])
 
+    # Heat production summary for cooling:
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingUnit(self) -> str:
+        return str(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentDay"]["unit"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingCurrentDay(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentDay"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingCurrentMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingCurrentYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["currentYear"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingLastMonth(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["lastMonth"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingLastSevenDays(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["lastSevenDays"]["value"])
+
+    @handleNotSupported
+    def getHeatProductionSummaryCoolingLastYear(self) -> float:
+        return float(self.getProperty("heating.heat.production.summary.cooling")["properties"]["lastYear"]["value"])
+
 
 class HeatingDeviceWithComponent:
     """This is the base class for all heating components"""
@@ -563,6 +722,10 @@ class HeatingDeviceWithComponent:
 
 
 class HeatingCircuit(HeatingDeviceWithComponent):
+    def __init__(self, device: HeatingDevice, component: str) -> None:
+        super().__init__(device, component)
+        self._programAliases: dict[str, str] = {}
+
     @property
     def circuit(self) -> str:
         return self.component
@@ -582,6 +745,26 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         r = self.device.setProperty(
             f"heating.circuits.{self.circuit}.operating.modes.active", "setMode", {'mode': mode})
         return r
+
+    @handleNotSupported
+    def getProgramTemperature(self, program: str):
+        feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")
+        return feature["properties"]["temperature"]["value"]
+
+    @handleNotSupported
+    def getReducedTemperature(self):
+        program = self.resolveProgramName("reduced")
+        return self.getProgramTemperature(program)
+
+    @handleNotSupported
+    def getComfortTemperature(self):
+        program = self.resolveProgramName("comfort")
+        return self.getProgramTemperature(program)
+
+    @handleNotSupported
+    def getNormalTemperature(self):
+        program = self.resolveProgramName("normal")
+        return self.getProgramTemperature(program)
 
     def setProgramTemperature(self, program: str, temperature: float):
         # Works for normal, reduced, comfort
@@ -606,13 +789,16 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                         "setTemperature", {'targetTemperature': float(temperature)})
 
     def setReducedTemperature(self, temperature):
-        return self.setProgramTemperature("reduced", temperature)
+        program = self.resolveProgramName("reduced")
+        return self.setProgramTemperature(program, temperature)
 
     def setComfortTemperature(self, temperature):
-        return self.setProgramTemperature("comfort", temperature)
+        program = self.resolveProgramName("comfort")
+        return self.setProgramTemperature(program, temperature)
 
     def setNormalTemperature(self, temperature):
-        return self.setProgramTemperature("normal", temperature)
+        program = self.resolveProgramName("normal")
+        return self.setProgramTemperature(program, temperature)
 
     @handleNotSupported
     def getActive(self):
@@ -625,6 +811,20 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     @handleNotSupported
     def getType(self):
         return self.getProperty(f"heating.circuits.{self.circuit}")["properties"]["type"]["value"]
+
+    @handleNotSupported
+    def getActiveProgramTemperature(self):
+        active_program = self.getActiveProgram()
+        try:
+            feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")
+            return feature["properties"]["temperature"]["value"]
+        except (PyViCareNotSupportedFeatureError, KeyError):
+            match active_program:
+                case "standby":
+                    return None
+                case "holiday":
+                    return self.getReducedTemperature()
+            raise
 
     @handleNotSupported
     def getActiveProgramMinTemperature(self):
@@ -685,7 +885,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                         {})
 
     def activateComfort(self):
-        return self.activateProgram("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.activateProgram(program)
 
     def deactivateProgram(self, program):
         """ Deactivate a program
@@ -703,7 +904,8 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                         "deactivate", {})
 
     def deactivateComfort(self):
-        return self.deactivateProgram("comfort")
+        program = self.resolveProgramName("comfort")
+        return self.deactivateProgram(program)
 
     @handleNotSupported
     def getSupplyTemperature(self):
@@ -800,25 +1002,33 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                         'normalCoolingEnergySaving', 'normalEnergySaving', 'normalHeating', 'reduced', 'reducedCooling',
                         'reducedCoolingEnergySaving', 'reducedEnergySaving', 'reducedHeating', 'standby']:
             with suppress(PyViCareNotSupportedFeatureError):
-                if self.getProperty(
-                        f"heating.circuits.{self.circuit}.operating.programs.{program}") is not None:
+                feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")
+                if feature is not None and "properties" in feature:
                     available_programs.append(program)
 
         return available_programs
 
-    @handleNotSupported
-    def getDesiredTemperatureForProgram(self, program):
-        return \
-            self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}")["properties"][
-                "temperature"]["value"]
+    def resolveProgramName(self, program: str) -> str:
+        if program not in ["reduced", "comfort", "normal"]:
+            return program
 
-    @handleNotSupported
+        if program not in self._programAliases:
+            program_alias = program
+            with suppress(PyViCareNotSupportedFeatureError):
+                feature = self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{program}Heating")
+                if feature is not None and "properties" in feature:
+                    program_alias = f"{program}Heating"
+            self._programAliases[program] = program_alias
+
+        return self._programAliases[program]
+
+    @deprecated(reason="renamed, use getProgramTemperature", version="2.66.0")
+    def getDesiredTemperatureForProgram(self, program):
+        return self.getProgramTemperature(program)
+
+    @deprecated(reason="renamed, use getActiveProgramTemperature", version="2.66.0")
     def getCurrentDesiredTemperature(self):
-        active_program = self.getActiveProgram()
-        if active_program in ['standby']:
-            return None
-        return self.getProperty(f"heating.circuits.{self.circuit}.operating.programs.{active_program}")[
-            "properties"]["temperature"]["value"]
+        return self.getActiveProgramTemperature()
 
     @handleNotSupported
     def getFrostProtectionActive(self):
@@ -875,7 +1085,7 @@ class HeatingCircuit(HeatingDeviceWithComponent):
         shift = None
         slope = None
         with suppress(PyViCareNotSupportedFeatureError):
-            inside = self.getCurrentDesiredTemperature()
+            inside = self.getActiveProgramTemperature()
             outside = self.device.getOutsideTemperature()
             shift = self.getHeatingCurveShift()
             slope = self.getHeatingCurveSlope()

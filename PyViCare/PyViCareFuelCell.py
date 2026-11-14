@@ -165,10 +165,6 @@ class FuelCell(HeatingDevice):
     def getDomesticHotWaterMinTemperatureLevel(self):
         return self.getProperty("heating.dhw.temperature.levels")["properties"]["min"]["value"]
 
-    @handleNotSupported
-    def getHydraulicSeparatorTemperature(self):
-        return self.getProperty("heating.sensors.temperature.hydraulicSeparator")["properties"]["value"]["value"]
-
     # ---- Actual FuelCell-relevant methods (they require paid "Advanced" API plan):
 
     @handleNotSupported
@@ -297,6 +293,38 @@ class FuelCell(HeatingDevice):
     def getFuelCellFlowSupplyTemperature(self) -> float:
         # Returns flow supply temperature at the fuel cell as float
         return float(self.getProperty("fuelCell.sensors.temperature.supply")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellPredictedPowerConsumptionUnit(self) -> str:
+        return str(self.getProperty("fuelCell.managers.energy.prediction.power.consumption")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellPredictedPowerConsumption(self) -> float:
+        return float(self.getProperty("fuelCell.managers.energy.prediction.power.consumption")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellPredictedRuntimeUnit(self) -> str:
+        return str(self.getProperty("fuelCell.managers.energy.prediction.runtime")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellPredictedRuntime(self) -> float:
+        return float(self.getProperty("fuelCell.managers.energy.prediction.runtime")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellTimeTillNextStartUnit(self) -> str:
+        return str(self.getProperty("fuelCell.managers.energy.timeTillNextStart")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellTimeTillNextStart(self) -> float:
+        return float(self.getProperty("fuelCell.managers.energy.timeTillNextStart")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getFuelCellPredictedHeatingDeficitUnit(self) -> str:
+        return str(self.getProperty("fuelCell.prediction.heating.deficit")["properties"]["value"]["unit"])
+
+    @handleNotSupported
+    def getFuelCellPredictedHeatingDeficit(self) -> float:
+        return float(self.getProperty("fuelCell.prediction.heating.deficit")["properties"]["value"]["value"])
 
     @handleNotSupported
     def getFuelCellOperationHours(self) -> int:

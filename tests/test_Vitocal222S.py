@@ -71,5 +71,11 @@ class Vitocal222S(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['action'], 'unschedule')
         self.assertEqual(self.service.setPropertyData[0]['data'], {})
 
+    def test_getBoilerInternalPumpCurrent(self):
+        self.assertEqual(self.device.getBoilerInternalPumpCurrent(), 94)
+
+    def test_getBoilerInternalPumpTarget(self):
+        self.assertEqual(self.device.getBoilerInternalPumpTarget(), 95)
+
     def test_getBufferCylinderSize(self):
         self.assertEqual(self.device.getBufferCylinderSize(), 0)

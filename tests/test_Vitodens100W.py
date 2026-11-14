@@ -14,6 +14,9 @@ class Vitodens100W(unittest.TestCase):
     def test_getActive(self):
         self.assertEqual(self.device.burners[0].getActive(), True)
 
+    def test_getBoilerInternalPumpActive(self):
+        self.assertEqual(self.device.getBoilerInternalPumpActive(), True)
+
     def test_getBurnerStarts(self):
         self.assertEqual(self.device.burners[0].getStarts(), 18187)
 

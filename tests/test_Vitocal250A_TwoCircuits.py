@@ -49,14 +49,16 @@ class Vitocal250ATwoCircuits(unittest.TestCase):
         self.assertEqual(self.device.circuits[0].getActiveProgram(), 'normalHeating')
         self.assertEqual(self.device.circuits[1].getActiveProgram(), 'normalHeating')
 
-    def test_circuit_getDesiredTemperatureForProgram(self):
+    def test_circuit_getProgramTemperature(self):
         radiators, underfloor = self.device.circuits
-        self.assertEqual(radiators.getDesiredTemperatureForProgram('comfortHeating'), 22)
-        self.assertEqual(radiators.getDesiredTemperatureForProgram('normalHeating'), 19)
-        self.assertEqual(radiators.getDesiredTemperatureForProgram('reducedHeating'), 18)
-        self.assertEqual(underfloor.getDesiredTemperatureForProgram('comfortHeating'), 22)
-        self.assertEqual(underfloor.getDesiredTemperatureForProgram('normalHeating'), 20)
-        self.assertEqual(underfloor.getDesiredTemperatureForProgram('reducedHeating'), 17)
+        self.assertEqual(radiators.getProgramTemperature('normalHeating'), 19)
+        self.assertEqual(radiators.getComfortTemperature(), 22)
+        self.assertEqual(radiators.getNormalTemperature(), 19)
+        self.assertEqual(radiators.getReducedTemperature(), 18)
+        self.assertEqual(underfloor.getProgramTemperature('normalHeating'), 20)
+        self.assertEqual(underfloor.getComfortTemperature(), 22)
+        self.assertEqual(underfloor.getNormalTemperature(), 20)
+        self.assertEqual(underfloor.getReducedTemperature(), 17)
 
     def test_circuit_getFrostProtectionActive(self):
         self.assertFalse(self.device.circuits[0].getFrostProtectionActive())
@@ -102,3 +104,38 @@ class Vitocal250ATwoCircuits(unittest.TestCase):
 
     def test_getWifiSignalStrength(self):
         self.assertEqual(self.device.getWifiSignalStrength(), -63)
+
+    def test_getDomesticHotWaterHygieneEnabled(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneEnabled(), True)
+
+    def test_getDomesticHotWaterHygieneActive(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneActive(), False)
+
+    def test_getDomesticHotWaterHygieneTriggerStartHour(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTriggerStartHour(), 2)
+
+    def test_getDomesticHotWaterHygieneTriggerStartMinute(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTriggerStartMinute(), 0)
+
+    def test_getDomesticHotWaterHygieneTriggerWeekdays(self):
+        self.assertEqual(self.device.getDomesticHotWaterHygieneTriggerWeekdays(), ['Tue'])
+
+    def test_setDomesticHotWaterHygieneEnabled(self):
+        # This device serves setEnabled, which is preferred over enable/disable.
+        self.device.setDomesticHotWaterHygieneEnabled(False)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.hygiene')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'setEnabled')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'enabled': False})
+
+    def test_setDomesticHotWaterHygieneTriggerDaily(self):
+        self.device.setDomesticHotWaterHygieneTriggerDaily(4, 30)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.hygiene.trigger')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'triggerDaily')
+        self.assertEqual(self.service.setPropertyData[0]['data'], {'startHour': 4, 'startMinute': 30})
+
+    def test_setDomesticHotWaterHygieneTriggerOncePerWeek(self):
+        self.device.setDomesticHotWaterHygieneTriggerOncePerWeek('Wed', 4, 30)
+        self.assertEqual(self.service.setPropertyData[0]['property_name'], 'heating.dhw.hygiene.trigger')
+        self.assertEqual(self.service.setPropertyData[0]['action'], 'triggerOncePerWeek')
+        self.assertEqual(self.service.setPropertyData[0]['data'],
+                         {'weekday': 'Wed', 'startHour': 4, 'startMinute': 30})
