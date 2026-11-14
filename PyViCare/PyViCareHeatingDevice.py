@@ -168,6 +168,16 @@ class HeatingDevice(Device):
         return status == 'on'
 
     @handleNotSupported
+    def getBoilerInternalPumpCurrent(self) -> float:
+        """Current modulation of the boiler's internal pump, in percent."""
+        return float(self.getProperty("heating.boiler.pumps.internal.current")["properties"]["value"]["value"])
+
+    @handleNotSupported
+    def getBoilerInternalPumpTarget(self) -> float:
+        """Target modulation of the boiler's internal pump, in percent."""
+        return float(self.getProperty("heating.boiler.pumps.internal.target")["properties"]["value"]["value"])
+
+    @handleNotSupported
     def getDomesticHotWaterActive(self):
         status = self.getProperty("heating.dhw")["properties"]["status"]["value"]
         return status == 'on'
