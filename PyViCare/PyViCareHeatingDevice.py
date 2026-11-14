@@ -436,10 +436,9 @@ class HeatingDevice(Device):
         """Configured size of the heating water buffer cylinder, in litres.
 
         `heating.configuration.bufferCylinderSize` is a commissioning
-        parameter, not a measurement. A value of 0 means no buffer cylinder is
-        configured - which is why such an installation serves neither the layer
-        temperatures of `heating.bufferCylinder.sensors.temperature.*` nor the
-        charging levels of `heating.buffer.charging.level.*`.
+        parameter, not a measurement. Devices report 0 here while still
+        serving buffer cylinder temperatures, so a 0 does not imply that no
+        buffer cylinder is present.
         """
         return float(self.getProperty("heating.configuration.bufferCylinderSize")["properties"]["value"]["value"])
 

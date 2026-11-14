@@ -72,5 +72,4 @@ class Vitocal222S(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['data'], {})
 
     def test_getBufferCylinderSize(self):
-        # 0 litres means no buffer cylinder is configured.
         self.assertEqual(self.device.getBufferCylinderSize(), 0)
