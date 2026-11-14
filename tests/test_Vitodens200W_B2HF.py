@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -83,3 +84,13 @@ class Vitodens200W_B2HF(unittest.TestCase):
             self.service.setPropertyData[0]['action'], 'setTemperature')
         self.assertEqual(self.service.setPropertyData[0]['data'], {
                          'targetTemperature': 65})
+
+    def test_getBoilerInternalPumpTarget(self):
+        # A gas boiler serves the internal pump too, which is why these getters
+        # live on HeatingDevice rather than on HeatPump.
+        self.assertEqual(self.device.getBoilerInternalPumpTarget(), 60)
+
+    def test_getBoilerInternalPumpCurrentNotSupported(self):
+        # This device reports the target but not the current modulation.
+        self.assertRaises(PyViCareNotSupportedFeatureError,
+                          self.device.getBoilerInternalPumpCurrent)
