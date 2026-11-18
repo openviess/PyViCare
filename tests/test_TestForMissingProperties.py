@@ -73,9 +73,6 @@ class TestForMissingProperties(unittest.TestCase):
 
         ignore = [
             # general - not yet used
-            'device.messages.info.raw',
-            'device.messages.service.raw',
-            'device.messages.status.raw',
             'device.messages.errors.counter.d6',
             'device.messages.logbook',
             'device.parameterIdentification.version',

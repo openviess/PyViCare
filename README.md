@@ -66,6 +66,13 @@ asks the API for its gateway serial and filters the page by device id, so
 `limit` counts that gateway's events. Paging and other event types are on
 `device.service.fetch_events()`.
 
+`getDeviceStatusMessages()`, `getDeviceServiceMessages()` and
+`getDeviceInfoMessages()` return the current status, service and info messages
+the same way `getDeviceErrors()` returns the errors, each entry with
+`errorCode`, `priority` and `timestamp`. An empty list means there is no such
+message right now; a device without the feature raises
+`PyViCareNotSupportedFeatureError`.
+
 ## Types of heatings
 
 - Use `asGazBoiler` for gas heatings
