@@ -1,0 +1,693 @@
+{
+  "data": [
+    {
+      "commands": {},
+      "feature": "rooms.0.childLock",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "status": {
+          "type": "string",
+          "value": "inactive"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.condensationRisk",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.heatOnTime",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.hydraulicBalancing",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.configuration.trvAlgorithmActive",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "deprecated": {
+        "info": "none",
+        "removalDate": "2024-09-15"
+      },
+      "feature": "rooms.0.configuration.window.openState",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.sensors.humidity",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 53
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.sensors.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.sensors.temperature",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20.4
+        }
+      }
+    },
+    {
+      "commands": {},
+      "deprecated": {
+        "info": "none",
+        "removalDate": "2024-09-15"
+      },
+      "feature": "rooms.0.sensors.window.openState",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.comfort.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 22
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20.5
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.0.temperature.levels.normal.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20.5
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.childLock",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "status": {
+          "type": "string",
+          "value": "inactive"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.condensationRisk",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.heatOnTime",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.hydraulicBalancing",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.configuration.trvAlgorithmActive",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "deprecated": {
+        "info": "none",
+        "removalDate": "2024-09-15"
+      },
+      "feature": "rooms.1.configuration.window.openState",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.sensors.humidity",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "percent",
+          "value": 45
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.sensors.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.sensors.temperature",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20.5
+        }
+      }
+    },
+    {
+      "commands": {},
+      "deprecated": {
+        "info": "none",
+        "removalDate": "2024-09-15"
+      },
+      "feature": "rooms.1.sensors.window.openState",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.comfort.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 22
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 18
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.1.temperature.levels.normal.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 20
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.childLock",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        },
+        "status": {
+          "type": "string",
+          "value": "inactive"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.condensationRisk",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.configuration.heatOnTime",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.configuration.hydraulicBalancing",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.configuration.openWindow",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.configuration.trvAlgorithmActive",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "deprecated": {
+        "info": "none",
+        "removalDate": "2024-09-15"
+      },
+      "feature": "rooms.2.configuration.window.openState",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.sensors.humidity",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "notConnected"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.sensors.temperature",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "connected"
+        },
+        "value": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 19.4
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.temperature.levels.comfort.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 22
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.temperature.levels.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 19
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.2.temperature.levels.normal.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 19
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features",
+      "isEnabled": true,
+      "properties": {
+        "activated": {
+          "type": "array",
+          "value": [
+            "supplyChannel0FTDC",
+            "supplyChannel1FTDC",
+            "supplyChannel2FTDC",
+            "supplyChannel3FTDC",
+            "supplyChannel0FTDCUseValveInformation",
+            "supplyChannel1FTDCUseValveInformation",
+            "supplyChannel2FTDCUseValveInformation",
+            "supplyChannel3FTDCUseValveInformation",
+            "supplyChannel0PumpControl",
+            "supplyChannel1PumpControl",
+            "supplyChannel2PumpControl",
+            "supplyChannel3PumpControl"
+          ]
+        },
+        "supported": {
+          "type": "array",
+          "value": [
+            "supplyChannel0FTDC",
+            "supplyChannel1FTDC",
+            "supplyChannel2FTDC",
+            "supplyChannel3FTDC",
+            "supplyChannel1FTDCUseValveInformation",
+            "supplyChannel1PumpControl",
+            "remotePresenceProbability",
+            "condensateAvoidance"
+          ]
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.remotePresenceProbability",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.supplyChannel0FTDC",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.supplyChannel1FTDC",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.supplyChannel1FTDCUseValveInformation",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.supplyChannel1PumpControl",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.supplyChannel2FTDC",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.features.supplyChannel3FTDC",
+      "isEnabled": true,
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.others.0.condensationRisk",
+      "isEnabled": true,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.others.0.sensors.humidity",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "notConnected"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.others.0.sensors.temperature",
+      "isEnabled": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "value": "notConnected"
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.others.0.temperature.levels.comfort.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 22
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.others.0.temperature.levels.heating",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 21
+        }
+      }
+    },
+    {
+      "commands": {},
+      "feature": "rooms.others.0.temperature.levels.normal.perceived",
+      "isEnabled": true,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "unit": "celsius",
+          "value": 21
+        }
+      }
+    }
+  ]
+}

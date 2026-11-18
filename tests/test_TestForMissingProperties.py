@@ -370,6 +370,33 @@ class TestForMissingProperties(unittest.TestCase):
             'ventilation.operating.programs.silent',
             # Vitoset Aqua water softener: device-level status not yet exposed
             'device.status',
+
+            # RoomControl One (E3_RoomControl_One_05), see RoomControlOne.json.
+            # The rooms.others branch holds rooms without a climate function;
+            # PyViCare has no accessor for it yet.
+            'rooms.others.0.condensationRisk',
+            'rooms.others.0.sensors.humidity',
+            'rooms.others.0.sensors.temperature',
+            'rooms.others.0.temperature.levels.comfort.perceived',
+            'rooms.others.0.temperature.levels.heating',
+            'rooms.others.0.temperature.levels.normal.perceived',
+            # Supply channel configuration of the floor heating, device level.
+            'rooms.features',
+            'rooms.features.remotePresenceProbability',
+            'rooms.features.supplyChannel0FTDC',
+            'rooms.features.supplyChannel1FTDC',
+            'rooms.features.supplyChannel1FTDCUseValveInformation',
+            'rooms.features.supplyChannel1PumpControl',
+            'rooms.features.supplyChannel2FTDC',
+            'rooms.features.supplyChannel3FTDC',
+            # Per-room data points this dump adds. levels.heating is not the
+            # same as levels.normal.perceived: room 1 reports 18 against 20.
+            'rooms.0.temperature.levels.heating',
+            # The API marks these two as deprecated (removalDate 2024-09-15)
+            # but still serves them, with the same values as
+            # sensors.openWindow / configuration.openWindow.
+            'rooms.0.sensors.window.openState',
+            'rooms.0.configuration.window.openState',
         ]
 
         all_features = self.read_all_features()
