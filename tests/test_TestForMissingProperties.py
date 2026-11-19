@@ -81,8 +81,6 @@ class TestForMissingProperties(unittest.TestCase):
             'device.time.daylightSaving',
             'device.heatingCircuitId',
             'device.configuration.houseLocation',
-            'device.timeseries.burner.stops',
-            'device.timeseries.dhw.burner.stops',
             'device.timeseries.ignitionTimeSteps',
             'device.timeseries.monitoringIonization',
             'device.timeseries.water.pressure.peaks',
