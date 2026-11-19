@@ -448,3 +448,7 @@ class Vitocal250A(unittest.TestCase):
         self.assertEqual(info[0]["errorCode"], "I.114")
         self.assertEqual(info[0]["priority"], "info")
         self.assertEqual(self.device.getDeviceServiceMessages(), [])
+
+    def test_getLocks(self):
+        self.assertFalse(self.device.getMalfunctionLockActive())
+        self.assertFalse(self.device.getExternalLockActive())

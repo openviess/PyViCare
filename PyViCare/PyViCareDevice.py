@@ -48,6 +48,14 @@ class Device:
     def getDeviceInfoMessages(self) -> list[Any]:
         return list[Any](self.getProperty("device.messages.info.raw")["properties"]["entries"]["value"])
 
+    @handleNotSupported
+    def getMalfunctionLockActive(self) -> bool:
+        return bool(self.getProperty("device.lock.malfunction")["properties"]["active"]["value"])
+
+    @handleNotSupported
+    def getExternalLockActive(self) -> bool:
+        return bool(self.getProperty("device.lock.external")["properties"]["active"]["value"])
+
     # Power consumption limitation (§14a EnWG):
     @handleNotSupported
     def getPowerConsumptionLimit(self) -> int:
