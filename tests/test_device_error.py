@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareDevice import Device
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -16,3 +17,8 @@ class DeviceErrorTest(unittest.TestCase):
         self.assertEqual(len(errors), 1)
         self.assertEqual(errors[0]["errorCode"], "F.1100")
         self.assertEqual(errors[0]["priority"], "criticalError")
+
+    def test_deviceMessages_notSupported(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDeviceStatusMessages)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDeviceServiceMessages)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDeviceInfoMessages)

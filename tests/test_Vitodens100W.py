@@ -52,3 +52,9 @@ class Vitodens100W(unittest.TestCase):
         self.assertEqual(self.device.getHeatProductionSummaryHeatingCurrentDay(), 17)
         self.assertEqual(self.device.getHeatProductionSummaryDomesticHotWaterCurrentYear(), 163.2)
         self.assertEqual(self.device.getHeatProductionSummaryHeatingUnit(), "kilowattHour")
+
+    def test_getDeviceStatusMessages(self):
+        status = self.device.getDeviceStatusMessages()
+        self.assertEqual(len(status), 2)
+        self.assertEqual(status[0]["errorCode"], "S.29")
+        self.assertEqual(status[0]["priority"], "status")

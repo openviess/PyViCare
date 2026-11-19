@@ -36,6 +36,18 @@ class Device:
     def getDeviceErrors(self) -> list[Any]:
         return list[Any](self.getProperty("device.messages.errors.raw")["properties"]["entries"]["value"])
 
+    @handleNotSupported
+    def getDeviceStatusMessages(self) -> list[Any]:
+        return list[Any](self.getProperty("device.messages.status.raw")["properties"]["entries"]["value"])
+
+    @handleNotSupported
+    def getDeviceServiceMessages(self) -> list[Any]:
+        return list[Any](self.getProperty("device.messages.service.raw")["properties"]["entries"]["value"])
+
+    @handleNotSupported
+    def getDeviceInfoMessages(self) -> list[Any]:
+        return list[Any](self.getProperty("device.messages.info.raw")["properties"]["entries"]["value"])
+
     # Power consumption limitation (§14a EnWG):
     @handleNotSupported
     def getPowerConsumptionLimit(self) -> int:

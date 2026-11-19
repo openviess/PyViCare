@@ -437,3 +437,14 @@ class Vitocal250A(unittest.TestCase):
             'deactivate'
         )
         self.assertEqual(self.service.setPropertyData[0]['data'], {})
+
+    def test_getDeviceMessages(self):
+        status = self.device.getDeviceStatusMessages()
+        self.assertEqual(len(status), 8)
+        self.assertEqual(status[0]["errorCode"], "S.134")
+        self.assertEqual(status[0]["priority"], "status")
+        info = self.device.getDeviceInfoMessages()
+        self.assertEqual(len(info), 1)
+        self.assertEqual(info[0]["errorCode"], "I.114")
+        self.assertEqual(info[0]["priority"], "info")
+        self.assertEqual(self.device.getDeviceServiceMessages(), [])
