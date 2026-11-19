@@ -2,6 +2,7 @@ import unittest
 
 from PyViCare.PyViCareGazBoiler import GazBoiler
 from PyViCare.PyViCareService import ViCareDeviceAccessor
+from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -58,3 +59,7 @@ class Vitodens100W(unittest.TestCase):
         self.assertEqual(len(status), 2)
         self.assertEqual(status[0]["errorCode"], "S.29")
         self.assertEqual(status[0]["priority"], "status")
+
+    def test_getLocks(self):
+        self.assertFalse(self.device.getMalfunctionLockActive())
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getExternalLockActive)

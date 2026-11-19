@@ -79,3 +79,6 @@ class Vitocal222S(unittest.TestCase):
 
     def test_getBufferCylinderSize(self):
         self.assertEqual(self.device.getBufferCylinderSize(), 0)
+
+    def test_getExternalLockActive_disabled(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getExternalLockActive)
