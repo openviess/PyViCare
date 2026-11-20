@@ -382,9 +382,6 @@ class TestForMissingProperties(unittest.TestCase):
             'rooms.features.supplyChannel1PumpControl',
             'rooms.features.supplyChannel2FTDC',
             'rooms.features.supplyChannel3FTDC',
-            # Per-room data points this dump adds. levels.heating is not the
-            # same as levels.normal.perceived: room 1 reports 18 against 20.
-            'rooms.0.temperature.levels.heating',
             # The API marks these two as deprecated (removalDate 2024-09-15)
             # but still serves them, with the same values as
             # sensors.openWindow / configuration.openWindow.

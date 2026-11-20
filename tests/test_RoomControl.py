@@ -106,3 +106,9 @@ class RoomControlTest(unittest.TestCase):
     def test_getRoomHeatOnTimeEnabled(self):
         self.assertTrue(self.device.getRoomHeatOnTimeEnabled("0"))
         self.assertFalse(self.device.getRoomHeatOnTimeEnabled("1"))
+
+    def test_getRoomSetpointHeating_not_served(self):
+        # This installation reports the levels per phase and has no bare
+        # temperature.levels.heating.
+        with self.assertRaises(PyViCareNotSupportedFeatureError):
+            self.device.getRoomSetpointHeating("0")
