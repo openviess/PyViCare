@@ -8,6 +8,12 @@ from PyViCare.PyViCareHeatingDevice import (
 from PyViCare.PyViCareUtils import handleNotSupported
 
 
+def _burner_stop_reasons(feature: Any) -> list[str]:
+    # Every reason comes as "<reason>AllStops"; "timeAllStops" is no reason.
+    return sorted(name.removesuffix("AllStops") for name in feature["properties"]
+                  if name.endswith("AllStops") and name != "timeAllStops")
+
+
 class GazBoiler(HeatingDevice):
 
     @property
@@ -312,6 +318,25 @@ class GazBoiler(HeatingDevice):
     def getSupplyPressure(self) -> float:
         # Returns heating supply pressure
         return float(self.getProperty("heating.sensors.pressure.supply")["properties"]["value"]["value"])
+
+    # Burner stops per reason (device.timeseries.burner.stops):
+    @handleNotSupported
+    def getBurnerStopReasons(self) -> list[str]:
+        return _burner_stop_reasons(self.getProperty("device.timeseries.burner.stops"))
+
+    @handleNotSupported
+    def getBurnerStopsAll(self, reason: str) -> int:
+        return int(self.getProperty("device.timeseries.burner.stops")["properties"][f"{reason}AllStops"]["value"])
+
+    # Burner stops per reason during domestic hot water heating (device.timeseries.dhw.burner.stops):
+    @handleNotSupported
+    def getDomesticHotWaterBurnerStopReasons(self) -> list[str]:
+        return _burner_stop_reasons(self.getProperty("device.timeseries.dhw.burner.stops"))
+
+    @handleNotSupported
+    def getDomesticHotWaterBurnerStopsAll(self, reason: str) -> int:
+        return int(self.getProperty("device.timeseries.dhw.burner.stops")["properties"][f"{reason}AllStops"]["value"])
+
 
 class GazBurner(HeatingDeviceWithComponent):
 

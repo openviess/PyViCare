@@ -97,3 +97,17 @@ class Vitodens200W_B2HF(unittest.TestCase):
 
     def test_getBufferCylinderSize(self):
         self.assertEqual(self.device.getBufferCylinderSize(), 300)
+
+    def test_getBurnerStops(self):
+        reasons = self.device.getBurnerStopReasons()
+        self.assertEqual(len(reasons), 14)
+        self.assertIn("normalStop", reasons)
+        self.assertIn("safetyShutdownErrorShutdown", reasons)
+        self.assertNotIn("time", reasons)
+        self.assertEqual(self.device.getBurnerStopsAll("normalStop"), 23)
+        self.assertEqual(self.device.getBurnerStopsAll("noGasAtStart"), 0)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurnerStopsAll, "unknownReason")
+
+    def test_getDomesticHotWaterBurnerStops(self):
+        self.assertEqual(self.device.getDomesticHotWaterBurnerStopReasons(), self.device.getBurnerStopReasons())
+        self.assertEqual(self.device.getDomesticHotWaterBurnerStopsAll("normalStop"), 18)
