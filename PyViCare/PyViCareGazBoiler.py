@@ -9,7 +9,7 @@ from PyViCare.PyViCareUtils import handleNotSupported
 
 
 def _burner_stop_reasons(feature: Any) -> list[str]:
-    # Every reason comes as "<reason>AllStops" and "<reason>LastStops"; "time" is no reason.
+    # Every reason comes as "<reason>AllStops"; "timeAllStops" is no reason.
     return sorted(name.removesuffix("AllStops") for name in feature["properties"]
                   if name.endswith("AllStops") and name != "timeAllStops")
 
@@ -328,18 +328,6 @@ class GazBoiler(HeatingDevice):
     def getBurnerStopsAll(self, reason: str) -> int:
         return int(self.getProperty("device.timeseries.burner.stops")["properties"][f"{reason}AllStops"]["value"])
 
-    @handleNotSupported
-    def getBurnerStopsLast(self, reason: str) -> int:
-        return int(self.getProperty("device.timeseries.burner.stops")["properties"][f"{reason}LastStops"]["value"])
-
-    @handleNotSupported
-    def getBurnerStopsTimeAll(self) -> int:
-        return int(self.getProperty("device.timeseries.burner.stops")["properties"]["timeAllStops"]["value"])
-
-    @handleNotSupported
-    def getBurnerStopsTimeLast(self) -> int:
-        return int(self.getProperty("device.timeseries.burner.stops")["properties"]["timeLastStops"]["value"])
-
     # Burner stops per reason during domestic hot water heating (device.timeseries.dhw.burner.stops):
     @handleNotSupported
     def getDomesticHotWaterBurnerStopReasons(self) -> list[str]:
@@ -348,18 +336,6 @@ class GazBoiler(HeatingDevice):
     @handleNotSupported
     def getDomesticHotWaterBurnerStopsAll(self, reason: str) -> int:
         return int(self.getProperty("device.timeseries.dhw.burner.stops")["properties"][f"{reason}AllStops"]["value"])
-
-    @handleNotSupported
-    def getDomesticHotWaterBurnerStopsLast(self, reason: str) -> int:
-        return int(self.getProperty("device.timeseries.dhw.burner.stops")["properties"][f"{reason}LastStops"]["value"])
-
-    @handleNotSupported
-    def getDomesticHotWaterBurnerStopsTimeAll(self) -> int:
-        return int(self.getProperty("device.timeseries.dhw.burner.stops")["properties"]["timeAllStops"]["value"])
-
-    @handleNotSupported
-    def getDomesticHotWaterBurnerStopsTimeLast(self) -> int:
-        return int(self.getProperty("device.timeseries.dhw.burner.stops")["properties"]["timeLastStops"]["value"])
 
 
 class GazBurner(HeatingDeviceWithComponent):

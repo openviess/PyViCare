@@ -67,4 +67,4 @@ class Vitodens100W(unittest.TestCase):
     def test_getBurnerStops_notSupported(self):
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurnerStopReasons)
         self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getBurnerStopsAll, "normalStop")
-        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDomesticHotWaterBurnerStopsTimeAll)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getDomesticHotWaterBurnerStopsAll, "normalStop")
