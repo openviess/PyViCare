@@ -57,7 +57,7 @@ class RoomControl(Device):
 
     @handleNotSupported
     def getRoomSetpointHeating(self, room_id: str) -> float:
-        """The setpoint in effect, following the schedule and a manual override."""
+        """The current setpoint, either from the schedule or from a manual entry."""
         return float(self.getProperty(f"rooms.{room_id}.temperature.levels.heating")["properties"]["temperature"]["value"])
 
     # --- temperature setpoints per program-level (°C) ---
