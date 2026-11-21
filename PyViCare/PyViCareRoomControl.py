@@ -55,26 +55,12 @@ class RoomControl(Device):
     def getRoomCondensationRisk(self, room_id: str) -> bool:
         return bool(self.getProperty(f"rooms.{room_id}.condensationRisk")["properties"]["value"]["value"])
 
-    # --- temperature setpoints per program-level (°C) ---
-
     @handleNotSupported
     def getRoomSetpointHeating(self, room_id: str) -> float:
-        """Heating setpoint currently in effect for the room.
-
-        Unlike the per-level setpoints this is not a configured value but the
-        one the room is aiming at right now. It follows the scheduled program
-        and it follows a manual setpoint that overrides the program, so it
-        changes over the course of a day while the level setpoints stand
-        still.
-
-        The four setpoints a room has in the ViCare app - comfort, normal and
-        reduced for the schedule, plus the manual one - live under
-        `rooms.N.operating.programs.*` and `rooms.N.quickmodes.manual`, which
-        the API serves only to clients with advanced permissions. On a client
-        limited to basic permissions this is the only value that shows what a
-        room is actually aiming at.
-        """
+        """The setpoint in effect, following the schedule and a manual override."""
         return float(self.getProperty(f"rooms.{room_id}.temperature.levels.heating")["properties"]["temperature"]["value"])
+
+    # --- temperature setpoints per program-level (°C) ---
 
     @handleNotSupported
     def getRoomSetpointComfortHeating(self, room_id: str) -> float:

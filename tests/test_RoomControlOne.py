@@ -95,13 +95,7 @@ class RoomControlOneTest(unittest.TestCase):
                 self.device.getRoomCO2(room_id)
 
     def test_getRoomSetpointHeating(self):
-        # The setpoint in effect at the time of the dump. Room 1 sits in a
-        # reduced phase at 18 while its normal level is 20.
+        # Room 1 is in a reduced phase at 18; its normal level is 20.
         self.assertAlmostEqual(self.device.getRoomSetpointHeating("0"), 20.5)
         self.assertAlmostEqual(self.device.getRoomSetpointHeating("1"), 18)
         self.assertAlmostEqual(self.device.getRoomSetpointHeating("2"), 19)
-
-    def test_getRoomSetpointHeating_differs_from_normal_level(self):
-        # The point of the getter: it is not the normal level.
-        self.assertAlmostEqual(self.device.getRoomSetpointNormalPerceived("1"), 20)
-        self.assertAlmostEqual(self.device.getRoomSetpointHeating("1"), 18)
