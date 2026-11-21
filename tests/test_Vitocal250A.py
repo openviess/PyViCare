@@ -3,6 +3,7 @@ import unittest
 from PyViCare.PyViCareHeatPump import HeatPump
 from PyViCare.PyViCareService import ViCareDeviceAccessor
 from PyViCare.PyViCareUtils import PyViCareNotSupportedFeatureError
+from tests.helper import readJson
 from tests.ViCareServiceMock import ViCareServiceMock
 
 
@@ -186,6 +187,14 @@ class Vitocal250A(unittest.TestCase):
             self.device.getDomesticHotWaterHysteresisSwitchOffMax(), 2.5)
         self.assertEqual(
             self.device.getDomesticHotWaterHysteresisSwitchOffStepping(), 0.5)
+
+    def test_getDomesticHotWaterHysteresisSwitchOff_null(self):
+        data = readJson('response/Vitocal250A.json')
+        hysteresis = next(f for f in data["data"] if f["feature"] == "heating.dhw.temperature.hysteresis")
+        hysteresis["properties"]["switchOffValue"] = {"type": "any", "value": None}
+        device = HeatPump(self.accessor, ViCareServiceMock(None, data))
+        self.assertRaises(PyViCareNotSupportedFeatureError, device.getDomesticHotWaterHysteresisSwitchOff)
+        self.assertEqual(device.getDomesticHotWaterHysteresisSwitchOn(), 5)
 
     def test_setDomesticHotWaterHysteresis(self):
         self.device.setDomesticHotWaterHysteresis(5)

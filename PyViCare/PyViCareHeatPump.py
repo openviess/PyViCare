@@ -278,13 +278,20 @@ class HeatPump(HeatingDevice, VentilationDevice):
     def getAvailableVentilationPrograms(self):
         return self.getVentilationPrograms()
 
+    def _getDomesticHotWaterHysteresisValue(self, name: str) -> float:
+        # some devices serve a value they do not have as {"type": "any", "value": null}
+        value = self.getProperty("heating.dhw.temperature.hysteresis")["properties"][name]["value"]
+        if value is None:
+            raise PyViCareNotSupportedFeatureError(name)
+        return float(value)
+
     @handleNotSupported
     def getDomesticHotWaterHysteresisUnit(self) -> str:
         return str(self.getProperty("heating.dhw.temperature.hysteresis")["properties"]["value"]["unit"])
 
     @handleNotSupported
     def getDomesticHotWaterHysteresis(self) -> float:
-        return float(self.getProperty("heating.dhw.temperature.hysteresis")["properties"]["value"]["value"])
+        return self._getDomesticHotWaterHysteresisValue("value")
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisMin(self) -> float:
@@ -315,7 +322,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisSwitchOn(self) -> float:
-        return float(self.getProperty("heating.dhw.temperature.hysteresis")["properties"]["switchOnValue"]["value"])
+        return self._getDomesticHotWaterHysteresisValue("switchOnValue")
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisSwitchOnMin(self) -> float:
@@ -346,7 +353,7 @@ class HeatPump(HeatingDevice, VentilationDevice):
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisSwitchOff(self) -> float:
-        return float(self.getProperty("heating.dhw.temperature.hysteresis")["properties"]["switchOffValue"]["value"])
+        return self._getDomesticHotWaterHysteresisValue("switchOffValue")
 
     @handleNotSupported
     def getDomesticHotWaterHysteresisSwitchOffMin(self) -> float:
