@@ -228,9 +228,6 @@ class TestForMissingProperties(unittest.TestCase):
             # new Vitocal generation - not yet used
             'heating.compressors.0.speed.setpoint',
             'heating.dhw.actuator',
-            'heating.noise.reduction.levels.maxReduced',
-            'heating.noise.reduction.levels.notReduced',
-            'heating.noise.reduction.levels.slightlyReduced',
             'system.temperature.outside',
             'tcu.ethernet.0.config',
             'tcu.features.eebus',

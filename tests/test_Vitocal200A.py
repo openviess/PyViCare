@@ -53,6 +53,12 @@ class Vitocal200ASystemController(unittest.TestCase):
         self.assertEqual(self.device.getPowerConsumptionLimit(), 1000000)
         self.assertEqual(self.device.getPowerConsumptionLimitStatus(), "unlimitedAutonomous")
 
+    def test_getNoiseReductionLevels(self):
+        self.assertEqual(self.device.getNoiseReductionLevels(), ["notReduced", "slightlyReduced", "maxReduced"])
+
+    def test_getNoiseReductionLevel(self):
+        self.assertEqual(self.device.getNoiseReductionLevel(), "notReduced")
+
 
 class Vitocal200AOutdoorUnit(unittest.TestCase):
 

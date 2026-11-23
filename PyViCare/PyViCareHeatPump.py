@@ -15,6 +15,12 @@ from PyViCare.PyViCareUtils import (
 )
 from PyViCare.PyViCareVentilationDevice import VentilationDevice
 
+_NOISE_REDUCTION_LEVELS = {
+    "notReduced": "heating.noise.reduction.levels.notReduced",
+    "slightlyReduced": "heating.noise.reduction.levels.slightlyReduced",
+    "maxReduced": "heating.noise.reduction.levels.maxReduced",
+}
+
 
 class HeatPump(HeatingDevice, VentilationDevice):
 
@@ -252,6 +258,29 @@ class HeatPump(HeatingDevice, VentilationDevice):
     @handleNotSupported
     def getVolumetricFlowReturn(self):
         return self.getProperty("heating.sensors.volumetricFlow.allengra")["properties"]['value']['value']
+
+    # Noise reduction (quiet mode), read-only.
+    def _getNoiseReductionLevelStates(self) -> dict[str, bool]:
+        states = {}
+        for level, feature in _NOISE_REDUCTION_LEVELS.items():
+            with suppress(PyViCareNotSupportedFeatureError):
+                properties = self.getProperty(feature)["properties"]
+                if "active" in properties:
+                    states[level] = bool(properties["active"]["value"])
+        if not states:
+            raise PyViCareNotSupportedFeatureError("heating.noise.reduction.levels")
+        return states
+
+    @handleNotSupported
+    def getNoiseReductionLevels(self) -> list[str]:
+        return list(self._getNoiseReductionLevelStates())
+
+    @handleNotSupported
+    def getNoiseReductionLevel(self) -> str:
+        active = [level for level, is_active in self._getNoiseReductionLevelStates().items() if is_active]
+        if len(active) != 1:
+            raise PyViCareNotSupportedFeatureError("heating.noise.reduction.levels")
+        return active[0]
 
     @handleNotSupported
     @deprecated(reason="renamed, use getVentilationModes", version="2.40.0")

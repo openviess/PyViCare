@@ -461,3 +461,7 @@ class Vitocal250A(unittest.TestCase):
     def test_getLocks(self):
         self.assertFalse(self.device.getMalfunctionLockActive())
         self.assertFalse(self.device.getExternalLockActive())
+
+    def test_getNoiseReductionLevel_notSupported(self):
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getNoiseReductionLevels)
+        self.assertRaises(PyViCareNotSupportedFeatureError, self.device.getNoiseReductionLevel)
