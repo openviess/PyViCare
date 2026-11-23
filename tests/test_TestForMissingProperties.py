@@ -53,6 +53,11 @@ class TestForMissingProperties(unittest.TestCase):
             'heating.configuration.heatingRod.dhw',
             'heating.configuration.heatingRod.heating',
             'heating.heatingRod.statistics',
+            # Marked as deprecated in the Vitocal 250-A dump of 2026-11. The replacement
+            # heating.configuration.temperature.outside.dampingFactor is not delivered yet.
+            'heating.configuration.temperature.outside.DampingFactor',
+            # Marked "Not used anymore" in the Vitocal 250-A dump of 2026-11, still read for fuel cells.
+            'heating.dhw.temperature.levels',
         ]
 
         all_features = self.read_all_deprecated_features()
