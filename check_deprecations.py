@@ -39,6 +39,10 @@ IGNORED_IN_CODE = {
         "replacement heatingRods.heatGeneration.N is still missing (Vitocal 250-A, 2026-10-06)",
     "heating.heatingRod.statistics":
         "replacement heatingRods.heatGeneration.N.statistics is still missing (Vitocal 250-A, 2026-10-06)",
+    "heating.configuration.temperature.outside.DampingFactor":
+        "replacement heating.configuration.temperature.outside.dampingFactor is still missing (Vitocal 250-A, 2026-11-23)",
+    "heating.dhw.temperature.levels":
+        "marked as not used anymore (Vitocal 250-A, 2026-11-23), still read for fuel cells",
 }
 
 
