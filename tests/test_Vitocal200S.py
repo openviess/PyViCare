@@ -34,6 +34,19 @@ class Vitocal200S(unittest.TestCase):
         self.assertEqual(
             self.device.getReturnTemperatureSecondaryCircuit(), 27.9)
 
+    def test_getDomesticHotWaterScheduleConstraints(self):
+        self.assertEqual(self.device.getDomesticHotWaterScheduleModes(), ['top', 'normal', 'temp-2'])
+        self.assertEqual(self.device.getDomesticHotWaterScheduleMaxEntries(), 8)
+        self.assertIs(self.device.getDomesticHotWaterScheduleOverlapAllowed(), True)
+        self.assertEqual(self.device.getDomesticHotWaterScheduleResolution(), 10)
+
+    def test_getHeatingScheduleConstraints(self):
+        circuit = self.device.circuits[0]
+        self.assertEqual(circuit.getHeatingScheduleModes(), ['reduced', 'normal', 'fixed'])
+        self.assertEqual(circuit.getHeatingScheduleMaxEntries(), 8)
+        self.assertIs(circuit.getHeatingScheduleOverlapAllowed(), True)
+        self.assertEqual(circuit.getHeatingScheduleResolution(), 10)
+
 class Vitocal200S_AWB(unittest.TestCase):
     def setUp(self):
         self.accessor = ViCareDeviceAccessor("[id]", "[serial]", "0")

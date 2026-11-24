@@ -71,6 +71,15 @@ class Vitodens300W(unittest.TestCase):
         ):
             self.assertRaises(PyViCareNotSupportedFeatureError, getter)
 
+    def test_getDomesticHotWaterScheduleConstraints(self):
+        for getter in (
+            self.device.getDomesticHotWaterScheduleModes,
+            self.device.getDomesticHotWaterScheduleMaxEntries,
+            self.device.getDomesticHotWaterScheduleOverlapAllowed,
+            self.device.getDomesticHotWaterScheduleResolution,
+        ):
+            self.assertRaises(PyViCareNotSupportedFeatureError, getter)
+
     # Total power consumption:
     def test_getPowerConsumptionUnit(self):
         self.assertEqual(

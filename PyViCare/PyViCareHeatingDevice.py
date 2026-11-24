@@ -418,6 +418,26 @@ class HeatingDevice(Device):
     def setDomesticHotWaterSchedule(self, schedule: dict) -> None:
         self.setProperty("heating.dhw.schedule", "setSchedule", {'newSchedule': schedule})
 
+    @handleNotSupported
+    def getDomesticHotWaterScheduleModes(self) -> list[str]:
+        return list(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["modes"])
+
+    @handleNotSupported
+    def getDomesticHotWaterScheduleMaxEntries(self) -> int:
+        return int(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["maxEntries"])
+
+    @handleNotSupported
+    def getDomesticHotWaterScheduleOverlapAllowed(self) -> bool:
+        return bool(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["overlapAllowed"])
+
+    @handleNotSupported
+    def getDomesticHotWaterScheduleResolution(self) -> int:
+        return int(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["resolution"])
+
     @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
         return self.setProperty("heating.dhw.pumps.circulation.schedule", "setSchedule",
@@ -1076,6 +1096,21 @@ class HeatingCircuit(HeatingDeviceWithComponent):
     def getHeatingScheduleModes(self) -> list:  # type: ignore[type-arg]
         return list(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"
             )["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"]["modes"])
+
+    @handleNotSupported
+    def getHeatingScheduleMaxEntries(self) -> int:
+        return int(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["maxEntries"])
+
+    @handleNotSupported
+    def getHeatingScheduleOverlapAllowed(self) -> bool:
+        return bool(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["overlapAllowed"])
+
+    @handleNotSupported
+    def getHeatingScheduleResolution(self) -> int:
+        return int(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["commands"]["setSchedule"]["params"][
+            "newSchedule"]["constraints"]["resolution"])
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
