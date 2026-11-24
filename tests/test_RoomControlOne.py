@@ -93,3 +93,9 @@ class RoomControlOneTest(unittest.TestCase):
         for room_id in self.device.getAvailableRoomIds():
             with self.assertRaises(PyViCareNotSupportedFeatureError):
                 self.device.getRoomCO2(room_id)
+
+    def test_getRoomSetpointHeating(self):
+        # Room 1 is in a reduced phase at 18; its normal level is 20.
+        self.assertAlmostEqual(self.device.getRoomSetpointHeating("0"), 20.5)
+        self.assertAlmostEqual(self.device.getRoomSetpointHeating("1"), 18)
+        self.assertAlmostEqual(self.device.getRoomSetpointHeating("2"), 19)

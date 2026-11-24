@@ -55,6 +55,11 @@ class RoomControl(Device):
     def getRoomCondensationRisk(self, room_id: str) -> bool:
         return bool(self.getProperty(f"rooms.{room_id}.condensationRisk")["properties"]["value"]["value"])
 
+    @handleNotSupported
+    def getRoomSetpointHeating(self, room_id: str) -> float:
+        """The current setpoint, either from the schedule or from a manual entry."""
+        return float(self.getProperty(f"rooms.{room_id}.temperature.levels.heating")["properties"]["temperature"]["value"])
+
     # --- temperature setpoints per program-level (°C) ---
 
     @handleNotSupported
