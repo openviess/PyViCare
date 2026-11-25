@@ -139,3 +139,16 @@ class Vitocal250ATwoCircuits(unittest.TestCase):
         self.assertEqual(self.service.setPropertyData[0]['action'], 'triggerOncePerWeek')
         self.assertEqual(self.service.setPropertyData[0]['data'],
                          {'weekday': 'Wed', 'startHour': 4, 'startMinute': 30})
+
+    def test_getDomesticHotWaterScheduleConstraints(self):
+        self.assertEqual(self.device.getDomesticHotWaterScheduleModes(), ['on'])
+        self.assertEqual(self.device.getDomesticHotWaterScheduleMaxEntries(), 4)
+        self.assertIs(self.device.getDomesticHotWaterScheduleOverlapAllowed(), False)
+        self.assertEqual(self.device.getDomesticHotWaterScheduleResolution(), 10)
+
+    def test_getHeatingScheduleConstraints(self):
+        for circuit in self.device.circuits:
+            self.assertEqual(circuit.getHeatingScheduleModes(), ['normal', 'comfort'])
+            self.assertEqual(circuit.getHeatingScheduleMaxEntries(), 4)
+            self.assertIs(circuit.getHeatingScheduleOverlapAllowed(), False)
+            self.assertEqual(circuit.getHeatingScheduleResolution(), 10)
