@@ -436,7 +436,7 @@ class TestForMissingProperties(unittest.TestCase):
             if python in ['PyViCareFuelCell.py']:  # skip, where we miss test data
                 continue
 
-            for match in re.findall(r'getProperty\(\s*?f?"(.*)"\s*?\)', all_python_files[python]):
+            for match in re.findall(r'getProperty\(\s*?f?"([^"]*)"\s*?\)', all_python_files[python]):
                 feature_name = re.sub(r'{(self\.)?(circuit|burner|compressor|condensor|evaporator|inverter|fan|room_id|slot|string)}', '0', match)
                 feature_name = re.sub(r'{burner}', '0', feature_name)
                 feature_name = re.sub(r'{circuit}', '0', feature_name)  # for local variable in loops

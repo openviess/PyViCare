@@ -39,6 +39,10 @@ def get_available_burners(device):
     return available_burners
 
 
+def _schedule_constraint(feature: dict[str, Any], name: str) -> Any:
+    return feature["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"][name]
+
+
 class HeatingDevice(Device):
     """This is the base class for all heating devices.
     This class connects to the Viessmann ViCare API.
@@ -420,23 +424,19 @@ class HeatingDevice(Device):
 
     @handleNotSupported
     def getDomesticHotWaterScheduleModes(self) -> list[str]:
-        return list(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["modes"])
+        return list(_schedule_constraint(self.getProperty("heating.dhw.schedule"), "modes"))
 
     @handleNotSupported
     def getDomesticHotWaterScheduleMaxEntries(self) -> int:
-        return int(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["maxEntries"])
+        return int(_schedule_constraint(self.getProperty("heating.dhw.schedule"), "maxEntries"))
 
     @handleNotSupported
     def getDomesticHotWaterScheduleOverlapAllowed(self) -> bool:
-        return bool(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["overlapAllowed"])
+        return bool(_schedule_constraint(self.getProperty("heating.dhw.schedule"), "overlapAllowed"))
 
     @handleNotSupported
     def getDomesticHotWaterScheduleResolution(self) -> int:
-        return int(self.getProperty("heating.dhw.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["resolution"])
+        return int(_schedule_constraint(self.getProperty("heating.dhw.schedule"), "resolution"))
 
     @handleAPICommandErrors
     def setDomesticHotWaterCirculationSchedule(self, schedule):
@@ -444,24 +444,20 @@ class HeatingDevice(Device):
                                         {'newSchedule': schedule})
 
     @handleNotSupported
-    def getDomesticHotWaterCirculationScheduleModes(self):
-        return self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["modes"]
+    def getDomesticHotWaterCirculationScheduleModes(self) -> list[str]:
+        return list(_schedule_constraint(self.getProperty("heating.dhw.pumps.circulation.schedule"), "modes"))
 
     @handleNotSupported
     def getDomesticHotWaterCirculationScheduleMaxEntries(self) -> int:
-        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["maxEntries"])
+        return int(_schedule_constraint(self.getProperty("heating.dhw.pumps.circulation.schedule"), "maxEntries"))
 
     @handleNotSupported
     def getDomesticHotWaterCirculationScheduleOverlapAllowed(self) -> bool:
-        return bool(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["overlapAllowed"])
+        return bool(_schedule_constraint(self.getProperty("heating.dhw.pumps.circulation.schedule"), "overlapAllowed"))
 
     @handleNotSupported
     def getDomesticHotWaterCirculationScheduleResolution(self) -> int:
-        return int(self.getProperty("heating.dhw.pumps.circulation.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["resolution"])
+        return int(_schedule_constraint(self.getProperty("heating.dhw.pumps.circulation.schedule"), "resolution"))
 
     @handleNotSupported
     def getDomesticHotWaterCirculationSchedule(self):
@@ -469,10 +465,9 @@ class HeatingDevice(Device):
             "heating.dhw.pumps.circulation.schedule")
 
         properties = schedule["properties"]
-        command = schedule["commands"]
         return {
             "active": properties["active"]["value"],
-            "default_mode": command["setSchedule"]["params"]["newSchedule"]["constraints"]["defaultMode"],
+            "default_mode": _schedule_constraint(schedule, "defaultMode"),
             "mon": properties["entries"]["value"]["mon"],
             "tue": properties["entries"]["value"]["tue"],
             "wed": properties["entries"]["value"]["wed"],
@@ -1093,24 +1088,20 @@ class HeatingCircuit(HeatingDeviceWithComponent):
                                 "setSchedule", {'newSchedule': schedule})
 
     @handleNotSupported
-    def getHeatingScheduleModes(self) -> list:  # type: ignore[type-arg]
-        return list(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"
-            )["commands"]["setSchedule"]["params"]["newSchedule"]["constraints"]["modes"])
+    def getHeatingScheduleModes(self) -> list[str]:
+        return list(_schedule_constraint(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"), "modes"))
 
     @handleNotSupported
     def getHeatingScheduleMaxEntries(self) -> int:
-        return int(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["maxEntries"])
+        return int(_schedule_constraint(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"), "maxEntries"))
 
     @handleNotSupported
     def getHeatingScheduleOverlapAllowed(self) -> bool:
-        return bool(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["overlapAllowed"])
+        return bool(_schedule_constraint(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"), "overlapAllowed"))
 
     @handleNotSupported
     def getHeatingScheduleResolution(self) -> int:
-        return int(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule")["commands"]["setSchedule"]["params"][
-            "newSchedule"]["constraints"]["resolution"])
+        return int(_schedule_constraint(self.getProperty(f"heating.circuits.{self.circuit}.heating.schedule"), "resolution"))
 
     # Calculates target supply temperature based on data from Viessmann
     # See: https://www.viessmann-community.com/t5/Gas/Mathematische-Formel-fuer-Vorlauftemperatur-aus-den-vier/m-p/68890#M27556
