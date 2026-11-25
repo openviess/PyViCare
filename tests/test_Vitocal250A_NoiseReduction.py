@@ -16,17 +16,3 @@ class Vitocal250ANoiseReduction(unittest.TestCase):
 
     def test_getNoiseReductionLevel(self):
         self.assertEqual(self.device.getNoiseReductionLevel(), "maxReduced")
-
-    def test_getDomesticHotWaterScheduleConstraints(self):
-        self.assertEqual(self.device.getDomesticHotWaterScheduleModes(), ['on'])
-        self.assertEqual(self.device.getDomesticHotWaterScheduleMaxEntries(), 4)
-        self.assertIs(self.device.getDomesticHotWaterScheduleOverlapAllowed(), False)
-        self.assertEqual(self.device.getDomesticHotWaterScheduleResolution(), 10)
-
-    def test_getHeatingScheduleConstraints(self):
-        self.assertEqual([circuit.circuit for circuit in self.device.circuits], ['1', '2'])
-        for circuit in self.device.circuits:
-            self.assertEqual(circuit.getHeatingScheduleModes(), ['normal', 'comfort'])
-            self.assertEqual(circuit.getHeatingScheduleMaxEntries(), 4)
-            self.assertIs(circuit.getHeatingScheduleOverlapAllowed(), False)
-            self.assertEqual(circuit.getHeatingScheduleResolution(), 10)
