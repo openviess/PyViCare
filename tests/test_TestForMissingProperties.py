@@ -376,8 +376,6 @@ class TestForMissingProperties(unittest.TestCase):
             'rooms.others.0.temperature.levels.heating',
             'rooms.others.0.temperature.levels.normal.perceived',
             # Supply channel configuration of the floor heating, device level.
-            'rooms.features',
-            'rooms.features.remotePresenceProbability',
             'rooms.features.supplyChannel0FTDC',
             'rooms.features.supplyChannel1FTDC',
             'rooms.features.supplyChannel1FTDCUseValveInformation',
