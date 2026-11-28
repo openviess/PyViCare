@@ -84,6 +84,15 @@ print([event.error_code for event in history.active_errors(device.accessor.devic
 saved = history.as_dict()
 ```
 
+New events also stay in `history.pending(device_id)` until you pass them to
+`history.acknowledge()`, for example once you have notified about them. Pending
+events are part of the saved state, so a restart before the notification does
+not lose them.
+
+`device.reportsDeviceMessages()` tells whether a device reports messages, such
+as errors, to the cloud. Its errors then reach the event history, also when the
+device offers no `device.messages.errors.raw`.
+
 `getDeviceStatusMessages()`, `getDeviceServiceMessages()` and
 `getDeviceInfoMessages()` return the current status, service and info messages
 the same way `getDeviceErrors()` returns the errors, each entry with

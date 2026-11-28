@@ -1,8 +1,13 @@
 import json
 import unittest
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from PyViCare.PyViCareErrorHistory import ViCareErrorHistory, chronological
+from PyViCare.PyViCareErrorHistory import (
+    PENDING_LIMIT,
+    ViCareErrorHistory,
+    chronological,
+)
 from PyViCare.PyViCareEvent import ViCareEvent
 from tests.helper import readJson
 
@@ -124,3 +129,50 @@ class ViCareErrorHistoryTest(unittest.TestCase):
                 history = ViCareErrorHistory.from_dict(data)
                 self.assertFalse(history.initialized)
                 self.assertEqual(history.active_errors('0'), [])
+
+
+class PendingTest(unittest.TestCase):
+
+    def test_new_events_wait_until_acknowledged(self):
+        history = ViCareErrorHistory()
+        history.update([CLEAR, RAISE])
+        raised = error_event('F.357', True, '2026-11-27T08:00:00.000Z')
+        cleared = error_event('F.357', False, '2026-11-27T08:05:00.000Z')
+        new = history.update([cleared, raised, CLEAR, RAISE])
+
+        self.assertEqual(codes(history.pending('0')), [('F.357', True), ('F.357', False)])
+        self.assertEqual(history.pending('1'), [])
+
+        history.acknowledge(new[:1])
+        self.assertEqual(codes(history.pending('0')), [('F.357', False)])
+        history.acknowledge(new[1:])
+        self.assertEqual(history.pending('0'), [])
+
+    def test_first_page_is_not_pending(self):
+        history = ViCareErrorHistory()
+        history.update([CLEAR, RAISE])
+        self.assertEqual(history.pending('0'), [])
+
+    def test_pending_survives_a_restore(self):
+        history = ViCareErrorHistory()
+        history.update([])
+        history.update([RAISE])
+        restored = ViCareErrorHistory.from_dict(json.loads(json.dumps(history.as_dict())))
+
+        pending = restored.pending('0')
+        self.assertEqual(codes(pending), [('F.380', True)])
+        restored.acknowledge(pending)
+        self.assertEqual(restored.pending('0'), [])
+
+    def test_pending_is_bounded(self):
+        history = ViCareErrorHistory()
+        history.update([])
+        start = datetime(2026, 11, 28, 10, tzinfo=UTC)
+        times = [start + timedelta(minutes=minute) for minute in range(PENDING_LIMIT + 5)]
+        for index, time in enumerate(times):
+            history.update([error_event('F.380', index % 2 == 0, time.isoformat())])
+        pending = history.pending('0')
+        self.assertEqual(len(pending), PENDING_LIMIT)
+        # the oldest lapse first
+        self.assertEqual(pending[0].event_timestamp, times[5])
+        self.assertEqual(pending[-1].event_timestamp, times[-1])

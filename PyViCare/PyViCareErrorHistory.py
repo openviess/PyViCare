@@ -19,6 +19,9 @@ _ErrorKey = tuple[str, str]
 
 _NO_TIME = datetime.min.replace(tzinfo=UTC)
 
+# New events kept per device until acknowledged; older ones lapse.
+PENDING_LIMIT = 100
+
 
 def _time(event: ViCareEvent) -> datetime:
     return event.event_timestamp or event.created_at or _NO_TIME
@@ -56,11 +59,16 @@ class ViCareErrorHistory:
     ``update()``. The first page is the past: nothing in it is new. An error
     whose raise drops off the end of the page still stands until its clear
     arrives.
+
+    New events also stay ``pending()`` until the caller ``acknowledge()``s
+    them, for example once it has notified about them. They are part of the
+    saved state, so a restart in between does not lose them.
     """
 
     def __init__(self) -> None:
         self._seen: set[_EventKey] | None = None
         self._standing: dict[_ErrorKey, ViCareEvent] = {}
+        self._pending: dict[str, list[ViCareEvent]] = {}
 
     @property
     def initialized(self) -> bool:
@@ -90,7 +98,26 @@ class ViCareErrorHistory:
         self._seen = {key for key, _ in keyed}
         if seen is None:
             return []
-        return [event for key, event in keyed if key not in seen]
+        new = [event for key, event in keyed if key not in seen]
+        for event in new:
+            assert event.device_id  # keyed events have one
+            pending = self._pending.setdefault(event.device_id, [])
+            pending.append(event)
+            del pending[:-PENDING_LIMIT]
+        return new
+
+    def pending(self, device_id: str) -> list[ViCareEvent]:
+        """Return the new events of the device not acknowledged yet, oldest first."""
+        return list(self._pending.get(device_id, ()))
+
+    def acknowledge(self, events: Iterable[ViCareEvent]) -> None:
+        """Take events returned by ``pending()`` off the pending ones."""
+        done = {id(event) for event in events}
+        for device_id, pending in list(self._pending.items()):
+            if remaining := [event for event in pending if id(event) not in done]:
+                self._pending[device_id] = remaining
+            else:
+                del self._pending[device_id]
 
     def active_errors(self, device_id: str) -> list[ViCareEvent]:
         """Return the raises of the errors of the device that stand, oldest first."""
@@ -103,6 +130,7 @@ class ViCareErrorHistory:
         return {
             'seen': None if self._seen is None else [list(key) for key in sorted(self._seen)],
             'standing': [event.raw for event in self._standing.values()],
+            'pending': [event.raw for pending in self._pending.values() for event in pending],
         }
 
     @classmethod
@@ -119,4 +147,8 @@ class ViCareErrorHistory:
         for event in (ViCareEvent(raw) for raw in standing):
             if event.device_id and event.error_code and event.active:
                 history._standing[(event.device_id, event.error_code)] = event
+        pending = data.get('pending')
+        for raw in pending if isinstance(pending, list) else ():
+            if isinstance(raw, dict) and (event := ViCareEvent(raw)).device_id and event.error_code:
+                history._pending.setdefault(event.device_id, []).append(event)
         return history
