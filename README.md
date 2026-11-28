@@ -66,6 +66,24 @@ asks the API for its gateway serial and filters the page by device id, so
 `limit` counts that gateway's events. Paging and other event types are on
 `device.service.fetch_events()`.
 
+To follow the errors over time, pass each newly fetched page to a
+`ViCareErrorHistory`. It returns the events that are new since the previous
+page, oldest first, and knows which errors stand, even after their raise has
+dropped off the page. Its state survives a restart through `as_dict()` and
+`from_dict()`, so events are neither repeated nor lost:
+
+```python
+from PyViCare.PyViCareErrorHistory import ViCareErrorHistory
+
+history = ViCareErrorHistory.from_dict(saved) if saved else ViCareErrorHistory()
+page = device.service.fetch_events(
+    device.accessor, "device-error", gateway_serials=device.accessor.serial, limit=100)
+for event in history.update(page.events):  # the first page is the past
+    print("raised" if event.active else "cleared", event.error_code)
+print([event.error_code for event in history.active_errors(device.accessor.device_id)])
+saved = history.as_dict()
+```
+
 `getDeviceStatusMessages()`, `getDeviceServiceMessages()` and
 `getDeviceInfoMessages()` return the current status, service and info messages
 the same way `getDeviceErrors()` returns the errors, each entry with
