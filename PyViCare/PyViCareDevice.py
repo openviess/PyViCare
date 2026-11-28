@@ -3,6 +3,7 @@ from typing import Any
 
 from PyViCare.PyViCareEvent import EVENT_TYPE_DEVICE_ERROR, ViCareEvent
 from PyViCare.PyViCareService import ViCareDeviceAccessor, ViCareService, hasRoles
+from PyViCare.PyViCareServiceViaGateway import filter_features_for_device
 from PyViCare.PyViCareUtils import (
     PyViCareNotSupportedFeatureError,
     handleAPICommandErrors,
@@ -31,6 +32,21 @@ class Device:
     @handleNotSupported
     def getSerial(self):
         return self.getProperty("device.serial")["properties"]["value"]["value"]
+
+    def reportsDeviceMessages(self) -> bool:
+        """Whether the device reports messages, such as errors, to the cloud.
+
+        A device that does keeps its errors in the event history, also when
+        it offers no ``device.messages.errors.raw``. Older devices report only
+        a ``device.messages.logbook``.
+        """
+        try:
+            features = self.service.fetch_all_features(self.accessor)
+        except PyViCareNotSupportedFeatureError:
+            return False
+        return any(
+            feature.get("feature", "").startswith("device.messages.")
+            for feature in filter_features_for_device(features.get("data", []), self.accessor.device_id))
 
     @handleNotSupported
     def getDeviceErrors(self) -> list[Any]:
