@@ -125,6 +125,21 @@ class RoomControl(Device):
     def getRoomHeatOnTimeEnabled(self, room_id: str) -> bool:
         return bool(self.getProperty(f"rooms.{room_id}.configuration.heatOnTime")["properties"]["active"]["value"])
 
+    # --- installation-wide, from the rooms.features node ---
+
+    @handleNotSupported
+    def getRoomsFeaturesSupported(self) -> list[str]:
+        return list(self.getProperty("rooms.features")["properties"]["supported"]["value"])
+
+    @handleNotSupported
+    def getRoomsFeaturesActivated(self) -> list[str]:
+        return list(self.getProperty("rooms.features")["properties"]["activated"]["value"])
+
+    @handleNotSupported
+    def getRemotePresenceProbabilityActive(self) -> bool:
+        """Whether the installation uses the app geofencing for presence."""
+        return bool(self.getProperty("rooms.features.remotePresenceProbability")["properties"]["active"]["value"])
+
 
 class Room(HeatingDeviceWithComponent):
     """One room of a RoomControl device."""

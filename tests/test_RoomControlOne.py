@@ -99,3 +99,15 @@ class RoomControlOneTest(unittest.TestCase):
         self.assertAlmostEqual(self.device.getRoomSetpointHeating("0"), 20.5)
         self.assertAlmostEqual(self.device.getRoomSetpointHeating("1"), 18)
         self.assertAlmostEqual(self.device.getRoomSetpointHeating("2"), 19)
+
+    def test_getRoomsFeaturesSupported(self):
+        self.assertIn("remotePresenceProbability", self.device.getRoomsFeaturesSupported())
+        self.assertIn("condensateAvoidance", self.device.getRoomsFeaturesSupported())
+
+    def test_getRoomsFeaturesActivated(self):
+        activated = self.device.getRoomsFeaturesActivated()
+        self.assertEqual(len(activated), 12)
+        self.assertIn("supplyChannel0FTDC", activated)
+
+    def test_getRemotePresenceProbabilityActive(self):
+        self.assertFalse(self.device.getRemotePresenceProbabilityActive())
